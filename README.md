@@ -3,7 +3,7 @@
 [TODO]
 
 # Table of Contents
-- [gfi.vim](#gfivim)
+- [doge](#doge)
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
@@ -13,11 +13,11 @@
 
 # Getting Started
 
-Install `gfi.vim`:
+Install `doge`:
 
 Using vim-pack:
 
-- `git clone https://github.com/kkoomen/gfi.vim ~/.vim/pack/<dir>/start/doge`
+- `git clone https://github.com/kkoomen/doge ~/.vim/pack/<dir>/start/doge`
 
 Using pathogen:
 
