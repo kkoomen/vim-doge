@@ -21,7 +21,7 @@ Using vim-pack:
 
 Using pathogen:
 
-- `git clone https://github.com/kkoomen/doge.vim ~/.vim/bundle/doge`
+- `git clone https://github.com/kkoomen/doge ~/.vim/bundle/doge`
 
 Using plug:
 
