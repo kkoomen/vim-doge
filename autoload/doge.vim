@@ -71,7 +71,13 @@ function! doge#generate() abort
 
   if exists('b:doge_func_expr')
     for l:func_expr in get(b:, 'doge_func_expr')
-      let l:curr_line = escape(trim(getline(line('.'))), '\')
+      " Assuming multiline function expressions won't be longer than 15 lines.
+      let l:lines = getline('.', line('.') + 15)
+      if empty(trim(get(l:lines, 0)))
+        continue
+      endif
+
+      let l:curr_line = escape(trim(join(l:lines, ' ')), '\')
       if l:curr_line !~# l:func_expr['match']
         continue
       endif
