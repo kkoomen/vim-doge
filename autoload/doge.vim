@@ -71,12 +71,12 @@ function! doge#generate() abort
 
   if exists('b:doge_func_expr')
     for l:func_expr in get(b:, 'doge_func_expr')
-      let l:next_line = escape(trim(getline(line('.') + 1)), '\')
-      if l:next_line !~# l:func_expr['match']
+      let l:curr_line = escape(trim(getline(line('.'))), '\')
+      if l:curr_line !~# l:func_expr['match']
         continue
       endif
 
-      let l:tokens = doge#extract_tokens(l:next_line, l:func_expr['match'], l:func_expr['match_group_names'])
+      let l:tokens = doge#extract_tokens(l:curr_line, l:func_expr['match'], l:func_expr['match_group_names'])
 
       " Prepare tokens and parameter values
       let l:params_dict = l:func_expr['parameters']
@@ -105,7 +105,7 @@ function! doge#generate() abort
         endif
       endfor
 
-      call append(line('.'), l:comment)
+      call append(line('.') - 1, map(l:comment, {k, line -> doge#indent#string(line('.'), line)}))
     endfor
   endif
 endfunction
