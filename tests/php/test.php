@@ -1,21 +1,74 @@
 <?php
 
 /**
- * This file contains test scenarios which should generate proper documentation.
+ * This file contains test scenarios and their expected results. When testing
+ * using the test.{ext} files you should be able to generate the examples below.
  */
 
-
+/**
+ * @param array $arg1 TODO
+ * @param string $arg2 TODO
+ * @param mixed $arg3 TODO
+ * @param \Drupal\core\Entity\Node $arg4 TODO
+ */
 function myFunction(array $arg1, string $arg2, $arg3 = NULL, \Drupal\core\Entity\Node $arg4) {
   //
 }
 
 class myClass {
 
+  /**
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
   public function myPublicMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
     //
   }
 
-  public function myPrivateMethod(
+  /**
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
+  public final function myPublicFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+    //
+  }
+
+  /**
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
+  public static function myPublicStaticMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+    //
+  }
+
+  /**
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
+  public static final function myPublicStaticFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+    //
+  }
+
+  /**
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
+  private function myPrivateMultilineMethod(
     array $arg1,
     \Test\Namespacing\With\A\ClassInterface $arg2,
     int $arg3,
