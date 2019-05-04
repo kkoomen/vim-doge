@@ -23,7 +23,6 @@ function! doge#generate#func_expr(func_expr) abort
 
   let l:tokens = doge#token#extract(l:curr_line, a:func_expr['match'], a:func_expr['match_group_names'])
 
-
   " Split the 'parameters' token value into a list.
   let l:params_dict = a:func_expr['parameters']
   let l:parameter_match_group_name = l:params_dict['parent_match_group_name']
@@ -49,7 +48,6 @@ function! doge#generate#func_expr(func_expr) abort
     endfor
   endfor
 
-
   " If an existing comment exists, remove it before we insert a new one.
   let l:old_comment_pattern = fnameescape(a:func_expr['comment']['opener']) . '\_.\{-}' . fnameescape(a:func_expr['comment']['closer']) . '$'
   let l:old_comment_start_lnum = search(l:old_comment_pattern, 'bn')
@@ -65,8 +63,7 @@ function! doge#generate#func_expr(func_expr) abort
   let l:cursor_pos = [0, l:adjusted_cursor_lnum, col('.'), 0]
 
   " If the old comment ends at the line above our cursor, then remove it.
-  " If it returns any other number then the prev line, it belongs to another
-  " code block.
+  " If it returns any other number then the prev line, it belongs to another code block.
   let l:has_old_comment = l:old_comment_end_lnum == line('.') - 1
   if l:has_old_comment
     execute(l:old_comment_start_lnum . 'd' . l:old_comment_lines_amount)
