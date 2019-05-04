@@ -7,7 +7,6 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-
 function! doge#generate#func_expr(func_expr) abort
   " Assuming multiline function expressions won't be longer than 15 lines.
   let l:lines = getline('.', line('.') + 15)
