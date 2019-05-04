@@ -12,7 +12,11 @@ if exists('g:loaded_doge')
 endif
 let g:loaded_doge = 1
 
-nnoremap <C-d> :call doge#generate()<CR>
+if !exists('g:doge_mapping')
+  let g:doge_mapping = '<C-d>'
+endif
+
+execute('nnoremap ' . get(g:, 'doge_mapping') . ' :call doge#generate()<CR>')
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
