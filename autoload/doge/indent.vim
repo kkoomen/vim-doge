@@ -10,7 +10,7 @@ set cpoptions&vim
 ""
 " @public
 " Indent a string based on a given line its indent.
-function! doge#indent#string(lnum, text)
+function! doge#indent#line(lnum, text)
   if &expandtab
     return repeat(' ', indent(a:lnum)) . a:text
   else
