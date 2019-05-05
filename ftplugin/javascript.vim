@@ -3,6 +3,9 @@
 " Maintainer: Kim Koomen <koomen@protonail.com>
 " License: MIT
 " ==============================================================================
+"
+" The javascript documentation should follow the 'jsdoc' conventions.
+" @see https://jsdoc.app
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim
