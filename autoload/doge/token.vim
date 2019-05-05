@@ -7,7 +7,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-function! doge#token#replace_string(tokens, text) abort
+function! s:token_replace(tokens, text) abort
   " Ensure the input is a string.
   if type(a:text) != type('')
     return a:text
@@ -85,9 +85,9 @@ endfunction
 function! doge#token#replace(tokens, text) abort
   let l:text = deepcopy(a:text)
   if type(l:text) == type([])
-    return map(l:text, {key, line -> doge#token#replace_string(a:tokens, line)})
+    return map(l:text, {key, line -> <SID>token_replace(a:tokens, line)})
   elseif type(l:text) == type('')
-    return doge#token#replace_string(a:tokens, l:text)
+    return <SID>token_replace(a:tokens, l:text)
   endif
 endfunction
 
