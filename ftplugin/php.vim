@@ -1,5 +1,5 @@
 " ==============================================================================
-" Filename: javascript.vim
+" Filename: php.vim
 " Maintainer: Kim Koomen <koomen@protonail.com>
 " License: MIT
 " ==============================================================================
