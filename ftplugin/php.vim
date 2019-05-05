@@ -7,15 +7,18 @@ let b:doge_func_expr = []
 " Matches regular function expressions and class methods.
 "
 " {match}: Should match at least the following scenarios:
-"     - function myFunction(...)
-"     - public myFunction(...)
-"     - public static myFunction(...)
-"     - public final myFunction(...)
-"     - public static final myFunction(...)
+"     - function myFunction(...) {
+"     - public myFunction(...) {
+"     - public static myFunction(...) {
+"     - public final myFunction(...) {
+"     - public static final myFunction(...) {
 "
 "   Regex explanation
+"     \m
+"       Use magic notation.
+"
 "     ^
-"       Require that the line starts with a function expression.
+"       Matches the position before the first character in the string.
 "
 "     \%(\%(public\|private\|protected\)\s\)\?
 "       Match an optional and non-captured group that may
@@ -29,14 +32,19 @@ let b:doge_func_expr = []
 "       Match an optional and non-captured group that may
 "       contain the keyword: 'final'.
 "
-"     function \([^(]\+\)\s*(\([^)]\+\))
+"     function \([^(]\+\)\s*(\(.\{-}\))\s*{
 "       Match two groups where group #1 is the function name,
 "       denoted as: 'function \([^(]\+\)'
 "
 "       Followed by 0 or more spaces, denoted as '\s*'.
 "
 "       Followed by group #2 which contains the parameters,
-"       denoted as: '(\([^)]\+\))'
+"       denoted as: '(\(.\{-}\))'. We use \{-} to ensure it will match as few
+"       matches as possible, which prevents wrong parsing when the input
+"       contains nested functions.
+"
+"       Followed by 0 or more spaces and then an opening curly brace,
+"       denoted as '\s*{'.
 "
 " {parameters.match}: Should match at least the following scenarios:
 "   - $arg1
@@ -46,8 +54,11 @@ let b:doge_func_expr = []
 "   - \Lorem\Ipsum\Dor\Sit\Amet $arg1 = NULL
 "
 "   Regex explanation
+"     \m
+"       Use magic notation.
+"
 "     ^
-"       Requires the pattern to match from the beginning of the parameter.
+"       Matches the position before the first character in the string.
 "
 "     \([a-zA-Z0-9_\\]\+\s*\)\?
 "       Matches an optional group containing 1 or more of the following
@@ -65,15 +76,15 @@ let b:doge_func_expr = []
 "       This group should match the parameter default value.
 "
 "     $
-"       Requires the pattern to match till the end of the parameter.
+"       Matches right after the last character in the string.
 call add(b:doge_func_expr, {
-      \   'match': '^\%(\%(public\|private\|protected\)\s\)\?\%(static\s\)\?\%(final\s\)\?function \([^(]\+\)\s*(\([^)]\+\))',
+      \   'match': '\m^\%(\%(public\|private\|protected\)\s\)\?\%(static\s\)\?\%(final\s\)\?function \([^(]\+\)\s*(\(.\{-}\))\s*{',
       \   'match_group_names': ['funcName', 'params'],
       \   'parameters': {
       \     'parent_match_group_name': 'params',
-      \     'match': '^\([a-zA-Z0-9_\\]\+\s*\)\?\($[a-zA-Z0-9_]\+\)\%(\s*=\s*.\+\)\?$',
+      \     'match': '\m^\([a-zA-Z0-9_\\]\+\s*\)\?\($[a-zA-Z0-9_]\+\)\%(\s*=\s*.\+\)\?$',
       \     'match_group_names': ['type', 'name'],
-      \     'format': '@param {type|mixed} {name} TODO',
+      \     'format': ['@param', '!{type|mixed}', '{name}', 'TODO'],
       \   },
       \   'comment': {
       \     'opener': '/**',

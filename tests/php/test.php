@@ -57,7 +57,7 @@ class myClass {
    * @param mixed $arg4 TODO
    * @param mixed $arg5 TODO
    */
-  public static final function myPublicStaticFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+  public static final function myPublicStaticFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = array()) {
     //
   }
 
