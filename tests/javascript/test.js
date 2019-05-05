@@ -1,3 +1,8 @@
+/**
+ * This file contains test scenarios and their expected results. You should be
+ * able to generate the examples below.
+ */
+
 // =============================================================================
 // Vanilla
 // =============================================================================

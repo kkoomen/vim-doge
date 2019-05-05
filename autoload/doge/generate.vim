@@ -7,7 +7,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-function! doge#generate#func_expr(func_expr) abort
+function! doge#generate#pattern(pattern) abort
   " Assuming multiline function expressions won't be longer than 15 lines.
   let l:lines = getline('.', line('.') + 15)
 
@@ -18,14 +18,14 @@ function! doge#generate#func_expr(func_expr) abort
 
   " Skip immediately if the current line does not match.
   let l:curr_line = escape(trim(join(l:lines, ' ')), '\')
-  if l:curr_line !~# a:func_expr['match']
+  if l:curr_line !~# a:pattern['match']
     return 0
   endif
 
-  let l:tokens = doge#token#extract(l:curr_line, a:func_expr['match'], a:func_expr['match_group_names'])
+  let l:tokens = doge#token#extract(l:curr_line, a:pattern['match'], a:pattern['match_group_names'])
 
   " Split the 'parameters' token value into a list.
-  let l:params_dict = a:func_expr['parameters']
+  let l:params_dict = a:pattern['parameters']
   let l:parameter_match_group_name = l:params_dict['parent_match_group_name']
   let l:params = map(split(l:tokens[l:parameter_match_group_name], ','), {k, v -> trim(v)})
 
@@ -43,7 +43,7 @@ function! doge#generate#func_expr(func_expr) abort
   " Create the comment by replacing the tokens in the template with their
   " corresponding values.
   let l:comment = []
-  for l:line in a:func_expr['comment']['template']
+  for l:line in a:pattern['comment']['template']
     let l:line_replaced = split(doge#token#replace(l:tokens, l:line), "\n")
     for l:replaced in l:line_replaced
       call add(l:comment, l:replaced)
@@ -51,7 +51,7 @@ function! doge#generate#func_expr(func_expr) abort
   endfor
 
   " If an existing comment exists, remove it before we insert a new one.
-  let l:old_comment_pattern = fnameescape(a:func_expr['comment']['opener']) . '\_.\{-}' . fnameescape(a:func_expr['comment']['closer']) . '$'
+  let l:old_comment_pattern = fnameescape(a:pattern['comment']['opener']) . '\_.\{-}' . fnameescape(a:pattern['comment']['closer']) . '$'
   let l:old_comment_start_lnum = search(l:old_comment_pattern, 'bn')
   let l:old_comment_end_lnum = search(l:old_comment_pattern, 'bne')
   let l:old_comment_lines_amount = l:old_comment_end_lnum - l:old_comment_start_lnum + 1

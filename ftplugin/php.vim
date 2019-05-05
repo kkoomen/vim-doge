@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let b:doge_func_expr = []
+let b:doge_patterns = []
 
 ""
 " Matches regular function expressions and class methods.
@@ -77,14 +77,14 @@ let b:doge_func_expr = []
 "
 "     $
 "       Matches right after the last character in the string.
-call add(b:doge_func_expr, {
+call add(b:doge_patterns, {
       \   'match': '\m^\%(\%(public\|private\|protected\)\s\)\?\%(static\s\)\?\%(final\s\)\?function \([^(]\+\)\s*(\(.\{-}\))\s*{',
       \   'match_group_names': ['funcName', 'params'],
       \   'parameters': {
       \     'parent_match_group_name': 'params',
       \     'match': '\m^\([a-zA-Z0-9_\\]\+\s*\)\?\($[a-zA-Z0-9_]\+\)\%(\s*=\s*.\+\)\?$',
       \     'match_group_names': ['type', 'name'],
-      \     'format': ['@param', '!{type|mixed}', '{name}', 'TODO'],
+      \     'format': ['@param', '{type|mixed}', '{name}', 'TODO'],
       \   },
       \   'comment': {
       \     'opener': '/**',

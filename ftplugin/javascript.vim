@@ -7,7 +7,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let b:doge_func_expr = []
+let b:doge_patterns = []
 
 ""
 " Matches regular and typed functions with default parameters.
@@ -67,7 +67,7 @@ let b:doge_func_expr = []
 "
 "     $
 "       Matches right after the last character in the string.
-call add(b:doge_func_expr, {
+call add(b:doge_patterns, {
       \   'match': '\m^function \([^(]\+\)\s*(\(.\{-}\))\s*{',
       \   'match_group_names': ['funcName', 'params'],
       \   'parameters': {

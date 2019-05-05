@@ -1,8 +1,8 @@
 <?php
 
 /**
- * This file contains test scenarios and their expected results. When testing
- * using the test.{ext} files you should be able to generate the examples below.
+ * This file contains test scenarios and their expected results. You should be
+ * able to generate the examples below.
  */
 
 /**
