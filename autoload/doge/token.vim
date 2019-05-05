@@ -15,54 +15,71 @@ function! doge#token#replace_string(tokens, text) abort
 
   let l:text = deepcopy(a:text)
 
-  " Grab all the tokens in the text by matching on the format: {name|default}.
-  let l:text_tokens = filter(map(split(l:text, ' '), {k, v -> matchstr(v, '\({[^}]\+}\)')}), 'v:val !=# ""')
-  for l:text_token in l:text_tokens
-    " The text can be in the following scenarios:
-    " - {name}
-    " - {name|default}
-    " so if the line contains a pipe character with a default value then we
-    " grab that value and remove it from the text.
-    let l:stripped_text_token = matchlist(l:text_token, '{\(.*\)|\(.*\)}')
-    let l:default_token_value = trim(get(l:stripped_text_token, 2, ''))
-    if !empty(l:default_token_value)
-      let l:formatted_text_token = '{' . trim(get(l:stripped_text_token, 1, '')) . '}'
-      let l:text = substitute(l:text, l:text_token, l:formatted_text_token, 'g')
-      let l:text_token = l:formatted_text_token
+  " When the text starts with '!' it indicates that we should empty the string
+  " the token did not got replaced to ensure no additional markup is left.
+  let l:return_empty_on_fail = l:text =~# '\m^!'
+  if l:return_empty_on_fail
+    " Remove the '!' character
+    let l:text = l:text[1:]
+  endif
+
+  " Tokens can be in the following 2 formats:
+  " - {name}
+  " - {name|default}
+  " so if the line contains a pipe character with a default value then we
+  " grab that value and remove it from the text.
+  let l:stripped_line = matchlist(l:text, '\m{\([^|{}]\+\)\%(|\([^}]\+\)\)\?}')
+  let l:default_token_value = trim(get(l:stripped_line, 2, ''))
+  if !empty(l:default_token_value)
+    let l:text = substitute(
+          \ l:text,
+          \ '{' . trim(get(l:stripped_line, 1, '')) . '|' . fnameescape(trim(get(l:stripped_line, 2, ''))) . '}',
+          \ '{' . trim(get(l:stripped_line, 1, '')) . '}',
+          \ 'g'
+          \ )
+  endif
+
+  let l:has_replaced_tokens = 0
+  for [l:token, l:value] in items(a:tokens)
+    let l:formatted_token = '{' . l:token . '}'
+
+    " Skip if the token does not exists in the text.
+    if l:text !~# l:formatted_token
+      continue
     endif
 
-    for [l:token, l:value] in items(a:tokens)
-      let l:formatted_token = '{' . l:token . '}'
-
-      " Skip if the token does not exists in the text.
-      if l:text_token !~# l:formatted_token
-        continue
-      endif
-
-      " The value of a token might be a list, for example:
-      "   { 'format': ['someRandomText', '{token|default}'] }
-      " and if this is the case then do a replacement for each item.
-      if type(l:value) == type([])
-        let l:multiline_replacement = []
-        for l:item in l:value
-          if empty(l:item)
-            call add(l:multiline_replacement, substitute(l:text, l:formatted_token, l:default_token_value, 'g'))
-          else
-            call add(l:multiline_replacement, substitute(l:text, l:formatted_token, escape(l:item, '\'), 'g'))
-          endif
-        endfor
-        let l:text = join(l:multiline_replacement, "\n")
-      else
-        if empty(l:value)
-          let l:text = substitute(l:text, l:formatted_token, l:default_token_value, 'g')
-        else
-          let l:text = substitute(l:text, l:formatted_token, l:value, 'g')
+    " The value of a token might be a list, for example:
+    "   { 'format': ['someRandomText', '{token|default}'] }
+    " and if this is the case then do a replacement for each item.
+    if type(l:value) == type([])
+      let l:multiline_replacement = []
+      for l:item in l:value
+        if empty(l:item) && !empty(l:default_token_value)
+          call add(l:multiline_replacement, substitute(l:text, l:formatted_token, l:default_token_value, 'g'))
+        elseif !empty(l:item)
+          call add(l:multiline_replacement, substitute(l:text, l:formatted_token, escape(l:item, '\'), 'g'))
         endif
+      endfor
+      let l:text = join(l:multiline_replacement, "\n")
+    else
+      if empty(l:value) && !empty(l:default_token_value)
+        let l:text = substitute(l:text, l:formatted_token, l:default_token_value, 'g')
+      elseif !empty(l:value)
+        let l:text = substitute(l:text, l:formatted_token, l:value, 'g')
       endif
-    endfor
+    endif
+
+    if l:text !~# l:formatted_token
+      let l:has_replaced_tokens = 1
+      break
+    endif
   endfor
 
-  return substitute(l:text, ' \+', ' ', 'g')
+  if l:has_replaced_tokens == 0 && l:return_empty_on_fail == 1
+    return ''
+  else
+    return substitute(l:text, ' \+', ' ', 'g')
+  endif
 endfunction
 
 function! doge#token#replace(tokens, text) abort

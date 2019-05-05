@@ -35,6 +35,7 @@ function! doge#generate#func_expr(func_expr) abort
   for l:param in l:params
     let l:param_tokens = doge#token#extract(l:param, l:params_dict['match'], l:params_dict['match_group_names'])
     let l:format = doge#token#replace(l:param_tokens, l:params_dict['format'])
+    let l:format = join(filter(l:format, 'v:val !=# ""'), ' ')
     call add(l:formatted_params, l:format)
   endfor
   let l:tokens[l:parameter_match_group_name] = l:formatted_params
