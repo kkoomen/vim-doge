@@ -1,19 +1,40 @@
-# doge
+# DoGe
 
-[TODO]
+We all love documentation because it makes our codebases easier to understand,
+yet no one has time to write it in a good and proper way or likes to write it.
+
+DoGe is a DOcumentation GEnerator which will generate proper documentation based
+on the function declaration. You can simply put your cursor on a function, press
+`<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>) and go on coding!
+
+*(In progress)* DoGe is also able to update an existing generated doc-comment which allows you
+to add, modify or delete a parameter, press `<C-d>` again and the corresponding
+doc-comment has been updated.
+
+*NOTE: The comment will be replaced for now rather then updated properly, this
+means that additional commentary being added will be removed as well when
+generating the comment again.*
+
+### Supported languages and doc standards
+
+- [x] Python ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))
+- [x] PHP ([phpdoc](https://www.phpdoc.org))
+- [ ] Javascript ([JSDoc](https://jsdoc.app))
 
 # Table of Contents
-- [doge](#doge)
+- [DoGe](#doge)
+    + [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
 - [Contributing](#contributing)
   * [Linting](#linting)
   * [Documentation](#documentation)
+- [License](#license)
 
 # Getting Started
 
-Install `doge`:
+Install `DoGe`:
 
 Using vim-pack:
 
