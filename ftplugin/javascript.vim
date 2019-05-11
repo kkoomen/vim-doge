@@ -5,7 +5,7 @@
 " ==============================================================================
 "
 " The javascript documentation should follow the 'jsdoc' conventions.
-" @see https://jsdoc.app
+" see https://jsdoc.app
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim
@@ -40,51 +40,50 @@ let b:doge_patterns = []
 "       denoted as '\s*{'.
 "
 " {parameters.match}: Should match at least the following scenarios:
-"   - arg1
-"   - arg1 = 5
-"   - arg1 = 'string'
-"   - arg1: bool
-"   - arg1: bool = 5
-"   - arg1: Person = false
-"   - arg1: string = 'string'
+"   - param1
+"   - param1 = 5
+"   - param1 = 'string'
+"   - param1: bool
+"   - param1: bool = 5
+"   - param1: Person = false
+"   - param1: string = 'string'
 "
 "   Regex explanation
 "     \m
 "       Use magic notation.
 "
-"     ^
-"       Matches the position before the first character in the string.
-"
 "     \([^,:]\+\)
-"       Matches a group which may contain every character besides ',' or ':'.
 "       This group should match the parameter name.
+"       ------------------------------------------------------------------------
+"       Matches a group which may contain every character besides ',' or ':'.
 "
 "     \%(\%(\s*:\s*\([a-zA-Z_]\+\)\)\)\?
+"       This group
+"       ------------------------------------------------------------------------
 "       Matches an optional non-capturing group containing 1 sub-group which may
 "       contain 1 or more of the following characters: [a-zA-Z_].
 "
 "     \%(\s*=\s*.\+\)\?
-"       Matches an optional and non-capturing group
-"       where it should match the format ' = VALUE'.
 "       This group should match the parameter default value.
-"
-"     $
-"       Matches right after the last character in the string.
+"       ------------------------------------------------------------------------
+"       Matches an optional and non-capturing group where it should match
+"       the format ' = VALUE'.
 call add(b:doge_patterns, {
-      \   'match': '\m^function \([^(]\+\)\s*(\(.\{-}\))\s*{',
-      \   'match_group_names': ['funcName', 'params'],
+      \   'match': '\m^function \([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*\(.\{-}\)\)\?{',
+      \   'match_group_names': ['funcName', 'parameters', 'returnType'],
       \   'parameters': {
-      \     'parent_match_group_name': 'params',
-      \     'match': '\m^\([^,:]\+\)\%(\%(\s*:\s*\([a-zA-Z_]\+\)\)\)\?\%(\s*=\s*.\+\)\?$',
+      \     'match': '\m\([^,:]\+\)\%(\%(\s*:\s*\([a-zA-Z_]\+\)\)\)\?\%(\s*=\s*[^,]\+\)\?',
       \     'match_group_names': ['name', 'type'],
       \     'format': ['@param', '!{{type|*}}', '{name}', 'TODO'],
       \   },
       \   'comment': {
+      \     'insert': 'above',
       \     'opener': '/**',
       \     'closer': '*/',
       \     'template': [
       \       '/**',
-      \       ' * {params}',
+      \       ' * {parameters}',
+      \       '! * @return {{returnType}}: TODO',
       \       ' */',
       \     ],
       \   },

@@ -8,9 +8,10 @@
 // =============================================================================
 
 /**
- * @param {*} arg1 TODO
+ * @param {string} arg1 TODO
+ * @param {int} arg2 TODO
  */
-function myFunc(arg1) {
+function myFunc(arg1: string = 'lol', arg2: int = 2) {
   var a = 2;
 }
 
@@ -45,6 +46,11 @@ const myObj = {
 // =============================================================================
 // Flow js (can be used e.g. in React projects)
 // =============================================================================
+/**
+ * @param {any} one TODO
+ * @param {any} two TODO
+ * @return {number}: TODO
+ */
 function add(one: any, two: any = 'default'): number {
   //
 }
@@ -65,6 +71,9 @@ function f(x: number, y?: number) {}
 
 export function configureStore(history: History, initialState: object): Store<AppState> {}
 
+/**
+ * @return {1 | 2 | 3 | 4 | 5 | 6}: TODO
+ */
 function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {}
 
 function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}

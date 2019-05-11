@@ -92,8 +92,11 @@ function! doge#token#replace(tokens, text) abort
 endfunction
 
 function! doge#token#extract(line, regex, regex_group_names) abort
-  let l:matches = map(matchlist(a:line, a:regex), {key, val -> trim(val)})
-  let l:tokens = {}
+  let l:submatches = []
+  call substitute(a:line, a:regex, '\=add(l:submatches, submatch(0))', 'g')
+
+  let l:matches = map(l:submatches, {key, val -> trim(val)})
+  let l:tokens = []
 
   " We can expect a list of matches like:
   "   ['val1', 'val2', '', 'val3']
@@ -108,10 +111,17 @@ function! doge#token#extract(line, regex, regex_group_names) abort
   "   'type': 'val1',
   " }
   if len(l:matches) > 0 && len(a:regex_group_names) > 0
-    for l:token in a:regex_group_names
-      let l:index = index(a:regex_group_names, l:token)
-      let l:match = l:matches[l:index + 1]
-      let l:tokens[l:token] = l:match
+    for l:match in l:matches
+      let l:values = matchlist(l:match, a:regex)
+      let l:group = {}
+
+      for l:token in a:regex_group_names
+        let l:group_idx = index(a:regex_group_names, l:token)
+        let l:token_value = l:values[l:group_idx + 1]
+        let l:group[l:token] = trim(l:token_value)
+      endfor
+
+      call add(l:tokens, l:group)
     endfor
   endif
 
