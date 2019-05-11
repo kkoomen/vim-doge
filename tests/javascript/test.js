@@ -8,10 +8,9 @@
 // =============================================================================
 
 /**
- * @param {string} arg1 TODO
- * @param {int} arg2 TODO
+ * @param {*} arg1 TODO
  */
-function myFunc(arg1: string = 'lol', arg2: int = 2) {
+function myFunc(arg1) {
   var a = 2;
 }
 

@@ -69,7 +69,7 @@ let b:doge_patterns = []
 "       Matches an optional and non-capturing group where it should match
 "       the format ' = VALUE'.
 call add(b:doge_patterns, {
-      \   'match': '\m^function \([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*\(.\{-}\)\)\?{',
+      \   'match': '\m^function \([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*\(.\{-}\)\)\?\s*{',
       \   'match_group_names': ['funcName', 'parameters', 'returnType'],
       \   'parameters': {
       \     'match': '\m\([^,:]\+\)\%(\%(\s*:\s*\([a-zA-Z_]\+\)\)\)\?\%(\s*=\s*[^,]\+\)\?',
