@@ -7,13 +7,13 @@ DoGe is a DOcumentation GEnerator which will generate proper documentation based
 on the function declaration. You can simply put your cursor on a function, press
 `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>) and go on coding!
 
-*(In progress)* DoGe is also able to update an existing generated doc-comment which allows you
+**(In progress)** DoGe is also able to update an existing generated doc-comment which allows you
 to add, modify or delete a parameter, press `<C-d>` again and the corresponding
 doc-comment has been updated.
 
-*NOTE: The comment will be replaced for now rather then updated properly, this
+**NOTE: The comment will be replaced for now rather then updated properly, this
 means that additional commentary being added will be removed as well when
-generating the comment again.*
+generating the comment again.**
 
 ### Supported languages and doc standards
 
