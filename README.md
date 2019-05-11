@@ -20,6 +20,7 @@ generating the comment again.**
 - [x] Python ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))
 - [x] PHP ([phpdoc](https://www.phpdoc.org))
 - [ ] Javascript ([JSDoc](https://jsdoc.app))
+- [ ] Typescript ([JSDoc](https://jsdoc.app))
 
 # Table of Contents
 - [DoGe](#doge)
