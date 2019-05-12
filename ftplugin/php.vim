@@ -1,7 +1,7 @@
 " ==============================================================================
 " Filename: php.vim
 " Maintainer: Kim Koomen <koomen@protonail.com>
-" License: MIT
+" License: GPL-3.0
 " ==============================================================================
 "
 " The PHP documentation should follow the 'phpdoc' conventions.

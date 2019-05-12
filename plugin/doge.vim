@@ -1,7 +1,7 @@
 " ==============================================================================
 " Filename: doge.vim
 " Maintainer: Kim Koomen <koomen@protonail.com>
-" License: MIT
+" License: GPL-3.0
 " ==============================================================================
 
 let s:save_cpo = &cpoptions

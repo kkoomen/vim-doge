@@ -1,7 +1,7 @@
 " ==============================================================================
 " Filename: jsx.vim
 " Maintainer: Kim Koomen <koomen@protonail.com>
-" License: MIT
+" License: GPL-3.0
 " ==============================================================================
 "
 " The javascript documentation should follow the 'jsdoc' conventions.
