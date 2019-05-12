@@ -28,12 +28,13 @@ function! s:token_replace(tokens, text) abort
   " - {name|default}
   " so if the line contains a pipe character with a default value then we
   " grab that value and remove it from the text.
-  let l:stripped_line = matchlist(l:text, '\m{\([^|{}]\+\)\%(|\([^}]\+\)\)\?}')
-  let l:default_token_value = trim(get(l:stripped_line, 2, ''))
-  if !empty(l:default_token_value)
+  let l:stripped_line = matchlist(l:text, '\m{\([^|{}]\+\)\%(\(|[^}]*\)\)\?}')
+  let l:default_token_value = trim(get(l:stripped_line, 2, '|'))[1:]
+  let l:has_default_token_value = !empty(trim(get(l:stripped_line, 2, '')))
+  if l:has_default_token_value
     let l:text = substitute(
           \ l:text,
-          \ '{' . trim(get(l:stripped_line, 1, '')) . '|' . fnameescape(trim(get(l:stripped_line, 2, ''))) . '}',
+          \ '{' . trim(get(l:stripped_line, 1, '')) . '|' . fnameescape(get(l:stripped_line, 2, '|')[1:]) . '}',
           \ '{' . trim(get(l:stripped_line, 1, '')) . '}',
           \ 'g'
           \ )
@@ -54,7 +55,7 @@ function! s:token_replace(tokens, text) abort
     if type(l:value) == type([])
       let l:multiline_replacement = []
       for l:item in l:value
-        if empty(l:item) && !empty(l:default_token_value)
+        if empty(l:item) && l:has_default_token_value
           call add(l:multiline_replacement, substitute(l:text, l:formatted_token, l:default_token_value, 'g'))
         elseif !empty(l:item)
           call add(l:multiline_replacement, substitute(l:text, l:formatted_token, escape(l:item, '\'), 'g'))
@@ -62,7 +63,7 @@ function! s:token_replace(tokens, text) abort
       endfor
       let l:text = join(l:multiline_replacement, "\n")
     else
-      if empty(l:value) && !empty(l:default_token_value)
+      if empty(l:value) && l:has_default_token_value
         let l:text = substitute(l:text, l:formatted_token, l:default_token_value, 'g')
       elseif !empty(l:value)
         let l:text = substitute(l:text, l:formatted_token, l:value, 'g')
@@ -71,15 +72,24 @@ function! s:token_replace(tokens, text) abort
 
     if l:text !~# l:formatted_token
       let l:has_replaced_tokens = 1
-      break
+      " break
     endif
   endfor
 
   if l:has_replaced_tokens == 0 && l:return_empty_on_fail == 1
     return ''
-  else
-    return substitute(l:text, ' \+', ' ', 'g')
   endif
+
+  " Replace double whitespace with a single.
+  let l:text = substitute(l:text, ' \+', ' ', 'g')
+
+  " Remove leading whitespace.
+  let l:text = substitute(l:text, ' \+$', '', 'g')
+
+  " For JSDoc we replace the typing 'typeA | type B' with 'typeA|typeB'.
+  let l:text = substitute(l:text, ' | ', '|', 'g')
+
+  return l:text
 endfunction
 
 function! doge#token#replace(tokens, text) abort

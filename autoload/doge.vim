@@ -12,9 +12,9 @@ function! doge#generate() abort
     for l:pattern in get(b:, 'doge_patterns')
       if doge#generate#pattern(l:pattern) == 0
         continue
-      else
-        return 1
       endif
+
+      return 1
     endfor
   endif
 endfunction
