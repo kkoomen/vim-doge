@@ -4,7 +4,8 @@
 " License: MIT
 " ==============================================================================
 "
-" The javascript documentation should follow the 'jsdoc' conventions.
+" The typescript documentation should follow the 'jsdoc' conventions, since
+" there is not official typescript documentation.
 " see https://jsdoc.app
 
 let s:save_cpo = &cpoptions
