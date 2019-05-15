@@ -89,7 +89,15 @@ function! doge#generate#pattern(pattern) abort
 
   if l:has_old_comment
     let l:cursor_pos = getpos('.')
-    execute(l:old_comment_start_lnum . 'd' . l:old_comment_lines_amount)
+
+    " Preserve the old comment before deleting.
+    let l:old_comment = getline(l:old_comment_start_lnum, l:old_comment_end_lnum)
+    let l:comment_has_changed = doge#comment#has_changed(l:old_comment, l:comment)
+
+    " Delete the old comment.
+    if l:comment_has_changed
+      execute(l:old_comment_start_lnum . 'd' . l:old_comment_lines_amount)
+    endif
 
     " If we have deleted a comment that is 'below' the function expression then
     " our cursor moved a line too much, so revert its position. This is the
@@ -112,11 +120,15 @@ function! doge#generate#pattern(pattern) abort
     let l:comment_lnum_inherited_indent = line('.')
   endif
 
-  " Write the comment.
-  call append(
-        \ l:comment_lnum_insert_position,
-        \ map(l:comment, {k, line -> doge#indent#line(l:comment_lnum_inherited_indent, line)})
-        \ )
+  " Write the comment if it changed.
+  if l:comment_has_changed
+    call append(
+          \ l:comment_lnum_insert_position,
+          \ map(l:comment, {k, line -> doge#indent#line(l:comment_lnum_inherited_indent, line)})
+          \ )
+  else
+    echo '[DoGE] Comment is up-to-date, skipping'
+  endif
 
   if l:has_old_comment
     call setpos('.', l:cursor_pos)
