@@ -16,6 +16,18 @@ on the function declaration. You can simply put your cursor on a function, press
   - [x] FlowJS
   - [x] NodeJS
 - [x] Typescript ([JSDoc](https://jsdoc.app))
+- [ ] Coffeescript ([JSDoc](https://jsdoc.app))
+- [ ] Java ([JAVADoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
+- [ ] Lua ([LuaDoc](http://lua-users.org/wiki/DocumentingLuaCode))
+- [ ] Ruby ([RDoc](https://ruby.github.io/rdoc))
+- [ ] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html)
+- [ ] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
+- [ ] R ([R style guide](https://style.tidyverse.org/documentation.html))
+- [ ] C++ ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))
+- [ ] Haskell ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))
+- [ ] Idris ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))
+- [ ] Assembly ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000)
+- [ ] C# ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))
 
 # Table of Contents
 - [DoGe](#doge)
