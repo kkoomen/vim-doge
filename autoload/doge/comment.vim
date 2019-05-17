@@ -15,7 +15,7 @@ function! doge#comment#has_changed(old_comment, new_comment) abort
   for l:old_line in a:old_comment
     let l:old_line_idx = index(a:old_comment, l:old_line)
     let l:new_line = get(a:new_comment, l:old_line_idx)
-    if trim(l:old_line) !=# trim(l:new_line)
+    if l:old_line !=# l:new_line
       return 1
     endif
   endfor
