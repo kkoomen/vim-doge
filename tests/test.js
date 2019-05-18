@@ -393,7 +393,6 @@ class Child {}
 
 /**
  * TODO
- * @extends Child
  */
 export class Child {}
 
@@ -405,8 +404,7 @@ class Child extends Parent {}
 
 /**
  * TODO
- * @extends Child
- * @implements Parent
+ * @extends Parent
  */
 export class Child extends Parent {}
 
@@ -425,8 +423,8 @@ class Child extends Parent implements CustomInterfaceName {}
 
 /**
  * TODO
- * @extends Child
- * @implements Parent
+ * @extends Parent
+ * @implements CustomInterfaceName
  */
 export class Child extends Parent implements CustomInterfaceName {}
 

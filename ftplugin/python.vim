@@ -1,6 +1,8 @@
 " ==============================================================================
 " The python documentation should follow the 'Sphinx reST' conventions.
 " see: http://daouzli.com/blog/docstring.html#restructuredtext
+"
+" This ftplugin should always reflect the logic of the ftplugin/javascript.vim.
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
@@ -47,25 +49,25 @@ let b:doge_patterns = []
 "   \m
 "     Interpret the pattern as a magic pattern.
 "
-"   \([a-zA-Z0-9_]\+\)
+"   \([[:alnum:]_]\+\)
 "     This should match the parameter name.
 "     ------------------------------------------------------------------------
 "     Matches a captured group containing 1 or more of the following
-"     characters: '[a-zA-Z0-9_]'.
+"     characters: '[[:alnum:]_]'.
 "
-"   \%(:\s*\([a-zA-Z0-9_]\+\%(\[[a-zA-Z0-9_\[\], ]\+\]\)\?\)\)\?
+"   \%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\], ]\+\]\)\?\)\)\?
 "     This should match the parameter type.
 "     ------------------------------------------------------------------------
 "     Matches an optional and non-capturing group, denoted as \%( ... \)\?
 "     which should start with the character ':' followed by 0 or more spaces,
 "     followed by the type itself, which is denoted as:
 "
-"     \([a-zA-Z0-9_]\+\%(\[[a-zA-Z0-9_\[\], ]\+\]\)\?\)
+"     \([[:alnum:]_]\+\%(\[[[:alnum:]_[\], ]\+\]\)\?\)
 "
-"       [a-zA-Z0-9_]\+
+"       [[:alnum:]_]\+
 "         This will match words as: 'str', 'int', etc.
 "
-"       \%(\[[a-zA-Z0-9_\[\], ]\+\]\)\?
+"       \%(\[[[:alnum:]_[\], ]\+\]\)\?
 "         This will match an optional and non-capturing group which is used
 "         for type hints such as: 'Callable[[int, Exception], None]'.
 "
@@ -79,7 +81,7 @@ call add(b:doge_patterns, {
       \   'match': '\m^def \([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
       \   'match_group_names': ['funcName', 'parameters', 'returnType'],
       \   'parameters': {
-      \     'match': '\m\([a-zA-Z0-9_]\+\)\%(:\s*\([a-zA-Z0-9_]\+\%(\[[a-zA-Z0-9_\[\], ]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
+      \     'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
       \     'match_group_names': ['name', 'type', 'default'],
       \     'format': [':param', '{name}', '{type|any}:', 'TODO'],
       \   },
@@ -87,6 +89,7 @@ call add(b:doge_patterns, {
       \     'insert': 'below',
       \     'opener': '"""',
       \     'closer': '"""',
+      \     'trim_comparision_check': 1,
       \     'template': [
       \       '"""',
       \       'TODO',

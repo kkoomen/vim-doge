@@ -54,8 +54,6 @@ def myFunc(param1: Sequence[T]) -> Generator[int, float, str]:
 
 class MyClass(object):
 
-    """Docstring for MyClass. """
-
     def __init__(self: MyClass):
         """
         TODO
