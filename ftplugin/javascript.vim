@@ -1,11 +1,7 @@
 " ==============================================================================
-" Filename: javascript.vim
-" Maintainer: Kim Koomen <koomen@protonail.com>
-" License: GPL-3.0
-" ==============================================================================
-"
 " The javascript documentation should follow the 'jsdoc' conventions.
 " see https://jsdoc.app
+" ==============================================================================
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim

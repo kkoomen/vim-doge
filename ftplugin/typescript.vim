@@ -1,12 +1,10 @@
 " ==============================================================================
-" Filename: typescript.vim
-" Maintainer: Kim Koomen <koomen@protonail.com>
-" License: GPL-3.0
-" ==============================================================================
-"
 " The typescript documentation should follow the 'jsdoc' conventions, since
-" there is not official typescript documentation.
+" there is no official typescript documentation.
 " see https://jsdoc.app
+"
+" This ftplugin should always reflect the logic of the ftplugin/javascript.vim.
+" ==============================================================================
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim

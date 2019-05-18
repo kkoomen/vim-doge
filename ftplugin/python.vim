@@ -1,11 +1,7 @@
 " ==============================================================================
-" Filename: python.vim
-" Maintainer: Kim Koomen <koomen@protonail.com>
-" License: GPL-3.0
-" ==============================================================================
-"
 " The python documentation should follow the 'Sphinx reST' conventions.
 " see: http://daouzli.com/blog/docstring.html#restructuredtext
+" ==============================================================================
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim

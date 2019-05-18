@@ -1,11 +1,7 @@
 " ==============================================================================
-" Filename: php.vim
-" Maintainer: Kim Koomen <koomen@protonail.com>
-" License: GPL-3.0
-" ==============================================================================
-"
 " The PHP documentation should follow the 'phpdoc' conventions.
 " see https://www.phpdoc.org
+" ==============================================================================
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim

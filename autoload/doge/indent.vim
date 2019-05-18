@@ -1,9 +1,3 @@
-" ==============================================================================
-" Filename: indent.vim
-" Maintainer: Kim Koomen <koomen@protonail.com>
-" License: MIT
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

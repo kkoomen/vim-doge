@@ -1,12 +1,8 @@
-" ==============================================================================
-" Filename: token.vim
-" Maintainer: Kim Koomen <koomen@protonail.com>
-" License: MIT
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+""
+" @private
 function! s:token_replace(tokens, text) abort
   " Ensure the input is a string.
   if type(a:text) != type('')
@@ -92,6 +88,8 @@ function! s:token_replace(tokens, text) abort
   return l:text
 endfunction
 
+""
+" @public
 function! doge#token#replace(tokens, text) abort
   let l:text = deepcopy(a:text)
   if type(l:text) == type([])
