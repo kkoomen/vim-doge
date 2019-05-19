@@ -36,10 +36,11 @@ on the function declaration. You can simply put your cursor on a function, press
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
+    + [`g:doge_mapping`](#gdoge_mapping)
 - [Contributing](#contributing)
   * [Linting](#linting)
   * [Documentation](#documentation)
-- [License](#license)
+  * [Help](#help)
 
 # Getting Started
 
