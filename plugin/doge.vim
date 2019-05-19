@@ -7,6 +7,12 @@ endif
 let g:loaded_doge = 1
 
 if !exists('g:doge_mapping')
+  ""
+  " @setting(g:doge_mapping)
+  "
+  " (Default: '<C-d>')
+  "
+  " Sets the mapping to trigger DoGe.
   let g:doge_mapping = '<C-d>'
 endif
 

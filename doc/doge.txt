@@ -3,7 +3,18 @@ Kim Koomen                                                              *doge*
 
 ==============================================================================
 CONTENTS                                                       *doge-contents*
-  1. Functions................................................|doge-functions|
+  1. Configuration...............................................|doge-config|
+  2. Functions................................................|doge-functions|
+
+==============================================================================
+CONFIGURATION                                                    *doge-config*
+
+                                                              *g:doge_mapping*
+|g:doge_mapping|
+
+(Default: '<C-d>')
+
+Sets the mapping to trigger DoGe.
 
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
