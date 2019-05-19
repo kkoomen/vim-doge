@@ -1,0 +1,39 @@
+*doge.txt*	[DO]cumentation [GE]nerator
+Kim Koomen                                                              *doge*
+
+==============================================================================
+CONTENTS                                                       *doge-contents*
+  1. Functions................................................|doge-functions|
+
+==============================================================================
+FUNCTIONS                                                     *doge-functions*
+
+doge#generate()                                              *doge#generate()*
+  Generates documentation based on available patterns in b:doge_patterns.
+
+doge#comment#has_changed({old_comment}, {new_comment}, {should_trim})
+                                                  *doge#comment#has_changed()*
+  Check whether two comments differ from each other by comparing them.
+
+doge#generate#pattern({pattern})                     *doge#generate#pattern()*
+  Generates a comment based on a given pattern.
+
+doge#indent#add({text}, {lnum})                            *doge#indent#add()*
+  Indent a string based on a given line its indent.
+
+doge#indent#remove({text}, {lnum})                      *doge#indent#remove()*
+  Remove indent based on a given line its indent.
+
+doge#token#replace({tokens}, {text})                    *doge#token#replace()*
+  Replace all tokens in the text parameter based on a given dictionary
+  containing all the tokens.
+
+doge#token#extract({text}, {regex}, {regex_group_names})
+                                                        *doge#token#extract()*
+  Extract all the tokens in a text by creating a dictionary holding key-value
+  pairs where the 'key' is the given group name and the 'value' the captured
+  value of that group. The regex groups in the 'regex' parameter should be
+  symmetrical in length to the 'regex_group_names' parameter.
+
+
+vim:tw=78:ts=8:ft=help:norl:

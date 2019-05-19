@@ -1,6 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+""
+" @public
+" Generates a comment based on a given pattern.
 function! doge#generate#pattern(pattern) abort
   " Assuming multiline function expressions won't be longer than 15 lines.
   let l:lines = getline('.', line('.') + 15)
@@ -62,7 +65,7 @@ function! doge#generate#pattern(pattern) abort
   else
     let l:comment_lnum_inherited_indent = line('.')
   endif
-  let l:comment = map(l:comment, {k, line -> doge#indent#add(l:comment_lnum_inherited_indent, line)})
+  let l:comment = map(l:comment, {k, line -> doge#indent#add(line, l:comment_lnum_inherited_indent)})
 
   " If an existing comment exists, remove it before we insert a new one.
   " We start off by creating the regex pattern

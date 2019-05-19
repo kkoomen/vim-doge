@@ -1,6 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+""
+" @public
+" Check whether two comments differ from each other by comparing them.
 function! doge#comment#has_changed(old_comment, new_comment, should_trim) abort
   " Return immediately if the lenght is already differnt.
   if len(a:old_comment) != len(a:new_comment)

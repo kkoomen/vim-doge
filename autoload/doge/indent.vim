@@ -4,7 +4,7 @@ set cpoptions&vim
 ""
 " @public
 " Indent a string based on a given line its indent.
-function! doge#indent#add(lnum, text)
+function! doge#indent#add(text, lnum)
   if &expandtab
     return repeat(' ', indent(a:lnum)) . a:text
   else
@@ -15,7 +15,7 @@ endfunction
 ""
 " @public
 " Remove indent based on a given line its indent.
-function! doge#indent#remove(lnum, text)
+function! doge#indent#remove(text, lnum)
   if &expandtab
     return substitute(a:text, repeat(' ', indent(a:lnum)), '', '')
   else

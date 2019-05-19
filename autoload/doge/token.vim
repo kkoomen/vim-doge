@@ -3,6 +3,8 @@ set cpoptions&vim
 
 ""
 " @private
+" Replace all tokens in the text parameter based on a given dictionary
+" containing all the tokens.
 function! s:token_replace(tokens, text) abort
   " Ensure the input is a string.
   if type(a:text) != type('')
@@ -90,6 +92,8 @@ endfunction
 
 ""
 " @public
+" Replace all tokens in the text parameter based on a given dictionary
+" containing all the tokens.
 function! doge#token#replace(tokens, text) abort
   let l:text = deepcopy(a:text)
   if type(l:text) == type([])
@@ -99,9 +103,15 @@ function! doge#token#replace(tokens, text) abort
   endif
 endfunction
 
-function! doge#token#extract(line, regex, regex_group_names) abort
+""
+" @public
+" Extract all the tokens in a text by creating a dictionary holding key-value
+" pairs where the 'key' is the given group name and the 'value' the captured
+" value of that group. The regex groups in the 'regex' parameter should be
+" symmetrical in length to the 'regex_group_names' parameter.
+function! doge#token#extract(text, regex, regex_group_names) abort
   let l:submatches = []
-  call substitute(a:line, a:regex, '\=add(l:submatches, submatch(0))', 'g')
+  call substitute(a:text, a:regex, '\=add(l:submatches, submatch(0))', 'g')
 
   let l:matches = map(l:submatches, {key, val -> trim(val)})
   let l:tokens = []
