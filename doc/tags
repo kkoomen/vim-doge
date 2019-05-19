@@ -1,0 +1,13 @@
+doge	doge.txt	/*doge*
+doge#comment#has_changed()	doge.txt	/*doge#comment#has_changed()*
+doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
+doge#generate()	doge.txt	/*doge#generate()*
+doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#indent#remove()	doge.txt	/*doge#indent#remove()*
+doge#token#extract()	doge.txt	/*doge#token#extract()*
+doge#token#replace()	doge.txt	/*doge#token#replace()*
+doge-config	doge.txt	/*doge-config*
+doge-contents	doge.txt	/*doge-contents*
+doge-functions	doge.txt	/*doge-functions*
+doge.txt	doge.txt	/*doge.txt*
+g:doge_mapping	doge.txt	/*g:doge_mapping*

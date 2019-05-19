@@ -59,7 +59,13 @@ Using plug:
 
 # Configuration
 
-[TODO]
+Run `:help doge-config` to get the help page for all the possible configuration.
+
+### `g:doge_mapping`
+
+(Default: `<C-d>`)
+
+Sets the mapping to trigger DoGe.
 
 # Contributing
 
@@ -89,3 +95,7 @@ let g:syntastic_vim_checkers = ['vint']
 
 Every function, mapping or configurable option should contain documentation. The
 documentation in the `doc/` should be generated using [vimdoc](https://github.com/google/vimdoc).
+
+## Help
+
+To open all the help pages, run `:help doge`.
