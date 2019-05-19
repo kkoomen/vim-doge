@@ -16,7 +16,8 @@ on the function declaration. You can simply put your cursor on a function, press
   - [x] FlowJS
   - [x] NodeJS
 - [x] Typescript ([JSDoc](https://jsdoc.app))
-- [ ] Coffeescript ([JSDoc](https://jsdoc.app))
+- [x] Coffeescript ([JSDoc](https://jsdoc.app))
+  - [x] FlowJS
 - [ ] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
 - [ ] Lua ([LuaDoc](http://lua-users.org/wiki/DocumentingLuaCode))
 - [ ] Ruby ([RDoc](https://ruby.github.io/rdoc))

@@ -43,8 +43,8 @@ let b:doge_patterns = []
 "     followed by 1 or more spaces and finally followed by a captured group,
 "     denoted as '\( ... \)', that may contain 1 or more of the following
 "     characters '[[:alnum:]_$]'.
-"
 "   \%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?
+"
 "     This should match the pattern 'implements <INTERFACE>'.
 "     ------------------------------------------------------------------------
 "     Matches an optional and non-captured group, denoted as '\%( ... \)',
@@ -163,11 +163,11 @@ call add(b:doge_patterns, {
 "     being responsive for capturing the type itself, denoted as '\( ... \)'.
 "
 "     The group for the type itself should contain at least 1 or more of the
-"     following characters: '[[:alnum:][:space:]._|]', followed by an optional and
-"     non-captured group, denoted as '\%( ... \)\?', which should contain 0 or
-"     more of the following characters: '[[:alnum:][:space:]_[\],]', surrounded by
-"     square brackets, denoted as '[ ... ]'. This will match the scenarios such
-"     as: 'T[K][]' or 'string[]'.
+"     following characters: '[[:alnum:][:space:]._|]', followed by an optional
+"     and non-captured group, denoted as '\%( ... \)\?', which should contain 0
+"     or more of the following characters: '[[:alnum:][:space:]_[\],]',
+"     surrounded by square brackets, denoted as '[ ... ]'. This will match the
+"     scenarios such as: 'T[K][]' or 'string[]'.
 "
 "   \%(\s*=\s*\([^,]\+\)\+\)\?
 "     This should match the parameter default value in the format ' = <VALUE>'.
@@ -240,8 +240,9 @@ call add(b:doge_patterns, {
 "     '<T, K extends keyof T>'.
 "     --------------------------------------------------------------------------
 "     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
-"     which may contain 0 or more of the following characters: '[[:alnum:][:space:]_,]',
-"     which should be surrounded by the characters '<' and '>'.
+"     which may contain 0 or more of the following characters:
+"     '[[:alnum:][:space:]_,]', which should be surrounded by the characters '<'
+"     and '>'.
 "
 "   (\([^>]\{-}\))
 "     This should match the function parameters.
@@ -277,7 +278,6 @@ call add(b:doge_patterns, {
 "   \m
 "     Interpret the pattern as a magic pattern.
 "
-"
 "   \%(\%(public\|private\|protected\)\?\s*\)\?
 "     This should match the parameter access value.
 "     --------------------------------------------------------------------------
@@ -302,11 +302,11 @@ call add(b:doge_patterns, {
 "     being responsive for capturing the type itself, denoted as '\( ... \)'.
 "
 "     The group for the type itself should contain at least 1 or more of the
-"     following characters: '[[:alnum:][:space:]._|]', followed by an optional and
-"     non-captured group, denoted as '\%( ... \)\?', which should contain 0 or
-"     more of the following characters: '[[:alnum:][:space:]_[\],]', surrounded by
-"     square brackets, denoted as '[ ... ]'. This will match the scenarios such
-"     as: 'T[K][]' or 'string[]'.
+"     following characters: '[[:alnum:][:space:]._|]', followed by an optional
+"     and non-captured group, denoted as '\%( ... \)\?', which should contain 0
+"     or more of the following characters: '[[:alnum:][:space:]_[\],]',
+"     surrounded by square brackets, denoted as '[ ... ]'. This will match the
+"     scenarios such as: 'T[K][]' or 'string[]'.
 "
 "   \%(\s*=\s*\([^,]\+\)\+\)\?
 "     This should match the parameter default value in the format ' = <VALUE>'.

@@ -10,6 +10,9 @@ function! doge#generate() abort
 
       return 1
     endfor
+    echo '[DoGe] No patterns did match the current line.'
+  else
+    echo '[DoGe] b:doge_patterns variable not found for filetype "' . &filetype . '".'
   endif
 endfunction
 
