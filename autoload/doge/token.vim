@@ -85,7 +85,7 @@ function! s:token_replace(tokens, text) abort
   let l:text = substitute(l:text, ' \+$', '', 'g')
 
   " For JSDoc we replace the typing 'typeA | type B' with 'typeA|typeB'.
-  let l:text = substitute(l:text, ' | ', '|', 'g')
+  let l:text = substitute(l:text, '\s*|\s*', '|', 'g')
 
   return l:text
 endfunction
