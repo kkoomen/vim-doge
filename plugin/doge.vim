@@ -16,7 +16,8 @@ if !exists('g:doge_mapping')
   let g:doge_mapping = '<C-d>'
 endif
 
-execute('nnoremap ' . get(g:, 'doge_mapping') . ' :call doge#generate()<CR>')
+nnoremap <buffer> <Plug>(doge-generate) :call doge#generate()<CR>
+execute('nmap <buffer> <unique> ' . get(g:, 'doge_mapping') . ' <Plug>(doge-generate)')
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
