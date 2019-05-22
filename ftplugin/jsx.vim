@@ -87,9 +87,9 @@ call add(b:doge_patterns, {
 "   ^
 "     Matches the position before the first character in the string.
 "
-"   \%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*\%({\|(\)
+"   \%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]
 "     This should match the pattern
-"     '(var|const|let) <FUNC_NAME> = (<PARAMETERS) => {'
+"     '(var|const|let) <FUNC_NAME> = (<PARAMETERS) => [{(]'
 "     ------------------------------------------------------------------------
 "
 "     \%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?
@@ -127,13 +127,12 @@ call add(b:doge_patterns, {
 "       parenthesis wrapping the return type, denoted as '(\? ... )\?', which
 "       may occur if 2 or more possible return types are given.
 "
-"     \s*=>\s*\%({\|(\)
+"     \s*=>\s*[{(]
 "       Matches the pattern ' => {' or ' => ('.
 "       ----------------------------------------------------------------------
 "       Matches 0 or more spaces, follow by a thick-arrow notation, denoted as
-"       '=>', followed by 0 or more spaces, followed by an non-captured group,
-"       denoted as '\%( ... \)', containing the character '{' or '(', denoted
-"       as '\({\|(\)'.
+"       '=>', followed by 0 or more spaces, followed by one of the following
+"       allowed characters: '{' or '(', denoted as '[{(]'.
 "
 " {parameters.match}: Regex explanation
 "   \m
@@ -180,7 +179,7 @@ call add(b:doge_patterns, {
 "     The group for the default value is a capturing group which may contain 1
 "     or more of the following characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*\%({\|(\)',
+      \   'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]',
       \   'match_group_names': ['funcName', 'parameters', 'returnType'],
       \   'parameters': {
       \     'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
@@ -268,11 +267,11 @@ call add(b:doge_patterns, {
 "     The group may contain 1 or more of the following characters:
 "     '[[:alnum:][:space:]_[\].,|<>]'.
 "
-"   \s*\%({\|(\)
+"   \s*[{(]
 "     This should match the opening of the function.
 "     --------------------------------------------------------------------------
-"     Matches 0 or more spaces, denoted as '\s*', followed by a non-capturing
-"     group that may contain the characters '{' or '(', denoted as '\%({\|(\)'.
+"     Matches 0 or more spaces, denoted as '\s*', followed by one of the
+"     following allowed characters: '{' or '(', denoted as '[{(]'.
 "
 " {parameters.match}: Regex explanation
 "   \m
@@ -319,7 +318,7 @@ call add(b:doge_patterns, {
 "     The group for the default value is a capturing group which may contain 1
 "     or more of the following characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(export\s\+\)\?\%(function\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%({\|(\)',
+      \   'match': '\m^\%(export\s\+\)\?\%(function\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
       \   'match_group_names': ['funcName', 'parameters', 'returnType'],
       \   'parameters': {
       \     'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
