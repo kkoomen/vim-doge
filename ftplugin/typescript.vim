@@ -249,8 +249,8 @@ call add(b:doge_patterns, {
 "     This should match the function parameters.
 "     --------------------------------------------------------------------------
 "     Matches parenthesis, denoted as '( ... )' which contains a captured group,
-"     denoted as '\( ... \)' which should contain as few as possible
-"     of the following characters: '[^>]', denoted as '[^>]\{-}'.
+"     denoted as '\( ... \)' which may contain as few as possible of the
+"     following characters: '[^>]', denoted as '[^>]\{-}'.
 "
 "   \%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?
 "     This should match the return type of the function.
