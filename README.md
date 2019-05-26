@@ -19,7 +19,7 @@ on the function declaration. You can simply put your cursor on a function, press
 - [x] Coffeescript ([JSDoc](https://jsdoc.app))
   - [x] FlowJS
 - [x] Lua ([LDoc](https://github.com/stevedonovan/LDoc))
-- [ ] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
+- [x] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
 - [ ] Ruby ([RDoc](https://ruby.github.io/rdoc))
 - [ ] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))
 - [ ] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
