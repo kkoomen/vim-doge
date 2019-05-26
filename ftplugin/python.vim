@@ -87,8 +87,6 @@ call add(b:doge_patterns, {
       \   },
       \   'comment': {
       \     'insert': 'below',
-      \     'opener': '"""',
-      \     'closer': '"""',
       \     'trim_comparision_check': 1,
       \     'template': [
       \       '"""',

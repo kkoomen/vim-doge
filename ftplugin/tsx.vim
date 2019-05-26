@@ -64,8 +64,6 @@ call add(b:doge_patterns, {
       \   'match_group_names': ['className', 'parentClassName', 'interfaceName'],
       \   'comment': {
       \     'insert': 'above',
-      \     'opener': '/**',
-      \     'closer': '*/',
       \     'trim_comparision_check': 0,
       \     'template': [
       \       '/**',
@@ -190,8 +188,6 @@ call add(b:doge_patterns, {
       \   },
       \   'comment': {
       \     'insert': 'above',
-      \     'opener': '/**',
-      \     'closer': '*/',
       \     'trim_comparision_check': 0,
       \     'template': [
       \       '/**',
@@ -329,8 +325,6 @@ call add(b:doge_patterns, {
       \   },
       \   'comment': {
       \     'insert': 'above',
-      \     'opener': '/**',
-      \     'closer': '*/',
       \     'trim_comparision_check': 0,
       \     'template': [
       \       '/**',

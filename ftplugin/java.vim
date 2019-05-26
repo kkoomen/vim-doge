@@ -105,8 +105,6 @@ call add(b:doge_patterns, {
       \   },
       \   'comment': {
       \     'insert': 'above',
-      \     'opener': '/**',
-      \     'closer': '*/',
       \     'trim_comparision_check': 0,
       \     'template': [
       \       '/**',

@@ -57,85 +57,20 @@ function! doge#generate#pattern(pattern) abort
     endfor
   endfor
 
-  " Indent the comment. By doing this we can compare the current comment its
-  " indent vs the new comment its indent and detect whether the indentation
-  " changed to. If so, it will also be updated.
   if a:pattern['comment']['insert'] ==# 'below'
+    let l:comment_lnum_insert_position = line('.')
     let l:comment_lnum_inherited_indent = line('.') + 1
   else
     let l:comment_lnum_inherited_indent = line('.')
-  endif
-  let l:comment = map(l:comment, {k, line -> doge#indent#add(line, l:comment_lnum_inherited_indent)})
-
-  " If an existing comment exists, remove it before we insert a new one.
-  " We start off by creating the regex pattern
-  let l:old_comment_regex = '\m' . fnameescape(a:pattern['comment']['opener']) . '\_.\{-}' . fnameescape(a:pattern['comment']['closer']) . '$'
-
-  if a:pattern['comment']['insert'] ==# 'below'
-    let l:old_comment_start_lnum = search(l:old_comment_regex, 'n')
-    let l:old_comment_end_lnum = search(l:old_comment_regex, 'ne')
-    let l:has_old_comment = l:old_comment_start_lnum == line('.') + 1
-  else
-    let l:old_comment_start_lnum = search(l:old_comment_regex, 'bn')
-    let l:old_comment_end_lnum = search(l:old_comment_regex, 'bne')
-    let l:has_old_comment = l:old_comment_end_lnum == line('.') - 1
-  endif
-  let l:old_comment_lines_amount = l:old_comment_end_lnum - l:old_comment_start_lnum + 1
-
-
-  " When deleting the old comment and inserting the new one, it might be that
-  " some things have been added or deleted.
-  " For example: a new parameter might have been added.
-  " If so, we have to increment the line number as well.
-  " The same goes for deleting but then we subtract the line number.
-  if a:pattern['comment']['insert'] ==# 'below'
-    let l:adjusted_cursor_lnum = line('.') + (1 + len(l:comment) - l:old_comment_lines_amount)
-  else
-    let l:adjusted_cursor_lnum = line('.') + (len(l:comment) - l:old_comment_lines_amount)
-  endif
-  let l:cursor_pos = [0, l:adjusted_cursor_lnum, col('.'), 0]
-
-  if l:has_old_comment
-    let l:temp_cursor_pos = getpos('.')
-
-    " Preserve the old comment before deleting.
-    let l:old_comment = getline(l:old_comment_start_lnum, l:old_comment_end_lnum)
-    let l:comment_has_changed = doge#comment#has_changed(l:old_comment, l:comment, a:pattern['comment']['trim_comparision_check'])
-
-    " Delete the old comment.
-    if l:comment_has_changed == 1
-      execute(l:old_comment_start_lnum . 'd' . l:old_comment_lines_amount)
-    endif
-
-    " If we have deleted a comment that is 'below' the function expression then
-    " our cursor moved a line too much, so revert its position. This is the
-    " same for 'above' the function expression, but we land on our old position
-    " automatically, hence that we don't have to take that situation into
-    " account.
-    if a:pattern['comment']['insert'] ==# 'below'
-      call setpos('.', l:temp_cursor_pos)
-    endif
-  endif
-
-  if a:pattern['comment']['insert'] ==# 'below'
-    let l:comment_lnum_insert_position = line('.')
-  else
     let l:comment_lnum_insert_position = line('.') - 1
   endif
 
-  " Write the comment if it changed or is new.
-  if (l:has_old_comment == 1 && l:comment_has_changed == 1) || l:has_old_comment == 0
-    call append(
-          \ l:comment_lnum_insert_position,
-          \ l:comment
-          \ )
-  else
-    echo '[DoGE] Comment is up-to-date, skipping'
-  endif
+  " Indent the comment.
+  let l:comment = map(l:comment, {k, line -> doge#indent#add(line, l:comment_lnum_inherited_indent)})
 
-  if l:has_old_comment == 1 && l:comment_has_changed == 1 && a:pattern['comment']['insert'] ==# 'above'
-    call setpos('.', l:cursor_pos)
-  endif
+  " Write the comment.
+  call append(l:comment_lnum_insert_position, l:comment)
+  echo "[DoGe] Successfully inserted comment."
 
   " Return 1 to indicate we have succesfully inserted the comment.
   return 1
