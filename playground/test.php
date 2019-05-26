@@ -6,6 +6,7 @@
  */
 
 /**
+ * TODO
  * @param array $arg1 TODO
  * @param string $arg2 TODO
  * @param mixed $arg3 TODO
@@ -18,6 +19,7 @@ function myFunction(array $arg1, string $arg2, $arg3 = NULL, \Drupal\core\Entity
 class myClass {
 
   /**
+   * TODO
    * @param array $arg1 TODO
    * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
    * @param int $arg3 TODO
@@ -29,6 +31,7 @@ class myClass {
   }
 
   /**
+   * TODO
    * @param array $arg1 TODO
    * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
    * @param int $arg3 TODO
@@ -40,6 +43,7 @@ class myClass {
   }
 
   /**
+   * TODO
    * @param array $arg1 TODO
    * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
    * @param int $arg3 TODO
@@ -51,6 +55,7 @@ class myClass {
   }
 
   /**
+   * TODO
    * @param array $arg1 TODO
    * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
    * @param int $arg3 TODO
@@ -62,6 +67,7 @@ class myClass {
   }
 
   /**
+   * TODO
    * @param array $arg1 TODO
    * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
    * @param int $arg3 TODO

@@ -20,21 +20,21 @@ let b:doge_patterns = []
 "   ^
 "     Matches the position before the first character in the string.
 "
-"   \%(\%(public\|private\|protected\)\s*\)\?
+"   \%(public\|private\|protected\)\?\s*
 "     This should match the keyword(s): 'public', 'private' or 'protected'.
 "     ------------------------------------------------------------------------
 "     Match an optional and non-captured group that may contain the keywords:
 "     'public', 'private' or 'protected', followed by 0 or more white-spaces,
 "     denoted as '\s*'.
 "
-"   \%(static\s*\)\?
+"   \%(static\)\?\s*
 "     This should match the keyword: 'static'.
 "     ------------------------------------------------------------------------
 "     Match an optional and non-captured group that may
 "     contain the keyword: 'static', followed by 0 or more white-spaces,
 "     denoted as '\s*'.
 "
-"   \%(final\s*\)\?
+"   \%(final\)\?\s*
 "     This should match the keyword: 'final'.
 "     ------------------------------------------------------------------------
 "     Match an optional and non-captured group that may
@@ -62,17 +62,17 @@ let b:doge_patterns = []
 "   \m
 "     Interpret the pattern as a magic pattern.
 "
-"   \([a-zA-Z0-9_\\]\+\s*\)\?
+"   \([[:alnum:]_\\]\+\)\?\s*
 "     This should match the parameter type.
 "     ------------------------------------------------------------------------
 "     Matches an optional group containing 1 or more of the following
-"     characters: '[a-zA-Z0-9_\\]' followed by 0 or more spaces.
+"     characters: '[[:alnum:]_\\]' followed by 0 or more spaces.
 "
-"   \($[a-zA-Z0-9_]\+\)
+"   \($[[:alnum:]_]\+\)
 "     This should match the parameter name.
 "     ------------------------------------------------------------------------
 "     Matches a group containing the character '$' followed by 1 or more
-"     characters of the following: '[a-zA-Z0-9_]'.
+"     characters of the following: '[[:alnum:]_]'.
 "
 "   \%(\s*=\s*[^,]\+\)\?
 "     This should match the parameter default value.
@@ -81,10 +81,10 @@ let b:doge_patterns = []
 "     format ' = <VALUE>'. The '<VALUE>' should contain 1 or more of the
 "     following characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(\%(public\|private\|protected\)\s*\)\?\%(static\s*\)\?\%(final\s*\)\?function \([^(]\+\)\s*(\(.\{-}\))\s*{',
+      \   'match': '\m^\%(public\|private\|protected\)\?\s*\%(static\)\?\s*\%(final\)\?\s*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
       \   'match_group_names': ['funcName', 'parameters'],
       \   'parameters': {
-      \     'match': '\m\([a-zA-Z0-9_\\]\+\s*\)\?\($[a-zA-Z0-9_]\+\)\%(\s*=\s*[^,]\+\)\?',
+      \     'match': '\m\([[:alnum:]_\\]\+\)\?\s*\($[[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
       \     'match_group_names': ['type', 'name'],
       \     'format': ['@param', '{type|mixed}', '{name}', 'TODO'],
       \   },
@@ -95,6 +95,7 @@ call add(b:doge_patterns, {
       \     'trim_comparision_check': 0,
       \     'template': [
       \       '/**',
+      \       ' * TODO',
       \       ' * {parameters}',
       \       ' */',
       \     ],

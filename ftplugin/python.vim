@@ -33,16 +33,16 @@ let b:doge_patterns = []
 "   (\(.\{-}\))
 "     This should match the parameters.
 "     ------------------------------------------------------------------------
-"     Matches a single captured group which matches any character, but as few
-"     as possible, denoted as '.\{-}'. We use \{-} to ensure it will match as
-"     few matches as possible, which prevents wrong parsing when the input
-"     contains nested functions.
+"     Matches a single captured group which will match as few matches as
+"     possible of any character, denoted as '.\{-}'. We use \{-} to ensure it
+"     will match as few matches as possible, which prevents wrong parsing when
+"     the input contains nested functions.
 "
 "   \%(\s*->\s*\(.\{-}\)\)\?\s*:
 "     The should match the return type, declared as 'def name(...): <TYPE>'.
 "     ------------------------------------------------------------------------
-"     Matches a non-captured group containing a single captured group which
-"     matches any character, but as few as possible, denoted as '.\{-}',
+"     Matches a non-captured group containing a single captured group which will
+"     match as few matches as possible of any character, denoted as '.\{-}',
 "     followed by 0 or more spaces and a colon, denoted as '\s*:'.
 "
 " {parameters.match}: Regex explanation

@@ -45,8 +45,8 @@ let b:doge_patterns = []
 "     This should match the function parameters.
 "     ------------------------------------------------------------------------
 "     Matches parenthesis, denoted as '( ... )' which contains a captured group,
-"     denoted as '\( ... \)', which may contain as few as possible characters,
-"     denoted as '.\{-}'.
+"     denoted as '\( ... \)', which will match as few matches as possible of any
+"     character, denoted as '.\{-}'.
 "
 " {parameters.match}: Regex explanation
 "   \m
@@ -116,8 +116,8 @@ call add(b:doge_patterns, {
 "     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
 "     that may contain the 'function' keyword, followed by 0 or more spaces,
 "     denoted as '\s*', followed by parenthesis, denoted as '( ... )' which
-"     contains a captured group, denoted as '\( ... \)', which should contain as
-"     few characters as possible, denoted as '.\{-}'.
+"     contains a captured group, denoted as '\( ... \)', which will match as few
+"     matches as possible of any character, denoted as '.\{-}'.
 "
 " {parameters.match}: Regex explanation
 "   \m
