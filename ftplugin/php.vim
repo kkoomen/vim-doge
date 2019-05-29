@@ -84,9 +84,9 @@ call add(b:doge_patterns, {
       \   'match': '\m^\%(public\|private\|protected\)\?\s*\%(static\)\?\s*\%(final\)\?\s*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
       \   'match_group_names': ['funcName', 'parameters'],
       \   'parameters': {
-      \     'match': '\m\([[:alnum:]_\\]\+\)\?\s*\($[[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
+      \     'match': '\m\([[:alnum:]_\\]\+\)\?\s*&\?\($[[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
       \     'match_group_names': ['type', 'name'],
-      \     'format': ['@param', '{type|mixed}', '{name}', 'TODO'],
+      \     'format': ['@param {type|mixed} {name} TODO'],
       \   },
       \   'comment': {
       \     'insert': 'above',
@@ -94,6 +94,7 @@ call add(b:doge_patterns, {
       \     'template': [
       \       '/**',
       \       ' * TODO',
+      \       ' *',
       \       ' * {parameters}',
       \       ' */',
       \     ],

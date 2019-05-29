@@ -29,8 +29,8 @@ function! doge#generate#pattern(pattern) abort
 
     " Go through each parameter, match the regex, extract the token values and
     " replace the 'parameters' key with the formatted version.
-    let l:param_tokens = doge#token#extract(l:params, l:params_dict['match'], l:params_dict['match_group_names'])
     let l:formatted_params = []
+    let l:param_tokens = doge#token#extract(l:params, l:params_dict['match'], l:params_dict['match_group_names'])
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(l:param_token, l:params_dict['format'])
       let l:format = join(filter(l:format, 'v:val !=# ""'), ' ')
