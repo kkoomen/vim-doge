@@ -7,7 +7,6 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 function! DogePreprocessParameterTokens(params) abort
-  echoerr a:params
   for l:param in a:params
     let param_idx = index(a:params, l:param)
     " Convert class type hints to their FQN.
