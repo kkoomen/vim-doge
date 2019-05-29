@@ -20,7 +20,7 @@ on the function declaration. You can simply put your cursor on a function, press
   - [x] FlowJS
 - [x] Lua ([LDoc](https://github.com/stevedonovan/LDoc))
 - [x] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
-- [ ] Ruby ([RDoc](https://ruby.github.io/rdoc))
+- [x] Ruby ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))
 - [ ] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))
 - [ ] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
 - [ ] R ([R style guide](https://style.tidyverse.org/documentation.html))
