@@ -79,7 +79,9 @@ let b:doge_patterns = []
 "     ------------------------------------------------------------------------
 "     Matches an optional and non-capturing group where it should match the
 "     format ' = <VALUE>'. The '<VALUE>' should contain 1 or more of the
-"     following characters: '[^,]'.
+"     following characters: '[^,]'. We also presume that default parameters will
+"     be '[]' or 'array()' rather then 'array(1, 2, 3, ...)', otherwise '[^,]'
+"     will not work.
 call add(b:doge_patterns, {
       \   'match': '\m^\%(public\|private\|protected\)\?\s*\%(static\)\?\s*\%(final\)\?\s*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
       \   'match_group_names': ['funcName', 'parameters'],
