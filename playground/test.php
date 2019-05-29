@@ -1,5 +1,8 @@
 <?php
 
+use Drupal\Core\Config\Entity\Query\QueryFactory;
+use Drupal\Core\Config\Entity\QueryBase as Query;
+
 /**
  * This file contains test scenarios and their expected results. You should be
  * able to generate the examples below.
@@ -14,6 +17,24 @@
  * @param \Drupal\core\Entity\Node $arg4 TODO
  */
 function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {
+  //
+}
+
+/**
+ * TODO
+ *
+ * @param \Drupal\Core\Config\Entity\Query\QueryFactory $arg4 TODO
+ */
+function myFunction(QueryFactory $arg4) {
+  //
+}
+
+/**
+ * TODO
+ *
+ * @param Query $arg4 TODO
+ */
+function myFunction(Query $arg4) {
   //
 }
 

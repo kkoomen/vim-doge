@@ -31,6 +31,12 @@ function! doge#generate#pattern(pattern) abort
     " replace the 'parameters' key with the formatted version.
     let l:formatted_params = []
     let l:param_tokens = doge#token#extract(l:params, l:params_dict['match'], l:params_dict['match_group_names'])
+
+    " Call the parameter preprocess function.
+    if exists('*DogePreprocessParameterTokens')
+      let l:param_tokens = DogePreprocessParameterTokens(l:param_tokens)
+    endif
+
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(l:param_token, l:params_dict['format'])
       let l:format = join(filter(l:format, 'v:val !=# ""'), ' ')
