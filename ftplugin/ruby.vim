@@ -53,22 +53,22 @@ let b:doge_patterns = []
 "     should contain the pattern ' = <VALUE>' where '<VALUE>' may contain 1 or
 "     more of the following characters '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^def\s\+\([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
-      \   'match_group_names': ['funcName', 'parameters'],
-      \   'parameters': {
-      \     'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
-      \     'match_group_names': ['name'],
-      \     'format': ['@param {name} [type] TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '# TODO',
-      \       '# {parameters}',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^def\s\+\([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
+\  'match_group_names': ['funcName', 'parameters'],
+\  'parameters': {
+\    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
+\    'match_group_names': ['name'],
+\    'format': ['@param {name} [type] TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '# TODO',
+\      '# {parameters}',
+\    ],
+\  },
+\})
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

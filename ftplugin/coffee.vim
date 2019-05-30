@@ -110,26 +110,26 @@ let b:doge_patterns = []
 "     The group for the default value is a capturing group which may contain 1
 "     or more of the following characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\([[:alnum:]_$]\+\)\%(<[[:alnum:][:space:]_,]*>\)\?\s*[:=]\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*->',
-      \   'match_group_names': ['funcName', 'parameters', 'returnType'],
-      \   'parameters': {
-      \     'match': '\m\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
-      \     'match_group_names': ['name', 'type', 'default'],
-      \     'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '###',
-      \       '@function {funcName|}',
-      \       '@description TODO',
-      \       '{parameters}',
-      \       '!@return {{returnType}} TODO',
-      \       '###',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\([[:alnum:]_$]\+\)\%(<[[:alnum:][:space:]_,]*>\)\?\s*[:=]\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*->',
+\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'parameters': {
+\    'match': '\m\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
+\    'match_group_names': ['name', 'type', 'default'],
+\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '###',
+\      '@function {funcName|}',
+\      '@description TODO',
+\      '{parameters}',
+\      '!@return {{returnType}} TODO',
+\      '###',
+\    ],
+\  },
+\})
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -58,22 +58,22 @@ let b:doge_patterns = []
 "     Matches a captured group that may contain 1 or more of the following
 "     characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(local\s*\)\?function\s*\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*(\(.\{-}\))',
-      \   'match_group_names': ['funcName', 'parameters'],
-      \   'parameters': {
-      \     'match': '\m\([^,]\+\)',
-      \     'match_group_names': ['name'],
-      \     'format': ['@param', '{name}', 'TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '-- TODO',
-      \       '-- {parameters}',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\%(local\s*\)\?function\s*\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*(\(.\{-}\))',
+\  'match_group_names': ['funcName', 'parameters'],
+\  'parameters': {
+\    'match': '\m\([^,]\+\)',
+\    'match_group_names': ['name'],
+\    'format': ['@param', '{name}', 'TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '-- TODO',
+\      '-- {parameters}',
+\    ],
+\  },
+\})
 
 ""
 " ==============================================================================
@@ -125,22 +125,22 @@ call add(b:doge_patterns, {
 "     Matches a captured group that may contain 1 or more of the following
 "     characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(local\s*\)\?\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*=\s*\%(\s*function\s*\)\?(\(.\{-}\))',
-      \   'match_group_names': ['funcName', 'parameters'],
-      \   'parameters': {
-      \     'match': '\m\([^,]\+\)',
-      \     'match_group_names': ['name'],
-      \     'format': ['@param', '{name}', 'TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '-- TODO',
-      \       '-- {parameters}',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\%(local\s*\)\?\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*=\s*\%(\s*function\s*\)\?(\(.\{-}\))',
+\  'match_group_names': ['funcName', 'parameters'],
+\  'parameters': {
+\    'match': '\m\([^,]\+\)',
+\    'match_group_names': ['name'],
+\    'format': ['@param', '{name}', 'TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '-- TODO',
+\      '-- {parameters}',
+\    ],
+\  },
+\})
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -58,20 +58,20 @@ let b:doge_patterns = []
 "     --------------------------------------------------------------------------
 "     Matches 0 or more spaces, followed by the character '{'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(export\s*\)\?class\s\+\([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?\s*{',
-      \   'match_group_names': ['className', 'parentClassName', 'interfaceName'],
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '/**',
-      \       ' * TODO',
-      \       '! * @extends {parentClassName}',
-      \       '! * @implements {interfaceName}',
-      \       ' */',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\%(export\s*\)\?class\s\+\([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?\s*{',
+\  'match_group_names': ['className', 'parentClassName', 'interfaceName'],
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '/**',
+\      ' * TODO',
+\      '! * @extends {parentClassName}',
+\      '! * @implements {interfaceName}',
+\      ' */',
+\    ],
+\  },
+\})
 
 ""
 " ==============================================================================
@@ -177,26 +177,26 @@ call add(b:doge_patterns, {
 "     The group for the default value is a capturing group which may contain 1
 "     or more of the following characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]',
-      \   'match_group_names': ['funcName', 'parameters', 'returnType'],
-      \   'parameters': {
-      \     'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
-      \     'match_group_names': ['name', 'type', 'default'],
-      \     'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '/**',
-      \       ' * @function {funcName|}',
-      \       ' * @description TODO',
-      \       ' * {parameters}',
-      \       '! * @return {{returnType}} TODO',
-      \       ' */',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]',
+\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'parameters': {
+\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
+\    'match_group_names': ['name', 'type', 'default'],
+\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '/**',
+\      ' * @function {funcName|}',
+\      ' * @description TODO',
+\      ' * {parameters}',
+\      '! * @return {{returnType}} TODO',
+\      ' */',
+\    ],
+\  },
+\})
 
 ""
 " ==============================================================================
@@ -314,26 +314,26 @@ call add(b:doge_patterns, {
 "     The group for the default value is a capturing group which may contain 1
 "     or more of the following characters: '[^,]'.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(export\s\+\)\?\%(function\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-      \   'match_group_names': ['funcName', 'parameters', 'returnType'],
-      \   'parameters': {
-      \     'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
-      \     'match_group_names': ['name', 'type', 'default'],
-      \     'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '/**',
-      \       ' * @function {funcName|}',
-      \       ' * @description TODO',
-      \       ' * {parameters}',
-      \       '! * @return {{returnType}} TODO',
-      \       ' */',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\%(export\s\+\)\?\%(function\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'parameters': {
+\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
+\    'match_group_names': ['name', 'type', 'default'],
+\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '/**',
+\      ' * @function {funcName|}',
+\      ' * @description TODO',
+\      ' * {parameters}',
+\      '! * @return {{returnType}} TODO',
+\      ' */',
+\    ],
+\  },
+\})
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -83,25 +83,25 @@ let b:doge_patterns = []
 "     be '[]' or 'array()' rather then 'array(1, 2, 3, ...)', otherwise '[^,]'
 "     will not work.
 call add(b:doge_patterns, {
-      \   'match': '\m^\%(public\|private\|protected\)\?\s*\%(static\)\?\s*\%(final\)\?\s*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
-      \   'match_group_names': ['funcName', 'parameters'],
-      \   'parameters': {
-      \     'match': '\m\([[:alnum:]_\\]\+\)\?\s*&\?\($[[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
-      \     'match_group_names': ['type', 'name'],
-      \     'format': ['@param {type|mixed} {name} TODO'],
-      \   },
-      \   'comment': {
-      \     'insert': 'above',
-      \     'trim_comparision_check': 0,
-      \     'template': [
-      \       '/**',
-      \       ' * TODO',
-      \       ' *',
-      \       ' * {parameters}',
-      \       ' */',
-      \     ],
-      \   },
-      \ })
+\  'match': '\m^\%(public\|private\|protected\)\?\s*\%(static\)\?\s*\%(final\)\?\s*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
+\  'match_group_names': ['funcName', 'parameters'],
+\  'parameters': {
+\    'match': '\m\([[:alnum:]_\\]\+\)\?\s*&\?\($[[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
+\    'match_group_names': ['type', 'name'],
+\    'format': ['@param {type|mixed} {name} TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'trim_comparision_check': 0,
+\    'template': [
+\      '/**',
+\      ' * TODO',
+\      ' *',
+\      ' * {parameters}',
+\      ' */',
+\    ],
+\  },
+\})
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
