@@ -9,6 +9,9 @@ documentation based on the function declaration. You can simply put your cursor
 on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), add brief
 descriptions and go on coding!
 
+> Any fool can write code that a computer can understand. Good programmers write
+> code that humans can understand. -- Martin Fowler, 1999
+
 ### Supported languages and doc standards
 
 - [x] Python ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))
