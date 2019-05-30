@@ -1,11 +1,13 @@
 # DoGe
 
 We all love documentation because it makes our codebases easier to understand,
-yet no one has time to write it in a good and proper way or likes to write it.
+yet no one has time to write it in a good and proper way or some might not even
+like to write it.
 
-DoGe is a DOcumentation GEnerator which will generate proper documentation based
-on the function declaration. You can simply put your cursor on a function, press
-`<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>) and go on coding!
+DoGe is a [Do]cumentation [Ge]nerator which will generate instant proper
+documentation based on the function declaration. You can simply put your cursor
+on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), add brief
+descriptions and go on coding!
 
 ### Supported languages and doc standards
 

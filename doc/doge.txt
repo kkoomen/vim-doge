@@ -1,10 +1,23 @@
-*doge.txt*	[DO]cumentation [GE]nerator
+*doge.txt*	[Do]cumentation [Ge]nerator
 Kim Koomen                                                              *doge*
 
 ==============================================================================
 CONTENTS                                                       *doge-contents*
-  1. Configuration...............................................|doge-config|
-  2. Functions................................................|doge-functions|
+  1. Introduction.................................................|doge-intro|
+  2. Configuration...............................................|doge-config|
+  3. Functions................................................|doge-functions|
+      1. Preprocessors....................................|doge-preprocessors|
+
+==============================================================================
+INTRODUCTION                                                      *doge-intro*
+
+We all love documentation because it makes our codebases easier to understand,
+yet no one has time to write it in a good and proper way or some might not
+even like to write it.
+
+DoGe is a [Do]cumentation [Ge]nerator which will generate instant proper
+documentation based on the function declaration. You can simply put your
+cursor on a function, press `<C-d>`, add brief descriptions and go on coding!
 
 ==============================================================================
 CONFIGURATION                                                    *doge-config*
@@ -21,10 +34,6 @@ FUNCTIONS                                                     *doge-functions*
 
 doge#generate()                                              *doge#generate()*
   Generates documentation based on available patterns in b:doge_patterns.
-
-doge#comment#has_changed({old_comment}, {new_comment}, {should_trim})
-                                                  *doge#comment#has_changed()*
-  Check whether two comments differ from each other by comparing them.
 
 doge#generate#pattern({pattern})                     *doge#generate#pattern()*
   Generates a comment based on a given pattern.
@@ -45,6 +54,14 @@ doge#token#extract({text}, {regex}, {regex_group_names})
   pairs where the 'key' is the given group name and the 'value' the captured
   value of that group. The regex groups in the 'regex' parameter should be
   symmetrical in length to the 'regex_group_names' parameter.
+
+==============================================================================
+PREPROCESSORS                                             *doge-preprocessors*
+
+Preprocess functions are called for specific filetypes when doge is generating
+a comment. The following preprocess functions are available:
+
+  doge#preprocessors#<filetype>#parameter_tokens(params)
 
 
 vim:tw=78:ts=8:ft=help:norl:
