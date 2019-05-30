@@ -142,17 +142,9 @@ let Easing = "ease-in" | "ease-out" | "ease-in-out" = "ease-in";
 /**
  * @function
  * @description TODO
- * @param {string} arg1 - TODO
- */
-(arg1: string = []) => (arg2: string) => { console.log(5); }
-
-/**
- * @function
- * @description TODO
  * @param {array} arg1 - TODO
- * @return {string} TODO
  */
-(arg1: array = []): string => () => { console.log(5); }
+(arg1: array = []) => (arg2: string) => { console.log(5); }
 
 /**
  * @function configureStore

@@ -11,54 +11,23 @@ set cpoptions&vim
 
 let b:doge_patterns = []
 
+" Matches the following pattern:
+"   <param-access> <param-name>: <param-type> = <param-default-value>
+let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?'
 
-""
 " ==============================================================================
 " Matches class declarations.
 " ==============================================================================
 "
-" {match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
+" Matches the following scenarios:
 "
-"   ^
-"     Matches the position before the first character in the string.
+"   export class Child {}
 "
-"   \%(export\s\+\)\?
-"     This should match the keyword 'export'.
-"     ------------------------------------------------------------------------
-"     Matches an optional and non-capturing group that should containing the
-"     word 'export' followed by 1 or more spaces, denoted as '\s\+'.
+"   class Child extends Parent {}
 "
-"   class\s\+\([[:alnum:]_$]\+\)
-"     This should match the pattern 'class <NAME>'
-"     ------------------------------------------------------------------------
-"     Matches the word 'class' followed by 1 or more spaces, followed by a
-"     captured group, denoted as '\( ... \)' that may contain 1 or more of the
-"     following characters '[[:alnum:]_$]'.
+"   class Child implements CustomInterfaceName {}
 "
-"   \%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?
-"     This should match the pattern 'extends <PARENT_CLASS_NAME>'.
-"     ------------------------------------------------------------------------
-"     Matches an optional and non-captured group, denoted as '\%( ... \)',
-"     which should contain 1 or more spaces, followed by the word 'extends',
-"     followed by 1 or more spaces and finally followed by a captured group,
-"     denoted as '\( ... \)', that may contain 1 or more of the following
-"     characters '[[:alnum:]_$]'.
-"   \%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?
-"
-"     This should match the pattern 'implements <INTERFACE>'.
-"     ------------------------------------------------------------------------
-"     Matches an optional and non-captured group, denoted as '\%( ... \)',
-"     that should contain 1 or more spaces, followed by the word 'implements',
-"     followed by 1 or more spaces, followed by a captured group, denoted as
-"     '\( ... \)', that may contain 1 or more of the following characters:
-"     '[[:alnum:]_$]'.
-"
-"   \s*{
-"     This should match the opening of the function.
-"     --------------------------------------------------------------------------
-"     Matches 0 or more spaces, followed by the character '{'.
+"   export class Child extends Parent implements CustomInterfaceName {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(export\s*\)\?class\s\+\([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?\s*{',
 \  'match_group_names': ['className', 'parentClassName', 'interfaceName'],
@@ -75,115 +44,27 @@ call add(b:doge_patterns, {
 \  },
 \})
 
-""
 " ==============================================================================
 " Matches fat-arrow functions.
 " ==============================================================================
 "
-" {match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
+" Matches the following scenarios:
 "
-"   ^
-"     Matches the position before the first character in the string.
+"   ((window, document, $) => {
+"     // ...
+"   })(window, document, jQuery);
 "
-"   \%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]
-"     This should match the pattern
-"     '(var|const|let) <FUNC_NAME> = (<PARAMETERS) => [{(]'
-"     ------------------------------------------------------------------------
+"   (arg1: array = []) => (arg2: string) => { console.log(5); }
 "
-"     \%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?
-"       Matches the pattern '(var|const|let) <FUNC_NAME> = '.
-"       ----------------------------------------------------------------------
-"       The regex contains an optional non-captured group
-"       '\%(\%(var\|const\|let\)\s\+\)\?' which matches the 3 keywords 'var',
-"       'const' and 'let', followed by 1 or more spaces, denoted as '\s\+'.
+"   const user = (arg1 = 'default') => (subarg1, subarg2 = 'default') => 5;
 "
-"       Followed by a captured group, denoted as '\( ... \)', that may contain
-"       1 or more of the following characters: '[[:alnum:]_$]'.
-"
-"       Followed by 0 or more spaces, followed by an equal sign, followed by 0
-"       or more spaces.
-"
-"     ({\?\([^>]\{-}\)}\?)
-"       Matches the pattern for the parameters.
-"       ----------------------------------------------------------------------
-"       Matches two parenthesis, denoted as '( ... )' that may contain
-"       optional curly bracets on the inside, which can be used in projects
-"       where destructuring is allowed. This notation is declared as '({  })'.
-"       Inside the parenthesis it contains a group that should contain as few
-"       as possible of the characters '[^>]', denoted as '[^>]\{-}'.
-"
-"     \%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?
-"       Matches the pattern for the return type.
-"       ----------------------------------------------------------------------
-"       Matches an optional and non-captured group, denoted as '\%( ... \)',
-"       that should start with 0 or more spaces, followed by a colon, followed
-"       by 0 or more spaces, denoted as '\s*:\s*'.
-"
-"       Followed by the actual return type which is a captured group, denoted
-"       as '\( ... \)', which may contain 1 or more of the following
-"       characters '[[:alnum:][:space:]_[\].,|<>]' and is surrounded by optional
-"       parenthesis wrapping the return type, denoted as '(\? ... )\?', which
-"       may occur if 2 or more possible return types are given.
-"
-"     \s*=>\s*[{(]
-"       Matches the pattern ' => {' or ' => ('.
-"       ----------------------------------------------------------------------
-"       Matches 0 or more spaces, follow by a thick-arrow notation, denoted as
-"       '=>', followed by 0 or more spaces, followed by one of the following
-"       allowed characters: '{' or '(', denoted as '[{(]'.
-"
-" {parameters.match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
-"
-"   \%(\%(public\|private\|protected\)\?\s*\)\?
-"     This should match the parameter access value.
-"     --------------------------------------------------------------------------
-"     Matches an optional an non-captured group, denoted as '\%( ... \)\?',
-"     which may contain the 3 keywords: 'public', 'private' or 'public',
-"     denoted as '\%(public\|private\|protected\)\?', followed by 0 or more
-"     spaces, denoted as '\s*'.
-"
-"   \([[:alnum:]_]\+\)
-"     This should match the parameter name.
-"     --------------------------------------------------------------------------
-"     Matches a captured group, denoted as '\( ... \)', which may contain 1 or
-"     more of the following characters '[[:alnum:]_$]'.
-"
-"   \%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?
-"     This should match the parameter type in the format ': <TYPE>' where we try
-"     to match the following scenarios: 'string', 'string[]' and 'T[K][]'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
-"     which should begin with 0 or more spaces, followed by a colon, followed by
-"     0 or more spaces, denoted as '\s*:\s*', followed by the captured group
-"     being responsive for capturing the type itself, denoted as '\( ... \)'.
-"
-"     The group for the type itself should contain at least 1 or more of the
-"     following characters: '[[:alnum:][:space:]._|]', followed by an optional
-"     and non-captured group, denoted as '\%( ... \)\?', which should contain 0
-"     or more of the following characters: '[[:alnum:][:space:]_[\],]',
-"     surrounded by square brackets, denoted as '[ ... ]'. This will match the
-"     scenarios such as: 'T[K][]' or 'string[]'.
-"
-"   \%(\s*=\s*\([^,]\+\)\+\)\?
-"     This should match the parameter default value in the format ' = <VALUE>'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
-"     which should start with 0 or more white-spaces, followed by an equal sign,
-"     followed by 0 or more white-spaces, followed by the group containing the
-"     actual parameter default value, denoted as '\([^,]\+\)'.
-"
-"     The group for the default value is a capturing group which may contain 1
-"     or more of the following characters: '[^,]'.
+"   (arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
 call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]',
 \  'match_group_names': ['funcName', 'parameters', 'returnType'],
 \  'parameters': {
-\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
-\    'match_group_names': ['name', 'type', 'default'],
+\    'match': s:parameters_match_pattern,
+\    'match_group_names': ['name', 'type'],
 \    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
 \  },
 \  'comment': {
@@ -205,122 +86,23 @@ call add(b:doge_patterns, {
 " Matches regular and typed functions with default parameters.
 " ==============================================================================
 "
-" {match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
+" Matches the following scenarios:
 "
-"   ^
-"     Matches the position before the first character in the string.
+"   function add(one: any, two: any = 'default'): number {}
+
+"   export function configureStore(history: History, initialState: object): Store<AppState> {}
 "
-"   \%(export\s\+\)\?
-"     This should match the keyword 'export'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)',
-"     which should contain the word 'export' followed by 1 or more white-spaces,
-"     denoted as '\s\+'.
+"   function configureStore(history: History, initialState: object): Store {}
 "
-"   \%(function\s*\)\?
-"     This should match the keyword 'function'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)',
-"     which should contain the word 'function', followed by 0 or more spaces,
-"     denoted as '\s*'.
+"   function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {}
 "
-"   \([[:alnum:]_$]\+\)\?
-"     This should match the function name.
-"     --------------------------------------------------------------------------
-"     Matches a capturing group, denoted as '\( ... \)', which should contain 1
-"     or more of the following characters: '[[:alnum:]_$]'.
-"
-"   \%(<[[:alnum:][:space:]_,]*>\)\?
-"     This should match additional type hinting for the parameters. For example:
-"     '<T, K extends keyof T>'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
-"     which may contain 0 or more of the following characters:
-"     '[[:alnum:][:space:]_,]', which should be surrounded by the characters '<'
-"     and '>'.
-"
-"   (\([^>]\{-}\))
-"     This should match the function parameters.
-"     --------------------------------------------------------------------------
-"     Matches parenthesis, denoted as '( ... )' which contains a captured group,
-"     denoted as '\( ... \)' which may contain as few as possible of the
-"     following characters: '[^>]', denoted as '[^>]\{-}'.
-"
-"   \%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?
-"     This should match the return type of the function.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)\?'
-"     which should start with 0 or more spaces, followed by a colon, followed by
-"     0 or more spaces, denoted as '\s*:\s*', followed by the group that
-"     contains the return type.
-"
-"     The group containing the return type is surrounded by optional
-"     parenthesis, denoted as '( ... )', which will match the situation where 2
-"     or more possible return types are given, for example:
-"
-"       function rollTheDice(...): (1 | 2 | 3 | 4 | 5 | 6) { ... }
-"
-"     The group may contain 1 or more of the following characters:
-"     '[[:alnum:][:space:]_[\].,|<>]'.
-"
-"   \s*[{(]
-"     This should match the opening of the function.
-"     --------------------------------------------------------------------------
-"     Matches 0 or more spaces, denoted as '\s*', followed by one of the
-"     following allowed characters: '{' or '(', denoted as '[{(]'.
-"
-" {parameters.match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
-"
-"   \%(\%(public\|private\|protected\)\?\s*\)\?
-"     This should match the parameter access value.
-"     --------------------------------------------------------------------------
-"     Matches an optional an non-captured group, denoted as '\%( ... \)\?',
-"     which may contain the 3 keywords: 'public', 'private' or 'public',
-"     denoted as '\%(public\|private\|protected\)\?', followed by 0 or more
-"     spaces, denoted as '\s*'.
-"
-"   \([[:alnum:]_]\+\)
-"     This should match the parameter name.
-"     --------------------------------------------------------------------------
-"     Matches a captured group, denoted as '\( ... \)', which may contain 1 or
-"     more of the following characters '[[:alnum:]_$]'.
-"
-"   \%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?
-"     This should match the parameter type in the format ': <TYPE>' where we try
-"     to match the following scenarios: 'string', 'string[]' and 'T[K][]'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
-"     which should begin with 0 or more spaces, followed by a colon, followed by
-"     0 or more spaces, denoted as '\s*:\s*', followed by the captured group
-"     being responsive for capturing the type itself, denoted as '\( ... \)'.
-"
-"     The group for the type itself should contain at least 1 or more of the
-"     following characters: '[[:alnum:][:space:]._|]', followed by an optional
-"     and non-captured group, denoted as '\%( ... \)\?', which should contain 0
-"     or more of the following characters: '[[:alnum:][:space:]_[\],]',
-"     surrounded by square brackets, denoted as '[ ... ]'. This will match the
-"     scenarios such as: 'T[K][]' or 'string[]'.
-"
-"   \%(\s*=\s*\([^,]\+\)\+\)\?
-"     This should match the parameter default value in the format ' = <VALUE>'.
-"     --------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as '\%( ... \)\?',
-"     which should start with 0 or more white-spaces, followed by an equal sign,
-"     followed by 0 or more white-spaces, followed by the group containing the
-"     actual parameter default value, denoted as '\([^,]\+\)'.
-"
-"     The group for the default value is a capturing group which may contain 1
-"     or more of the following characters: '[^,]'.
+"   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(export\s\+\)\?\%(function\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
 \  'match_group_names': ['funcName', 'parameters', 'returnType'],
 \  'parameters': {
-\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?',
-\    'match_group_names': ['name', 'type', 'default'],
+\    'match': s:parameters_match_pattern,
+\    'match_group_names': ['name', 'type'],
 \    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
 \  },
 \  'comment': {

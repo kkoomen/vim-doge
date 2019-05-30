@@ -1,8 +1,6 @@
 " ==============================================================================
 " The python documentation should follow the 'Sphinx reST' conventions.
 " see: http://daouzli.com/blog/docstring.html#restructuredtext
-"
-" This ftplugin should always reflect the logic of the ftplugin/javascript.vim.
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
@@ -10,73 +8,19 @@ set cpoptions&vim
 
 let b:doge_patterns = []
 
-""
 " ==============================================================================
 " Matches regular function expressions and class methods.
 " ==============================================================================
 "
-" {match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
+" Matches the following scenarios:
 "
-"   ^
-"     Matches the position before the first character in the string.
+"   def __init__(self: MyClass):
 "
-"   def \([^(]\+\)\s*
-"     This should match the function name, declared as 'def <FUNC_NAME>'.
-"     ------------------------------------------------------------------------
-"     Matches the word 'def', followed by a captured group, followed by some
-"     additional white-space. The group uses the pattern '[^(]\+' to allow any
-"     character until a '(' character is found. Followed by 0 or more spaces,
-"     denoted as '\s*'.
+"   def myMethod(self: MyClass, param1: Sequence[T]) -> Generator[int, float, str]:
 "
-"   (\(.\{-}\))
-"     This should match the parameters.
-"     ------------------------------------------------------------------------
-"     Matches a single captured group which will match as few matches as
-"     possible of any character, denoted as '.\{-}'. We use \{-} to ensure it
-"     will match as few matches as possible, which prevents wrong parsing when
-"     the input contains nested functions.
+"   def call(self, *args: str, **kwargs: str) -> str:
 "
-"   \%(\s*->\s*\(.\{-}\)\)\?\s*:
-"     The should match the return type, declared as 'def name(...): <TYPE>'.
-"     ------------------------------------------------------------------------
-"     Matches a non-captured group containing a single captured group which will
-"     match as few matches as possible of any character, denoted as '.\{-}',
-"     followed by 0 or more spaces and a colon, denoted as '\s*:'.
-"
-" {parameters.match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
-"
-"   \([[:alnum:]_]\+\)
-"     This should match the parameter name.
-"     ------------------------------------------------------------------------
-"     Matches a captured group containing 1 or more of the following
-"     characters: '[[:alnum:]_]'.
-"
-"   \%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\], ]\+\]\)\?\)\)\?
-"     This should match the parameter type.
-"     ------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as \%( ... \)\?
-"     which should start with the character ':' followed by 0 or more spaces,
-"     followed by the type itself, which is denoted as:
-"
-"     \([[:alnum:]_]\+\%(\[[[:alnum:]_[\], ]\+\]\)\?\)
-"
-"       [[:alnum:]_]\+
-"         This will match words as: 'str', 'int', etc.
-"
-"       \%(\[[[:alnum:]_[\], ]\+\]\)\?
-"         This will match an optional and non-capturing group which is used
-"         for type hints such as: 'Callable[[int, Exception], None]'.
-"
-"   \%(\s*=\s*\([^,]\+\)\)\?
-"     This should match the parameter default value.
-"     ------------------------------------------------------------------------
-"     Matches an optional and non-capturing group, denoted as \%( ... \)\?
-"     which may contain the pattern ' = <VALUE>'. The '<VALUE>' should contain
-"     1 or more of the following characters: '[^,]'.
+"   def myFunc(param1: Callable[[int], None] = False, param2: Callable[[int, Exception], None]) -> Sequence[T]:
 call add(b:doge_patterns, {
 \  'match': '\m^def \([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
 \  'match_group_names': ['funcName', 'parameters', 'returnType'],

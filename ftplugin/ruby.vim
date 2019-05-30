@@ -8,57 +8,26 @@ set cpoptions&vim
 
 let b:doge_patterns = []
 
-""
 " ==============================================================================
 " Matches regular function expressions and class methods.
 " ==============================================================================
 "
-" {match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
+" Matches the following scenarios:
 "
-"   ^
-"     Matches the position before the first character in the string.
+"   def myFunc(arg1, arg_2 = some_default_value)
 "
-"   def\s\+\([^=(!]\+\)[=!]\?\s*
-"     This should match the function name.
-"     ------------------------------------------------------------------------
-"     Matches the keyword 'def' followed by 1 or more spaces, denoted as '\s\+',
-"     followed by a captured group, denoted as '\( ... \)', which may contain 1
-"     more of the following characters '[^=(!]', followed by an optional single
-"     character '=' or '!', denoted as '[=!]\?', followed by 0 or more spaces,
-"     denoted as '\s*'.
+"   def def parameters (arg1,arg2=4, arg3*)
 "
-"   (\(.\{-}\))
-"     This should match the function parameters.
-"     ------------------------------------------------------------------------
-"     Matches parenthesis, denoted as '( ... )' which contains a captured group,
-"     denoted as '\( ... \)', which will match as few matches as possible of any
-"     character, denoted as '.\{-}'.
+"   def where(attribute, type = nil, **options)
 "
-" {parameters.match}: Regex explanation
-"   \m
-"     Interpret the pattern as a magic pattern.
-"
-"   \([[:alnum:]_]\+\)
-"     This should match the parameter name.
-"     ------------------------------------------------------------------------
-"     Matches a captured group that may contain 1 or more of the following
-"     characters: '[[:alnum:]_]'.
-"
-"   \%(\s*=\s*[^,]\+\)\?
-"     This should match the parameter default value.
-"     ------------------------------------------------------------------------
-"     Matches an optional and non-captured group, denoted as \(% ... \), which
-"     should contain the pattern ' = <VALUE>' where '<VALUE>' may contain 1 or
-"     more of the following characters '[^,]'.
+"   def each(&block)
 call add(b:doge_patterns, {
 \  'match': '\m^def\s\+\([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
 \  'match_group_names': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
 \    'match_group_names': ['name'],
-\    'format': ['@param {name} [type] TODO'],
+\    'format': ['@param', '{name}', '[type] TODO'],
 \  },
 \  'comment': {
 \    'insert': 'above',
