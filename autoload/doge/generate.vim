@@ -32,11 +32,12 @@ function! doge#generate#pattern(pattern) abort
     let l:formatted_params = []
     let l:param_tokens = doge#token#extract(l:params, l:params_dict['match'], l:params_dict['match_group_names'])
 
-    " Call the parameter preprocess function.
-    let l:preprocess_func = printf('Doge_%s_preprocess_parameter_tokens', &filetype)
-    if exists('*' . l:preprocess_func)
-      let l:param_tokens = call(l:preprocess_func, [l:param_tokens])
-    endif
+    " Preprocess the extracted parameter tokens.
+    try
+      let l:preprocess_fn = printf('doge#preprocessors#%s#parameter_tokens', &filetype)
+      call function(l:preprocess_fn)(l:param_tokens)
+    catch /E117: Unknown function/
+    endtry
 
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(l:param_token, l:params_dict['format'])
