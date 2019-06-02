@@ -1,0 +1,155 @@
+# ==============================================================================
+# Class methods without parameters.
+# ==============================================================================
+Given php (class method without parameters):
+  class Test {
+
+    public function myMethod() {}
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect php (no changes):
+  class Test {
+
+    public function myMethod() {}
+
+  }
+
+# ==============================================================================
+# Class methods with parameters
+# ==============================================================================
+
+# Scenario 1
+Given php (class method with parameters):
+  class Test {
+
+    public function myMethod(array &$arg1) {}
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect php (generated comment with param tags):
+  class Test {
+
+    /**
+     * TODO
+     *
+     * @param array $arg1 TODO
+     */
+    public function myMethod(array &$arg1) {}
+
+  }
+
+# Scenario 2
+Given php (static protected class method with parameters):
+  class Test {
+
+    protected static function myMethod(array &$arg1) {}
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect php (generated comment with param tags):
+  class Test {
+
+    /**
+     * TODO
+     *
+     * @param array $arg1 TODO
+     */
+    protected static function myMethod(array &$arg1) {}
+
+  }
+
+# Scenario 3
+Given php (final public class method with parameters):
+  class Test {
+
+    public final function myMethod(array &$arg1) {}
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect php (generated comment with param tags):
+  class Test {
+
+    /**
+     * TODO
+     *
+     * @param array $arg1 TODO
+     */
+    public final function myMethod(array &$arg1) {}
+
+  }
+
+# Scenario 4
+Given php (private static final class method with parameters):
+  class Test {
+
+    private static final function myMethod(array &$arg1) {}
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect php (generated comment with param tags):
+  class Test {
+
+    /**
+     * TODO
+     *
+     * @param array $arg1 TODO
+     */
+    private static final function myMethod(array &$arg1) {}
+
+  }
+
+# Scenario 5
+Given php (constructor method with parameters):
+  use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+  class Test {
+
+    public function __construct(
+      \Drupal\Core\Config\Entity\Query\QueryFactory $eqf,
+      AbstractController $controller
+    ) {}
+
+  }
+
+Do (trigger doge):
+  :5\<CR>
+  \<C-d>
+
+Expect php (generated comment with param tags):
+  use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+  class Test {
+
+    /**
+     * TODO
+     *
+     * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf TODO
+     * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $controller TODO
+     */
+    public function __construct(
+      \Drupal\Core\Config\Entity\Query\QueryFactory $eqf,
+      AbstractController $controller
+    ) {}
+
+  }

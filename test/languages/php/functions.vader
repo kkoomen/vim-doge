@@ -1,0 +1,31 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given php (function without parameters):
+  function myFunc() {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect php (no changes):
+  function myFunc() {}
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given php (function with parameters):
+  function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect php (generated comment with param tags):
+  /**
+   * TODO
+   *
+   * @param array $arg1 TODO
+   * @param string $arg2 TODO
+   * @param mixed $arg3 TODO
+   * @param \Drupal\core\Entity\Node $arg4 TODO
+   */
+  function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}

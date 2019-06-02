@@ -1,0 +1,68 @@
+# ==============================================================================
+# Class properties
+#
+# Should resolve its corresponding type defined in the constructor.
+# ==============================================================================
+Given php (class property above the constructor should should resolve its corresponding type via the constructor):
+  use Symfony\Component\HttpFoundation\Response;
+
+  class Test {
+
+    protected $migrationName;
+
+    protected $migration;
+
+    private $response;
+
+    public function __construct(string $name, Migration $migration, Response $response) {
+      $this->migrationName = $name;
+      $this->migration = $migration;
+      $this->response = $response;
+    }
+
+  }
+
+Do (trigger doge):
+  :5\<CR>
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+  :15\<CR>
+  \<C-d>
+  :20\<CR>
+  \<C-d>
+
+Expect php (generated comments at all properties and constructor function):
+  use Symfony\Component\HttpFoundation\Response;
+
+  class Test {
+
+    /**
+     * @var string
+     */
+    protected $migrationName;
+
+    /**
+     * @var Migration
+     */
+    protected $migration;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Response
+     */
+    private $response;
+
+    /**
+     * TODO
+     *
+     * @param string $name TODO
+     * @param Migration $migration TODO
+     * @param \Symfony\Component\HttpFoundation\Response $response TODO
+     */
+    public function __construct(string $name, Migration $migration, Response $response) {
+      $this->migrationName = $name;
+      $this->migration = $migration;
+      $this->response = $response;
+    }
+
+  }

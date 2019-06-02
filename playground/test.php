@@ -12,6 +12,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseBase, S
 /**
  * TODO
  *
+ */
+function myFunc() {}
+
+/**
+ * TODO
+ *
  * @param array $arg1 TODO
  * @param string $arg2 TODO
  * @param mixed $arg3 TODO

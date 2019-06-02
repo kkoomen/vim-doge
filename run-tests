@@ -46,8 +46,11 @@ done
 # Allow tests to be passed as arguments.
 if [ $# -ne 0 ]; then
   tests="$*"
+
+  # Do not run any other tools when targeting specific tests.
+  run_linter=0
 else
-  tests='test/*.vader'
+  tests='test/*.vader test/*/*.vader test/*/*/*.vader'
 fi
 
 # Delete .swp files in the test directory, which cause Vim 8 to hang.
