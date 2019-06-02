@@ -19,7 +19,6 @@
 ((window, document, $) => {
 
   /**
-   * @function myFunc
    * @description TODO
    * @param {string} $arg1 - TODO
    */
@@ -28,7 +27,6 @@
 })(window, document, jQuery);
 
 /**
- * @function myFunc
  * @description TODO
  * @param {*} arg1 - TODO
  */
@@ -39,7 +37,6 @@ function myFunc(arg1) {
 var myObj = {
   myFunc: function() {
     /**
-     * @function
      * @description TODO
      * @param {string} arg1 - TODO
      * @param {Immutable.List} arg2 - TODO
@@ -48,7 +45,7 @@ var myObj = {
       var a = 2;
     };
 
-    /* This function should be ignored by DoGe. */
+    /* This function should be ignored by DoGe because of the 'return' prefix */
     return function() {
       //
     }
@@ -100,11 +97,14 @@ const myObj = {
       //
     },
   },
+
   /**
-   * @function name
    * @description TODO
+   * @param {string} arg1 - TODO
+   * @param {int} arg2 - TODO
+   * @return {string} TODO
    */
-  name() {
+  myFunc(arg1: string, arg2: int = 5): string {
     //
   }
 };
@@ -121,7 +121,6 @@ let foo: number = 1;
 let isOneOf: number | boolean | string = foo;
 
 /**
- * @function add
  * @description TODO
  * @param {any} one - TODO
  * @param {any} two - TODO
@@ -147,7 +146,6 @@ let Easing = "ease-in" | "ease-out" | "ease-in-out" = "ease-in";
 (arg1: array = []) => (arg2: string) => { console.log(5); }
 
 /**
- * @function configureStore
  * @description TODO
  * @param {History} history - TODO
  * @param {object} initialState - TODO
@@ -156,7 +154,6 @@ let Easing = "ease-in" | "ease-out" | "ease-in-out" = "ease-in";
 export function configureStore(history: History, initialState: object): Store<AppState> {}
 
 /**
- * @function configureStore
  * @description TODO
  * @param {History} history - TODO
  * @param {object} initialState - TODO
@@ -165,7 +162,6 @@ export function configureStore(history: History, initialState: object): Store<Ap
 function configureStore(history: History, initialState: object): Store {}
 
 /**
- * @function configureStore
  * @description TODO
  * @param {History} history - TODO
  * @param {object} initialState - TODO
@@ -183,21 +179,18 @@ function configureStore(history: History, initialState: object): Store<AppState>
 const configureStore = (history: History, initialState: object): Store<AppState> => {}
 
 /**
- * @function rollDice
  * @description TODO
  * @return {1|2|3|4|5|6} TODO
  */
 function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {}
 
 /**
- * @function rollDice
  * @description TODO
  * @return {1|2|3|4|5|6} TODO
  */
 function rollDice(): (1 | 2 | 3 | 4 | 5 | 6) {}
 
 /**
- * @function pluck
  * @description TODO
  * @param {T} o - TODO
  * @param {K[]} names - TODO
@@ -206,7 +199,6 @@ function rollDice(): (1 | 2 | 3 | 4 | 5 | 6) {}
 function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 
 /**
- * @function isFish
  * @description TODO
  * @param {Fish|Bird} pet - TODO
  * @param {[User]} users - TODO
@@ -215,7 +207,6 @@ function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 function isFish(pet: Fish | Bird, users: [User]): [User, Fish] {}
 
 /**
- * @function isNumber
  * @description TODO
  * @param {any} x - TODO
  * @return {x is number} TODO
@@ -253,12 +244,6 @@ function isNumber(x: any): x is number {}
  */
 const user1 = (arg1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
-/**
- * @function user2
- * @description TODO
- * @param {array} arg1 - TODO
- * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
- */
 let user2 = (arg1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
 /**
@@ -340,14 +325,12 @@ const add = (b: number): number | Fish => { console.log(5); }
  */
 class SpaceRepeatingPadder implements Padder {
   /**
-   * @function constructor
    * @description TODO
    * @param {number} numSpaces - TODO
    */
   constructor(private numSpaces: number) { }
 
   /**
-   * @function getPaddingString
    * @description TODO
    * @return {string} TODO
    */
@@ -426,7 +409,6 @@ export class Child extends Parent implements CustomInterfaceName {}
  */
 class Child extends Parent {
   /**
-   * @function myMethod
    * @description TODO
    * @param {number} b - TODO
    */
@@ -444,7 +426,6 @@ class Child extends Parent {
   }
 
   /**
-   * @function myMethod
    * @description TODO
    * @param {number} b - TODO
    * @return {number} TODO

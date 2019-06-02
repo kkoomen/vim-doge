@@ -109,7 +109,6 @@ call add(b:doge_patterns, {
 \    'trim_comparision_check': 0,
 \    'template': [
 \      '/**',
-\      ' * @function {funcName|}',
 \      ' * @description TODO',
 \      ' * {parameters}',
 \      '! * @return {{returnType}} TODO',
