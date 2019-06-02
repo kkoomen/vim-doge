@@ -47,7 +47,7 @@ function! doge#generate#pattern(pattern) abort
 
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(l:param_token, l:params_dict['format'])
-      let l:format = join(filter(l:format, 'v:val !=# ""'), ' ')
+      let l:format = join(filter(l:format, "v:val !=# ''"), ' ')
       call add(l:formatted_params, l:format)
     endfor
     let l:tokens['parameters'] = l:formatted_params
@@ -79,12 +79,16 @@ function! doge#generate#pattern(pattern) abort
     let l:comment_lnum_insert_position = line('.') - 1
   endif
 
+  " vint: -ProhibitUnusedVariable
+  let l:IndentFunc = function('doge#indent#add', [l:comment_lnum_inherited_indent])
+  " vint: +ProhibitUnusedVariable
+
   " Indent the comment.
-  let l:comment = map(l:comment, {k, line -> doge#indent#add(line, l:comment_lnum_inherited_indent)})
+  let l:comment = map(l:comment, { k, line -> l:IndentFunc(line) })
 
   " Write the comment.
   call append(l:comment_lnum_insert_position, l:comment)
-  echo "[DoGe] Successfully inserted comment."
+  echo '[DoGe] Successfully inserted comment.'
 
   " Return 1 to indicate we have succesfully inserted the comment.
   return 1

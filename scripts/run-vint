@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# For more info about the 'set' command, see
+# https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
+set -e
+set -u
+
+exit_code=0
+docker_flags=(--rm -v "$PWD:/testplugin" -v "$PWD/test:/home" -w /testplugin "$DOGE_DOCKER_IMAGE")
+
+echo '========================================'
+echo 'Running Vint to lint our code'
+echo '========================================'
+echo 'Vint warnings/errors follow:'
+echo
+
+set -o pipefail
+docker run -a stdout "${docker_flags[@]}" vint -s . || exit_code=$?
+set +o pipefail
+echo
+
+exit $exit_code

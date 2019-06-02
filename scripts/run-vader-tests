@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+# For more info about the 'set' command, see
+# https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
+set -e
+set -u
+
+verbose=0
+while [ $# -ne 0 ]; do
+  case $1 in
+  -v)
+      verbose=1
+      shift
+  ;;
+  --)
+      shift
+      break
+  ;;
+  -?*)
+      echo "Invalid argument: $1" 1>&2
+      exit 1
+  ;;
+  *)
+      break
+  ;;
+  esac
+done
+
 vim="$1"
 tests="$2"
 
@@ -8,6 +34,7 @@ green='\033[0;32m'
 nc='\033[0m'
 
 run_file="$(mktemp -t tests_ran.XXXXXXXX)"
+
 
 function filter-vader-output() {
   local hit_first_vader_line=0

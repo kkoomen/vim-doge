@@ -8,6 +8,7 @@ RUN apk --update add $PACKAGES \
   && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 RUN pip install vim-vint==0.3.15
+COPY .vintrc.yaml $HOME/.vintrc.yaml
 
 RUN git clone https://github.com/junegunn/vader.vim vader \
   && cd vader \

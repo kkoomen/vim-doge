@@ -1,4 +1,4 @@
-# DoGe
+# DoGe [![Travic CI Build Status](https://travis-ci.com/kkoomen/doge.svg?branch=master)](https://travis-ci.com/kkoomen/doge)
 
 We all love documentation because it makes our codebases easier to understand,
 yet no one has time to write it in a good and proper way or some might not even

@@ -1,10 +1,47 @@
 #!/usr/bin/env bash
 
+# For more info about the 'set' command, see
+# https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
+set -e
+set -u
+
 docker_image=kkoomen/doge
-current_docker_image_id=fb461f02e779
+current_docker_image_id=45829e92e365
 
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
+
+verbose_flag=''
+run_vim_81_tests=1
+run_linter=1
+
+while [ $# -ne 0 ]; do
+  case $1 in
+  -v)
+      verbose_flag='-v'
+      shift
+  ;;
+  --vim-81-only)
+    run_linter=0
+    shift
+  ;;
+  --linter-only)
+    run_vim_81_tests=0
+    shift
+  ;;
+  --)
+      shift
+      break
+  ;;
+  -?*)
+      echo "Invalid argument: $1" 1>&2
+      exit 1
+  ;;
+  *)
+      break
+  ;;
+  esac
+done
 
 # Allow tests to be passed as arguments.
 if [ $# -ne 0 ]; then
@@ -20,6 +57,8 @@ docker images -q $DOGE_DOCKER_IMAGE | grep "^$current_docker_image_id" > /dev/nu
   || docker pull "$image"
 
 output_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+
+trap '{ rm -rf "$output_dir"; }' EXIT
 
 # Used for killing tests when you kill the script.
 cancel_tests() {
@@ -47,14 +86,20 @@ trap cancel_tests INT TERM
 file_number=0
 pid_list=''
 for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^vim'); do
-  if [[ $vim =~ ^vim-v8.1 ]]; then
+  if ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ); then
       echo "Starting Vim: $vim..."
       file_number=$((file_number+1))
-      echo "Dumping output in $output_dir/$file_number"
-      scripts/run-vader-tests "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
+      scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
       pid_list="$pid_list $!"
   fi
 done
+
+if ((run_linter)); then
+    echo "Starting Vint..."
+    file_number=$((file_number+1))
+    scripts/run-vint > "$output_dir/$file_number" 2>&1 &
+    pid_list="$pid_list $!"
+fi
 
 echo
 

@@ -52,11 +52,11 @@ function! s:get_property_type_via_constructor(propertyName) abort
   let l:type = ''
 
   " Search for the first class opener and closer around the cursor.
-  let [l:class_opener_lnum, _] = searchpairpos('{', '', '}', 'bnrW')
-  let [l:class_closer_lnum, _] = searchpairpos('{', '', '}', 'nrW')
+  let l:class_opener = searchpairpos('{', '', '}', 'bnrW')
+  let l:class_closer = searchpairpos('{', '', '}', 'nrW')
 
   " Get the contents inside the class.
-  let l:class_content = join(getline(l:class_opener_lnum, l:class_closer_lnum), ' ')
+  let l:class_content = join(getline(l:class_opener[0], l:class_closer[0]), ' ')
 
   " Search for the constructor function in that class.
   if match(l:class_content, '__construct(') != -1
@@ -91,7 +91,7 @@ endfunction
 " extracted. This function will adjust the input if needed.
 function! doge#preprocessors#php#parameter_tokens(params) abort
   for l:param in a:params
-    let param_idx = index(a:params, l:param)
+    let l:param_idx = index(a:params, l:param)
     if has_key(l:param, 'type') && !empty(l:param['type'])
       let l:fqn = <SID>get_parameter_type_fqn(l:param['type'])
       let a:params[l:param_idx]['type'] = l:fqn
