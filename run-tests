@@ -12,6 +12,7 @@ DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
 verbose_flag=''
+verbose=0
 run_vim_81_tests=1
 run_linter=1
 
@@ -19,6 +20,7 @@ while [ $# -ne 0 ]; do
   case $1 in
   -v)
       verbose_flag='-v'
+      verbose=1
       shift
   ;;
   --vim-81-only)
@@ -74,7 +76,7 @@ cancel_tests() {
     done
   fi
 
-  docker kill $(docker ps -a -q --filter ancestor="$image" --format='{{.ID}}') &> /dev/null
+  docker kill $(docker ps -a -q --filter ancestor="$docker_image" --format='{{.ID}}') &> /dev/null
 
   if [ -d "$output_dir" ]; then
     rm -rf "$output_dir"
@@ -118,7 +120,7 @@ for pid in $pid_list; do
     this_failed=1
   fi
 
-  if [[ -f "$output_dir/$index" ]] && ((this_failed)); then
+  if ( [[ -f "$output_dir/$index" ]] && ((this_failed)) ) || ((verbose)); then
     cat "$output_dir/$index"
   fi
 done
