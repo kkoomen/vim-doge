@@ -1,106 +1,62 @@
 <?php
 
-use Drupal\Core\Config\Entity\Query\QueryFactory;
-use Drupal\Core\Config\Entity\QueryBase as Query;
-
 /**
  * This file contains test scenarios and their expected results. You should be
  * able to generate the examples below.
  */
 
-/**
- * TODO
- *
- * @param array $arg1 TODO
- * @param string $arg2 TODO
- * @param mixed $arg3 TODO
- * @param \Drupal\core\Entity\Node $arg4 TODO
- */
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route as BaseRoute;
+use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseBase, Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {
   //
 }
 
-/**
- * TODO
- *
- * @param \Drupal\Core\Config\Entity\Query\QueryFactory $arg4 TODO
- */
-function myFunction(QueryFactory $arg4) {
-  //
+function myFunction(Response $arg4) {
+  // This should return \Symfony\Component\HttpFoundation\Response since
+  // 'Response' is not defined as a an alias.
 }
 
-/**
- * TODO
- *
- * @param Query $arg4 TODO
- */
-function myFunction(Query $arg4) {
-  //
+function myFunction(BaseRoute $arg4) {
+  // This should return 'BaseRoute' since it is defined as an alias.
+}
+
+function myFunction(AbstractController $arg4) {
+  // This should return
+  // \Symfony\Bundle\FrameworkBundle\Controller\AbstractController since
+  // 'AbstractController' is not defined as an alias.
+}
+
+function myFunction(RedirectResponse $arg4) {
+  // This should return 'RedirectResponse' since it is defined as an alias.
 }
 
 class myClass {
 
-  /**
-   * TODO
-   *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
-   */
+  protected $entityQueryFactory;
+
+  public function __construct(Drupal\Core\Config\Entity\Query\QueryFactory $eqf) {
+    $this->entityQueryFactory = $eqf;
+  }
+
+
   public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
     //
   }
 
-  /**
-   * TODO
-   *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
-   */
   public final function myPublicFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = 'test') {
     //
   }
 
-  /**
-   * TODO
-   *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
-   */
   public static function myPublicStaticMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
     //
   }
 
-  /**
-   * TODO
-   *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param array $arg5 TODO
-   */
   public static final function myPublicStaticFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4 = [], array $arg5 = array()) {
     //
   }
 
-  /**
-   * TODO
-   *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
-   */
   private function myPrivateMultilineMethod(
     array $arg1,
     \Test\Namespacing\With\A\ClassInterface $arg2,
@@ -108,6 +64,23 @@ class myClass {
     $arg4,
     $arg5 = NULL
   ) {
+    //
+  }
+
+}
+
+class myClass2 {
+
+  protected $entityQueryFactory;
+
+  public function __construct(\Drupal\Core\Config\Entity\Query\QueryFactory $eqf, AbstractController $controller) {
+    $this->entityQueryFactory = $eqf;
+    $this->controller = $controller;
+  }
+
+  protected $controller;
+
+  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
     //
   }
 

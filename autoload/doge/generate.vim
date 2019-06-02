@@ -22,6 +22,12 @@ function! doge#generate#pattern(pattern) abort
   " Extract the primary tokens.
   let l:tokens = get(doge#token#extract(l:curr_line, a:pattern['match'], a:pattern['match_group_names']), 0)
 
+  try
+    let l:preprocess_fn = printf('doge#preprocessors#%s#tokens', &filetype)
+    call function(l:preprocess_fn)(l:tokens)
+  catch /E117: Unknown function/
+  endtry
+
   " Split the 'parameters' token value into a list.
   if has_key(a:pattern, 'parameters')
     let l:params_dict = a:pattern['parameters']
