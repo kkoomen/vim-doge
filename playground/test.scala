@@ -2,8 +2,10 @@
 // Functions
 // =============================================================================
 
-// TODO: ^(?:val\s+([a-zA-Z0-9_]+)\s*=\s*)?\((.*?)\)\s*=>\s*
-// [ funcName, paramters ]
+/**
+ * This file contains test scenarios and their expected results. You should be
+ * able to generate the examples below.
+ */
 
 /** TODO
  *
