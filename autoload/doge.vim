@@ -7,10 +7,9 @@ set cpoptions&vim
 function! doge#generate() abort
   if exists('b:doge_patterns')
     for l:pattern in get(b:, 'doge_patterns')
-      if doge#generate#pattern(l:pattern) is 0
+      if doge#generate#pattern(l:pattern) == v:false
         continue
       endif
-
       return 1
     endfor
     echo '[DoGe] No patterns did match L' . line('.') . '.'

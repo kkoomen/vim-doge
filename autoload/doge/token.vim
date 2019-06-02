@@ -7,7 +7,7 @@ set cpoptions&vim
 " containing all the tokens.
 function! s:token_replace(tokens, text) abort
   " Ensure the input is a string.
-  if type(a:text) isnot v:t_string
+  if type(a:text) != v:t_string
     return a:text
   endif
 
@@ -50,7 +50,7 @@ function! s:token_replace(tokens, text) abort
     " The value of a token might be a list, for example:
     "   { 'format': ['someRandomText', '{token|default}'] }
     " and if this is the case then do a replacement for each item.
-    if type(l:value) is v:t_list
+    if type(l:value) == v:t_list
       let l:multiline_replacement = []
       for l:item in l:value
         if empty(l:item) && l:has_default_token_value
@@ -74,7 +74,7 @@ function! s:token_replace(tokens, text) abort
     endif
   endfor
 
-  if l:has_replaced_tokens is 0 && l:return_empty_on_fail is 1
+  if l:has_replaced_tokens == v:false && l:return_empty_on_fail == v:true
     return ''
   endif
 
@@ -96,9 +96,9 @@ endfunction
 " containing all the tokens.
 function! doge#token#replace(tokens, text) abort
   let l:text = deepcopy(a:text)
-  if type(l:text) is v:t_list
+  if type(l:text) == v:t_list
     return map(l:text, {key, line -> <SID>token_replace(a:tokens, line)})
-  elseif type(l:text) is v:t_string
+  elseif type(l:text) == v:t_string
     return <SID>token_replace(a:tokens, l:text)
   endif
 endfunction

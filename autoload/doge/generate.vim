@@ -47,7 +47,7 @@ function! doge#generate#pattern(pattern) abort
 
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(l:param_token, l:params_dict['format'])
-      let l:format = join(filter(l:format, 'v:val isnot# ""'), ' ')
+      let l:format = join(filter(l:format, 'v:val !=# ""'), ' ')
       call add(l:formatted_params, l:format)
     endfor
     let l:tokens['parameters'] = l:formatted_params
@@ -71,7 +71,7 @@ function! doge#generate#pattern(pattern) abort
     endfor
   endfor
 
-  if a:pattern['comment']['insert'] is# 'below'
+  if a:pattern['comment']['insert'] ==# 'below'
     let l:comment_lnum_insert_position = line('.')
     let l:comment_lnum_inherited_indent = line('.') + 1
   else
