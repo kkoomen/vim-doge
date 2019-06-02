@@ -54,7 +54,7 @@ fi
 find test -name '*.swp' -delete
 
 docker images -q $DOGE_DOCKER_IMAGE | grep "^$current_docker_image_id" > /dev/null \
-  || docker pull "$image"
+  || docker pull "$docker_image"
 
 output_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
 
