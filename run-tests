@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+
+docker_image=kkoomen/doge
+current_docker_image_id=fb461f02e779
+
+DOGE_DOCKER_IMAGE="$docker_image"
+export DOGE_DOCKER_IMAGE
+
+# Allow tests to be passed as arguments.
+if [ $# -ne 0 ]; then
+  tests="$*"
+else
+  tests='test/*.vader'
+fi
+
+# Delete .swp files in the test directory, which cause Vim 8 to hang.
+find test -name '*.swp' -delete
+
+docker images -q $DOGE_DOCKER_IMAGE | grep "^$current_docker_image_id" > /dev/null \
+  || docker pull "$image"
+
+output_dir=$(mktemp -d 2>/dev/null || mktemp -d -t 'mytmpdir')
+
+# Used for killing tests when you kill the script.
+cancel_tests() {
+  set +e
+
+  if [ -n "$pid_list" ]; then
+    for pid in $pid_list; do
+      kill "$pid"
+      wait "$pid"
+    done
+  fi
+
+  docker kill $(docker ps -a -q --filter ancestor="$image" --format='{{.ID}}') &> /dev/null
+
+  if [ -d "$output_dir" ]; then
+    rm -rf "$output_dir"
+  fi
+
+  echo
+  exit 1
+}
+
+trap cancel_tests INT TERM
+
+file_number=0
+pid_list=''
+for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^vim'); do
+  if [[ $vim =~ ^vim-v8.1 ]]; then
+      echo "Starting Vim: $vim..."
+      file_number=$((file_number+1))
+      echo "Dumping output in $output_dir/$file_number"
+      scripts/run-vader-tests "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
+      pid_list="$pid_list $!"
+  fi
+done
+
+echo
+
+failed=0
+index=0
+
+for pid in $pid_list; do
+  this_failed=0
+  index=$((index+1))
+
+  if ! wait "$pid"; then
+    failed=1
+    this_failed=1
+  fi
+
+  if [[ -f "$output_dir/$index" ]] || ((this_failed)); then
+    cat "$output_dir/$index"
+  fi
+done
+
+if ((failed)); then
+  echo 'Something went wrong!'
+else
+  echo 'All tests passed!'
+fi
+
+exit $failed
