@@ -53,7 +53,7 @@ Install `DoGe`:
 
 Using vim-pack:
 
-- `git clone https://github.com/kkoomen/doge ~/.vim/pack/<dir>/start/doge`
+- `git clone https://github.com/kkoomen/doge ~/.vim/pack/*/start/doge`
 
 Using pathogen:
 
