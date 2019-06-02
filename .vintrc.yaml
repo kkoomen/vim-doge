@@ -27,7 +27,7 @@ policies:
   ProhibitUnnecessaryDoubleQuote:
     enabled: true
   ProhibitUnusedVariable:
-    enabled: false
+    enabled: true
   ProhibitUsingUndeclaredVariable:
     enabled: true
   ProhibitAutocmdWithNoGroup:

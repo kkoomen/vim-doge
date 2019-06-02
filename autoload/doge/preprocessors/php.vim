@@ -23,7 +23,6 @@ set cpoptions&vim
 "        */
 function! s:get_parameter_type_fqn(type) abort
   let l:fqn = a:type
-  let l:has_fqn_defined = 0
 
   if a:type !~# '\\'
     let l:use_statement_regex = printf('\m^use.\{-}\([[:alnum:]_\\]\+%s\)[;,].\{-}', a:type)
@@ -80,7 +79,7 @@ endfunction
 " function will adjust the input if needed.
 function! doge#preprocessors#php#tokens(params) abort
   if has_key(a:params, 'propertyName') && !empty(a:params['propertyName'])
-    let l:fqn = <SID>get_property_type_via_constructor(a:params['propertyName'])
+    let l:fqn = s:get_property_type_via_constructor(a:params['propertyName'])
     if !empty(l:fqn)
       let a:params['type'] = l:fqn
     endif
@@ -93,7 +92,7 @@ function! doge#preprocessors#php#parameter_tokens(params) abort
   for l:param in a:params
     let l:param_idx = index(a:params, l:param)
     if has_key(l:param, 'type') && !empty(l:param['type'])
-      let l:fqn = <SID>get_parameter_type_fqn(l:param['type'])
+      let l:fqn = s:get_parameter_type_fqn(l:param['type'])
       let a:params[l:param_idx]['type'] = l:fqn
     endif
   endfor

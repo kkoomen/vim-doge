@@ -97,9 +97,9 @@ endfunction
 function! doge#token#replace(tokens, text) abort
   let l:text = deepcopy(a:text)
   if type(l:text) == v:t_list
-    return map(l:text, {key, line -> <SID>token_replace(a:tokens, line)})
+    return map(l:text, {key, line -> s:token_replace(a:tokens, line)})
   elseif type(l:text) == v:t_string
-    return <SID>token_replace(a:tokens, l:text)
+    return s:token_replace(a:tokens, l:text)
   endif
 endfunction
 
