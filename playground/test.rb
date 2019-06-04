@@ -18,7 +18,7 @@ end
 # @param arg1 [type] TODO
 # @param arg2 [type] TODO
 # @param arg3 [type] TODO
-def def parameters (arg1,arg2=4, arg3*)
+def parameters (arg1,arg2=4, arg3*)
 end
 
 # TODO

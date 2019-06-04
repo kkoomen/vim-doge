@@ -1,0 +1,114 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given ruby (function without parameters):
+  def myFunc()
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (no changes):
+  # TODO
+  def myFunc()
+  end
+
+# ==============================================================================
+# Functions with parameters.
+Given ruby (function with parameters):
+# ==============================================================================
+  def myFunc(arg1, arg_2 = some_default_value)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # TODO
+  # @param arg1 [type] TODO
+  # @param arg_2 [type] TODO
+  def myFunc(arg1, arg_2 = some_default_value)
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with parameters with a '&' in its name):
+  def each(&block)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # TODO
+  # @param block [type] TODO
+  def each(&block)
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with paramters containing '*' in its name):
+  def parameters (arg1,arg2=4, arg3*)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # TODO
+  # @param arg1 [type] TODO
+  # @param arg2 [type] TODO
+  # @param arg3 [type] TODO
+  def parameters (arg1,arg2=4, arg3*)
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with paramters containing ':' in its name):
+  def myFunc (format = :html)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # TODO
+  # @param format [type] TODO
+  def myFunc (format = :html)
+  end
+
+# ==============================================================================
+# Functions with special characters in their name.
+# ==============================================================================
+Given ruby (function containing special characters in their function name):
+  def [](attribute)
+  end
+
+  def copy!(other)
+  end
+
+  def define_method_attribute=(name)
+  end
+
+Do (trigger doge):
+  \<C-d>
+  :6\<CR>
+  \<C-d>
+  :11\<CR>
+  \<C-d>
+
+Expect ruby (generated comments with @param tags):
+  # TODO
+  # @param attribute [type] TODO
+  def [](attribute)
+  end
+
+  # TODO
+  # @param other [type] TODO
+  def copy!(other)
+  end
+
+  # TODO
+  # @param name [type] TODO
+  def define_method_attribute=(name)
+  end
