@@ -1,0 +1,57 @@
+# ==============================================================================
+# Methods declared with a ':'.
+# ==============================================================================
+Given lua (method declared with a ':' with parameters):
+  function a.b:c (arg1, arg2)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (generated comment with @param tags):
+  -- TODO
+  -- @param arg1 TODO
+  -- @param arg2 TODO
+  function a.b:c (arg1, arg2)
+  end
+
+# ==============================================================================
+# Methods declared with a '.'.
+# ==============================================================================
+Given lua (method declared with a '.' with parameters):
+  a.b.c = function (self, arg1, arg2)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (generated comment with @param tags):
+  -- TODO
+  -- @param self TODO
+  -- @param arg1 TODO
+  -- @param arg2 TODO
+  a.b.c = function (self, arg1, arg2)
+  end
+
+# ==============================================================================
+# Method calls that should not generate anything.
+# ==============================================================================
+Given lua (method with parameters called with ':' syntax):
+  myobj:foo(n)
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (no changes):
+  myobj:foo(n)
+
+# ------------------------------------------------------------------------------
+
+Given lua (method with parameters called with '.' syntax):
+  myobj.foo(myobj, n)
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (generated comment with @param tags):
+  myobj.foo(myobj, n)
