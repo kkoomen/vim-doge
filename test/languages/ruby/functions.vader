@@ -8,7 +8,7 @@ Given ruby (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect ruby (no changes):
+Expect ruby (generated comment with nothing but the text 'TODO'):
   # TODO
   def myFunc()
   end

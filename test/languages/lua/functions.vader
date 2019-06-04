@@ -1,0 +1,50 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given lua (function without parameters):
+  function myFunc()
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (generated comment with nothing but the text 'TODO'):
+  -- TODO
+  function myFunc()
+  end
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given lua (function with parameters):
+  function myFunc(arg1, arg2, arg3, arg4)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (generated comment with @param tags):
+  -- TODO
+  -- @param arg1 TODO
+  -- @param arg2 TODO
+  -- @param arg3 TODO
+  -- @param arg4 TODO
+  function myFunc(arg1, arg2, arg3, arg4)
+  end
+
+# ==============================================================================
+# Functions as a variable value.
+# ==============================================================================
+Given lua (function as a variable value with parameters):
+  local myFunc = function(arg1, arg2)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect lua (generated comment with @param tags):
+  -- TODO
+  -- @param arg1 TODO
+  -- @param arg2 TODO
+  local myFunc = function(arg1, arg2)
+  end
