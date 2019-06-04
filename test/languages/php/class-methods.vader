@@ -51,7 +51,8 @@ Expect php (generated comment with @param tags):
 
   }
 
-# Scenario 2
+# ------------------------------------------------------------------------------
+
 Given php (static protected class method with parameters):
   class Test {
 
@@ -75,7 +76,8 @@ Expect php (generated comment with @param tags):
 
   }
 
-# Scenario 3
+# ------------------------------------------------------------------------------
+
 Given php (final public class method with parameters):
   class Test {
 
@@ -99,7 +101,8 @@ Expect php (generated comment with @param tags):
 
   }
 
-# Scenario 4
+# ------------------------------------------------------------------------------
+
 Given php (private static final class method with parameters):
   class Test {
 
@@ -123,7 +126,8 @@ Expect php (generated comment with @param tags):
 
   }
 
-# Scenario 5
+# ------------------------------------------------------------------------------
+
 Given php (constructor method with parameters):
   use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 

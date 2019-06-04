@@ -6,7 +6,6 @@
 # 'Response' is not defined as a an alias.
 # ------------------------------------------------------------------------------
 
-# Scenario 1
 Given php (function where the type should result in its FQN):
   use Symfony\Component\HttpFoundation\Response;
 
@@ -26,7 +25,8 @@ Expect php (generated comment containing the FQN):
    */
   function myFunction(Response $arg1) {}
 
-# Scenario 2
+# ------------------------------------------------------------------------------
+
 Given php (function where the type should result in its FQN with multiple FQN statements after it):
   use Symfony\Component\HttpFoundation\Response, use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
@@ -46,7 +46,8 @@ Expect php (generated comment containing the FQN):
    */
   function myFunction(Response $arg1) {}
 
-# Scenario 3
+# ------------------------------------------------------------------------------
+
 Given php (function where the type should result in its FQN with multiple FQN statements before it):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
@@ -69,7 +70,6 @@ Expect php (generated comment containing the FQN):
 # This should return 'BaseRoute' since it is defined as an alias.
 # ------------------------------------------------------------------------------
 
-# Scenario 1
 Given php (function where the type should not result in its FQN):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
@@ -89,7 +89,8 @@ Expect php (generated comment not containing the FQN):
    */
   function myFunction(BaseRoute $arg1) {}
 
-# Scenario 2
+# ------------------------------------------------------------------------------
+
 Given php (function where the type should not result in its FQN with multiple FQN statements after it):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
@@ -109,7 +110,8 @@ Expect php (generated comment not containing the FQN):
    */
   function myFunction(BaseRoute $arg1) {}
 
-# Scenario 3
+# ------------------------------------------------------------------------------
+
 Given php (function where the type should not result in its FQN with multiple FQN statements before it):
   use Symfony\Component\HttpFoundation\Response, Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
