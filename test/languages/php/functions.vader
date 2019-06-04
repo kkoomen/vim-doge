@@ -7,7 +7,11 @@ Given php (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect php (no changes):
+Expect php (function with nothing but the text 'TODO'):
+  /**
+   * TODO
+   *
+   */
   function myFunc() {}
 
 # ==============================================================================
@@ -19,7 +23,7 @@ Given php (function with parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect php (generated comment with param tags):
+Expect php (generated comment with @param tags):
   /**
    * TODO
    *

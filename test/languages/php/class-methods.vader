@@ -12,9 +12,13 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (no changes):
+Expect php (class method with nothing but the text 'TODO'):
   class Test {
 
+    /**
+     * TODO
+     *
+     */
     public function myMethod() {}
 
   }
@@ -35,7 +39,7 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with param tags):
+Expect php (generated comment with @param tags):
   class Test {
 
     /**
@@ -59,7 +63,7 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with param tags):
+Expect php (generated comment with @param tags):
   class Test {
 
     /**
@@ -83,7 +87,7 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with param tags):
+Expect php (generated comment with @param tags):
   class Test {
 
     /**
@@ -107,7 +111,7 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with param tags):
+Expect php (generated comment with @param tags):
   class Test {
 
     /**
@@ -136,7 +140,7 @@ Do (trigger doge):
   :5\<CR>
   \<C-d>
 
-Expect php (generated comment with param tags):
+Expect php (generated comment with @param tags):
   use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
   class Test {
