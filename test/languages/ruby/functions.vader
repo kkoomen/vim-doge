@@ -80,7 +80,7 @@ Expect ruby (generated comment with @param tags):
 # ==============================================================================
 # Functions with special characters in their name.
 # ==============================================================================
-Given ruby (function containing special characters in their function name):
+Given ruby (functions containing special characters in their function name):
   def [](attribute)
   end
 
