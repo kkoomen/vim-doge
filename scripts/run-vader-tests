@@ -31,6 +31,7 @@ tests="$2"
 
 red='\033[0;31m'
 green='\033[0;32m'
+blue='\033[0;34m'
 nc='\033[0m'
 
 run_file="$(mktemp -t tests_ran.XXXXXXXX)"
@@ -70,9 +71,11 @@ function filter-vader-output() {
 
 function color-vader-output() {
   while read -r; do
-    if [[ "$REPLY" = *'[EXECUTE] (X)'* ]]; then
+    if [[ "$REPLY" = *'(X)'* ]]; then
       echo -en "$red"
-    elif [[ "$REPLY" = *'[EXECUTE]'* ]] || [[ "$REPLY" = *'[  GIVEN]'* ]]; then
+    elif [[ "$REPLY" = *'Starting Vader:'* ]]; then
+      echo -en "$blue"
+    else
       echo -en "$nc"
     fi
 
@@ -88,8 +91,14 @@ function color-vader-output() {
 
       echo "$REPLY"
       echo -en "$nc"
+      echo
     else
       echo "$REPLY"
+
+      # Split blocks by echoing an extra white line.
+      if [[ "$REPLY" = *'EXPECT]'* ]]; then
+        echo
+      fi
     fi
   done
 
