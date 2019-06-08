@@ -27,7 +27,6 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['propertyName'],
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/**',
 \      ' * @var {type}',
@@ -63,7 +62,6 @@ call add(b:doge_patterns, {
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/**',
 \      ' * TODO',

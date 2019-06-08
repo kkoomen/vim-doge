@@ -32,7 +32,6 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['className', 'parentClassName', 'interfaceName'],
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/**',
 \      ' * TODO',
@@ -68,7 +67,6 @@ call add(b:doge_patterns, {
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/**',
 \      ' * @function {funcName|}',
@@ -106,7 +104,6 @@ call add(b:doge_patterns, {
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/**',
 \      ' * @description TODO',

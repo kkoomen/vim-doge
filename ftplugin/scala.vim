@@ -31,7 +31,6 @@ call add(b:doge_patterns, {
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/** TODO',
 \      ' *',
@@ -64,7 +63,6 @@ call add(b:doge_patterns, {
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/** TODO',
 \      ' *',
@@ -96,7 +94,6 @@ call add(b:doge_patterns, {
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'trim_comparision_check': 0,
 \    'template': [
 \      '/** TODO',
 \      ' *',
