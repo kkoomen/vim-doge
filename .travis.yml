@@ -1,10 +1,10 @@
 ---
 sudo: required
 services:
-    - docker
+  - docker
 language: generic
 env:
-    - OPTIONS=--vim-81-only
-    - OPTIONS=--linter-only
+  - OPTIONS=--vim-81-only
+  - OPTIONS=--linter-only
 script: |
-    ./run-tests -v $OPTIONS
+  ./run-tests -v $OPTIONS
