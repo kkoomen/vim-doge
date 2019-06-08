@@ -1,0 +1,103 @@
+# ==============================================================================
+# Classes without 'extends' or 'implements'.
+# ==============================================================================
+Given javascript (class without extends or implements):
+  class Child {}
+
+  export class Child {}
+
+Do (trigger doge):
+  \<C-d>
+  :6\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with nothing but the text 'TODO'):
+  /**
+   * TODO
+   */
+  class Child {}
+
+  /**
+   * TODO
+   */
+  export class Child {}
+
+# ==============================================================================
+# Classes with 'extends' without 'implements'.
+# ==============================================================================
+Given javascript (class with extends without implements):
+  class Child extends Parent {}
+
+  export class Child extends Parent {}
+
+Do (trigger doge):
+  \<C-d>
+  :7\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @extends):
+  /**
+   * TODO
+   * @extends Parent
+   */
+  class Child extends Parent {}
+
+  /**
+   * TODO
+   * @extends Parent
+   */
+  export class Child extends Parent {}
+
+# ==============================================================================
+# Classes without 'extends' with 'implements'.
+# ==============================================================================
+Given javascript (class without extends with implements):
+  class Child implements CustomInterfaceName {}
+
+  export class Child implements CustomInterfaceName {}
+
+Do (trigger doge):
+  \<C-d>
+  :7\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @implements tag):
+  /**
+   * TODO
+   * @implements CustomInterfaceName
+   */
+  class Child implements CustomInterfaceName {}
+
+  /**
+   * TODO
+   * @implements CustomInterfaceName
+   */
+  export class Child implements CustomInterfaceName {}
+
+# ==============================================================================
+# Classes with 'extends' and 'implements'.
+# ==============================================================================
+Given javascript (class with extends and with implements):
+  class Child extends Parent implements CustomInterfaceName {}
+
+  export class Child extends Parent implements CustomInterfaceName {}
+
+Do (trigger doge):
+  \<C-d>
+  :8\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @extends and @implements tags):
+  /**
+   * TODO
+   * @extends Parent
+   * @implements CustomInterfaceName
+   */
+  class Child extends Parent implements CustomInterfaceName {}
+
+  /**
+   * TODO
+   * @extends Parent
+   * @implements CustomInterfaceName
+   */
+  export class Child extends Parent implements CustomInterfaceName {}

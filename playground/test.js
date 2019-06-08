@@ -27,6 +27,27 @@
 })(window, document, jQuery);
 
 /**
+ * @function myFunc
+ * @description TODO
+ * @param {*} $arg1 - TODO
+ * @param {*} arg2 - TODO
+ * @param {*} arg3 - TODO
+ * @param {*} arg4 - TODO
+ */
+var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+/**
+ * @function myFunc
+ * @description TODO
+ * @param {string} $arg1 - TODO
+ * @param {string[]} arg2 - TODO
+ * @param {number} arg3 - TODO
+ * @param {float} arg4 - TODO
+ * @return {string[]} TODO
+ */
+var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+/**
  * @description TODO
  * @param {*} arg1 - TODO
  */
@@ -391,6 +412,12 @@ class Child implements CustomInterfaceName {}
 
 /**
  * TODO
+ * @implements CustomInterfaceName
+ */
+export class Child implements CustomInterfaceName {}
+
+/**
+ * TODO
  * @extends Parent
  * @implements CustomInterfaceName
  */
@@ -402,6 +429,17 @@ class Child extends Parent implements CustomInterfaceName {}
  * @implements CustomInterfaceName
  */
 export class Child extends Parent implements CustomInterfaceName {}
+
+/**
+ * @function myFunc
+ * @description TODO
+ * @param {string} $arg1 - TODO
+ * @param {string[]} arg2 - TODO
+ * @param {number} arg3 - TODO
+ * @param {float} arg4 - TODO
+ * @return {string[]} TODO
+ */
+const myFunc = ($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
 
 /**
  * TODO

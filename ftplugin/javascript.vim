@@ -40,42 +40,6 @@ call add(b:doge_patterns, {
 \  },
 \})
 
-" ==============================================================================
-" Matches fat-arrow functions.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   ((window, document, $) => {
-"     // ...
-"   })(window, document, jQuery);
-"
-"   (arg1: array = []) => (arg2: string) => { console.log(5); }
-"
-"   const user = (arg1 = 'default') => (subarg1, subarg2 = 'default') => 5;
-"
-"   (arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
-call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*=>\s*[{(]',
-\  'match_group_names': ['funcName', 'parameters', 'returnType'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @function {funcName|}',
-\      ' * @description TODO',
-\      ' * {parameters}',
-\      '! * @return {{returnType}} TODO',
-\      ' */',
-\    ],
-\  },
-\})
-
 ""
 " ==============================================================================
 " Matches regular and typed functions with default parameters.
@@ -104,6 +68,44 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': [
 \      '/**',
+\      ' * @description TODO',
+\      ' * {parameters}',
+\      '! * @return {{returnType}} TODO',
+\      ' */',
+\    ],
+\  },
+\})
+
+" ==============================================================================
+" Matches fat-arrow functions.
+" ==============================================================================
+"
+" Matches the following scenarios:
+"
+"   ((window, document, $) => {
+"     // ...
+"   })(window, document, jQuery);
+"
+"   (arg1: array = []) => (arg2: string) => { console.log(5); }
+"
+"   const user = (arg1 = 'default') => (subarg1, subarg2 = 'default') => 5;
+"
+"   (arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
+"
+"   var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+call add(b:doge_patterns, {
+\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\%(function\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'parameters': {
+\    'match': s:parameters_match_pattern,
+\    'match_group_names': ['name', 'type'],
+\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'template': [
+\      '/**',
+\      ' * @function {funcName|}',
 \      ' * @description TODO',
 \      ' * {parameters}',
 \      '! * @return {{returnType}} TODO',

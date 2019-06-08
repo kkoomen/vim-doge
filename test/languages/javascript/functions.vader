@@ -1,0 +1,125 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given javascript (function without parameters):
+  function myFunc() {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description tags):
+  /**
+   * @description TODO
+   */
+  function myFunc() {}
+
+# ==============================================================================
+# Functions with parameters without type hints.
+# ==============================================================================
+Given javascript (function with parameters without type hints):
+  function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description and @param tags):
+  /**
+   * @description TODO
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+# ==============================================================================
+# Functions with parameters with type hints.
+# ==============================================================================
+Given javascript (function with parameters with type hints):
+  function myFunc($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description, @param and @return tags):
+  /**
+   * @description TODO
+   * @param {string} $arg1 - TODO
+   * @param {string[]} arg2 - TODO
+   * @param {number} arg3 - TODO
+   * @param {float} arg4 - TODO
+   * @return {string[]} TODO
+   */
+  function myFunc($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+# ==============================================================================
+# Functions as variables with parameters without type hints.
+# ==============================================================================
+Given javascript (function as variable with parameters without type hints):
+  var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @function, @description and @param tags):
+  /**
+   * @function myFunc
+   * @description TODO
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+# ==============================================================================
+# Functions as variables with parameters with type hints.
+# ==============================================================================
+Given javascript (function as variable with parameters with type hints):
+  var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @function, @description and @param tags):
+  /**
+   * @function myFunc
+   * @description TODO
+   * @param {string} $arg1 - TODO
+   * @param {string[]} arg2 - TODO
+   * @param {number} arg3 - TODO
+   * @param {float} arg4 - TODO
+   * @return {string[]} TODO
+   */
+  var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+# ==============================================================================
+# Functions that should be ignored by DoGe.
+# ==============================================================================
+Given javascript (function that should be ignored):
+  var myObj = {
+    /* This function should be ignored by DoGe */
+    myFunc: function() {
+      /* This function should be ignored by DoGe */
+      return function() {
+        //
+      }
+    },
+  };
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+  :5\<CR>
+  \<C-d>
+
+Expect javascript (no changes):
+  var myObj = {
+    /* This function should be ignored by DoGe */
+    myFunc: function() {
+      /* This function should be ignored by DoGe */
+      return function() {
+        //
+      }
+    },
+  };

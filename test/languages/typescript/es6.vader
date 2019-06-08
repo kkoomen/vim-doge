@@ -1,0 +1,136 @@
+# ==============================================================================
+# Fat-arrow functions without parameters.
+# ==============================================================================
+Given typescript (fat-arrow function without parameters):
+  () => {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect typescript (generated comment with @function and @description tags):
+  /**
+   * @function
+   * @description TODO
+   */
+  () => {}
+
+# ==============================================================================
+# Fat-arrow functions with parameters without type hints.
+# ==============================================================================
+Given typescript (fat-arrow function with parameters without type hints using 'const' and 'let' declarations):
+  const myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+
+  let myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+
+Do (trigger doge):
+  \<C-d>
+  :11\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with @function, @description and @param tags):
+  /**
+   * @function myFunc
+   * @description TODO
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  const myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+
+  /**
+   * @function myFunc
+   * @description TODO
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  let myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+
+# ==============================================================================
+# Fat-arrow functions with parameters with type hints.
+# ==============================================================================
+Given typescript (fat-arrow function with parameters with type hints):
+  const myFunc = ($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect typescript (generated comment with @function, @description, @param and @return tags):
+  /**
+   * @function myFunc
+   * @description TODO
+   * @param {string} $arg1 - TODO
+   * @param {string[]} arg2 - TODO
+   * @param {number} arg3 - TODO
+   * @param {float} arg4 - TODO
+   * @return {string[]} TODO
+   */
+  const myFunc = ($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+
+# ==============================================================================
+# Fat-arrow functions with destructuring.
+# ==============================================================================
+Given typescript (fat-arrow functions with destructuring):
+  class Test {
+    myMethod = ({ b: number }) => {
+      return this.add(b);
+    }
+
+    myMethod({ b: number }): number {
+      return this.add(b);
+    }
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :11\<CR>
+  \<C-d>
+
+Expect typescript (generated comments with @function, @description, @param and @return tags):
+  class Test {
+    /**
+     * @function myMethod
+     * @description TODO
+     * @param {number} b - TODO
+     */
+    myMethod = ({ b: number }) => {
+      return this.add(b);
+    }
+
+    /**
+     * @description TODO
+     * @param {number} b - TODO
+     * @return {number} TODO
+     */
+    myMethod({ b: number }): number {
+      return this.add(b);
+    }
+  }
+
+# ==============================================================================
+# Fat-arrow functions with a specific scope.
+# ==============================================================================
+Given typescript (fat-arrow function with a specific scope):
+  class Test {
+    myMethod(public b: number) {
+      return this.add(b);
+    }
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with @description and @param tags):
+  class Test {
+    /**
+     * @description TODO
+     * @param {number} b - TODO
+     */
+    myMethod(public b: number) {
+      return this.add(b);
+    }
+  }
