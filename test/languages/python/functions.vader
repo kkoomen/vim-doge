@@ -1,0 +1,94 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given python (function without parameters):
+  def myFunc():
+    pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (no changes):
+  def myFunc():
+    """
+    TODO
+    
+    """
+    pass
+
+# ==============================================================================
+# Functions without type hints.
+# ==============================================================================
+Given python (function without type hints):
+  def myFunc(param1 = 'string', param2 = 5, param3, param4):
+    pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  def myFunc(param1 = 'string', param2 = 5, param3, param4):
+    """
+    TODO
+    
+    :param param1 any: TODO
+    :param param2 any: TODO
+    :param param3 any: TODO
+    :param param4 any: TODO
+    """
+    pass
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given python (function with parameters):
+  def myFunc(param1: str = 'string', param2: int = 5):
+      pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  def myFunc(param1: str = 'string', param2: int = 5):
+      """
+      TODO
+      
+      :param param1 str: TODO
+      :param param2 int: TODO
+      """
+      pass
+
+# ==============================================================================
+# Functions with advanced type hint parameters.
+# ==============================================================================
+Given python (functions with advanced type hint parameters):
+  def myFunc(param1: Callable[[int], None] = False, param2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+      pass
+
+  def myFunc(param1: Sequence[T]) -> Generator[int, float, str]:
+      pass
+
+Do (trigger doge):
+  \<C-d>
+  :11\<CR>
+  \<C-d>
+
+Expect python (generated comments with :param tags):
+  def myFunc(param1: Callable[[int], None] = False, param2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+      """
+      TODO
+      
+      :param param1 Callable[[int], None]: TODO
+      :param param2 Callable[[int, Exception], None]: TODO
+      :rtype Sequence[T]: TODO
+      """
+      pass
+
+  def myFunc(param1: Sequence[T]) -> Generator[int, float, str]:
+      """
+      TODO
+      
+      :param param1 Sequence[T]: TODO
+      :rtype Generator[int, float, str]: TODO
+      """
+      pass

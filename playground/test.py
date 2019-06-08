@@ -7,6 +7,13 @@ This file contains test scenarios and their expected results. You should be able
 to generate the examples below.
 """
 
+def myFunc():
+    """
+    TODO
+
+    """
+    pass
+
 def myFunc(param1: str = 'string', param2: int = 5):
     """
     TODO

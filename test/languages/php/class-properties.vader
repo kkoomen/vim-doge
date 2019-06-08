@@ -3,7 +3,7 @@
 #
 # Should resolve its corresponding type defined in the constructor.
 # ==============================================================================
-Given php (class property above the constructor should should resolve its corresponding type via the constructor):
+Given php (class properties above and below the constructor should should resolve its corresponding type via the constructor):
   use Symfony\Component\HttpFoundation\Response;
 
   class Test {
@@ -12,13 +12,13 @@ Given php (class property above the constructor should should resolve its corres
 
     protected $migration;
 
-    private $response;
-
     public function __construct(string $name, Migration $migration, Response $response) {
       $this->migrationName = $name;
       $this->migration = $migration;
       $this->response = $response;
     }
+
+    private $response;
 
   }
 
@@ -29,7 +29,7 @@ Do (trigger doge):
   \<C-d>
   :15\<CR>
   \<C-d>
-  :20\<CR>
+  :28\<CR>
   \<C-d>
 
 Expect php (generated comments at all properties and constructor function):
@@ -48,11 +48,6 @@ Expect php (generated comments at all properties and constructor function):
     protected $migration;
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Response
-     */
-    private $response;
-
-    /**
      * TODO
      *
      * @param string $name TODO
@@ -64,5 +59,10 @@ Expect php (generated comments at all properties and constructor function):
       $this->migration = $migration;
       $this->response = $response;
     }
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Response
+     */
+    private $response;
 
   }

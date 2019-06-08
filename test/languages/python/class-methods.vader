@@ -1,0 +1,75 @@
+# ==============================================================================
+# Class method __init__().
+# ==============================================================================
+Given python (class method __init__() with parameters):
+  class MyClass(object):
+
+      def __init__(self: MyClass):
+          pass
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  class MyClass(object):
+
+      def __init__(self: MyClass):
+          """
+          TODO
+          
+          :param self MyClass: TODO
+          """
+          pass
+# ==============================================================================
+# Class method with advanced type hints.
+# ==============================================================================
+Given python (class method with advanced type hints):
+  class MyClass(object):
+
+      def myMethod(self: MyClass, param1: Sequence[T]) -> Generator[int, float, str]:
+          pass
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  class MyClass(object):
+
+      def myMethod(self: MyClass, param1: Sequence[T]) -> Generator[int, float, str]:
+          """
+          TODO
+          
+          :param self MyClass: TODO
+          :param param1 Sequence[T]: TODO
+          :rtype Generator[int, float, str]: TODO
+          """
+          pass
+
+# ==============================================================================
+# Class method parameters with *args and **kwargs.
+# ==============================================================================
+Given python (class method parameters with *args and **kwargs):
+  class MyClass(object):
+
+      def call(self, *args: str, **kwargs: str) -> str:
+          pass
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  class MyClass(object):
+
+      def call(self, *args: str, **kwargs: str) -> str:
+          """
+          TODO
+          
+          :param self any: TODO
+          :param args str: TODO
+          :param kwargs str: TODO
+          :rtype str: TODO
+          """
+          pass
