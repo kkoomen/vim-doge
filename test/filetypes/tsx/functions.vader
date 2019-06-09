@@ -7,7 +7,7 @@ Given tsx (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect tsx (generated comment with @description tags):
+Expect tsx (generated comment with @description tag):
   /**
    * @description TODO
    */

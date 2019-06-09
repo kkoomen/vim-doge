@@ -7,7 +7,7 @@ Given jsx (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect jsx (generated comment with @description tags):
+Expect jsx (generated comment with @description tag):
   /**
    * @description TODO
    */

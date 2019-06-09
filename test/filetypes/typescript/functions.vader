@@ -7,7 +7,7 @@ Given typescript (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect typescript (generated comment with @description tags):
+Expect typescript (generated comment with @description tag):
   /**
    * @description TODO
    */
