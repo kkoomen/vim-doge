@@ -38,7 +38,7 @@ class Test {
    * @param int type TODO
    * @return List TODO
    */
-  private List<ElementDto> createSortedList(Map<Integer, ElementDto> map, int type) {
+  private List<Element> createSortedList(Map<Integer, ElementDto> map, int type) {
     //
   }
 
@@ -88,3 +88,18 @@ void MyParameterizedFunction(String param1, int param2, Boolean ... params) {}
  * @return void TODO
  */
 void MyParameterizedFunction(String param1, int param2, Boolean ...params) {}
+
+/**
+ * TODO
+ * @return List TODO
+ */
+List<Element> createSortedList() {}
+
+/**
+ * TODO
+ * @param IndexSettings indexSettings TODO
+ * @param Environment env TODO
+ * @param String name TODO
+ * @param Settings settings TODO
+ */
+public UkrainianAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) {}

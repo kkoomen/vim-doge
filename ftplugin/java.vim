@@ -9,7 +9,7 @@ set cpoptions&vim
 let b:doge_patterns = []
 
 " ==============================================================================
-" Matches regular function expressions and class methods.
+" Matches class methods.
 " ==============================================================================
 "
 " Matches the following scenarios:
@@ -22,7 +22,7 @@ let b:doge_patterns = []
 "
 "   void MyParameterizedFunction(String param1, int param2, Boolean ...params) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(public\|private\|protected\)\?\s*\%(static\)\?\s*\%(final\)\?\s*\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]*>\)\?\)\s*\([[:alnum:]_]\+\)\s*(\(.\{-}\))\s*{',
+\  'match': '\m^\%(\%(public\|private\|protected\)\s*\)\?\%(static\s*\)\?\%(final\s*\)\?\%(\([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\([[:alnum:]_]\+\)(\(.\{-}\))\s*{',
 \  'match_group_names': ['returnType', 'funcName', 'parameters'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
@@ -35,7 +35,7 @@ call add(b:doge_patterns, {
 \      '/**',
 \      ' * TODO',
 \      ' * {parameters}',
-\      '! * @return {returnType} TODO',
+\      '! * @return {returnType|void} TODO',
 \      ' */',
 \    ],
 \  },
