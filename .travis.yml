@@ -5,6 +5,7 @@ services:
 language: generic
 env:
   - OPTIONS=--vim-81-only
+  - OPTIONS=--neovim-03-only
   - OPTIONS=--linter-only
 script: |
   ./run-tests -v $OPTIONS

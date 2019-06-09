@@ -10,7 +10,7 @@ let b:doge_patterns = []
 
 " Matches the following pattern:
 "   <param-name>: <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\(\%(val\s+\)\?[[:alnum:]_]\+\)\%(\s*:\s*\([^,(\)=]\+\)\)\?\%(\s*=\s*[^,(\)]\+\)\?'
+let s:parameters_match_pattern = '\m\%(\%(val\s\+\)\?\([[:alnum:]_]\+\)\)\%(\s*:\s*\([^,(\)=]\+\)\)\?\%(\s*=\s*[^,(\)]\+\)\?'
 
 " ==============================================================================
 " Functions

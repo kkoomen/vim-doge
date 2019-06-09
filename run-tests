@@ -29,7 +29,7 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=17b41b268a58
+current_docker_image_id=5a3156d58b1d
 
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
@@ -37,6 +37,7 @@ export DOGE_DOCKER_IMAGE
 verbose_flag=''
 verbose=0
 run_vim_81_tests=1
+run_neovim_03_tests=1
 run_linter=1
 
 while [ $# -ne 0 ]; do
@@ -48,11 +49,33 @@ while [ $# -ne 0 ]; do
   ;;
   --vim-81-only)
     run_linter=0
+    run_neovim_03_tests=0
+    shift
+  ;;
+  --neovim-03-only)
+    run_linter=0
+    run_vim_81_tests=0
     shift
   ;;
   --linter-only)
     run_vim_81_tests=0
+    run_neovim_03_tests=0
     shift
+  ;;
+  --help)
+      echo 'Usage: ./run-tests [OPTION]... [FILE]...'
+      echo
+      echo 'Filenames can be given as arguments to run a subset of tests.'
+      echo 'For example: ./run-tests test/filetypes/python/functions.vader test/filetypes/java/class-methods.vader'
+      echo
+      echo 'Options:'
+      echo '  -v                Enable verbose output'
+      echo '  --vim-81-only     Run tests only for Vim 8.1'
+      echo '  --neovim-03-only  Run tests only for NeoVim 0.3'
+      echo '  --linters-only    Run only Vint'
+      echo '  --help            Show this help text'
+      echo '  --                Stop parsing options after this'
+      exit 0
   ;;
   --)
       shift
@@ -113,8 +136,9 @@ trap cancel_tests INT TERM
 
 file_number=0
 pid_list=''
-for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^vim'); do
-  if ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ); then
+for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
+   if ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ) \
+   || ( [[ $vim =~ ^neovim-v0.3 ]] && ((run_neovim_03_tests)) ); then
       echo "Starting Vim: $vim..."
       file_number=$((file_number+1))
       scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
