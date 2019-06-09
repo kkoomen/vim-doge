@@ -32,7 +32,6 @@ descriptions and go on coding!
   - [x] NodeJS
 - [x] Typescript ([JSDoc](https://jsdoc.app))
 - [x] Coffeescript ([JSDoc](https://jsdoc.app))
-  - [x] FlowJS
 - [x] Lua ([LDoc](https://github.com/stevedonovan/LDoc))
 - [x] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
 - [x] Ruby ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))
