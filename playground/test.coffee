@@ -2,15 +2,46 @@
 # able to generate the examples below.
 
 ###
-@function square
 @description TODO
-@param {*} x - TODO
+@function myFunc
 ###
-square = (x) -> x * x
+myFunc = () -> x * x
 
 ###
-@function square2
 @description TODO
+@function myFunc
 @param {*} x - TODO
 ###
-square2 = (x) -> x * x
+myFunc = (x) -> x * x
+
+###
+@description TODO
+@function myFunc
+@param {*} x - TODO
+###
+myFunc = (x) => x * x
+
+###
+@description TODO
+@function myFunc
+@param {*} arg1 - TODO
+@param {*} arg2 - TODO
+@param {*} arg3 - TODO
+###
+myFunc = (arg1, arg2, arg3) -> x * x
+
+###
+@description TODO
+@function myFunc
+@param {*} $arg1 - TODO
+@param {*} $arg2 - TODO
+@param {*} $arg3 - TODO
+###
+myFunc = ($arg1, $arg2, $arg3) => x * x
+
+###
+@description TODO
+@function String#dasherize
+###
+String::dasherize = ->
+  this.replace /_/g, "-"

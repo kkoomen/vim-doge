@@ -1,0 +1,71 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given coffee (function without parameters):
+  myFunc = () -> x * x
+
+Do (trigger doge):
+  \<C-d>
+
+Expect coffee (generated comment with @description and @function tags):
+  ###
+  @description TODO
+  @function myFunc
+  ###
+  myFunc = () -> x * x
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given coffee (function with parameters):
+  myFunc = (arg1, arg2, arg3) -> x * x
+
+Do (trigger doge):
+  \<C-d>
+
+Expect coffee (generated comment with @description, @function and @param tags):
+  ###
+  @description TODO
+  @function myFunc
+  @param {*} arg1 - TODO
+  @param {*} arg2 - TODO
+  @param {*} arg3 - TODO
+  ###
+  myFunc = (arg1, arg2, arg3) -> x * x
+
+# ==============================================================================
+# Fat-arrow functions with parameters.
+# ==============================================================================
+Given coffee (function with parameters):
+  myFunc = (arg1, arg2, arg3) => x * x
+
+Do (trigger doge):
+  \<C-d>
+
+Expect coffee (generated comment with @description, @function and @param tags):
+  ###
+  @description TODO
+  @function myFunc
+  @param {*} arg1 - TODO
+  @param {*} arg2 - TODO
+  @param {*} arg3 - TODO
+  ###
+  myFunc = (arg1, arg2, arg3) => x * x
+
+# ==============================================================================
+# Prototype functions.
+# ==============================================================================
+Given coffee (prototype function):
+  String::dasherize = ->
+    this.replace /_/g, "-"
+
+Do (trigger doge):
+  \<C-d>
+
+Expect coffee (generated comment with @description and @function tags):
+  ###
+  @description TODO
+  @function String#dasherize
+  ###
+  String::dasherize = ->
+    this.replace /_/g, "-"
