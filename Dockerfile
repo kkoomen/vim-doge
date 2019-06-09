@@ -1,6 +1,8 @@
 FROM tweekmonster/vim-testbed:latest
 
-RUN install_vim -tag v8.1.0519 -build
+RUN install_vim \
+      -tag v8.1.1511 -build \
+      -tag neovim:v0.3.2 -build
 
 ENV PACKAGES="bash git python py-pip"
 
