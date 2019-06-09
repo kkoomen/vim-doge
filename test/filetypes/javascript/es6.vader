@@ -188,3 +188,23 @@ Expect javascript (generated comment with @description, @function, @param and @r
    * @return {Foo|Bar} TODO
    */
   const myFunc = ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+
+# ==============================================================================
+# Async fat-arrow functions with parameters with multiple type hints.
+# ==============================================================================
+Given javascript (async fat-arrow function with parameters with multiple type hints):
+  const myFunc = async ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description, @function, @param and @return tags):
+  /**
+   * @description TODO
+   * @async
+   * @function myFunc
+   * @param {string} $arg1 - TODO
+   * @param {Foo|Bar|Baz} arg2 - TODO
+   * @return {Foo|Bar} TODO
+   */
+  const myFunc = async ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};

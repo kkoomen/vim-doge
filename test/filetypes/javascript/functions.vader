@@ -176,3 +176,62 @@ Expect javascript (generated comment with @description, @param and @return tags)
    * @return {Foo|Bar} TODO
    */
   function myFunc($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) {}
+
+# ==============================================================================
+# Async functions with parameters without typehints.
+# ==============================================================================
+Given javascript (async function with parameters without type hints):
+  async function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description, @async, and @param tags):
+  /**
+   * @description TODO
+   * @async
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  async function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+# ==============================================================================
+# Generator functions with parameters without typehints.
+# ==============================================================================
+Given javascript (generator function with parameters without type hints):
+  function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description and @param tags):
+  /**
+   * @description TODO
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+# ==============================================================================
+# Async generator functions with parameters without typehints.
+# ==============================================================================
+Given javascript (async generator function with parameters without type hints):
+  async function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description, @async, and @param tags):
+  /**
+   * @description TODO
+   * @async
+   * @param {*} $arg1 - TODO
+   * @param {*} arg2 - TODO
+   * @param {*} arg3 - TODO
+   * @param {*} arg4 - TODO
+   */
+  async function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}

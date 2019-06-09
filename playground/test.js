@@ -56,6 +56,60 @@ Person.prototype.greet = function () {}
 
 /**
  * @description TODO
+ * @function perfectSquares
+ */
+perfectSquares = function*() {
+  var num;
+  num = 0;
+  while (true) {
+    num += 1;
+    yield num * num;
+  }
+};
+
+/**
+ * @description TODO
+ * @function perfectSquares
+ */
+perfectSquares = async function*() {
+  var num;
+  num = 0;
+  while (true) {
+    num += 1;
+    yield num * num;
+  }
+};
+
+/**
+ * @description TODO
+ * @async
+ * @function myFunc
+ * @param {*} $arg1 - TODO
+ * @param {*} arg2 - TODO
+ * @param {*} arg3 - TODO
+ * @param {*} arg4 - TODO
+ */
+var myFunc = async function*($arg1 = 'value', arg2 = [], arg3, arg4) {}
+
+/**
+ * @description TODO
+ * @async
+ * @function myFunc
+ * @param {*} $arg1 - TODO
+ * @param {*} arg2 - TODO
+ * @param {*} arg3 - TODO
+ * @param {*} arg4 - TODO
+ */
+var myFunc = async ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+
+/**
+ * @description TODO
+ * @param {string} $arg1 - TODO
+ * @param {Foo|Bar|Baz} arg2 - TODO
+ * @return {Foo|Bar} TODO
+ */
+/**
+ * @description TODO
  * @param {string} $arg1 - TODO
  * @param {Foo|Bar|Baz} arg2 - TODO
  * @return {Foo|Bar} TODO

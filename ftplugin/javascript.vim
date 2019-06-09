@@ -57,8 +57,8 @@ call add(b:doge_patterns, {
 "
 "   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s\+\)\?\%(function\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'match': '\m^\%(export\s\+\)\?\(async\s*\)\?\%(function\*\?\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match_group_names': ['async', 'funcName', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -69,6 +69,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * @description TODO',
+\      '! * @{async}',
 \      ' * {parameters}',
 \      '! * @return {{returnType}} TODO',
 \      ' */',
@@ -85,9 +86,11 @@ call add(b:doge_patterns, {
 "   Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()) => {};
 "
 "   Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()) {};
+"
+"   Person.prototype.greet = function*(arg1: string = 'default', arg2: Immutable.List = Immutable.List()) {};
 call add(b:doge_patterns, {
-\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\%(function\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'match_group_names': ['className', 'funcName', 'parameters', 'returnType'],
+\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s*\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'match_group_names': ['className', 'funcName', 'async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -98,6 +101,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * @description TODO',
+\      '! * @{async}',
 \      ' * @function {className}#{funcName}',
 \      ' * {parameters}',
 \      '! * @return {{returnType}} TODO',
@@ -123,9 +127,15 @@ call add(b:doge_patterns, {
 "   (arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
 "
 "   var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+"
+"   var myFunc = function*($arg1 = 'value', arg2 = [], arg3, arg4) {}
+"
+"   var myFunc = async function*($arg1 = 'value', arg2 = [], arg3, arg4) {}
+"
+"   var myFunc = async ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\%(function\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\(async\s*\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -136,6 +146,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * @description TODO',
+\      '! * @{async}',
 \      ' * @function {funcName|}',
 \      ' * {parameters}',
 \      '! * @return {{returnType}} TODO',
