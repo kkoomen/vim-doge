@@ -1,7 +1,7 @@
 # ==============================================================================
 # Classes without 'extends' or 'implements'.
 # ==============================================================================
-Given typescript.tsx (class without extends or implements):
+Given tsx (class without extends or implements):
   class Child {}
 
   export class Child {}
@@ -11,21 +11,21 @@ Do (trigger doge):
   :6\<CR>
   \<C-d>
 
-Expect typescript.tsx (generated comment with nothing but the text 'TODO'):
+Expect tsx (generated comment with nothing but the text 'TODO'):
   /**
-   * TODO
+   * @description TODO
    */
   class Child {}
 
   /**
-   * TODO
+   * @description TODO
    */
   export class Child {}
 
 # ==============================================================================
 # Classes with 'extends' without 'implements'.
 # ==============================================================================
-Given typescript.tsx (class with extends without implements):
+Given tsx (class with extends without implements):
   class Child extends Parent {}
 
   export class Child extends Parent {}
@@ -35,15 +35,15 @@ Do (trigger doge):
   :7\<CR>
   \<C-d>
 
-Expect typescript.tsx (generated comment with @extends):
+Expect tsx (generated comment with @extends):
   /**
-   * TODO
+   * @description TODO
    * @extends Parent
    */
   class Child extends Parent {}
 
   /**
-   * TODO
+   * @description TODO
    * @extends Parent
    */
   export class Child extends Parent {}
@@ -51,7 +51,7 @@ Expect typescript.tsx (generated comment with @extends):
 # ==============================================================================
 # Classes without 'extends' with 'implements'.
 # ==============================================================================
-Given typescript.tsx (class without extends with implements):
+Given tsx (class without extends with implements):
   class Child implements CustomInterfaceName {}
 
   export class Child implements CustomInterfaceName {}
@@ -61,15 +61,15 @@ Do (trigger doge):
   :7\<CR>
   \<C-d>
 
-Expect typescript.tsx (generated comment with @implements tag):
+Expect tsx (generated comment with @implements tag):
   /**
-   * TODO
+   * @description TODO
    * @implements CustomInterfaceName
    */
   class Child implements CustomInterfaceName {}
 
   /**
-   * TODO
+   * @description TODO
    * @implements CustomInterfaceName
    */
   export class Child implements CustomInterfaceName {}
@@ -77,7 +77,7 @@ Expect typescript.tsx (generated comment with @implements tag):
 # ==============================================================================
 # Classes with 'extends' and 'implements'.
 # ==============================================================================
-Given typescript.tsx (class with extends and with implements):
+Given tsx (class with extends and with implements):
   class Child extends Parent implements CustomInterfaceName {}
 
   export class Child extends Parent implements CustomInterfaceName {}
@@ -87,16 +87,16 @@ Do (trigger doge):
   :8\<CR>
   \<C-d>
 
-Expect typescript.tsx (generated comment with @extends and @implements tags):
+Expect tsx (generated comment with @extends and @implements tags):
   /**
-   * TODO
+   * @description TODO
    * @extends Parent
    * @implements CustomInterfaceName
    */
   class Child extends Parent implements CustomInterfaceName {}
 
   /**
-   * TODO
+   * @description TODO
    * @extends Parent
    * @implements CustomInterfaceName
    */

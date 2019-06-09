@@ -34,7 +34,7 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': [
 \      '/**',
-\      ' * TODO',
+\      ' * @description TODO',
 \      '! * @extends {parentClassName}',
 \      '! * @implements {interfaceName}',
 \      ' */',
@@ -79,6 +79,36 @@ call add(b:doge_patterns, {
 \})
 
 " ==============================================================================
+" Matches prototype functions.
+" ==============================================================================
+"
+" Matches the following scenarios:
+"
+"   Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()) => {};
+"
+"   Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()) {};
+call add(b:doge_patterns, {
+\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\%(function\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'match_group_names': ['className', 'funcName', 'parameters', 'returnType'],
+\  'parameters': {
+\    'match': s:parameters_match_pattern,
+\    'match_group_names': ['name', 'type'],
+\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'template': [
+\      '/**',
+\      ' * @description TODO',
+\      ' * @function {className}#{funcName}',
+\      ' * {parameters}',
+\      '! * @return {{returnType}} TODO',
+\      ' */',
+\    ],
+\  },
+\})
+
+" ==============================================================================
 " Matches fat-arrow functions.
 " ==============================================================================
 "
@@ -107,8 +137,8 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': [
 \      '/**',
-\      ' * @function {funcName|}',
 \      ' * @description TODO',
+\      ' * @function {funcName|}',
 \      ' * {parameters}',
 \      '! * @return {{returnType}} TODO',
 \      ' */',

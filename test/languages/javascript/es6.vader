@@ -7,10 +7,10 @@ Given javascript (fat-arrow function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function and @description tags):
+Expect javascript (generated comment with @description @function tags):
   /**
-   * @function
    * @description TODO
+   * @function
    */
   () => {}
 
@@ -27,10 +27,10 @@ Do (trigger doge):
   :11\<CR>
   \<C-d>
 
-Expect javascript (generated comment with @function, @description and @param tags):
+Expect javascript (generated comment with @description, @function and @param tags):
   /**
-   * @function myFunc
    * @description TODO
+   * @function myFunc
    * @param {*} $arg1 - TODO
    * @param {*} arg2 - TODO
    * @param {*} arg3 - TODO
@@ -39,8 +39,8 @@ Expect javascript (generated comment with @function, @description and @param tag
   const myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
 
   /**
-   * @function myFunc
    * @description TODO
+   * @function myFunc
    * @param {*} $arg1 - TODO
    * @param {*} arg2 - TODO
    * @param {*} arg3 - TODO
@@ -57,10 +57,10 @@ Given javascript (fat-arrow function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function, @description, @param and @return tags):
+Expect javascript (generated comment with @description, @function, @param and @return tags):
   /**
-   * @function myFunc
    * @description TODO
+   * @function myFunc
    * @param {string} $arg1 - TODO
    * @param {string[]} arg2 - TODO
    * @param {number} arg3 - TODO
@@ -89,11 +89,11 @@ Do (trigger doge):
   :11\<CR>
   \<C-d>
 
-Expect javascript (generated comments with @function, @description, @param and @return tags):
+Expect javascript (generated comments with @description, @function, @param and @return tags):
   class Test {
     /**
-     * @function myMethod
      * @description TODO
+     * @function myMethod
      * @param {number} b - TODO
      */
     myMethod = ({ b: number }) => {
@@ -134,3 +134,57 @@ Expect javascript (generated comment with @description and @param tags):
       return this.add(b);
     }
   }
+
+# ==============================================================================
+# Prototype fat-arrow functions with parameters with type hints.
+# ==============================================================================
+Given javascript (prototype fat-arrow function with parameters with type hints):
+  Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] => {};
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description, @function, @param and @return tags):
+  /**
+   * @description TODO
+   * @function Person#greet
+   * @param {string} arg1 - TODO
+   * @param {Immutable.List} arg2 - TODO
+   * @return {string[]} TODO
+   */
+  Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] => {};
+
+# ==============================================================================
+# Prototype fat-arrow functions with parameters without type hints.
+# ==============================================================================
+Given javascript (prototype fat-arrow function without parameters without type hints):
+  Person.prototype.greet = () => {};
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description and @function tags):
+  /**
+   * @description TODO
+   * @function Person#greet
+   */
+  Person.prototype.greet = () => {};
+
+# ==============================================================================
+# Fat-arrow functions with parameters with multiple type hints.
+# ==============================================================================
+Given javascript (fat-arrow function with parameters with multiple type hints):
+  const myFunc = ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with @description, @function, @param and @return tags):
+  /**
+   * @description TODO
+   * @function myFunc
+   * @param {string} $arg1 - TODO
+   * @param {Foo|Bar|Baz} arg2 - TODO
+   * @return {Foo|Bar} TODO
+   */
+  const myFunc = ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
