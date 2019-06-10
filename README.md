@@ -17,9 +17,9 @@ yet no one has time to write it in a good and proper way or some might not even
 like to write it.
 
 DoGe is a [Do]cumentation [Ge]nerator which will generate instant proper
-documentation based on the function declaration. You can simply put your cursor
-on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), add brief
-descriptions and go on coding!
+documentation based on the certain expressions (mainly functions). You can
+simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
+<kbd>d</kbd>), add brief descriptions and go on coding!
 
 > Any fool can write code that a computer can understand. Good programmers write
 > code that humans can understand. -- Martin Fowler, 1999
