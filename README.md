@@ -1,4 +1,6 @@
-<h1 align="center">DoGe</h1>
+<p align="center">
+  <img src="./banner.jpg" alt="DoGe" />
+</p>
 <p align="center">
   <a href="https://travis-ci.com/kkoomen/doge">
     <img src="https://travis-ci.com/kkoomen/doge.svg?branch=master" alt="Travic CI Build Status" />
