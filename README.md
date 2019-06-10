@@ -74,7 +74,7 @@ Using plug:
 
 # Configuration
 
-Run `:help doge-config` to get the help page for all the possible configuration.
+<!-- Run `:help doge-config` to get the help page for all the possible configuration. -->
 
 ### `g:doge_mapping`
 
@@ -91,7 +91,9 @@ request.
 ## Linting
 
 Your pull request should follow the rules of the `vim-vint` linter which is a
-must to keep your code clean and prevent mistakes being made.
+must to keep the code clean and prevent mistakes being made. Each PR will
+automatically run tests for code quality using Vint. You don't have to use Vint
+locally, but it will help you to fix any errors before submitting a PR.
 
 - `pip3 install vim-vint`
 
@@ -109,7 +111,8 @@ let g:syntastic_vim_checkers = ['vint']
 ## Documentation
 
 Every function, mapping or configurable option should contain documentation. The
-documentation in the `doc/` should be generated using [vimdoc](https://github.com/google/vimdoc).
+documentation in the `doc/` should be generated using
+[vimdoc](https://github.com/google/vimdoc).
 
 ## Help
 
