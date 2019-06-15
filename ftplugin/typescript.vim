@@ -60,7 +60,7 @@ call add(b:doge_patterns, {
 "
 "   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s\+\)\?\(async\s*\)\?\%(function\*\?\s*\)\?\([[:alnum:]_$]\+\)\?\%(<[[:alnum:][:space:]_,]*>\)\?(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match': '\m^\%(export\s\+\)\?\(async\s*\)\?\%(function\*\?\s*\)\?\([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
 \  'match_group_names': ['async', 'funcName', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,

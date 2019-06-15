@@ -54,7 +54,7 @@ call add(b:doge_patterns, {
 "
 "   def move(dx: Int, dy: Int): Unit = {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(override\s\+\)\?\%(\%(public\|private\|protected\)\s\+\)\?def\s\+\([[:alnum:]_]\+\)\%(\[.*\]\)\?\%(\s*=\s*\)\?(\(.\{-}\)):',
+\  'match': '\m^\%(\%(public\|private\|protected\|override\)\s\+\)*def\s\+\([[:alnum:]_]\+\)\%(\[.*\]\)\?\%(\s*=\s*\)\?(\(.\{-}\)):',
 \  'match_group_names': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -85,7 +85,7 @@ call add(b:doge_patterns, {
 "
 "   protected case class LoremIpsum(name: String, age: Int) extends B with C with D {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(package\s\+\)\?\%(\%(public\|private\|protected\)\s\+\)\?\%(case\s\+\)\?class\s\+\([[:alnum:]_]\+\)\%(\[.*\]\)\?(\(.\{-}\))\([^{]\+{\)\?',
+\  'match': '\m^\%(\%(public\|private\|protected\|package\|case\)\s\+\)*class\s\+\([[:alnum:]_]\+\)\%(\[.*\]\)\?(\(.\{-}\))\([^{]\+{\)\?',
 \  'match_group_names': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,

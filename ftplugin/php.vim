@@ -23,7 +23,7 @@ let b:doge_patterns = []
 " The {type} will be added by the doge#preprocess#php#tokens() function.
 " See doge#preprocessors#php#tokens().
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|private\|protected\|var\)\s\+\)$\([[:alnum:]_]\+\)',
+\  'match': '\m^\%(\%(public\|private\|protected\|static\|var\|const\)\s\+\)*$\([[:alnum:]_]\+\)',
 \  'match_group_names': ['propertyName'],
 \  'comment': {
 \    'insert': 'above',
@@ -53,7 +53,7 @@ call add(b:doge_patterns, {
 "     $arg5 = NULL
 "   ) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|private\|protected\)\s\+\)\?\%(\%(static\)\s\+\)\?\%(\%(final\)\s\+\)\?function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
+\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
 \  'match_group_names': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
