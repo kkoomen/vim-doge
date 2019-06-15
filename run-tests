@@ -40,6 +40,11 @@ run_vim_81_tests=1
 run_neovim_03_tests=1
 run_linter=1
 
+red='\033[0;31m'
+green='\033[0;32m'
+blue='\033[0;34m'
+nc='\033[0m'
+
 while [ $# -ne 0 ]; do
   case $1 in
   -v)
@@ -173,9 +178,16 @@ for pid in $pid_list; do
 done
 
 if ((failed)); then
-  echo 'Something went wrong!'
+  echo -en "$red"
+  echo '✖ Something went wrong!'
+  if !((verbose)); then
+    echo -en "$blue"
+    echo 'Use -v to show all output'
+  fi
 else
-  echo 'All tests passed!'
+  echo -en "$green"
+  echo '✔ All tests passed!'
 fi
+echo -en "$nc"
 
 exit $failed
