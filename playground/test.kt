@@ -38,52 +38,18 @@ fun printSum(a: Int, b: Int) {
   println("sum of $a and $b is ${a + b}")
 }
 
-/**
- * TODO
- * @param map TODO
- * @param str TODO
- * @return TODO
- */
 fun parseInt(map: MutableMap<String, Any?>, str: String): Int? {}
 
 /**
  * TODO
+ * @param i TODO
+ * @param lst TODO
+ * @param str TODO
  * @param map TODO
  * @param str TODO
  * @return TODO
  */
-fun parseInt(map: MutableMap<String, Any?>, str: String<String, <T>>): Int? {}
-
-/**
- * TODO
- * @param str TODO
- * @param map TODO
- * @return TODO
- */
-fun parseInt(str: String<String, <T>>, map: MutableMap<String, Any?>): Int? {}
-
-/**
- * TODO
- * @param map TODO
- * @param str TODO
- * @return TODO
- */
-fun parseInt(map: MutableMap<String, Any?>, str: String.() -> Unit): Int? {}
-
-/**
- * TODO
- * @param str TODO
- * @param map TODO
- * @return TODO
- */
-fun parseInt(str: String.() -> Unit, map: MutableMap<String, Any?>) {}
-
-/**
- * TODO
- * @param json TODO
- * @return TODO
- */
-inline fun Gson.fromJson(json: JsonElement): T {}
+fun parseInt(i: Boolean = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
 
 /**
  * TODO
@@ -91,6 +57,7 @@ inline fun Gson.fromJson(json: JsonElement): T {}
  * @return TODO
  */
 inline fun <reified T: Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java) {}
+
 
 /**
  * TODO
@@ -182,6 +149,7 @@ private fun foo(list: List<Any?>) {}
 // =============================================================================
 // Extension Functions
 // =============================================================================
+
 /**
  * TODO
  * @param index1 TODO
@@ -206,6 +174,12 @@ fun MutableList<Int>.swap(index1: Int, index2: Int) {}
  */
 fun <T> MutableList.swap(index1: Int, index2: Int) {}
 
+/**
+ * TODO
+ * @param index1 TODO
+ * @param index2 TODO
+ * @return TODO
+ */
 /**
  * TODO
  * @param index1 TODO
@@ -244,6 +218,7 @@ fun Any?.toString(): String {
 // =============================================================================
 // Classes: Implementation by Delegation
 // =============================================================================
+
 /**
  * TODO
  * @param b TODO
@@ -274,6 +249,7 @@ class Delegate {
   }
 }
 
+
 /**
  * TODO
  * @param map TODO
@@ -285,15 +261,23 @@ class MutableUser(val map: MutableMap<String, Any?>) {
 }
 
 class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {
+  /**
+   * TODO
+   * @param thisRef TODO
+   * @param property TODO
+   * @return TODO
+   */
   override fun getValue(thisRef: MyUI, property: KProperty<*>): T { ... }
 }
 
-/**
- * TODO
- * @param id TODO
- * @return TODO
- */
+
 class ResourceLoader<T>(id: ResourceID<T>) {
+  /**
+   * TODO
+   * @param thisRef TODO
+   * @param prop TODO
+   * @return TODO
+   */
   operator fun provideDelegate(
       thisRef: MyUI,
       prop: KProperty<*>
@@ -304,10 +288,21 @@ class ResourceLoader<T>(id: ResourceID<T>) {
 
   }
 
+  /**
+   * TODO
+   * @param thisRef TODO
+   * @param name TODO
+   * @return TODO
+   */
   private fun checkProperty(thisRef: MyUI, name: String) { ... }
 }
 
 class MyUI {
+  /**
+   * TODO
+   * @param id TODO
+   * @return TODO
+   */
   fun <T> bindResource(id: ResourceID<T>): ResourceLoader<T> { ... }
 
   val image by bindResource(ResourceID.image_id)
@@ -319,7 +314,7 @@ class MyUI {
 // Classes: Companion Object Extensions
 // =============================================================================
 class MyClass {
-  companion object { }  // will be called "Companion"
+  companion object { }
 }
 
 /**
@@ -331,6 +326,7 @@ fun MyClass.Companion.foo() { ... }
 // =============================================================================
 // Inline classes
 // =============================================================================
+
 /**
  * TODO
  * @param s TODO
@@ -340,6 +336,10 @@ inline class Name(val s: String) {
   val length: Int
   get() = s.length
 
+  /**
+   * TODO
+   * @return TODO
+   */
   fun greet() {
     println("Hello, $s")
   }
@@ -348,6 +348,7 @@ inline class Name(val s: String) {
 // =============================================================================
 // Data classes
 // =============================================================================
+
 /**
  * TODO
  * @param name TODO
@@ -362,6 +363,10 @@ data class User(val name: String, val age: Int)
 class Outer {
   private val bar: Int = 1
   inner class Inner {
+    /**
+     * TODO
+     * @return TODO
+     */
     fun foo() = bar
   }
 }
@@ -369,6 +374,7 @@ class Outer {
 // =============================================================================
 // Enum classes
 // =============================================================================
+
 /**
  * TODO
  * @param rgb TODO
@@ -385,6 +391,7 @@ enum class RGB { RED, GREEN, BLUE }
 // =============================================================================
 // Classes: primary constructors
 // =============================================================================
+
 /**
  * TODO
  * @param firstName TODO
@@ -420,6 +427,11 @@ class Person {
   }
 }
 
+/**
+ * TODO
+ * @param name TODO
+ * @return TODO
+ */
 class Person(val name: String) {
   /**
    * TODO
@@ -443,12 +455,19 @@ class MyView : View {
    */
   protected constructor(ctx: Context) : super(ctx)
 
+  /**
+   * TODO
+   * @param ctx TODO
+   * @param attrs TODO
+   * @return TODO
+   */
   constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)
 }
 
 // =============================================================================
 // Abstract classes & methods
 // =============================================================================
+
 /**
  * TODO
  * @param name TODO
@@ -476,27 +495,53 @@ class Bar2 : Foo {
    */
   override fun v() {}
 
+  /**
+   * TODO
+   * @return TODO
+   */
   final override fun v() {}
 }
 
 open class Base {
+  /**
+   * TODO
+   * @return TODO
+   */
   open fun v() { ... }
+
+  /**
+   * TODO
+   * @return TODO
+   */
   fun nv() { ... }
 }
+
 /**
  * TODO
  * @return TODO
  */
 class Derived() : Base() {
+  /**
+   * TODO
+   * @return TODO
+   */
   override fun v() { ... }
 }
 
 open class Foo {
+  /**
+   * TODO
+   * @return TODO
+   */
   open fun f() { println("Foo.f()") }
   open val x: Int get() = 1
 }
 
 class Bar : Foo() {
+  /**
+   * TODO
+   * @return TODO
+   */
   override fun f() {
     super.f()
     println("Bar.f()")
@@ -509,12 +554,23 @@ class Bar : Foo() {
 // Classes: interfaces
 // =============================================================================
 interface A {
+  /**
+   * TODO
+   * @return TODO
+   */
   fun foo() { print("A") }
-  fun bar()
 }
 
 interface B {
+  /**
+   * TODO
+   * @return TODO
+   */
   fun foo() { print("B") }
+  /**
+   * TODO
+   * @return TODO
+   */
   fun bar() { print("bar") }
 }
 

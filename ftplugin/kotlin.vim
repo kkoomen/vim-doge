@@ -12,12 +12,14 @@ let b:doge_patterns = []
 "
 "   (str: String.() -> Unit, map: MutableMap<String, Any?>)
 "
+"   (num: <*>, str: String.() -> Unit, map: MutableMap<String, Any?>)
+"
 "   (map: MutableMap<String, <T>>, str: String.() -> Unit)
 "
 "   (map: MutableMap, str: String)
 "
 "   (onetime: Boolean = true, callback: () -> Unit)
-let s:parameters_match_pattern = '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%(\s*:\s*\%([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,<>:?]\+>\|[^,]\+\)\?\)\?'
+let s:parameters_match_pattern = '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%(\s*:\s*\%([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,<>:?*]\{-1,}>\|[^,]\+\)\?\)\?'
 
 " ==============================================================================
 " Matches regular functions, class methods and extension functions.
@@ -43,7 +45,7 @@ let s:parameters_match_pattern = '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%
 "
 "   open fun f() { println("Foo.f()") }
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|protected\|private\|final\|inline\|abstract\|override\|operator\|open\|data\)\s\+\)*fun\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*[[:alnum:]_:\.]\+\%(<[[:alnum:][:space:]_,<>:?]\+>\)\??\?\)\?\s*[={]',
+\  'match': '\m^\%(\%(public\|protected\|private\|final\|inline\|abstract\|override\|operator\|open\|data\)\s\+\)*fun\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*[[:alnum:]_:\.]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\??\?\)\?\s*[={]',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -88,7 +90,7 @@ call add(b:doge_patterns, {
 "
 "   abstract class Vehicle(val name: String, val color: String, val weight: Double) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(inner\|inline\|data\|enum\|open\|abstract\|sealed\)\s\+\)*class\s\+\%([[:alnum:]_]\+\%(<[[:alnum:][:space:]_,<>:?]\+>\)\?\)\s*\%(\%(public\|private\|protected\)\s*\)\?\%(constructor\s*\)\?(\(.\{-}\))',
+\  'match': '\m^\%(\%(inner\|inline\|data\|enum\|open\|abstract\|sealed\)\s\+\)*class\s\+\%([[:alnum:]_]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\?\)\s*\%(\%(public\|private\|protected\)\s*\)\?\%(constructor\s*\)\?(\(.\{-}\))',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -113,6 +115,7 @@ call add(b:doge_patterns, {
 "
 " Matches the following scenarios:
 "
+"   constructor(parent: Person) {}
 "   constructor(parent: Person) {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(public\|private\|protected\)\s\+\)\?constructor\s*(\(.\{-}\))',
