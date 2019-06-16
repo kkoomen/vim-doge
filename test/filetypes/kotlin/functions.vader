@@ -1,0 +1,322 @@
+# ==============================================================================
+# Functions without type parameters without parameters without return type.
+# ==============================================================================
+Given kotlin (function without type parameters without parameters without return type):
+  fun myFunc() {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun myFunc() {}
+
+# ==============================================================================
+# Functions with type parameters without parameters without return type.
+# ==============================================================================
+Given kotlin (function with type parameters without parameters without return type):
+  fun <String: <T>> myFunc() {}
+
+  fun <T: Any?> myFunc() {}
+
+  fun <T> myFunc() {}
+
+Do (trigger doge):
+  \<C-d>
+  :7\<CR>
+  \<C-d>
+  :13\<CR>
+  \<C-d>
+
+Expect kotlin (generated comments with nothing but the text 'TODO' and @return tag):
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun <String: <T>> myFunc() {}
+
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun <T: Any?> myFunc() {}
+
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun <T> myFunc() {}
+
+# ==============================================================================
+# Functions without type parameters without parameters with return type.
+# ==============================================================================
+Given kotlin (function without type parameters without parameters with return type):
+  fun myFunc(): Int? {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun myFunc(): Int? {}
+
+# ==============================================================================
+# Functions with type parameters without parameters with return type.
+# ==============================================================================
+Given kotlin (function with type parameters without parameters with return type):
+  fun <String: <T>> myFunc(): Int? {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun <String: <T>> myFunc(): Int? {}
+
+# ==============================================================================
+# Functions without type parameters with parameters with return type.
+# ==============================================================================
+Given kotlin (function without type parameters with parameters with return type):
+  fun myFunc(i: Int = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
+
+  abstract fun signal(t: Int, u: Int) = apply(t, u)
+
+Do (trigger doge):
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+
+Expect kotlin (generated comment with @param and @return tags):
+  /**
+   * TODO
+   * @param i TODO
+   * @param lst TODO
+   * @param str TODO
+   * @param map TODO
+   * @param str TODO
+   * @return TODO
+   */
+  fun myFunc(i: Int = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
+
+  /**
+   * TODO
+   * @param t TODO
+   * @param u TODO
+   * @return TODO
+   */
+  abstract fun signal(t: Int, u: Int) = apply(t, u)
+
+# ==============================================================================
+# Different function modifiers.
+# ==============================================================================
+Given kotlin (different function modifiers: inline, open, data, public, protected, private, final, abstract, override, operator):
+  inline fun <reified T : Enum<T>> printAllValues() {}
+
+  open data fun asNullable(i: Foo?) {}
+
+  public fun myFunc(i: Foo?) {}
+
+  protected fun <T> myFunc(i: Foo?): T {}
+
+  private fun myFunc(i: Foo?) Any? {}
+
+  final fun myFunc(i: Foo?) {}
+
+  abstract fun myFunc(i: Foo?) {}
+
+  override fun myFunc(i: Foo?) {}
+
+  operator fun myFunc(i: Foo?) {}
+
+Do (trigger doge):
+  \<C-d>
+  :7\<CR>
+  \<C-d>
+  :14\<CR>
+  \<C-d>
+  :21\<CR>
+  \<C-d>
+  :28\<CR>
+  \<C-d>
+  :35\<CR>
+  \<C-d>
+  :42\<CR>
+  \<C-d>
+  :49\<CR>
+  \<C-d>
+  :56\<CR>
+  \<C-d>
+
+Expect kotlin (generated comments with @param and @return tags):
+  /**
+   * TODO
+   * @return TODO
+   */
+  inline fun <reified T : Enum<T>> printAllValues() {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  open data fun asNullable(i: Foo?) {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  public fun myFunc(i: Foo?) {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  protected fun <T> myFunc(i: Foo?): T {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  private fun myFunc(i: Foo?) Any? {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  final fun myFunc(i: Foo?) {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  abstract fun myFunc(i: Foo?) {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  override fun myFunc(i: Foo?) {}
+
+  /**
+   * TODO
+   * @param i TODO
+   * @return TODO
+   */
+  operator fun myFunc(i: Foo?) {}
+
+# ==============================================================================
+# Extension functions with type parameters with parameters without return type.
+# ==============================================================================
+Given kotlin (extension functions with type parameters with parameters without return type):
+  fun <T> MutableList<Int>.swap(index1: Int, index2: Int) {}
+
+  fun <T> MutableList.swap(index1: Int, index2: Int) {}
+
+Do (trigger doge):
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+
+Expect kotlin (generated comments with @param and @return tags):
+  /**
+   * TODO
+   * @param index1 TODO
+   * @param index2 TODO
+   * @return TODO
+   */
+  fun <T> MutableList<Int>.swap(index1: Int, index2: Int) {}
+
+  /**
+   * TODO
+   * @param index1 TODO
+   * @param index2 TODO
+   * @return TODO
+   */
+  fun <T> MutableList.swap(index1: Int, index2: Int) {}
+
+# ==============================================================================
+# Extension functions without type parameters with parameters without return
+# type.
+# ==============================================================================
+Given kotlin (extension functions without type parameters with parameters without return type):
+  fun MutableList<Int>.swap(index1: Int, index2: Int) {}
+
+  fun MutableList.swap(index1: Int, index2: Int) {}
+
+Do (trigger doge):
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+
+Expect kotlin (generated comments with @param and @return tags):
+  /**
+   * TODO
+   * @param index1 TODO
+   * @param index2 TODO
+   * @return TODO
+   */
+  fun MutableList<Int>.swap(index1: Int, index2: Int) {}
+
+  /**
+   * TODO
+   * @param index1 TODO
+   * @param index2 TODO
+   * @return TODO
+   */
+  fun MutableList.swap(index1: Int, index2: Int) {}
+
+# ==============================================================================
+# Extension functions defined with a nullable receiver type.
+# ==============================================================================
+Given kotlin (extension functions defined with a nullable receiver type):
+  fun Any?.toString(): String {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun Any?.toString(): String {}
+
+# ==============================================================================
+# Extension functions defined for a companion object.
+# ==============================================================================
+Given kotlin (extension function defined for a companion object):
+  class MyClass {
+    companion object {}
+  }
+
+  fun MyClass.Companion.foo() {}
+
+Do (trigger doge):
+  :5\<CR>
+  \<C-d>
+
+Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
+  class MyClass {
+    companion object {}
+  }
+
+  /**
+   * TODO
+   * @return TODO
+   */
+  fun MyClass.Companion.foo() {}
