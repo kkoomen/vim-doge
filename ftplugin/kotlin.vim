@@ -70,9 +70,9 @@ call add(b:doge_patterns, {
 "
 " Matches the following scenarios:
 "
-"   class Outer {}
+"   class Outer() {}
 "
-"   inner class Inner {}
+"   inner class Inner() {}
 "
 "   data class User(val name: String, val age: Int) {}
 "
@@ -84,13 +84,15 @@ call add(b:doge_patterns, {
 "
 "   class Person(firstName: String) {}
 "
-"   class MyView : View {}
+"   class MyView() : View()) {}
 "
 "   inline class Name(val s: String) {}
 "
 "   abstract class Vehicle(val name: String, val color: String, val weight: Double) {}
+"
+"   external class MyClass() {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(inner\|inline\|data\|enum\|open\|abstract\|sealed\)\s\+\)*class\s\+\%([[:alnum:]_]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\?\)\s*\%(\%(public\|private\|protected\)\s*\)\?\%(constructor\s*\)\?(\(.\{-}\))',
+\  'match': '\m^\%(\%(inner\|inline\|data\|enum\|external\|open\|abstract\|sealed\)\s\+\)*class\s\+\%([[:alnum:]_]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\?\)\s*\%(\%(public\|private\|protected\)\s*\)\?\%(constructor\s*\)\?(\(.\{-}\))',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -103,7 +105,6 @@ call add(b:doge_patterns, {
 \      '/**',
 \      ' * TODO',
 \      ' * {parameters}',
-\      ' * @return TODO',
 \      ' */',
 \    ],
 \  },
@@ -115,8 +116,7 @@ call add(b:doge_patterns, {
 "
 " Matches the following scenarios:
 "
-"   constructor(parent: Person) {}
-"   constructor(parent: Person) {}
+"   constructor(parent: Person, query: Query<*, <T>>) {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(public\|private\|protected\)\s\+\)\?constructor\s*(\(.\{-}\))',
 \  'match_group_names': ['parameters'],
@@ -131,7 +131,6 @@ call add(b:doge_patterns, {
 \      '/**',
 \      ' * TODO',
 \      ' * {parameters}',
-\      ' * @return TODO',
 \      ' */',
 \    ],
 \  },
