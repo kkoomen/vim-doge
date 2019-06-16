@@ -7,7 +7,7 @@ Given php (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect php (function with nothing but the text 'TODO'):
+Expect php (generated comment with nothing but the text 'TODO'):
   /**
    * TODO
    *
