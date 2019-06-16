@@ -38,7 +38,7 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 - [x] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
 - [x] Ruby ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))
 - [x] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))
-- [ ] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
+- [x] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
 - [ ] R ([R style guide](https://style.tidyverse.org/documentation.html))
 - [ ] C++ ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))
 - [ ] Haskell ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))
