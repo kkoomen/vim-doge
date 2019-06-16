@@ -56,7 +56,7 @@ fun parseInt(map: MutableMap<String, Any?>, str: String): Int? {}
  * @param str TODO
  * @return TODO
  */
-fun parseInt(i: Boolean = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
+fun parseInt(i: Int = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
 
 /**
  * TODO
@@ -71,7 +71,7 @@ inline fun <reified T: Any> Gson.fromJson(json: JsonElement): T = this.fromJson(
  * @param callback TODO
  * @return TODO
  */
-fun listenForPackageChanges(onetime: Boolean = true, callback: () -> Unit): Int? = object : BroadcastReceiver() {
+fun listenForPackageChanges(onetime: Int = true, callback: () -> Unit): Int? = object : BroadcastReceiver() {
 
 /**
  * TODO
@@ -193,14 +193,6 @@ fun MutableList.swap(index1: Int, index2: Int) {}
  * @param index2 TODO
  * @return TODO
  */
-fun swap(index1: Int, index2: Int) {}
-
-/**
- * TODO
- * @param index1 TODO
- * @param index2 TODO
- * @return TODO
- */
 fun <T> MutableList<T>.swap(index1: Int, index2: Int) {}
 
 /**
@@ -219,15 +211,15 @@ fun Any?.toString(): String {
 // =============================================================================
 /**
  * TODO
- * @param b TODO
+ * @property b TODO
  */
 class Derived(b: Base) : Base by b
 
 class Delegate {
   /**
    * TODO
-   * @param thisRef TODO
-   * @param property TODO
+   * @property thisRef TODO
+   * @property property TODO
    * @return TODO
    */
   operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
@@ -248,7 +240,7 @@ class Delegate {
 
 /**
  * TODO
- * @param map TODO
+ * @property map TODO
  */
 class MutableUser(val map: MutableMap<String, Any?>) {
   var name: String by map
@@ -262,12 +254,12 @@ class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {
    * @param property TODO
    * @return TODO
    */
-  override fun getValue(thisRef: MyUI, property: KProperty<*>): T { ... }
+  override fun getValue(thisRef: MyUI, property: KProperty<*>): T {}
 }
 
 /**
  * TODO
- * @param id TODO
+ * @property id TODO
  */
 class ResourceLoader<T>(id: ResourceID<T>) {
   /**
@@ -291,7 +283,7 @@ class ResourceLoader<T>(id: ResourceID<T>) {
    * @param name TODO
    * @return TODO
    */
-  private fun checkProperty(thisRef: MyUI, name: String) { ... }
+  private fun checkProperty(thisRef: MyUI, name: String) {}
 }
 
 class MyUI {
@@ -300,12 +292,11 @@ class MyUI {
    * @param id TODO
    * @return TODO
    */
-  fun <T> bindResource(id: ResourceID<T>): ResourceLoader<T> { ... }
+  fun <T> bindResource(id: ResourceID<T>): ResourceLoader<T> {}
 
   val image by bindResource(ResourceID.image_id)
   val text by bindResource(ResourceID.text_id)
 }
-
 
 // =============================================================================
 // Classes: Companion Object Extensions
@@ -318,14 +309,14 @@ class MyClass {
  * TODO
  * @return TODO
  */
-fun MyClass.Companion.foo() { ... }
+fun MyClass.Companion.foo() {}
 
 // =============================================================================
 // Inline classes
 // =============================================================================
 /**
  * TODO
- * @param s TODO
+ * @property s TODO
  */
 inline class Name(val s: String) {
   val length: Int
@@ -345,8 +336,8 @@ inline class Name(val s: String) {
 // =============================================================================
 /**
  * TODO
- * @param name TODO
- * @param age TODO
+ * @property name TODO
+ * @property age TODO
  */
 data class User(val name: String, val age: Int)
 
@@ -369,7 +360,7 @@ class Outer {
 // =============================================================================
 /**
  * TODO
- * @param rgb TODO
+ * @property rgb TODO
  */
 enum class Color(val rgb: Int) {
   RED(0xFF0000),
@@ -384,21 +375,21 @@ enum class RGB { RED, GREEN, BLUE }
 // =============================================================================
 /**
  * TODO
- * @param firstName TODO
+ * @property firstName TODO
  */
-class Person constructor(firstName: String) { ... }
+class Person constructor(firstName: String) {}
 
 /**
  * TODO
- * @param a TODO
+ * @property a TODO
  */
-class C private constructor(a: Int) { ... }
+class C private constructor(a: Int) {}
 
 /**
  * TODO
- * @param firstName TODO
+ * @property firstName TODO
  */
-class Person(firstName: String) { ... }
+class Person(firstName: String) {}
 
 // =============================================================================
 // Classes: secondary constructors
@@ -407,15 +398,17 @@ class Person {
   /**
    * TODO
    * @param parent TODO
+   * @param query TODO
+   * @param users TODO
    */
-  constructor(parent: Person) {
+  constructor(parent: Person, query: Query<*, <T>>, users: List<User>) {
     parent.children.add(this)
   }
 }
 
 /**
  * TODO
- * @param name TODO
+ * @property name TODO
  */
 class Person(val name: String) {
   /**
@@ -452,9 +445,9 @@ class MyView : View {
 
 /**
  * TODO
- * @param name TODO
- * @param color TODO
- * @param weight TODO
+ * @property name TODO
+ * @property color TODO
+ * @property weight TODO
  */
 abstract class Vehicle(val name: String, val color: String, val weight: Double) {
   /**
@@ -497,7 +490,6 @@ open class Base {
   fun nv() {}
 }
 
-
 /**
  * TODO
  */
@@ -506,7 +498,7 @@ class Derived() : Base() {
    * TODO
    * @return TODO
    */
-  override fun v() { ... }
+  override fun v() {}
 }
 
 open class Foo {
