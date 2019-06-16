@@ -97,7 +97,7 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', 'TODO'],
+\    'format': ['@property', '{name}', 'TODO'],
 \  },
 \  'comment': {
 \    'insert': 'above',
