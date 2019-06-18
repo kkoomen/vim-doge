@@ -24,6 +24,18 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 > Any fool can write code that a computer can understand. Good programmers write
 > code that humans can understand. -- Martin Fowler, 1999
 
+# Table of Contents
+  - [Table of Contents](#table-of-contents)
+- [Supported languages and doc standards](#supported-languages-and-doc-standards)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+    + [`g:doge_mapping`](#gdoge_mapping)
+    + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
+- [Contributing](#contributing)
+  * [Linting](#linting)
+  * [Documentation](#documentation)
+  * [Help](#help)
+
 # Supported languages and doc standards
 
 - [x] Python ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))
@@ -46,18 +58,6 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 - [ ] Idris ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))
 - [ ] Assembly ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000))
 - [ ] C# ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))
-
-# Table of Contents
-- [Supported languages and doc standards](#supported-languages-and-doc-standards)
-- [Table of Contents](#table-of-contents)
-- [Getting Started](#getting-started)
-- [Configuration](#configuration)
-    + [`g:doge_mapping`](#gdoge_mapping)
-    + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
-- [Contributing](#contributing)
-  * [Linting](#linting)
-  * [Documentation](#documentation)
-  * [Help](#help)
 
 # Getting Started
 
