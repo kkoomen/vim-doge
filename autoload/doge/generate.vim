@@ -86,6 +86,13 @@ function! doge#generate#pattern(pattern) abort
   " Indent the comment.
   let l:comment = map(l:comment, { k, line -> l:IndentFunc(line) })
 
+  try
+    let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', &filetype)
+    let l:preprocessed_insert_position = function(l:preprocess_fn)(l:comment_lnum_insert_position)
+    let l:comment_lnum_insert_position = l:preprocessed_insert_position
+  catch /E117: Unknown function/
+  endtry
+
   " Write the comment.
   call append(l:comment_lnum_insert_position, l:comment)
   echo '[DoGe] Successfully inserted comment.'

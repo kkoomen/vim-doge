@@ -19,6 +19,16 @@ class Test {
    * @param int childId TODO
    * @return MstRelation TODO
    */
+  @Override
+  private MstRelation getUpwardRelation(int childId) {
+    //
+  }
+
+  /**
+   * TODO
+   * @param int childId TODO
+   * @return MstRelation TODO
+   */
   private MstRelation getUpwardRelation(int childId) {
     //
   }

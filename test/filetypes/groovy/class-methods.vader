@@ -78,3 +78,28 @@ Expect groovy (generated comments with @param and @return tags):
      */
     ListResultBean<MstRelation> MyParameterizedMethod(String param1, int param2, Boolean... params) {}
   }
+
+# ==============================================================================
+# Methods with parameters.
+# ==============================================================================
+Given groovy (methods with parameters with '@Override'):
+  class Test {
+    @Override
+    protected void MyParameterizedMethod(String param1, int param2) {}
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect groovy (generated comments with @param and @return tags inserted above the '@Override'):
+  class Test {
+    /**
+     * TODO
+     * @param String param1 TODO
+     * @param int param2 TODO
+     * @return void TODO
+     */
+    @Override
+    protected void MyParameterizedMethod(String param1, int param2) {}
+  }
