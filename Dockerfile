@@ -1,6 +1,7 @@
 FROM tweekmonster/vim-testbed:latest
 
 RUN install_vim \
+      -tag v8.0.1630 -build \
       -tag v8.1.1511 -build \
       -tag neovim:v0.3.2 -build
 

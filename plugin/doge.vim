@@ -1,6 +1,13 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+if v:version < 800 || (v:version == 800 && !has('patch1630'))
+  echohl WarningMsg
+  echo '[DoGe] Unsupported version. Vim v8.0.1630+ is required.'
+  echohl None
+  finish
+endif
+
 ""
 " @section Introduction, intro
 " We all love documentation because it makes our codebases easier to understand,

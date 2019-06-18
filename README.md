@@ -5,7 +5,7 @@
   <a href="https://travis-ci.com/kkoomen/doge">
     <img src="https://travis-ci.com/kkoomen/doge.svg?branch=master" alt="Travic CI Build Status" />
   </a>
-  <img src="https://img.shields.io/badge/vim-8.1%2B-informational.svg" alt="Minimum supported Vim version" />
+  <img src="https://img.shields.io/badge/vim-8.0.1630%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.3.2%2B-informational.svg" alt="Minimum supported NeoVim version" />
   <a href="https://github.com/kkoomen/doge/blob/develop/LICENSE">
     <img src="https://img.shields.io/github/license/kkoomen/doge.svg" alt="License" />
