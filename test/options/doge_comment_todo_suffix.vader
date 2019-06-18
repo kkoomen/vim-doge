@@ -4,9 +4,6 @@
 Given php (function with parameters where g:doge_comment_todo_suffix = 1):
   public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
 
-Before (set g:doge_comment_todo_suffix = 1):
-  let g:doge_comment_todo_suffix = 1
-
 Do (trigger doge):
   \<C-d>
 
@@ -27,11 +24,10 @@ Expect php (generated comment with @param tags and with a TODO suffix for each p
 Given php (function with parameters where g:doge_comment_todo_suffix = 0):
   public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
 
-Before (set g:doge_comment_todo_suffix = 0):
-  let g:doge_comment_todo_suffix = 0
-
 Do (trigger doge):
+  :let g:doge_comment_todo_suffix = 0\<CR>
   \<C-d>
+  :let g:doge_comment_todo_suffix = 1\<CR>
 
 Expect php (generated comment with @param tags and without a TODO suffix for each parameter):
   /**
