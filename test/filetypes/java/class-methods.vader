@@ -22,7 +22,7 @@ Expect java (method with 'TODO' and a @return tag):
 # ==============================================================================
 # Methods without return type.
 # ==============================================================================
-Given java (mtehod without return type):
+Given java (method without return type):
   class Test {
     public createSortedList() {}
   }
@@ -43,7 +43,7 @@ Expect java (method with 'TODO' and a @return tag containing 'void'):
 # ==============================================================================
 # Methods with parameters.
 # ==============================================================================
-Given java (method without return type):
+Given java (methods with parameters):
   class Test {
     private static MstRelation MyParameterizedMethod(String param1, int param2, Boolean ...params) {}
 
@@ -56,7 +56,7 @@ Do (trigger doge):
   :11\<CR>
   \<C-d>
 
-Expect java (generated comment where the @return tag should be void):
+Expect java (generated comments with @param and @return tags):
   class Test {
     /**
      * TODO
