@@ -1,3 +1,8 @@
+" ==============================================================================
+" The Kotlin documentation should follow the 'KDoc' conventions.
+" see https://kotlinlang.org/docs/reference/kotlin-doc.html
+" ==============================================================================
+
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
