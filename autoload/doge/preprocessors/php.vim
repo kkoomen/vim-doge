@@ -77,26 +77,26 @@ endfunction
 
 " A callback function being called after the tokens have been extracted. This
 " function will adjust the input if needed.
-function! doge#preprocessors#php#tokens(params) abort
-  if has_key(a:params, 'propertyName') && !empty(a:params['propertyName'])
-    let l:fqn = s:get_property_type_via_constructor(a:params['propertyName'])
+function! doge#preprocessors#php#tokens(tokens) abort
+  if has_key(a:tokens, 'propertyName') && !empty(a:tokens['propertyName'])
+    let l:fqn = s:get_property_type_via_constructor(a:tokens['propertyName'])
     if !empty(l:fqn)
-      let a:params['type'] = l:fqn
+      let a:tokens['type'] = l:fqn
     endif
   endif
 endfunction
 
 " A callback function being called after the parameter tokens have been
 " extracted. This function will adjust the input if needed.
-function! doge#preprocessors#php#parameter_tokens(params) abort
-  for l:param in a:params
-    let l:param_idx = index(a:params, l:param)
-    if has_key(l:param, 'type') && !empty(l:param['type'])
-      let l:fqn = s:get_parameter_type_fqn(l:param['type'])
-      let a:params[l:param_idx]['type'] = l:fqn
+function! doge#preprocessors#php#parameter_tokens(tokens) abort
+  for l:token in a:tokens
+    let l:token_idx = index(a:tokens, l:token)
+    if has_key(l:token, 'type') && !empty(l:token['type'])
+      let l:fqn = s:get_parameter_type_fqn(l:token['type'])
+      let a:tokens[l:token_idx]['type'] = l:fqn
     endif
   endfor
-  return a:params
+  return a:tokens
 endfunction
 
 let &cpoptions = s:save_cpo

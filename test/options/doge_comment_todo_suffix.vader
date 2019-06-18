@@ -1,0 +1,46 @@
+# ==============================================================================
+# Tests the functionality for the g:doge_comment_todo_suffix option.
+# ==============================================================================
+Given php (function with parameters where g:doge_comment_todo_suffix = 1):
+  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+
+Before (set g:doge_comment_todo_suffix = 1):
+  let g:doge_comment_todo_suffix = 1
+
+Do (trigger doge):
+  \<C-d>
+
+Expect php (generated comment with @param tags and with a TODO suffix for each parameter):
+  /**
+   * TODO
+   *
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
+  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+
+# ------------------------------------------------------------------------------
+
+Given php (function with parameters where g:doge_comment_todo_suffix = 0):
+  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+
+Before (set g:doge_comment_todo_suffix = 0):
+  let g:doge_comment_todo_suffix = 0
+
+Do (trigger doge):
+  \<C-d>
+
+Expect php (generated comment with @param tags and without a TODO suffix for each parameter):
+  /**
+   * TODO
+   *
+   * @param array $arg1
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2
+   * @param int $arg3
+   * @param mixed $arg4
+   * @param mixed $arg5
+   */
+  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}

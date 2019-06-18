@@ -48,6 +48,9 @@ function! doge#generate#pattern(pattern) abort
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(l:param_token, l:params_dict['format'])
       let l:format = join(filter(l:format, "v:val !=# ''"), ' ')
+      if g:doge_comment_todo_suffix == v:false
+        let l:format = substitute(l:format, '\m\s*TODO\s*$', '', 'g')
+      endif
       call add(l:formatted_params, l:format)
     endfor
     let l:tokens['parameters'] = l:formatted_params

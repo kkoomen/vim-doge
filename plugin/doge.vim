@@ -18,7 +18,11 @@ set cpoptions&vim
 " Preprocess functions are called for specific filetypes when @plugin(name) is
 " generating a comment. The following preprocess functions are available:
 "
-"   doge#preprocessors#<filetype>#parameter_tokens(params)
+"   doge#preprocessors#<filetype>#tokens(tokens)
+"
+"   doge#preprocessors#<filetype>#parameter_tokens(tokens)
+"
+"   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
 
 if exists('g:loaded_doge')
   finish
@@ -27,12 +31,18 @@ let g:loaded_doge = 1
 
 if !exists('g:doge_mapping')
   ""
-  " @setting(g:doge_mapping)
-  "
   " (Default: '<C-d>')
   "
   " Sets the mapping to trigger DoGe.
   let g:doge_mapping = '<C-d>'
+endif
+
+if !exists('g:doge_comment_todo_suffix')
+  ""
+  " (Default: 1)
+  "
+  " Adds the TODO suffix after every generated parameter.
+  let g:doge_comment_todo_suffix = 0
 endif
 
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>

@@ -77,13 +77,19 @@ Using plug:
 
 # Configuration
 
-<!-- Run `:help doge-config` to get the help page for all the possible configuration. -->
+Run `:help doge` to get the full help page.
 
 ### `g:doge_mapping`
 
 (Default: `<C-d>`)
 
 Sets the mapping to trigger DoGe.
+
+### `g:doge_comment_todo_suffix`
+
+(Default: `1`)
+
+Adds the TODO suffix after every generated parameter.
 
 # Contributing
 
@@ -114,8 +120,12 @@ let g:syntastic_vim_checkers = ['vint']
 ## Documentation
 
 Every function, mapping or configurable option should contain documentation. The
-documentation in the `doc/` should be generated using
+documentation in the `doc/doge.txt` should be generated using
 [vimdoc](https://github.com/google/vimdoc).
+
+If you change the `doc/doge.txt` you also have to update the helptags file
+located in `doc/tags`. You can do this by running:
+`:helptags ~/.vim/path/to/doge/doc/`.
 
 ## Help
 

@@ -23,11 +23,14 @@ cursor on a function, press `<C-d>`, add brief descriptions and go on coding!
 CONFIGURATION                                                    *doge-config*
 
                                                               *g:doge_mapping*
-|g:doge_mapping|
-
 (Default: '<C-d>')
 
 Sets the mapping to trigger DoGe.
+
+                                                  *g:doge_comment_todo_suffix*
+(Default: 1)
+
+Adds the TODO suffix after every generated parameter.
 
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
@@ -38,11 +41,8 @@ doge#generate()                                              *doge#generate()*
 doge#generate#pattern({pattern})                     *doge#generate#pattern()*
   Generates a comment based on a given pattern.
 
-doge#indent#add({text}, {lnum})                            *doge#indent#add()*
+doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent.
-
-doge#indent#remove({text}, {lnum})                      *doge#indent#remove()*
-  Remove indent based on a given line its indent.
 
 doge#token#replace({tokens}, {text})                    *doge#token#replace()*
   Replace all tokens in the text parameter based on a given dictionary
@@ -61,7 +61,11 @@ PREPROCESSORS                                             *doge-preprocessors*
 Preprocess functions are called for specific filetypes when doge is generating
 a comment. The following preprocess functions are available:
 
-  doge#preprocessors#<filetype>#parameter_tokens(params)
+  doge#preprocessors#<filetype>#tokens(tokens)
+
+  doge#preprocessors#<filetype>#parameter_tokens(tokens)
+
+  doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
 
 
 vim:tw=78:ts=8:ft=help:norl:
