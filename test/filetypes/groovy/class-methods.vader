@@ -1,0 +1,80 @@
+# Groovy tests should be equal to Java tests.
+
+# ==============================================================================
+# Method without parameters.
+# ==============================================================================
+Given groovy (method without parameters):
+  class Test {
+    List<Element> createSortedList() {}
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect groovy (method with 'TODO' and a @return tag):
+  class Test {
+    /**
+     * TODO
+     * @return List TODO
+     */
+    List<Element> createSortedList() {}
+  }
+
+# ==============================================================================
+# Methods without return type.
+# ==============================================================================
+Given groovy (method without return type):
+  class Test {
+    public createSortedList() {}
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect groovy (method with 'TODO' and a @return tag containing 'void'):
+  class Test {
+    /**
+     * TODO
+     * @return void TODO
+     */
+    public createSortedList() {}
+  }
+
+# ==============================================================================
+# Methods with parameters.
+# ==============================================================================
+Given groovy (methods with parameters):
+  class Test {
+    private static MstRelation MyParameterizedMethod(String param1, int param2, Boolean ...params) {}
+
+    ListResultBean<MstRelation> MyParameterizedMethod(String param1, int param2, Boolean... params) {}
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :11\<CR>
+  \<C-d>
+
+Expect groovy (generated comments with @param and @return tags):
+  class Test {
+    /**
+     * TODO
+     * @param String param1 TODO
+     * @param int param2 TODO
+     * @param Boolean params TODO
+     * @return MstRelation TODO
+     */
+    private static MstRelation MyParameterizedMethod(String param1, int param2, Boolean ...params) {}
+
+    /**
+     * TODO
+     * @param String param1 TODO
+     * @param int param2 TODO
+     * @param Boolean params TODO
+     * @return ListResultBean TODO
+     */
+    ListResultBean<MstRelation> MyParameterizedMethod(String param1, int param2, Boolean... params) {}
+  }

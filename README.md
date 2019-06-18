@@ -36,6 +36,7 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 - [x] Coffeescript ([JSDoc](https://jsdoc.app))
 - [x] Lua ([LDoc](https://github.com/stevedonovan/LDoc))
 - [x] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
+- [x] Groovy ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
 - [x] Ruby ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))
 - [x] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))
 - [x] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
