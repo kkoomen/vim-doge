@@ -24,7 +24,7 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 > Any fool can write code that a computer can understand. Good programmers write
 > code that humans can understand. -- Martin Fowler, 1999
 
-### Supported languages and doc standards
+# Supported languages and doc standards
 
 - [x] Python ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))
 - [x] PHP ([phpdoc](https://www.phpdoc.org))
@@ -48,12 +48,12 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 - [ ] C# ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))
 
 # Table of Contents
-- [DoGe](#doge)
-    + [Supported languages and doc standards](#supported-languages-and-doc-standards)
+- [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Table of Contents](#table-of-contents)
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
     + [`g:doge_mapping`](#gdoge_mapping)
+    + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
 - [Contributing](#contributing)
   * [Linting](#linting)
   * [Documentation](#documentation)
