@@ -25,10 +25,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   /**
    * @description TODO
-   * @param {*} $arg1 - TODO
-   * @param {*} arg2 - TODO
-   * @param {*} arg3 - TODO
-   * @param {*} arg4 - TODO
+   * @param {*} $arg1 TODO
+   * @param {*} arg2 TODO
+   * @param {*} arg3 TODO
+   * @param {*} arg4 TODO
    */
   function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
 
@@ -44,10 +44,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @description, @param and @return tags):
   /**
    * @description TODO
-   * @param {string} $arg1 - TODO
-   * @param {string[]} arg2 - TODO
-   * @param {number} arg3 - TODO
-   * @param {float} arg4 - TODO
+   * @param {string} $arg1 TODO
+   * @param {string[]} arg2 TODO
+   * @param {number} arg3 TODO
+   * @param {float} arg4 TODO
    * @return {string[]} TODO
    */
   function myFunc($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
@@ -65,10 +65,10 @@ Expect javascript (generated comment with @description, @functon and @param tags
   /**
    * @description TODO
    * @function myFunc
-   * @param {*} $arg1 - TODO
-   * @param {*} arg2 - TODO
-   * @param {*} arg3 - TODO
-   * @param {*} arg4 - TODO
+   * @param {*} $arg1 TODO
+   * @param {*} arg2 TODO
+   * @param {*} arg3 TODO
+   * @param {*} arg4 TODO
    */
   var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
 
@@ -85,10 +85,10 @@ Expect javascript (generated comment with @description, @function and @param tag
   /**
    * @description TODO
    * @function myFunc
-   * @param {string} $arg1 - TODO
-   * @param {string[]} arg2 - TODO
-   * @param {number} arg3 - TODO
-   * @param {float} arg4 - TODO
+   * @param {string} $arg1 TODO
+   * @param {string[]} arg2 TODO
+   * @param {number} arg3 TODO
+   * @param {float} arg4 TODO
    * @return {string[]} TODO
    */
   var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
@@ -137,8 +137,8 @@ Expect javascript (generated comment with @description, @function, @param and @r
   /**
    * @description TODO
    * @function Person#greet
-   * @param {string} arg1 - TODO
-   * @param {Immutable.List} arg2 - TODO
+   * @param {string} arg1 TODO
+   * @param {Immutable.List} arg2 TODO
    * @return {string[]} TODO
    */
   Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] {};
@@ -171,8 +171,8 @@ Do (trigger doge):
 Expect javascript (generated comment with @description, @param and @return tags):
   /**
    * @description TODO
-   * @param {string} $arg1 - TODO
-   * @param {Foo|Bar|Baz} arg2 - TODO
+   * @param {string} $arg1 TODO
+   * @param {Foo|Bar|Baz} arg2 TODO
    * @return {Foo|Bar} TODO
    */
   function myFunc($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) {}
@@ -190,10 +190,10 @@ Expect javascript (generated comment with @description, @async, and @param tags)
   /**
    * @description TODO
    * @async
-   * @param {*} $arg1 - TODO
-   * @param {*} arg2 - TODO
-   * @param {*} arg3 - TODO
-   * @param {*} arg4 - TODO
+   * @param {*} $arg1 TODO
+   * @param {*} arg2 TODO
+   * @param {*} arg3 TODO
+   * @param {*} arg4 TODO
    */
   async function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
 
@@ -209,10 +209,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   /**
    * @description TODO
-   * @param {*} $arg1 - TODO
-   * @param {*} arg2 - TODO
-   * @param {*} arg3 - TODO
-   * @param {*} arg4 - TODO
+   * @param {*} $arg1 TODO
+   * @param {*} arg2 TODO
+   * @param {*} arg3 TODO
+   * @param {*} arg4 TODO
    */
   function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
 
@@ -229,9 +229,9 @@ Expect javascript (generated comment with @description, @async, and @param tags)
   /**
    * @description TODO
    * @async
-   * @param {*} $arg1 - TODO
-   * @param {*} arg2 - TODO
-   * @param {*} arg3 - TODO
-   * @param {*} arg4 - TODO
+   * @param {*} $arg1 TODO
+   * @param {*} arg2 TODO
+   * @param {*} arg3 TODO
+   * @param {*} arg4 TODO
    */
   async function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}

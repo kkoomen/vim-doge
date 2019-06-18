@@ -62,7 +62,7 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\    'format': ['@param', '!{{type|*}}', '{name}', 'TODO'],
 \  },
 \  'comment': {
 \    'insert': 'above',
@@ -94,7 +94,7 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\    'format': ['@param', '!{{type|*}}', '{name}', 'TODO'],
 \  },
 \  'comment': {
 \    'insert': 'above',
@@ -139,7 +139,7 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '!{{type|*}}', '{name}', '- TODO'],
+\    'format': ['@param', '!{{type|*}}', '{name}', 'TODO'],
 \  },
 \  'comment': {
 \    'insert': 'above',

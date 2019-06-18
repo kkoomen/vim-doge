@@ -45,7 +45,7 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': '\m\([^,]\+\)',
 \    'match_group_names': ['name'],
-\    'format': ['@param {*}', '{name}', '- TODO'],
+\    'format': ['@param {*}', '{name}', 'TODO'],
 \  },
 \  'comment': {
 \    'insert': 'above',

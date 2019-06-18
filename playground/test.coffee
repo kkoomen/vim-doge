@@ -10,32 +10,32 @@ myFunc = () -> x * x
 ###
 @description TODO
 @function myFunc
-@param {*} x - TODO
+@param {*} x TODO
 ###
 myFunc = (x) -> x * x
 
 ###
 @description TODO
 @function myFunc
-@param {*} x - TODO
+@param {*} x TODO
 ###
 myFunc = (x) => x * x
 
 ###
 @description TODO
 @function myFunc
-@param {*} arg1 - TODO
-@param {*} arg2 - TODO
-@param {*} arg3 - TODO
+@param {*} arg1 TODO
+@param {*} arg2 TODO
+@param {*} arg3 TODO
 ###
 myFunc = (arg1, arg2, arg3) -> x * x
 
 ###
 @description TODO
 @function myFunc
-@param {*} $arg1 - TODO
-@param {*} $arg2 - TODO
-@param {*} $arg3 - TODO
+@param {*} $arg1 TODO
+@param {*} $arg2 TODO
+@param {*} $arg3 TODO
 ###
 myFunc = ($arg1, $arg2, $arg3) => x * x
 

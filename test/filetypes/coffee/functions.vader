@@ -27,9 +27,9 @@ Expect coffee (generated comment with @description, @function and @param tags):
   ###
   @description TODO
   @function myFunc
-  @param {*} arg1 - TODO
-  @param {*} arg2 - TODO
-  @param {*} arg3 - TODO
+  @param {*} arg1 TODO
+  @param {*} arg2 TODO
+  @param {*} arg3 TODO
   ###
   myFunc = (arg1, arg2, arg3) -> x * x
 
@@ -46,9 +46,9 @@ Expect coffee (generated comment with @description, @function and @param tags):
   ###
   @description TODO
   @function myFunc
-  @param {*} arg1 - TODO
-  @param {*} arg2 - TODO
-  @param {*} arg3 - TODO
+  @param {*} arg1 TODO
+  @param {*} arg2 TODO
+  @param {*} arg3 TODO
   ###
   myFunc = (arg1, arg2, arg3) => x * x
 
