@@ -97,9 +97,17 @@ List<Element> createSortedList() {}
 
 /**
  * TODO
+ * @param Collection scriptRequests TODO
+ * @return Collection TODO
+ */
+protected Collection<ScriptRequest> createSecureScriptRequests(Collection<ScriptRequest> scriptRequests) {}
+
+/**
+ * TODO
  * @param IndexSettings indexSettings TODO
  * @param Environment env TODO
  * @param String name TODO
  * @param Settings settings TODO
+ * @return void TODO
  */
 public UkrainianAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) {}
