@@ -139,6 +139,7 @@ tries=0
 while [ "$tries" -lt 5 ]; do
   tries=$((tries + 1))
 
+  echo "tests: $tests"
   exit_code=0
   set -o pipefail
   docker run \
@@ -147,20 +148,20 @@ while [ "$tries" -lt 5 ]; do
     --rm \
     -v "$PWD:/testplugin" \
     -v "$PWD/test:/home" \
-    -w /testplugin "$DOGE_DOCKER_IMAGE" "/vim-build/bin/$vim" \
-    -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
-      set +o pipefail
+    -w /testplugin "$DOGE_DOCKER_IMAGE" \
+    "/vim-build/bin/$vim" -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
+  set +o pipefail
 
-      if [ -s "$run_file" ]; then
-        break
-      fi
-    done
+  if [ -s "$run_file" ]; then
+    break
+  fi
+done
 
-    if [ "$tries" -gt 1 ]; then
-      echo
-      echo "Tried to run tests $tries times"
-    fi
+if [ "$tries" -gt 1 ]; then
+  echo
+  echo "Tried to run tests $tries times"
+fi
 
-    rm "$run_file"
+rm "$run_file"
 
-    exit "$exit_code"
+exit "$exit_code"
