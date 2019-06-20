@@ -102,13 +102,12 @@ function! doge#generate#pattern(pattern) abort
 
   " Write the comment.
   call append(l:comment_lnum_insert_position, l:comment)
-  echo '[DoGe] Successfully inserted comment.'
 
   if g:doge_comment_interactive == v:true
     if a:pattern['comment']['insert'] ==# 'below'
       " TODO: implement python
     else
-      let l:todo_match = search('TODO', 'bnW', l:comment_lnum_insert_position)
+      let l:todo_match = search('TODO', 'bnW', l:comment_lnum_insert_position + 1)
 
       if l:todo_match != 0
         let l:todo_count = doge#helpers#count(
@@ -118,13 +117,12 @@ function! doge#generate#pattern(pattern) abort
               \ )
         if l:todo_count > 0
           let b:doge_interactive = {
-                \ 'todos_total': l:todo_count,
                 \ 'comment': l:comment,
                 \ 'lnum_comment_start_pos': (l:comment_lnum_insert_position + 1),
                 \ 'lnum_comment_end_pos': (l:comment_lnum_insert_position + len(l:comment)),
                 \ }
           " Go to the top of the comment and select the first TODO.
-          exe l:comment_lnum_insert_position
+          exe l:comment_lnum_insert_position + 1
           call search('TODO', 'W')
           execute("normal! viwo\<C-g>")
         endif

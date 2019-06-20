@@ -13,19 +13,19 @@
 </p>
 
 We all love documentation because it makes our codebases easier to understand,
-yet no one has time to write it in a good and proper way or some might not even
-like to write it.
+yet no one has time to write it in a good and proper way.
 
 DoGe is a [Do]cumentation [Ge]nerator which will generate instant proper
-documentation based on the certain expressions (mainly functions). You can
-simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
-<kbd>d</kbd>), add brief descriptions and go on coding!
+documentation based on the certain expressions (mainly functions). Simply put
+your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), jump
+quickly through TODO items using `<Tab>` and `<S-Tab>` to quickly add
+descriptions and go on coding!
 
 > Any fool can write code that a computer can understand. Good programmers write
 > code that humans can understand. -- Martin Fowler, 1999
 
 # Table of Contents
-  - [Table of Contents](#table-of-contents)
+- [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Getting Started](#getting-started)
 - [Configuration](#configuration)
@@ -35,6 +35,7 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
   * [Linting](#linting)
   * [Documentation](#documentation)
   * [Help](#help)
+- [Motivation](#motivation)
 
 # Supported languages and doc standards
 
@@ -58,6 +59,10 @@ simply put your cursor on a function, press `<C-d>`(<kbd>Ctrl</kbd> +
 - [ ] Idris ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))
 - [ ] Assembly ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000))
 - [ ] C# ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))
+
+Every language that has a documentation standard should be supported by DoGe.
+Is your favorite language not supported?
+[Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>)
 
 # Getting Started
 
@@ -130,3 +135,21 @@ located in `doc/tags`. You can do this by running:
 ## Help
 
 To open all the help pages, run `:help doge`.
+
+# Motivation
+
+I created DoGe mainly because I couldn't find a plugin that could generate
+proper comments for a big collection of languages in a quick and easy way. I am
+a polyglot developer when it comes to programming languages and I couldn't find
+proper vim plugins that would generate documentation quickly for all languages I
+did want to be supported.
+
+Rather then scraping off the internet to find all sorts of vim plugins for every
+language I was coding in, I did want a single plugin that would support every
+language I was working in.
+
+Another big motivation for me is that I've noticed people tend to skip the
+documentation part because writing _just the skeleton_ of the comment takes
+already too much time and I am one of those people. Having the skeleton
+generated and an interactive mode to quickly add descriptions is a big
+time saver.

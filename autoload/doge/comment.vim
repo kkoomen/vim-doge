@@ -1,55 +1,57 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-""
-" @public
-" Jumps to the next TODO item in the comment based on the b:doge_interactive
-" variable. Requires @settings(g:doge_comment_interactive) to be enabled.
-function! doge#comment#jump_forward() abort
-  let l:regular_mapping = doge#helpers#keyseq(g:doge_mapping_comment_jump_forward)
+function! s:jump_forward() abort
+  let l:next_pos = search('TODO', 'nW')
 
-  if exists('b:doge_interactive')
-    " Quit interactive mode if the cursor is outside of the comment.
-    if line('.') < b:doge_interactive['lnum_comment_start_pos'] || line('.') > b:doge_interactive['lnum_comment_end_pos']
-      unlet b:doge_interactive
-      return l:regular_mapping
+  " Check if the next pos we want to jump to is still inside the comment.
+  if l:next_pos != 0 && l:next_pos <= b:doge_interactive['lnum_comment_end_pos']
+    if mode() ==# 'i'
+      return "\<C-O>/TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
+    elseif mode() ==# 's'
+      return "\<Esc>/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+    elseif mode() ==# 'n'
+      return "/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+    else
+      return "viwo\<C-g>"
     endif
-
-    let l:todo_count = doge#helpers#count(
-          \ 'TODO',
-          \ b:doge_interactive['lnum_comment_start_pos'],
-          \ b:doge_interactive['lnum_comment_end_pos']
-          \ )
-    if l:todo_count > 0
-      let l:next_pos = search('TODO', 'nW')
-      " Check if the next pos we want to jump to is still inside the comment.
-      if l:next_pos != 0 && l:next_pos < b:doge_interactive['lnum_comment_end_pos']
-        if mode() ==# 'i'
-          return "\<C-O>/TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
-        elseif mode() ==# 's'
-          return "\<Esc>/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
-        else
-          return "viwo\<C-g>"
-        endif
-      elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
-        return "\<C-O>viwo\<C-g>"
-      endif
-    elseif exists('b:doge_interactive')
-      " All the TODO items have been resolved, so we're done.
-      unlet b:doge_interactive
-    endif
+  elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
+    return "\<C-O>viwo\<C-g>"
   endif
 
-  " If none of the above returned anything, we will return the key itself.
-  return l:regular_mapping
+  " No more next TODOs found.
+  return 0
+endfunction
+
+function! s:jump_backward() abort
+  let l:prev_pos = search('TODO', 'bnW')
+
+  " Check if the prev pos we want to jump to is still inside the comment.
+  if l:prev_pos != 0 && l:prev_pos >= b:doge_interactive['lnum_comment_start_pos']
+    if mode() ==# 'i'
+      return "\<C-O>?TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
+    elseif mode() ==# 's'
+      return "\<Esc>?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+    elseif mode() ==# 'n'
+      return "?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+    else
+      return "viwo\<C-g>"
+    endif
+  elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
+    return "\<C-O>viwo\<C-g>"
+  endif
+
+  " No more previous TODOs found.
+  return 0
 endfunction
 
 ""
 " @public
-" Jumps to the previous TODO item in the comment based on the b:doge_interactive
-" variable. Requires @settings(g:doge_comment_interactive) to be enabled.
-function! doge#comment#jump_backward() abort
-  let l:regular_mapping = doge#helpers#keyseq(g:doge_mapping_comment_jump_backward)
+" Jumps to the previous and next TODO item in the comment based on the b:doge_interactive
+" variable. Requires @setting(g:doge_comment_interactive) to be enabled.
+" The {direction} can be of the following values: 'forward' | 'backward'
+function! doge#comment#jump(direction) abort
+  let l:regular_mapping = doge#helpers#keyseq(get(g:, 'doge_mapping_comment_jump_' . a:direction))
 
   if exists('b:doge_interactive')
     " Quit interactive mode if the cursor is outside of the comment.
@@ -64,24 +66,16 @@ function! doge#comment#jump_backward() abort
           \ b:doge_interactive['lnum_comment_end_pos']
           \ )
     if l:todo_count > 0
-      " Check if the cursor is outside the comment, if so, put it back.
-      if line('.') < b:doge_interactive['lnum_comment_start_pos'] || line('.') > b:doge_interactive['lnum_comment_end_pos']
-        execute(printf(':%d', b:doge_interactive['lnum_comment_end_pos']))
+      " We update the interactive comment info also when jumping which fixes the
+      " scenario if a user is using visual mode in-between the jumping to maybe
+      " delete some lines.
+      call doge#comment#update_interactive_comment_info()
+
+      let l:jump_keyseq = call(printf('s:jump_%s', a:direction), [])
+      if l:jump_keyseq != v:false
+        return l:jump_keyseq
       endif
-      let l:prev_pos = search('TODO', 'bnW')
-      " Check if the prev pos we want to jump to is still inside the comment.
-      if l:prev_pos != 0 && l:prev_pos > b:doge_interactive['lnum_comment_start_pos']
-        if mode() ==# 'i'
-          return "\<C-O>?TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
-        elseif mode() ==# 's'
-          return "\<Esc>?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
-        else
-          return "viwo\<C-g>"
-        endif
-      elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
-        return "\<C-O>viwo\<C-g>"
-      endif
-    elseif exists('b:doge_interactive')
+    else
       " All the TODO items have been resolved, so we're done.
       unlet b:doge_interactive
     endif
@@ -95,14 +89,38 @@ endfunction
 " @public
 " This function is trigged by the auto-command TextChangedI and will update the
 " b:doge_interactive variable where needed. Requires
-" @settings(g:doge_comment_interactive) to be enabled.
+" @setting(g:doge_comment_interactive) to be enabled.
 function! doge#comment#update_interactive_comment_info() abort
   if exists('b:doge_interactive')
-    " When filling in the TODO items the user might hit the ENTER key so we
-    " constantly have to update the end position of the comment, because the
-    " comment can get bigger.
-    let l:lnum_comment_end_pos = search(b:doge_interactive['comment'][-1], 'nW')
-    let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos
+    " Only update if the cursor is inside the comment.
+    " We add +1 to the lnum_comment_end_pos which covers the scenario if a user
+    " pressed ENTER while being on the last line of the comment.
+    if line('.') >= b:doge_interactive['lnum_comment_start_pos'] && line('.') <= b:doge_interactive['lnum_comment_end_pos'] + 1
+      " When filling in the TODO items the user might hit the ENTER key so we
+      " constantly have to update the end position of the comment, because the
+      " comment can get bigger.
+
+      " We will use a while loop because of languages like lua and ruby which
+      " use single-line comments which gives us no separation if we have a lua
+      " comment like this:
+      "
+      "   -- TODO
+      "   -- @param arg1 TODO
+      "   -- @param arg2 I can aplp
+      "   -- @param arg3 TODO
+      "   -- @param arg4 TODO
+      "   function new_function(arg1, arg2, arg3, arg4)
+      "   end
+      "
+      " So the idea is to just loop through every line until we come across a
+      " non-comment line.
+      let l:lnum_comment_end_pos = line('.')
+      let l:comment_last_line = trim(b:doge_interactive['comment'][-1])[0]
+      while trim(getline(l:lnum_comment_end_pos)) =~# printf('\m^%s', l:comment_last_line)
+        let l:lnum_comment_end_pos += 1
+      endwhile
+      let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos - 1
+    endif
   endif
 endfunction
 

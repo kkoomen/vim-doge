@@ -17,7 +17,8 @@ even like to write it.
 
 DoGe is a [Do]cumentation [Ge]nerator which will generate instant proper
 documentation based on the function declaration. You can simply put your
-cursor on a function, press `<C-d>`, add brief descriptions and go on coding!
+cursor on a function, press `<C-d>`, jump quickly through TODO items using
+`<Tab>` and `<S-Tab>` to quickly add descriptions and go on coding!
 
 ==============================================================================
 CONFIGURATION                                                    *doge-config*
@@ -31,13 +32,13 @@ The mapping to trigger DoGe.
 (Default: '<Tab>')
 
 The mapping to jump forward to the next TODO item in a comment. Required
-@settings(g:doge_comment_interactive) to be enabled.
+|g:doge_comment_interactive| to be enabled.
 
                                         *g:doge_mapping_comment_jump_backward*
 (Default: '<S-Tab>')
 
 The mapping to jump backward to the previous TODO item in a comment. Required
-@settings(g:doge_comment_interactive) to be enabled.
+|g:doge_comment_interactive| to be enabled.
 
                                                   *g:doge_comment_todo_suffix*
 (Default: 1)
@@ -47,7 +48,7 @@ Adds the TODO suffix after every generated parameter.
                                                   *g:doge_comment_interactive*
 (Default: 1)
 
-Jumps interactively through all TODO items.
+Jumps interactively through all TODO items in the generated comment.
 
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
@@ -55,20 +56,17 @@ FUNCTIONS                                                     *doge-functions*
 doge#generate()                                              *doge#generate()*
   Generates documentation based on available patterns in b:doge_patterns.
 
-doge#comment#jump_forward()                      *doge#comment#jump_forward()*
-  Jumps to the next TODO item in the comment based on the b:doge_interactive
-  variable. Requires @settings(g:doge_comment_interactive) to be enabled.
-
-doge#comment#jump_backward()                    *doge#comment#jump_backward()*
-  Jumps to the previous TODO item in the comment based on the
-  b:doge_interactive variable. Requires @settings(g:doge_comment_interactive)
-  to be enabled.
+doge#comment#jump({direction})                           *doge#comment#jump()*
+  Jumps to the previous and next TODO item in the comment based on the
+  b:doge_interactive variable. Requires |g:doge_comment_interactive| to be
+  enabled. The {direction} can be of the following values: 'forward' |
+  'backward'
 
 doge#comment#update_interactive_comment_info()
                               *doge#comment#update_interactive_comment_info()*
   This function is trigged by the auto-command TextChangedI and will update
   the b:doge_interactive variable where needed. Requires
-  @settings(g:doge_comment_interactive) to be enabled.
+  |g:doge_comment_interactive| to be enabled.
 
 doge#generate#pattern({pattern})                     *doge#generate#pattern()*
   Generates a comment based on a given pattern.

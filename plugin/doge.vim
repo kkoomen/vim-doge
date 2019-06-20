@@ -18,8 +18,8 @@ endif
 "
 " DoGe is a [Do]cumentation [Ge]nerator which will generate instant
 " proper documentation based on the function declaration. You can simply put
-" your cursor on a function, press `<C-d>`, add brief descriptions and go on
-" coding!
+" your cursor on a function, press `<C-d>`, jump quickly through TODO items
+" using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on coding!
 
 " }}}
 " section Preprocessors, preprocessors {{{
@@ -56,7 +56,7 @@ if !exists('g:doge_mapping_comment_jump_forward')
   " (Default: '<Tab>')
   "
   " The mapping to jump forward to the next TODO item in a comment.
-  " Required @settings(g:doge_comment_interactive) to be enabled.
+  " Required @setting(g:doge_comment_interactive) to be enabled.
   let g:doge_mapping_comment_jump_forward = '<Tab>'
 endif
 
@@ -65,7 +65,7 @@ if !exists('g:doge_mapping_comment_jump_backward')
   " (Default: '<S-Tab>')
   "
   " The mapping to jump backward to the previous TODO item in a comment.
-  " Required @settings(g:doge_comment_interactive) to be enabled.
+  " Required @setting(g:doge_comment_interactive) to be enabled.
   let g:doge_mapping_comment_jump_backward = '<S-Tab>'
 endif
 
@@ -81,20 +81,24 @@ if !exists('g:doge_comment_interactive')
   ""
   " (Default: 1)
   "
-  " Jumps interactively through all TODO items.
+  " Jumps interactively through all TODO items in the generated comment.
   let g:doge_comment_interactive = 1
 endif
 
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
-inoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump_forward()
-snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump_forward()
-inoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump_backward()
-snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump_backward()
+nnoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
+nnoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
+inoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
+inoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
+snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
+snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
 
-execute(printf('nmap <unique> %s <Plug>(doge-generate)', g:doge_mapping))
+execute(printf('nmap <silent> <unique> %s <Plug>(doge-generate)', g:doge_mapping))
+execute(printf('nmap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+execute(printf('nmap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 execute(printf('imap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
 execute(printf('imap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
 execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 
 augroup doge

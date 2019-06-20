@@ -1,6 +1,5 @@
 doge	doge.txt	/*doge*
-doge#comment#jump_backward()	doge.txt	/*doge#comment#jump_backward()*
-doge#comment#jump_forward()	doge.txt	/*doge#comment#jump_forward()*
+doge#comment#jump()	doge.txt	/*doge#comment#jump()*
 doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_interactive_comment_info()*
 doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
