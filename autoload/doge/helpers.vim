@@ -39,7 +39,7 @@ endfunction
 " Useful when returning a dynamic value such as a user-configurable setting.
 function! doge#helpers#keyseq(seq) abort
   let l:escaped_keyseq = printf('"%s"', escape(
-        \ substitute(escape(g:doge_mapping_comment_jump_forward, '\'), '<', '\\<', 'g'),
+        \ substitute(escape(a:seq, '\'), '<', '\\<', 'g'),
         \ '"'))
   let l:keyseq = eval(l:escaped_keyseq)
   return l:keyseq
