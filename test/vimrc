@@ -8,6 +8,10 @@ else
   set runtimepath=/home/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,/testplugin,/vader
 endif
 
+" Disable interactive mode in tests, because it will break existing tests and we
+" want to test this manually.
+let g:doge_comment_interactive = 0
+
 " The following is just an example
 filetype plugin indent on
 syntax on
