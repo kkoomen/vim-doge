@@ -6,10 +6,9 @@ set cpoptions&vim
 " @function doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
 " Returns the amount of occurences of a word.
 "
-" The 2nd and 3rd arguments, named lnum_start and lnum_end, can be used to
-" limit the count in-between a range of lines. Both have to be supplied at the
-" same time. When not specified the default value for the range will be '%',
-" indicating a full buffer count.
+" The 2nd and 3rd arguments, named lnum_start and lnum_end, can be used to limit
+" the count in-between a range of lines. The default value for the range will be
+" '%', indicating a full buffer count.
 " NOTE: When lnum_start is a bigger number than lnum_end then these values
 " will be flipped to ensure a correct range format.
 function! doge#helpers#count(word, ...) abort

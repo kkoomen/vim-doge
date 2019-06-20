@@ -67,7 +67,7 @@ doge#comment#jump_backward()                    *doge#comment#jump_backward()*
 doge#comment#update_interactive_comment_info()
                               *doge#comment#update_interactive_comment_info()*
   This function is trigged by the auto-command TextChangedI and will update
-  the b:doge_interactive variable where needed.  Requires
+  the b:doge_interactive variable where needed. Requires
   @settings(g:doge_comment_interactive) to be enabled.
 
 doge#generate#pattern({pattern})                     *doge#generate#pattern()*
@@ -78,11 +78,10 @@ doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
   Returns the amount of occurences of a word.
 
   The 2nd and 3rd arguments, named lnum_start and lnum_end, can be used to
-  limit the count in-between a range of lines. Both have to be supplied at the
-  same time. When not specified the default value for the range will be '%',
-  indicating a full buffer count. NOTE: When lnum_start is a bigger number
-  than lnum_end then these values will be flipped to ensure a correct range
-  format.
+  limit the count in-between a range of lines. The default value for the range
+  will be '%', indicating a full buffer count. NOTE: When lnum_start is a
+  bigger number than lnum_end then these values will be flipped to ensure a
+  correct range format.
 
 doge#helpers#keyseq({seq})                             *doge#helpers#keyseq()*
   Creates a sequence of keys which can be used as a return value for mappings.

@@ -94,7 +94,7 @@ endfunction
 ""
 " @public
 " This function is trigged by the auto-command TextChangedI and will update the
-" b:doge_interactive variable where needed.  Requires
+" b:doge_interactive variable where needed. Requires
 " @settings(g:doge_comment_interactive) to be enabled.
 function! doge#comment#update_interactive_comment_info() abort
   if exists('b:doge_interactive')
