@@ -124,7 +124,7 @@ function! doge#generate#pattern(pattern) abort
                 \ 'lnum_comment_end_pos': (l:comment_lnum_insert_position + len(l:comment)),
                 \ }
           " Go to the top of the comment and select the first TODO.
-          execute(printf(':%d', l:comment_lnum_insert_position))
+          exe l:comment_lnum_insert_position
           call search('TODO', 'W')
           execute("normal! viwo\<C-g>")
         endif

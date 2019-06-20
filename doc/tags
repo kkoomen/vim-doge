@@ -5,6 +5,7 @@ doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_in
 doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
+doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*

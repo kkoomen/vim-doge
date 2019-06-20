@@ -33,5 +33,17 @@ function! doge#helpers#count(word, ...) abort
   return trim(strpart(l:cnt, 0, stridx(l:cnt, ' ')))
 endfunction
 
+""
+" @public
+" Creates a sequence of keys which can be used as a return value for mappings.
+" Useful when returning a dynamic value such as a user-configurable setting.
+function! doge#helpers#keyseq(seq) abort
+  let l:escaped_keyseq = printf('"%s"', escape(
+        \ substitute(escape(g:doge_mapping_comment_jump_forward, '\'), '<', '\\<', 'g'),
+        \ '"'))
+  let l:keyseq = eval(l:escaped_keyseq)
+  return l:keyseq
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -53,20 +53,20 @@ endif
 
 if !exists('g:doge_mapping_comment_jump_forward')
   ""
-  " (Default: '<TAB>')
+  " (Default: '<Tab>')
   "
   " The mapping to jump forward to the next TODO item in a comment.
   " Required @settings(g:doge_comment_interactive) to be enabled.
-  let g:doge_mapping_comment_jump_forward = '<TAB>'
+  let g:doge_mapping_comment_jump_forward = '<Tab>'
 endif
 
 if !exists('g:doge_mapping_comment_jump_backward')
   ""
-  " (Default: '<S-TAB>')
+  " (Default: '<S-Tab>')
   "
   " The mapping to jump backward to the previous TODO item in a comment.
   " Required @settings(g:doge_comment_interactive) to be enabled.
-  let g:doge_mapping_comment_jump_backward = '<S-TAB>'
+  let g:doge_mapping_comment_jump_backward = '<S-Tab>'
 endif
 
 if !exists('g:doge_comment_todo_suffix')
@@ -86,19 +86,14 @@ if !exists('g:doge_comment_interactive')
 endif
 
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
-execute(printf('nmap %s <Plug>(doge-generate)', g:doge_mapping))
+inoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump_forward()
+snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump_forward()
+inoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump_backward()
+snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump_backward()
 
-nnoremap <Plug>(doge-comment-jump-forward) :call doge#comment#jump_forward()<CR>
-inoremap <Plug>(doge-comment-jump-forward) <C-R>=doge#comment#jump_forward()<CR>
-snoremap <Plug>(doge-comment-jump-forward) <ESC>:call doge#comment#jump_forward()<CR>
-nnoremap <Plug>(doge-comment-jump-backward) :call doge#comment#jump_backward()<CR>
-inoremap <Plug>(doge-comment-jump-backward) <C-R>=doge#comment#jump_backward()<CR>
-snoremap <Plug>(doge-comment-jump-backward) <ESC>:call doge#comment#jump_backward()<CR>
-
-execute(printf('nmap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+execute(printf('nmap <unique> %s <Plug>(doge-generate)', g:doge_mapping))
 execute(printf('imap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
 execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-execute(printf('nmap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 execute(printf('imap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 
