@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-# This file contains test scenarios and their expected results. You should be
-# able to generate the examples below.
-
 # TODO
 # @param arg1 [type] TODO
 # @param arg_2 [type] TODO

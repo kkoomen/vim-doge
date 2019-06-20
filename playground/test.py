@@ -2,11 +2,6 @@
 # -*- coding: utf-8 -*-
 # vim: fenc=utf-8 ts=4 sw=4 et
 
-"""
-This file contains test scenarios and their expected results. You should be able
-to generate the examples below.
-"""
-
 def myFunc():
     """
     TODO

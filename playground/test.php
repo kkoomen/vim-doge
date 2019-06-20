@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file contains test scenarios and their expected results. You should be
- * able to generate the examples below.
- */
-
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseBase, Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
