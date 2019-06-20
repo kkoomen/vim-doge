@@ -139,15 +139,6 @@ class myClass {
    * @param mixed $arg4 TODO
    * @param mixed $arg5 TODO
    */
-  /**
-   * TODO
-   *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
-   */
   private function myPrivateMultilineMethod(
     array $arg1,
     \Test\Namespacing\With\A\ClassInterface $arg2,
