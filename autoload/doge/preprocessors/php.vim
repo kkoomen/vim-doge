@@ -29,7 +29,7 @@ function! s:get_parameter_type_fqn(type) abort
     let l:lnum_use_statement = search(l:use_statement_regex, 'n')
     if l:lnum_use_statement > 0
       let l:matches = matchlist(getline(l:lnum_use_statement), l:use_statement_regex)
-      let l:fqn = '\' . substitute(get(l:matches, 1), '^\\\+', '', '')
+      let l:fqn = '\' . substitute(l:matches[1], '^\\\+', '', '')
     endif
   elseif l:fqn !~# '^\\'
     let l:fqn = '\' . l:fqn
@@ -60,13 +60,13 @@ function! s:get_property_type_via_constructor(propertyName) abort
   " Search for the constructor function in that class.
   if match(l:class_content, '__construct(') != -1
     let l:constructor_func_match = filter(matchlist(l:class_content, '\m\(__construct(.\{-})\s*{.\{-}}\)'), "v:val !=# ''")
-    let l:constructor_func_contents = get(l:constructor_func_match, 1)
+    let l:constructor_func_contents = l:constructor_func_match[1]
     if l:constructor_func_contents != v:false
       " Constructor exists, grab the type hint and if it exists then set it.
       let l:property_type_hint_pattern = printf('\m\<\([[:alnum:]_\\]\+\)\s\+\($[[:alnum:]_]\+\)\>\ze\%(.\{-}$this->%s\s*=\s*\2\>\)', a:propertyName)
       let l:matches = matchlist(l:constructor_func_contents, l:property_type_hint_pattern)
       if len(l:matches) > 1
-        let l:fqn = <SID>get_parameter_type_fqn(get(l:matches, 1))
+        let l:fqn = <SID>get_parameter_type_fqn(l:matches[1])
         let l:type = l:fqn
       endif
     endif

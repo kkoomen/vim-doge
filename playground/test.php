@@ -19,9 +19,9 @@ function myFunc() {}
  * TODO
  *
  * @param array $arg1 TODO
- * @param string $arg2 TODO
- * @param mixed $arg3 TODO
- * @param \Drupal\core\Entity\Node $arg4 TODO
+ * @param string $arg2 
+ * @param mixed $arg3 
+ * @param \Drupal\core\Entity\Node $arg4 a
  */
 function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {
   //
@@ -135,6 +135,15 @@ class myClass {
     //
   }
 
+  /**
+   * TODO
+   *
+   * @param array $arg1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
+   * @param int $arg3 TODO
+   * @param mixed $arg4 TODO
+   * @param mixed $arg5 TODO
+   */
   /**
    * TODO
    *

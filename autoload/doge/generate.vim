@@ -9,7 +9,7 @@ function! doge#generate#pattern(pattern) abort
   let l:lines = getline('.', line('.') + 15)
 
   " Skip if the cursor doesn't start with text.
-  if empty(trim(get(l:lines, 0)))
+  if empty(trim(l:lines[0]))
     return 0
   endif
 
@@ -20,7 +20,11 @@ function! doge#generate#pattern(pattern) abort
   endif
 
   " Extract the primary tokens.
-  let l:tokens = get(doge#token#extract(l:curr_line, a:pattern['match'], a:pattern['match_group_names']), 0)
+  let l:tokens = doge#token#extract(
+        \ l:curr_line,
+        \ a:pattern['match'],
+        \ a:pattern['match_group_names']
+        \ )[0]
 
   try
     let l:preprocess_fn = printf('doge#preprocessors#%s#tokens', &filetype)
@@ -83,11 +87,11 @@ function! doge#generate#pattern(pattern) abort
   endif
 
   " vint: -ProhibitUnusedVariable
-  let l:IndentFunc = function('doge#indent#add', [l:comment_lnum_inherited_indent])
+  let l:Indent = function('doge#indent#add', [l:comment_lnum_inherited_indent])
   " vint: +ProhibitUnusedVariable
 
   " Indent the comment.
-  let l:comment = map(l:comment, { k, line -> l:IndentFunc(line) })
+  let l:comment = map(l:comment, { k, line -> l:Indent(line) })
 
   try
     let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', &filetype)
@@ -99,6 +103,34 @@ function! doge#generate#pattern(pattern) abort
   " Write the comment.
   call append(l:comment_lnum_insert_position, l:comment)
   echo '[DoGe] Successfully inserted comment.'
+
+  if g:doge_comment_interactive == v:true
+    if a:pattern['comment']['insert'] ==# 'below'
+      " TODO: implement python
+    else
+      let l:todo_match = search('TODO', 'bnW', l:comment_lnum_insert_position)
+
+      if l:todo_match != 0
+        let l:todo_count = doge#helpers#count(
+              \ 'TODO',
+              \ (l:comment_lnum_insert_position + 1),
+              \ (l:comment_lnum_insert_position + 1 + len(l:comment))
+              \ )
+        if l:todo_count > 0
+          let b:doge_interactive = {
+                \ 'todos_total': l:todo_count,
+                \ 'comment': l:comment,
+                \ 'lnum_comment_start_pos': (l:comment_lnum_insert_position + 1),
+                \ 'lnum_comment_end_pos': (l:comment_lnum_insert_position + len(l:comment)),
+                \ }
+          " Go to the top of the comment and select the first TODO.
+          execute(printf(':%d', l:comment_lnum_insert_position))
+          call search('TODO', 'W')
+          execute("normal! viwo\<C-g>")
+        endif
+      endif
+    endif
+  endif
 
   " Return 1 to indicate we have succesfully inserted the comment.
   return 1
