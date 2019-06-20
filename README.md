@@ -119,8 +119,10 @@ Jumps interactively through all TODO items in the generated comment.
 # Contributing
 
 Help or feedback is always appreciated. If you find any bugs, feel free to
-submit an issue. If you find any improvements, feel free to submit a pull
-request.
+[submit a bug report](https://github.com/kkoomen/doge/issues/new?labels=bug&template=bug_report.md).
+If you think DoGe can be improved, feel free to submit a
+[feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md)
+or a pull request.
 
 ## Linting
 
