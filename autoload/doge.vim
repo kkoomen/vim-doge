@@ -19,7 +19,7 @@ function! doge#generate() abort
     echo 'Is this a bug? Use the following link to quickly sent in a bug report for kkoomen/doge:'
     echohl None
     let l:issue_title = substitute(&filetype . ' expression does not generate comment', '\s\+', '+', 'g')
-    echo printf('https://github.com/kkoomen/doge/issues/new?labels=bug&template=bug_report.md&title=[BUG]+%s', l:issue_title)
+    echo printf('https://github.com/kkoomen/doge/issues/new?labels=bug&template=bug_report.md&title=%s', l:issue_title)
   else
     echo '[DoGe] b:doge_patterns variable not found for filetype "' . &filetype . '".'
     echo '--'
@@ -27,7 +27,7 @@ function! doge#generate() abort
     echo 'Should this filetype be supported? Use the following link to quickly sent in a feature request for kkoomen/doge:'
     echohl None
     let l:issue_title = substitute('Add support for ' . &filetype, '\s\+', '+', 'g')
-    echo printf('https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=[FEATURE]+%s', l:issue_title)
+    echo printf('https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%s', l:issue_title)
   endif
 endfunction
 
