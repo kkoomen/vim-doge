@@ -56,7 +56,7 @@ if !exists('g:doge_mapping_comment_jump_forward')
   " (Default: '<Tab>')
   "
   " The mapping to jump forward to the next TODO item in a comment.
-  " Required @setting(g:doge_comment_interactive) to be enabled.
+  " Requires @setting(g:doge_comment_interactive) to be enabled.
   let g:doge_mapping_comment_jump_forward = '<Tab>'
 endif
 
@@ -65,7 +65,7 @@ if !exists('g:doge_mapping_comment_jump_backward')
   " (Default: '<S-Tab>')
   "
   " The mapping to jump backward to the previous TODO item in a comment.
-  " Required @setting(g:doge_comment_interactive) to be enabled.
+  " Requires @setting(g:doge_comment_interactive) to be enabled.
   let g:doge_mapping_comment_jump_backward = '<S-Tab>'
 endif
 

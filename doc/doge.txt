@@ -31,13 +31,13 @@ The mapping to trigger DoGe.
                                          *g:doge_mapping_comment_jump_forward*
 (Default: '<Tab>')
 
-The mapping to jump forward to the next TODO item in a comment. Required
+The mapping to jump forward to the next TODO item in a comment. Requires
 |g:doge_comment_interactive| to be enabled.
 
                                         *g:doge_mapping_comment_jump_backward*
 (Default: '<S-Tab>')
 
-The mapping to jump backward to the previous TODO item in a comment. Required
+The mapping to jump backward to the previous TODO item in a comment. Requires
 |g:doge_comment_interactive| to be enabled.
 
                                                   *g:doge_comment_todo_suffix*

@@ -90,11 +90,31 @@ Run `:help doge` to get the full help page.
 
 Sets the mapping to trigger DoGe.
 
+### `g:doge_mapping_comment_jump_forward`
+
+(Default: `<Tab>`)
+
+The mapping to jump forward to the next TODO item in a comment. Requires
+`g:doge_comment_interactive` to be enabled.
+
+### `g:doge_mapping_comment_jump_backward`
+
+(Default: `<S-Tab>`)
+
+The mapping to jump backward to the next TODO item in a comment. Requires
+`g:doge_comment_interactive` to be enabled.
+
 ### `g:doge_comment_todo_suffix`
 
 (Default: `1`)
 
 Adds the TODO suffix after every generated parameter.
+
+### `g:doge_comment_interactive`
+
+(Default: `1`)
+
+Jumps interactively through all TODO items in the generated comment.
 
 # Contributing
 
