@@ -73,6 +73,17 @@ doge#comment#update_interactive_comment_info()
 doge#generate#pattern({pattern})                     *doge#generate#pattern()*
   Generates a comment based on a given pattern.
 
+doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
+                                                        *doge#helpers#count()*
+  Returns the amount of occurences of a word.
+
+  The 2nd and 3rd arguments, named lnum_start and lnum_end, can be used to
+  limit the count in-between a range of lines. Both have to be supplied at the
+  same time. When not specified the default value for the range will be '%',
+  indicating a full buffer count. NOTE: When lnum_start is a bigger number
+  than lnum_end then these values will be flipped to ensure a correct range
+  format.
+
 doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent.
 

@@ -4,6 +4,7 @@ doge#comment#jump_forward()	doge.txt	/*doge#comment#jump_forward()*
 doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_interactive_comment_info()*
 doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
+doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
