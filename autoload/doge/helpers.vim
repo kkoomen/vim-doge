@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-function! doge#helpers#count(word, ...)
+function! doge#helpers#count(word, ...) abort
   let l:cursor_pos = getpos('.')
   let l:range = '%'
   if (type(a:1) == v:t_number && type(a:2) == v:t_number) && (a:1 < a:2)
