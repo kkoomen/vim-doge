@@ -119,6 +119,15 @@ function! doge#comment#update_interactive_comment_info() abort
       while trim(getline(l:lnum_comment_end_pos)) =~# printf('\m^%s', l:comment_last_line)
         let l:lnum_comment_end_pos += 1
       endwhile
+
+      " If we're still at the same line we're probably dealing with python
+      " comments (or something equivalent) where it only has an opener and
+      " closer and each comment line does not start with a comment leader, so
+      " just search for the last line of the comment
+      if l:lnum_comment_end_pos == line('.')
+        let l:lnum_comment_end_pos = search(l:comment_last_line, 'nW')
+      endif
+
       let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos - 1
     endif
   endif
