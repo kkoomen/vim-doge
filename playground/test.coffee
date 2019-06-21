@@ -21,20 +21,20 @@ myFunc = (x) => x * x
 ###
 @description TODO
 @function myFunc
-@param {*} arg1 TODO
-@param {*} arg2 TODO
-@param {*} arg3 TODO
+@param {*} p1 TODO
+@param {*} p2 TODO
+@param {*} p3 TODO
 ###
-myFunc = (arg1, arg2, arg3) -> x * x
+myFunc = (p1, p2, p3) -> x * x
 
 ###
 @description TODO
 @function myFunc
-@param {*} $arg1 TODO
-@param {*} $arg2 TODO
-@param {*} $arg3 TODO
+@param {*} $p1 TODO
+@param {*} $p2 TODO
+@param {*} $p3 TODO
 ###
-myFunc = ($arg1, $arg2, $arg3) => x * x
+myFunc = ($p1, $p2, $p3) => x * x
 
 ###
 @description TODO

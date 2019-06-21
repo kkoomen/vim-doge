@@ -83,11 +83,11 @@ call add(b:doge_patterns, {
 "
 " Matches the following scenarios:
 "
-"   Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()) => {};
+"   Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()) => {};
 "
-"   Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()) {};
+"   Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
 "
-"   Person.prototype.greet = function*(arg1: string = 'default', arg2: Immutable.List = Immutable.List()) {};
+"   Person.prototype.greet = function*(p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
 call add(b:doge_patterns, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s*\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
 \  'match_group_names': ['className', 'funcName', 'async', 'parameters', 'returnType'],
@@ -120,19 +120,19 @@ call add(b:doge_patterns, {
 "     // ...
 "   })(window, document, jQuery);
 "
-"   (arg1: array = []) => (arg2: string) => { console.log(5); }
+"   (p1: array = []) => (p2: string) => { console.log(5); }
 "
-"   const user = (arg1 = 'default') => (subarg1, subarg2 = 'default') => 5;
+"   const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
 "
-"   (arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
+"   (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
 "
-"   var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+"   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 "
-"   var myFunc = function*($arg1 = 'value', arg2 = [], arg3, arg4) {}
+"   var myFunc = function*($p1 = 'value', p2 = [], p3, p4) {}
 "
-"   var myFunc = async function*($arg1 = 'value', arg2 = [], arg3, arg4) {}
+"   var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
 "
-"   var myFunc = async ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+"   var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\(async\s*\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
 \  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],

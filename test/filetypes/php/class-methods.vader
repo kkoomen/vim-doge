@@ -31,7 +31,7 @@ Expect php (class method with nothing but the text 'TODO'):
 Given php (class method with parameters):
   class Test {
 
-    public function myMethod(array &$arg1) {}
+    public function myMethod(array &$p1) {}
 
   }
 
@@ -45,9 +45,9 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $arg1 TODO
+     * @param array $p1 TODO
      */
-    public function myMethod(array &$arg1) {}
+    public function myMethod(array &$p1) {}
 
   }
 
@@ -56,7 +56,7 @@ Expect php (generated comment with @param tags):
 Given php (static protected class method with parameters):
   class Test {
 
-    protected static function myMethod(array &$arg1) {}
+    protected static function myMethod(array &$p1) {}
 
   }
 
@@ -70,9 +70,9 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $arg1 TODO
+     * @param array $p1 TODO
      */
-    protected static function myMethod(array &$arg1) {}
+    protected static function myMethod(array &$p1) {}
 
   }
 
@@ -81,7 +81,7 @@ Expect php (generated comment with @param tags):
 Given php (final public class method with parameters):
   class Test {
 
-    public final function myMethod(array &$arg1) {}
+    public final function myMethod(array &$p1) {}
 
   }
 
@@ -95,9 +95,9 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $arg1 TODO
+     * @param array $p1 TODO
      */
-    public final function myMethod(array &$arg1) {}
+    public final function myMethod(array &$p1) {}
 
   }
 
@@ -106,7 +106,7 @@ Expect php (generated comment with @param tags):
 Given php (private static final class method with parameters):
   class Test {
 
-    private static final function myMethod(array &$arg1) {}
+    private static final function myMethod(array &$p1) {}
 
   }
 
@@ -120,9 +120,9 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $arg1 TODO
+     * @param array $p1 TODO
      */
-    private static final function myMethod(array &$arg1) {}
+    private static final function myMethod(array &$p1) {}
 
   }
 

@@ -2,7 +2,7 @@
 # Methods declared with a ':'.
 # ==============================================================================
 Given lua (method declared with a ':' with parameters):
-  function a.b:c (arg1, arg2)
+  function a.b:c (p1, p2)
   end
 
 Do (trigger doge):
@@ -10,16 +10,16 @@ Do (trigger doge):
 
 Expect lua (generated comment with @param tags):
   -- TODO
-  -- @param arg1 TODO
-  -- @param arg2 TODO
-  function a.b:c (arg1, arg2)
+  -- @param p1 TODO
+  -- @param p2 TODO
+  function a.b:c (p1, p2)
   end
 
 # ==============================================================================
 # Methods declared with a '.'.
 # ==============================================================================
 Given lua (method declared with a '.' with parameters):
-  a.b.c = function (self, arg1, arg2)
+  a.b.c = function (self, p1, p2)
   end
 
 Do (trigger doge):
@@ -28,9 +28,9 @@ Do (trigger doge):
 Expect lua (generated comment with @param tags):
   -- TODO
   -- @param self TODO
-  -- @param arg1 TODO
-  -- @param arg2 TODO
-  a.b.c = function (self, arg1, arg2)
+  -- @param p1 TODO
+  -- @param p2 TODO
+  a.b.c = function (self, p1, p2)
   end
 
 # ==============================================================================

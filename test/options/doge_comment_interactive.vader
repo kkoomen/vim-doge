@@ -2,7 +2,7 @@
 # Tests the functionality for the g:doge_comment_interactive option.
 # ==============================================================================
 Given php (function with parameters where g:doge_comment_interactive = 1):
-  function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
 Do (trigger doge):
   :let g:doge_comment_interactive = 1\<CR>
@@ -17,12 +17,12 @@ Expect php (generated comment with @param tags):
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param string $arg2 TODO
-   * @param mixed $arg3 TODO
-   * @param \Drupal\core\Entity\Node $arg4 TODO
+   * @param array $p1 TODO
+   * @param string $p2 TODO
+   * @param mixed $p3 TODO
+   * @param \Drupal\core\Entity\Node $p4 TODO
    */
-  function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
 # ------------------------------------------------------------------------------
 
@@ -107,14 +107,14 @@ Expect php (generated comment with @param tags with brief descriptions):
   /**
    * myFunction
    *
-   * @param array $arg1 Lorem ipsum.
-   * @param string $arg2 Dor sit amet.
-   * @param mixed $arg3 
+   * @param array $p1 Lorem ipsum.
+   * @param string $p2 Dor sit amet.
+   * @param mixed $p3 
    *   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-   * @param \Drupal\core\Entity\Node $arg4 
+   * @param \Drupal\core\Entity\Node $p4 
    *   Lorem ipsum dor sit amet.    
    */
-  function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
 Do (let g:doge_comment_interactive = 0):
   :let g:doge_comment_interactive = 0\<CR>

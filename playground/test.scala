@@ -106,9 +106,9 @@ def move(dx: Int, dy: Int): Unit = {}
 
 /** TODO
  *
- * @param arg any TODO
+ * @param p any TODO
  */
-class name(arg) extends A with B {
+class name(p) extends A with B {
   /** TODO
    *
    * @param x Int TODO

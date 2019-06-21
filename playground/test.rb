@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
 # TODO
-# @param arg1 [type] TODO
-# @param arg_2 [type] TODO
-def myFunc(arg1, arg_2 = some_default_value)
+# @param p1 [type] TODO
+# @param p_2 [type] TODO
+def myFunc(p1, p_2 = some_default_value)
 end
 
 # TODO
@@ -12,10 +12,10 @@ def myFunc (format = :html)
 end
 
 # TODO
-# @param arg1 [type] TODO
-# @param arg2 [type] TODO
-# @param arg3 [type] TODO
-def parameters (arg1,arg2=4, arg3*)
+# @param p1 [type] TODO
+# @param p2 [type] TODO
+# @param p3 [type] TODO
+def parameters (p1,p2=4, p3*)
 end
 
 # TODO

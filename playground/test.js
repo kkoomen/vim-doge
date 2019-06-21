@@ -15,31 +15,31 @@
 
   /**
    * @description TODO
-   * @param {string} $arg1 TODO
+   * @param {string} $p1 TODO
    */
-  function myFunc($arg1: string = 'value') {}
+  function myFunc($p1: string = 'value') {}
 
 })(window, document, jQuery);
 
 /**
  * @description TODO
  * @function Person#greet
- * @param {string} arg1 TODO
- * @param {Immutable.List} arg2 TODO
+ * @param {string} p1 TODO
+ * @param {Immutable.List} p2 TODO
  * @return {string[]} TODO
  */
-Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] => {
+Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] => {
   //
 };
 
 /**
  * @description TODO
  * @function Person#greet
- * @param {string} arg1 TODO
- * @param {Immutable.List} arg2 TODO
+ * @param {string} p1 TODO
+ * @param {Immutable.List} p2 TODO
  * @return {string[]} TODO
  */
-Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] {
+Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] {
   //
 };
 
@@ -79,37 +79,37 @@ perfectSquares = async function*() {
  * @description TODO
  * @async
  * @function myFunc
- * @param {*} $arg1 TODO
- * @param {*} arg2 TODO
- * @param {*} arg3 TODO
- * @param {*} arg4 TODO
+ * @param {*} $p1 TODO
+ * @param {*} p2 TODO
+ * @param {*} p3 TODO
+ * @param {*} p4 TODO
  */
-var myFunc = async function*($arg1 = 'value', arg2 = [], arg3, arg4) {}
+var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
 
 /**
  * @description TODO
  * @async
  * @function myFunc
- * @param {*} $arg1 TODO
- * @param {*} arg2 TODO
- * @param {*} arg3 TODO
- * @param {*} arg4 TODO
+ * @param {*} $p1 TODO
+ * @param {*} p2 TODO
+ * @param {*} p3 TODO
+ * @param {*} p4 TODO
  */
-var myFunc = async ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 
 /**
  * @description TODO
- * @param {string} $arg1 TODO
- * @param {Foo|Bar|Baz} arg2 TODO
+ * @param {string} $p1 TODO
+ * @param {Foo|Bar|Baz} p2 TODO
  * @return {Foo|Bar} TODO
  */
 /**
  * @description TODO
- * @param {string} $arg1 TODO
- * @param {Foo|Bar|Baz} arg2 TODO
+ * @param {string} $p1 TODO
+ * @param {Foo|Bar|Baz} p2 TODO
  * @return {Foo|Bar} TODO
  */
-function myFunc($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) {}
+function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
 /**
  * @description TODO
@@ -120,29 +120,29 @@ Person.prototype.greet = () => {}
 /**
  * @description TODO
  * @function myFunc
- * @param {*} $arg1 TODO
- * @param {*} arg2 TODO
- * @param {*} arg3 TODO
- * @param {*} arg4 TODO
+ * @param {*} $p1 TODO
+ * @param {*} p2 TODO
+ * @param {*} p3 TODO
+ * @param {*} p4 TODO
  */
-var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
 /**
  * @description TODO
  * @function myFunc
- * @param {string} $arg1 TODO
- * @param {string[]} arg2 TODO
- * @param {number} arg3 TODO
- * @param {float} arg4 TODO
+ * @param {string} $p1 TODO
+ * @param {string[]} p2 TODO
+ * @param {number} p3 TODO
+ * @param {float} p4 TODO
  * @return {string[]} TODO
  */
-var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+var myFunc = function($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 /**
  * @description TODO
- * @param {*} arg1 TODO
+ * @param {*} p1 TODO
  */
-function myFunc(arg1) {
+function myFunc(p1) {
   var a = 2;
 }
 
@@ -150,10 +150,10 @@ var myObj = {
   myFunc: function() {
     /**
      * @description TODO
-     * @param {string} arg1 TODO
-     * @param {Immutable.List} arg2 TODO
+     * @param {string} p1 TODO
+     * @param {Immutable.List} p2 TODO
      */
-    function(arg1: string = 'default', arg2: Immutable.List = Immutable.List()) {
+    function(p1: string = 'default', p2: Immutable.List = Immutable.List()) {
       var a = 2;
     };
 
@@ -173,35 +173,35 @@ var myObj = {
 /**
  * @description TODO
  * @function user
- * @param {*} arg1 TODO
+ * @param {*} p1 TODO
  */
-const user = (arg1 = 'default') => (subarg1, subarg2 = 'default') => 5;
+const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
 
 /**
  * @description TODO
  * @function
- * @param {string} arg1 TODO
- * @param {int} arg2 TODO
- * @param {*} arg3 TODO
- * @param {Immutable.List} arg4 TODO
- * @param {string[]} arg5 TODO
- * @param {float} arg6 TODO
+ * @param {string} p1 TODO
+ * @param {int} p2 TODO
+ * @param {*} p3 TODO
+ * @param {Immutable.List} p4 TODO
+ * @param {string[]} p5 TODO
+ * @param {float} p6 TODO
  * @return {number[]} TODO
  */
-(arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
+(p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
 
 /**
  * @description TODO
  * @function user
- * @param {string} arg1 TODO
- * @param {int} arg2 TODO
- * @param {*} arg3 TODO
- * @param {Immutable.List} arg4 TODO
- * @param {string[]} arg5 TODO
- * @param {float} arg6 TODO
+ * @param {string} p1 TODO
+ * @param {int} p2 TODO
+ * @param {*} p3 TODO
+ * @param {Immutable.List} p4 TODO
+ * @param {string[]} p5 TODO
+ * @param {float} p6 TODO
  * @return {number[]} TODO
  */
-const user = (arg1: string = 'default', arg2: int = 5, arg3, arg4: Immutable.List = [], arg5: string[] = [], arg6: float = 0.5): number[] => { };
+const user = (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
 
 const myObj = {
   myFunc: () => {
@@ -212,11 +212,11 @@ const myObj = {
 
   /**
    * @description TODO
-   * @param {string} arg1 TODO
-   * @param {int} arg2 TODO
+   * @param {string} p1 TODO
+   * @param {int} p2 TODO
    * @return {string} TODO
    */
-  myFunc(arg1: string, arg2: int = 5): string {
+  myFunc(p1: string, p2: int = 5): string {
     //
   }
 };
@@ -253,9 +253,9 @@ let Easing = "ease-in" | "ease-out" | "ease-in-out" = "ease-in";
 /**
  * @description TODO
  * @function
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  */
-(arg1: array = []) => (arg2: string) => { console.log(5); }
+(p1: array = []) => (p2: string) => { console.log(5); }
 
 /**
  * @description TODO
@@ -328,59 +328,59 @@ function isNumber(x: any): x is number {}
 /**
  * @description TODO
  * @function
- * @param {int} arg1 TODO
+ * @param {int} p1 TODO
  */
-(arg1: int = 5) => { console.log(5); }
+(p1: int = 5) => { console.log(5); }
 
 /**
  * @description TODO
  * @function
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {Sequence[T]} TODO
  */
-(arg1: array = []): Sequence[T] => { console.log(5); }
+(p1: array = []): Sequence[T] => { console.log(5); }
 
 /**
  * @description TODO
  * @function
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
  */
-(arg1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
+(p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
 /**
  * @description TODO
  * @function user1
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
  */
-const user1 = (arg1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
+const user1 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
-let user2 = (arg1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
+let user2 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
 /**
  * @description TODO
  * @function user3
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
  */
-var user3 = (arg1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
+var user3 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
 /**
  * @description TODO
  * @function $_123user3
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {x is number} TODO
  */
-const $_123user3 = (arg1: array = []): x is number => { console.log(5); }
+const $_123user3 = (p1: array = []): x is number => { console.log(5); }
 
 /**
  * @description TODO
  * @function rollDice
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {1|2|3|4|5|6} TODO
  */
-const rollDice = (arg1: array = []): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
+const rollDice = (p1: array = []): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
 
 /**
  * @description TODO
@@ -411,10 +411,10 @@ const myFunc = ({ children }) => {
 /**
  * @description TODO
  * @function rollDice
- * @param {array} arg1 TODO
+ * @param {array} p1 TODO
  * @return {1|2|3|4|5|6} TODO
  */
-const rollDice = (arg1: array = []): (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); }
+const rollDice = (p1: array = []): (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); }
 
 /**
  * @description TODO
@@ -524,13 +524,13 @@ export class Child extends Parent implements CustomInterfaceName {}
 /**
  * @description TODO
  * @function myFunc
- * @param {string} $arg1 TODO
- * @param {string[]} arg2 TODO
- * @param {number} arg3 TODO
- * @param {float} arg4 TODO
+ * @param {string} $p1 TODO
+ * @param {string[]} p2 TODO
+ * @param {number} p3 TODO
+ * @param {float} p4 TODO
  * @return {string[]} TODO
  */
-const myFunc = ($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 /**
  * TODO

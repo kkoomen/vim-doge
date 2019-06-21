@@ -9,7 +9,7 @@
 Given php (function where the type should result in its FQN):
   use Symfony\Component\HttpFoundation\Response;
 
-  function myFunction(Response $arg1) {}
+  function myFunction(Response $p1) {}
 
 Do (trigger doge):
   :3\<CR>
@@ -21,16 +21,16 @@ Expect php (generated comment containing the FQN):
   /**
    * TODO
    *
-   * @param \Symfony\Component\HttpFoundation\Response $arg1 TODO
+   * @param \Symfony\Component\HttpFoundation\Response $p1 TODO
    */
-  function myFunction(Response $arg1) {}
+  function myFunction(Response $p1) {}
 
 # ------------------------------------------------------------------------------
 
 Given php (function where the type should result in its FQN with multiple FQN statements after it):
   use Symfony\Component\HttpFoundation\Response, use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
-  function myFunction(Response $arg1) {}
+  function myFunction(Response $p1) {}
 
 Do (trigger doge):
   :3\<CR>
@@ -42,16 +42,16 @@ Expect php (generated comment containing the FQN):
   /**
    * TODO
    *
-   * @param \Symfony\Component\HttpFoundation\Response $arg1 TODO
+   * @param \Symfony\Component\HttpFoundation\Response $p1 TODO
    */
-  function myFunction(Response $arg1) {}
+  function myFunction(Response $p1) {}
 
 # ------------------------------------------------------------------------------
 
 Given php (function where the type should result in its FQN with multiple FQN statements before it):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
-  function myFunction(Response $arg1) {}
+  function myFunction(Response $p1) {}
 
 Do (trigger doge):
   :3\<CR>
@@ -63,9 +63,9 @@ Expect php (generated comment containing the FQN):
   /**
    * TODO
    *
-   * @param \Symfony\Component\HttpFoundation\Response $arg1 TODO
+   * @param \Symfony\Component\HttpFoundation\Response $p1 TODO
    */
-  function myFunction(Response $arg1) {}
+  function myFunction(Response $p1) {}
 
 # This should return 'BaseRoute' since it is defined as an alias.
 # ------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ Expect php (generated comment containing the FQN):
 Given php (function where the type should not result in its FQN):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
-  function myFunction(BaseRoute $arg1) {}
+  function myFunction(BaseRoute $p1) {}
 
 Do (trigger doge):
   :3\<CR>
@@ -85,16 +85,16 @@ Expect php (generated comment not containing the FQN):
   /**
    * TODO
    *
-   * @param BaseRoute $arg1 TODO
+   * @param BaseRoute $p1 TODO
    */
-  function myFunction(BaseRoute $arg1) {}
+  function myFunction(BaseRoute $p1) {}
 
 # ------------------------------------------------------------------------------
 
 Given php (function where the type should not result in its FQN with multiple FQN statements after it):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
-  function myFunction(BaseRoute $arg1) {}
+  function myFunction(BaseRoute $p1) {}
 
 Do (trigger doge):
   :3\<CR>
@@ -106,16 +106,16 @@ Expect php (generated comment not containing the FQN):
   /**
    * TODO
    *
-   * @param BaseRoute $arg1 TODO
+   * @param BaseRoute $p1 TODO
    */
-  function myFunction(BaseRoute $arg1) {}
+  function myFunction(BaseRoute $p1) {}
 
 # ------------------------------------------------------------------------------
 
 Given php (function where the type should not result in its FQN with multiple FQN statements before it):
   use Symfony\Component\HttpFoundation\Response, Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
-  function myFunction(BaseRoute $arg1) {}
+  function myFunction(BaseRoute $p1) {}
 
 Do (trigger doge):
   :3\<CR>
@@ -127,6 +127,6 @@ Expect php (generated comment not containing the FQN):
   /**
    * TODO
    *
-   * @param BaseRoute $arg1 TODO
+   * @param BaseRoute $p1 TODO
    */
-  function myFunction(BaseRoute $arg1) {}
+  function myFunction(BaseRoute $p1) {}

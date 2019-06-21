@@ -16,15 +16,15 @@ let s:parameters_match_pattern = '\m\([^,]\+\)'
 "
 " Matches the following scenarios:
 "
-"   function new_function(arg1, arg2, arg3, arg4)
+"   function new_function(p1, p2, p3, p4)
 "
-"   local function new_function(arg1, arg2, arg3)
+"   local function new_function(p1, p2, p3)
 "
-"   function BotDetectionHandler:access(arg1, arg2, arg3)
+"   function BotDetectionHandler:access(p1, p2, p3)
 "
-"   function a.b:c (arg1, arg2) body end
+"   function a.b:c (p1, p2) body end
 "
-"   a.b.c = function (self, arg1, arg2) body end
+"   a.b.c = function (self, p1, p2) body end
 call add(b:doge_patterns, {
 \  'match': '\m^\%(local\s*\)\?function\s*\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*(\(.\{-}\))',
 \  'match_group_names': ['funcName', 'parameters'],
@@ -49,9 +49,9 @@ call add(b:doge_patterns, {
 "
 " Matches the following scenarios:
 "
-"   myprint = function(arg1, arg2)
+"   myprint = function(p1, p2)
 "
-"   local myprint = function(arg1, arg2, arg3, arg4, arg5)
+"   local myprint = function(p1, p2, p3, p4, p5)
 call add(b:doge_patterns, {
 \  'match': '\m^\%(local\s*\)\?\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*=\s*\%(\s*function\s*\)\?(\(.\{-}\))',
 \  'match_group_names': ['funcName', 'parameters'],

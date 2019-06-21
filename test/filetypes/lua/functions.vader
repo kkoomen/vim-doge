@@ -17,7 +17,7 @@ Expect lua (generated comment with nothing but the text 'TODO'):
 # Functions with parameters.
 # ==============================================================================
 Given lua (function with parameters):
-  function myFunc(arg1, arg2, arg3, arg4)
+  function myFunc(p1, p2, p3, p4)
   end
 
 Do (trigger doge):
@@ -25,18 +25,18 @@ Do (trigger doge):
 
 Expect lua (generated comment with @param tags):
   -- TODO
-  -- @param arg1 TODO
-  -- @param arg2 TODO
-  -- @param arg3 TODO
-  -- @param arg4 TODO
-  function myFunc(arg1, arg2, arg3, arg4)
+  -- @param p1 TODO
+  -- @param p2 TODO
+  -- @param p3 TODO
+  -- @param p4 TODO
+  function myFunc(p1, p2, p3, p4)
   end
 
 # ==============================================================================
 # Functions as a variable value.
 # ==============================================================================
 Given lua (function as a variable value with parameters):
-  local myFunc = function(arg1, arg2)
+  local myFunc = function(p1, p2)
   end
 
 Do (trigger doge):
@@ -44,7 +44,7 @@ Do (trigger doge):
 
 Expect lua (generated comment with @param tags):
   -- TODO
-  -- @param arg1 TODO
-  -- @param arg2 TODO
-  local myFunc = function(arg1, arg2)
+  -- @param p1 TODO
+  -- @param p2 TODO
+  local myFunc = function(p1, p2)
   end

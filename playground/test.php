@@ -13,21 +13,21 @@ function myFunc() {}
 /**
  * TODO
  *
- * @param array $arg1 TODO
- * @param string $arg2 
- * @param mixed $arg3 
- * @param \Drupal\core\Entity\Node $arg4 a
+ * @param array $p1 TODO
+ * @param string $p2 
+ * @param mixed $p3 
+ * @param \Drupal\core\Entity\Node $p4 a
  */
-function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {
+function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {
   //
 }
 
 /**
  * TODO
  *
- * @param \Symfony\Component\HttpFoundation\Response $arg4 TODO
+ * @param \Symfony\Component\HttpFoundation\Response $p4 TODO
  */
-function myFunction(Response $arg4) {
+function myFunction(Response $p4) {
   // This should return \Symfony\Component\HttpFoundation\Response since
   // 'Response' is not defined as a an alias.
 }
@@ -35,18 +35,18 @@ function myFunction(Response $arg4) {
 /**
  * TODO
  *
- * @param BaseRoute $arg4 TODO
+ * @param BaseRoute $p4 TODO
  */
-function myFunction(BaseRoute $arg4) {
+function myFunction(BaseRoute $p4) {
   // This should return 'BaseRoute' since it is defined as an alias.
 }
 
 /**
  * TODO
  *
- * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $arg4 TODO
+ * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $p4 TODO
  */
-function myFunction(AbstractController $arg4) {
+function myFunction(AbstractController $p4) {
   // This should return
   // \Symfony\Bundle\FrameworkBundle\Controller\AbstractController since
   // 'AbstractController' is not defined as an alias.
@@ -55,9 +55,9 @@ function myFunction(AbstractController $arg4) {
 /**
  * TODO
  *
- * @param RedirectResponse $arg4 TODO
+ * @param RedirectResponse $p4 TODO
  */
-function myFunction(RedirectResponse $arg4) {
+function myFunction(RedirectResponse $p4) {
   // This should return 'RedirectResponse' since it is defined as an alias.
 }
 
@@ -81,70 +81,70 @@ class myClass {
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param mixed $p5 TODO
    */
-  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {
     //
   }
 
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param mixed $p5 TODO
    */
-  public final function myPublicFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = 'test') {
+  public final function myPublicFinalMethod(array $p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = 'test') {
     //
   }
 
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param mixed $p5 TODO
    */
-  public static function myPublicStaticMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+  public static function myPublicStaticMethod(array $p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {
     //
   }
 
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param array $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param array $p5 TODO
    */
-  public static final function myPublicStaticFinalMethod(array $arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4 = [], array $arg5 = array()) {
+  public static final function myPublicStaticFinalMethod(array $p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4 = [], array $p5 = array()) {
     //
   }
 
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param mixed $p5 TODO
    */
   private function myPrivateMultilineMethod(
-    array $arg1,
-    \Test\Namespacing\With\A\ClassInterface $arg2,
-    int $arg3,
-    $arg4,
-    $arg5 = NULL
+    array $p1,
+    \Test\Namespacing\With\A\ClassInterface $p2,
+    int $p3,
+    $p4,
+    $p5 = NULL
   ) {
     //
   }
@@ -177,13 +177,13 @@ class myClass2 {
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param mixed $p5 TODO
    */
-  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {
+  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {
     //
   }
 

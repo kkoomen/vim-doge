@@ -38,7 +38,7 @@ call add(b:doge_patterns, {
 "
 "   myFunc = (x) -> x * x
 "
-"   myFunc = (arg1, arg2, arg3) ->
+"   myFunc = (p1, p2, p3) ->
 call add(b:doge_patterns, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\s*=\s*(\(.\{-}\))\s*[-=]>',
 \  'match_group_names': ['funcName', 'parameters'],

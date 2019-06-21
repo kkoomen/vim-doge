@@ -17,7 +17,7 @@ Expect javascript (generated comment with @description tag):
 # Functions with parameters without type hints.
 # ==============================================================================
 Given javascript (function with parameters without type hints):
-  function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 Do (trigger doge):
   \<C-d>
@@ -25,18 +25,18 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   /**
    * @description TODO
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
 # Functions with parameters with type hints.
 # ==============================================================================
 Given javascript (function with parameters with type hints):
-  function myFunc($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+  function myFunc($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 Do (trigger doge):
   \<C-d>
@@ -44,19 +44,19 @@ Do (trigger doge):
 Expect javascript (generated comment with @description, @param and @return tags):
   /**
    * @description TODO
-   * @param {string} $arg1 TODO
-   * @param {string[]} arg2 TODO
-   * @param {number} arg3 TODO
-   * @param {float} arg4 TODO
+   * @param {string} $p1 TODO
+   * @param {string[]} p2 TODO
+   * @param {number} p3 TODO
+   * @param {float} p4 TODO
    * @return {string[]} TODO
    */
-  function myFunc($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+  function myFunc($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 # ==============================================================================
 # Functions as variables with parameters without type hints.
 # ==============================================================================
 Given javascript (function as variable with parameters without type hints):
-  var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
 Do (trigger doge):
   \<C-d>
@@ -65,18 +65,18 @@ Expect javascript (generated comment with @description, @functon and @param tags
   /**
    * @description TODO
    * @function myFunc
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  var myFunc = function($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
 # Functions as variables with parameters with type hints.
 # ==============================================================================
 Given javascript (function as variable with parameters with type hints):
-  var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+  var myFunc = function($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 Do (trigger doge):
   \<C-d>
@@ -85,13 +85,13 @@ Expect javascript (generated comment with @description, @function and @param tag
   /**
    * @description TODO
    * @function myFunc
-   * @param {string} $arg1 TODO
-   * @param {string[]} arg2 TODO
-   * @param {number} arg3 TODO
-   * @param {float} arg4 TODO
+   * @param {string} $p1 TODO
+   * @param {string[]} p2 TODO
+   * @param {number} p3 TODO
+   * @param {float} p4 TODO
    * @return {string[]} TODO
    */
-  var myFunc = function($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+  var myFunc = function($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 # ==============================================================================
 # Functions that should be ignored by DoGe.
@@ -128,7 +128,7 @@ Expect javascript (no changes):
 # Prototype functions with parameters with type hints.
 # ==============================================================================
 Given javascript (prototype function with parameters with type hints):
-  Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] {};
+  Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] {};
 
 Do (trigger doge):
   \<C-d>
@@ -137,11 +137,11 @@ Expect javascript (generated comment with @description, @function, @param and @r
   /**
    * @description TODO
    * @function Person#greet
-   * @param {string} arg1 TODO
-   * @param {Immutable.List} arg2 TODO
+   * @param {string} p1 TODO
+   * @param {Immutable.List} p2 TODO
    * @return {string[]} TODO
    */
-  Person.prototype.greet = function (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] {};
+  Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] {};
 
 # ==============================================================================
 # Prototype functions without parameters without type hints.
@@ -163,7 +163,7 @@ Expect javascript (generated comment with @description and @function tags):
 # Functions with parameters with multiple type hints.
 # ==============================================================================
 Given javascript (function with parameters with multiple type hints):
-  function myFunc($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) {}
+  function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
 Do (trigger doge):
   \<C-d>
@@ -171,17 +171,17 @@ Do (trigger doge):
 Expect javascript (generated comment with @description, @param and @return tags):
   /**
    * @description TODO
-   * @param {string} $arg1 TODO
-   * @param {Foo|Bar|Baz} arg2 TODO
+   * @param {string} $p1 TODO
+   * @param {Foo|Bar|Baz} p2 TODO
    * @return {Foo|Bar} TODO
    */
-  function myFunc($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) {}
+  function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
 # ==============================================================================
 # Async functions with parameters without typehints.
 # ==============================================================================
 Given javascript (async function with parameters without type hints):
-  async function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  async function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 Do (trigger doge):
   \<C-d>
@@ -190,18 +190,18 @@ Expect javascript (generated comment with @description, @async, and @param tags)
   /**
    * @description TODO
    * @async
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  async function myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  async function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
 # Generator functions with parameters without typehints.
 # ==============================================================================
 Given javascript (generator function with parameters without type hints):
-  function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 Do (trigger doge):
   \<C-d>
@@ -209,18 +209,18 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   /**
    * @description TODO
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
 # Async generator functions with parameters without typehints.
 # ==============================================================================
 Given javascript (async generator function with parameters without type hints):
-  async function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 Do (trigger doge):
   \<C-d>
@@ -229,9 +229,9 @@ Expect javascript (generated comment with @description, @async, and @param tags)
   /**
    * @description TODO
    * @async
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  async function* myFunc($arg1 = 'value', arg2 = [], arg3, arg4) {}
+  async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}

@@ -14,9 +14,9 @@ let b:doge_patterns = []
 "
 " Matches the following scenarios:
 "
-"   def myFunc(arg1, arg_2 = some_default_value)
+"   def myFunc(p1, p_2 = some_default_value)
 "
-"   def def parameters (arg1,arg2=4, arg3*)
+"   def def parameters (p1,p2=4, p3*)
 "
 "   def where(attribute, type = nil, **options)
 "

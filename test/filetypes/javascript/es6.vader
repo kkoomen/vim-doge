@@ -18,9 +18,9 @@ Expect javascript (generated comment with @description @function tags):
 # Fat-arrow functions with parameters without type hints.
 # ==============================================================================
 Given javascript (fat-arrow function with parameters without type hints using 'const' and 'let' declarations):
-  const myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+  const myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
-  let myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+  let myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
 Do (trigger doge):
   \<C-d>
@@ -31,28 +31,28 @@ Expect javascript (generated comment with @description, @function and @param tag
   /**
    * @description TODO
    * @function myFunc
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  const myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+  const myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
   /**
    * @description TODO
    * @function myFunc
-   * @param {*} $arg1 TODO
-   * @param {*} arg2 TODO
-   * @param {*} arg3 TODO
-   * @param {*} arg4 TODO
+   * @param {*} $p1 TODO
+   * @param {*} p2 TODO
+   * @param {*} p3 TODO
+   * @param {*} p4 TODO
    */
-  let myFunc = ($arg1 = 'value', arg2 = [], arg3, arg4) => {}
+  let myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
 # ==============================================================================
 # Fat-arrow functions with parameters with type hints.
 # ==============================================================================
 Given javascript (fat-arrow function with parameters with type hints):
-  const myFunc = ($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+  const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 Do (trigger doge):
   \<C-d>
@@ -61,13 +61,13 @@ Expect javascript (generated comment with @description, @function, @param and @r
   /**
    * @description TODO
    * @function myFunc
-   * @param {string} $arg1 TODO
-   * @param {string[]} arg2 TODO
-   * @param {number} arg3 TODO
-   * @param {float} arg4 TODO
+   * @param {string} $p1 TODO
+   * @param {string[]} p2 TODO
+   * @param {number} p3 TODO
+   * @param {float} p4 TODO
    * @return {string[]} TODO
    */
-  const myFunc = ($arg1: string = 'value', arg2: string[] = [], arg3: number, arg4: float): string[]  {}
+  const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 # ==============================================================================
 # Fat-arrow functions with destructuring.
@@ -139,7 +139,7 @@ Expect javascript (generated comment with @description and @param tags):
 # Prototype fat-arrow functions with parameters with type hints.
 # ==============================================================================
 Given javascript (prototype fat-arrow function with parameters with type hints):
-  Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] => {};
+  Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] => {};
 
 Do (trigger doge):
   \<C-d>
@@ -148,11 +148,11 @@ Expect javascript (generated comment with @description, @function, @param and @r
   /**
    * @description TODO
    * @function Person#greet
-   * @param {string} arg1 TODO
-   * @param {Immutable.List} arg2 TODO
+   * @param {string} p1 TODO
+   * @param {Immutable.List} p2 TODO
    * @return {string[]} TODO
    */
-  Person.prototype.greet = (arg1: string = 'default', arg2: Immutable.List = Immutable.List()): string[] => {};
+  Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] => {};
 
 # ==============================================================================
 # Prototype fat-arrow functions with parameters without type hints.
@@ -174,7 +174,7 @@ Expect javascript (generated comment with @description and @function tags):
 # Fat-arrow functions with parameters with multiple type hints.
 # ==============================================================================
 Given javascript (fat-arrow function with parameters with multiple type hints):
-  const myFunc = ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+  const myFunc = ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
 
 Do (trigger doge):
   \<C-d>
@@ -183,17 +183,17 @@ Expect javascript (generated comment with @description, @function, @param and @r
   /**
    * @description TODO
    * @function myFunc
-   * @param {string} $arg1 TODO
-   * @param {Foo|Bar|Baz} arg2 TODO
+   * @param {string} $p1 TODO
+   * @param {Foo|Bar|Baz} p2 TODO
    * @return {Foo|Bar} TODO
    */
-  const myFunc = ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+  const myFunc = ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
 
 # ==============================================================================
 # Async fat-arrow functions with parameters with multiple type hints.
 # ==============================================================================
 Given javascript (async fat-arrow function with parameters with multiple type hints):
-  const myFunc = async ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+  const myFunc = async ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
 
 Do (trigger doge):
   \<C-d>
@@ -203,8 +203,8 @@ Expect javascript (generated comment with @description, @function, @param and @r
    * @description TODO
    * @async
    * @function myFunc
-   * @param {string} $arg1 TODO
-   * @param {Foo|Bar|Baz} arg2 TODO
+   * @param {string} $p1 TODO
+   * @param {Foo|Bar|Baz} p2 TODO
    * @return {Foo|Bar} TODO
    */
-  const myFunc = async ($arg1: string, arg2: Foo | Bar | Baz): (Foo | Bar) => {};
+  const myFunc = async ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};

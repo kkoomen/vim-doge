@@ -17,7 +17,7 @@ Expect ruby (generated comment with nothing but the text 'TODO'):
 # Functions with parameters.
 Given ruby (function with parameters):
 # ==============================================================================
-  def myFunc(arg1, arg_2 = some_default_value)
+  def myFunc(p1, p_2 = some_default_value)
   end
 
 Do (trigger doge):
@@ -25,9 +25,9 @@ Do (trigger doge):
 
 Expect ruby (generated comment with @param tags):
   # TODO
-  # @param arg1 [type] TODO
-  # @param arg_2 [type] TODO
-  def myFunc(arg1, arg_2 = some_default_value)
+  # @param p1 [type] TODO
+  # @param p_2 [type] TODO
+  def myFunc(p1, p_2 = some_default_value)
   end
 
 # ------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ Expect ruby (generated comment with @param tags):
 # ------------------------------------------------------------------------------
 
 Given ruby (function with paramters containing '*' in its name):
-  def parameters (arg1,arg2=4, arg3*)
+  def parameters (p1,p2=4, p3*)
   end
 
 Do (trigger doge):
@@ -56,10 +56,10 @@ Do (trigger doge):
 
 Expect ruby (generated comment with @param tags):
   # TODO
-  # @param arg1 [type] TODO
-  # @param arg2 [type] TODO
-  # @param arg3 [type] TODO
-  def parameters (arg1,arg2=4, arg3*)
+  # @param p1 [type] TODO
+  # @param p2 [type] TODO
+  # @param p3 [type] TODO
+  def parameters (p1,p2=4, p3*)
   end
 
 # ------------------------------------------------------------------------------

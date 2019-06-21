@@ -2,7 +2,7 @@
 # Tests the functionality for the g:doge_comment_todo_suffix option.
 # ==============================================================================
 Given php (function with parameters where g:doge_comment_todo_suffix = 1):
-  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {}
 
 Do (trigger doge):
   \<C-d>
@@ -11,18 +11,18 @@ Expect php (generated comment with @param tags and with a TODO suffix for each p
   /**
    * TODO
    *
-   * @param array $arg1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2 TODO
-   * @param int $arg3 TODO
-   * @param mixed $arg4 TODO
-   * @param mixed $arg5 TODO
+   * @param array $p1 TODO
+   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
+   * @param int $p3 TODO
+   * @param mixed $p4 TODO
+   * @param mixed $p5 TODO
    */
-  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {}
 
 # ------------------------------------------------------------------------------
 
 Given php (function with parameters where g:doge_comment_todo_suffix = 0):
-  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {}
 
 Do (trigger doge):
   :let g:doge_comment_todo_suffix = 0\<CR>
@@ -33,10 +33,10 @@ Expect php (generated comment with @param tags and without a TODO suffix for eac
   /**
    * TODO
    *
-   * @param array $arg1
-   * @param \Test\Namespacing\With\A\ClassInterface $arg2
-   * @param int $arg3
-   * @param mixed $arg4
-   * @param mixed $arg5
+   * @param array $p1
+   * @param \Test\Namespacing\With\A\ClassInterface $p2
+   * @param int $p3
+   * @param mixed $p4
+   * @param mixed $p5
    */
-  public function myPublicMethod(array &$arg1, \Test\Namespacing\With\A\ClassInterface $arg2, int $arg3, $arg4, $arg5 = NULL) {}
+  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {}

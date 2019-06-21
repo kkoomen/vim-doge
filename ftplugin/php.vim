@@ -41,16 +41,16 @@ call add(b:doge_patterns, {
 "
 " Matches the following scenarios:
 "
-"   function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}
+"   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 "
-"   function myFunction(QueryFactory $arg4) {}
+"   function myFunction(QueryFactory $p4) {}
 "
 "   public function myPublicMethod(
-"     array &$arg1,
-"     \Test\Namespacing\With\A\ClassInterface $arg2,
-"     int $arg3,
-"     $arg4,
-"     $arg5 = NULL
+"     array &$p1,
+"     \Test\Namespacing\With\A\ClassInterface $p2,
+"     int $p3,
+"     $p4,
+"     $p5 = NULL
 "   ) {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
