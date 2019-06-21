@@ -1,6 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+" vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
   let l:next_pos = search('TODO', 'nW')
 
@@ -23,6 +24,7 @@ function! s:jump_forward() abort
   return 0
 endfunction
 
+" vint: next-line -ProhibitUnusedVariable
 function! s:jump_backward() abort
   let l:prev_pos = search('TODO', 'bnW')
 

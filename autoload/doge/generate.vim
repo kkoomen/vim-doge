@@ -86,9 +86,8 @@ function! doge#generate#pattern(pattern) abort
     let l:comment_lnum_insert_position = line('.') - 1
   endif
 
-  " vint: -ProhibitUnusedVariable
+  " vint: next-line -ProhibitUnusedVariable
   let l:Indent = function('doge#indent#add', [l:comment_lnum_inherited_indent])
-  " vint: +ProhibitUnusedVariable
 
   " Indent the comment.
   let l:comment = map(l:comment, { k, line -> l:Indent(line) })
