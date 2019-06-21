@@ -71,30 +71,12 @@ Do (trigger doge and jump forward until the last TODO item):
   \<Tab>
   \<Tab>
 
-Then (expect the second TODO in the comment to be selected):
+Then (expect the last TODO in the comment to be selected):
   AssertEqual 's', mode()
   AssertEqual 7, line('.')
   AssertEqual 42, col('.')
 
 # ------------------------------------------------------------------------------
-
-Do (trigger doge and jump forward):
-  \<C-d>
-  \<Tab>
-  \<Tab>
-  \<Tab>
-  \<Tab>
-
-Then (expect the second TODO in the comment to be selected):
-  AssertEqual 's', mode()
-  AssertEqual 7, line('.')
-  AssertEqual 42, col('.')
-
-# ------------------------------------------------------------------------------
-
-Given php (function with parameters where g:doge_comment_interactive = 1):
-  function myFunction(array &$arg1, string $arg2, &$arg3 = NULL, \Drupal\core\Entity\Node $arg4) {}
-
 
 Do (trigger doge and jump forward while filling in text):
   :let g:doge_comment_interactive = 1\<CR>
