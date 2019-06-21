@@ -37,7 +37,7 @@ descriptions and go on coding!
 - [Contributing](#contributing)
   * [Linting](#linting)
   * [Documentation](#documentation)
-  * [Help](#help)
+- [Help](#help)
 - [Motivation](#motivation)
 
 # Supported languages and doc standards
@@ -157,7 +157,7 @@ If you change the `doc/doge.txt` you also have to update the helptags file
 located in `doc/tags`. You can do this by running:
 `:helptags ~/.vim/path/to/doge/doc/`.
 
-## Help
+# Help
 
 To open all the help pages, run `:help doge`.
 
