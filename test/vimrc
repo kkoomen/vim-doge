@@ -28,6 +28,11 @@ set shiftwidth=2
 set expandtab
 set backspace=2
 set ttimeoutlen=0
+set nowrap
+set ttyfast
+set autoindent
+set smartindent
+set smarttab
 
 " The encoding must be explicitly set for tests for Windows.
 execute 'set encoding=utf-8'
