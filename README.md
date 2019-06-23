@@ -85,7 +85,7 @@ Run `:help doge` to get the full help page.
 
 (Default: `<C-d>`)
 
-Sets the mapping to trigger DoGe.
+The mapping to trigger DoGe.
 
 ### `g:doge_mapping_comment_jump_forward`
 
