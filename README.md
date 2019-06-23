@@ -12,6 +12,9 @@
   </a>
 </p>
 
+> Any fool can write code that a computer can understand. Good programmers write
+> code that humans can understand. -- Martin Fowler, 1999
+
 We all love documentation because it makes our codebases easier to understand,
 yet no one has time to write it in a good and proper way.
 
@@ -21,13 +24,10 @@ on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), jump quickly
 through TODO items using `<Tab>` and `<S-Tab>` to quickly add descriptions and
 go on coding!
 
-> Any fool can write code that a computer can understand. Good programmers write
-> code that humans can understand. -- Martin Fowler, 1999
-
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
-- [Getting Started](#getting-started)
+- [Getting started](#getting-started)
 - [Configuration](#configuration)
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
@@ -47,12 +47,12 @@ Is your favorite language not supported?
 [Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
 
 |                      | Language                                       | Doc standard                                                                                                                          |
-| ---                  | ---                                            | ---                                                                                                                                   |
+| -------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | :white_check_mark:   | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))                                                              |
 | :white_check_mark:   | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                                                                    |
-| :white_check_mark:   | Javascript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| :white_check_mark:   | Typescript                                     | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| :white_check_mark:   | Coffeescript                                   | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| :white_check_mark:   | JavaScript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| :white_check_mark:   | TypeScript                                     | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| :white_check_mark:   | CoffeeScript                                   | ([JSDoc](https://jsdoc.app))                                                                                                          |
 | :white_check_mark:   | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                                                                        |
 | :white_check_mark:   | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
 | :white_check_mark:   | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
@@ -60,13 +60,8 @@ Is your favorite language not supported?
 | :white_check_mark:   | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                                                                         |
 | :white_check_mark:   | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                                                                       |
 | :white_check_mark:   | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                                                                                   |
-| :white_large_square: | C++                                            | ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))                                                                       |
-| :white_large_square: | Haskell                                        | ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))                                                                    |
-| :white_large_square: | Idris                                          | ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))                                                        |
-| :white_large_square: | Assembly                                       | ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000)) |
-| :white_large_square: | C#                                             | ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))    |
 
-# Getting Started
+# Getting started
 
 Install `DoGe`:
 
@@ -177,3 +172,19 @@ documentation part because writing _just the skeleton_ of the comment takes
 already too much time and I am one of those people. Having the skeleton
 generated and an interactive mode to quickly add descriptions is a big
 time saver.
+
+# How does DoGe work?
+
+The key to DoGe is _regex_. Why? Because of its flexibility. Each filetype
+consists of a buffer-local variable named `b:doge_patterns` which is a list of
+dictionaries containing info about a certain pattern to apply for when
+triggering DoGe.
+
+In each pattern you can specify a regex pattern and each group can be named and
+then be used inside the `template` key to render that value when it matches.
+After implementating this the only thing left to do was implementing all the
+languages.
+
+# License
+
+DoGe is licensed under the GPL-3.0 license.
