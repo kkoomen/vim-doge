@@ -1,10 +1,14 @@
 # ==============================================================================
 # Tests the functionality for the g:doge_comment_interactive option.
+#
+# We test PHP because we will test the functionality of a commment being
+# inserted above.
 # ==============================================================================
-Given php (function with parameters where g:doge_comment_interactive = 1):
+Given php (PHP function with peters where g:doge_comment_interactive = 1):
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
 Do (trigger doge):
+# g:doge_comment_interactive will be 1 for every test following.
   :let g:doge_comment_interactive = 1\<CR>
   \<C-d>
 
@@ -96,7 +100,7 @@ Do (trigger doge and jump forward while filling in text):
   \<Space>
   \<Space>
   Lorem ipsum dor sit amet.
-# Enter two extra tabs to test whether we receive an actual <Tab> character
+# Enter two extra tabs to test whether we receive actual <Tab> characters
   \<Tab>
   \<Tab>
 
@@ -115,6 +119,38 @@ Expect php (generated comment with @param tags with brief descriptions):
    *   Lorem ipsum dor sit amet.    
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
+
+# ==============================================================================
+# We test Python because we will test the functionality of a commment being
+# inserted below.
+# ==============================================================================
+Given python (Python function with peters):
+  def myFunc(p1: str = 'string', p2: int = 5):
+      pass
+
+Do (trigger doge and jump forward while filling in text):
+  \<C-d>
+  Lorem ipsum dor sit amet.
+  \<Tab>
+  This is a string.
+  \<Tab>
+  This is an integer.
+# Enter two extra tabs to test whether we receive actual <Tab> characters
+  \<Tab>
+  \<Tab>
+
+Then (expect b:doge_interactive to be destroyed):
+  AssertEqual 0, exists('b:doge_interactive')
+
+Expect python (generated comment with @param tags with brief descriptions):
+  def myFunc(p1: str = 'string', p2: int = 5):
+      """
+      Lorem ipsum dor sit amet.
+      
+      :param p1 str: This is a string.
+      :param p2 int: This is an integer.      
+      """
+      pass
 
 Do (let g:doge_comment_interactive = 0):
   :let g:doge_comment_interactive = 0\<CR>

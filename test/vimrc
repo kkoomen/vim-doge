@@ -34,5 +34,10 @@ set autoindent
 set smartindent
 set smarttab
 
+augroup styles
+  autocmd!
+  autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+augroup END
+
 " The encoding must be explicitly set for tests for Windows.
 execute 'set encoding=utf-8'

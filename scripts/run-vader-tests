@@ -94,6 +94,11 @@ function filter-vader-output() {
 
 function color-vader-output() {
   while read -r; do
+    # Split blocks by echoing an extra white line.
+    if [[ "$REPLY" = *'GIVEN]'* ]]; then
+      echo
+    fi
+
     if [[ "$REPLY" = *'(X)'* ]]; then
       echo -en "$red"
     elif [[ "$REPLY" = *'Starting Vader:'* ]]; then
@@ -117,11 +122,6 @@ function color-vader-output() {
       echo
     else
       echo "$REPLY"
-
-      # Split blocks by echoing an extra white line.
-      if [[ "$REPLY" = *'EXPECT]'* ]]; then
-        echo
-      fi
     fi
   done
 

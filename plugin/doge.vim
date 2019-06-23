@@ -102,6 +102,7 @@ execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-forward)', g:
 execute(printf('smap <silent> <unique> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 
 augroup doge
+  autocmd!
   autocmd TextChangedI * call doge#comment#update_interactive_comment_info()
 augroup END
 
