@@ -20,7 +20,7 @@ let b:doge_patterns = []
 "
 "   void foo(Map<String, Object> parameters) {}
 "
-"   void MyParameterizedFunction(String param1, int param2, Boolean ...params) {}
+"   void MyParameterizedFunction(String p1, int p2, Boolean ...params) {}
 call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\([[:alnum:]_]\+\)(\(.\{-}\))\s*{',
 \  'match_group_names': ['returnType', 'funcName', 'parameters'],

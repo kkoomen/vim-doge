@@ -16,11 +16,11 @@ let b:doge_patterns = []
 "
 "   def __init__(self: MyClass):
 "
-"   def myMethod(self: MyClass, param1: Sequence[T]) -> Generator[int, float, str]:
+"   def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
 "
 "   def call(self, *args: str, **kwargs: str) -> str:
 "
-"   def myFunc(param1: Callable[[int], None] = False, param2: Callable[[int, Exception], None]) -> Sequence[T]:
+"   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None]) -> Sequence[T]:
 call add(b:doge_patterns, {
 \  'match': '\m^def \([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
 \  'match_group_names': ['funcName', 'parameters', 'returnType'],

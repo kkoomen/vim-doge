@@ -69,30 +69,30 @@ void foo(Map<String, Object> parameters) {
 
 /**
  * TODO
- * @param String param1 TODO
- * @param int param2 TODO
+ * @param String p1 TODO
+ * @param int p2 TODO
  * @param Boolean params TODO
  * @return void TODO
  */
-void MyParameterizedFunction(String param1, int param2, Boolean... params) {}
+void MyParameterizedFunction(String p1, int p2, Boolean... params) {}
 
 /**
  * TODO
- * @param String param1 TODO
- * @param int param2 TODO
+ * @param String p1 TODO
+ * @param int p2 TODO
  * @param Boolean params TODO
  * @return void TODO
  */
-void MyParameterizedFunction(String param1, int param2, Boolean ... params) {}
+void MyParameterizedFunction(String p1, int p2, Boolean ... params) {}
 
 /**
  * TODO
- * @param String param1 TODO
- * @param int param2 TODO
+ * @param String p1 TODO
+ * @param int p2 TODO
  * @param Boolean params TODO
  * @return void TODO
  */
-void MyParameterizedFunction(String param1, int param2, Boolean ...params) {}
+void MyParameterizedFunction(String p1, int p2, Boolean ...params) {}
 
 /**
  * TODO

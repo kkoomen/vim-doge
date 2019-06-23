@@ -27,7 +27,7 @@ Expect python (generated comment with :param tags):
 Given python (class method with advanced type hints):
   class MyClass(object):
 
-      def myMethod(self: MyClass, param1: Sequence[T]) -> Generator[int, float, str]:
+      def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
           pass
 
 Do (trigger doge):
@@ -37,12 +37,12 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   class MyClass(object):
 
-      def myMethod(self: MyClass, param1: Sequence[T]) -> Generator[int, float, str]:
+      def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
           """
           TODO
           
           :param self MyClass: TODO
-          :param param1 Sequence[T]: TODO
+          :param p1 Sequence[T]: TODO
           :rtype Generator[int, float, str]: TODO
           """
           pass
