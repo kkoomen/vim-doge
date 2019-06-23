@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-function! s:uppercase(str)
+function! s:uppercase(str) abort
   return substitute(a:str, '\(.*\)', '\U\1\e', 'g')
 endfunction
 
