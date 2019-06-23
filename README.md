@@ -181,7 +181,9 @@ dictionaries containing info about a certain pattern to apply for when
 triggering DoGe.
 
 In each pattern you can specify a regex pattern and each group can be named and
-then be used inside the `template` key to render that value when it matches.
+then be used as a token inside the `template` key to render that value when it
+matches.
+
 After implementating this the only thing left to do was implementing all the
 languages.
 
