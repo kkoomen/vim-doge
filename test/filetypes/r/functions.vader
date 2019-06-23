@@ -1,0 +1,76 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given r (functions without parameters):
+  myFunc = function() {
+    # ...
+  }
+
+  myFunc <- function() {
+    # ...
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+
+Expect r (generated comments with nothing but the text 'TODO' and @export tag):
+  #' TODO
+  #'
+  #'
+  #' @export
+  #'
+  myFunc = function() {
+    # ...
+  }
+
+  #' TODO
+  #'
+  #'
+  #' @export
+  #'
+  myFunc <- function() {
+    # ...
+  }
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given r (function with parameters):
+  myFunc = function(
+    p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
+    p4 = 'libs', p5 = NULL, ..., p7 = 'default',
+    p8 = c('lorem', 'ipsum+dor', 'sit', 'amet'),
+    p9 = TRUE, p10 = list(), p11 = TRUE
+  ) {
+    # ...
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect r (generated comment with @param and @export tags):
+  #' TODO
+  #'
+  #' @param p1 TODO
+  #' @param p2_sub1 TODO
+  #' @param p3 TODO
+  #' @param p4 TODO
+  #' @param p5 TODO
+  #' @param p7 TODO
+  #' @param p8 TODO
+  #' @param p9 TODO
+  #' @param p10 TODO
+  #' @param p11 TODO
+  #'
+  #' @export
+  #'
+  myFunc = function(
+    p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
+    p4 = 'libs', p5 = NULL, ..., p7 = 'default',
+    p8 = c('lorem', 'ipsum+dor', 'sit', 'amet'),
+    p9 = TRUE, p10 = list(), p11 = TRUE
+  ) {
+    # ...
+  }

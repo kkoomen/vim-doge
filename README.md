@@ -56,7 +56,7 @@ go on coding!
 - [x] Ruby ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))
 - [x] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))
 - [x] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
-- [ ] R ([R style guide](https://style.tidyverse.org/documentation.html))
+- [x] R ([Roxygen2](https://github.com/klutometis/roxygen))
 - [ ] C++ ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))
 - [ ] Haskell ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))
 - [ ] Idris ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))
