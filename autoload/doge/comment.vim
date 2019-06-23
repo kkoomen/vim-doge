@@ -97,7 +97,7 @@ function! doge#comment#update_interactive_comment_info() abort
     " Only update if the cursor is inside the comment.
     " We add +1 to the lnum_comment_end_pos which covers the scenario if a user
     " pressed ENTER while being on the last line of the comment.
-    if line('.') >= b:doge_interactive['lnum_comment_start_pos'] && line('.') <= b:doge_interactive['lnum_comment_end_pos'] + 1
+    if line('.') > b:doge_interactive['lnum_comment_start_pos'] && line('.') <= b:doge_interactive['lnum_comment_end_pos'] + 1
       " When filling in the TODO items the user might hit the ENTER key so we
       " constantly have to update the end position of the comment, because the
       " comment can get bigger.
