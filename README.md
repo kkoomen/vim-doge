@@ -46,20 +46,20 @@ Every language that has a documentation standard should be supported by DoGe.
 Is your favorite language not supported?
 [Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
 
-|                      | Language                                       | Doc standard                                                                                                                          |
-| -------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| :white_check_mark:   | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))                                                              |
-| :white_check_mark:   | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                                                                    |
-| :white_check_mark:   | JavaScript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| :white_check_mark:   | TypeScript                                     | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| :white_check_mark:   | CoffeeScript                                   | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| :white_check_mark:   | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                                                                        |
-| :white_check_mark:   | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
-| :white_check_mark:   | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
-| :white_check_mark:   | Ruby                                           | ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))                                                                        |
-| :white_check_mark:   | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                                                                         |
-| :white_check_mark:   | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                                                                       |
-| :white_check_mark:   | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                                                                                   |
+|                    | Language                                       | Doc standard                                                                      |
+| ---                | ---                                            | ---                                                                               |
+| :white_check_mark: | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))          |
+| :white_check_mark: | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                |
+| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                      |
+| :white_check_mark: | TypeScript                                     | ([JSDoc](https://jsdoc.app))                                                      |
+| :white_check_mark: | CoffeeScript                                   | ([JSDoc](https://jsdoc.app))                                                      |
+| :white_check_mark: | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                    |
+| :white_check_mark: | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)) |
+| :white_check_mark: | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)) |
+| :white_check_mark: | Ruby                                           | ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))                    |
+| :white_check_mark: | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                     |
+| :white_check_mark: | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                   |
+| :white_check_mark: | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                               |
 
 # Getting started
 
