@@ -42,29 +42,29 @@ go on coding!
 
 # Supported languages and doc standards
 
-|     | Language                                       | Doc standard                                                                                                                          |
-| --- | ---                                            | ---                                                                                                                                   |
-| ✅  | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))                                                              |
-| ✅  | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                                                                    |
-| ✅  | Javascript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| ✅  | Typescript                                     | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| ✅  | Coffeescript                                   | ([JSDoc](https://jsdoc.app))                                                                                                          |
-| ✅  | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                                                                        |
-| ✅  | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
-| ✅  | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
-| ✅  | Ruby                                           | ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))                                                                        |
-| ✅  | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                                                                         |
-| ✅  | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                                                                       |
-| ✅  | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                                                                                   |
-| ⬜️  | C++                                            | ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))                                                                       |
-| ⬜️  | Haskell                                        | ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))                                                                    |
-| ⬜️  | Idris                                          | ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))                                                        |
-| ⬜️  | Assembly                                       | ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000)) |
-| ⬜️  | C#                                             | ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))    |
-
 Every language that has a documentation standard should be supported by DoGe.
 Is your favorite language not supported?
-[Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>)!
+[Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
+
+|                      | Language                                       | Doc standard                                                                                                                          |
+| ---                  | ---                                            | ---                                                                                                                                   |
+| :white_check_mark:   | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))                                                              |
+| :white_check_mark:   | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                                                                    |
+| :white_check_mark:   | Javascript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| :white_check_mark:   | Typescript                                     | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| :white_check_mark:   | Coffeescript                                   | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| :white_check_mark:   | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                                                                        |
+| :white_check_mark:   | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
+| :white_check_mark:   | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
+| :white_check_mark:   | Ruby                                           | ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))                                                                        |
+| :white_check_mark:   | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                                                                         |
+| :white_check_mark:   | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                                                                       |
+| :white_check_mark:   | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                                                                                   |
+| :white_large_square: | C++                                            | ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))                                                                       |
+| :white_large_square: | Haskell                                        | ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))                                                                    |
+| :white_large_square: | Idris                                          | ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))                                                        |
+| :white_large_square: | Assembly                                       | ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000)) |
+| :white_large_square: | C#                                             | ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))    |
 
 # Getting Started
 
