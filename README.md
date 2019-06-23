@@ -42,30 +42,29 @@ go on coding!
 
 # Supported languages and doc standards
 
-- [x] Python ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))
-- [x] PHP ([phpdoc](https://www.phpdoc.org))
-- [x] Javascript ([JSDoc](https://jsdoc.app))
-  - [x] ES6
-  - [x] FlowJS
-  - [x] NodeJS
-- [x] Typescript ([JSDoc](https://jsdoc.app))
-- [x] Coffeescript ([JSDoc](https://jsdoc.app))
-- [x] Lua ([LDoc](https://github.com/stevedonovan/LDoc))
-- [x] Java ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
-- [x] Groovy ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))
-- [x] Ruby ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))
-- [x] Scala ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))
-- [x] Kotlin ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))
-- [x] R ([Roxygen2](https://github.com/klutometis/roxygen))
-- [ ] C++ ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))
-- [ ] Haskell ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))
-- [ ] Idris ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))
-- [ ] Assembly ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000))
-- [ ] C# ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))
+|     | Language                                       | Doc standard                                                                                                                          |
+| --- | ---                                            | ---                                                                                                                                   |
+| ✅  | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))                                                              |
+| ✅  | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                                                                    |
+| ✅  | Javascript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| ✅  | Typescript                                     | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| ✅  | Coffeescript                                   | ([JSDoc](https://jsdoc.app))                                                                                                          |
+| ✅  | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                                                                        |
+| ✅  | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
+| ✅  | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html))                                                     |
+| ✅  | Ruby                                           | ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))                                                                        |
+| ✅  | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                                                                         |
+| ✅  | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                                                                       |
+| ✅  | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                                                                                   |
+| ⬜️  | C++                                            | ([CPPDoc](http://www.edparrish.net/common/cppdoc.html#comment))                                                                       |
+| ⬜️  | Haskell                                        | ([Haddock](https://www.haskell.org/haddock/doc/html/ch03s02.html))                                                                    |
+| ⬜️  | Idris                                          | ([IdrisDocs](http://docs.idris-lang.org/en/latest/reference/documenting.html))                                                        |
+| ⬜️  | Assembly                                       | ([ASMDoc](https://www.ee.ryerson.ca/~kclowes/stand-alone/CodingStandards/CodingStdAsm/CodingStdAsm.html#SECTION00070000000000000000)) |
+| ⬜️  | C#                                             | ([XML Documentation](https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/5ast78ax%28v%3dvs.100%29))    |
 
 Every language that has a documentation standard should be supported by DoGe.
 Is your favorite language not supported?
-[Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>)
+[Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>)!
 
 # Getting Started
 
