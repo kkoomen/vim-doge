@@ -5,8 +5,9 @@ when contributing to the repository. The topics below will also contain small
 checklists to keep in mind when contributing.
 
 When contributing make sure you:
-- Have read and understood the [Code of Conduct](./CODE_OF_CONDUCT.md).
-- Are working from the `develop` branch and also submitting a PR to the `develop` branch.
+- have read and understood the [Code of Conduct](./CODE_OF_CONDUCT.md).
+- are working from the `develop` branch
+- submit your PR to the `develop` branch.
 
 # Table of Contents
 - [Contribution Guidelines](#contribution-guidelines)
