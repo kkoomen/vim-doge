@@ -4,9 +4,9 @@ To keep consistency within the codebase, several guidelines will be required
 when contributing to the repository. The topics below will also contain small
 checklists to keep in mind when contributing.
 
-Make sure to read the [Code of Conduct](./CODE_OF_CONDUCT.md) when contributing.
-
-When contributing, you should work from the `develop` branch.
+When contributing make sure you:
+- Have read and understood the [Code of Conduct](./CODE_OF_CONDUCT.md).
+- Are working from the `develop` branch and also submitting a PR to the `develop` branch.
 
 # Table of Contents
 - [Contribution Guidelines](#contribution-guidelines)
