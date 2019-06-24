@@ -134,7 +134,7 @@ The generation is done using the patterns as the following:
 
 call add(b:doge_patterns, {
    " The 'match' key is the main pattern to detect the actual expression.
-   " The example below will match: 'public static function myFunc($arg1 = NULL) {'
+   " The example below will match: 'public static function myFunc($p1 = NULL) {'
    " NOTE: The 'match' key should always start with \m to force magic notation
    " and start with ^ to make sure it's not matching in middle.
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
