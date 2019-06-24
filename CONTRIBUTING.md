@@ -6,6 +6,8 @@ checklists to keep in mind when contributing.
 
 Make sure to read the [Code of Conduct](./CODE_OF_CONDUCT.md) when contributing.
 
+When contributing, you should work from the `develop` branch.
+
 # Table of Contents
 - [Contribution Guidelines](#contribution-guidelines)
 - [Table of Contents](#table-of-contents)
@@ -159,11 +161,11 @@ call add(b:doge_patterns, {
      " that can be used in the 'format' key.
 \    'match_group_names': ['type', 'name'],
 
-     " The 'format' key described how the format how each parameter will be.
+     " The 'format' key describes how the format of each parameter should be.
      " NOTE: The 'format' is not multi-line because it is a list. A list-syntax
      " is used if you want to apply additional formatting for a single token.
      " See the 'Additional token formatting' for more info.
-\    'format': ['@param {type|mixed} {name} TODO'],
+\    'format': ['@param', '{type|mixed}', '{name}', 'TODO'],
 \  },
 
    " The 'comment' key determines how to generate the final comment.
