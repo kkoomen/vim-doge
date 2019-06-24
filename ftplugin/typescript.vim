@@ -29,8 +29,8 @@ let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\
 "
 "   export class Child extends Parent implements CustomInterfaceName {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s*\)\?class\s\+\([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?\s*{',
-\  'match_group_names': ['className', 'parentClassName', 'interfaceName'],
+\  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?\s*{',
+\  'match_group_names': ['parentClassName', 'interfaceName'],
 \  'comment': {
 \    'insert': 'above',
 \    'template': [
@@ -60,8 +60,8 @@ call add(b:doge_patterns, {
 "
 "   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s\+\)\?\(async\s*\)\?\%(function\*\?\s*\)\?\([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-\  'match_group_names': ['async', 'funcName', 'parameters', 'returnType'],
+\  'match': '\m^\%(export\s\+\)\?\(async\s*\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match_group_names': ['async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],

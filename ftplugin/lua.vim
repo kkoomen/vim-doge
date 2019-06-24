@@ -26,8 +26,8 @@ let s:parameters_match_pattern = '\m\([^,]\+\)'
 "
 "   a.b.c = function (self, p1, p2) body end
 call add(b:doge_patterns, {
-\  'match': '\m^\%(local\s*\)\?function\s*\%([[:alnum:]_:.]\+[:.]\)\?\([[:alnum:]_]\+\)\s*(\(.\{-}\))',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^\%(local\s*\)\?function\s*\%([[:alnum:]_:.]\+[:.]\)\?\%([[:alnum:]_]\+\)\s*(\(.\{-}\))',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],

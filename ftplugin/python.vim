@@ -22,8 +22,8 @@ let b:doge_patterns = []
 "
 "   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None]) -> Sequence[T]:
 call add(b:doge_patterns, {
-\  'match': '\m^def \([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
-\  'match_group_names': ['funcName', 'parameters', 'returnType'],
+\  'match': '\m^def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
+\  'match_group_names': ['parameters', 'returnType'],
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
 \    'match_group_names': ['name', 'type', 'default'],

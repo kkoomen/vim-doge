@@ -33,8 +33,8 @@ let b:doge_patterns = []
 "     # ...
 "   }
 call add(b:doge_patterns, {
-\  'match': '\m^\([[:alnum:]_.]\+\)\s*\%(=\|<-\)\s*function\s*(\(.\{-}\))\s*{',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^\%([[:alnum:]_.]\+\)\s*\%(=\|<-\)\s*function\s*(\(.\{-}\))\s*{',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\%(.\%([[:alnum:]_]\+\)\)*\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\)\?',
 \    'match_group_names': ['name'],
