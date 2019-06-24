@@ -21,7 +21,7 @@ yet no one has time to write it in a good and proper way.
 DoGe is a [Do]cumentation [Ge]nerator which will generate a proper documentation
 skeleton based on certain expressions (mainly functions). Simply put your cursor
 on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), jump quickly
-through TODO items using `<Tab>` and `<S-Tab>` to quickly add descriptions and
+through `TODO` items using `<Tab>` and `<S-Tab>` to quickly add descriptions and
 go on coding!
 
 [Visit the Demo page](./doc/demos/README.md)
