@@ -37,6 +37,8 @@ go on coding!
     + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
 - [Help](#help)
+- [FAQ](#faq)
+  * [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
 - [Contributing](#contributing)
 - [Motivation](#motivation)
 - [License](#license)
@@ -117,6 +119,22 @@ Jumps interactively through all `TODO` items in the generated comment.
 # Help
 
 To open all the help pages, run `:help doge`.
+
+# FAQ
+
+## Jump-forward trigger requires to be pressed 2 times in order to jump forward
+
+**Problem**
+This is because you have another plugin that overrides the DoGe default `<Tab>`
+mapping in select mode. UltiSnips could be one of them for most people or any
+other plugin that maps the `<Tab>` character in select mode.
+
+
+**Solution**
+You can solve this by re-mapping the jump forward/backward keys using
+`g:doge_mapping_comment_jump_forward` and `g:doge_mapping_comment_jump_backward`
+or re-map the other plugins. You can also load DoGe earlier since it uses `nore`
+and thus should prevent other plugins from overwriting at a later stage.
 
 # Contributing
 
