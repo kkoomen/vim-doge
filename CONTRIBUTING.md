@@ -290,4 +290,4 @@ non-greedy regex to ensure no parameters will be taken from the function defined
 below the one you're generating documentation for.
 
 If you need help with your regex you can visit the IRC Freenode #regex or #vim channel
-or [ask a question](https://github.com/kkoomen/doge/issues/new?labels=question&template=question.md) in the issue tracker.
+or [ask a question](https://github.com/kkoomen/vim-doge/issues/new?labels=question&template=question.md) in the issue tracker.

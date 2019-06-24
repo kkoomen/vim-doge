@@ -20,18 +20,18 @@ function! doge#generate() abort
     echo '[DoGe] No patterns did match L' . line('.') . '.'
     echo '--'
     echohl WarningMsg
-    echo 'Is this a bug? Use the following link to quickly sent in a bug report for kkoomen/doge:'
+    echo 'Is this a bug? Use the following link to quickly sent in a bug report for kkoomen/vim-doge:'
     echohl None
     let l:issue_title = substitute(s:uppercase(&filetype) . ' expression does not generate comment', '\s\+', '+', 'g')
-    echo printf('https://github.com/kkoomen/doge/issues/new?labels=bug&template=bug_report.md&title=%s', l:issue_title)
+    echo printf('https://github.com/kkoomen/vim-doge/issues/new?labels=bug&template=bug_report.md&title=%s', l:issue_title)
   else
     echo '[DoGe] b:doge_patterns variable not found for filetype "' . s:uppercase(&filetype) . '".'
     echo '--'
     echohl WarningMsg
-    echo 'Should this filetype be supported? Use the following link to quickly sent in a feature request for kkoomen/doge:'
+    echo 'Should this filetype be supported? Use the following link to quickly sent in a feature request for kkoomen/vim-doge:'
     echohl None
     let l:issue_title = substitute('Add support for ' . s:uppercase(&filetype), '\s\+', '+', 'g')
-    echo printf('https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%s', l:issue_title)
+    echo printf('https://github.com/kkoomen/vim-doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=%s', l:issue_title)
   endif
 endfunction
 

@@ -4,13 +4,13 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://travis-ci.com/kkoomen/doge">
-    <img src="https://travis-ci.com/kkoomen/doge.svg?branch=master" alt="Travic CI Build Status" />
+  <a href="https://travis-ci.com/kkoomen/vim-doge">
+    <img src="https://travis-ci.com/kkoomen/vim-doge.svg?branch=master" alt="Travic CI Build Status" />
   </a>
   <img src="https://img.shields.io/badge/vim-8.0.1630%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.3.2%2B-informational.svg" alt="Minimum supported NeoVim version" />
   <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/kkoomen/doge.svg" alt="License" />
+    <img src="https://img.shields.io/github/license/kkoomen/vim-doge.svg" alt="License" />
   </a>
 </p>
 
@@ -49,7 +49,7 @@ go on coding!
 
 Every language that has a documentation standard should be supported by DoGe.
 Is your favorite language not supported?
-[Make a feature request](https://github.com/kkoomen/doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
+[Make a feature request](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
 
 |                    | Language                                       | Doc standard                                                                      |
 | ---                | ---                                            | ---                                                                               |
@@ -72,15 +72,15 @@ Install `DoGe`:
 
 Using vim-pack:
 
-- `git clone https://github.com/kkoomen/doge ~/.vim/pack/*/start/doge`
+- `git clone https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/doge`
 
 Using pathogen:
 
-- `git clone https://github.com/kkoomen/doge ~/.vim/bundle/doge`
+- `git clone https://github.com/kkoomen/vim-doge ~/.vim/bundle/doge`
 
 Using plug:
 
-- `Plug 'kkoomen/doge'`
+- `Plug 'kkoomen/vim-doge'`
 
 # Configuration
 
@@ -141,9 +141,9 @@ and thus should prevent other plugins from overwriting at a later stage.
 # Contributing
 
 Help or feedback is always appreciated. If you find any bugs, feel free to
-[submit a bug report](https://github.com/kkoomen/doge/issues/new?labels=bug&template=bug_report.md).
+[submit a bug report](https://github.com/kkoomen/vim-doge/issues/new?labels=bug&template=bug_report.md).
 If you think DoGe can be improved, feel free to submit a
-[feature request](https://github.com/kkoomen/doge/issues/new?labels=enhancement&template=feature_request.md)
+[feature request](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md)
 or a pull request if you have time to help out.
 
 Read the [Contribution Guidelines](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) when doing contributions.
