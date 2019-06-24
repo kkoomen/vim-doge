@@ -1,15 +1,15 @@
-# Demos and supported functionality
-
-This README contains several demos of some of the languages being supported by
-DoGe and also specifies _what_ is being supported.
-
-## Table of Contents
+# Table of Contents
+- [Table of Contents](#table-of-contents)
 - [Demos and supported functionality](#demos-and-supported-functionality)
-  * [Table of Contents](#table-of-contents)
   * [PHP](#php)
   * [JavaScript](#javascript)
   * [Python](#python)
   * [Scala](#scala)
+
+# Demos and supported functionality
+
+This README contains several demos of some of the languages being supported by
+DoGe and also specifies _what_ is being supported.
 
 ## PHP
 
