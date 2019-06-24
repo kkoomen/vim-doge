@@ -154,3 +154,25 @@ Expect python (generated comment with @param tags with brief descriptions):
 
 Do (let g:doge_comment_interactive = 0):
   :let g:doge_comment_interactive = 0\<CR>
+
+Given php (PHP function with peters where g:doge_comment_interactive = 0):
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
+
+Do (trigger doge):
+  \<C-d>
+
+Then (expect the cursor to be in the same position but shifted by the amount of lines inserted):
+  AssertEqual 'n', mode()
+  AssertEqual 9, line('.')
+  AssertEqual 1, col('.')
+
+Expect php (generated comment with @param tags):
+  /**
+   * TODO
+   *
+   * @param array $p1 TODO
+   * @param string $p2 TODO
+   * @param mixed $p3 TODO
+   * @param \Drupal\core\Entity\Node $p4 TODO
+   */
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
