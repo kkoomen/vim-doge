@@ -129,6 +129,8 @@ or a pull request if you have time to help out.
 Read the [Contribution Guidelines](./CONTRIBUTING.md) for a list of
 requirements when doing contributions.
 
+Make sure to read the [Code of Conduct](./CODE_OF_CONDUCT.md) when contributing.
+
 # Motivation
 
 I created DoGe mainly because I couldn't find a plugin that could generate

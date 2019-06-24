@@ -4,6 +4,8 @@ To keep consistency within the codebase, several guidelines will be required
 when contributing to the repository. The topics below will also contain small
 checklists to keep in mind when contributing.
 
+Make sure to read the [Code of Conduct](./CODE_OF_CONDUCT.md) when contributing.
+
 # Table of Contents
 - [Contribution Guidelines](#contribution-guidelines)
 - [Table of Contents](#table-of-contents)
