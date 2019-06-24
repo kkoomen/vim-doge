@@ -124,13 +124,13 @@ To open all the help pages, run `:help doge`.
 
 ### Jump-forward trigger requires to be pressed 2 times in order to jump forward
 
-**Problem**
+**Problem:**
 This is because you have another plugin that overrides the DoGe default `<Tab>`
 mapping in select mode. UltiSnips could be one of them for most people or any
 other plugin that maps the `<Tab>` character in select mode.
 
 
-**Solution**
+**Solution:**
 You can solve this by re-mapping the jump forward/backward keys using
 `g:doge_mapping_comment_jump_forward` and `g:doge_mapping_comment_jump_backward`
 or re-map the other plugins. You can also load DoGe earlier since it uses `nore`
