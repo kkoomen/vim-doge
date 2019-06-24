@@ -80,7 +80,7 @@ this will help a lot when writing tests, because you already have the
 scenarios. This can also help debugging when regex is not working as expected.
 
 **Summary of requirements:**
-- Playground file (located in `playground/test.<ext>`)
+- Playground file (located at `playground/test.<ext>`)
 - ftplugin
   - Top comment describing what doc standard it should follow.
   - For each pattern a comment with example scenarios that it should match. See [Writing your first pattern](#writing-your-first-pattern) for more info.
@@ -100,8 +100,8 @@ default value, a brief description of what is does and tests.
 - Install [vimdoc](https://github.com/google/vimdoc) and run `vimdoc .`
   locally. If no errors were given, the `doc/doge.txt` should be updated.
 - Open vim and run `:helptags ~/.vim/path/to/your/local/doge/doc`. This should
-  update the `tags` file located in `doc/tags`.
-- Tests (located in `test/options/<option-name>.vader`)
+  update the `tags` file located at `doc/tags`.
+- Tests (located at `test/options/<option-name>.vader`)
 
 ## Code
 
