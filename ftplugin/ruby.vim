@@ -22,8 +22,8 @@ let b:doge_patterns = []
 "
 "   def each(&block)
 call add(b:doge_patterns, {
-\  'match': '\m^def\s\+\([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^def\s\+\%([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
 \    'match_group_names': ['name'],

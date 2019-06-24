@@ -53,8 +53,8 @@ call add(b:doge_patterns, {
 "     $p5 = NULL
 "   ) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\%([^(]\+\)\s*(\(.\{-}\))\s*{',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
 \    'match_group_names': ['type', 'name'],

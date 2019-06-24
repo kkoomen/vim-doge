@@ -22,8 +22,8 @@ let s:parameters_match_pattern = '\m\%(\%(val\s\+\)\?\([[:alnum:]_]\+\)\)\%(\s*:
 "
 "   val getTheAnswer = () => 42
 call add(b:doge_patterns, {
-\  'match': '\m^\%(val\s\+\([[:alnum:]_]\+\)\s*=\s*\)\?(\(.\{-}\))\s*=>\s*',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^\%(val\s\+\%([[:alnum:]_]\+\)\s*=\s*\)\?(\(.\{-}\))\s*=>\s*',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -54,8 +54,8 @@ call add(b:doge_patterns, {
 "
 "   def move(dx: Int, dy: Int): Unit = {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|private\|protected\|override\)\s\+\)*def\s\+\([[:alnum:]_]\+\)\%(\[.*\]\)\?\%(\s*=\s*\)\?(\(.\{-}\)):',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^\%(\%(public\|private\|protected\|override\)\s\+\)*def\s\+\%([[:alnum:]_]\+\)\%(\[.*\]\)\?\%(\s*=\s*\)\?(\(.\{-}\)):',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -85,8 +85,8 @@ call add(b:doge_patterns, {
 "
 "   protected case class LoremIpsum(name: String, age: Int) extends B with C with D {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|private\|protected\|package\|case\)\s\+\)*class\s\+\([[:alnum:]_]\+\)\%(\[.*\]\)\?(\(.\{-}\))\([^{]\+{\)\?',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'match': '\m^\%(\%(public\|private\|protected\|package\|case\)\s\+\)*class\s\+\%([[:alnum:]_]\+\)\%(\[.*\]\)\?(\(.\{-}\))\([^{]\+{\)\?',
+\  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
