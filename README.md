@@ -47,7 +47,7 @@ go on coding!
 
 Every language that has a documentation standard should be supported by DoGe.
 Is your favorite language not supported?
-[Make a feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
+[Make a feature request](https://github.com/kkoomen/doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
 
 |                    | Language                                       | Doc standard                                                                      |
 | ---                | ---                                            | ---                                                                               |
