@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./banner.jpg" alt="DoGe" />
+  <img src="./doc/banner.jpg" alt="DoGe" />
 </p>
 <p align="center">
   <a href="https://travis-ci.com/kkoomen/doge">
