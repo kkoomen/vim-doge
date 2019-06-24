@@ -24,7 +24,7 @@ on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), jump quickly
 through `TODO` items using `<Tab>` and `<S-Tab>` to quickly add descriptions and
 go on coding!
 
-[Visit the Demo page](./doc/demos/README.md)
+[Visit the demo page](./doc/demos/README.md)
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
