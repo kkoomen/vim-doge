@@ -25,14 +25,13 @@ checklists to keep in mind when contributing.
 
 The key to DoGe is _regex_. Why? Because of its flexibility. Each filetype
 consists of a buffer-local variable named `b:doge_patterns` which is a list of
-dictionaries containing info about a certain pattern to apply for when
-triggering DoGe.
+dictionaries containing info about the pattern to match and how the comment
+should be structured.
 
-In each pattern you can specify a regex pattern and each group can be named and
-then be used as a token inside the different keys to render that value when it
-matches.
+In each pattern you can specify a regex pattern, each group can be named and
+each name can be used as a token inside other specific keys.
 
-After implementating this the only thing left to do is implementing all the
+After implementing this the only thing left to do is implementing all the
 languages.
 
 # Topics
@@ -73,7 +72,7 @@ account. Assuming you know the language ins and outs, it is recommended for
 everyone to add a `playground` file with all possible scenarios. This helps to
 write good regex since you know all the possible scenarios and more important:
 this will help a lot when writing tests, because you already have the
-scenarios. This can also help debugging when regex is _not_ working as expected.
+scenarios. This can also help debugging when regex is not working as expected.
 
 **Summary of requirements:**
 - Playground file (located in `playground/test.<ext>`)
@@ -159,6 +158,9 @@ call add(b:doge_patterns, {
 \    'match_group_names': ['type', 'name'],
 
      " The 'format' key described how the format how each parameter will be.
+     " NOTE: The 'format' is not multi-line because it is a list. A list-syntax
+     " is used if you want to apply additional formatting for a single token.
+     " See the 'Additional token formatting' for more info.
 \    'format': ['@param {type|mixed} {name} TODO'],
 \  },
 
@@ -197,7 +199,8 @@ to capture a value you can specify a default value using the pipe character
 
 For example:
 PHP uses `mixed` as a type when the variable has no type hint specified. You
-can accomplish this by render the `{type}` token as `{type|mixed}`.
+can accomplish this by render the `{type}` token as `{type|mixed}`. This will
+result in `* @param mixed $myVar TODO` instead of `* @param {type} $myVar TODO`.
 
 You can also leave the default value empty to just remove the token when it
 fails to capture a value. Example: `{type|}`. This will result in:
@@ -277,9 +280,9 @@ If you trigger DoGe you will receive as input (line 3 - 18) as a single string:
 ```
 function myFuncA(   array $p1,   string $p2,   int $p3,   bool $p4,   Entity $p5,   Node $p6, ) {   // }  function myFuncA(   bool $p1,   Entity $p2,   Node $p3,
 ```
-and this is where you should write your regex for. This requires to write a lot
-of non-greedy regex to ensure no parameters will be taken from the function
-defined below the one you're generating documentation for.
+and this is where you should write your regex for. This requires you to write a
+non-greedy regex to ensure no parameters will be taken from the function defined
+below the one you're generating documentation for.
 
 If you need help with your regex you can visit the IRC Freenode #regex or #vim channel
 or [ask a question](https://github.com/kkoomen/doge/issues/new?labels=question&template=question.md) in the issue tracker.

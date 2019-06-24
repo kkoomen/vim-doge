@@ -38,7 +38,6 @@ go on coding!
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
 - [Help](#help)
 - [Contributing](#contributing)
-  * [Guidelines](#guidelines)
 - [Motivation](#motivation)
 - [License](#license)
 
@@ -126,8 +125,6 @@ Help or feedback is always appreciated. If you find any bugs, feel free to
 If you think DoGe can be improved, feel free to submit a
 [feature request](https://github.com/kkoomen/doge/issues/new?labels=enhancement&template=feature_request.md)
 or a pull request if you have time to help out.
-
-## Guidelines
 
 Read the [Contribution Guidelines](./CONTRIBUTING.md) for a list of
 requirements when doing contributions.
