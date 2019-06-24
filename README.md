@@ -7,7 +7,7 @@
   </a>
   <img src="https://img.shields.io/badge/vim-8.0.1630%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.3.2%2B-informational.svg" alt="Minimum supported NeoVim version" />
-  <a href="https://github.com/kkoomen/doge/blob/develop/LICENSE">
+  <a href="./LICENSE">
     <img src="https://img.shields.io/github/license/kkoomen/doge.svg" alt="License" />
   </a>
 </p>
@@ -23,6 +23,8 @@ skeleton based on certain expressions (mainly functions). Simply put your cursor
 on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), jump quickly
 through TODO items using `<Tab>` and `<S-Tab>` to quickly add descriptions and
 go on coding!
+
+[Visit the Demo page](./doc/demos/README.md)
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
