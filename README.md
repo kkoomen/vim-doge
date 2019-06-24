@@ -36,11 +36,11 @@ go on coding!
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
-- [Contributing](#contributing)
-  * [Linting](#linting)
-  * [Documentation](#documentation)
 - [Help](#help)
+- [Contributing](#contributing)
+  * [Guidelines](#guidelines)
 - [Motivation](#motivation)
+- [License](#license)
 
 # Supported languages and doc standards
 
@@ -115,47 +115,22 @@ Adds the TODO suffix after every generated parameter.
 
 Jumps interactively through all TODO items in the generated comment.
 
+# Help
+
+To open all the help pages, run `:help doge`.
+
 # Contributing
 
 Help or feedback is always appreciated. If you find any bugs, feel free to
 [submit a bug report](https://github.com/kkoomen/doge/issues/new?labels=bug&template=bug_report.md).
 If you think DoGe can be improved, feel free to submit a
-[feature request](https://github.com/kkoomen/doge/issues/new?assignees=&labels=enhancement&template=feature_request.md)
-or a pull request.
+[feature request](https://github.com/kkoomen/doge/issues/new?labels=enhancement&template=feature_request.md)
+or a pull request if you have time to help out.
 
-## Linting
+## Guidelines
 
-Your pull request should follow the rules of the `vim-vint` linter which is a
-must to keep the code clean and prevent mistakes being made. Each PR will
-automatically run tests for code quality using Vint. You don't have to use Vint
-locally, but it will help you to fix any errors before submitting a PR.
-
-- `pip3 install vim-vint`
-
-If you use [ALE](https://github.com/w0rp/ale) (recommended)
-
-```
-let g:ale_linters = { 'vim': ['vint'] }
-```
-
-or if you use [Syntastic](https://github.com/vim-syntastic/syntastic)
-```
-let g:syntastic_vim_checkers = ['vint']
-```
-
-## Documentation
-
-Every function, mapping or configurable option should contain documentation. The
-documentation in the `doc/doge.txt` should be generated using
-[vimdoc](https://github.com/google/vimdoc).
-
-If you change the `doc/doge.txt` you also have to update the helptags file
-located in `doc/tags`. You can do this by running:
-`:helptags ~/.vim/path/to/doge/doc/`.
-
-# Help
-
-To open all the help pages, run `:help doge`.
+Read the [Contribution Guidelines](./CONTRIBUTING.md) for a list of
+requirements when doing contributions.
 
 # Motivation
 
@@ -174,20 +149,6 @@ documentation part because writing _just the skeleton_ of the comment takes
 already too much time and I am one of those people. Having the skeleton
 generated and an interactive mode to quickly add descriptions is a big
 time saver.
-
-# How does DoGe work?
-
-The key to DoGe is _regex_. Why? Because of its flexibility. Each filetype
-consists of a buffer-local variable named `b:doge_patterns` which is a list of
-dictionaries containing info about a certain pattern to apply for when
-triggering DoGe.
-
-In each pattern you can specify a regex pattern and each group can be named and
-then be used as a token inside the `template` key to render that value when it
-matches.
-
-After implementating this the only thing left to do was implementing all the
-languages.
 
 # License
 
