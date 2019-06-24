@@ -38,7 +38,7 @@ go on coding!
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
 - [Help](#help)
 - [FAQ](#faq)
-  * [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
+    + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
 - [Contributing](#contributing)
 - [Motivation](#motivation)
 - [License](#license)
@@ -122,7 +122,7 @@ To open all the help pages, run `:help doge`.
 
 # FAQ
 
-## Jump-forward trigger requires to be pressed 2 times in order to jump forward
+### Jump-forward trigger requires to be pressed 2 times in order to jump forward
 
 **Problem**
 This is because you have another plugin that overrides the DoGe default `<Tab>`
