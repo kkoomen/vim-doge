@@ -37,7 +37,7 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': [
 \      '-- TODO',
-\      '-- {parameters}',
+\      '!-- {parameters}',
 \    ],
 \  },
 \})
@@ -64,7 +64,7 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': [
 \      '-- TODO',
-\      '-- {parameters}',
+\      '!-- {parameters}',
 \    ],
 \  },
 \})
