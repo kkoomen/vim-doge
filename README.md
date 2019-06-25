@@ -72,11 +72,11 @@ Install `DoGe`:
 
 Using vim-pack:
 
-- `git clone https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/doge`
+- `git clone https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
 
 Using pathogen:
 
-- `git clone https://github.com/kkoomen/vim-doge ~/.vim/bundle/doge`
+- `git clone https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
 
 Using plug:
 
