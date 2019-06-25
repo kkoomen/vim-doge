@@ -1,5 +1,5 @@
 " ==============================================================================
-" The javascript documentation should follow the 'jsdoc' conventions.
+" The JavaScript documentation should follow the 'jsdoc' conventions.
 " see https://jsdoc.app
 " ==============================================================================
 

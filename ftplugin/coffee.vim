@@ -1,5 +1,6 @@
 " ==============================================================================
-" The coffeescript documentation should follow the 'jsdoc' conventions.
+" The CoffeeScript documentation should follow the 'jsdoc' conventions, since
+" there is no official CoffeeScript documentation.
 " see https://jsdoc.app
 " ==============================================================================
 

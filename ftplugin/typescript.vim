@@ -1,6 +1,6 @@
 " ==============================================================================
-" The typescript documentation should follow the 'jsdoc' conventions, since
-" there is no official typescript documentation.
+" The TypeScript documentation should follow the 'jsdoc' conventions, since
+" there is no official TypeScript documentation.
 " see https://jsdoc.app
 "
 " This ftplugin should always reflect the logic of the ftplugin/javascript.vim.
