@@ -19,6 +19,7 @@ When contributing make sure you:
   * [Filetype / language](#filetype--language)
   * [Configurable setting](#configurable-setting)
   * [Code](#code)
+  * [Tests](#tests)
 - [Tips](#tips)
   * [Writing your first pattern](#writing-your-first-pattern)
     + [Additional token formatting](#additional-token-formatting)
@@ -113,6 +114,11 @@ bug fix then no tests are required.
 
 Make sure to document code where needed and keep the [README](./README.md),
 [doge.txt](./doc/doge.txt) and [tags](./doc/tags) file updated.
+
+## Tests
+
+Running tests can be done by simply running `./run-tests`.
+Use `./run-tests --help` for more info about the usage.
 
 # Tips
 
