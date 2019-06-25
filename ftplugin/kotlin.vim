@@ -62,7 +62,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * TODO',
-\      ' * {parameters}',
+\      '! * {parameters}',
 \      ' * @return TODO',
 \      ' */',
 \    ],
@@ -109,7 +109,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * TODO',
-\      ' * {parameters}',
+\      '! * {parameters}',
 \      ' */',
 \    ],
 \  },
@@ -135,7 +135,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * TODO',
-\      ' * {parameters}',
+\      '! * {parameters}',
 \      ' */',
 \    ],
 \  },

@@ -23,7 +23,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '###',
 \      '@description TODO',
-\      '@function {className}#{funcName}',
+\      '!@function {className}#{funcName}',
 \      '!@return {{returnType}} TODO',
 \      '###',
 \    ],
@@ -53,7 +53,7 @@ call add(b:doge_patterns, {
 \      '###',
 \      '@description TODO',
 \      '@function {funcName|}',
-\      '{parameters}',
+\      '!{parameters}',
 \      '!@return {{returnType}} TODO',
 \      '###',
 \    ],

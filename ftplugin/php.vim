@@ -66,7 +66,7 @@ call add(b:doge_patterns, {
 \      '/**',
 \      ' * TODO',
 \      ' *',
-\      ' * {parameters}',
+\      '! * {parameters}',
 \      ' */',
 \    ],
 \  },

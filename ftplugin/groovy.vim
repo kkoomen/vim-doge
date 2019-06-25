@@ -36,7 +36,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      '/**',
 \      ' * TODO',
-\      ' * {parameters}',
+\      '! * {parameters}',
 \      '! * @return {returnType|void} TODO',
 \      ' */',
 \    ],

@@ -35,7 +35,7 @@ call add(b:doge_patterns, {
 \      '"""',
 \      'TODO',
 \      '',
-\      '{parameters}',
+\      '!{parameters}',
 \      '!:rtype {returnType}: TODO',
 \      '"""',
 \    ],

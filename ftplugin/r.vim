@@ -45,7 +45,7 @@ call add(b:doge_patterns, {
 \    'template': [
 \      "#' TODO",
 \      "#'",
-\      "#' {parameters}",
+\      "!#' {parameters}",
 \      "#'",
 \      "#' @export",
 \      "#'",
