@@ -2,11 +2,11 @@
 # Functions without parameters.
 # ==============================================================================
 Given r (functions without parameters):
-  myFunc = function() {
+  myFunc = function() { # inline comment
     # ...
   }
 
-  myFunc <- function() {
+  myFunc <- function() { # inline comment
     # ...
   }
 
@@ -21,7 +21,7 @@ Expect r (generated comments with nothing but the text 'TODO' and @export tag):
   #'
   #' @export
   #'
-  myFunc = function() {
+  myFunc = function() { # inline comment
     # ...
   }
 
@@ -30,7 +30,7 @@ Expect r (generated comments with nothing but the text 'TODO' and @export tag):
   #'
   #' @export
   #'
-  myFunc <- function() {
+  myFunc <- function() { # inline comment
     # ...
   }
 

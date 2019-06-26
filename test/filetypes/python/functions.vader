@@ -2,14 +2,14 @@
 # Functions without parameters.
 # ==============================================================================
 Given python (function without parameters):
-  def myFunc():
+  def myFunc(): # inline comment
     pass
 
 Do (trigger doge):
   \<C-d>
 
 Expect python (no changes):
-  def myFunc():
+  def myFunc(): # inline comment
     """
     TODO
     

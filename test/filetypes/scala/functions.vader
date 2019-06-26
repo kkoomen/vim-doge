@@ -2,9 +2,9 @@
 # Functions without parameters.
 # ==============================================================================
 Given scala (functions without parameters):
-  () => x + 1
+  (/* inline comment */) => x + 1
 
-  val addOne = () => x + 1
+  val addOne /* inline comment */ = () => x + 1
 
 Do (trigger doge):
   \<C-d>
@@ -16,19 +16,22 @@ Expect scala (generated comments with the text 'TODO' and @return tag):
    *
    * @return TODO
    */
-  () => x + 1
+  (/* inline comment */) => x + 1
 
   /** TODO
    *
    * @return TODO
    */
-  val addOne = () => x + 1
+  val addOne /* inline comment */ = () => x + 1
 
 # ==============================================================================
 # Functions with parameters.
 # ==============================================================================
 Given scala (function with parameters):
-  val add = (x: Int, y: Int) => x + y
+  val add = (
+    x: Int /* inline coment */,
+    y: Int // inline comment
+  ) => x + y
 
 Do (trigger doge):
   \<C-d>
@@ -40,4 +43,7 @@ Expect scala (generated comment with @param and @return tags):
    * @param y Int TODO
    * @return TODO
    */
-  val add = (x: Int, y: Int) => x + y
+  val add = (
+    x: Int /* inline coment */,
+    y: Int // inline comment
+  ) => x + y

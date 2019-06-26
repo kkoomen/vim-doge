@@ -2,7 +2,7 @@
 # Functions without parameters.
 # ==============================================================================
 Given ruby (function without parameters):
-  def myFunc()
+  def myFunc() # inline comment
   end
 
 Do (trigger doge):
@@ -10,7 +10,7 @@ Do (trigger doge):
 
 Expect ruby (generated comment with nothing but the text 'TODO'):
   # TODO
-  def myFunc()
+  def myFunc() # inline comment
   end
 
 # ==============================================================================
