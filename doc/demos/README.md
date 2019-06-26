@@ -43,7 +43,7 @@ All of the above is _also_ supported for TypeScript and NodeJS.
 ## Python
 
 Supported:
-- Regular function expressions
+- Functions
 - Class methods.
 - Python 3.7+ type hints
 
