@@ -2,7 +2,7 @@
 # Functions without parameters.
 # ==============================================================================
 Given lua (function without parameters):
-  function myFunc()
+  function myFunc() -- inline comment
   end
 
 Do (trigger doge):
@@ -10,14 +10,14 @@ Do (trigger doge):
 
 Expect lua (generated comment with nothing but the text 'TODO'):
   -- TODO
-  function myFunc()
+  function myFunc() -- inline comment
   end
 
 # ==============================================================================
 # Functions with parameters.
 # ==============================================================================
 Given lua (function with parameters):
-  function myFunc(p1, p2, p3, p4)
+  function myFunc(p1, p2, p3, p4) -- inline comment
   end
 
 Do (trigger doge):
@@ -29,7 +29,7 @@ Expect lua (generated comment with @param tags):
   -- @param p2 TODO
   -- @param p3 TODO
   -- @param p4 TODO
-  function myFunc(p1, p2, p3, p4)
+  function myFunc(p1, p2, p3, p4) -- inline comment
   end
 
 # ==============================================================================

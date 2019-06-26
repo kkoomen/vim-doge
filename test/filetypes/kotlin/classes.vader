@@ -208,35 +208,3 @@ Expect kotlin (generated comments with @param tags):
      */
     constructor(parent: Person, query: Query<*, <T>>, users: List<User>) {}
   }
-
-# ==============================================================================
-# Classes without parameters that should be ignored.
-# ==============================================================================
-Given kotlin (classes without parameters that should be ignored):
-  class Delegate {}
-
-  class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {}
-
-  class MyView : View {}
-
-  class Bar2 : Foo() {}
-
-Do (trigger doge):
-  \<C-d>
-  :3\<CR>
-  \<C-d>
-  :3\<CR>
-  \<C-d>
-  :5\<CR>
-  \<C-d>
-  :7\<CR>
-  \<C-d>
-
-Expect kotlin (no changes):
-  class Delegate {}
-
-  class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {}
-
-  class MyView : View {}
-
-  class Bar2 : Foo() {}

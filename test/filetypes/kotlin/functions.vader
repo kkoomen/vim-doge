@@ -2,7 +2,7 @@
 # Functions without type parameters without parameters without return type.
 # ==============================================================================
 Given kotlin (function without type parameters without parameters without return type):
-  fun myFunc() {}
+  fun myFunc(/* inline comment */) {}
 
 Do (trigger doge):
   \<C-d>
@@ -12,7 +12,7 @@ Expect kotlin (generated comment with nothing but the text 'TODO' and @return ta
    * TODO
    * @return TODO
    */
-  fun myFunc() {}
+  fun myFunc(/* inline comment */) {}
 
 # ==============================================================================
 # Functions with type parameters without parameters without return type.
@@ -88,7 +88,7 @@ Expect kotlin (generated comment with nothing but the text 'TODO' and @return ta
 Given kotlin (function without type parameters with parameters with return type):
   fun myFunc(i: Int = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
 
-  abstract fun signal(t: Int, u: Int) = apply(t, u)
+  abstract fun signal(t: Int/* inline comment */, u: Int) = apply(t, u)
 
 Do (trigger doge):
   \<C-d>
@@ -113,7 +113,7 @@ Expect kotlin (generated comment with @param and @return tags):
    * @param u TODO
    * @return TODO
    */
-  abstract fun signal(t: Int, u: Int) = apply(t, u)
+  abstract fun signal(t: Int/* inline comment */, u: Int) = apply(t, u)
 
 # ==============================================================================
 # Different function modifiers.

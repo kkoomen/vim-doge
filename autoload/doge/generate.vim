@@ -6,18 +6,26 @@ set cpoptions&vim
 " Generates a comment based on a given pattern.
 function! doge#generate#pattern(pattern) abort
   " Assuming multiline function expressions won't be longer than 15 lines.
-  let l:lines = getline('.', line('.') + 15)
+  let l:lines_raw = getline('.', line('.') + 15)
+  let l:lines = map(l:lines_raw, {key, line ->
+        \ substitute(line, b:doge_pattern_single_line_comment, '' ,'g')})
 
   " Skip if the cursor doesn't start with text.
   if empty(trim(l:lines[0]))
     return 0
   endif
 
-  " Skip immediately if the current line does not match.
-  let l:curr_line = escape(trim(join(l:lines, ' ')), '\')
-  if l:curr_line !~# a:pattern['match']
+  " Skip if the current line does not match the main pattern.
+  let l:curr_line_raw = escape(trim(join(l:lines, ' ')), '\')
+  if l:curr_line_raw !~# a:pattern['match']
     return 0
   endif
+
+  let l:curr_line = substitute(
+        \ l:curr_line_raw,
+        \ b:doge_pattern_multi_line_comment,
+        \ '',
+        \ 'g')
 
   " Extract the primary tokens.
   let l:tokens = doge#token#extract(

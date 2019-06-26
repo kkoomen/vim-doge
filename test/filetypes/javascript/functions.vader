@@ -2,7 +2,7 @@
 # Functions without parameters.
 # ==============================================================================
 Given javascript (function without parameters):
-  function myFunc() {}
+  function myFunc(/* inline comment */) {}
 
 Do (trigger doge):
   \<C-d>
@@ -11,13 +11,13 @@ Expect javascript (generated comment with @description tag):
   /**
    * @description TODO
    */
-  function myFunc() {}
+  function myFunc(/* inline comment */) {}
 
 # ==============================================================================
 # Functions with parameters without type hints.
 # ==============================================================================
 Given javascript (function with parameters without type hints):
-  function myFunc($p1 = 'value', p2 = [], p3, p4) {}
+  function myFunc($p1 = 'value', p2 = [], p3, p4 /* inline comment */) {}
 
 Do (trigger doge):
   \<C-d>
@@ -30,7 +30,7 @@ Expect javascript (generated comment with @description and @param tags):
    * @param {*} p3 TODO
    * @param {*} p4 TODO
    */
-  function myFunc($p1 = 'value', p2 = [], p3, p4) {}
+  function myFunc($p1 = 'value', p2 = [], p3, p4 /* inline comment */) {}
 
 # ==============================================================================
 # Functions with parameters with type hints.

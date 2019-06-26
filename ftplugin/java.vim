@@ -6,6 +6,8 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
+let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 let b:doge_patterns = []
 
 " ==============================================================================
