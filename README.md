@@ -53,7 +53,7 @@ Every language that has a documentation standard should be supported by DoGe.
 Is your favorite language not supported?
 [Suggest a new language](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:<br/>
 Is your favorite doc standard not supported?
-[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md)!
+[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md)! :tada:
 
 |                    | Language                                       | Doc standard                                                                                                              |
 | ---                | ---                                            | ---                                                                                                                       |
