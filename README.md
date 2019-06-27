@@ -45,6 +45,7 @@ go on coding!
     + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
 - [Contributing](#contributing)
 - [Motivation](#motivation)
+- [Supporting DoGe](#supporting-doge)
 - [License](#license)
 
 # Supported languages and doc standards
@@ -202,6 +203,10 @@ documentation part because writing _just the skeleton_ of the comment takes
 already too much time and I am one of those people. Having the skeleton
 generated and an interactive mode to quickly add descriptions is a big
 time saver.
+
+# Supporting DoGe
+
+Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on [vim.org](https://www.vim.org/scripts/script.php?script_id=5801).
 
 # License
 
