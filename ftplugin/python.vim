@@ -1,5 +1,5 @@
 " ==============================================================================
-" The python documentation should follow the 'Sphinx reST' conventions.
+" The Python documentation should follow the 'reST' or 'Numpy' conventions.
 " see: http://daouzli.com/blog/docstring.html#restructuredtext
 " ==============================================================================
 
@@ -8,6 +8,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m#.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m\(""".\{-}"""\|' . "'''.\\{-}'''" . '\)'
+
+let b:doge_supported_doc_standards = ['reST', 'numpy']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_python', 'reST')
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+        \ '[DoGe] %s is not a valid Python doc standard, available doc standard are: %s',
+        \ b:doge_doc_standard,
+        \ join(b:doge_supported_doc_standards, ', ')
+        \ )
+endif
+
 let b:doge_patterns = []
 
 " ==============================================================================
@@ -28,19 +39,41 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['parameters', 'returnType'],
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
-\    'match_group_names': ['name', 'type', 'default'],
-\    'format': [':param', '{name}', '{type|any}:', 'TODO'],
+\    'match_group_names': ['name', 'type'],
+\    'format': {
+\      'reST': ':param {name} {type|any}: TODO',
+\      'numpy': [
+\        '{name} : {type|any}',
+\        "\tTODO",
+\      ],
+\    },
 \  },
 \  'comment': {
 \    'insert': 'below',
-\    'template': [
-\      '"""',
-\      'TODO',
-\      '',
-\      '!{parameters}',
-\      '!:rtype {returnType}: TODO',
-\      '"""',
-\    ],
+\    'template': {
+\      'reST': [
+\        '"""',
+\        'TODO',
+\        '',
+\        '#(parameters|{parameters})',
+\        '#(returnType|:rtype {returnType}: TODO)',
+\        '"""',
+\      ],
+\      'numpy': [
+\        '"""',
+\        'TODO',
+\        '#(parameters|)',
+\        '#(parameters|Parameters)',
+\        '#(parameters|----------)',
+\        '#(parameters|{parameters})',
+\        '#(returnType|)',
+\        '#(returnType|Returns)',
+\        '#(returnType|-------)',
+\        '#(returnType|{returnType|any}:)',
+\        "#(returnType|\tTODO)",
+\        '"""',
+\      ],
+\    },
 \  },
 \})
 

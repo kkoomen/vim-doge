@@ -8,6 +8,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m#.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m\(=begin.\{-}=end\|<<-DOC.\{-}DOC\)'
+
+let b:doge_supported_doc_standards = ['YARD']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_ruby', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid Ruby doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " ==============================================================================
@@ -29,14 +40,18 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', '[type] TODO'],
+\    'format': {
+\      'YARD': '@param {name} [type] TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '# TODO',
-\      '!# {parameters}',
-\    ],
+\    'template': {
+\      'YARD': [
+\        '# TODO',
+\        '#(parameters|# {parameters})',
+\      ],
+\    },
 \  },
 \})
 

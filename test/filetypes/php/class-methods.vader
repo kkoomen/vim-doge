@@ -17,7 +17,6 @@ Expect php (class method with nothing but the text 'TODO'):
 
     /**
      * TODO
-     *
      */
     public function myMethod() {}
 

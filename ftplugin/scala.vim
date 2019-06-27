@@ -8,6 +8,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+
+let b:doge_supported_doc_standards = ['scaladoc']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_scala', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid Scala doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " Matches the following pattern:
@@ -29,17 +40,21 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '{name}', '{type}', 'TODO'],
+\    'format': {
+\      'scaladoc': '@param {name} {type} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/** TODO',
-\      ' *',
-\      '! * {parameters}',
-\      ' * @return TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'scaladoc': [
+\        '/** TODO',
+\        ' *',
+\        '#(parameters| * {parameters})',
+\        ' * @return TODO',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -61,17 +76,21 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '{name}', '{type}', 'TODO'],
+\    'format': {
+\      'scaladoc': '@param {name} {type} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/** TODO',
-\      ' *',
-\      '! * {parameters}',
-\      ' * @return TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'scaladoc': [
+\        '/** TODO',
+\        ' *',
+\        '#(parameters| * {parameters})',
+\        ' * @return TODO',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -92,16 +111,20 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '{name}', '{type}', 'TODO'],
+\    'format': {
+\      'scaladoc': '@param {name} {type} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/** TODO',
-\      ' *',
-\      '! * {parameters}',
-\      ' */',
-\    ],
+\    'template': {
+\      'scaladoc': [
+\        '/** TODO',
+\        ' *',
+\        '#(parameters| * {parameters})',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 

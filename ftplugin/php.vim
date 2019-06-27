@@ -8,6 +8,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+
+let b:doge_supported_doc_standards = ['phpdoc']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_php', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid PHP doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " ==============================================================================
@@ -29,11 +40,13 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['propertyName'],
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @var {type}',
-\      ' */',
-\    ],
+\    'template': {
+\      'phpdoc': [
+\        '/**',
+\        ' * @var {type}',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -60,17 +73,21 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
 \    'match_group_names': ['type', 'name'],
-\    'format': ['@param', '{type|mixed}', '{name}', 'TODO'],
+\    'format': {
+\      'phpdoc': '@param {type|mixed} {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * TODO',
-\      ' *',
-\      '! * {parameters}',
-\      ' */',
-\    ],
+\    'template': {
+\      'phpdoc': [
+\        '/**',
+\        ' * TODO',
+\        '#(parameters| *)',
+\        '#(parameters| * {parameters})',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 

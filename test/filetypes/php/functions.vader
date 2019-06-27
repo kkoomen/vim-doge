@@ -10,7 +10,6 @@ Do (trigger doge):
 Expect php (generated comment with nothing but the text 'TODO'):
   /**
    * TODO
-   *
    */
   function myFunc(/* inline comment */) {}
 
