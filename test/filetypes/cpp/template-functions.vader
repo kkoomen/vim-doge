@@ -1,0 +1,52 @@
+# ==============================================================================
+# Template functions with parameters with advanced return types.
+# ==============================================================================
+Given cpp (template function with parameters with advanced return types):
+  template <typename HandshakeHandler>
+  INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
+  myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler)
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param type TODO
+   * @param handler TODO
+   * @return TODO
+   */
+  template <typename HandshakeHandler>
+  INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
+  myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler)
+  {
+    //
+  }
+
+# ==============================================================================
+# Template functions with parameters with advanced return types with default
+# values.
+# ==============================================================================
+Given cpp (template function with parameters with advanced return types with default values):
+  template<class...T> void h(int i = 0, T... args) {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param i TODO
+   * @param args TODO
+   * @return TODO
+   */
+  template<class...T> void h(int i = 0, T... args) {
+    //
+  }

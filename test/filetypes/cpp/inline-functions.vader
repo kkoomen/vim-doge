@@ -1,0 +1,23 @@
+# ==============================================================================
+# Inline functions with parameters with return types.
+# ==============================================================================
+Given cpp (inline function with parameters with advanced return types):
+  inline project::error_code my_func(ssl_errors e)
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param e TODO
+   * @return TODO
+   */
+  inline project::error_code my_func(ssl_errors e)
+  {
+    //
+  }

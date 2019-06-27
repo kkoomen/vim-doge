@@ -1,0 +1,52 @@
+# ==============================================================================
+# Auto-functions with parameters.
+# ==============================================================================
+Given cpp (auto-function with parameters using return type 'decltype(auto)'):
+  template<class F, class... Args>
+  decltype(auto) PerfectForward(F fun, Args&&... args)
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param fun TODO
+   * @param args TODO
+   * @return TODO
+   */
+  template<class F, class... Args>
+  decltype(auto) PerfectForward(F fun, Args&&... args)
+  {
+    //
+  }
+# ==============================================================================
+# Auto-functions with parameters with advanced type hints.
+# ==============================================================================
+Given cpp (auto-function with parameters with advanced type hints using return type 'auto'):
+  template<auto n>
+  auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // inline comment
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param it_begin TODO
+   * @param _end TODO
+   * @return TODO
+   */
+  template<auto n>
+  auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // inline comment
+  {
+    //
+  }
