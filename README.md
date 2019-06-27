@@ -49,8 +49,12 @@ go on coding!
 # Supported languages and doc standards
 
 Every language that has a documentation standard should be supported by DoGe.
+
 Is your favorite language not supported?
-[Make a feature request](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
+[Suggest a new language](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
+
+Is your favorite doc standard not supported?
+[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md)!
 
 |                    | Language                                       | Doc standard                                                                                                              |
 | ---                | ---                                            | ---                                                                                                                       |
@@ -122,8 +126,10 @@ Jumps interactively through all `TODO` items in the generated comment.
 ## Choose different doc standard
 
 DoGe supports multiple doc standard and you can overwrite them per filetype in
-your vimrc. Does DoGe not support your preferred dog standard?
-[Make a feature request](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md)!
+your vimrc.
+
+Is your favorite doc standard not supported?
+[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md)!
 
 Here is the full list of available doc standards per filetype:
 - `let g:doge_doc_standard_python`
