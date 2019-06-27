@@ -6,6 +6,7 @@ doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#indent#convert()	doge.txt	/*doge#indent#convert()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
 doge-config	doge.txt	/*doge-config*
