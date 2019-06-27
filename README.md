@@ -100,84 +100,96 @@ your vimrc. Is your favorite doc standard not supported?
 Here is the full list of available doc standards per filetype:
 
 ### `g:doge_doc_standard_python`
-- Default: `reST`
-- Available: `['reST', 'numpy']`
+Default: `'reST'`
+
+Supported: `['reST', 'numpy']`
 
 ### `g:doge_doc_standard_php`
-  - Default: `phpdoc`
-  - Available: `['phpdoc']`
+Default: `'phpdoc'`
+
+Supported: `['phpdoc']`
 
 ### `g:doge_doc_standard_javascript`
-  - Default: `jsdoc`
-  - Available: `['jsdoc']`
+Default: `'jsdoc'`
+
+Supported: `['jsdoc']`
 
 ### `g:doge_doc_standard_typescript`
-  - Default: `jsdoc`
-  - Available: `['jsdoc']`
+Default: `'jsdoc'`
+
+Supported: `['jsdoc']`
 
 ### `g:doge_doc_standard_coffeescript`
-  - Default: `jsdoc`
-  - Available: `['jsdoc']`
+Default: `'jsdoc'`
+
+Supported: `['jsdoc']`
 
 ### `g:doge_doc_standard_lua`
-  - Default: `ldoc`
-  - Available: `['ldoc']`
+Default: `'ldoc'`
+
+Supported: `['ldoc']`
 
 ### `g:doge_doc_standard_java`
-  - Default: `javadoc`
-  - Available: `['javadoc']`
+Default: `'javadoc'`
+
+Supported: `['javadoc']`
 
 ### `g:doge_doc_standard_groovy`
-  - Default: `javadoc`
-  - Available: `['javadoc']`
+Default: `'javadoc'`
+
+Supported: `['javadoc']`
 
 ### `g:doge_doc_standard_ruby`
-  - Default: `YARD`
-  - Available: `['YARD']`
+Default: `'YARD'`
+
+Supported: `['YARD']`
 
 ### `g:doge_doc_standard_scala`
-  - Default: `scaladoc`
-  - Available: `['scaladoc']`
+Default: `'scaladoc'`
+
+Supported: `['scaladoc']`
 
 ### `g:doge_doc_standard_kotlin`
-  - Default: `kdoc`
-  - Available: `['kdoc']`
+Default: `'kdoc'`
+
+Supported: `['kdoc']`
 
 ### `g:doge_doc_standard_r`
-  - Default: `roxygen2`
-  - Available: `['roxygen2']`
+Default: `'roxygen2'`
+
+Supported: `['roxygen2']`
 
 ## Options
 
 ### `g:doge_mapping`
 
-(Default: `<C-d>`)
+Default: `'<C-d>'`
 
 The mapping to trigger DoGe.
 
 ### `g:doge_mapping_comment_jump_forward`
 
-(Default: `<Tab>`)
+Default: `'<Tab>'`
 
 The mapping to jump forward to the next `TODO` item in a comment. Requires
 `g:doge_comment_interactive` to be enabled.
 
 ### `g:doge_mapping_comment_jump_backward`
 
-(Default: `<S-Tab>`)
+Default: `'<S-Tab>'`
 
 The mapping to jump backward to the next `TODO` item in a comment. Requires
 `g:doge_comment_interactive` to be enabled.
 
 ### `g:doge_comment_todo_suffix`
 
-(Default: `1`)
+Default: `1`
 
 Adds the `TODO` suffix after every generated parameter.
 
 ### `g:doge_comment_interactive`
 
-(Default: `1`)
+Default: `1`
 
 Jumps interactively through all `TODO` items in the generated comment.
 
