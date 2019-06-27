@@ -24,7 +24,7 @@ When contributing make sure you:
   * [Writing your first pattern](#writing-your-first-pattern)
     + [Additional token formatting](#additional-token-formatting)
       - [Default value](#default-value)
-      - [Prevent rendering when captured group failed to capture](#prevent-rendering-when-captured-group-failed-to-capture)
+      - [Conditional rendering](#conditional-rendering)
   * [Writing proper regex](#writing-proper-regex)
 
 # How does DoGe work?
@@ -217,35 +217,34 @@ You can also leave the default value empty to just remove the token when it
 fails to capture a value. Example: `{type|}`. This will result in:
 `* @param $p1 TODO` instead of `* @param {type} $p1 TODO`.
 
-#### Prevent rendering when captured group failed to capture
+#### Conditional rendering
 
-When groups fail to capture a value there are scenarios where you do not want
-the token to render. You can use the exclamation mark `!` at the beginning of a
-sentence in the `template` or `parameters.format` keys to accomplish this.
+The syntax for a conditional render is `#(<token>|<value>)` where `<token>` is
+the name of the token and `<value>` the value you want to render when `<token>`
+is _not empty_.
 
 Example:
-Javascript uses JSDoc where a function should use the `@async` tag when a
-function is declared using the `async` keyword. We want to render the tag
-_only_ when the `async` keyword is used in the function declaration.
 
 This is how it's done:
 
 ```vim
+" Example taken from ftplugin/python.vim
+
 call add(b:doge_patterns, {
-\  'match': '...\(async\)\?...',
-\  'match_group_names': ['async'],
-\  'parameters': {},
+\  " ...
 \  'comment': {
-\    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @description TODO',
-       " The '{async}' token renders the word 'async' which ends up in '@async'.
-       " The whole line is removed when `{async}` fails to be captured.
-\      '! * @{async}',
-\      ' * {parameters}',
-\      ' */',
-\    ],
+\    'insert': 'below',
+\    'template': {
+\      'numpy': [
+\        '"""',
+\        'TODO',
+\        '#(parameters|)',              " Render an empty line if '{parameters}' is not empty
+\        '#(parameters|Parameters)',    " Renders 'Parameters' if '{parameters}' is not empty
+\        '#(parameters|----------)',    " Renders '----------' if '{parameters}' is not empty
+\        '#(parameters|{parameters})',  " Renders '{parameters}' if '{parameters}' is not empty
+\        '"""',
+\      ],
+\    }
 \  },
 \})
 ```

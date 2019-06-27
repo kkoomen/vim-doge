@@ -8,6 +8,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m--\+\([[\)\@!.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m--\+[[.\{-}]]--\+'
+
+let b:doge_supported_doc_standards = ['ldoc']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_lua', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid Lua doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 let s:parameters_match_pattern = '\m\([^,]\+\)'
@@ -33,14 +44,18 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', 'TODO'],
+\    'format': {
+\      'ldoc': '@param {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '-- TODO',
-\      '!-- {parameters}',
-\    ],
+\    'template': {
+\      'ldoc': [
+\        '-- TODO',
+\        '#(parameters|-- {parameters})',
+\      ],
+\    },
 \  },
 \})
 
@@ -60,14 +75,18 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', 'TODO'],
+\    'format': {
+\      'ldoc': '@param {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '-- TODO',
-\      '!-- {parameters}',
-\    ],
+\    'template': {
+\      'ldoc': [
+\        '-- TODO',
+\        '#(parameters|-- {parameters})',
+\      ],
+\    },
 \  },
 \})
 

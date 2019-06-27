@@ -8,6 +8,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m#.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m#.\{-}$'
+
+let b:doge_supported_doc_standards = ['roxygen2']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_r', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid R doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " ==============================================================================
@@ -40,18 +51,22 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\%(.\%([[:alnum:]_]\+\)\)*\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\)\?',
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', 'TODO'],
+\    'format': {
+\      'roxygen2': '@param {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      "#' TODO",
-\      "#'",
-\      "!#' {parameters}",
-\      "#'",
-\      "#' @export",
-\      "#'",
-\    ],
+\    'template': {
+\      'roxygen2': [
+\        "#' TODO",
+\        "#(parameters|#')",
+\        "#(parameters|#' {parameters})",
+\        "#'",
+\        "#' @export",
+\        "#'",
+\      ],
+\    },
 \  },
 \})
 
