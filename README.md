@@ -33,7 +33,7 @@ go on coding!
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
-  * [Choose different doc standard](#choose-different-doc-standard)
+  * [Choosing a different doc standard](#choosing-a-different-doc-standard)
   * [Options](#options)
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
@@ -91,49 +91,59 @@ Using plug:
 
 Run `:help doge` to get the full help page.
 
-## Choose different doc standard
+## Choosing a different doc standard
 
 DoGe supports multiple doc standard and you can overwrite them per filetype in
-your vimrc.
-
-Is your favorite doc standard not supported?
+your vimrc. Is your favorite doc standard not supported?
 [Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
 
 Here is the full list of available doc standards per filetype:
-- `let g:doge_doc_standard_python`
-  - Default: `reST`
-  - Available: `['reST', 'numpy']`
-- `let g:doge_doc_standard_php`
+
+### `g:doge_doc_standard_python`
+- Default: `reST`
+- Available: `['reST', 'numpy']`
+
+### `g:doge_doc_standard_php`
   - Default: `phpdoc`
   - Available: `['phpdoc']`
-- `let g:doge_doc_standard_javascript`
+
+### `g:doge_doc_standard_javascript`
   - Default: `jsdoc`
   - Available: `['jsdoc']`
-- `let g:doge_doc_standard_typescript`
+
+### `g:doge_doc_standard_typescript`
   - Default: `jsdoc`
   - Available: `['jsdoc']`
-- `let g:doge_doc_standard_coffeescript`
+
+### `g:doge_doc_standard_coffeescript`
   - Default: `jsdoc`
   - Available: `['jsdoc']`
-- `let g:doge_doc_standard_lua`
+
+### `g:doge_doc_standard_lua`
   - Default: `ldoc`
   - Available: `['ldoc']`
-- `let g:doge_doc_standard_java`
+
+### `g:doge_doc_standard_java`
   - Default: `javadoc`
   - Available: `['javadoc']`
-- `let g:doge_doc_standard_groovy`
+
+### `g:doge_doc_standard_groovy`
   - Default: `javadoc`
   - Available: `['javadoc']`
-- `let g:doge_doc_standard_ruby`
+
+### `g:doge_doc_standard_ruby`
   - Default: `YARD`
   - Available: `['YARD']`
-- `let g:doge_doc_standard_scala`
+
+### `g:doge_doc_standard_scala`
   - Default: `scaladoc`
   - Available: `['scaladoc']`
-- `let g:doge_doc_standard_kotlin`
+
+### `g:doge_doc_standard_kotlin`
   - Default: `kdoc`
   - Available: `['kdoc']`
-- `let g:doge_doc_standard_r`
+
+### `g:doge_doc_standard_r`
   - Default: `roxygen2`
   - Available: `['roxygen2']`
 
