@@ -1,6 +1,8 @@
 " ==============================================================================
 " The Python documentation should follow the 'reST' or 'Numpy' conventions.
-" see: http://daouzli.com/blog/docstring.html#restructuredtext
+" see:
+" - reST: http://daouzli.com/blog/docstring.html#restructuredtext
+" - Numpy: http://daouzli.com/blog/docstring.html#numpydoc
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
