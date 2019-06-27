@@ -28,16 +28,6 @@ go on coding!
 
 [Visit the demo page](./doc/demos/README.md)
 
-<hr/>
-<p align="center">
-  <small>
-    <br/>
-    DoGe is looking for Chinese translators to translate <a href="./README.md">README</a> and <a href="./CONTRIBUTING.md">CONTRIBUTING</a>.
-    <br/><br/>
-  </small>
-</p>
-<hr/>
-
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
