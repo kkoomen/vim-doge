@@ -1,0 +1,114 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given cpp (function without parameters):
+  void Emitter::append_token(/* inline comment */) // another comment
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with nothing but the text 'TODO' and @return tag):
+  /**
+   * TODO
+   *
+   * @return TODO
+   */
+  void Emitter::append_token(/* inline comment */) // another comment
+  {
+    //
+  }
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given cpp (function with parameters):
+  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node) // another comment
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param text TODO
+   * @param node TODO
+   * @return TODO
+   */
+  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node) // another comment
+  {
+    //
+  }
+
+# ==============================================================================
+# Functions with parameters with default values.
+# ==============================================================================
+Given cpp (function with parameters with default values):
+  void f(A* p = this)
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param p TODO
+   * @return TODO
+   */
+  void f(A* p = this)
+  {
+    //
+  }
+
+# ==============================================================================
+# Functions with parameters with advanced return types.
+# ==============================================================================
+Given cpp (functions with parameters with advanced return types):
+  lowest_layer_type& my_func(std::string& text)
+  {
+    //
+  }
+
+  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec)
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+
+Expect cpp (generated comments with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param text TODO
+   * @return TODO
+   */
+  lowest_layer_type& my_func(std::string& text)
+  {
+    //
+  }
+
+  /**
+   * TODO
+   *
+   * @param v TODO
+   * @param ec TODO
+   * @return TODO
+   */
+  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec)
+  {
+    //
+  }

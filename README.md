@@ -57,7 +57,7 @@ Is your favorite doc standard not supported?
 [Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
 
 |                    | Language                                       | Doc standard                                                                                                              |
-| ---                | ---                                            | ---                                                                                                                       |
+| :----------------- | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | :white_check_mark: | Python                                         | [reST](http://daouzli.com/blog/docstring.html#restructuredtext), [Numpy](http://daouzli.com/blog/docstring.html#numpydoc) |
 | :white_check_mark: | PHP                                            | [phpdoc](https://www.phpdoc.org)                                                                                          |
 | :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc](https://jsdoc.app)                                                                                                |
@@ -70,6 +70,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Scala                                          | [ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html)                                                               |
 | :white_check_mark: | Kotlin                                         | [KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html)                                                             |
 | :white_check_mark: | R                                              | [Roxygen2](https://github.com/klutometis/roxygen)                                                                         |
+| :white_check_mark: | C++                                            | [Doxygen](http://www.doxygen.nl)                                                                         |
 
 # Getting started
 
@@ -99,65 +100,21 @@ your vimrc. Is your favorite doc standard not supported?
 
 Here is the full list of available doc standards per filetype:
 
-### `g:doge_doc_standard_python`
-Default: `'reST'`
-
-Supported: `['reST', 'numpy']`
-
-### `g:doge_doc_standard_php`
-Default: `'phpdoc'`
-
-Supported: `['phpdoc']`
-
-### `g:doge_doc_standard_javascript`
-Default: `'jsdoc'`
-
-Supported: `['jsdoc']`
-
-### `g:doge_doc_standard_typescript`
-Default: `'jsdoc'`
-
-Supported: `['jsdoc']`
-
-### `g:doge_doc_standard_coffeescript`
-Default: `'jsdoc'`
-
-Supported: `['jsdoc']`
-
-### `g:doge_doc_standard_lua`
-Default: `'ldoc'`
-
-Supported: `['ldoc']`
-
-### `g:doge_doc_standard_java`
-Default: `'javadoc'`
-
-Supported: `['javadoc']`
-
-### `g:doge_doc_standard_groovy`
-Default: `'javadoc'`
-
-Supported: `['javadoc']`
-
-### `g:doge_doc_standard_ruby`
-Default: `'YARD'`
-
-Supported: `['YARD']`
-
-### `g:doge_doc_standard_scala`
-Default: `'scaladoc'`
-
-Supported: `['scaladoc']`
-
-### `g:doge_doc_standard_kotlin`
-Default: `'kdoc'`
-
-Supported: `['kdoc']`
-
-### `g:doge_doc_standard_r`
-Default: `'roxygen2'`
-
-Supported: `['roxygen2']`
+| Variable                           | Default      | Supported           |
+| :--------------------------------- | :----------- | :------------------ |
+| `g:doge_doc_standard_python`       | `'reST'`     | `'reST'`, `'numpy'` |
+| `g:doge_doc_standard_php`          | `'phpdoc'`   | `'phpdoc'`          |
+| `g:doge_doc_standard_javascript`   | `'jsdoc'`    | `'jsdoc'`           |
+| `g:doge_doc_standard_typescript`   | `'jsdoc'`    | `'jsdoc'`           |
+| `g:doge_doc_standard_coffeescript` | `'jsdoc'`    | `'jsdoc'`           |
+| `g:doge_doc_standard_lua`          | `'ldoc'`     | `'ldoc'`            |
+| `g:doge_doc_standard_java`         | `'javadoc'`  | `'javadoc'`         |
+| `g:doge_doc_standard_groovy`       | `'javadoc'`  | `'javadoc'`         |
+| `g:doge_doc_standard_ruby`         | `'YARD'`     | `'YARD'`            |
+| `g:doge_doc_standard_scala`        | `'scaladoc'` | `'scaladoc'`        |
+| `g:doge_doc_standard_kotlin`       | `'kdoc'`     | `'kdoc'`            |
+| `g:doge_doc_standard_r`            | `'roxygen2'` | `'roxygen2'`        |
+| `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen'`         |
 
 ## Options
 

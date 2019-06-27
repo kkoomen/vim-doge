@@ -8,11 +8,22 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+
+let b:doge_supported_doc_standards = ['doxygen']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_cpp', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid Kotlin doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " Matches the following pattern:
-"   const? <param-name> <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\s\+\)\([[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?'
+"   const? <param-type> <param-name> = <param-default-value>
+let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\{-})\|[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\s\+\)\([[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?'
 
 " ==============================================================================
 " Matches PTS-functions (placeholder type specifiers)
@@ -26,23 +37,27 @@ let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_:&*.]\
 "   template<class F, class... Args>
 "   decltype(auto) PerfectForward(F fun, Args&&... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]\+>\)\s\+\)\?\%(decltype(auto[&*]*)\|auto[&*]*\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*\%(\s*->\s*[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\?\s*{',
+\  'match': '\m^\%(template\s*<[[:alnum:][:space:]_<>.,]\+>\s\+\)\?\%(decltype(auto[&*]*)\|auto[&*]*\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*\%(\s*->\s*[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\?\s*{',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', 'TODO'],
+\    'format': {
+\      'doxygen': '@param {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * TODO',
-\      ' *',
-\      '! * {parameters}',
-\      ' * @return TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'doxygen': [
+\        '/**',
+\        ' * TODO',
+\        ' *',
+\        '#(parameters| * {parameters})',
+\        ' * @return TODO',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -60,23 +75,27 @@ call add(b:doge_patterns, {
 "   template <class T>
 "   T GetMax (T a, T b) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]\+>\)\s\+\)\?\%([[:alnum:]_:]\+\s*\%(<[[:alnum:][:space:]_<>.,]\+>\)\?\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*{',
+\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]\+>\|const\|inline\)\s\+\)\?\%([[:alnum:]_:&]\+\s*\%(<[[:alnum:][:space:]_<>.,]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*{',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
-\    'format': ['@param', '{name}', 'TODO'],
+\    'format': {
+\      'doxygen': '@param {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * TODO',
-\      ' *',
-\      '! * {parameters}',
-\      ' * @return TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'doxygen': [
+\        '/**',
+\        ' * TODO',
+\        ' *',
+\        '#(parameters| * {parameters})',
+\        ' * @return TODO',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
