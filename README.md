@@ -206,7 +206,8 @@ time saver.
 
 # Supporting DoGe
 
-Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on [vim.org](https://www.vim.org/scripts/script.php?script_id=5801).
+Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on
+[vim.org](https://www.vim.org/scripts/script.php?script_id=5801).
 
 # License
 
