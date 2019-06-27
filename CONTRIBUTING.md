@@ -84,6 +84,10 @@ scenarios. This can also help debugging when regex is not working as expected.
 - Playground file (located at `playground/test.<ext>`)
 - ftplugin
   - Top comment describing what doc standard it should follow.
+  - `b:doge_pattern_single_line_comment` (Used to strip comments before generating)
+  - `b:doge_pattern_multi_line_comment` (Used to strip comments before generating)
+  - `b:doge_supported_doc_standards` (A list containing the available doc standards)
+  - `b:doge_doc_standard` (Contains the preferred doc standard by the user with a fallback to the first item of `b:doge_supported_doc_standards`)
   - For each pattern a comment with example scenarios that it should match. See [Writing your first pattern](#writing-your-first-pattern) for more info.
 - Tests (located in `test/filetypes/<filetype>/`)
 - Add your new language to the main [README](./README.md).
@@ -169,10 +173,12 @@ call add(b:doge_patterns, {
 \    'match_group_names': ['type', 'name'],
 
      " The 'format' key describes how the format of each parameter should be.
-     " NOTE: The 'format' is not multi-line because it is a list. A list-syntax
-     " is used if you want to apply additional formatting for a single token.
-     " See the 'Additional token formatting' for more info.
-\    'format': ['@param', '{type|mixed}', '{name}', 'TODO'],
+     " It contains a format for each supported doc standard.
+     " Use a list for multi-line.
+     " Use a tab '\t' to indent properly based on the user setting.
+\    'format': {
+\      'phpdoc': '@param {type|mixed} {name} TODO',
+\    },
 \  },
 
    " The 'comment' key determines how to generate the final comment.
@@ -184,15 +190,17 @@ call add(b:doge_patterns, {
      " - Python comments will be inserted below the function expression.
 \    'insert': 'above',
 
-     " The 'template' key is a list where each key is a single line and is the
-     " main key that will be used to render the actual comment.
-\    'template': [
-\      '/**',
-\      ' * TODO',
-\      ' *',
-\      ' * {parameters}',
-\      ' */',
-\    ],
+     " The 'template' key is a dictonary containing a list for each doc standard.
+     " Each key in the template list is a new line when rendering the comment.
+\    'template': {
+\      'phpdoc': [
+\        '/**',
+\        ' * TODO',
+\        '#(parameters| *)',
+\        '#(parameters| * {parameters})',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 ```
