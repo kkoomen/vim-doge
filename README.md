@@ -33,12 +33,13 @@ go on coding!
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
+  * [Choose different doc standard](#choose-different-doc-standard)
+  * [Options](#options)
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
-  * [Choose different doc standard](#choose-different-doc-standard)
 - [Help](#help)
 - [FAQ](#faq)
     + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
@@ -90,38 +91,6 @@ Using plug:
 
 Run `:help doge` to get the full help page.
 
-### `g:doge_mapping`
-
-(Default: `<C-d>`)
-
-The mapping to trigger DoGe.
-
-### `g:doge_mapping_comment_jump_forward`
-
-(Default: `<Tab>`)
-
-The mapping to jump forward to the next `TODO` item in a comment. Requires
-`g:doge_comment_interactive` to be enabled.
-
-### `g:doge_mapping_comment_jump_backward`
-
-(Default: `<S-Tab>`)
-
-The mapping to jump backward to the next `TODO` item in a comment. Requires
-`g:doge_comment_interactive` to be enabled.
-
-### `g:doge_comment_todo_suffix`
-
-(Default: `1`)
-
-Adds the `TODO` suffix after every generated parameter.
-
-### `g:doge_comment_interactive`
-
-(Default: `1`)
-
-Jumps interactively through all `TODO` items in the generated comment.
-
 ## Choose different doc standard
 
 DoGe supports multiple doc standard and you can overwrite them per filetype in
@@ -167,6 +136,40 @@ Here is the full list of available doc standards per filetype:
 - `let g:doge_doc_standard_r`
   - Default: `roxygen2`
   - Available: `['roxygen2']`
+
+## Options
+
+### `g:doge_mapping`
+
+(Default: `<C-d>`)
+
+The mapping to trigger DoGe.
+
+### `g:doge_mapping_comment_jump_forward`
+
+(Default: `<Tab>`)
+
+The mapping to jump forward to the next `TODO` item in a comment. Requires
+`g:doge_comment_interactive` to be enabled.
+
+### `g:doge_mapping_comment_jump_backward`
+
+(Default: `<S-Tab>`)
+
+The mapping to jump backward to the next `TODO` item in a comment. Requires
+`g:doge_comment_interactive` to be enabled.
+
+### `g:doge_comment_todo_suffix`
+
+(Default: `1`)
+
+Adds the `TODO` suffix after every generated parameter.
+
+### `g:doge_comment_interactive`
+
+(Default: `1`)
+
+Jumps interactively through all `TODO` items in the generated comment.
 
 # Help
 
