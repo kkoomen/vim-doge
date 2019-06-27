@@ -11,6 +11,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+
+let b:doge_supported_doc_standards = ['jsdoc']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_typescript', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid TypeScript doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " Matches the following pattern:
@@ -35,13 +46,15 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['parentClassName', 'interfaceName'],
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @description TODO',
-\      '! * @extends {parentClassName}',
-\      '! * @implements {interfaceName}',
-\      ' */',
-\    ],
+\    'template': {
+\      'jsdoc': [
+\        '/**',
+\        ' * @description TODO',
+\        '#(parentClassName| * @extends {parentClassName})',
+\        '#(interfaceName| * @implements {interfaceName})',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -67,18 +80,22 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '{{type|*}}', '{name}', 'TODO'],
+\    'format': {
+\      'jsdoc': '@param {{type|*}} {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @description TODO',
-\      '! * @{async}',
-\      '! * {parameters}',
-\      '! * @return {{returnType}} TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'jsdoc': [
+\        '/**',
+\        ' * @description TODO',
+\        '#(async| * @{async})',
+\        '#(parameters| * {parameters})',
+\        '#(returnType| * @return {{returnType}} TODO)',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -99,19 +116,23 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '{{type|*}}', '{name}', 'TODO'],
+\    'format': {
+\      'jsdoc': '@param {{type|*}} {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @description TODO',
-\      '! * @{async}',
-\      ' * @function {className}#{funcName}',
-\      '! * {parameters}',
-\      '! * @return {{returnType}} TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'jsdoc': [
+\        '/**',
+\        ' * @description TODO',
+\        '#(async| * @{async})',
+\        ' * @function {className}#{funcName}',
+\        '#(parameters| * {parameters})',
+\        '#(returnType| * @return {{returnType}} TODO)',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
@@ -144,19 +165,23 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
-\    'format': ['@param', '{{type|*}}', '{name}', 'TODO'],
+\    'format': {
+\      'jsdoc': '@param {{type|*}} {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * @description TODO',
-\      '! * @{async}',
-\      ' * @function {funcName|}',
-\      '! * {parameters}',
-\      '! * @return {{returnType}} TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'jsdoc': [
+\        '/**',
+\        ' * @description TODO',
+\        '#(async| * @{async})',
+\        ' * @function {funcName|}',
+\        '#(parameters| * {parameters})',
+\        '#(returnType| * @return {{returnType}} TODO)',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 

@@ -12,12 +12,11 @@ Given r (functions without parameters):
 
 Do (trigger doge):
   \<C-d>
-  :10\<CR>
+  :9\<CR>
   \<C-d>
 
 Expect r (generated comments with nothing but the text 'TODO' and @export tag):
   #' TODO
-  #'
   #'
   #' @export
   #'
@@ -26,7 +25,6 @@ Expect r (generated comments with nothing but the text 'TODO' and @export tag):
   }
 
   #' TODO
-  #'
   #'
   #' @export
   #'

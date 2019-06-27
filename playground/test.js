@@ -188,7 +188,11 @@ const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
  * @param {float} p6 TODO
  * @return {number[]} TODO
  */
-(p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
+/**
+ * @description TODO
+ * @function {funcName|}
+ */
+(): number[] => { };
 
 /**
  * @description TODO

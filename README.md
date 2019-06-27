@@ -28,21 +28,13 @@ go on coding!
 
 [Visit the demo page](./doc/demos/README.md)
 
-<hr/>
-<p align="center">
-  <small>
-    <br/>
-    DoGe is looking for Chinese translators to translate <a href="./README.md">README</a> and <a href="./CONTRIBUTING.md">CONTRIBUTING</a>.
-    <br/><br/>
-  </small>
-</p>
-<hr/>
-
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
+  * [Choosing a different doc standard](#choosing-a-different-doc-standard)
+  * [Options](#options)
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
@@ -58,23 +50,26 @@ go on coding!
 # Supported languages and doc standards
 
 Every language that has a documentation standard should be supported by DoGe.
-Is your favorite language not supported?
-[Make a feature request](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:
 
-|                    | Language                                       | Doc standard                                                                      |
-| ---                | ---                                            | ---                                                                               |
-| :white_check_mark: | Python                                         | ([Sphinx reST](http://daouzli.com/blog/docstring.html#restructuredtext))          |
-| :white_check_mark: | PHP                                            | ([phpdoc](https://www.phpdoc.org))                                                |
-| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | ([JSDoc](https://jsdoc.app))                                                      |
-| :white_check_mark: | TypeScript                                     | ([JSDoc](https://jsdoc.app))                                                      |
-| :white_check_mark: | CoffeeScript                                   | ([JSDoc](https://jsdoc.app))                                                      |
-| :white_check_mark: | Lua                                            | ([LDoc](https://github.com/stevedonovan/LDoc))                                    |
-| :white_check_mark: | Java                                           | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)) |
-| :white_check_mark: | Groovy                                         | ([JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)) |
-| :white_check_mark: | Ruby                                           | ([YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md))                    |
-| :white_check_mark: | Scala                                          | ([ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html))                     |
-| :white_check_mark: | Kotlin                                         | ([KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html))                   |
-| :white_check_mark: | R                                              | ([Roxygen2](https://github.com/klutometis/roxygen))                               |
+Is your favorite language not supported?
+[Suggest a new language](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:<br/>
+Is your favorite doc standard not supported?
+[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
+
+|                    | Language                                       | Doc standard                                                                                                              |
+| ---                | ---                                            | ---                                                                                                                       |
+| :white_check_mark: | Python                                         | [reST](http://daouzli.com/blog/docstring.html#restructuredtext), [Numpy](http://daouzli.com/blog/docstring.html#numpydoc) |
+| :white_check_mark: | PHP                                            | [phpdoc](https://www.phpdoc.org)                                                                                          |
+| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc](https://jsdoc.app)                                                                                                |
+| :white_check_mark: | TypeScript                                     | [JSDoc](https://jsdoc.app)                                                                                                |
+| :white_check_mark: | CoffeeScript                                   | [JSDoc](https://jsdoc.app)                                                                                                |
+| :white_check_mark: | Lua                                            | [LDoc](https://github.com/stevedonovan/LDoc)                                                                              |
+| :white_check_mark: | Java                                           | [JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)                                           |
+| :white_check_mark: | Groovy                                         | [JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)                                           |
+| :white_check_mark: | Ruby                                           | [YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md)                                                              |
+| :white_check_mark: | Scala                                          | [ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html)                                                               |
+| :white_check_mark: | Kotlin                                         | [KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html)                                                             |
+| :white_check_mark: | R                                              | [Roxygen2](https://github.com/klutometis/roxygen)                                                                         |
 
 # Getting started
 
@@ -96,35 +91,105 @@ Using plug:
 
 Run `:help doge` to get the full help page.
 
+## Choosing a different doc standard
+
+DoGe supports multiple doc standard and you can overwrite them per filetype in
+your vimrc. Is your favorite doc standard not supported?
+[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
+
+Here is the full list of available doc standards per filetype:
+
+### `g:doge_doc_standard_python`
+Default: `'reST'`
+
+Supported: `['reST', 'numpy']`
+
+### `g:doge_doc_standard_php`
+Default: `'phpdoc'`
+
+Supported: `['phpdoc']`
+
+### `g:doge_doc_standard_javascript`
+Default: `'jsdoc'`
+
+Supported: `['jsdoc']`
+
+### `g:doge_doc_standard_typescript`
+Default: `'jsdoc'`
+
+Supported: `['jsdoc']`
+
+### `g:doge_doc_standard_coffeescript`
+Default: `'jsdoc'`
+
+Supported: `['jsdoc']`
+
+### `g:doge_doc_standard_lua`
+Default: `'ldoc'`
+
+Supported: `['ldoc']`
+
+### `g:doge_doc_standard_java`
+Default: `'javadoc'`
+
+Supported: `['javadoc']`
+
+### `g:doge_doc_standard_groovy`
+Default: `'javadoc'`
+
+Supported: `['javadoc']`
+
+### `g:doge_doc_standard_ruby`
+Default: `'YARD'`
+
+Supported: `['YARD']`
+
+### `g:doge_doc_standard_scala`
+Default: `'scaladoc'`
+
+Supported: `['scaladoc']`
+
+### `g:doge_doc_standard_kotlin`
+Default: `'kdoc'`
+
+Supported: `['kdoc']`
+
+### `g:doge_doc_standard_r`
+Default: `'roxygen2'`
+
+Supported: `['roxygen2']`
+
+## Options
+
 ### `g:doge_mapping`
 
-(Default: `<C-d>`)
+Default: `'<C-d>'`
 
 The mapping to trigger DoGe.
 
 ### `g:doge_mapping_comment_jump_forward`
 
-(Default: `<Tab>`)
+Default: `'<Tab>'`
 
 The mapping to jump forward to the next `TODO` item in a comment. Requires
 `g:doge_comment_interactive` to be enabled.
 
 ### `g:doge_mapping_comment_jump_backward`
 
-(Default: `<S-Tab>`)
+Default: `'<S-Tab>'`
 
 The mapping to jump backward to the next `TODO` item in a comment. Requires
 `g:doge_comment_interactive` to be enabled.
 
 ### `g:doge_comment_todo_suffix`
 
-(Default: `1`)
+Default: `1`
 
 Adds the `TODO` suffix after every generated parameter.
 
 ### `g:doge_comment_interactive`
 
-(Default: `1`)
+Default: `1`
 
 Jumps interactively through all `TODO` items in the generated comment.
 
