@@ -233,8 +233,6 @@ is _not empty_.
 
 Example:
 
-This is how it's done:
-
 ```vim
 " Example taken from ftplugin/python.vim
 
