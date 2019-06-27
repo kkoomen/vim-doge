@@ -9,6 +9,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m#\@<!##\@!.\+$'
 let b:doge_pattern_multi_line_comment = '\m###.\{-}###'
+
+let b:doge_supported_doc_standards = ['jsdoc']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_coffee', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid CoffeeScript doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " ==============================================================================
@@ -23,13 +34,14 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['className', 'funcName'],
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '###',
-\      '@description TODO',
-\      '!@function {className}#{funcName}',
-\      '!@return {{returnType}} TODO',
-\      '###',
-\    ],
+\    'template': {
+\      'jsdoc': [
+\        '###',
+\        '@description TODO',
+\        '@function {className}#{funcName}',
+\        '###',
+\      ],
+\    }
 \  },
 \})
 
@@ -48,18 +60,21 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': '\m\([^,]\+\)',
 \    'match_group_names': ['name'],
-\    'format': ['@param {*}', '{name}', 'TODO'],
+\    'format': {
+\      'jsdoc': '@param {*} {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '###',
-\      '@description TODO',
-\      '@function {funcName|}',
-\      '!{parameters}',
-\      '!@return {{returnType}} TODO',
-\      '###',
-\    ],
+\    'template': {
+\      'jsdoc': [
+\        '###',
+\        '@description TODO',
+\        '@function {funcName|}',
+\        '#(parameters|{parameters})',
+\        '###',
+\      ],
+\    }
 \  },
 \})
 

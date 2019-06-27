@@ -10,6 +10,17 @@ set cpoptions&vim
 
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+
+let b:doge_supported_doc_standards = ['javadoc']
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_groovy', b:doge_supported_doc_standards[0])
+if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+  echoerr printf(
+  \ '[DoGe] %s is not a valid Groovy doc standard, available doc standard are: %s',
+  \ b:doge_doc_standard,
+  \ join(b:doge_supported_doc_standards, ', ')
+  \ )
+endif
+
 let b:doge_patterns = []
 
 " ==============================================================================
@@ -31,17 +42,21 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
 \    'match_group_names': ['type', 'name'],
-\    'format': ['@param', '{type}', '{name}', 'TODO'],
+\    'format': {
+\      'javadoc': '@param {type} {name} TODO',
+\    },
 \  },
 \  'comment': {
 \    'insert': 'above',
-\    'template': [
-\      '/**',
-\      ' * TODO',
-\      '! * {parameters}',
-\      '! * @return {returnType|void} TODO',
-\      ' */',
-\    ],
+\    'template': {
+\      'javadoc': [
+\        '/**',
+\        ' * TODO',
+\        '#(parameters| * {parameters})',
+\        ' * @return {returnType|void} TODO',
+\        ' */',
+\      ],
+\    },
 \  },
 \})
 
