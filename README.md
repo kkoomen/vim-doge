@@ -98,6 +98,11 @@ DoGe supports multiple doc standard and you can overwrite them per filetype in
 your vimrc. Is your favorite doc standard not supported?
 [Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
 
+Example:
+```vim
+let g:doge_doc_standard_python = 'numpy'
+```
+
 Here is the full list of available doc standards per filetype:
 
 | Variable                           | Default      | Supported           |
