@@ -25,7 +25,8 @@ function! doge#generate#pattern(pattern) abort
         \ l:curr_line_raw,
         \ b:doge_pattern_multi_line_comment,
         \ '',
-        \ 'g')
+        \ 'g'
+        \ )
 
   " Extract the primary tokens.
   let l:tokens = doge#token#extract(

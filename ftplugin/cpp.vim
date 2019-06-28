@@ -37,7 +37,7 @@ let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\
 "   template<class F, class... Args>
 "   decltype(auto) PerfectForward(F fun, Args&&... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(template\s*<[[:alnum:][:space:]_<>.,]\+>\s\+\)\?\%(decltype(auto[&*]*)\|auto[&*]*\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*\%(\s*->\s*[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\?\s*{',
+\  'match': '\m^\%(template\s*<[[:alnum:][:space:]_<>.,]*>\s\+\)\?\%(static\s\+\)\?\%(decltype(auto[&*]*)\|auto[&*]*\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*\%(\%([[:alnum:]_:]\+\s*(\(.\{-}\))\)*\s\+\)\?\%(\s*->\s*[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\?\s*[;{]',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -74,8 +74,11 @@ call add(b:doge_patterns, {
 "
 "   template <class T>
 "   T GetMax (T a, T b) {}
+"
+"   template<typename T, typename... Args>
+"   static T* create(Args&& ... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]\+>\|const\|inline\)\s\+\)\?\%([[:alnum:]_:&]\+\s*\%(<[[:alnum:][:space:]_<>.,]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*{',
+\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]*>\|const\|inline\)\s\+\)\?\%(static\s\+\)\?\%([[:alnum:]_:&*]\+\s*\%(<[[:alnum:][:space:]_<>.,]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*[;{]',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,

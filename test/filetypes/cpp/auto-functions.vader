@@ -50,3 +50,36 @@ Expect cpp (generated comment with @param and @return tags):
   {
     //
   }
+
+# ==============================================================================
+# Auto-functions with advanced syntax.
+# ==============================================================================
+Given cpp (auto-function with advanced syntax):
+  template<typename BasicJsonType, typename ValueType>
+  static auto
+    from_json(BasicJsonType&& j, ValueType& val) 
+    noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
+  -> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param j TODO
+   * @param val TODO
+   * @return TODO
+   */
+  template<typename BasicJsonType, typename ValueType>
+  static auto
+    from_json(BasicJsonType&& j, ValueType& val) 
+    noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
+  -> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
+  {
+    //
+  }
