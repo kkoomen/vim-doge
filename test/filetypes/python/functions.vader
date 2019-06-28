@@ -109,6 +109,8 @@ Expect python (generated comment with nothing but the text 'TODO'):
   def myFunc():
       """
       TODO
+      
+      TODO
       """
       pass
 
@@ -125,6 +127,8 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
       """
+      TODO
+      
       TODO
       
       Parameters
@@ -149,6 +153,8 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
       """
+      TODO
+      
       TODO
       
       Parameters
