@@ -1,0 +1,49 @@
+# ==============================================================================
+# Function declarations with parameters.
+# ==============================================================================
+Given cpp (function declaration with parameters):
+  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node);
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param text TODO
+   * @param node TODO
+   * @return TODO
+   */
+  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node);
+
+# ==============================================================================
+# Function declarations with parameters with advanced return types.
+# ==============================================================================
+Given cpp (function declarations with parameters with advanced return types):
+  lowest_layer_type& my_func(std::string& text);
+
+  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec);
+
+Do (trigger doge):
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+
+Expect cpp (generated comments with @param and @return tags):
+  /**
+   * TODO
+   *
+   * @param text TODO
+   * @return TODO
+   */
+  lowest_layer_type& my_func(std::string& text);
+
+  /**
+   * TODO
+   *
+   * @param v TODO
+   * @param ec TODO
+   * @return TODO
+   */
+  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec);

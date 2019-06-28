@@ -14,7 +14,11 @@ void Emitter::append_token(const std::string& text, const AST_Node* node)
   //
 }
 
-/* should be ignored */
+/**
+ * TODO
+ *
+ * @return TODO
+ */
 const next_layer_type& my_func()
 {
   //
@@ -130,6 +134,42 @@ template<class...T> void h(int i = 0, T... args) {
  */
 template<auto n>
 auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // test
+{
+  //
+}
+
+/**
+ * TODO
+ *
+ * @param args TODO
+ * @return TODO
+ */
+template<typename T, typename... Args>
+static T* create(Args&& ... args)
+{
+  //
+}
+
+/**
+ * TODO
+ *
+ * @param args TODO
+ * @return TODO
+ */
+template<> static T* create(Args&& ... args);
+
+/**
+ * TODO
+ *
+ * @param j TODO
+ * @param val TODO
+ * @return TODO
+ */
+template<typename BasicJsonType, typename ValueType>
+static auto 
+  from_json(BasicJsonType&& j, ValueType& val) 
+  noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
+-> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
 {
   //
 }
