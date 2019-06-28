@@ -119,7 +119,7 @@ Make sure to document code where needed and keep the [README](./README.md),
 
 ## Tests
 
-Running tests can be done by simply running `./run-tests`.
+Running tests can be done in a docker by simply running `./run-tests`.
 Use `./run-tests --help` for more info about the usage.
 
 # Tips
