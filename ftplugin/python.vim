@@ -64,6 +64,8 @@ call add(b:doge_patterns, {
 \      'numpy': [
 \        '"""',
 \        'TODO',
+\        '',
+\        'TODO',
 \        '#(parameters|)',
 \        '#(parameters|Parameters)',
 \        '#(parameters|----------)',
