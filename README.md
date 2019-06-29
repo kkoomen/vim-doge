@@ -1,6 +1,6 @@
 <p align="center">
-  <a href="./doc/demos/README.md">
-    <img src="./doc/banner.jpg" alt="DoGe" />
+  <a href="https://github.com/kkoomen/vim-doge/blob/master/doc/demos/README.md">
+    <img src="https://user-images.githubusercontent.com/10693490/60382742-df4a2c80-9a67-11e9-82e3-9ada6daff0a8.jpg" alt="DoGe" />
   </a>
 </p>
 <p align="center">
@@ -9,7 +9,7 @@
   </a>
   <img src="https://img.shields.io/badge/vim-8.0.1630%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.3.2%2B-informational.svg" alt="Minimum supported NeoVim version" />
-  <a href="./LICENSE">
+  <a href="https://github.com/kkoomen/vim-doge/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/kkoomen/vim-doge.svg" alt="License" />
   </a>
 </p>
@@ -26,7 +26,7 @@ on a function, press `<C-d>`(<kbd>Ctrl</kbd> + <kbd>d</kbd>), jump quickly
 through `TODO` items using `<Tab>` and `<S-Tab>` to quickly add descriptions and
 go on coding!
 
-[Visit the demo page](./doc/demos/README.md)
+[Visit the demo page][demo-readme]
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -53,25 +53,25 @@ go on coding!
 Every language that has a documentation standard should be supported by DoGe.
 
 Is your favorite language not supported?
-[Suggest a new language](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>) :tada:<br/>
+[Suggest a new language][suggest-language] :tada:<br/>
 Is your favorite doc standard not supported?
-[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
+[Suggest a new doc standard][suggest-doc-standard] :tada:
 
-|                    | Language                                       | Doc standard                                                                                                              |
-| :----------------- | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| :white_check_mark: | Python                                         | [reST](http://daouzli.com/blog/docstring.html#restructuredtext), [Numpy](http://daouzli.com/blog/docstring.html#numpydoc) |
-| :white_check_mark: | PHP                                            | [phpdoc](https://www.phpdoc.org)                                                                                          |
-| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc](https://jsdoc.app)                                                                                                |
-| :white_check_mark: | TypeScript                                     | [JSDoc](https://jsdoc.app)                                                                                                |
-| :white_check_mark: | CoffeeScript                                   | [JSDoc](https://jsdoc.app)                                                                                                |
-| :white_check_mark: | Lua                                            | [LDoc](https://github.com/stevedonovan/LDoc)                                                                              |
-| :white_check_mark: | Java                                           | [JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)                                           |
-| :white_check_mark: | Groovy                                         | [JavaDoc](https://www.oracle.com/technetwork/articles/javase/index-137868.html)                                           |
-| :white_check_mark: | Ruby                                           | [YARD](https://www.rubydoc.info/gems/yard/file/docs/Tags.md)                                                              |
-| :white_check_mark: | Scala                                          | [ScalaDoc](https://docs.scala-lang.org/style/scaladoc.html)                                                               |
-| :white_check_mark: | Kotlin                                         | [KDoc](https://kotlinlang.org/docs/reference/kotlin-doc.html)                                                             |
-| :white_check_mark: | R                                              | [Roxygen2](https://github.com/klutometis/roxygen)                                                                         |
-| :white_check_mark: | C++                                            | [Doxygen](http://www.doxygen.nl)                                                                         |
+|                    | Language                                       | Doc standard                 |
+| :----------------- | :--------------------------------------------- | :--------------------------- |
+| :white_check_mark: | Python                                         | [reST][reST], [Numpy][numpy] |
+| :white_check_mark: | PHP                                            | [phpdoc][phpdoc]             |
+| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc][jsdoc]               |
+| :white_check_mark: | TypeScript                                     | [JSDoc][jsdoc]               |
+| :white_check_mark: | CoffeeScript                                   | [JSDoc][jsdoc]               |
+| :white_check_mark: | Lua                                            | [LDoc][ldoc]                 |
+| :white_check_mark: | Java                                           | [JavaDoc][javadoc]           |
+| :white_check_mark: | Groovy                                         | [JavaDoc][javadoc]           |
+| :white_check_mark: | Ruby                                           | [YARD][YARD]                 |
+| :white_check_mark: | Scala                                          | [ScalaDoc][scaladoc]         |
+| :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                 |
+| :white_check_mark: | R                                              | [Roxygen2][roxygen2]         |
+| :white_check_mark: | C++                                            | [Doxygen][doxygen]           |
 
 # Getting started
 
@@ -97,7 +97,7 @@ Run `:help doge` to get the full help page.
 
 DoGe supports multiple doc standard and you can overwrite them per filetype in
 your vimrc. Is your favorite doc standard not supported?
-[Suggest a new doc standard](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md) :tada:
+[Suggest a new doc standard][suggest-doc-standard] :tada:
 
 Example:
 ```vim
@@ -179,12 +179,12 @@ and thus should prevent other plugins from overwriting at a later stage.
 # Contributing
 
 Help or feedback is always appreciated. If you find any bugs, feel free to
-[submit a bug report](https://github.com/kkoomen/vim-doge/issues/new?labels=bug&template=bug_report.md).
-If you think DoGe can be improved, feel free to submit a
-[feature request](https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md)
-or a pull request if you have time to help out.
+[submit a bug report][bug-report]. If you think DoGe can be improved, feel free
+to submit a [feature request][feature-request] or a pull request if you have
+time to help out.
 
-Read the [Contribution Guidelines](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) when doing contributions.
+Read the [Contribution Guidelines][contrib-guide] and [Code of Conduct][coc]
+when doing contributions.
 
 # Motivation
 
@@ -207,8 +207,29 @@ time saver.
 # Supporting DoGe
 
 Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on
-[vim.org](https://www.vim.org/scripts/script.php?script_id=5801).
+[vim.org][vim-script].
 
 # License
 
 DoGe is licensed under the GPL-3.0 license.
+
+[reST]: http://daouzli.com/blog/docstring.html#restructuredtext
+[numpy]: http://daouzli.com/blog/docstring.html#numpydoc
+[phpdoc]: https://www.phpdoc.org
+[jsdoc]: https://jsdoc.app
+[ldoc]: https://github.com/stevedonovan/LDoc
+[javadoc]: https://www.oracle.com/technetwork/articles/javase/index-137868.html
+[YARD]: https://www.rubydoc.info/gems/yard/file/docs/Tags.md
+[scaladoc]: https://docs.scala-lang.org/style/scaladoc.html
+[kdoc]: https://kotlinlang.org/docs/reference/kotlin-doc.html
+[roxygen2]: https://github.com/klutometis/roxygen
+[doxygen]: http://www.doxygen.nl
+
+[demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos/README.md
+[suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
+[suggest-doc-standard]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md
+[bug-report]: https://github.com/kkoomen/vim-doge/issues/new?labels=bug&template=bug_report.md
+[feature-request]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md
+[contrib-guide]: https://github.com/kkoomen/vim-doge/blob/master/CONTRIBUTING.md
+[coc]: https://github.com/kkoomen/vim-doge/blob/master/CODE_OF_CONDUCT.md
+[vim-script]: https://www.vim.org/scripts/script.php?script_id=5801
