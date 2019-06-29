@@ -57,7 +57,7 @@ Is your favorite language not supported?
 Is your favorite doc standard not supported?
 [Suggest a new doc standard][suggest-doc-standard] :tada:
 
-|                    | Language                                       | Doc standard                 |
+|                    | Language                                       | Doc standards                |
 | :----------------- | :--------------------------------------------- | :--------------------------- |
 | :white_check_mark: | Python                                         | [reST][reST], [Numpy][numpy] |
 | :white_check_mark: | PHP                                            | [phpdoc][phpdoc]             |
