@@ -45,7 +45,6 @@ Expect cpp (generated comment with @param and @return tags):
    *
    * @param i TODO
    * @param args TODO
-   * @return TODO
    */
   template<class...T> void h(int i = 0, T... args) {
     //

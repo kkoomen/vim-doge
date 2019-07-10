@@ -13,7 +13,6 @@ Expect cpp (generated comment with @param and @return tags):
    *
    * @param text TODO
    * @param node TODO
-   * @return TODO
    */
   void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node);
 

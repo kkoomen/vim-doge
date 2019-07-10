@@ -38,8 +38,7 @@ function! s:token_replace(tokens, text) abort
     let l:conditional_pattern = printf('\m#(%s|\(.*\))', l:token)
     if l:text =~# l:conditional_pattern
       let l:conditional_pattern_replacement_value = '\1'
-      if (type(l:token_value) == v:t_string && empty(l:token_value))
-      \ || (type(l:token_value) == v:t_list && len(l:token_value) < 1)
+      if (type(l:token_value) == v:t_string && empty(l:token_value)) || (type(l:token_value) == v:t_list && len(l:token_value) < 1)
         let l:conditional_pattern_replacement_value = ''
         let l:empty_conditional_pattern_value = 1
       endif

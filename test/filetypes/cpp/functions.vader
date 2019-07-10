@@ -13,8 +13,6 @@ Do (trigger doge):
 Expect cpp (generated comment with nothing but the text 'TODO' and @return tag):
   /**
    * TODO
-   *
-   * @return TODO
    */
   void Emitter::append_token(/* inline comment */) // another comment
   {
@@ -39,7 +37,6 @@ Expect cpp (generated comment with @param and @return tags):
    *
    * @param text TODO
    * @param node TODO
-   * @return TODO
    */
   void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node) // another comment
   {
@@ -63,7 +60,6 @@ Expect cpp (generated comment with @param and @return tags):
    * TODO
    *
    * @param p TODO
-   * @return TODO
    */
   void f(A* p = this)
   {

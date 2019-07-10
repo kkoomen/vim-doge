@@ -37,8 +37,8 @@ let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\
 "   template<class F, class... Args>
 "   decltype(auto) PerfectForward(F fun, Args&&... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(template\s*<[[:alnum:][:space:]_<>.,]*>\s\+\)\?\%(static\s\+\)\?\%(decltype(auto[&*]*)\|auto[&*]*\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*\%(\%([[:alnum:]_:]\+\s*(\(.\{-}\))\)*\s\+\)\?\%(\s*->\s*[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\?\s*[;{]',
-\  'match_group_names': ['parameters'],
+\  'match': '\m^\%(template\s*<[[:alnum:][:space:]_<>.,]*>\s\+\)\?\%(static\s\+\)\?\%(decltype(auto[&*]*)\|auto[&*]*\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*\%(\%([[:alnum:]_:]\+\s*(\%(.\{-}\))\)*\s\+\)\?\s*->\s*\([[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\s*[;{]',
+\  'match_group_names': ['parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
@@ -52,9 +52,9 @@ call add(b:doge_patterns, {
 \      'doxygen': [
 \        '/**',
 \        ' * TODO',
-\        ' *',
+\        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        '#(returnType| * @return TODO)',
 \        ' */',
 \      ],
 \    },
@@ -78,8 +78,8 @@ call add(b:doge_patterns, {
 "   template<typename T, typename... Args>
 "   static T* create(Args&& ... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]*>\|const\|inline\)\s\+\)\?\%(static\s\+\)\?\%([[:alnum:]_:&*]\+\s*\%(<[[:alnum:][:space:]_<>.,]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*[;{]',
-\  'match_group_names': ['parameters'],
+\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]*>\|const\|inline\)\s\+\)\?\%(static\s\+\)\?\([[:alnum:]_:&*]\+\s*\%(<[[:alnum:][:space:]_<>.,]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*[;{]',
+\  'match_group_names': ['returnType', 'parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
@@ -93,9 +93,9 @@ call add(b:doge_patterns, {
 \      'doxygen': [
 \        '/**',
 \        ' * TODO',
-\        ' *',
+\        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        '#(returnType| * @return TODO)',
 \        ' */',
 \      ],
 \    },
