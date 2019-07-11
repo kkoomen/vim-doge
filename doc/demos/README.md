@@ -18,7 +18,7 @@ Supported:
 - Class methods
 - Functions
 
-[Demo PHP][https://vdoge.kimkoomen.nl/demos/doge-demo-php.gif]
+[Demo PHP](https://vdoge.kimkoomen.nl/demos/doge-demo-php.gif)
 
 ## JavaScript
 
@@ -38,7 +38,7 @@ Supported:
 
 All of the above is _also_ supported for TypeScript and NodeJS.
 
-[Demo][https://vdoge.kimkoomen.nl/demos/doge-demo-javascript.gif]
+[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-javascript.gif)
 
 ## Python
 
@@ -47,7 +47,7 @@ Supported:
 - Class methods.
 - Python 3.7+ type hints
 
-[Demo][https://vdoge.kimkoomen.nl/demos/doge-demo-python.gif]
+[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-python.gif)
 
 ## Scala
 
@@ -56,4 +56,4 @@ Supported:
 - Methods
 - Classes
 
-[Demo][https://vdoge.kimkoomen.nl/demos/doge-demo-scala.gif]
+[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-scala.gif)
