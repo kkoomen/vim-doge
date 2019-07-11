@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/kkoomen/vim-doge/blob/master/doc/demos/README.md">
+  <a href="https://github.com/kkoomen/vim-doge/blob/master/doc/demos">
     <img src="https://user-images.githubusercontent.com/10693490/60382742-df4a2c80-9a67-11e9-82e3-9ada6daff0a8.jpg" alt="DoGe" />
   </a>
 </p>
@@ -225,7 +225,7 @@ DoGe is licensed under the GPL-3.0 license.
 [roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
 
-[demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos/README.md
+[demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
 [suggest-doc-standard]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md
 [bug-report]: https://github.com/kkoomen/vim-doge/issues/new?labels=bug&template=bug_report.md
