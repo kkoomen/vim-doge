@@ -58,7 +58,7 @@ Supported:
 
 ![Demo Scala][demo-scala]
 
-[demo-php]: https://vdoge.kimkoomen.nl/demos/doge-demo/php.gif
-[demo-javascript]: https://vdoge.kimkoomen.nl/demos/doge-demo/javascript.gif
-[demo-python]: https://vdoge.kimkoomen.nl/demos/doge-demo/python.gif
-[demo-scala]: https://vdoge.kimkoomen.nl/demos/doge-demo/scala.gif
+[demo-php]: https://vdoge.kimkoomen.nl/demos/doge-demo-php.gif
+[demo-javascript]: https://vdoge.kimkoomen.nl/demos/doge-demo-javascript.gif
+[demo-python]: https://vdoge.kimkoomen.nl/demos/doge-demo-python.gif
+[demo-scala]: https://vdoge.kimkoomen.nl/demos/doge-demo-scala.gif
