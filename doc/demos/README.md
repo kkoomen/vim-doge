@@ -18,7 +18,7 @@ Supported:
 - Class methods
 - Functions
 
-[Demo PHP](https://vdoge.kimkoomen.nl/demos/doge-demo-php.gif)
+[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-php.gif)
 
 ## JavaScript
 
