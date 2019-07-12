@@ -11,7 +11,7 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m#.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m\(""".\{-}"""\|' . "'''.\\{-}'''" . '\)'
 
-let b:doge_supported_doc_standards = ['reST', 'numpy']
+let b:doge_supported_doc_standards = ['reST', 'numpy', 'google']
 let b:doge_doc_standard = get(g:, 'doge_doc_standard_python', 'reST')
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
@@ -48,6 +48,9 @@ call add(b:doge_patterns, {
 \        '{name} : {type|any}',
 \        "\tTODO",
 \      ],
+\      'google': [
+\        '{name}: TODO',
+\      ],
 \    },
 \  },
 \  'comment': {
@@ -74,6 +77,18 @@ call add(b:doge_patterns, {
 \        '#(returnType|Returns)',
 \        '#(returnType|-------)',
 \        '#(returnType|{returnType|any}:)',
+\        "#(returnType|\tTODO)",
+\        '"""',
+\      ],
+\      'google': [
+\        '"""TODO',
+\        '',
+\        'TODO',
+\        '#(parameters|)',
+\        '#(parameters|Args:)',
+\        "#(parameters|\t{parameters})",
+\        '#(returnType|)',
+\        '#(returnType|Returns:)',
 \        "#(returnType|\tTODO)",
 \        '"""',
 \      ],

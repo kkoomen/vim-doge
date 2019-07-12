@@ -45,6 +45,10 @@ All of the above is _also_ supported for TypeScript and NodeJS.
 Supported:
 - Functions
 - Class methods.
+- Doc standards
+  - reST
+  - Numpy
+  - Google
 - Python 3.7+ type hints
 
 [Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-python.gif)
