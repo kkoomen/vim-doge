@@ -15,7 +15,7 @@ endif
 " We all love documentation because it makes our codebases easier to understand,
 " yet no one has time to write it in a good and proper way.
 "
-" DoGe is a [Do]cumentation [Ge]nerator which will generate a proper
+" DoGe is a (Do)cumentation (Ge)nerator which will generate a proper
 " documentation skeleton based on certain expressions (mainly functions).
 " Simply put your cursor on a function, press `<C-d>`, jump quickly through TODO
 " items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
