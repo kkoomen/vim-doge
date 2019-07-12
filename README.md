@@ -104,6 +104,12 @@ Example:
 let g:doge_doc_standard_python = 'numpy'
 ```
 
+If you want to change the doc standard specifically for a buffer you can do:
+```vim
+" Inside test.py
+:let b:doge_doc_standard = 'numpy'
+```
+
 Here is the full list of available doc standards per filetype:
 
 | Variable                           | Default      | Supported                       |
