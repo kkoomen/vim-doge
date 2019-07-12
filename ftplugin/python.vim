@@ -49,7 +49,7 @@ call add(b:doge_patterns, {
 \        "\tTODO",
 \      ],
 \      'google': [
-\        '{name}: TODO',
+\        '{name} ({type|TODO}): TODO',
 \      ],
 \    },
 \  },
@@ -88,7 +88,7 @@ call add(b:doge_patterns, {
 \        '#(parameters|Args:)',
 \        "#(parameters|\t{parameters})",
 \        '#(returnType|)',
-\        '#(returnType|Returns:)',
+\        '#(returnType|Returns ({returnType}):)',
 \        "#(returnType|\tTODO)",
 \        '"""',
 \      ],
