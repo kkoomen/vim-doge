@@ -21,15 +21,15 @@ Expect python (generated comment with nothing but the text 'TODO'):
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters without type hints without return type where b:doge_doc_standard='google'):
-  def myFunc(p1, p2):
+  def myFunc(p1, p2, p3 = ''):
       pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='google'\<CR>
   \<C-d>
 
-Expect python (generated comment with :param tags):
-  def myFunc(p1, p2):
+Expect python (generated comment with Args tags):
+  def myFunc(p1, p2, p3 = ''):
       """TODO
       
       TODO
@@ -37,50 +37,53 @@ Expect python (generated comment with :param tags):
       Args:
           p1 (TODO): TODO
           p2 (TODO): TODO
+          p3 (TODO, optional): TODO
       """
       pass
 
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters with type hints without return type where b:doge_doc_standard='google'):
-  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
       pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='google'\<CR>
   \<C-d>
 
-Expect python (generated comment with :param tags):
-  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
+Expect python (generated comment with Args tags):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
       """TODO
       
       TODO
       
       Args:
-          p1 (Callable[[int], None]): TODO
-          p2 (Callable[[int, Exception], None]): TODO
+          p1 (TODO): TODO
+          p2 (Callable[[int], None]): TODO
+          p3 (Callable[[int, Exception], None], optional): TODO
       """
       pass
 
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters with type hints with return type where b:doge_doc_standard='google'):
-  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
       pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='google'\<CR>
   \<C-d>
 
-Expect python (generated comment with :param tags):
-  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+Expect python (generated comment with Args and Returns tags):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
       """TODO
       
       TODO
       
       Args:
-          p1 (Callable[[int], None]): TODO
-          p2 (Callable[[int, Exception], None]): TODO
+          p1 (TODO): TODO
+          p2 (Callable[[int], None]): TODO
+          p3 (Callable[[int, Exception], None], optional): TODO
       
       Returns (Sequence[T]):
           TODO

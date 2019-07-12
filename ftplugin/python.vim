@@ -41,7 +41,7 @@ call add(b:doge_patterns, {
 \  'match_group_names': ['parameters', 'returnType'],
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
-\    'match_group_names': ['name', 'type'],
+\    'match_group_names': ['name', 'type', 'default'],
 \    'format': {
 \      'reST': ':param {name} {type|any}: TODO',
 \      'numpy': [
@@ -49,7 +49,7 @@ call add(b:doge_patterns, {
 \        "\tTODO",
 \      ],
 \      'google': [
-\        '{name} ({type|TODO}): TODO',
+\        '{name} ({type|TODO}#(default|, optional)): TODO',
 \      ],
 \    },
 \  },
