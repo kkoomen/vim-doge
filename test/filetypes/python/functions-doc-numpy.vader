@@ -29,7 +29,7 @@ Do (trigger doge):
   :let b:doge_doc_standard='numpy'\<CR>
   \<C-d>
 
-Expect python (generated comment with :param tags):
+Expect python (generated comment with Parameters tag):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
       """
       TODO
@@ -55,7 +55,7 @@ Do (trigger doge):
   :let b:doge_doc_standard='numpy'\<CR>
   \<C-d>
 
-Expect python (generated comment with :param tags):
+Expect python (generated comment with Parameters and Returns tag):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
       """
       TODO
