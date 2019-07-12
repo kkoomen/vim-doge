@@ -106,21 +106,21 @@ let g:doge_doc_standard_python = 'numpy'
 
 Here is the full list of available doc standards per filetype:
 
-| Variable                           | Default      | Supported           |
-| :--------------------------------- | :----------- | :------------------ |
-| `g:doge_doc_standard_python`       | `'reST'`     | `'reST'`, `'numpy'` |
-| `g:doge_doc_standard_php`          | `'phpdoc'`   | `'phpdoc'`          |
-| `g:doge_doc_standard_javascript`   | `'jsdoc'`    | `'jsdoc'`           |
-| `g:doge_doc_standard_typescript`   | `'jsdoc'`    | `'jsdoc'`           |
-| `g:doge_doc_standard_coffeescript` | `'jsdoc'`    | `'jsdoc'`           |
-| `g:doge_doc_standard_lua`          | `'ldoc'`     | `'ldoc'`            |
-| `g:doge_doc_standard_java`         | `'javadoc'`  | `'javadoc'`         |
-| `g:doge_doc_standard_groovy`       | `'javadoc'`  | `'javadoc'`         |
-| `g:doge_doc_standard_ruby`         | `'YARD'`     | `'YARD'`            |
-| `g:doge_doc_standard_scala`        | `'scaladoc'` | `'scaladoc'`        |
-| `g:doge_doc_standard_kotlin`       | `'kdoc'`     | `'kdoc'`            |
-| `g:doge_doc_standard_r`            | `'roxygen2'` | `'roxygen2'`        |
-| `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen'`         |
+| Variable                           | Default      | Supported                       |
+| :--------------------------------- | :----------- | :------------------------------ |
+| `g:doge_doc_standard_python`       | `'reST'`     | `'reST'`, `'numpy'`, `'google'` |
+| `g:doge_doc_standard_php`          | `'phpdoc'`   | `'phpdoc'`                      |
+| `g:doge_doc_standard_javascript`   | `'jsdoc'`    | `'jsdoc'`                       |
+| `g:doge_doc_standard_typescript`   | `'jsdoc'`    | `'jsdoc'`                       |
+| `g:doge_doc_standard_coffeescript` | `'jsdoc'`    | `'jsdoc'`                       |
+| `g:doge_doc_standard_lua`          | `'ldoc'`     | `'ldoc'`                        |
+| `g:doge_doc_standard_java`         | `'javadoc'`  | `'javadoc'`                     |
+| `g:doge_doc_standard_groovy`       | `'javadoc'`  | `'javadoc'`                     |
+| `g:doge_doc_standard_ruby`         | `'YARD'`     | `'YARD'`                        |
+| `g:doge_doc_standard_scala`        | `'scaladoc'` | `'scaladoc'`                    |
+| `g:doge_doc_standard_kotlin`       | `'kdoc'`     | `'kdoc'`                        |
+| `g:doge_doc_standard_r`            | `'roxygen2'` | `'roxygen2'`                    |
+| `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen'`                     |
 
 ## Options
 
