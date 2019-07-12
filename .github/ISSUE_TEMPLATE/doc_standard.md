@@ -15,5 +15,4 @@ Specify a link to the documentation standard section containing the tags.
 - [ ] Some people use it
 - [ ] Quite a lot of people use it
 - [ ] It's not the most popular one, but a good alternative
-- [ ] Everyone within the <community> community is using it
 - [ ] Everyone is using it
