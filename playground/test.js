@@ -5,8 +5,8 @@
 // =============================================================================
 
 /**
- * @function
  * @description TODO
+ * @function
  * @param {*} window TODO
  * @param {*} document TODO
  * @param {*} $ TODO
@@ -64,6 +64,7 @@ perfectSquares = function*() {
 
 /**
  * @description TODO
+ * @async
  * @function perfectSquares
  */
 perfectSquares = async function*() {
@@ -97,12 +98,6 @@ var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
  */
 var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 
-/**
- * @description TODO
- * @param {string} $p1 TODO
- * @param {Foo|Bar|Baz} p2 TODO
- * @return {Foo|Bar} TODO
- */
 /**
  * @description TODO
  * @param {string} $p1 TODO
@@ -167,7 +162,7 @@ var myObj = {
 // =============================================================================
 //
 // Node & ES6
-
+//
 // =============================================================================
 
 /**
@@ -180,17 +175,7 @@ const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
 /**
  * @description TODO
  * @function
- * @param {string} p1 TODO
- * @param {int} p2 TODO
- * @param {*} p3 TODO
- * @param {Immutable.List} p4 TODO
- * @param {string[]} p5 TODO
- * @param {float} p6 TODO
  * @return {number[]} TODO
- */
-/**
- * @description TODO
- * @function {funcName|}
  */
 (): number[] => { };
 
@@ -268,14 +253,6 @@ let Easing = "ease-in" | "ease-out" | "ease-in-out" = "ease-in";
  * @return {Store<AppState>} TODO
  */
 export function configureStore(history: History, initialState: object): Store<AppState> {}
-
-/**
- * @description TODO
- * @param {History} history TODO
- * @param {object} initialState TODO
- * @return {Store} TODO
- */
-function configureStore(history: History, initialState: object): Store {}
 
 /**
  * @description TODO
@@ -360,6 +337,12 @@ function isNumber(x: any): x is number {}
  */
 const user1 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
+/**
+ * @description TODO
+ * @function user2
+ * @param {array} p1 TODO
+ * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
+ */
 let user2 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
 /**
@@ -436,7 +419,7 @@ const rollDice = () : (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); }
 const add = (b: number): number | Fish => { console.log(5); }
 
 /**
- * TODO
+ * @description TODO
  * @implements Padder
  */
 class SpaceRepeatingPadder implements Padder {
@@ -456,7 +439,7 @@ class SpaceRepeatingPadder implements Padder {
 }
 
 /**
- * TODO
+ * @description TODO
  */
 class Adder {
   /**
@@ -478,48 +461,48 @@ class Adder {
 }
 
 /**
- * TODO
+ * @description TODO
  */
 class Child {}
 
 /**
- * TODO
+ * @description TODO
  */
 export class Child {}
 
 /**
- * TODO
+ * @description TODO
  * @extends Parent
  */
 class Child extends Parent {}
 
 /**
- * TODO
+ * @description TODO
  * @extends Parent
  */
 export class Child extends Parent {}
 
 /**
- * TODO
+ * @description TODO
  * @implements CustomInterfaceName
  */
 class Child implements CustomInterfaceName {}
 
 /**
- * TODO
+ * @description TODO
  * @implements CustomInterfaceName
  */
 export class Child implements CustomInterfaceName {}
 
 /**
- * TODO
+ * @description TODO
  * @extends Parent
  * @implements CustomInterfaceName
  */
 class Child extends Parent implements CustomInterfaceName {}
 
 /**
- * TODO
+ * @description TODO
  * @extends Parent
  * @implements CustomInterfaceName
  */
@@ -537,7 +520,7 @@ export class Child extends Parent implements CustomInterfaceName {}
 const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 /**
- * TODO
+ * @description TODO
  * @extends Parent
  */
 class Child extends Parent {

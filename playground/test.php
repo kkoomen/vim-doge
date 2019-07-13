@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse as RedirectResponseBase, S
 
 /**
  * TODO
- *
  */
 function myFunc() {}
 
@@ -14,9 +13,9 @@ function myFunc() {}
  * TODO
  *
  * @param array $p1 TODO
- * @param string $p2 
- * @param mixed $p3 
- * @param \Drupal\core\Entity\Node $p4 a
+ * @param string $p2 TODO
+ * @param mixed $p3 TODO
+ * @param \Drupal\core\Entity\Node $p4 TODO
  */
 function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {
   //
@@ -61,97 +60,7 @@ function myFunction(RedirectResponse $p4) {
   // This should return 'RedirectResponse' since it is defined as an alias.
 }
 
-class myClass {
-
-  /**
-   * @var \Drupal\Core\Config\Entity\Query\QueryFactory
-   */
-  protected $entityQueryFactory;
-
-  /**
-   * TODO
-   *
-   * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf TODO
-   */
-  public function __construct(\Drupal\Core\Config\Entity\Query\QueryFactory $eqf) {
-    $this->entityQueryFactory = $eqf;
-  }
-
-
-  /**
-   * TODO
-   *
-   * @param array $p1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
-   * @param int $p3 TODO
-   * @param mixed $p4 TODO
-   * @param mixed $p5 TODO
-   */
-  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {
-    //
-  }
-
-  /**
-   * TODO
-   *
-   * @param array $p1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
-   * @param int $p3 TODO
-   * @param mixed $p4 TODO
-   * @param mixed $p5 TODO
-   */
-  public final function myPublicFinalMethod(array $p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = 'test') {
-    //
-  }
-
-  /**
-   * TODO
-   *
-   * @param array $p1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
-   * @param int $p3 TODO
-   * @param mixed $p4 TODO
-   * @param mixed $p5 TODO
-   */
-  public static function myPublicStaticMethod(array $p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {
-    //
-  }
-
-  /**
-   * TODO
-   *
-   * @param array $p1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
-   * @param int $p3 TODO
-   * @param mixed $p4 TODO
-   * @param array $p5 TODO
-   */
-  public static final function myPublicStaticFinalMethod(array $p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4 = [], array $p5 = array()) {
-    //
-  }
-
-  /**
-   * TODO
-   *
-   * @param array $p1 TODO
-   * @param \Test\Namespacing\With\A\ClassInterface $p2 TODO
-   * @param int $p3 TODO
-   * @param mixed $p4 TODO
-   * @param mixed $p5 TODO
-   */
-  private function myPrivateMultilineMethod(
-    array $p1,
-    \Test\Namespacing\With\A\ClassInterface $p2,
-    int $p3,
-    $p4,
-    $p5 = NULL
-  ) {
-    //
-  }
-
-}
-
-class myClass2 {
+class MyClass {
 
   /**
    * @var \Drupal\Core\Config\Entity\Query\QueryFactory
