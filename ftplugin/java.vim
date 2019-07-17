@@ -41,7 +41,7 @@ call add(b:doge_patterns, {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
 \    'match_group_names': ['type', 'name'],
 \    'format': {
-\      'javadoc': '@param {type} {name} TODO',
+\      'javadoc': '@param {type} {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -49,9 +49,9 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'javadoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * ' . g:doge_comment_placeholder,
 \        '#(parameters| * {parameters})',
-\        ' * @return {returnType|void} TODO',
+\        ' * @return {returnType|void} ' . g:doge_comment_placeholder,
 \        ' */',
 \      ],
 \    },
