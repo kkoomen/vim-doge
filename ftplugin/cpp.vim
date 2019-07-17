@@ -13,7 +13,7 @@ let b:doge_supported_doc_standards = ['doxygen']
 let b:doge_doc_standard = get(g:, 'doge_doc_standard_cpp', b:doge_supported_doc_standards[0])
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
-  \ '[DoGe] %s is not a valid Kotlin doc standard, available doc standard are: %s',
+  \ '[DoGe] %s is not a valid C++ doc standard, available doc standard are: %s',
   \ b:doge_doc_standard,
   \ join(b:doge_supported_doc_standards, ', ')
   \ )
@@ -43,7 +43,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'doxygen': '@param {name} TODO',
+\      'doxygen': '@param {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -51,10 +51,10 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'doxygen': [
 \        '/**',
-\        ' * TODO',
+\        ' * ' . g:doge_comment_placeholder,
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return TODO)',
+\        '#(returnType| * @return ' . g:doge_comment_placeholder . ')',
 \        ' */',
 \      ],
 \    },
@@ -84,7 +84,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'doxygen': '@param {name} TODO',
+\      'doxygen': '@param {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -92,10 +92,10 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'doxygen': [
 \        '/**',
-\        ' * TODO',
+\        ' * ' . g:doge_comment_placeholder,
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return TODO)',
+\        '#(returnType| * @return ' . g:doge_comment_placeholder . ')',
 \        ' */',
 \      ],
 \    },
