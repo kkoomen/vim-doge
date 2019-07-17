@@ -17,7 +17,7 @@ endif
 "
 " DoGe is a (Do)cumentation (Ge)nerator which will generate a proper
 " documentation skeleton based on certain expressions (mainly functions).
-" Simply put your cursor on a function, press `<C-d>`, jump quickly through TODO
+" Simply put your cursor on a function, press `<Leader>d`, jump quickly through TODO
 " items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
 " coding!
 
@@ -45,10 +45,10 @@ let g:loaded_doge = 1
 
 if !exists('g:doge_mapping')
   ""
-  " (Default: '<C-d>')
+  " (Default: '<Leader>d')
   "
   " The mapping to trigger DoGe.
-  let g:doge_mapping = '<C-d>'
+  let g:doge_mapping = '<Leader>d'
 endif
 
 if !exists('g:doge_mapping_comment_jump_forward')
