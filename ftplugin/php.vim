@@ -74,7 +74,7 @@ call add(b:doge_patterns, {
 \    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
 \    'match_group_names': ['type', 'name'],
 \    'format': {
-\      'phpdoc': '@param {type|mixed} {name} TODO',
+\      'phpdoc': '@param {type|mixed} {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -82,7 +82,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'phpdoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * ' . g:doge_comment_placeholder,
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
 \        ' */',
