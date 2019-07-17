@@ -41,17 +41,17 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'scaladoc': '@param {name} {type} TODO',
+\      'scaladoc': '@param {name} {type} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'scaladoc': [
-\        '/** TODO',
+\        '/** ' . g:doge_comment_placeholder,
 \        ' *',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        ' * @return ' . g:doge_comment_placeholder,
 \        ' */',
 \      ],
 \    },
@@ -77,17 +77,17 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'scaladoc': '@param {name} {type} TODO',
+\      'scaladoc': '@param {name} {type} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'scaladoc': [
-\        '/** TODO',
+\        '/** ' . g:doge_comment_placeholder,
 \        ' *',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        ' * @return ' . g:doge_comment_placeholder,
 \        ' */',
 \      ],
 \    },
@@ -112,14 +112,14 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'scaladoc': '@param {name} {type} TODO',
+\      'scaladoc': '@param {name} {type} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'scaladoc': [
-\        '/** TODO',
+\        '/** ' . g:doge_comment_placeholder,
 \        ' *',
 \        '#(parameters| * {parameters})',
 \        ' */',
