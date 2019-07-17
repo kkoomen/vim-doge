@@ -70,12 +70,12 @@ function! doge#generate#pattern(pattern) abort
       if type(l:format) == v:t_list
         if g:doge_comment_todo_suffix == v:false
           let l:format = map(l:format, { key, line ->
-                \ substitute(line, '\m\s*TODO\s*$', '', 'g') })
+                \ substitute(line, '\m\s*' . g:doge_comment_placeholder . '\s*$', '', 'g') })
         endif
         call add(l:formatted_params, join(l:format, "\n"))
       else
         if g:doge_comment_todo_suffix == v:false
-          let l:format = substitute(l:format, '\m\s*TODO\s*$', '', 'g')
+          let l:format = substitute(l:format, '\m\s*' . g:doge_comment_placeholder . '\s*$', '', 'g')
         endif
         call add(l:formatted_params, l:format)
       endif
@@ -130,13 +130,13 @@ function! doge#generate#pattern(pattern) abort
   " Enable interactive mode.
   if g:doge_comment_interactive == v:true
     if a:pattern['comment']['insert'] ==# 'below'
-      let l:todo_match = search('TODO', 'nW', l:comment_lnum_insert_position + len(l:comment))
+      let l:todo_match = search(g:doge_comment_placeholder, 'nW', l:comment_lnum_insert_position + len(l:comment))
     else
-      let l:todo_match = search('TODO', 'bnW', l:comment_lnum_insert_position + 1)
+      let l:todo_match = search(g:doge_comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
     endif
     if l:todo_match != 0
       let l:todo_count = doge#helpers#count(
-            \ 'TODO',
+            \ g:doge_comment_placeholder,
             \ (l:comment_lnum_insert_position + 1),
             \ (l:comment_lnum_insert_position + 1 + len(l:comment))
             \ )
@@ -146,9 +146,9 @@ function! doge#generate#pattern(pattern) abort
               \ 'lnum_comment_start_pos': (l:comment_lnum_insert_position + 1),
               \ 'lnum_comment_end_pos': (l:comment_lnum_insert_position + len(l:comment)),
               \ }
-        " Go to the top of the comment and select the first TODO.
+        " Go to the top of the comment and select the first placeholder.
         exe l:comment_lnum_insert_position + 1
-        call search('TODO', 'W')
+        call search(g:doge_comment_placeholder, 'W')
         execute("normal! viwo\<C-g>")
       endif
     endif

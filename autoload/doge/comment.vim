@@ -3,53 +3,53 @@ set cpoptions&vim
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
-  let l:next_pos = search('TODO', 'nW')
+  let l:next_pos = search(g:doge_comment_placeholder, 'nW')
 
   " Check if the next pos we want to jump to is still inside the comment.
   if l:next_pos != 0 && l:next_pos <= b:doge_interactive['lnum_comment_end_pos']
     if mode() ==# 'i'
-      return "\<C-O>/TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
+      return "\<C-O>/" . g:doge_comment_placeholder . "\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
     elseif mode() ==# 's'
-      return "\<Esc>/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return "\<Esc>/" . g:doge_comment_placeholder . "\<CR>:silent! noh\<CR>viwo\<C-g>"
     elseif mode() ==# 'n'
-      return "/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return '/' . g:doge_comment_placeholder . "\<CR>:silent! noh\<CR>viwo\<C-g>"
     else
       return "viwo\<C-g>"
     endif
-  elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
+  elseif expand('<cword>') ==# g:doge_comment_placeholder && mode() ==# 'i'
     return "\<C-O>viwo\<C-g>"
   endif
 
-  " No more next TODOs found.
+  " No more next placeholders.
   return 0
 endfunction
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_backward() abort
-  let l:prev_pos = search('TODO', 'bnW')
+  let l:prev_pos = search(g:doge_comment_placeholder, 'bnW')
 
   " Check if the prev pos we want to jump to is still inside the comment.
   if l:prev_pos != 0 && l:prev_pos >= b:doge_interactive['lnum_comment_start_pos']
     if mode() ==# 'i'
-      return "\<C-O>?TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
+      return "\<C-O>?" . g:doge_comment_placeholder . "\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
     elseif mode() ==# 's'
-      return "\<Esc>?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return "\<Esc>?" . g:doge_comment_placeholder . "\<CR>:silent! noh\<CR>viwo\<C-g>"
     elseif mode() ==# 'n'
-      return "?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return '?' . g:doge_comment_placeholder . "\<CR>:silent! noh\<CR>viwo\<C-g>"
     else
       return "viwo\<C-g>"
     endif
-  elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
+  elseif expand('<cword>') ==# g:doge_comment_placeholder && mode() ==# 'i'
     return "\<C-O>viwo\<C-g>"
   endif
 
-  " No more previous TODOs found.
+  " No more previous placeholders.
   return 0
 endfunction
 
 ""
 " @public
-" Jumps to the previous and next TODO item in the comment based on the b:doge_interactive
+" Jumps to the previous and next placeholder item in the comment based on the b:doge_interactive
 " variable. Requires @setting(g:doge_comment_interactive) to be enabled.
 " The {direction} can be of the following values: 'forward' | 'backward'
 function! doge#comment#jump(direction) abort
@@ -63,7 +63,7 @@ function! doge#comment#jump(direction) abort
     endif
 
     let l:todo_count = doge#helpers#count(
-          \ 'TODO',
+          \ g:doge_comment_placeholder,
           \ b:doge_interactive['lnum_comment_start_pos'],
           \ b:doge_interactive['lnum_comment_end_pos']
           \ )
@@ -78,7 +78,7 @@ function! doge#comment#jump(direction) abort
         return l:jump_keyseq
       endif
     else
-      " All the TODO items have been resolved, so we're done.
+      " All the placeholder items have been resolved, so we're done.
       unlet b:doge_interactive
     endif
   endif
@@ -98,7 +98,7 @@ function! doge#comment#update_interactive_comment_info() abort
     " We add +1 to the lnum_comment_end_pos which covers the scenario if a user
     " pressed ENTER while being on the last line of the comment.
     if line('.') > b:doge_interactive['lnum_comment_start_pos'] && line('.') <= b:doge_interactive['lnum_comment_end_pos'] + 1
-      " When filling in the TODO items the user might hit the ENTER key so we
+      " When filling in the placeholder items the user might hit the ENTER key so we
       " constantly have to update the end position of the comment, because the
       " comment can get bigger.
 

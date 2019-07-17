@@ -85,6 +85,15 @@ if !exists('g:doge_comment_interactive')
   let g:doge_comment_interactive = 1
 endif
 
+if !exists('g:doge_comment_placeholder')
+  ""
+  " (Default: TODO)
+  "
+  " String used as placeholder in generated documentation.
+  " let g:doge_comment_placeholder = 'TODO'
+  let g:doge_comment_placeholder = 'TODO'
+endif
+
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
 nnoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
 nnoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
