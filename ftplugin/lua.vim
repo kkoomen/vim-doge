@@ -45,14 +45,14 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'ldoc': '@param {name} TODO',
+\      'ldoc': '@param {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'ldoc': [
-\        '-- TODO',
+\        '-- ' . g:doge_comment_placeholder,
 \        '#(parameters|-- {parameters})',
 \      ],
 \    },
@@ -76,14 +76,14 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'ldoc': '@param {name} TODO',
+\      'ldoc': '@param {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'ldoc': [
-\        '-- TODO',
+\        '-- ' . g:doge_comment_placeholder,
 \        '#(parameters|-- {parameters})',
 \      ],
 \    },
