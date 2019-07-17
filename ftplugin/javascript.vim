@@ -46,7 +46,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * @description ' . g:doge_comment_placeholder,
 \        '#(parentClassName| * @extends {parentClassName})',
 \        '#(interfaceName| * @implements {interfaceName})',
 \        ' */',
@@ -78,7 +78,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|*}} {name} TODO',
+\      'jsdoc': '@param {{type|*}} {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -86,10 +86,10 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * @description ' . g:doge_comment_placeholder,
 \        '#(async| * @{async})',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return {{returnType}} TODO)',
+\        '#(returnType| * @return {{returnType}} ' . g:doge_comment_placeholder . ')',
 \        ' */',
 \      ],
 \    },
@@ -114,7 +114,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|*}} {name} TODO',
+\      'jsdoc': '@param {{type|*}} {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -122,11 +122,11 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * @description ' . g:doge_comment_placeholder,
 \        '#(async| * @{async})',
 \        ' * @function {className}#{funcName}',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return {{returnType}} TODO)',
+\        '#(returnType| * @return {{returnType}} ' . g:doge_comment_placeholder . ')',
 \        ' */',
 \      ],
 \    },
@@ -163,7 +163,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|*}} {name} TODO',
+\      'jsdoc': '@param {{type|*}} {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -171,11 +171,11 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * @description ' . g:doge_comment_placeholder,
 \        '#(async| * @{async})',
 \        ' * @function {funcName|}',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return {{returnType}} TODO)',
+\        '#(returnType| * @return {{returnType}} ' . g:doge_comment_placeholder . ')',
 \        ' */',
 \      ],
 \    },
