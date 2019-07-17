@@ -41,14 +41,14 @@ call add(b:doge_patterns, {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
 \    'match_group_names': ['name'],
 \    'format': {
-\      'YARD': '@param {name} [type] TODO',
+\      'YARD': '@param {name} [type] ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'YARD': [
-\        '# TODO',
+\        '# ' . g:doge_comment_placeholder,
 \        '#(parameters|# {parameters})',
 \      ],
 \    },
