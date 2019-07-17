@@ -37,7 +37,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '###',
-\        '@description TODO',
+\        '@description ' . g:doge_comment_placeholder,
 \        '@function {className}#{funcName}',
 \        '###',
 \      ],
@@ -61,7 +61,7 @@ call add(b:doge_patterns, {
 \    'match': '\m\([^,]\+\)',
 \    'match_group_names': ['name'],
 \    'format': {
-\      'jsdoc': '@param {*} {name} TODO',
+\      'jsdoc': '@param {*} {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
@@ -69,7 +69,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '###',
-\        '@description TODO',
+\        '@description ' . g:doge_comment_placeholder,
 \        '@function {funcName|}',
 \        '#(parameters|{parameters})',
 \        '###',
