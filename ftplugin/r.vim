@@ -52,14 +52,14 @@ call add(b:doge_patterns, {
 \    'match': '\m\([[:alnum:]_]\+\%(.\%([[:alnum:]_]\+\)\)*\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\)\?',
 \    'match_group_names': ['name'],
 \    'format': {
-\      'roxygen2': '@param {name} TODO',
+\      'roxygen2': '@param {name} ' . g:doge_comment_placeholder,
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'roxygen2': [
-\        "#' TODO",
+\        "#' " . g:doge_comment_placeholder,
 \        "#(parameters|#')",
 \        "#(parameters|#' {parameters})",
 \        "#'",
