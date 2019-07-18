@@ -40,7 +40,7 @@ call add(b:doge_patterns, {
 \  'match': '\m^def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
 \  'match_group_names': ['parameters', 'returnType'],
 \  'parameters': {
-\    'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
+\    'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_.]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
 \    'match_group_names': ['name', 'type', 'default'],
 \    'format': {
 \      'reST': ':param {name} {type|' . doge#helpers#placeholder('type') . '}: TODO',
