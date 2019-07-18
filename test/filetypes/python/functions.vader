@@ -92,3 +92,28 @@ Expect python (generated comments with :param tags):
       :rtype Generator[int, float, str]: TODO
       """
       pass
+
+# ==============================================================================
+# Functions defined multi-line.
+# ==============================================================================
+Given python (multi-line function with type hint parameters):
+  def myFunc(p1: str, p2: dict,
+          p3: list, p4: tuple) -> Iterator[int]:
+      pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param and :rtype tags):
+  def myFunc(p1: str, p2: dict,
+          p3: list, p4: tuple) -> Iterator[int]:
+      """
+      TODO
+      
+      :param p1 str: TODO
+      :param p2 dict: TODO
+      :param p3 list: TODO
+      :param p4 tuple: TODO
+      :rtype Iterator[int]: TODO
+      """
+      pass

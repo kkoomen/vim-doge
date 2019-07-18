@@ -113,18 +113,25 @@ function! doge#generate#pattern(pattern) abort
     let l:comment_lnum_insert_position = line('.') - 1
   endif
 
+  try
+    let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', &filetype)
+    let l:preprocessed_insert_position = function(l:preprocess_fn)(l:comment_lnum_insert_position)
+    let l:comment_lnum_insert_position = l:preprocessed_insert_position
+
+    " Update the inherited_indent variable based on the new insert position.
+    " For now we only have to do this for languages like Python where we insert
+    " below the declaration.
+    if a:pattern['comment']['insert'] ==# 'below'
+      let l:comment_lnum_inherited_indent = l:comment_lnum_insert_position + 1
+    endif
+  catch /^Vim\%((\a\+)\)\=:E117/
+  endtry
+
   " vint: next-line -ProhibitUnusedVariable
   let l:Indent = function('doge#indent#add', [l:comment_lnum_inherited_indent])
 
   " Indent the comment.
   let l:comment = map(l:comment, { k, line -> l:Indent(line) })
-
-  try
-    let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', &filetype)
-    let l:preprocessed_insert_position = function(l:preprocess_fn)(l:comment_lnum_insert_position)
-    let l:comment_lnum_insert_position = l:preprocessed_insert_position
-  catch /^Vim\%((\a\+)\)\=:E117/
-  endtry
 
   " Write the comment.
   call append(l:comment_lnum_insert_position, l:comment)
@@ -140,7 +147,7 @@ function! doge#generate#pattern(pattern) abort
       let l:todo_count = doge#helpers#count(
             \ s:comment_placeholder,
             \ (l:comment_lnum_insert_position + 1),
-            \ (l:comment_lnum_insert_position + 1 + len(l:comment))
+            \ (l:comment_lnum_insert_position + len(l:comment))
             \ )
       if l:todo_count > 0
         let b:doge_interactive = {
