@@ -44,5 +44,26 @@ function! doge#helpers#keyseq(seq) abort
   return l:keyseq
 endfunction
 
+
+""
+" @public
+" Generate a placeholder with optionally a context. Optionally, you can pass the
+" context using the following example call:
+"
+"   doge#helpers#placeholder('summary')
+"
+" The above will return:
+"
+"   'TODO<summary>'
+"
+" If no context is specified the todo-pattern is returned to search for.
+function! doge#helpers#placeholder(...) abort
+  if !has_key(a:, 1)
+    return '\m\(\[TODO:.\{-}\]\|TODO\)'
+  else
+    return printf('[TODO:%s]', a:1)
+  endif
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

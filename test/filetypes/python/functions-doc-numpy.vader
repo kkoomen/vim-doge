@@ -10,12 +10,12 @@ Do (trigger doge):
   :let b:doge_doc_standard='numpy'\<CR>
   \<C-d>
 
-Expect python (generated comment with nothing but the text 'TODO'):
+Expect python (generated comment with nothing but the summary and description 'TODO'):
   def myFunc():
       """
-      TODO
+      [TODO:summary]
       
-      TODO
+      [TODO:description]
       """
       pass
 
@@ -32,9 +32,9 @@ Do (trigger doge):
 Expect python (generated comment with Parameters tag):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
       """
-      TODO
+      [TODO:summary]
       
-      TODO
+      [TODO:description]
       
       Parameters
       ----------
@@ -58,9 +58,9 @@ Do (trigger doge):
 Expect python (generated comment with Parameters and Returns tag):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
       """
-      TODO
+      [TODO:summary]
       
-      TODO
+      [TODO:description]
       
       Parameters
       ----------

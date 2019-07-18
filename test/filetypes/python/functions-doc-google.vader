@@ -10,11 +10,11 @@ Do (trigger doge):
   :let b:doge_doc_standard='google'\<CR>
   \<C-d>
 
-Expect python (generated comment with nothing but the text 'TODO'):
+Expect python (generated comment with nothing but the summary and description 'TODO'):
   def myFunc():
-      """TODO
+      """[TODO:summary]
       
-      TODO
+      [TODO:description]
       """
       pass
 
@@ -30,14 +30,14 @@ Do (trigger doge):
 
 Expect python (generated comment with Args tags):
   def myFunc(p1, p2, p3 = ''):
-      """TODO
+      """[TODO:summary]
       
-      TODO
+      [TODO:description]
       
       Args:
-          p1 (TODO): TODO
-          p2 (TODO): TODO
-          p3 (TODO, optional): TODO
+          p1 ([TODO:type]): TODO
+          p2 ([TODO:type]): TODO
+          p3 ([TODO:type], optional): TODO
       """
       pass
 
@@ -53,12 +53,12 @@ Do (trigger doge):
 
 Expect python (generated comment with Args tags):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
-      """TODO
+      """[TODO:summary]
       
-      TODO
+      [TODO:description]
       
       Args:
-          p1 (TODO): TODO
+          p1 ([TODO:type]): TODO
           p2 (Callable[[int], None]): TODO
           p3 (Callable[[int, Exception], None], optional): TODO
       """
@@ -76,12 +76,12 @@ Do (trigger doge):
 
 Expect python (generated comment with Args and Returns tags):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
-      """TODO
+      """[TODO:summary]
       
-      TODO
+      [TODO:description]
       
       Args:
-          p1 (TODO): TODO
+          p1 ([TODO:type]): TODO
           p2 (Callable[[int], None]): TODO
           p3 (Callable[[int, Exception], None], optional): TODO
       

@@ -52,7 +52,8 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': {
 \      'ldoc': [
-\        '-- TODO',
+\        '-- ' . doge#helpers#placeholder('summary'),
+\        '-- ' . doge#helpers#placeholder('description'),
 \        '#(parameters|-- {parameters})',
 \      ],
 \    },
@@ -83,7 +84,8 @@ call add(b:doge_patterns, {
 \    'insert': 'above',
 \    'template': {
 \      'ldoc': [
-\        '-- TODO',
+\        '-- ' . doge#helpers#placeholder('summary'),
+\        '-- ' . doge#helpers#placeholder('description'),
 \        '#(parameters|-- {parameters})',
 \      ],
 \    },

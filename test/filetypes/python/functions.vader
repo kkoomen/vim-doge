@@ -31,10 +31,10 @@ Expect python (generated comment with :param tags):
     """
     TODO
     
-    :param p1 any: TODO
-    :param p2 any: TODO
-    :param p3 any: TODO
-    :param p4 any: TODO
+    :param p1 [TODO:type]: TODO
+    :param p2 [TODO:type]: TODO
+    :param p3 [TODO:type]: TODO
+    :param p4 [TODO:type]: TODO
     """
     pass
 

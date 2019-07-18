@@ -67,7 +67,7 @@ Expect python (generated comment with :param tags):
           """
           TODO
           
-          :param self any: TODO
+          :param self [TODO:type]: TODO
           :param args str: TODO
           :param kwargs str: TODO
           :rtype str: TODO

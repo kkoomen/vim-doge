@@ -1,23 +1,25 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let s:comment_placeholder = doge#helpers#placeholder()
+
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
-  let l:next_pos = search('TODO', 'nW')
+  let l:next_pos = search(s:comment_placeholder, 'nW')
 
   " Check if the next pos we want to jump to is still inside the comment.
   if l:next_pos != 0 && l:next_pos <= b:doge_interactive['lnum_comment_end_pos']
     if mode() ==# 'i'
-      return "\<C-O>/TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
+      return "\<C-O>/" . s:comment_placeholder . "\<CR>\<C-O>:silent! noh\<CR>\<C-O>gno\<C-g>"
     elseif mode() ==# 's'
-      return "\<Esc>/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return "\<Esc>/" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
     elseif mode() ==# 'n'
-      return "/TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return '/' . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
     else
-      return "viwo\<C-g>"
+      return "viw\<C-g>"
     endif
-  elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
-    return "\<C-O>viwo\<C-g>"
+  elseif expand('<cword>') ==# s:comment_placeholder && mode() ==# 'i'
+    return "\<C-O>viw\<C-g>"
   endif
 
   " No more next TODOs found.
@@ -26,21 +28,21 @@ endfunction
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_backward() abort
-  let l:prev_pos = search('TODO', 'bnW')
+  let l:prev_pos = search(s:comment_placeholder, 'bnW')
 
   " Check if the prev pos we want to jump to is still inside the comment.
   if l:prev_pos != 0 && l:prev_pos >= b:doge_interactive['lnum_comment_start_pos']
     if mode() ==# 'i'
-      return "\<C-O>?TODO\<CR>\<C-O>:silent! noh\<CR>\<C-O>viwo\<C-g>"
+      return "\<C-O>?" . s:comment_placeholder . "\<CR>\<C-O>:silent! noh\<CR>\<C-O>gno\<C-g>"
     elseif mode() ==# 's'
-      return "\<Esc>?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return "\<Esc>?" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
     elseif mode() ==# 'n'
-      return "?TODO\<CR>:silent! noh\<CR>viwo\<C-g>"
+      return '?' . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
     else
-      return "viwo\<C-g>"
+      return "viW\<C-g>"
     endif
-  elseif expand('<cword>') ==# 'TODO' && mode() ==# 'i'
-    return "\<C-O>viwo\<C-g>"
+  elseif expand('<cword>') ==# s:comment_placeholder && mode() ==# 'i'
+    return "\<C-O>viw\<C-g>"
   endif
 
   " No more previous TODOs found.
@@ -63,7 +65,7 @@ function! doge#comment#jump(direction) abort
     endif
 
     let l:todo_count = doge#helpers#count(
-          \ 'TODO',
+          \ s:comment_placeholder,
           \ b:doge_interactive['lnum_comment_start_pos'],
           \ b:doge_interactive['lnum_comment_end_pos']
           \ )

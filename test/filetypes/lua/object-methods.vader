@@ -9,7 +9,8 @@ Do (trigger doge):
   \<C-d>
 
 Expect lua (generated comment with @param tags):
-  -- TODO
+  -- [TODO:summary]
+  -- [TODO:description]
   -- @param p1 TODO
   -- @param p2 TODO
   function a.b:c (p1, p2)
@@ -26,7 +27,8 @@ Do (trigger doge):
   \<C-d>
 
 Expect lua (generated comment with @param tags):
-  -- TODO
+  -- [TODO:summary]
+  -- [TODO:description]
   -- @param self TODO
   -- @param p1 TODO
   -- @param p2 TODO

@@ -8,8 +8,9 @@ Given lua (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect lua (generated comment with nothing but the text 'TODO'):
-  -- TODO
+Expect lua (generated comment with nothing but the summary and description 'TODO'):
+  -- [TODO:summary]
+  -- [TODO:description]
   function myFunc() -- inline comment
   end
 
@@ -24,7 +25,8 @@ Do (trigger doge):
   \<C-d>
 
 Expect lua (generated comment with @param tags):
-  -- TODO
+  -- [TODO:summary]
+  -- [TODO:description]
   -- @param p1 TODO
   -- @param p2 TODO
   -- @param p3 TODO
@@ -43,7 +45,8 @@ Do (trigger doge):
   \<C-d>
 
 Expect lua (generated comment with @param tags):
-  -- TODO
+  -- [TODO:summary]
+  -- [TODO:description]
   -- @param p1 TODO
   -- @param p2 TODO
   local myFunc = function(p1, p2)
