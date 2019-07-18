@@ -1,6 +1,8 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let s:comment_placeholder = doge#helpers#placeholder()
+
 ""
 " @public
 " Generates a comment based on a given pattern.
@@ -62,7 +64,6 @@ function! doge#generate#pattern(pattern) abort
     catch /^Vim\%((\a\+)\)\=:E117/
     endtry
 
-    let l:comment_placeholder = doge#helpers#placeholder()
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(
             \ l:param_token,
@@ -71,12 +72,12 @@ function! doge#generate#pattern(pattern) abort
       if type(l:format) == v:t_list
         if g:doge_comment_todo_suffix == v:false
           let l:format = map(l:format, { key, line ->
-                \ substitute(line, '\m\s*' . l:comment_placeholder . '\s*$', '', 'g') })
+                \ substitute(line, '\m\s*' . s:comment_placeholder . '\s*$', '', 'g') })
         endif
         call add(l:formatted_params, join(l:format, "\n"))
       else
         if g:doge_comment_todo_suffix == v:false
-          let l:format = substitute(l:format, '\m\s*' . l:comment_placeholder . '\s*$', '', 'g')
+          let l:format = substitute(l:format, '\m\s*' . s:comment_placeholder . '\s*$', '', 'g')
         endif
         call add(l:formatted_params, l:format)
       endif
@@ -131,13 +132,13 @@ function! doge#generate#pattern(pattern) abort
   " Enable interactive mode.
   if g:doge_comment_interactive == v:true
     if a:pattern['comment']['insert'] ==# 'below'
-      let l:todo_match = search(doge#helpers#placeholder(), 'nW', l:comment_lnum_insert_position + len(l:comment))
+      let l:todo_match = search(s:comment_placeholder, 'nW', l:comment_lnum_insert_position + len(l:comment))
     else
-      let l:todo_match = search(doge#helpers#placeholder(), 'bnW', l:comment_lnum_insert_position + 1)
+      let l:todo_match = search(s:comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
     endif
     if l:todo_match != 0
       let l:todo_count = doge#helpers#count(
-            \ doge#helpers#placeholder(),
+            \ s:comment_placeholder,
             \ (l:comment_lnum_insert_position + 1),
             \ (l:comment_lnum_insert_position + 1 + len(l:comment))
             \ )
@@ -149,7 +150,7 @@ function! doge#generate#pattern(pattern) abort
               \ }
         " Go to the top of the comment and select the first TODO.
         exe l:comment_lnum_insert_position + 1
-        call search(doge#helpers#placeholder(), 'W')
+        call search(s:comment_placeholder, 'W')
         execute("normal! gno\<C-g>")
       endif
     endif
