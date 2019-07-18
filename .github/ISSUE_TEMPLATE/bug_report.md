@@ -8,7 +8,15 @@ assignees: ''
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+A clear and concise description of what the bug is. Provide the scenarios if
+you're reporting an issue for a certain expression that doesn't (properly)
+generate documentation.
+
+**Settings**
+If applicable, describe your custom DoGe settings like so:
+```vim
+let g:doge_mapping = '<Leader>f'
+```
 
 **To Reproduce**
 Steps to reproduce the behavior:
@@ -24,4 +32,4 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Out of `vim --version`**
-Run `vim --version` on the command-line and paste the output here, which can help debugging.
+Run `vim --version` on the command-line and paste the output here.
