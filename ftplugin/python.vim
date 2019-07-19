@@ -3,6 +3,7 @@
 " see:
 " - reST: http://daouzli.com/blog/docstring.html#restructuredtext
 " - Numpy: http://daouzli.com/blog/docstring.html#numpydoc
+" - Google: https://github.com/google/styleguide/blob/gh-pages/pyguide.md
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
