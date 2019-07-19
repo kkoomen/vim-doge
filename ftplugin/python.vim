@@ -4,6 +4,7 @@
 " - reST: http://daouzli.com/blog/docstring.html#restructuredtext
 " - Numpy: http://daouzli.com/blog/docstring.html#numpydoc
 " - Google: https://github.com/google/styleguide/blob/gh-pages/pyguide.md
+" - Sphinx: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html#the-sphinx-docstring-format
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
