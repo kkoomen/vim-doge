@@ -5,11 +5,11 @@
 #' TODO
 #'
 #'
-#' @return
+#' @return TODO
 #' @export
 #'
 #' @examples
-#' 
+#' # TODO
 myFunc = function() {
   # ...
 }
@@ -17,8 +17,11 @@ myFunc = function() {
 #' TODO
 #'
 #'
+#' @return TODO
 #' @export
 #'
+#' @examples
+#' # TODO
 myFunc <- function() {
   # ...
 }
@@ -31,11 +34,11 @@ myFunc <- function() {
 #' @param p3.sub1 TODO
 #' @param p4.sub1 TODO
 #'
-#' @return
+#' @return TODO
 #' @export
 #'
 #' @examples
-#' 
+#' # TODO
 myFunc.default <- function(
   p1,
   p2.sub1 = FALSE,
@@ -59,11 +62,11 @@ myFunc.default <- function(
 #' @param p10 TODO
 #' @param p11 TODO
 #'
-#' @return
+#' @return TODO
 #' @export
 #'
 #' @examples
-#' 
+#' # TODO
 myFunc = function(
   p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
   p4 = 'libs', p5 = NULL, ..., p7 = 'default',
