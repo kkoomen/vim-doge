@@ -14,7 +14,6 @@ Expect python (generated comment with nothing but the summary and description 'T
       """
       TODO
       
-      :return: TODO
       """
       pass
 
@@ -28,18 +27,17 @@ Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
   \<C-d>
 
-Expect python (generated comment with Args tags):
+Expect python (generated comment with defaults and optional):
   def myFunc(p1, p2, p3 = ''):
       """
       TODO
       
       :param p1: TODO
-      :type p1 : [TODO:type]
+      :type p1: [TODO:type]
       :param p2: TODO
-      :type p2 : [TODO:type]
+      :type p2: [TODO:type]
       :param p3: TODO, defaults to ''
-      :type p3 : [TODO:type], optional
-      :return: TODO
+      :type p3: [TODO:type], optional
       """
       pass
 
@@ -53,18 +51,17 @@ Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
   \<C-d>
 
-Expect python (generated comment with Args tags):
+Expect python (generated comment with types, defaults and optional):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
       """
       TODO
       
       :param p1: TODO
-      :type p1 : [TODO:type]
+      :type p1: [TODO:type]
       :param p2: TODO
-      :type p2 : Callable[[int], None]
+      :type p2: Callable[[int], None]
       :param p3: TODO, defaults to []
-      :type p3 : Callable[[int, Exception], None], optional
-      :return: TODO
+      :type p3: Callable[[int, Exception], None], optional
       """
       pass
 
@@ -84,11 +81,11 @@ Expect python (generated comment with Args and Returns tags):
       TODO
       
       :param p1: TODO
-      :type p1 : [TODO:type]
+      :type p1: [TODO:type]
       :param p2: TODO
-      :type p2 : Callable[[int], None]
+      :type p2: Callable[[int], None]
       :param p3: TODO, defaults to []
-      :type p3 : Callable[[int, Exception], None], optional
+      :type p3: Callable[[int, Exception], None], optional
       :return: TODO
       :rtype: Sequence[T]
       """
