@@ -23,7 +23,7 @@ let b:doge_patterns = []
 
 " Matches the following pattern:
 "   const? <param-type> <param-name> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\{-})\|[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\s\+\)\([[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?'
+let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\{-})\|[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\s\+\)&\?\([[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?'
 
 " ==============================================================================
 " Matches PTS-functions (placeholder type specifiers)

@@ -51,6 +51,14 @@ ASIO_SYNC_OP_VOID myFunc(
 /**
  * TODO
  *
+ * @param line TODO
+ * @return TODO
+ */
+std::string trimLine(const std::string &line);
+
+/**
+ * TODO
+ *
  * @param e TODO
  * @return TODO
  */
