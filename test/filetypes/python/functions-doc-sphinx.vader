@@ -1,0 +1,140 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given python (function without parameters):
+  def myFunc(): # inline comment
+    pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (no changes):
+  def myFunc(): # inline comment
+    """
+    TODO
+    
+    :return: TODO
+    """
+    pass
+
+# ==============================================================================
+# Functions without type hints.
+# ==============================================================================
+Given python (function without type hints):
+  def myFunc(p1 = 'string', p2 = 5, p3, p4):
+    pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  def myFunc(p1 = 'string', p2 = 5, p3, p4):
+    """
+    TODO
+    
+    :param p1: TODO
+    :type p1: [TODO:type]
+    :param p2: TODO
+    :type p2: [TODO:type]
+    :param p3: TODO
+    :type p3: [TODO:type]
+    :param p4: TODO
+    :type p4: [TODO:type]
+    :return: TODO
+    """
+    pass
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given python (function with parameters):
+  def myFunc(p1: str = 'string', p2: int = 5):
+      pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param tags):
+  def myFunc(p1: str = 'string', p2: int = 5):
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: str
+      :param p2: TODO
+      :type p2: int
+      :return: TODO
+      """
+      pass
+
+# ==============================================================================
+# Functions with advanced type hint parameters.
+# ==============================================================================
+Given python (functions with advanced type hint parameters):
+  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+      pass
+
+  def myFunc(p1: Sequence[T], p2: my_module.types) -> Generator[int, float, str]:
+      pass
+
+Do (trigger doge):
+  \<C-d>
+  11j
+  \<C-d>
+
+Expect python (generated comments with :param tags):
+  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: Callable[[int], None]
+      :param p2: TODO
+      :type p2: Callable[[int, Exception], None]
+      :return: TODO
+      :rtype: Sequence[T]
+      """
+      pass
+
+  def myFunc(p1: Sequence[T], p2: my_module.types) -> Generator[int, float, str]:
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: Sequence[T]
+      :param p2: TODO
+      :type p2: my_module.types
+      :return: TODO
+      :rtype: Generator[int, float, str]
+      """
+      pass
+
+# ==============================================================================
+# Functions defined multi-line.
+# ==============================================================================
+Given python (multi-line function with type hint parameters):
+  def myFunc(p1: str, p2: dict,
+          p3: list, p4: tuple) -> Iterator[int]:
+      pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param and :rtype tags):
+  def myFunc(p1: str, p2: dict,
+          p3: list, p4: tuple) -> Iterator[int]:
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: str
+      :param p2: TODO
+      :type p2: dict
+      :param p3: TODO
+      :type p3: list
+      :param p4: TODO
+      :type p4: tuple
+      :return: TODO
+      :rtype: Iterator[int]
+      """
+      pass
