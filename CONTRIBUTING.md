@@ -14,6 +14,7 @@ When contributing make sure you have read and understood the
 - [Topics](#topics)
   * [Linting](#linting)
   * [Documentation](#documentation)
+  * [Doc standard](#doc-standard)
   * [Filetype / language](#filetype--language)
   * [Configurable setting](#configurable-setting)
   * [Code](#code)
@@ -69,6 +70,20 @@ Try to document all functions and configurable options where needed. The
 documentation in the `doc/doge.txt` should be generated using
 [vimdoc](https://github.com/google/vimdoc).
 
+## Doc standard
+
+When adding a doc standard make sure to add proper tests which covers a lot of
+cases and to add your doc standard to all the places in the documentation where
+needed.
+
+**Summary of requirements:**
+- ftplugin
+- Make sure to add your doc standard to the top comment in `ftplugin/<filetype>.vim`.
+- README
+  - Add your doc standard to the [__Supported languages and doc standards__](https://github.com/kkoomen/vim-doge#supported-languages-and-doc-standards) section.
+  - Add your new doc standard to the [__Choosing a different doc standard__](https://github.com/kkoomen/vim-doge#choosing-a-different-doc-standard) section.
+- Tests (located in `test/filetypes/<filetype>/`)
+
 ## Filetype / language
 
 When adding a new filetype/language to DoGe there is a lot to take into
@@ -88,7 +103,9 @@ scenarios. This can also help debugging when regex is not working as expected.
   - `b:doge_doc_standard` (Contains the preferred doc standard by the user with a fallback to the first item of `b:doge_supported_doc_standards`)
   - For each pattern a comment with example scenarios that it should match. See [Writing your first pattern](#writing-your-first-pattern) for more info.
 - Tests (located in `test/filetypes/<filetype>/`)
-- Add your new language to the main [README](./README.md).
+- README
+  - Add your doc standard to the [__Supported languages and doc standards__](https://github.com/kkoomen/vim-doge#supported-languages-and-doc-standards) section.
+  - Add your new doc standard to the [__Choosing a different doc standard__](https://github.com/kkoomen/vim-doge#choosing-a-different-doc-standard) section.
 
 ## Configurable setting
 
