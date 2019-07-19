@@ -1,7 +1,7 @@
 # ==============================================================================
 # Functions using the Sphinx doc standard.
 # ==============================================================================
-Given python(function without paramters without return type where b:doge_doc_standard='sphinx'):
+Given python(function without parameters without return type where b:doge_doc_standard='sphinx'):
   def myFunc():
       pass
 
@@ -9,7 +9,7 @@ Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
   \<C-d>
 
-Expect python (generated comment with nothing but the text 'TODO):
+Expect python (generated comment with nothing but the text 'TODO'):
   def myFunc():
       """
       TODO
