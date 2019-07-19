@@ -85,7 +85,7 @@ Expect python (generated comment with Args and Returns tags):
           p2 (Callable[[int], None]): TODO
           p3 (Callable[[int, Exception], None], optional): TODO
       
-      Returns (Sequence[T]):
-          TODO
+      Returns:
+          Sequence[T]: TODO
       """
       pass
