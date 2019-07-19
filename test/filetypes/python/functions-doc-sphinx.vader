@@ -1,10 +1,9 @@
 # ==============================================================================
-# Functions using the Google doc standard.
+# Functions using the Sphinx doc standard.
 # ==============================================================================
 Given python(function without paramters without return type where b:doge_doc_standard='sphinx'):
   def myFunc():
       pass
-
 
 Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
@@ -35,11 +34,11 @@ Expect python (generated comment with Args tags):
       TODO
       
       :param p1: TODO
-      :type p1: [TODO:type]
+      :type p1 : [TODO:type]
       :param p2: TODO
-      :type p2: [TODO:type]
-      :param p3: TODO
-      :type p3: [TODO:type]
+      :type p2 : [TODO:type]
+      :param p3: TODO, defaults to ''
+      :type p3 : [TODO:type], optional
       :return: TODO
       """
       pass
@@ -60,11 +59,11 @@ Expect python (generated comment with Args tags):
       TODO
       
       :param p1: TODO
-      :type p1: [TODO:type]
+      :type p1 : [TODO:type]
       :param p2: TODO
-      :type p2: Callable[[int], None]
-      :param p3: TODO
-      :type p3: Callable[[int, Exception], None]
+      :type p2 : Callable[[int], None]
+      :param p3: TODO, defaults to []
+      :type p3 : Callable[[int, Exception], None], optional
       :return: TODO
       """
       pass
@@ -85,11 +84,11 @@ Expect python (generated comment with Args and Returns tags):
       TODO
       
       :param p1: TODO
-      :type p1: [TODO:type]
+      :type p1 : [TODO:type]
       :param p2: TODO
-      :type p2: Callable[[int], None]
-      :param p3: TODO
-      :type p3: Callable[[int, Exception], None]
+      :type p2 : Callable[[int], None]
+      :param p3: TODO, defaults to []
+      :type p3 : Callable[[int, Exception], None], optional
       :return: TODO
       :rtype: Sequence[T]
       """

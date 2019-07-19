@@ -46,8 +46,8 @@ call add(b:doge_patterns, {
 \    'format': {
 \      'reST': ':param {name} {type|' . doge#helpers#placeholder('type') . '}: TODO',
 \      'sphinx': [
-\        ':param {name}: TODO',
-\        ':type {name}: {type|' . doge#helpers#placeholder('type') . '}'
+\        ':param {name}: TODO#(default|, defaults to {default})',
+\        ':type {name} : {type|' . doge#helpers#placeholder('type') . '}#(default|, optional)'
 \      ],
 \      'numpy': [
 \        '{name} : {type|' . doge#helpers#placeholder('type') . '}',
