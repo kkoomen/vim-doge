@@ -56,21 +56,21 @@ Is your favorite language not supported?
 Is your favorite doc standard not supported?
 [Suggest a new doc standard][suggest-doc-standard] :tada:
 
-|                    | Language                                       | Doc standards                                           |
-| :----------------- | :--------------------------------------------- | :------------------------------------------------------ |
-| :white_check_mark: | Python                                         | [reST][py-reST], [Numpy][py-numpy], [Google][py-google] |
-| :white_check_mark: | PHP                                            | [phpdoc][phpdoc]                                        |
-| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc][jsdoc]                                          |
-| :white_check_mark: | TypeScript                                     | [JSDoc][jsdoc]                                          |
-| :white_check_mark: | CoffeeScript                                   | [JSDoc][jsdoc]                                          |
-| :white_check_mark: | Lua                                            | [LDoc][ldoc]                                            |
-| :white_check_mark: | Java                                           | [JavaDoc][javadoc]                                      |
-| :white_check_mark: | Groovy                                         | [JavaDoc][javadoc]                                      |
-| :white_check_mark: | Ruby                                           | [YARD][YARD]                                            |
-| :white_check_mark: | Scala                                          | [ScalaDoc][scaladoc]                                    |
-| :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                                            |
-| :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                    |
-| :white_check_mark: | C++                                            | [Doxygen][doxygen]                                      |
+|                    | Language                                       | Doc standards                                                                |
+| :----------------- | :--------------------------------------------- | :--------------------------------------------------------------------------- |
+| :white_check_mark: | Python                                         | [reST][py-reST], [Numpy][py-numpy], [Google][py-google], [Sphinx][py-sphinx] |
+| :white_check_mark: | PHP                                            | [phpdoc][phpdoc]                                                             |
+| :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc][jsdoc]                                                               |
+| :white_check_mark: | TypeScript                                     | [JSDoc][jsdoc]                                                               |
+| :white_check_mark: | CoffeeScript                                   | [JSDoc][jsdoc]                                                               |
+| :white_check_mark: | Lua                                            | [LDoc][ldoc]                                                                 |
+| :white_check_mark: | Java                                           | [JavaDoc][javadoc]                                                           |
+| :white_check_mark: | Groovy                                         | [JavaDoc][javadoc]                                                           |
+| :white_check_mark: | Ruby                                           | [YARD][YARD]                                                                 |
+| :white_check_mark: | Scala                                          | [ScalaDoc][scaladoc]                                                         |
+| :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                                                                 |
+| :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
+| :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
 
 # Getting started
 
@@ -221,6 +221,7 @@ DoGe is licensed under the GPL-3.0 license.
 [py-reST]: http://daouzli.com/blog/docstring.html#restructuredtext
 [py-numpy]: http://daouzli.com/blog/docstring.html#numpydoc
 [py-google]: https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings
+[py-sphinx]: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html#the-sphinx-docstring-format
 [phpdoc]: https://www.phpdoc.org
 [jsdoc]: https://jsdoc.app
 [ldoc]: https://github.com/stevedonovan/LDoc
