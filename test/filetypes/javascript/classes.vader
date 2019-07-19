@@ -8,17 +8,19 @@ Given javascript (class without extends or implements):
 
 Do (trigger doge):
   \<C-d>
-  :6\<CR>
+  :7\<CR>
   \<C-d>
 
 Expect javascript (generated comment with nothing but the text 'TODO'):
   /**
-   * @description TODO
+   * TODO
+   *
    */
   class Child {}
 
   /**
-   * @description TODO
+   * TODO
+   *
    */
   export class Child {}
 
@@ -32,18 +34,20 @@ Given javascript (class with extends without implements):
 
 Do (trigger doge):
   \<C-d>
-  :7\<CR>
+  :8\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @extends):
   /**
-   * @description TODO
+   * TODO
+   *
    * @extends Parent
    */
   class Child extends Parent {}
 
   /**
-   * @description TODO
+   * TODO
+   *
    * @extends Parent
    */
   export class Child extends Parent {}
@@ -58,18 +62,20 @@ Given javascript (class without extends with implements):
 
 Do (trigger doge):
   \<C-d>
-  :7\<CR>
+  :8\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @implements tag):
   /**
-   * @description TODO
+   * TODO
+   *
    * @implements CustomInterfaceName
    */
   class Child implements CustomInterfaceName {}
 
   /**
-   * @description TODO
+   * TODO
+   *
    * @implements CustomInterfaceName
    */
   export class Child implements CustomInterfaceName {}
@@ -84,19 +90,21 @@ Given javascript (class with extends and with implements):
 
 Do (trigger doge):
   \<C-d>
-  :8\<CR>
+  :10\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @extends and @implements tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @extends Parent
    * @implements CustomInterfaceName
    */
   class Child extends Parent implements CustomInterfaceName {}
 
   /**
-   * @description TODO
+   * TODO
+   *
    * @extends Parent
    * @implements CustomInterfaceName
    */

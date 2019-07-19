@@ -9,7 +9,8 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @description @function tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function
    */
   () => {}
@@ -24,12 +25,13 @@ Given javascript (fat-arrow function with parameters without type hints using 'c
 
 Do (trigger doge):
   \<C-d>
-  :11\<CR>
+  :12\<CR>
   \<C-d>
 
-Expect javascript (generated comment with @description, @function and @param tags):
+Expect javascript (generated comment with @function and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function myFunc
    * @param {*} $p1 TODO
    * @param {*} p2 TODO
@@ -39,7 +41,8 @@ Expect javascript (generated comment with @description, @function and @param tag
   const myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
   /**
-   * @description TODO
+   * TODO
+   *
    * @function myFunc
    * @param {*} $p1 TODO
    * @param {*} p2 TODO
@@ -57,9 +60,10 @@ Given javascript (fat-arrow function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function myFunc
    * @param {string} $p1 TODO
    * @param {string[]} p2 TODO
@@ -86,13 +90,14 @@ Given javascript (fat-arrow functions with destructuring):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :11\<CR>
+  :12\<CR>
   \<C-d>
 
-Expect javascript (generated comments with @description, @function, @param and @return tags):
+Expect javascript (generated comments with @function, @param and @return tags):
   class Test {
     /**
-     * @description TODO
+     * TODO
+     *
      * @function myMethod
      * @param {number} b TODO
      */
@@ -101,7 +106,8 @@ Expect javascript (generated comments with @description, @function, @param and @
     }
 
     /**
-     * @description TODO
+     * TODO
+     *
      * @param {number} b TODO
      * @return {number} TODO
      */
@@ -127,7 +133,8 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   class Test {
     /**
-     * @description TODO
+     * TODO
+     *
      * @param {number} b TODO
      */
     myMethod(public b: number) {
@@ -144,9 +151,10 @@ Given javascript (prototype fat-arrow function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function Person#greet
    * @param {string} p1 TODO
    * @param {Immutable.List} p2 TODO
@@ -165,7 +173,8 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @description and @function tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function Person#greet
    */
   Person.prototype.greet = () => {};
@@ -179,9 +188,10 @@ Given javascript (fat-arrow function with parameters with multiple type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function myFunc
    * @param {string} $p1 TODO
    * @param {Foo|Bar|Baz} p2 TODO
@@ -198,9 +208,10 @@ Given javascript (async fat-arrow function with parameters with multiple type hi
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @async
    * @function myFunc
    * @param {string} $p1 TODO

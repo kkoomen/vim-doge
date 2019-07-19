@@ -9,7 +9,8 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @description tag):
   /**
-   * @description TODO
+   * TODO
+   *
    */
   function myFunc(/* inline comment */) {}
 
@@ -24,7 +25,8 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @description and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @param {*} $p1 TODO
    * @param {*} p2 TODO
    * @param {*} p3 TODO
@@ -41,9 +43,10 @@ Given javascript (function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @param and @return tags):
+Expect javascript (generated comment with @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @param {string} $p1 TODO
    * @param {string[]} p2 TODO
    * @param {number} p3 TODO
@@ -61,9 +64,10 @@ Given javascript (function as variable with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @functon and @param tags):
+Expect javascript (generated comment with @functon and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function myFunc
    * @param {*} $p1 TODO
    * @param {*} p2 TODO
@@ -81,9 +85,10 @@ Given javascript (function as variable with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @function and @param tags):
+Expect javascript (generated comment with @function and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function myFunc
    * @param {string} $p1 TODO
    * @param {string[]} p2 TODO
@@ -133,9 +138,10 @@ Given javascript (prototype function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function Person#greet
    * @param {string} p1 TODO
    * @param {Immutable.List} p2 TODO
@@ -154,7 +160,8 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @description and @function tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @function Person#greet
    */
   Person.prototype.greet = function () {}
@@ -168,9 +175,10 @@ Given javascript (function with parameters with multiple type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @param and @return tags):
+Expect javascript (generated comment with @param and @return tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @param {string} $p1 TODO
    * @param {Foo|Bar|Baz} p2 TODO
    * @return {Foo|Bar} TODO
@@ -186,9 +194,10 @@ Given javascript (async function with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @async, and @param tags):
+Expect javascript (generated comment with @async, and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @async
    * @param {*} $p1 TODO
    * @param {*} p2 TODO
@@ -208,7 +217,8 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @description and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @param {*} $p1 TODO
    * @param {*} p2 TODO
    * @param {*} p3 TODO
@@ -225,9 +235,10 @@ Given javascript (async generator function with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description, @async, and @param tags):
+Expect javascript (generated comment with @async, and @param tags):
   /**
-   * @description TODO
+   * TODO
+   *
    * @async
    * @param {*} $p1 TODO
    * @param {*} p2 TODO

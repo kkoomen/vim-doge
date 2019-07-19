@@ -46,7 +46,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * TODO',
+\        ' *',
 \        '#(parentClassName| * @extends {parentClassName})',
 \        '#(interfaceName| * @implements {interfaceName})',
 \        ' */',
@@ -86,7 +87,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * TODO',
+\        ' *',
 \        '#(async| * @{async})',
 \        '#(parameters| * {parameters})',
 \        '#(returnType| * @return {{returnType}} TODO)',
@@ -122,7 +124,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * TODO',
+\        ' *',
 \        '#(async| * @{async})',
 \        ' * @function {className}#{funcName}',
 \        '#(parameters| * {parameters})',
@@ -171,7 +174,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '/**',
-\        ' * @description TODO',
+\        ' * TODO',
+\        ' *',
 \        '#(async| * @{async})',
 \        ' * @function {funcName|}',
 \        '#(parameters| * {parameters})',
