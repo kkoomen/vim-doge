@@ -1,0 +1,92 @@
+# ==============================================================================
+# Functions using the Sphinx doc standard.
+# ==============================================================================
+Given python(function without parameters without return type where b:doge_doc_standard='sphinx'):
+  def myFunc():
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='sphinx'\<CR>
+  \<C-d>
+
+Expect python (generated comment with nothing but the text 'TODO'):
+  def myFunc():
+      """
+      TODO
+      
+      """
+      pass
+
+# ------------------------------------------------------------------------------
+
+Given python(function with parameters without type hints without return type where b:doge_doc_standard='sphinx'):
+  def myFunc(p1, p2, p3 = ''):
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='sphinx'\<CR>
+  \<C-d>
+
+Expect python (generated comment without type hints with defaults and optional):
+  def myFunc(p1, p2, p3 = ''):
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: [TODO:type]
+      :param p2: TODO
+      :type p2: [TODO:type]
+      :param p3: TODO, defaults to ''
+      :type p3: [TODO:type], optional
+      """
+      pass
+
+# ------------------------------------------------------------------------------
+
+Given python(function with parameters with type hints without return type where b:doge_doc_standard='sphinx'):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='sphinx'\<CR>
+  \<C-d>
+
+Expect python (generated comment with type hints, defaults and optional):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: [TODO:type]
+      :param p2: TODO
+      :type p2: Callable[[int], None]
+      :param p3: TODO, defaults to []
+      :type p3: Callable[[int, Exception], None], optional
+      """
+      pass
+
+# ------------------------------------------------------------------------------
+
+Given python(function with parameters with type hints with return type where b:doge_doc_standard='sphinx'):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='sphinx'\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param, :type, :return and :rtype tags):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
+      """
+      TODO
+      
+      :param p1: TODO
+      :type p1: [TODO:type]
+      :param p2: TODO
+      :type p2: Callable[[int], None]
+      :param p3: TODO, defaults to []
+      :type p3: Callable[[int, Exception], None], optional
+      :return: TODO
+      :rtype: Sequence[T]
+      """
+      pass
