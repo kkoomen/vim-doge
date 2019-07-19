@@ -6,6 +6,7 @@ Given python (function without parameters):
     pass
 
 Do (trigger doge):
+  :let b:doge_doc_standard_python='sphinx'\<CR>
   \<C-d>
 
 Expect python (no changes):
@@ -22,9 +23,10 @@ Expect python (no changes):
 # ==============================================================================
 Given python (function without type hints):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
-    pass
+ a  pass
 
 Do (trigger doge):
+  :let b:doge_doc_standard_python='sphinx'\<CR>
   \<C-d>
 
 Expect python (generated comment with :param tags):
@@ -52,6 +54,7 @@ Given python (function with parameters):
       pass
 
 Do (trigger doge):
+  :let b:doge_doc_standard_python='sphinx'\<CR>
   \<C-d>
 
 Expect python (generated comment with :param tags):
@@ -78,8 +81,9 @@ Given python (functions with advanced type hint parameters):
       pass
 
 Do (trigger doge):
+  :let b:doge_doc_standard_python='sphinx'\<CR>
   \<C-d>
-  11j
+  :14\<CR>
   \<C-d>
 
 Expect python (generated comments with :param tags):
@@ -118,6 +122,7 @@ Given python (multi-line function with type hint parameters):
       pass
 
 Do (trigger doge):
+  :let b:doge_doc_standard_python='sphinx'\<CR>
   \<C-d>
 
 Expect python (generated comment with :param and :rtype tags):
