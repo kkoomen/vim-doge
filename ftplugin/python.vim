@@ -4,7 +4,6 @@
 " - reST: http://daouzli.com/blog/docstring.html#restructuredtext
 " - Numpy: http://daouzli.com/blog/docstring.html#numpydoc
 " - Google: https://github.com/google/styleguide/blob/gh-pages/pyguide.md
-" - Sphinx: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
@@ -13,7 +12,7 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m#.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m\(""".\{-}"""\|' . "'''.\\{-}'''" . '\)'
 
-let b:doge_supported_doc_standards = ['reST', 'numpy', 'google', 'sphinx']
+let b:doge_supported_doc_standards = ['reST', 'numpy', 'google']
 let b:doge_doc_standard = get(g:, 'doge_doc_standard_python', 'reST')
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
@@ -46,10 +45,6 @@ call add(b:doge_patterns, {
 \    'match_group_names': ['name', 'type', 'default'],
 \    'format': {
 \      'reST': ':param {name} {type|' . doge#helpers#placeholder('type') . '}: TODO',
-\      'sphinx': [
-\        ':param {name}: TODO#(default|, defaults to {default})',
-\        ':type {name}: {type|' . doge#helpers#placeholder('type') . '}#(default|, optional)',
-\      ],
 \      'numpy': [
 \        '{name} : {type|' . doge#helpers#placeholder('type') . '}',
 \        "\tTODO",
@@ -68,15 +63,6 @@ call add(b:doge_patterns, {
 \        '',
 \        '#(parameters|{parameters})',
 \        '#(returnType|:rtype {returnType}: TODO)',
-\        '"""',
-\      ],
-\      'sphinx': [
-\        '"""',
-\        'TODO',
-\        '',
-\        '#(parameters|{parameters})',
-\        '#(returnType|:return: TODO)',
-\        '#(returnType|:rtype: {returnType})',
 \        '"""',
 \      ],
 \      'numpy': [
@@ -103,8 +89,8 @@ call add(b:doge_patterns, {
 \        '#(parameters|Args:)',
 \        "#(parameters|\t{parameters})",
 \        '#(returnType|)',
-\        '#(returnType|Returns ({returnType}):)',
-\        "#(returnType|\tTODO)",
+\        '#(returnType|Returns:)',
+\        "#(returnType|\t{returnType): TODO)",
 \        '"""',
 \      ],
 \    },
