@@ -4,7 +4,6 @@
 
 #' TODO
 #'
-#'
 #' @return TODO
 #' @export
 #'
@@ -15,7 +14,6 @@ myFunc = function() {
 }
 
 #' TODO
-#'
 #'
 #' @return TODO
 #' @export
