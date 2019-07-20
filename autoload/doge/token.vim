@@ -81,7 +81,11 @@ function! s:token_replace(tokens, text) abort
 
   " Replace 2 or more white-spaces with 1 single white-space, except for leading
   " white-spaces and/or newlines. Those should be preserved.
-  let l:text = substitute(l:text, '\m\(^\|\s\|\n\)\@<!\s\{2,}', ' ', 'g')
+  "
+  " NOTE: Initially the regex contained '\@<!\s\{2,}' but since '\s' equals
+  " <Space> and <Tab> characters we have to use specifically ' ' as a space
+  " character to ensure only spaces will be checked.
+  let l:text = substitute(l:text, '\m\(^\|\s\|\n\)\@<! \{2,}', ' ', 'g')
 
   " Remove trailing whitespace.
   let l:text = substitute(l:text, '\m\s\+$', '', 'g')
