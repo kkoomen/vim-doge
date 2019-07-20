@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' # TODO
+#' TODO
 myFunc = function() {
   # ...
 }
@@ -19,7 +19,7 @@ myFunc = function() {
 #' @export
 #'
 #' @examples
-#' # TODO
+#' TODO
 myFunc <- function() {
   # ...
 }
@@ -36,7 +36,7 @@ myFunc <- function() {
 #' @export
 #'
 #' @examples
-#' # TODO
+#' TODO
 myFunc.default <- function(
   p1,
   p2.sub1 = FALSE,
@@ -64,7 +64,7 @@ myFunc.default <- function(
 #' @export
 #'
 #' @examples
-#' # TODO
+#' TODO
 myFunc = function(
   p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
   p4 = 'libs', p5 = NULL, ..., p7 = 'default',

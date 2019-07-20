@@ -67,7 +67,7 @@ call add(b:doge_patterns, {
 \        "#' @export",
 \        "#'",
 \        "#' @examples",
-\        "#' # TODO",
+\        "#' TODO",
 \      ],
 \    },
 \  },
