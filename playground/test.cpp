@@ -14,6 +14,8 @@ void Emitter::append_token(const std::string& text, const AST_Node* node)
   //
 }
 
+std::vector<std::string> someFunction();
+
 /**
  * TODO
  *

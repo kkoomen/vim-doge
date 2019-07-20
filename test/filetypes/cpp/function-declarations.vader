@@ -24,13 +24,17 @@ Given cpp (function declarations with parameters with advanced return types):
 
   ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec);
 
-  std::string trimLine(const std::string &line);
+  std::string myFunc(const std::string &line);
+
+  std::vector<std::string> myFunc();
 
 Do (trigger doge):
   \<C-d>
   :9\<CR>
   \<C-d>
   :18\<CR>
+  \<C-d>
+  :27\<CR>
   \<C-d>
 
 Expect cpp (generated comments with @param and @return tags):
@@ -57,4 +61,10 @@ Expect cpp (generated comments with @param and @return tags):
    * @param line TODO
    * @return TODO
    */
-  std::string trimLine(const std::string &line);
+  std::string myFunc(const std::string &line);
+
+  /**
+   * TODO
+   * @return TODO
+   */
+  std::vector<std::string> myFunc();
