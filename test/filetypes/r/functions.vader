@@ -12,22 +12,28 @@ Given r (functions without parameters):
 
 Do (trigger doge):
   \<C-d>
-  :9\<CR>
+  :12\<CR>
   \<C-d>
 
 Expect r (generated comments with nothing but the text 'TODO' and @export tag):
   #' TODO
   #'
+  #' @return TODO
   #' @export
   #'
+  #' @examples
+  #' TODO
   myFunc = function() { # inline comment
     # ...
   }
 
   #' TODO
   #'
+  #' @return TODO
   #' @export
   #'
+  #' @examples
+  #' TODO
   myFunc <- function() { # inline comment
     # ...
   }
@@ -62,8 +68,11 @@ Expect r (generated comment with @param and @export tags):
   #' @param p10 TODO
   #' @param p11 TODO
   #'
+  #' @return TODO
   #' @export
   #'
+  #' @examples
+  #' TODO
   myFunc = function(
     p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
     p4 = 'libs', p5 = NULL, ..., p7 = 'default',
