@@ -18,7 +18,7 @@ Then (expect the cursor to be in the same position but shifted by the amount of 
 
 Expect php (generated comment with @param tags):
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param array $p1
    *   [TODO:description]
@@ -48,7 +48,7 @@ Then (expect the first TODO in the comment to be selected):
 
 Expect php (generated comment with @param tags):
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param array $p1
    *   [TODO:description]
