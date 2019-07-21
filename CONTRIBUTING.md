@@ -22,6 +22,7 @@ When contributing make sure you have read and understood the
 - [Tips](#tips)
   * [Writing your first pattern](#writing-your-first-pattern)
     + [Additional token formatting](#additional-token-formatting)
+      - [Creating TODO placeholders](#creating-todo-placeholders)
       - [Default value](#default-value)
       - [Conditional rendering](#conditional-rendering)
   * [Writing proper regex](#writing-proper-regex)
