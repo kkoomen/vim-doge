@@ -5,8 +5,8 @@ doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
+doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
-doge#indent#convert()	doge.txt	/*doge#indent#convert()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
 doge-config	doge.txt	/*doge-config*
@@ -16,7 +16,6 @@ doge-intro	doge.txt	/*doge-intro*
 doge-preprocessors	doge.txt	/*doge-preprocessors*
 doge.txt	doge.txt	/*doge.txt*
 g:doge_comment_interactive	doge.txt	/*g:doge_comment_interactive*
-g:doge_comment_todo_suffix	doge.txt	/*g:doge_comment_todo_suffix*
 g:doge_mapping	doge.txt	/*g:doge_mapping*
 g:doge_mapping_comment_jump_backward	doge.txt	/*g:doge_mapping_comment_jump_backward*
 g:doge_mapping_comment_jump_forward	doge.txt	/*g:doge_mapping_comment_jump_forward*

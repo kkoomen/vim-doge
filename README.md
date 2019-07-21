@@ -37,7 +37,6 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
-    + [`g:doge_comment_todo_suffix`](#gdoge_comment_todo_suffix)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
 - [Help](#help)
 - [FAQ](#faq)
@@ -148,12 +147,6 @@ Default: `'<S-Tab>'`
 
 The mapping to jump backward to the next `TODO` item in a comment. Requires
 `g:doge_comment_interactive` to be enabled.
-
-### `g:doge_comment_todo_suffix`
-
-Default: `1`
-
-Adds the `TODO` suffix after every generated parameter.
 
 ### `g:doge_comment_interactive`
 

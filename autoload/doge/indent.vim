@@ -12,16 +12,5 @@ function! doge#indent#add(lnum, text) abort
   endif
 endfunction
 
-""
-" @public
-" Convert spaces to tabs and tabs to spaces based on the user setting.
-function! doge#indent#convert(text) abort
-  if &expandtab
-    return substitute(a:text, "\t", repeat(' ', shiftwidth()), 'g')
-  else
-    return substitute(a:text, repeat(' ', shiftwidth()), "\t", 'g')
-  endif
-endfunction
-
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

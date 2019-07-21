@@ -81,20 +81,13 @@ function! s:token_replace(tokens, text) abort
 
   " Replace 2 or more white-spaces with 1 single white-space, except for leading
   " white-spaces and/or newlines. Those should be preserved.
-  "
-  " NOTE: Initially the regex contained '\@<!\s\{2,}' but since '\s' equals
-  " <Space> and <Tab> characters we have to use specifically ' ' as a space
-  " character to ensure only spaces will be checked.
-  let l:text = substitute(l:text, '\m\(^\|\s\|\n\)\@<! \{2,}', ' ', 'g')
+  let l:text = substitute(l:text, '\m\(^\|\s\|\n\)\@<!\s\{2,}', ' ', 'g')
 
   " Remove trailing whitespace.
   let l:text = substitute(l:text, '\m\s\+$', '', 'g')
 
   " For JSDoc we replace the type hints 'typeA | type B' with 'typeA|typeB'.
   let l:text = substitute(l:text, '\m\s*|\s*', '|', 'g')
-
-  " Convert spaces to tabs and tabs to spaces based on the user settings.
-  let l:text = doge#indent#convert(l:text)
 
   " Empty lines will be added to the empty in the doge#generate#pattern()
   " function and to indicate it should be prevented from rendering we have to

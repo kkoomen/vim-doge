@@ -79,7 +79,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|*}} {name} TODO',
+\      'jsdoc': '@param {{type|' . doge#helpers#placeholder('type') . '}} {name} ' . doge#helpers#placeholder('description'),
 \    },
 \  },
 \  'comment': {
@@ -91,7 +91,7 @@ call add(b:doge_patterns, {
 \        ' *',
 \        '#(async| * @{async})',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return {{returnType}} TODO)',
+\        '#(returnType| * @return {{returnType}} ' . doge#helpers#placeholder('description') . ')',
 \        ' */',
 \      ],
 \    },
@@ -116,7 +116,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|*}} {name} TODO',
+\      'jsdoc': '@param {{type|' . doge#helpers#placeholder('type') . '}} {name} ' . doge#helpers#placeholder('description'),
 \    },
 \  },
 \  'comment': {
@@ -129,7 +129,7 @@ call add(b:doge_patterns, {
 \        '#(async| * @{async})',
 \        ' * @function {className}#{funcName}',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return {{returnType}} TODO)',
+\        '#(returnType| * @return {{returnType}} ' . doge#helpers#placeholder('description') . ')',
 \        ' */',
 \      ],
 \    },
@@ -166,7 +166,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|*}} {name} TODO',
+\      'jsdoc': '@param {{type|' . doge#helpers#placeholder('type') . '}} {name} ' . doge#helpers#placeholder('description'),
 \    },
 \  },
 \  'comment': {
@@ -179,7 +179,7 @@ call add(b:doge_patterns, {
 \        '#(async| * @{async})',
 \        ' * @function {funcName|}',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return {{returnType}} TODO)',
+\        '#(returnType| * @return {{returnType}} ' . doge#helpers#placeholder('description') . ')',
 \        ' */',
 \      ],
 \    },

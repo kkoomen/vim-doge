@@ -33,10 +33,14 @@ Expect php (generated comment with @param tags):
   /**
    * TODO
    *
-   * @param array $p1 TODO
-   * @param string $p2 TODO
-   * @param mixed $p3 TODO
-   * @param \Drupal\core\Entity\Node $p4 TODO
+   * @param array $p1
+   *   [TODO:description]
+   * @param string $p2
+   *   [TODO:description]
+   * @param [TODO:type] $p3
+   *   [TODO:description]
+   * @param \Drupal\core\Entity\Node $p4
+   *   [TODO:description]
    */
   function myFunction(
     array &$p1 /* inline comment */,

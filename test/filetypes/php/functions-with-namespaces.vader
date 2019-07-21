@@ -21,7 +21,8 @@ Expect php (generated comment containing the FQN):
   /**
    * TODO
    *
-   * @param \Symfony\Component\HttpFoundation\Response $p1 TODO
+   * @param \Symfony\Component\HttpFoundation\Response $p1
+   *   [TODO:description]
    */
   function myFunction(Response $p1) {}
 
@@ -42,7 +43,8 @@ Expect php (generated comment containing the FQN):
   /**
    * TODO
    *
-   * @param \Symfony\Component\HttpFoundation\Response $p1 TODO
+   * @param \Symfony\Component\HttpFoundation\Response $p1
+   *   [TODO:description]
    */
   function myFunction(Response $p1) {}
 
@@ -63,7 +65,8 @@ Expect php (generated comment containing the FQN):
   /**
    * TODO
    *
-   * @param \Symfony\Component\HttpFoundation\Response $p1 TODO
+   * @param \Symfony\Component\HttpFoundation\Response $p1
+   *   [TODO:description]
    */
   function myFunction(Response $p1) {}
 
@@ -85,7 +88,8 @@ Expect php (generated comment not containing the FQN):
   /**
    * TODO
    *
-   * @param BaseRoute $p1 TODO
+   * @param BaseRoute $p1
+   *   [TODO:description]
    */
   function myFunction(BaseRoute $p1) {}
 
@@ -106,7 +110,8 @@ Expect php (generated comment not containing the FQN):
   /**
    * TODO
    *
-   * @param BaseRoute $p1 TODO
+   * @param BaseRoute $p1
+   *   [TODO:description]
    */
   function myFunction(BaseRoute $p1) {}
 
@@ -127,6 +132,7 @@ Expect php (generated comment not containing the FQN):
   /**
    * TODO
    *
-   * @param BaseRoute $p1 TODO
+   * @param BaseRoute $p1
+   *   [TODO:description]
    */
   function myFunction(BaseRoute $p1) {}

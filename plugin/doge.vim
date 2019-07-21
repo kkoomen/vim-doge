@@ -71,14 +71,6 @@ if !exists('g:doge_mapping_comment_jump_backward')
   let g:doge_mapping_comment_jump_backward = '<S-Tab>'
 endif
 
-if !exists('g:doge_comment_todo_suffix')
-  ""
-  " (Default: 1)
-  "
-  " Adds the TODO suffix after every generated parameter.
-  let g:doge_comment_todo_suffix = 1
-endif
-
 if !exists('g:doge_comment_interactive')
   ""
   " (Default: 1)

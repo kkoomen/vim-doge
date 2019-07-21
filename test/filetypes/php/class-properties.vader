@@ -29,7 +29,7 @@ Do (trigger doge):
   \<C-d>
   :15\<CR>
   \<C-d>
-  :28\<CR>
+  :31\<CR>
   \<C-d>
 
 Expect php (generated comments at all properties and constructor function):
@@ -50,9 +50,12 @@ Expect php (generated comments at all properties and constructor function):
     /**
      * TODO
      *
-     * @param string $name TODO
-     * @param Migration $migration TODO
-     * @param \Symfony\Component\HttpFoundation\Response $response TODO
+     * @param string $name
+     *   [TODO:description]
+     * @param Migration $migration
+     *   [TODO:description]
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     *   [TODO:description]
      */
     public function __construct(string $name, Migration $migration, Response $response) {
       $this->migrationName = $name;

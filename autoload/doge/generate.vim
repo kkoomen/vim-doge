@@ -70,15 +70,8 @@ function! doge#generate#pattern(pattern) abort
             \ l:params_dict['format'][b:doge_doc_standard]
             \ )
       if type(l:format) == v:t_list
-        if g:doge_comment_todo_suffix == v:false
-          let l:format = map(l:format, { key, line ->
-                \ substitute(line, '\m\s*' . s:comment_placeholder . '\s*$', '', 'g') })
-        endif
         call add(l:formatted_params, join(l:format, "\n"))
       else
-        if g:doge_comment_todo_suffix == v:false
-          let l:format = substitute(l:format, '\m\s*' . s:comment_placeholder . '\s*$', '', 'g')
-        endif
         call add(l:formatted_params, l:format)
       endif
     endfor
@@ -101,7 +94,7 @@ function! doge#generate#pattern(pattern) abort
     endif
 
     for l:replaced in split(l:line_replaced, "\n")
-      call add(l:comment, doge#indent#convert(l:replaced))
+      call add(l:comment, substitute(l:replaced, '\\t', repeat(' ', shiftwidth()), 'g'))
     endfor
   endfor
 

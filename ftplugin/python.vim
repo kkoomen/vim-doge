@@ -52,7 +52,7 @@ call add(b:doge_patterns, {
 \      ],
 \      'numpy': [
 \        '{name} : {type|' . doge#helpers#placeholder('type') . '}',
-\        "\tTODO",
+\        '\tTODO',
 \      ],
 \      'google': [
 \        '{name} ({type|' . doge#helpers#placeholder('type') . '}#(default|, optional)): TODO',
@@ -92,7 +92,7 @@ call add(b:doge_patterns, {
 \        '#(returnType|Returns)',
 \        '#(returnType|-------)',
 \        '#(returnType|{returnType}:)',
-\        "#(returnType|\tTODO)",
+\        '#(returnType|\tTODO)',
 \        '"""',
 \      ],
 \      'google': [
@@ -101,10 +101,10 @@ call add(b:doge_patterns, {
 \        doge#helpers#placeholder('description'),
 \        '#(parameters|)',
 \        '#(parameters|Args:)',
-\        "#(parameters|\t{parameters})",
+\        '#(parameters|\t{parameters})',
 \        '#(returnType|)',
 \        '#(returnType|Returns:)',
-\        "#(returnType|\t{returnType}: TODO)",
+\        '#(returnType|\t{returnType}: TODO)',
 \        '"""',
 \      ],
 \    },

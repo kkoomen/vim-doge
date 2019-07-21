@@ -44,7 +44,8 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $p1 TODO
+     * @param array $p1
+     *   [TODO:description]
      */
     public function myMethod(array &$p1) {}
 
@@ -69,7 +70,8 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $p1 TODO
+     * @param array $p1
+     *   [TODO:description]
      */
     protected static function myMethod(array &$p1) {}
 
@@ -94,7 +96,8 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $p1 TODO
+     * @param array $p1
+     *   [TODO:description]
      */
     public final function myMethod(array &$p1) {}
 
@@ -119,7 +122,8 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param array $p1 TODO
+     * @param array $p1
+     *   [TODO:description]
      */
     private static final function myMethod(array &$p1) {}
 
@@ -151,8 +155,10 @@ Expect php (generated comment with @param tags):
     /**
      * TODO
      *
-     * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf TODO
-     * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $controller TODO
+     * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf
+     *   [TODO:description]
+     * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $controller
+     *   [TODO:description]
      */
     public function __construct(
       \Drupal\Core\Config\Entity\Query\QueryFactory $eqf,

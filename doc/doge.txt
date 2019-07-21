@@ -40,11 +40,6 @@ The mapping to jump forward to the next TODO item in a comment. Requires
 The mapping to jump backward to the previous TODO item in a comment. Requires
 |g:doge_comment_interactive| to be enabled.
 
-                                                  *g:doge_comment_todo_suffix*
-(Default: 1)
-
-Adds the TODO suffix after every generated parameter.
-
                                                   *g:doge_comment_interactive*
 (Default: 1)
 
@@ -85,11 +80,20 @@ doge#helpers#keyseq({seq})                             *doge#helpers#keyseq()*
   Creates a sequence of keys which can be used as a return value for mappings.
   Useful when returning a dynamic value such as a user-configurable setting.
 
+doge#helpers#placeholder()                        *doge#helpers#placeholder()*
+  Generate a placeholder with optionally a context. Optionally, you can pass
+  the context using the following example call:
+
+    doge#helpers#placeholder('summary')
+
+  The above will return:
+
+    'TODO<summary>'
+
+  If no context is specified the todo-pattern is returned to search for.
+
 doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
-
-doge#indent#convert({text})                            *doge#indent#convert()*
-  Convert spaces to tabs and tabs to spaces based on the user setting.
 
 doge#token#replace({tokens}, {text})                    *doge#token#replace()*
   Replace all tokens in the text parameter based on a given dictionary

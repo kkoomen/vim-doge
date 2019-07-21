@@ -4,7 +4,36 @@
 # We test PHP because we will test the functionality of a commment being
 # inserted above.
 # ==============================================================================
-Given php (PHP function with peters where g:doge_comment_interactive = 1):
+Given php (PHP function with parameters where g:doge_comment_interactive = 0):
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
+
+Do (trigger doge):
+  :let g:doge_comment_interactive = 0\<CR>
+  \<C-d>
+
+Then (expect the cursor to be in the same position but shifted by the amount of lines inserted):
+  AssertEqual 'n', mode()
+  AssertEqual 13, line('.')
+  AssertEqual 1, col('.')
+
+Expect php (generated comment with @param tags):
+  /**
+   * TODO
+   *
+   * @param array $p1
+   *   [TODO:description]
+   * @param string $p2
+   *   [TODO:description]
+   * @param [TODO:type] $p3
+   *   [TODO:description]
+   * @param \Drupal\core\Entity\Node $p4
+   *   [TODO:description]
+   */
+  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
+
+# ------------------------------------------------------------------------------
+
+Given php (PHP function with parameters where g:doge_comment_interactive = 1):
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
 Do (trigger doge):
@@ -21,10 +50,14 @@ Expect php (generated comment with @param tags):
   /**
    * TODO
    *
-   * @param array $p1 TODO
-   * @param string $p2 TODO
-   * @param mixed $p3 TODO
-   * @param \Drupal\core\Entity\Node $p4 TODO
+   * @param array $p1
+   *   [TODO:description]
+   * @param string $p2
+   *   [TODO:description]
+   * @param [TODO:type] $p3
+   *   [TODO:description]
+   * @param \Drupal\core\Entity\Node $p4
+   *   [TODO:description]
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
@@ -47,13 +80,14 @@ Do (trigger doge and try to jump forwards outside of the comment):
   \<Tab>
   \<Tab>
   \<Tab>
-# 4x <Tab will already be at the last TODO, so we'll trigger it 5 times.
+  \<Tab>
+# 5x <Tab will already be at the last TODO, so we'll trigger it 5 times.
   \<Tab>
 
 Then (expect the last TODO in the comment to be selected):
   AssertEqual 's', mode()
-  AssertEqual 7, line('.')
-  AssertEqual 40, col('.')
+  AssertEqual 11, line('.')
+  AssertEqual 6, col('.')
 
 # ------------------------------------------------------------------------------
 
@@ -63,8 +97,8 @@ Do (trigger doge and jump forward):
 
 Then (expect the second TODO in the comment to be selected):
   AssertEqual 's', mode()
-  AssertEqual 4, line('.')
-  AssertEqual 21, col('.')
+  AssertEqual 5, line('.')
+  AssertEqual 6, col('.')
 
 # ------------------------------------------------------------------------------
 
@@ -74,11 +108,12 @@ Do (trigger doge and jump forward until the last TODO item):
   \<Tab>
   \<Tab>
   \<Tab>
+  \<Tab>
 
 Then (expect the last TODO in the comment to be selected):
   AssertEqual 's', mode()
-  AssertEqual 7, line('.')
-  AssertEqual 40, col('.')
+  AssertEqual 11, line('.')
+  AssertEqual 6, col('.')
 
 # ------------------------------------------------------------------------------
 
@@ -91,14 +126,10 @@ Do (trigger doge and jump forward while filling in text):
   \<Tab>
   Dor sit amet.
   \<Tab>
-  \<CR>
-  \<Space>
-  \<Space>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  mixed
   \<Tab>
-  \<CR>
-  \<Space>
-  \<Space>
+  Lorem ipsum dor sit amet.
+  \<Tab>
   Lorem ipsum dor sit amet.
 # Enter two extra tabs to test whether we receive actual <Tab> characters
   \<Tab>
@@ -111,20 +142,22 @@ Expect php (generated comment with @param tags with brief descriptions):
   /**
    * myFunction
    *
-   * @param array $p1 Lorem ipsum.
-   * @param string $p2 Dor sit amet.
-   * @param mixed $p3 
-   *   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-   * @param \Drupal\core\Entity\Node $p4 
+   * @param array $p1
+   *   Lorem ipsum.
+   * @param string $p2
+   *   Dor sit amet.
+   * @param mixed $p3
+   *   Lorem ipsum dor sit amet.
+   * @param \Drupal\core\Entity\Node $p4
    *   Lorem ipsum dor sit amet.    
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
 
 # ==============================================================================
 # We test Python because we will test the functionality of a commment being
-# inserted below.
+# inserted 'below' instead of 'above'.
 # ==============================================================================
-Given python (Python function with peters):
+Given python (Python function with parameters):
   def myFunc(p1: str = 'string', p2: int = 5):
       pass
 
@@ -142,7 +175,7 @@ Do (trigger doge and jump forward while filling in text):
 Then (expect b:doge_interactive to be destroyed):
   AssertEqual 0, exists('b:doge_interactive')
 
-Expect python (generated comment with @param tags with brief descriptions):
+Expect python (generated comment with :param tags with brief descriptions):
   def myFunc(p1: str = 'string', p2: int = 5):
       """
       Lorem ipsum dor sit amet.
@@ -154,25 +187,3 @@ Expect python (generated comment with @param tags with brief descriptions):
 
 Do (let g:doge_comment_interactive = 0):
   :let g:doge_comment_interactive = 0\<CR>
-
-Given php (PHP function with peters where g:doge_comment_interactive = 0):
-  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
-
-Do (trigger doge):
-  \<C-d>
-
-Then (expect the cursor to be in the same position but shifted by the amount of lines inserted):
-  AssertEqual 'n', mode()
-  AssertEqual 9, line('.')
-  AssertEqual 1, col('.')
-
-Expect php (generated comment with @param tags):
-  /**
-   * TODO
-   *
-   * @param array $p1 TODO
-   * @param string $p2 TODO
-   * @param mixed $p3 TODO
-   * @param \Drupal\core\Entity\Node $p4 TODO
-   */
-  function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}

@@ -4,21 +4,20 @@
 //
 // =============================================================================
 
-
 /**
  * TODO
  *
  * @function
- * @param {*} window TODO
- * @param {*} document TODO
- * @param {*} $ TODO
+ * @param {[TODO:type]} window [TODO:description]
+ * @param {[TODO:type]} document [TODO:description]
+ * @param {[TODO:type]} $ [TODO:description]
  */
 ((window, document, $) => {
 
   /**
    * TODO
    *
-   * @param {string} $p1 TODO
+   * @param {string} $p1 [TODO:description]
    */
   function myFunc($p1: string = 'value') {}
 
@@ -28,21 +27,9 @@
  * TODO
  *
  * @function Person#greet
- * @param {string} p1 TODO
- * @param {Immutable.List} p2 TODO
- * @return {string[]} TODO
- */
-Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] => {
-  //
-};
-
-/**
- * TODO
- *
- * @function Person#greet
- * @param {string} p1 TODO
- * @param {Immutable.List} p2 TODO
- * @return {string[]} TODO
+ * @param {string} p1 [TODO:description]
+ * @param {Immutable.List} p2 [TODO:description]
+ * @return {string[]} [TODO:description]
  */
 Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] {
   //
@@ -89,10 +76,10 @@ perfectSquares = async function*() {
  *
  * @async
  * @function myFunc
- * @param {*} $p1 TODO
- * @param {*} p2 TODO
- * @param {*} p3 TODO
- * @param {*} p4 TODO
+ * @param {[TODO:type]} $p1 [TODO:description]
+ * @param {[TODO:type]} p2 [TODO:description]
+ * @param {[TODO:type]} p3 [TODO:description]
+ * @param {[TODO:type]} p4 [TODO:description]
  */
 var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -101,19 +88,19 @@ var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
  *
  * @async
  * @function myFunc
- * @param {*} $p1 TODO
- * @param {*} p2 TODO
- * @param {*} p3 TODO
- * @param {*} p4 TODO
+ * @param {[TODO:type]} $p1 [TODO:description]
+ * @param {[TODO:type]} p2 [TODO:description]
+ * @param {[TODO:type]} p3 [TODO:description]
+ * @param {[TODO:type]} p4 [TODO:description]
  */
 var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 
 /**
  * TODO
  *
- * @param {string} $p1 TODO
- * @param {Foo|Bar|Baz} p2 TODO
- * @return {Foo|Bar} TODO
+ * @param {string} $p1 [TODO:description]
+ * @param {Foo|Bar|Baz} p2 [TODO:description]
+ * @return {Foo|Bar} [TODO:description]
  */
 function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
@@ -128,10 +115,10 @@ Person.prototype.greet = () => {}
  * TODO
  *
  * @function myFunc
- * @param {*} $p1 TODO
- * @param {*} p2 TODO
- * @param {*} p3 TODO
- * @param {*} p4 TODO
+ * @param {[TODO:type]} $p1 [TODO:description]
+ * @param {[TODO:type]} p2 [TODO:description]
+ * @param {[TODO:type]} p3 [TODO:description]
+ * @param {[TODO:type]} p4 [TODO:description]
  */
 var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -139,18 +126,18 @@ var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
  * TODO
  *
  * @function myFunc
- * @param {string} $p1 TODO
- * @param {string[]} p2 TODO
- * @param {number} p3 TODO
- * @param {float} p4 TODO
- * @return {string[]} TODO
+ * @param {string} $p1 [TODO:description]
+ * @param {string[]} p2 [TODO:description]
+ * @param {number} p3 [TODO:description]
+ * @param {float} p4 [TODO:description]
+ * @return {string[]} [TODO:description]
  */
 var myFunc = function($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
 /**
  * TODO
  *
- * @param {*} p1 TODO
+ * @param {[TODO:type]} p1 [TODO:description]
  */
 function myFunc(p1) {
   var a = 2;
@@ -161,8 +148,8 @@ var myObj = {
     /**
      * TODO
      *
-     * @param {string} p1 TODO
-     * @param {Immutable.List} p2 TODO
+     * @param {string} p1 [TODO:description]
+     * @param {Immutable.List} p2 [TODO:description]
      */
     function(p1: string = 'default', p2: Immutable.List = Immutable.List()) {
       var a = 2;
@@ -185,7 +172,7 @@ var myObj = {
  * TODO
  *
  * @function user
- * @param {*} p1 TODO
+ * @param {[TODO:type]} p1 [TODO:description]
  */
 const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
 
@@ -193,7 +180,7 @@ const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
  * TODO
  *
  * @function
- * @return {number[]} TODO
+ * @return {number[]} [TODO:description]
  */
 (): number[] => { };
 
@@ -201,13 +188,13 @@ const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
  * TODO
  *
  * @function user
- * @param {string} p1 TODO
- * @param {int} p2 TODO
- * @param {*} p3 TODO
- * @param {Immutable.List} p4 TODO
- * @param {string[]} p5 TODO
- * @param {float} p6 TODO
- * @return {number[]} TODO
+ * @param {string} p1 [TODO:description]
+ * @param {int} p2 [TODO:description]
+ * @param {[TODO:type]} p3 [TODO:description]
+ * @param {Immutable.List} p4 [TODO:description]
+ * @param {string[]} p5 [TODO:description]
+ * @param {float} p6 [TODO:description]
+ * @return {number[]} [TODO:description]
  */
 const user = (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
 
@@ -221,9 +208,9 @@ const myObj = {
   /**
    * TODO
    *
-   * @param {string} p1 TODO
-   * @param {int} p2 TODO
-   * @return {string} TODO
+   * @param {string} p1 [TODO:description]
+   * @param {int} p2 [TODO:description]
+   * @return {string} [TODO:description]
    */
   myFunc(p1: string, p2: int = 5): string {
     //
@@ -244,9 +231,9 @@ let isOneOf: number | boolean | string = foo;
 /**
  * TODO
  *
- * @param {any} one TODO
- * @param {any} two TODO
- * @return {number} TODO
+ * @param {any} one [TODO:description]
+ * @param {any} two [TODO:description]
+ * @return {number} [TODO:description]
  */
 function add(one: any, two: any = 'default'): number {}
 
@@ -264,25 +251,25 @@ let Easing = "ease-in" | "ease-out" | "ease-in-out" = "ease-in";
  * TODO
  *
  * @function
- * @param {array} p1 TODO
+ * @param {array} p1 [TODO:description]
  */
 (p1: array = []) => (p2: string) => { console.log(5); }
 
 /**
  * TODO
  *
- * @param {History} history TODO
- * @param {object} initialState TODO
- * @return {Store<AppState>} TODO
+ * @param {History} history [TODO:description]
+ * @param {object} initialState [TODO:description]
+ * @return {Store<AppState>} [TODO:description]
  */
 export function configureStore(history: History, initialState: object): Store<AppState> {}
 
 /**
  * TODO
  *
- * @param {History} history TODO
- * @param {object} initialState TODO
- * @return {Store<AppState>} TODO
+ * @param {History} history [TODO:description]
+ * @param {object} initialState [TODO:description]
+ * @return {Store<AppState>} [TODO:description]
  */
 function configureStore(history: History, initialState: object): Store<AppState> {}
 
@@ -290,49 +277,49 @@ function configureStore(history: History, initialState: object): Store<AppState>
  * TODO
  *
  * @function configureStore
- * @param {History} history TODO
- * @param {object} initialState TODO
- * @return {Store<AppState>} TODO
+ * @param {History} history [TODO:description]
+ * @param {object} initialState [TODO:description]
+ * @return {Store<AppState>} [TODO:description]
  */
 const configureStore = (history: History, initialState: object): Store<AppState> => {}
 
 /**
  * TODO
  *
- * @return {1|2|3|4|5|6} TODO
+ * @return {1|2|3|4|5|6} [TODO:description]
  */
 function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {}
 
 /**
  * TODO
  *
- * @return {1|2|3|4|5|6} TODO
+ * @return {1|2|3|4|5|6} [TODO:description]
  */
 function rollDice(): (1 | 2 | 3 | 4 | 5 | 6) {}
 
 /**
  * TODO
  *
- * @param {T} o TODO
- * @param {K[]} names TODO
- * @return {T[K][]} TODO
+ * @param {T} o [TODO:description]
+ * @param {K[]} names [TODO:description]
+ * @return {T[K][]} [TODO:description]
  */
 function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 
 /**
  * TODO
  *
- * @param {Fish|Bird} pet TODO
- * @param {[User]} users TODO
- * @return {[User, Fish]} TODO
+ * @param {Fish|Bird} pet [TODO:description]
+ * @param {[User]} users [TODO:description]
+ * @return {[User, Fish]} [TODO:description]
  */
 function isFish(pet: Fish | Bird, users: [User]): [User, Fish] {}
 
 /**
  * TODO
  *
- * @param {any} x TODO
- * @return {x is number} TODO
+ * @param {any} x [TODO:description]
+ * @return {x is number} [TODO:description]
  */
 function isNumber(x: any): x is number {}
 
@@ -340,7 +327,7 @@ function isNumber(x: any): x is number {}
  * TODO
  *
  * @function
- * @param {int} p1 TODO
+ * @param {int} p1 [TODO:description]
  */
 (p1: int = 5) => { console.log(5); }
 
@@ -348,8 +335,8 @@ function isNumber(x: any): x is number {}
  * TODO
  *
  * @function
- * @param {array} p1 TODO
- * @return {Sequence[T]} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {Sequence[T]} [TODO:description]
  */
 (p1: array = []): Sequence[T] => { console.log(5); }
 
@@ -357,8 +344,8 @@ function isNumber(x: any): x is number {}
  * TODO
  *
  * @function
- * @param {array} p1 TODO
- * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {Sequence[undefined, Sequnence[T], None, 5]} [TODO:description]
  */
 (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
@@ -366,8 +353,8 @@ function isNumber(x: any): x is number {}
  * TODO
  *
  * @function user1
- * @param {array} p1 TODO
- * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {Sequence[undefined, Sequnence[T], None, 5]} [TODO:description]
  */
 const user1 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
@@ -375,8 +362,8 @@ const user1 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { 
  * TODO
  *
  * @function user2
- * @param {array} p1 TODO
- * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {Sequence[undefined, Sequnence[T], None, 5]} [TODO:description]
  */
 let user2 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
@@ -384,8 +371,8 @@ let user2 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { co
  * TODO
  *
  * @function user3
- * @param {array} p1 TODO
- * @return {Sequence[undefined, Sequnence[T], None, 5]} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {Sequence[undefined, Sequnence[T], None, 5]} [TODO:description]
  */
 var user3 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { console.log(5); }
 
@@ -393,8 +380,8 @@ var user3 = (p1: array = []): Sequence[undefined, Sequnence[T], None, 5] => { co
  * TODO
  *
  * @function $_123user3
- * @param {array} p1 TODO
- * @return {x is number} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {x is number} [TODO:description]
  */
 const $_123user3 = (p1: array = []): x is number => { console.log(5); }
 
@@ -402,8 +389,8 @@ const $_123user3 = (p1: array = []): x is number => { console.log(5); }
  * TODO
  *
  * @function rollDice
- * @param {array} p1 TODO
- * @return {1|2|3|4|5|6} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {1|2|3|4|5|6} [TODO:description]
  */
 const rollDice = (p1: array = []): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
 
@@ -411,7 +398,7 @@ const rollDice = (p1: array = []): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
  * TODO
  *
  * @function rollDice
- * @return {1|2|3|4|5|6} TODO
+ * @return {1|2|3|4|5|6} [TODO:description]
  */
 const rollDice = (): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
 
@@ -419,8 +406,8 @@ const rollDice = (): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
  * TODO
  *
  * @function myFunc
- * @param {*} children TODO
- * @return {PropTypes.Element|null} TODO
+ * @param {[TODO:type]} children [TODO:description]
+ * @return {PropTypes.Element|null} [TODO:description]
  */
 const myFunc = ({ children }): (PropTypes.Element | null) => (
   <div>...</div>
@@ -430,7 +417,7 @@ const myFunc = ({ children }): (PropTypes.Element | null) => (
  * TODO
  *
  * @function myFunc
- * @param {*} children TODO
+ * @param {[TODO:type]} children [TODO:description]
  */
 const myFunc = ({ children }) => {
   <div>...</div>
@@ -440,8 +427,8 @@ const myFunc = ({ children }) => {
  * TODO
  *
  * @function rollDice
- * @param {array} p1 TODO
- * @return {1|2|3|4|5|6} TODO
+ * @param {array} p1 [TODO:description]
+ * @return {1|2|3|4|5|6} [TODO:description]
  */
 const rollDice = (p1: array = []): (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); }
 
@@ -449,7 +436,7 @@ const rollDice = (p1: array = []): (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); 
  * TODO
  *
  * @function rollDice
- * @return {1|2|3|4|5|6} TODO
+ * @return {1|2|3|4|5|6} [TODO:description]
  */
 const rollDice = () : (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); }
 
@@ -457,8 +444,8 @@ const rollDice = () : (1 | 2 | 3 | 4 | 5 | 6) => { console.log(5); }
  * TODO
  *
  * @function add
- * @param {number} b TODO
- * @return {number|Fish} TODO
+ * @param {number} b [TODO:description]
+ * @return {number|Fish} [TODO:description]
  */
 const add = (b: number): number | Fish => { console.log(5); }
 
@@ -471,14 +458,14 @@ class SpaceRepeatingPadder implements Padder {
   /**
    * TODO
    *
-   * @param {number} numSpaces TODO
+   * @param {number} numSpaces [TODO:description]
    */
   constructor(private numSpaces: number) { }
 
   /**
    * TODO
    *
-   * @return {string} TODO
+   * @return {string} [TODO:description]
    */
   getPaddingString(): string {
     return Array(this.numSpaces + 1).join(" ");
@@ -494,7 +481,7 @@ class Adder {
    * TODO
    *
    * @function constructor
-   * @param {number} a TODO
+   * @param {number} a [TODO:description]
    */
   constructor = (public a: number) => {}
 
@@ -502,8 +489,8 @@ class Adder {
    * TODO
    *
    * @function add
-   * @param {number} b TODO
-   * @return {number} TODO
+   * @param {number} b [TODO:description]
+   * @return {number} [TODO:description]
    */
   add = (b: number): number => {
     return this.a + b;
@@ -570,11 +557,11 @@ export class Child extends Parent implements CustomInterfaceName {}
  * TODO
  *
  * @function myFunc
- * @param {string} $p1 TODO
- * @param {string[]} p2 TODO
- * @param {number} p3 TODO
- * @param {float} p4 TODO
- * @return {string[]} TODO
+ * @param {string} $p1 [TODO:description]
+ * @param {string[]} p2 [TODO:description]
+ * @param {number} p3 [TODO:description]
+ * @param {float} p4 [TODO:description]
+ * @return {string[]} [TODO:description]
  */
 const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
 
@@ -587,7 +574,7 @@ class Child extends Parent {
   /**
    * TODO
    *
-   * @param {number} b TODO
+   * @param {number} b [TODO:description]
    */
   myMethod(public b: number) {
     return this.add(b);
@@ -597,7 +584,7 @@ class Child extends Parent {
    * TODO
    *
    * @function myMethod
-   * @param {number} b TODO
+   * @param {number} b [TODO:description]
    */
   myMethod = (b: number) => {
     return this.add(b);
@@ -606,8 +593,8 @@ class Child extends Parent {
   /**
    * TODO
    *
-   * @param {number} b TODO
-   * @return {number} TODO
+   * @param {number} b [TODO:description]
+   * @return {number} [TODO:description]
    */
   myMethod({ b: number }): number {
     return this.add(b);
@@ -617,9 +604,9 @@ class Child extends Parent {
    * TODO
    *
    * @function myMethod
-   * @param {number} b TODO
+   * @param {number} b [TODO:description]
    */
-  myMethod = ({ b: number }) => {
+  mMethod = ({ b: number }) => {
     return this.add(b);
   }
 }
