@@ -192,7 +192,7 @@ call add(b:doge_patterns, {
      " Use a list for multi-line.
      " Use a tab '\t' to indent properly based on the user setting.
 \    'format': {
-\      'phpdoc': '@param {type|mixed} {name} TODO',
+\      'phpdoc': '@param {type|!type} {name} !description',
 \    },
 \  },
 
@@ -210,7 +210,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'phpdoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * !description',
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
 \        ' */',
@@ -225,6 +225,49 @@ call add(b:doge_patterns, {
 Additional formatting is available when using tokens in the `template` or
 `parameters.format` keys.
 
+#### Creating TODO placeholders
+
+If you've used DoGe already at least for a single function you've noticed it
+will render items such as: `[TODO:description]`. These TODO items will
+automatically be searched for when jumping forward or backward.
+
+Inside a DoGe pattern you can use the token format `!<context>` which will be
+replaced with `[TODO:<context>]`. To give the user a clear understanding what to
+add at this TODO it's recommended to add a context. You may use the following in
+a context: `[a-zA-Z0-9\s]`, although it is recommended to keep it _very_ short.
+
+For example: some Python doc
+standards require a summary at the start of the doc block followed by a
+description (separated by a whiteline).
+
+If you see this:
+```python
+def myFunc(a):
+    """
+    TODO
+
+    TODO
+
+    :param a: TODO
+    """
+    pass
+```
+
+then you don't know _exactly_ what to add in the first TODO and the second TODO.
+
+Giving it context will be more user-friendly:
+```python
+def myFunc(a):
+    """
+    [TODO:summary]
+
+    [TODO:description]
+
+    :param a: [TODO:description]
+    """
+    pass
+```
+
 #### Default value
 
 You can render a token using the format `{...}`. When the captured group failed
@@ -234,11 +277,11 @@ to capture a value you can specify a default value using the pipe character
 For example:
 PHP uses `mixed` as a type when the variable has no type hint specified. You
 can accomplish this by render the `{type}` token as `{type|mixed}`. This will
-result in `* @param mixed $myVar TODO` instead of `* @param {type} $myVar TODO`.
+result in `* @param mixed $myVar !description` instead of `* @param {type} $myVar !description`.
 
 You can also leave the default value empty to just remove the token when it
 fails to capture a value. Example: `{type|}`. This will result in:
-`* @param $p1 TODO` instead of `* @param {type} $p1 TODO`.
+`* @param $p1 !description` instead of `* @param {type} $p1 !description`.
 
 #### Conditional rendering
 
@@ -258,7 +301,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'numpy': [
 \        '"""',
-\        'TODO',
+\        '!description',
 \        '#(parameters|)',              " Render an empty line if '{parameters}' is not empty
 \        '#(parameters|Parameters)',    " Renders 'Parameters' if '{parameters}' is not empty
 \        '#(parameters|----------)',    " Renders '----------' if '{parameters}' is not empty

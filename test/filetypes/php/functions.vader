@@ -9,7 +9,7 @@ Do (trigger doge):
 
 Expect php (generated comment with nothing but the text 'TODO'):
   /**
-   * TODO
+   * [TODO:description]
    */
   function myFunc(/* inline comment */) {}
 
@@ -31,7 +31,7 @@ Do (trigger doge):
 
 Expect php (generated comment with @param tags):
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param array $p1
    *   [TODO:description]

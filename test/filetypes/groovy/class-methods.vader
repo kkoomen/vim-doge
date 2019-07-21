@@ -15,8 +15,8 @@ Do (trigger doge):
 Expect groovy (method with 'TODO' and a @return tag):
   class Test {
     /**
-     * TODO
-     * @return List TODO
+     * [TODO:description]
+     * @return List [TODO:description]
      */
     List<Element> createSortedList() {}
   }
@@ -36,8 +36,8 @@ Do (trigger doge):
 Expect groovy (method with 'TODO' and a @return tag containing 'void'):
   class Test {
     /**
-     * TODO
-     * @return void TODO
+     * [TODO:description]
+     * @return void [TODO:description]
      */
     public createSortedList() {}
   }
@@ -61,20 +61,20 @@ Do (trigger doge):
 Expect groovy (generated comments with @param and @return tags):
   class Test {
     /**
-     * TODO
-     * @param String p1 TODO
-     * @param int p2 TODO
-     * @param Boolean params TODO
-     * @return MstRelation TODO
+     * [TODO:description]
+     * @param String p1 [TODO:description]
+     * @param int p2 [TODO:description]
+     * @param Boolean params [TODO:description]
+     * @return MstRelation [TODO:description]
      */
     private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) {}
 
     /**
-     * TODO
-     * @param String p1 TODO
-     * @param int p2 TODO
-     * @param Boolean params TODO
-     * @return ListResultBean TODO
+     * [TODO:description]
+     * @param String p1 [TODO:description]
+     * @param int p2 [TODO:description]
+     * @param Boolean params [TODO:description]
+     * @return ListResultBean [TODO:description]
      */
     ListResultBean<MstRelation> MyParameterizedMethod(String p1, int p2, Boolean... params) {}
   }
@@ -95,10 +95,10 @@ Do (trigger doge):
 Expect groovy (generated comments with @param and @return tags inserted above the '@Override'):
   class Test {
     /**
-     * TODO
-     * @param String p1 TODO
-     * @param int p2 TODO
-     * @return void TODO
+     * [TODO:description]
+     * @param String p1 [TODO:description]
+     * @param int p2 [TODO:description]
+     * @return void [TODO:description]
      */
     @Override
     protected void MyParameterizedMethod(String p1, int p2) {}

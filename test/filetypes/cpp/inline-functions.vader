@@ -12,10 +12,10 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param e TODO
-   * @return TODO
+   * @param e [TODO:description]
+   * @return [TODO:description]
    */
   inline project::error_code my_func(ssl_errors e)
   {

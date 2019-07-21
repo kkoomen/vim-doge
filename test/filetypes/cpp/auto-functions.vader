@@ -13,11 +13,11 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param fun TODO
-   * @param args TODO
-   * @return TODO
+   * @param fun [TODO:description]
+   * @param args [TODO:description]
+   * @return [TODO:description]
    */
   template<class F, class... Args>
   decltype(auto) PerfectForward(F fun, Args&&... args)
@@ -40,11 +40,11 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param it_begin TODO
-   * @param _end TODO
-   * @return TODO
+   * @param it_begin [TODO:description]
+   * @param _end [TODO:description]
+   * @return [TODO:description]
    */
   template<auto n>
   auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // inline comment
@@ -67,10 +67,10 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param it_begin TODO
-   * @param _end TODO
+   * @param it_begin [TODO:description]
+   * @param _end [TODO:description]
    */
   template<auto n>
   auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> void // inline comment
@@ -96,11 +96,11 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param j TODO
-   * @param val TODO
-   * @return TODO
+   * @param j [TODO:description]
+   * @param val [TODO:description]
+   * @return [TODO:description]
    */
   template<typename BasicJsonType, typename ValueType>
   static auto

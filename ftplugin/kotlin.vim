@@ -69,7 +69,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'kdoc': '@param {name} TODO',
+\      'kdoc': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -77,9 +77,9 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'kdoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * !description',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        ' * @return !description',
 \        ' */',
 \      ],
 \    },
@@ -120,7 +120,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'kdoc': '@property {name} TODO',
+\      'kdoc': '@property {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -128,7 +128,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'kdoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * !description',
 \        '#(parameters| * {parameters})',
 \        ' */',
 \      ],
@@ -150,7 +150,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'kdoc': '@param {name} TODO',
+\      'kdoc': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -158,7 +158,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'kdoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * !description',
 \        '#(parameters| * {parameters})',
 \        ' */',
 \      ],

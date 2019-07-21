@@ -1,6 +1,6 @@
 " ==============================================================================
-" The Ruby documentation should follow the 'RDoc' conventions.
-" see https://ruby.github.io/rdoc
+" The Ruby documentation should follow the 'YARD' conventions.
+" see https://www.rubydoc.info/gems/yard/file/docs/Tags.md
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
@@ -41,14 +41,14 @@ call add(b:doge_patterns, {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
 \    'match_group_names': ['name'],
 \    'format': {
-\      'YARD': '@param {name} [type] TODO',
+\      'YARD': '@param {name} [!type] !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'YARD': [
-\        '# TODO',
+\        '# !description',
 \        '#(parameters|# {parameters})',
 \      ],
 \    },

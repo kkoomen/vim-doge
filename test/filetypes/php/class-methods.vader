@@ -16,7 +16,7 @@ Expect php (class method with nothing but the text 'TODO'):
   class Test {
 
     /**
-     * TODO
+     * [TODO:description]
      */
     public function myMethod() {}
 
@@ -42,7 +42,7 @@ Expect php (generated comment with @param tags):
   class Test {
 
     /**
-     * TODO
+     * [TODO:description]
      *
      * @param array $p1
      *   [TODO:description]
@@ -68,7 +68,7 @@ Expect php (generated comment with @param tags):
   class Test {
 
     /**
-     * TODO
+     * [TODO:description]
      *
      * @param array $p1
      *   [TODO:description]
@@ -94,7 +94,7 @@ Expect php (generated comment with @param tags):
   class Test {
 
     /**
-     * TODO
+     * [TODO:description]
      *
      * @param array $p1
      *   [TODO:description]
@@ -120,7 +120,7 @@ Expect php (generated comment with @param tags):
   class Test {
 
     /**
-     * TODO
+     * [TODO:description]
      *
      * @param array $p1
      *   [TODO:description]
@@ -153,7 +153,7 @@ Expect php (generated comment with @param tags):
   class Test {
 
     /**
-     * TODO
+     * [TODO:description]
      *
      * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf
      *   [TODO:description]

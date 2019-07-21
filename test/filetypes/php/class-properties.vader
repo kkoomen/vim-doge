@@ -48,7 +48,7 @@ Expect php (generated comments at all properties and constructor function):
     protected $migration;
 
     /**
-     * TODO
+     * [TODO:description]
      *
      * @param string $name
      *   [TODO:description]

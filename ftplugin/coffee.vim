@@ -37,7 +37,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '###',
-\        '@description TODO',
+\        '!description',
+\        '',
 \        '@function {className}#{funcName}',
 \        '###',
 \      ],
@@ -61,7 +62,7 @@ call add(b:doge_patterns, {
 \    'match': '\m\([^,]\+\)',
 \    'match_group_names': ['name'],
 \    'format': {
-\      'jsdoc': '@param {*} {name} TODO',
+\      'jsdoc': '@param {!type} {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -69,7 +70,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'jsdoc': [
 \        '###',
-\        '@description TODO',
+\        '!description',
+\        '',
 \        '@function {funcName|}',
 \        '#(parameters|{parameters})',
 \        '###',

@@ -19,7 +19,7 @@ Expect php (generated comment containing the FQN):
   use Symfony\Component\HttpFoundation\Response;
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1
    *   [TODO:description]
@@ -41,7 +41,7 @@ Expect php (generated comment containing the FQN):
   use Symfony\Component\HttpFoundation\Response, use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1
    *   [TODO:description]
@@ -63,7 +63,7 @@ Expect php (generated comment containing the FQN):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1
    *   [TODO:description]
@@ -86,7 +86,7 @@ Expect php (generated comment not containing the FQN):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param BaseRoute $p1
    *   [TODO:description]
@@ -108,7 +108,7 @@ Expect php (generated comment not containing the FQN):
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param BaseRoute $p1
    *   [TODO:description]
@@ -130,7 +130,7 @@ Expect php (generated comment not containing the FQN):
   use Symfony\Component\HttpFoundation\Response, Symfony\Component\Routing\Annotation\Route as BaseRoute;
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @param BaseRoute $p1
    *   [TODO:description]

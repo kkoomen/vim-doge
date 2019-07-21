@@ -12,15 +12,15 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comments with the text 'TODO' and @return tag):
-  /** TODO
+  /** [TODO:description]
    *
-   * @return TODO
+   * @return [TODO:description]
    */
   (/* inline comment */) => x + 1
 
-  /** TODO
+  /** [TODO:description]
    *
-   * @return TODO
+   * @return [TODO:description]
    */
   val addOne /* inline comment */ = () => x + 1
 
@@ -37,11 +37,11 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Int TODO
-   * @param y Int TODO
-   * @return TODO
+   * @param x Int [TODO:description]
+   * @param y Int [TODO:description]
+   * @return [TODO:description]
    */
   val add = (
     x: Int /* inline coment */,

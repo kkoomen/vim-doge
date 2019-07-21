@@ -2,9 +2,9 @@
 # Methods without parameters.
 # ==============================================================================
 Given scala (method without parameters):
-  /** TODO
+  /** [TODO:description]
    *
-   * @return TODO
+   * @return [TODO:description]
    */
   def add(): Int = x + y
 
@@ -12,9 +12,9 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with the text 'TODO' and @return tag):
-  /** TODO
+  /** [TODO:description]
    *
-   * @return TODO
+   * @return [TODO:description]
    */
   def add(): Int = x + y
 
@@ -28,11 +28,11 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Int TODO
-   * @param y Int TODO
-   * @return TODO
+   * @param x Int [TODO:description]
+   * @param y Int [TODO:description]
+   * @return [TODO:description]
    */
   def add(x: Int, y: Int): Int = x + y
 
@@ -52,20 +52,20 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Int TODO
-   * @param y Int TODO
-   * @param multiplier Int TODO
-   * @return TODO
+   * @param x Int [TODO:description]
+   * @param y Int [TODO:description]
+   * @param multiplier Int [TODO:description]
+   * @return [TODO:description]
    */
   def addThenMultiply(x: Int, y: Int)(multiplier: Int): Int = (x + y) * multiplier
 
-  /** TODO
+  /** [TODO:description]
    *
-   * @param ssl Boolean TODO
-   * @param domainName String TODO
-   * @return TODO
+   * @param ssl Boolean [TODO:description]
+   * @param domainName String [TODO:description]
+   * @return [TODO:description]
    */
   def urlBuilder(ssl: Boolean = true, domainName: String = "some domain value"): (String, String) => String = {
     //
@@ -89,19 +89,19 @@ Do (trigger doge):
 
 Expect scala (generated comments with @param and @return tags):
   class Test() {
-    /** TODO
+    /** [TODO:description]
      *
-     * @param x Int TODO
-     * @param y Int TODO
-     * @return TODO
+     * @param x Int [TODO:description]
+     * @param y Int [TODO:description]
+     * @return [TODO:description]
      */
     override def add(x: Int, y: Int): Int = x + y
 
-    /** TODO
+    /** [TODO:description]
      *
-     * @param x Int TODO
-     * @param y Int TODO
-     * @return TODO
+     * @param x Int [TODO:description]
+     * @param y Int [TODO:description]
+     * @return [TODO:description]
      */
     override private def add(x: Int, y: Int): Int = x + y
   }

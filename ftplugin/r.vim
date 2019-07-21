@@ -52,22 +52,22 @@ call add(b:doge_patterns, {
 \    'match': '\m\([[:alnum:]_]\+\%(.\%([[:alnum:]_]\+\)\)*\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\)\?',
 \    'match_group_names': ['name'],
 \    'format': {
-\      'roxygen2': '@param {name} TODO',
+\      'roxygen2': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'roxygen2': [
-\        "#' TODO",
+\        "#' !description",
 \        "#(parameters|#')",
 \        "#(parameters|#' {parameters})",
 \        "#'",
-\        "#' @return TODO",
+\        "#' @return !description",
 \        "#' @export",
 \        "#'",
 \        "#' @examples",
-\        "#' TODO",
+\        "#' !example",
 \      ],
 \    },
 \  },

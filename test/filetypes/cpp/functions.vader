@@ -12,7 +12,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with nothing but the text 'TODO' and @return tag):
   /**
-   * TODO
+   * [TODO:description]
    */
   void Emitter::append_token(/* inline comment */) // another comment
   {
@@ -33,10 +33,10 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param text TODO
-   * @param node TODO
+   * @param text [TODO:description]
+   * @param node [TODO:description]
    */
   void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node) // another comment
   {
@@ -57,9 +57,9 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param p TODO
+   * @param p [TODO:description]
    */
   void f(A* p = this)
   {
@@ -87,10 +87,10 @@ Do (trigger doge):
 
 Expect cpp (generated comments with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param text TODO
-   * @return TODO
+   * @param text [TODO:description]
+   * @return [TODO:description]
    */
   lowest_layer_type& my_func(std::string& text)
   {
@@ -98,11 +98,11 @@ Expect cpp (generated comments with @param and @return tags):
   }
 
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param v TODO
-   * @param ec TODO
-   * @return TODO
+   * @param v [TODO:description]
+   * @param ec [TODO:description]
+   * @return [TODO:description]
    */
   ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec)
   {

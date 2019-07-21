@@ -9,8 +9,8 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun myFunc(/* inline comment */) {}
 
@@ -33,20 +33,20 @@ Do (trigger doge):
 
 Expect kotlin (generated comments with nothing but the text 'TODO' and @return tag):
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun <String: <T>> myFunc() {}
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun <T: Any?> myFunc() {}
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun <T> myFunc() {}
 
@@ -61,8 +61,8 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun myFunc(): Int? {}
 
@@ -77,8 +77,8 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun <String: <T>> myFunc(): Int? {}
 
@@ -97,21 +97,21 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with @param and @return tags):
   /**
-   * TODO
-   * @param i TODO
-   * @param lst TODO
-   * @param str TODO
-   * @param map TODO
-   * @param str TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @param lst [TODO:description]
+   * @param str [TODO:description]
+   * @param map [TODO:description]
+   * @param str [TODO:description]
+   * @return [TODO:description]
    */
   fun myFunc(i: Int = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
 
   /**
-   * TODO
-   * @param t TODO
-   * @param u TODO
-   * @return TODO
+   * [TODO:description]
+   * @param t [TODO:description]
+   * @param u [TODO:description]
+   * @return [TODO:description]
    */
   abstract fun signal(t: Int/* inline comment */, u: Int) = apply(t, u)
 
@@ -158,64 +158,64 @@ Do (trigger doge):
 
 Expect kotlin (generated comments with @param and @return tags):
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   inline fun <reified T : Enum<T>> printAllValues() {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   open data fun asNullable(i: Foo?) {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   public fun myFunc(i: Foo?) {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   protected fun <T> myFunc(i: Foo?): T {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   private fun myFunc(i: Foo?) Any? {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   final fun myFunc(i: Foo?) {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   abstract fun myFunc(i: Foo?) {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   override fun myFunc(i: Foo?) {}
 
   /**
-   * TODO
-   * @param i TODO
-   * @return TODO
+   * [TODO:description]
+   * @param i [TODO:description]
+   * @return [TODO:description]
    */
   operator fun myFunc(i: Foo?) {}
 
@@ -234,18 +234,18 @@ Do (trigger doge):
 
 Expect kotlin (generated comments with @param and @return tags):
   /**
-   * TODO
-   * @param index1 TODO
-   * @param index2 TODO
-   * @return TODO
+   * [TODO:description]
+   * @param index1 [TODO:description]
+   * @param index2 [TODO:description]
+   * @return [TODO:description]
    */
   fun <T> MutableList<Int>.swap(index1: Int, index2: Int) {}
 
   /**
-   * TODO
-   * @param index1 TODO
-   * @param index2 TODO
-   * @return TODO
+   * [TODO:description]
+   * @param index1 [TODO:description]
+   * @param index2 [TODO:description]
+   * @return [TODO:description]
    */
   fun <T> MutableList.swap(index1: Int, index2: Int) {}
 
@@ -265,18 +265,18 @@ Do (trigger doge):
 
 Expect kotlin (generated comments with @param and @return tags):
   /**
-   * TODO
-   * @param index1 TODO
-   * @param index2 TODO
-   * @return TODO
+   * [TODO:description]
+   * @param index1 [TODO:description]
+   * @param index2 [TODO:description]
+   * @return [TODO:description]
    */
   fun MutableList<Int>.swap(index1: Int, index2: Int) {}
 
   /**
-   * TODO
-   * @param index1 TODO
-   * @param index2 TODO
-   * @return TODO
+   * [TODO:description]
+   * @param index1 [TODO:description]
+   * @param index2 [TODO:description]
+   * @return [TODO:description]
    */
   fun MutableList.swap(index1: Int, index2: Int) {}
 
@@ -291,8 +291,8 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with nothing but the text 'TODO' and @return tag):
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun Any?.toString(): String {}
 
@@ -316,7 +316,7 @@ Expect kotlin (generated comment with nothing but the text 'TODO' and @return ta
   }
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun MyClass.Companion.foo() {}

@@ -11,8 +11,8 @@ Do (trigger doge):
 Expect lua (generated comment with @param tags):
   -- [TODO:summary]
   -- [TODO:description]
-  -- @param p1 TODO
-  -- @param p2 TODO
+  -- @param p1 [TODO:description]
+  -- @param p2 [TODO:description]
   function a.b:c (p1, p2)
   end
 
@@ -29,9 +29,9 @@ Do (trigger doge):
 Expect lua (generated comment with @param tags):
   -- [TODO:summary]
   -- [TODO:description]
-  -- @param self TODO
-  -- @param p1 TODO
-  -- @param p2 TODO
+  -- @param self [TODO:description]
+  -- @param p1 [TODO:description]
+  -- @param p2 [TODO:description]
   a.b.c = function (self, p1, p2)
   end
 

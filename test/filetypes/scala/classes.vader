@@ -10,7 +10,7 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comments with nothing but the text 'TODO'):
-  /** TODO
+  /** [TODO:description]
    *
    */
   class Test() {
@@ -29,10 +29,10 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Double TODO
-   * @param y Double TODO
+   * @param x Double [TODO:description]
+   * @param y Double [TODO:description]
    */
   class Test(val x: Double = 0, val y: Double = 0) {
     //
@@ -50,10 +50,10 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Double TODO
-   * @param y Double TODO
+   * @param x Double [TODO:description]
+   * @param y Double [TODO:description]
    */
   class Test(val x: Double = 0, val y: Double = 0) extends A {
     //
@@ -71,10 +71,10 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Double TODO
-   * @param y Double TODO
+   * @param x Double [TODO:description]
+   * @param y Double [TODO:description]
    */
   class Test(val x: Double = 0, val y: Double = 0) with A {
     //
@@ -92,10 +92,10 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Double TODO
-   * @param y Double TODO
+   * @param x Double [TODO:description]
+   * @param y Double [TODO:description]
    */
   class Test(val x: Double = 0, val y: Double = 0) extends A with B with C {
     //
@@ -113,9 +113,9 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param tag):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param to Int TODO
+   * @param to Int [TODO:description]
    */
   class IntIterator(to: Int) extends Iterator[Int] {
     //
@@ -131,9 +131,9 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param tag):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param name String TODO
+   * @param name String [TODO:description]
    */
   class Dog(val name: String) extends Pet
 
@@ -147,8 +147,8 @@ Do (trigger doge):
   \<C-d>
 
 Expect scala (generated comment with @param and @return tags):
-  /** TODO
+  /** [TODO:description]
    *
-   * @param amount_msat Long TODO
+   * @param amount_msat Long [TODO:description]
    */
   private case class GUISat(amount_msat: Long) extends BtcAmountGUILossless {}

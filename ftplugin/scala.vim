@@ -41,17 +41,17 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'scaladoc': '@param {name} {type} TODO',
+\      'scaladoc': '@param {name} {type} !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'scaladoc': [
-\        '/** TODO',
+\        '/** !description',
 \        ' *',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        ' * @return !description',
 \        ' */',
 \      ],
 \    },
@@ -77,17 +77,17 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'scaladoc': '@param {name} {type} TODO',
+\      'scaladoc': '@param {name} {type} !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'scaladoc': [
-\        '/** TODO',
+\        '/** !description',
 \        ' *',
 \        '#(parameters| * {parameters})',
-\        ' * @return TODO',
+\        ' * @return !description',
 \        ' */',
 \      ],
 \    },
@@ -112,14 +112,14 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'scaladoc': '@param {name} {type} TODO',
+\      'scaladoc': '@param {name} {type} !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'scaladoc': [
-\        '/** TODO',
+\        '/** !description',
 \        ' *',
 \        '#(parameters| * {parameters})',
 \        ' */',

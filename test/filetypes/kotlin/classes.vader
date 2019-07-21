@@ -9,7 +9,7 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with nothing but the text 'TODO'):
   /**
-   * TODO
+   * [TODO:description]
    */
   class MyClass() {}
 
@@ -24,8 +24,8 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with @property tags):
   /**
-   * TODO
-   * @property id TODO
+   * [TODO:description]
+   * @property id [TODO:description]
    */
   class ResourceLoader<T>(id: ResourceID<T>) {}
 
@@ -40,9 +40,9 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with @property tags):
   /**
-   * TODO
-   * @property map TODO
-   * @property num TODO
+   * [TODO:description]
+   * @property map [TODO:description]
+   * @property num [TODO:description]
    */
   class MutableUser(val map: MutableMap<String, Any?>, num: Int) {}
 
@@ -57,8 +57,8 @@ Do (trigger doge):
 
 Expect kotlin (generated comment with @property tags):
   /**
-   * TODO
-   * @property map TODO
+   * [TODO:description]
+   * @property map [TODO:description]
    */
   class MutableUser(val map: MutableMap<String, Any?>) {}
 
@@ -102,51 +102,51 @@ Do (trigger doge):
 
 Expect kotlin (generated comments with @property tags):
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   inner class MyClass(val s: String, val n: Int) {}
 
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   inline class MyClass(val s: String, val n: Int) {}
 
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   enum class MyClass(val s: String, val n: Int) {}
 
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   external class MyClass(val s: String, val n: Int) {}
 
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   open data class MyClass(val s: String, val n: Int) {}
 
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   abstract class MyClass(val s: String, val n: Int) {}
 
   /**
-   * TODO
-   * @property s TODO
-   * @property n TODO
+   * [TODO:description]
+   * @property s [TODO:description]
+   * @property n [TODO:description]
    */
   sealed class MyClass(val s: String, val n: Int) {}
 
@@ -165,14 +165,14 @@ Do (trigger doge):
 
 Expect kotlin (generated comments with @property tags):
   /**
-   * TODO
-   * @property firstName TODO
+   * [TODO:description]
+   * @property firstName [TODO:description]
    */
   class Person constructor(firstName: String) {}
 
   /**
-   * TODO
-   * @property a TODO
+   * [TODO:description]
+   * @property a [TODO:description]
    */
   class C private constructor(a: Int) {}
 
@@ -195,16 +195,16 @@ Do (trigger doge):
 Expect kotlin (generated comments with @param tags):
   class MyClass {
     /**
-     * TODO
-     * @param ctx TODO
+     * [TODO:description]
+     * @param ctx [TODO:description]
      */
     protected constructor(ctx: Context) : super(ctx)
 
     /**
-     * TODO
-     * @param parent TODO
-     * @param query TODO
-     * @param users TODO
+     * [TODO:description]
+     * @param parent [TODO:description]
+     * @param query [TODO:description]
+     * @param users [TODO:description]
      */
     constructor(parent: Person, query: Query<*, <T>>, users: List<User>) {}
   }

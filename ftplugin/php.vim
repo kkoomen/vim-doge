@@ -75,8 +75,8 @@ call add(b:doge_patterns, {
 \    'match_group_names': ['type', 'name'],
 \    'format': {
 \      'phpdoc': [
-\        '@param {type|' . doge#helpers#placeholder('type') . '} {name}',
-\        ' * \t' . doge#helpers#placeholder('description'),
+\        '@param {type|!type} {name}',
+\        ' * \t!description',
 \      ],
 \    },
 \  },
@@ -85,7 +85,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'phpdoc': [
 \        '/**',
-\        ' * TODO',
+\        ' * !description',
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
 \        ' */',

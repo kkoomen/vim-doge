@@ -14,11 +14,11 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param type TODO
-   * @param handler TODO
-   * @return TODO
+   * @param type [TODO:description]
+   * @param handler [TODO:description]
+   * @return [TODO:description]
    */
   template <typename HandshakeHandler>
   INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
@@ -41,10 +41,10 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * TODO
+   * [TODO:description]
    *
-   * @param i TODO
-   * @param args TODO
+   * @param i [TODO:description]
+   * @param args [TODO:description]
    */
   template<class...T> void h(int i = 0, T... args) {
     //

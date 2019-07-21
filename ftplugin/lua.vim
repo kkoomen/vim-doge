@@ -45,15 +45,15 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'ldoc': '@param {name} TODO',
+\      'ldoc': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'ldoc': [
-\        '-- ' . doge#helpers#placeholder('summary'),
-\        '-- ' . doge#helpers#placeholder('description'),
+\        '-- !summary',
+\        '-- !description',
 \        '#(parameters|-- {parameters})',
 \      ],
 \    },
@@ -77,15 +77,15 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'ldoc': '@param {name} TODO',
+\      'ldoc': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
 \    'insert': 'above',
 \    'template': {
 \      'ldoc': [
-\        '-- ' . doge#helpers#placeholder('summary'),
-\        '-- ' . doge#helpers#placeholder('description'),
+\        '-- !summary',
+\        '-- !description',
 \        '#(parameters|-- {parameters})',
 \      ],
 \    },
