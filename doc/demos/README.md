@@ -46,6 +46,7 @@ Supported:
 - Class methods.
 - Doc standards
   - reST
+  - Sphinx
   - Numpy
   - Google
 - Python 3.7+ type hints
