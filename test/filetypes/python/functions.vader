@@ -11,7 +11,7 @@ Do (trigger doge):
 Expect python (no changes):
   def myFunc(): # inline comment
     """
-    TODO
+    [TODO:description]
     
     """
     pass
@@ -29,12 +29,12 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
     """
-    TODO
+    [TODO:description]
     
-    :param p1 [TODO:type]: TODO
-    :param p2 [TODO:type]: TODO
-    :param p3 [TODO:type]: TODO
-    :param p4 [TODO:type]: TODO
+    :param p1 [TODO:type]: [TODO:description]
+    :param p2 [TODO:type]: [TODO:description]
+    :param p3 [TODO:type]: [TODO:description]
+    :param p4 [TODO:type]: [TODO:description]
     """
     pass
 
@@ -51,10 +51,10 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   def myFunc(p1: str = 'string', p2: int = 5):
       """
-      TODO
+      [TODO:description]
       
-      :param p1 str: TODO
-      :param p2 int: TODO
+      :param p1 str: [TODO:description]
+      :param p2 int: [TODO:description]
       """
       pass
 
@@ -76,21 +76,21 @@ Do (trigger doge):
 Expect python (generated comments with :param tags):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
       """
-      TODO
+      [TODO:description]
       
-      :param p1 Callable[[int], None]: TODO
-      :param p2 Callable[[int, Exception], None]: TODO
-      :rtype Sequence[T]: TODO
+      :param p1 Callable[[int], None]: [TODO:description]
+      :param p2 Callable[[int, Exception], None]: [TODO:description]
+      :rtype Sequence[T]: [TODO:description]
       """
       pass
 
   def myFunc(p1: Sequence[T], p2: my_module.types) -> Generator[int, float, str]:
       """
-      TODO
+      [TODO:description]
       
-      :param p1 Sequence[T]: TODO
-      :param p2 my_module.types: TODO
-      :rtype Generator[int, float, str]: TODO
+      :param p1 Sequence[T]: [TODO:description]
+      :param p2 my_module.types: [TODO:description]
+      :rtype Generator[int, float, str]: [TODO:description]
       """
       pass
 
@@ -109,12 +109,12 @@ Expect python (generated comment with :param and :rtype tags):
   def myFunc(p1: str, p2: dict,
           p3: list, p4: tuple) -> Iterator[int]:
       """
-      TODO
+      [TODO:description]
       
-      :param p1 str: TODO
-      :param p2 dict: TODO
-      :param p3 list: TODO
-      :param p4 tuple: TODO
-      :rtype Iterator[int]: TODO
+      :param p1 str: [TODO:description]
+      :param p2 dict: [TODO:description]
+      :param p3 list: [TODO:description]
+      :param p4 tuple: [TODO:description]
+      :rtype Iterator[int]: [TODO:description]
       """
       pass

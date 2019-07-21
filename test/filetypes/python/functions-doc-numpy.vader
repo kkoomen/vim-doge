@@ -39,9 +39,9 @@ Expect python (generated comment with Parameters tag):
       Parameters
       ----------
       p1 : Callable[[int], None]
-          TODO
+          [TODO:description]
       p2 : Callable[[int, Exception], None]
-          TODO
+          [TODO:description]
       """
       pass
 
@@ -65,13 +65,13 @@ Expect python (generated comment with Parameters and Returns tag):
       Parameters
       ----------
       p1 : Callable[[int], None]
-          TODO
+          [TODO:description]
       p2 : Callable[[int, Exception], None]
-          TODO
+          [TODO:description]
       
       Returns
       -------
       Sequence[T]:
-          TODO
+          [TODO:description]
       """
       pass

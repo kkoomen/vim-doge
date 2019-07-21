@@ -12,7 +12,7 @@ Do (trigger doge):
 Expect python (generated comment with nothing but the text 'TODO'):
   def myFunc():
       """
-      TODO
+      [TODO:description]
       
       """
       pass
@@ -30,13 +30,13 @@ Do (trigger doge):
 Expect python (generated comment without type hints with defaults and optional):
   def myFunc(p1, p2, p3 = ''):
       """
-      TODO
+      [TODO:description]
       
-      :param p1: TODO
+      :param p1: [TODO:description]
       :type p1: [TODO:type]
-      :param p2: TODO
+      :param p2: [TODO:description]
       :type p2: [TODO:type]
-      :param p3: TODO, defaults to ''
+      :param p3: [TODO:description], defaults to ''
       :type p3: [TODO:type], optional
       """
       pass
@@ -54,13 +54,13 @@ Do (trigger doge):
 Expect python (generated comment with type hints, defaults and optional):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
       """
-      TODO
+      [TODO:description]
       
-      :param p1: TODO
+      :param p1: [TODO:description]
       :type p1: [TODO:type]
-      :param p2: TODO
+      :param p2: [TODO:description]
       :type p2: Callable[[int], None]
-      :param p3: TODO, defaults to []
+      :param p3: [TODO:description], defaults to []
       :type p3: Callable[[int, Exception], None], optional
       """
       pass
@@ -78,15 +78,15 @@ Do (trigger doge):
 Expect python (generated comment with :param, :type, :return and :rtype tags):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
       """
-      TODO
+      [TODO:description]
       
-      :param p1: TODO
+      :param p1: [TODO:description]
       :type p1: [TODO:type]
-      :param p2: TODO
+      :param p2: [TODO:description]
       :type p2: Callable[[int], None]
-      :param p3: TODO, defaults to []
+      :param p3: [TODO:description], defaults to []
       :type p3: Callable[[int, Exception], None], optional
-      :return: TODO
+      :return: [TODO:description]
       :rtype: Sequence[T]
       """
       pass

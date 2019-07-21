@@ -45,17 +45,17 @@ call add(b:doge_patterns, {
 \    'match': '\m\([[:alnum:]_]\+\)\%(:\s*\([[:alnum:]_.]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
 \    'match_group_names': ['name', 'type', 'default'],
 \    'format': {
-\      'reST': ':param {name} {type|' . doge#helpers#placeholder('type') . '}: TODO',
+\      'reST': ':param {name} {type|' . doge#helpers#placeholder('type') . '}: ' . doge#helpers#placeholder('description'),
 \      'sphinx': [
-\        ':param {name}: TODO#(default|, defaults to {default})',
+\        ':param {name}: ' . doge#helpers#placeholder('description') . '#(default|, defaults to {default})',
 \        ':type {name}: {type|' . doge#helpers#placeholder('type') . '}#(default|, optional)',
 \      ],
 \      'numpy': [
 \        '{name} : {type|' . doge#helpers#placeholder('type') . '}',
-\        '\tTODO',
+\        '\t' . doge#helpers#placeholder('description'),
 \      ],
 \      'google': [
-\        '{name} ({type|' . doge#helpers#placeholder('type') . '}#(default|, optional)): TODO',
+\        '{name} ({type|' . doge#helpers#placeholder('type') . '}#(default|, optional)): ' . doge#helpers#placeholder('description'),
 \      ],
 \    },
 \  },
@@ -64,18 +64,18 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'reST': [
 \        '"""',
-\        'TODO',
+\        doge#helpers#placeholder('description'),
 \        '',
 \        '#(parameters|{parameters})',
-\        '#(returnType|:rtype {returnType}: TODO)',
+\        '#(returnType|:rtype {returnType}: ' . doge#helpers#placeholder('description') . ')',
 \        '"""',
 \      ],
 \      'sphinx': [
 \        '"""',
-\        'TODO',
+\        doge#helpers#placeholder('description'),
 \        '',
 \        '#(parameters|{parameters})',
-\        '#(returnType|:return: TODO)',
+\        '#(returnType|:return: ' . doge#helpers#placeholder('description') . ')',
 \        '#(returnType|:rtype: {returnType})',
 \        '"""',
 \      ],
@@ -92,7 +92,7 @@ call add(b:doge_patterns, {
 \        '#(returnType|Returns)',
 \        '#(returnType|-------)',
 \        '#(returnType|{returnType}:)',
-\        '#(returnType|\tTODO)',
+\        '#(returnType|\t' . doge#helpers#placeholder('description') . ')',
 \        '"""',
 \      ],
 \      'google': [
@@ -104,7 +104,7 @@ call add(b:doge_patterns, {
 \        '#(parameters|\t{parameters})',
 \        '#(returnType|)',
 \        '#(returnType|Returns:)',
-\        '#(returnType|\t{returnType}: TODO)',
+\        '#(returnType|\t{returnType}: ' . doge#helpers#placeholder('description') . ')',
 \        '"""',
 \      ],
 \    },

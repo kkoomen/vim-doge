@@ -35,9 +35,9 @@ Expect python (generated comment with Args tags):
       [TODO:description]
       
       Args:
-          p1 ([TODO:type]): TODO
-          p2 ([TODO:type]): TODO
-          p3 ([TODO:type], optional): TODO
+          p1 ([TODO:type]): [TODO:description]
+          p2 ([TODO:type]): [TODO:description]
+          p3 ([TODO:type], optional): [TODO:description]
       """
       pass
 
@@ -58,9 +58,9 @@ Expect python (generated comment with Args tags):
       [TODO:description]
       
       Args:
-          p1 ([TODO:type]): TODO
-          p2 (Callable[[int], None]): TODO
-          p3 (Callable[[int, Exception], None], optional): TODO
+          p1 ([TODO:type]): [TODO:description]
+          p2 (Callable[[int], None]): [TODO:description]
+          p3 (Callable[[int, Exception], None], optional): [TODO:description]
       """
       pass
 
@@ -81,11 +81,11 @@ Expect python (generated comment with Args and Returns tags):
       [TODO:description]
       
       Args:
-          p1 ([TODO:type]): TODO
-          p2 (Callable[[int], None]): TODO
-          p3 (Callable[[int, Exception], None], optional): TODO
+          p1 ([TODO:type]): [TODO:description]
+          p2 (Callable[[int], None]): [TODO:description]
+          p3 (Callable[[int, Exception], None], optional): [TODO:description]
       
       Returns:
-          Sequence[T]: TODO
+          Sequence[T]: [TODO:description]
       """
       pass
