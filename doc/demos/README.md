@@ -4,7 +4,6 @@
   * [PHP](#php)
   * [JavaScript](#javascript)
   * [Python](#python)
-  * [Scala](#scala)
 
 # Demos and supported functionality
 
