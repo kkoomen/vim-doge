@@ -3,23 +3,25 @@
 // =============================================================================
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param text TODO
- * @param node TODO
- * @return TODO
+ * @param text [TODO:description]
+ * @param node [TODO:description]
  */
 void Emitter::append_token(const std::string& text, const AST_Node* node)
 {
   //
 }
 
+/**
+ * [TODO:description]
+ * @return [TODO:description]
+ */
 std::vector<std::string> someFunction();
 
 /**
- * TODO
- *
- * @return TODO
+ * [TODO:description]
+ * @return [TODO:description]
  */
 const next_layer_type& my_func()
 {
@@ -27,10 +29,10 @@ const next_layer_type& my_func()
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param text TODO
- * @return TODO
+ * @param text [TODO:description]
+ * @return [TODO:description]
  */
 lowest_layer_type& my_func(std::string& text)
 {
@@ -38,11 +40,11 @@ lowest_layer_type& my_func(std::string& text)
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param v TODO
- * @param ec TODO
- * @return TODO
+ * @param v [TODO:description]
+ * @param ec [TODO:description]
+ * @return [TODO:description]
  */
 ASIO_SYNC_OP_VOID myFunc(
     verify_mode v, asio::error_code& ec)
@@ -50,19 +52,13 @@ ASIO_SYNC_OP_VOID myFunc(
   //
 }
 
-/**
- * TODO
- *
- * @param line TODO
- * @return TODO
- */
 std::string trimLine(const std::string &line);
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param e TODO
- * @return TODO
+ * @param e [TODO:description]
+ * @return [TODO:description]
  */
 inline project::error_code my_func(ssl_errors e)
 {
@@ -70,11 +66,11 @@ inline project::error_code my_func(ssl_errors e)
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param type TODO
- * @param handler TODO
- * @return TODO
+ * @param type [TODO:description]
+ * @param handler [TODO:description]
+ * @return [TODO:description]
  */
 template <typename HandshakeHandler>
 INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
@@ -84,11 +80,11 @@ myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler)
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param it_begin TODO
- * @param _end TODO
- * @return TODO
+ * @param it_begin [TODO:description]
+ * @param _end [TODO:description]
+ * @return [TODO:description]
  */
 template<typename T>
 Vector(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) {
@@ -96,10 +92,9 @@ Vector(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) {
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param p TODO
- * @return TODO
+ * @param p [TODO:description]
  */
 void f(A* p = this)
 {
@@ -107,11 +102,11 @@ void f(A* p = this)
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param a TODO
- * @param b TODO
- * @return TODO
+ * @param a [TODO:description]
+ * @param b [TODO:description]
+ * @return [TODO:description]
  */
 template <class T>
 T GetMax (T a, T b) {
@@ -121,11 +116,10 @@ T GetMax (T a, T b) {
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param i TODO
- * @param args TODO
- * @return TODO
+ * @param i [TODO:description]
+ * @param args [TODO:description]
  */
 template<class...T> void h(int i = 0, T... args) {
   //
@@ -136,11 +130,11 @@ template<class...T> void h(int i = 0, T... args) {
 // =============================================================================
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param it_begin TODO
- * @param _end TODO
- * @return TODO
+ * @param it_begin [TODO:description]
+ * @param _end [TODO:description]
+ * @return [TODO:description]
  */
 template<auto n>
 auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // test
@@ -149,10 +143,10 @@ auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> st
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param args TODO
- * @return TODO
+ * @param args [TODO:description]
+ * @return [TODO:description]
  */
 template<typename T, typename... Args>
 static T* create(Args&& ... args)
@@ -161,23 +155,23 @@ static T* create(Args&& ... args)
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param args TODO
- * @return TODO
+ * @param args [TODO:description]
+ * @return [TODO:description]
  */
 template<> static T* create(Args&& ... args);
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param j TODO
- * @param val TODO
- * @return TODO
+ * @param j [TODO:description]
+ * @param val [TODO:description]
+ * @return [TODO:description]
  */
 template<typename BasicJsonType, typename ValueType>
-static auto 
-  from_json(BasicJsonType&& j, ValueType& val) 
+static auto
+  from_json(BasicJsonType&& j, ValueType& val)
   noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
 -> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
 {
@@ -185,11 +179,11 @@ static auto
 }
 
 /**
- * TODO
+ * [TODO:description]
  *
- * @param fun TODO
- * @param args TODO
- * @return TODO
+ * @param fun [TODO:description]
+ * @param args [TODO:description]
+ * @return [TODO:description]
  */
 template<class F, class... Args>
 decltype(auto) PerfectForward(F fun, Args&&... args)

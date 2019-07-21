@@ -1,43 +1,49 @@
 ###
-@description TODO
+[TODO:description]
+
 @function myFunc
 ###
 myFunc = () -> x * x
 
 ###
-@description TODO
+[TODO:description]
+
 @function myFunc
-@param {*} x TODO
+@param {[TODO:type]} x [TODO:description]
 ###
 myFunc = (x) -> x * x
 
 ###
-@description TODO
+[TODO:description]
+
 @function myFunc
-@param {*} x TODO
+@param {[TODO:type]} x [TODO:description]
 ###
 myFunc = (x) => x * x
 
 ###
-@description TODO
+[TODO:description]
+
 @function myFunc
-@param {*} p1 TODO
-@param {*} p2 TODO
-@param {*} p3 TODO
+@param {[TODO:type]} p1 [TODO:description]
+@param {[TODO:type]} p2 [TODO:description]
+@param {[TODO:type]} p3 [TODO:description]
 ###
 myFunc = (p1, p2, p3) -> x * x
 
 ###
-@description TODO
+[TODO:description]
+
 @function myFunc
-@param {*} $p1 TODO
-@param {*} $p2 TODO
-@param {*} $p3 TODO
+@param {[TODO:type]} $p1 [TODO:description]
+@param {[TODO:type]} $p2 [TODO:description]
+@param {[TODO:type]} $p3 [TODO:description]
 ###
 myFunc = ($p1, $p2, $p3) => x * x
 
 ###
-@description TODO
+[TODO:description]
+
 @function String#dasherize
 ###
 String::dasherize = ->

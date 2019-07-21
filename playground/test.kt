@@ -7,143 +7,143 @@
 // =============================================================================
 
 /**
- * TODO
- * @param a TODO
- * @param b TODO
- * @return TODO
+ * [TODO:description]
+ * @param a [TODO:description]
+ * @param b [TODO:description]
+ * @return [TODO:description]
  */
 fun sum(a: Int, b: Int): Int {
   return a + b
 }
 
 /**
- * TODO
- * @param a TODO
- * @param b TODO
- * @return TODO
+ * [TODO:description]
+ * @param a [TODO:description]
+ * @param b [TODO:description]
+ * @return [TODO:description]
  */
 fun sum(a: Int, b: Int) = a + b
 
 /**
- * TODO
- * @param a TODO
- * @param b TODO
- * @return TODO
+ * [TODO:description]
+ * @param a [TODO:description]
+ * @param b [TODO:description]
+ * @return [TODO:description]
  */
 fun printSum(a: Int, b: Int) {
   println("sum of $a and $b is ${a + b}")
 }
 
 /**
- * TODO
- * @param map TODO
- * @param str TODO
- * @return TODO
+ * [TODO:description]
+ * @param map [TODO:description]
+ * @param str [TODO:description]
+ * @return [TODO:description]
  */
 fun parseInt(map: MutableMap<String, Any?>, str: String): Int? {}
 
 /**
- * TODO
- * @param i TODO
- * @param lst TODO
- * @param str TODO
- * @param map TODO
- * @param str TODO
- * @return TODO
+ * [TODO:description]
+ * @param i [TODO:description]
+ * @param lst [TODO:description]
+ * @param str [TODO:description]
+ * @param map [TODO:description]
+ * @param str [TODO:description]
+ * @return [TODO:description]
  */
 fun parseInt(i: Int = 0, lst: List<*, <T>>, str: String.() -> Unit, map: MutableMap<String, Any?>, str: List<String, <T>>): Int? {}
 
 /**
- * TODO
- * @param json TODO
- * @return TODO
+ * [TODO:description]
+ * @param json [TODO:description]
+ * @return [TODO:description]
  */
 inline fun <reified T: Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java) {}
 
 /**
- * TODO
- * @param onetime TODO
- * @param callback TODO
- * @return TODO
+ * [TODO:description]
+ * @param onetime [TODO:description]
+ * @param callback [TODO:description]
+ * @return [TODO:description]
  */
 fun listenForPackageChanges(onetime: Int = true, callback: () -> Unit): Int? = object : BroadcastReceiver() {
 
 /**
- * TODO
- * @return TODO
+ * [TODO:description]
+ * @return [TODO:description]
  */
 inline fun <reified T : Enum<T>> printAllValues() {
   print(enumValues<T>().joinToString { it.name })
 }
 
 /**
- * TODO
- * @param x TODO
- * @return TODO
+ * [TODO:description]
+ * @param x [TODO:description]
+ * @return [TODO:description]
  */
 fun <T> id(x: T): T = x
 
 /**
- * TODO
- * @param i TODO
- * @return TODO
+ * [TODO:description]
+ * @param i [TODO:description]
+ * @return [TODO:description]
  */
 open data fun asNullable(i: Foo?) {}
 
 /**
- * TODO
- * @param x TODO
- * @return TODO
+ * [TODO:description]
+ * @param x [TODO:description]
+ * @return [TODO:description]
  */
 fun demo(x: Comparable<Number>) {}
 
 /**
- * TODO
- * @param group TODO
- * @param user TODO
- * @param test TODO
- * @return TODO
+ * [TODO:description]
+ * @param group [TODO:description]
+ * @param user [TODO:description]
+ * @param test [TODO:description]
+ * @return [TODO:description]
  */
 fun readStar(group: Group<*>, user: User<*>, test: Boolean) {}
 
 /**
- * TODO
- * @param group TODO
- * @return TODO
+ * [TODO:description]
+ * @param group [TODO:description]
+ * @return [TODO:description]
  */
 fun readOut(group: Group<out Animal>) {}
 
 /**
- * TODO
- * @param group TODO
- * @return TODO
+ * [TODO:description]
+ * @param group [TODO:description]
+ * @return [TODO:description]
  */
 fun readIn(group: Group<in Nothing>) {}
 
 /**
- * TODO
- * @param list TODO
- * @return TODO
+ * [TODO:description]
+ * @param list [TODO:description]
+ * @return [TODO:description]
  */
 fun acceptAnyList(list: List<Any?>) {}
 
 /**
- * TODO
- * @param from TODO
- * @param to TODO
- * @return TODO
+ * [TODO:description]
+ * @param from [TODO:description]
+ * @param to [TODO:description]
+ * @return [TODO:description]
  */
 fun copy(from: Array<Any>, to: Array<Any>) {}
 
 // =============================================================================
 // Functions: visibility modifiers
 // =============================================================================
-// Options: public | protected | private | inline 
+// Options: public | protected | private | inline
 
 /**
- * TODO
- * @param list TODO
- * @return TODO
+ * [TODO:description]
+ * @param list [TODO:description]
+ * @return [TODO:description]
  */
 private fun foo(list: List<Any?>) {}
 
@@ -151,48 +151,48 @@ private fun foo(list: List<Any?>) {}
 // Extension Functions
 // =============================================================================
 /**
- * TODO
- * @param index1 TODO
- * @param index2 TODO
- * @return TODO
+ * [TODO:description]
+ * @param index1 [TODO:description]
+ * @param index2 [TODO:description]
+ * @return [TODO:description]
  */
 fun <T> MutableList<Int>.swap(index1: Int, index2: Int) {}
 
 /**
- * TODO
- * @param index1 TODO
- * @param index2 TODO
- * @return TODO
+ * [TODO:description]
+ * @param index1 [TODO:description]
+ * @param index2 [TODO:description]
+ * @return [TODO:description]
  */
 fun MutableList<Int>.swap(index1: Int, index2: Int) {}
 
 /**
- * TODO
- * @param index1 TODO
- * @param index2 TODO
- * @return TODO
+ * [TODO:description]
+ * @param index1 [TODO:description]
+ * @param index2 [TODO:description]
+ * @return [TODO:description]
  */
 fun <T> MutableList.swap(index1: Int, index2: Int) {}
 
 /**
- * TODO
- * @param index1 TODO
- * @param index2 TODO
- * @return TODO
+ * [TODO:description]
+ * @param index1 [TODO:description]
+ * @param index2 [TODO:description]
+ * @return [TODO:description]
  */
 fun MutableList.swap(index1: Int, index2: Int) {}
 
 /**
- * TODO
- * @param index1 TODO
- * @param index2 TODO
- * @return TODO
+ * [TODO:description]
+ * @param index1 [TODO:description]
+ * @param index2 [TODO:description]
+ * @return [TODO:description]
  */
 fun <T> MutableList<T>.swap(index1: Int, index2: Int) {}
 
 /**
- * TODO
- * @return TODO
+ * [TODO:description]
+ * @return [TODO:description]
  */
 fun Any?.toString(): String {
   if (this == null) return "null"
@@ -205,28 +205,28 @@ fun Any?.toString(): String {
 // Classes: Implementation by Delegation
 // =============================================================================
 /**
- * TODO
- * @property b TODO
+ * [TODO:description]
+ * @property b [TODO:description]
  */
 class Derived(b: Base) : Base by b
 
 class Delegate {
   /**
-   * TODO
-   * @property thisRef TODO
-   * @property property TODO
-   * @return TODO
+   * [TODO:description]
+   * @property thisRef [TODO:description]
+   * @property property [TODO:description]
+   * @return [TODO:description]
    */
   operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
     return "$thisRef, thank you for delegating '${property.name}' to me!"
   }
 
   /**
-   * TODO
-   * @param thisRef TODO
-   * @param property TODO
-   * @param value TODO
-   * @return TODO
+   * [TODO:description]
+   * @param thisRef [TODO:description]
+   * @param property [TODO:description]
+   * @param value [TODO:description]
+   * @return [TODO:description]
    */
   operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
     println("$value has been assigned to '${property.name}' in $thisRef.")
@@ -234,8 +234,8 @@ class Delegate {
 }
 
 /**
- * TODO
- * @property map TODO
+ * [TODO:description]
+ * @property map [TODO:description]
  */
 class MutableUser(val map: MutableMap<String, Any?>) {
   var name: String by map
@@ -244,24 +244,24 @@ class MutableUser(val map: MutableMap<String, Any?>) {
 
 class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {
   /**
-   * TODO
-   * @param thisRef TODO
-   * @param property TODO
-   * @return TODO
+   * [TODO:description]
+   * @param thisRef [TODO:description]
+   * @param property [TODO:description]
+   * @return [TODO:description]
    */
   override fun getValue(thisRef: MyUI, property: KProperty<*>): T {}
 }
 
 /**
- * TODO
- * @property id TODO
+ * [TODO:description]
+ * @property id [TODO:description]
  */
 class ResourceLoader<T>(id: ResourceID<T>) {
   /**
-   * TODO
-   * @param thisRef TODO
-   * @param prop TODO
-   * @return TODO
+   * [TODO:description]
+   * @param thisRef [TODO:description]
+   * @param prop [TODO:description]
+   * @return [TODO:description]
    */
   operator fun provideDelegate(
       thisRef: MyUI,
@@ -273,19 +273,19 @@ class ResourceLoader<T>(id: ResourceID<T>) {
   }
 
   /**
-   * TODO
-   * @param thisRef TODO
-   * @param name TODO
-   * @return TODO
+   * [TODO:description]
+   * @param thisRef [TODO:description]
+   * @param name [TODO:description]
+   * @return [TODO:description]
    */
   private fun checkProperty(thisRef: MyUI, name: String) {}
 }
 
 class MyUI {
   /**
-   * TODO
-   * @param id TODO
-   * @return TODO
+   * [TODO:description]
+   * @param id [TODO:description]
+   * @return [TODO:description]
    */
   fun <T> bindResource(id: ResourceID<T>): ResourceLoader<T> {}
 
@@ -301,8 +301,8 @@ class MyClass {
 }
 
 /**
- * TODO
- * @return TODO
+ * [TODO:description]
+ * @return [TODO:description]
  */
 fun MyClass.Companion.foo() {}
 
@@ -310,16 +310,16 @@ fun MyClass.Companion.foo() {}
 // Inline classes
 // =============================================================================
 /**
- * TODO
- * @property s TODO
+ * [TODO:description]
+ * @property s [TODO:description]
  */
 inline class Name(val s: String) {
   val length: Int
   get() = s.length
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun greet() {
     println("Hello, $s")
@@ -330,9 +330,9 @@ inline class Name(val s: String) {
 // Data classes
 // =============================================================================
 /**
- * TODO
- * @property name TODO
- * @property age TODO
+ * [TODO:description]
+ * @property name [TODO:description]
+ * @property age [TODO:description]
  */
 data class User(val name: String, val age: Int)
 
@@ -343,8 +343,8 @@ class Outer {
   private val bar: Int = 1
   inner class Inner {
     /**
-     * TODO
-     * @return TODO
+     * [TODO:description]
+     * @return [TODO:description]
      */
     fun foo() = bar
   }
@@ -354,8 +354,8 @@ class Outer {
 // Enum classes
 // =============================================================================
 /**
- * TODO
- * @property rgb TODO
+ * [TODO:description]
+ * @property rgb [TODO:description]
  */
 enum class Color(val rgb: Int) {
   RED(0xFF0000),
@@ -369,20 +369,20 @@ enum class RGB { RED, GREEN, BLUE }
 // Classes: primary constructors
 // =============================================================================
 /**
- * TODO
- * @property firstName TODO
+ * [TODO:description]
+ * @property firstName [TODO:description]
  */
 class Person constructor(firstName: String) {}
 
 /**
- * TODO
- * @property a TODO
+ * [TODO:description]
+ * @property a [TODO:description]
  */
 class C private constructor(a: Int) {}
 
 /**
- * TODO
- * @property firstName TODO
+ * [TODO:description]
+ * @property firstName [TODO:description]
  */
 class Person(firstName: String) {}
 
@@ -391,10 +391,10 @@ class Person(firstName: String) {}
 // =============================================================================
 class Person {
   /**
-   * TODO
-   * @param parent TODO
-   * @param query TODO
-   * @param users TODO
+   * [TODO:description]
+   * @param parent [TODO:description]
+   * @param query [TODO:description]
+   * @param users [TODO:description]
    */
   constructor(parent: Person, query: Query<*, <T>>, users: List<User>) {
     parent.children.add(this)
@@ -402,14 +402,14 @@ class Person {
 }
 
 /**
- * TODO
- * @property name TODO
+ * [TODO:description]
+ * @property name [TODO:description]
  */
 class Person(val name: String) {
   /**
-   * TODO
-   * @param name TODO
-   * @param parent TODO
+   * [TODO:description]
+   * @param name [TODO:description]
+   * @param parent [TODO:description]
    */
   constructor(name: String, parent: Person) : this(name) {
     parent.children.add(this)
@@ -421,15 +421,15 @@ class Person(val name: String) {
 // =============================================================================
 class MyView : View {
   /**
-   * TODO
-   * @param ctx TODO
+   * [TODO:description]
+   * @param ctx [TODO:description]
    */
   protected constructor(ctx: Context) : super(ctx)
 
   /**
-   * TODO
-   * @param ctx TODO
-   * @param attrs TODO
+   * [TODO:description]
+   * @param ctx [TODO:description]
+   * @param attrs [TODO:description]
    */
   constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs)
 }
@@ -439,17 +439,17 @@ class MyView : View {
 // =============================================================================
 
 /**
- * TODO
- * @property name TODO
- * @property color TODO
- * @property weight TODO
+ * [TODO:description]
+ * @property name [TODO:description]
+ * @property color [TODO:description]
+ * @property weight [TODO:description]
  */
 abstract class Vehicle(val name: String, val color: String, val weight: Double) {
   /**
-   * TODO
-   * @param t TODO
-   * @param u TODO
-   * @return TODO
+   * [TODO:description]
+   * @param t [TODO:description]
+   * @param u [TODO:description]
+   * @return [TODO:description]
    */
   abstract fun signal(t: Int, u: Int) = apply(t, u)
 }
@@ -459,47 +459,47 @@ abstract class Vehicle(val name: String, val color: String, val weight: Double) 
 // =============================================================================
 class Bar2 : Foo {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   override fun v() {}
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   final override fun v() {}
 }
 
 open class Base {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   open fun v() {}
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun nv() {}
 }
 
 /**
- * TODO
+ * [TODO:description]
  */
 class Derived() : Base() {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   override fun v() {}
 }
 
 open class Foo {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   open fun f() { println("Foo.f()") }
 
@@ -508,8 +508,8 @@ open class Foo {
 
 class Bar : Foo() {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   override fun f() {
     super.f()
@@ -524,30 +524,30 @@ class Bar : Foo() {
 // =============================================================================
 interface A {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun foo() { print("A") }
 }
 
 interface B {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun foo() { print("B") }
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   fun bar() { print("bar") }
 }
 
 class D : A, B {
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   override fun foo() {
     super<A>.foo()
@@ -555,8 +555,8 @@ class D : A, B {
   }
 
   /**
-   * TODO
-   * @return TODO
+   * [TODO:description]
+   * @return [TODO:description]
    */
   override fun bar() {
     super<B>.bar()
@@ -564,6 +564,6 @@ class D : A, B {
 }
 
 /**
- * TODO
+ * [TODO:description]
  */
 external class MyClass() {}

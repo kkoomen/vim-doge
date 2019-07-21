@@ -2,41 +2,41 @@
 # Functions
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-#' TODO
+#' [TODO:description]
 #'
-#' @return TODO
+#' @return [TODO:description]
 #' @export
 #'
 #' @examples
-#' TODO
+#' [TODO:example]
 myFunc = function() {
   # ...
 }
 
-#' TODO
+#' [TODO:description]
 #'
-#' @return TODO
+#' @return [TODO:description]
 #' @export
 #'
 #' @examples
-#' TODO
+#' [TODO:example]
 myFunc <- function() {
   # ...
 }
 
 
-#' TODO
+#' [TODO:description]
 #'
-#' @param p1 TODO
-#' @param p2.sub1 TODO
-#' @param p3.sub1 TODO
-#' @param p4.sub1 TODO
+#' @param p1 [TODO:description]
+#' @param p2.sub1 [TODO:description]
+#' @param p3.sub1 [TODO:description]
+#' @param p4.sub1 [TODO:description]
 #'
-#' @return TODO
+#' @return [TODO:description]
 #' @export
 #'
 #' @examples
-#' TODO
+#' [TODO:example]
 myFunc.default <- function(
   p1,
   p2.sub1 = FALSE,
@@ -47,24 +47,24 @@ myFunc.default <- function(
   # ...
 }
 
-#' TODO
+#' [TODO:description]
 #'
-#' @param p1 TODO
-#' @param p2_sub1 TODO
-#' @param p3 TODO
-#' @param p4 TODO
-#' @param p5 TODO
-#' @param p7 TODO
-#' @param p8 TODO
-#' @param p9 TODO
-#' @param p10 TODO
-#' @param p11 TODO
+#' @param p1 [TODO:description]
+#' @param p2_sub1 [TODO:description]
+#' @param p3 [TODO:description]
+#' @param p4 [TODO:description]
+#' @param p5 [TODO:description]
+#' @param p7 [TODO:description]
+#' @param p8 [TODO:description]
+#' @param p9 [TODO:description]
+#' @param p10 [TODO:description]
+#' @param p11 [TODO:description]
 #'
-#' @return TODO
+#' @return [TODO:description]
 #' @export
 #'
 #' @examples
-#' TODO
+#' [TODO:example]
 myFunc = function(
   p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
   p4 = 'libs', p5 = NULL, ..., p7 = 'default',

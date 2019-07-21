@@ -1,57 +1,57 @@
 #!/usr/bin/env ruby
 
-# TODO
-# @param p1 [type] TODO
-# @param p_2 [type] TODO
+# [TODO:description]
+# @param p1 [[TODO:type]] [TODO:description]
+# @param p_2 [[TODO:type]] [TODO:description]
 def myFunc(p1, p_2 = some_default_value)
 end
 
-# TODO
-# @param format [type] TODO
+# [TODO:description]
+# @param format [[TODO:type]] [TODO:description]
 def myFunc (format = :html)
 end
 
-# TODO
-# @param p1 [type] TODO
-# @param p2 [type] TODO
-# @param p3 [type] TODO
+# [TODO:description]
+# @param p1 [[TODO:type]] [TODO:description]
+# @param p2 [[TODO:type]] [TODO:description]
+# @param p3 [[TODO:type]] [TODO:description]
 def parameters (p1,p2=4, p3*)
 end
 
-# TODO
-# @param options [type] TODO
+# [TODO:description]
+# @param options [[TODO:type]] [TODO:description]
 def my_func(options = nil)
 end
 
 module ClassMethods
-  # TODO
+  # [TODO:description]
   def initialize(*)
   end
 
   private
-    # TODO
-    # @param name [type] TODO
+    # [TODO:description]
+    # @param name [[TODO:type]] [TODO:description]
     def define_method_attribute=(name)
     end
 
-    # TODO
-    # @param other [type] TODO
+    # [TODO:description]
+    # @param other [[TODO:type]] [TODO:description]
     def copy!(other)
     end
 
-    # TODO
-    # @param attribute [type] TODO
-    # @param type [type] TODO
-    # @param options [type] TODO
+    # [TODO:description]
+    # @param attribute [[TODO:type]] [TODO:description]
+    # @param type [[TODO:type]] [TODO:description]
+    # @param options [[TODO:type]] [TODO:description]
     def where(attribute, type = nil, **options)
     end
 
-    # TODO
-    # @param attribute [type] TODO
+    # [TODO:description]
+    # @param attribute [[TODO:type]] [TODO:description]
     def [](attribute)
     end
 
-    # TODO
-    # @param block [type] TODO
+    # [TODO:description]
+    # @param block [[TODO:type]] [TODO:description]
     def each(&block)
     end

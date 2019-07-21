@@ -2,31 +2,31 @@
 // Functions
 // =============================================================================
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Int TODO
- * @return TODO
+ * @param x Int [TODO:description]
+ * @return [TODO:description]
  */
 (x: Int) => x + 1
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Int TODO
- * @return TODO
+ * @param x Int [TODO:description]
+ * @return [TODO:description]
  */
 val addOne = (x: Int) => x + 1
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Int TODO
- * @param y Int TODO
- * @return TODO
+ * @param x Int [TODO:description]
+ * @param y Int [TODO:description]
+ * @return [TODO:description]
  */
 val add = (x: Int, y: Int) => x + y
 
-/** TODO
+/** [TODO:description]
  *
- * @return TODO
+ * @return [TODO:description]
  */
 val getTheAnswer = () => 42
 
@@ -34,10 +34,10 @@ val getTheAnswer = () => 42
 // Methods
 // =============================================================================
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Double TODO
- * @param y Double TODO
+ * @param x Double [TODO:description]
+ * @param y Double [TODO:description]
  */
 class Point(val x: Double = 0, val y: Double = 0) {
   override def toString: String =
@@ -45,35 +45,35 @@ class Point(val x: Double = 0, val y: Double = 0) {
   private def printWarning = println("WARNING: Out of bounds")
 }
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Int TODO
- * @param y Int TODO
- * @return TODO
+ * @param x Int [TODO:description]
+ * @param y Int [TODO:description]
+ * @return [TODO:description]
  */
 def add(x: Int, y: Int): Int = x + y
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Int TODO
- * @param y Int TODO
- * @param multiplier Int TODO
- * @return TODO
+ * @param x Int [TODO:description]
+ * @param y Int [TODO:description]
+ * @param multiplier Int [TODO:description]
+ * @return [TODO:description]
  */
 def addThenMultiply(x: Int, y: Int)(multiplier: Int): Int = (x + y) * multiplier
 
-/** TODO
+/** [TODO:description]
  *
- * @param input Double TODO
- * @return TODO
+ * @param input Double [TODO:description]
+ * @return [TODO:description]
  */
 def getSquareString(input: Double): String = {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param ssl Boolean TODO
- * @param domainName String TODO
- * @return TODO
+ * @param ssl Boolean [TODO:description]
+ * @param domainName String [TODO:description]
+ * @return [TODO:description]
  */
 def urlBuilder(ssl: Boolean = true, domainName: String = "some domain value"): (String, String) => String = {
   val schema = if (ssl) "https://" else "http://"
@@ -86,51 +86,51 @@ def curryBinaryOperator[A](User: user, name: String, operator: (A, A) => A): (A,
 
 def foldLeft[B](z: B)(op: (B, A) => B): B = {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param args Array[String] TODO
- * @return TODO
+ * @param args Array[String] [TODO:description]
+ * @return [TODO:description]
  */
 def main(args: Array[String]): Unit =
   println("Hello, Scala developer!")
 
 def foldLeft[B](z: B)(op: (B, A) => B): (B, A) => (A) = {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param dx Int TODO
- * @param dy Int TODO
- * @return TODO
+ * @param dx Int [TODO:description]
+ * @param dy Int [TODO:description]
+ * @return [TODO:description]
  */
 def move(dx: Int, dy: Int): Unit = {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param p any TODO
+ * @param p {type} [TODO:description]
  */
 class name(p) extends A with B {
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Int TODO
-   * @param y Int TODO
-   * @return TODO
+   * @param x Int [TODO:description]
+   * @param y Int [TODO:description]
+   * @return [TODO:description]
    */
   override def add(x: Int, y: Int): Int = x + y
 
-  /** TODO
+  /** [TODO:description]
    *
-   * @param x Int TODO
-   * @param y Int TODO
-   * @return TODO
+   * @param x Int [TODO:description]
+   * @param y Int [TODO:description]
+   * @return [TODO:description]
    */
   override private def add(x: Int, y: Int): Int = x + y
 }
 
 
-/** TODO
+/** [TODO:description]
  *
- * @param newValue Int TODO
- * @return TODO
+ * @param newValue Int [TODO:description]
+ * @return [TODO:description]
  */
 def x_ = (newValue: Int): Unit = {}
 
@@ -138,36 +138,33 @@ def x_ = (newValue: Int): Unit = {}
 // Classes, Objects & Traits
 // =============================================================================
 
-// TODO: ^(?:package\s+)?(?:(?:public|private|protected)\s+)?(?:case\s+)?(?:trait|object|class)\s+([a-zA-Z0-9_]+)(?:\[.*\])?(?:\((.*?)\))?[^{]+{
-// [ funcName, parameters ]
-
 // classes
 class Test {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param prefix String TODO
- * @param suffix String TODO
+ * @param prefix String [TODO:description]
+ * @param suffix String [TODO:description]
  */
 class Greeter(prefix: String, suffix: String) {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param amount_msat Long TODO
+ * @param amount_msat Long [TODO:description]
  */
 private case class GUISat(amount_msat: Long) extends BtcAmountGUILossless {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param name String TODO
- * @param age Int TODO
+ * @param name String [TODO:description]
+ * @param age Int [TODO:description]
  */
 protected case class LoremIpsum(name: String, age: Int) extends B with C with D {}
 
-/** TODO
+/** [TODO:description]
  *
- * @param x Int TODO
- * @param y Int TODO
+ * @param x Int [TODO:description]
+ * @param y Int [TODO:description]
  */
 case class Point(x: Int, y: Int) {}
 
@@ -179,10 +176,10 @@ package object mypackage {}
 
 // Traits
 trait Greeter {
-  /** TODO
+  /** [TODO:description]
    *
-   * @param name String TODO
-   * @return TODO
+   * @param name String [TODO:description]
+   * @return [TODO:description]
    */
   def greet(name: String): Unit =
     println("Hello, " + name + "!")
@@ -190,21 +187,21 @@ trait Greeter {
 
 trait Iterator[A] {
   def hasNext: Boolean
-  /** TODO
+  /** [TODO:description]
    *
-   * @return TODO
+   * @return [TODO:description]
    */
   def next(): A
 }
 
-/** TODO
+/** [TODO:description]
  *
- * @param to Int TODO
+ * @param to Int [TODO:description]
  */
 class IntIterator(to: Int) extends Iterator[Int] {
-  /** TODO
+  /** [TODO:description]
    *
-   * @return TODO
+   * @return [TODO:description]
    */
   override def next(): Int =  {
     if (hasNext) {
@@ -220,13 +217,14 @@ trait Pet {
   val name: String
 }
 
-/** TODO
+/** [TODO:description]
  *
- * @param name String TODO
+ * @param name String [TODO:description]
  */
 class Cat(val name: String) extends Pet
-/** TODO
+
+/** [TODO:description]
  *
- * @param name String TODO
+ * @param name String [TODO:description]
  */
 class Dog(val name: String) extends Pet
