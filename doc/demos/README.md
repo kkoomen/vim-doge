@@ -18,7 +18,7 @@ Supported:
 - Class methods
 - Functions
 
-[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-php.gif)
+[![Demo PHP](https://asciinema.org/a/OvTglKYTEH0FiYKQO3X0H23oB.svg)](https://asciinema.org/a/OvTglKYTEH0FiYKQO3X0H23oB)
 
 ## JavaScript
 
@@ -38,7 +38,7 @@ Supported:
 
 All of the above is _also_ supported for TypeScript and NodeJS.
 
-[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-javascript.gif)
+[![Demo JavaScript](https://asciinema.org/a/KUvRSPGyFVI0dKsblEa41RG3x.svg)](https://asciinema.org/a/KUvRSPGyFVI0dKsblEa41RG3x)
 
 ## Python
 
@@ -51,13 +51,4 @@ Supported:
   - Google
 - Python 3.7+ type hints
 
-[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-python.gif)
-
-## Scala
-
-Supported:
-- Functions
-- Methods
-- Classes
-
-[Demo](https://vdoge.kimkoomen.nl/demos/doge-demo-scala.gif)
+[![Demo Python](https://asciinema.org/a/QKwuUrZphWPD6eZ3mowumkA1O.svg)](https://asciinema.org/a/QKwuUrZphWPD6eZ3mowumkA1O)

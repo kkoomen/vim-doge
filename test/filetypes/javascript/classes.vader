@@ -13,13 +13,13 @@ Do (trigger doge):
 
 Expect javascript (generated comment with nothing but the text 'TODO'):
   /**
-   * TODO
+   * [TODO:description]
    *
    */
   class Child {}
 
   /**
-   * TODO
+   * [TODO:description]
    *
    */
   export class Child {}
@@ -39,14 +39,14 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @extends):
   /**
-   * TODO
+   * [TODO:description]
    *
    * @extends Parent
    */
   class Child extends Parent {}
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @extends Parent
    */
@@ -67,14 +67,14 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @implements tag):
   /**
-   * TODO
+   * [TODO:description]
    *
    * @implements CustomInterfaceName
    */
   class Child implements CustomInterfaceName {}
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @implements CustomInterfaceName
    */
@@ -95,7 +95,7 @@ Do (trigger doge):
 
 Expect javascript (generated comment with @extends and @implements tags):
   /**
-   * TODO
+   * [TODO:description]
    *
    * @extends Parent
    * @implements CustomInterfaceName
@@ -103,7 +103,7 @@ Expect javascript (generated comment with @extends and @implements tags):
   class Child extends Parent implements CustomInterfaceName {}
 
   /**
-   * TODO
+   * [TODO:description]
    *
    * @extends Parent
    * @implements CustomInterfaceName
