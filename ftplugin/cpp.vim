@@ -1,5 +1,5 @@
 " ==============================================================================
-" The C++ documentation should follow the 'Doxygen' conventions.
+" The C documentation should follow the 'Doxygen' conventions.
 " see http://www.doxygen.nl/manual/docblocks.html
 " ==============================================================================
 
