@@ -23,7 +23,7 @@ let b:doge_patterns = []
 
 " Matches the following pattern:
 "   const? <param-type> <param-name>
-let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\{-})\|[[:alnum:]_:&*.]\+\%(<[[:alnum:][:space:]_(),]\+>\%([[:alnum:]_:&*.]\+\)*\)*\)\s\+\)&\?\([[:alnum:]_]\+\)'
+let s:parameters_match_pattern = '\m\%(\%([[:alnum:]_]\)\+\s\+\**\)\([[:alnum:]_]\)\+'
 
 " ==============================================================================
 " Matches regular functions.
@@ -42,7 +42,7 @@ let s:parameters_match_pattern = '\m\%(\%(const\)\s\+\)\?\%(\%([[:alnum:]_]\+(.\
 "   template<typename T, typename... Args>
 "   static T* create(Args&& ... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\(\(static\|extern\|[[:alnum:]_]\+\)[[:space:]_]\?\)\+\**\)(\%([[:print:]_]*\))[[:space:]_]*{',
+\  'match': '\m^\(\%(\%(static\|extern\|[[:alnum:]_]\+\|\**\)[[:space:]_]\?\)\+\)(\(.\{-}\))\s*[;{]',
 \  'match_group_names': ['returnType', 'parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
