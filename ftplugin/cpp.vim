@@ -78,7 +78,7 @@ call add(b:doge_patterns, {
 "   template<typename T, typename... Args>
 "   static T* create(Args&& ... args) {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]*>\|const\|inline\)\s\+\)\?\%(static\s\+\)\?\([[:alnum:]_:&*]\+\s*\%(<[[:alnum:][:space:]_<>.,:]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*[;{]',
+\  'match': '\m^\%(\%(template\s*<[[:alnum:][:space:]_<>.,]*>\|const\|inline\)\s\+\)*\%(static\s\+\)\?\([[:alnum:]_:&*]\+\s*\%(<[[:alnum:][:space:]_<>.,:]\+>\)\?\|[[:alnum:]_]\+(.\{-})\)\s\+\%([[:alnum:]_:]\+\)\s*(\(.\{-}\))\s*[;{]',
 \  'match_group_names': ['returnType', 'parameters'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
