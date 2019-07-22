@@ -43,7 +43,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'doxygen': '@param {name} [TODO:description]',
+\      'doxygen': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -51,10 +51,10 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'doxygen': [
 \        '/**',
-\        ' * [TODO:description]',
+\        ' * !description',
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return [TODO:description])',
+\        '#(returnType| * @return !description)',
 \        ' */',
 \      ],
 \    },
@@ -84,7 +84,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name'],
 \    'format': {
-\      'doxygen': '@param {name} [TODO:description]',
+\      'doxygen': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -92,10 +92,10 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'doxygen': [
 \        '/**',
-\        ' * [TODO:description]',
+\        ' * !description',
 \        '#(parameters| *)',
 \        '#(parameters| * {parameters})',
-\        '#(returnType| * @return [TODO:description])',
+\        '#(returnType| * @return !description)',
 \        ' */',
 \      ],
 \    },
