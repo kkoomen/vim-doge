@@ -26,6 +26,46 @@ let b:doge_patterns = []
 let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?'
 
 " ==============================================================================
+" Matches fat-arrow / functions inside objects.
+" ==============================================================================
+"
+" Matches the following scenarios:
+"
+"   myKey: function myRealFunction(p1, p2) {}
+"
+"   myKey: async function myRealFunction(p1, p2) {}
+"
+"   myKey: (p1, p2) => {}
+"
+"   myKey: async (p1, p2) => {}
+call add(b:doge_patterns, {
+\  'match': '\m^[[:punct:]]\?\([[:alnum:]_-]\+\)[[:punct:]]\?\s*:\s*\(async\)\?\s*\%(function\)\?\s*\%([[:alnum:]_]\+\)\?(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\%(\s*=>\s*\)\?\s*[({]',
+\  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],
+\  'parameters': {
+\    'match': s:parameters_match_pattern,
+\    'match_group_names': ['name', 'type'],
+\    'format': {
+\      'jsdoc': '@param {{type|!type}} {name} !description',
+\    },
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'template': {
+\      'jsdoc': [
+\        '/**',
+\        ' * !description',
+\        ' *',
+\        '#(async| * @{async})',
+\        ' * @function {funcName|}',
+\        '#(parameters| * {parameters})',
+\        '#(returnType| * @return {{returnType}} !description)',
+\        ' */',
+\      ],
+\    },
+\  },
+\})
+
+" ==============================================================================
 " Matches class declarations.
 " ==============================================================================
 "

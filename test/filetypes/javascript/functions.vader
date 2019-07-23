@@ -7,7 +7,7 @@ Given javascript (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description tag):
+Expect javascript (generated comment with nothing but the text 'TODO'):
   /**
    * [TODO:description]
    *
@@ -227,7 +227,7 @@ Expect javascript (generated comment with @description and @param tags):
   function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
-# Async generator functions with parameters without typehints.
+# Async generator functions with parameters without type-hints.
 # ==============================================================================
 Given javascript (async generator function with parameters without type hints):
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}

@@ -1,0 +1,89 @@
+# ==============================================================================
+# Anonymous functions inside objects without parameters.
+# ==============================================================================
+Given javascript (anonymous function inside object without parameters):
+  var myObj = {
+    myFunc: function(/* inline comment */) {
+      //
+    },
+    myArrowFunc: (/* inline comment */) => {
+      //
+    },
+  };
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with nothing but the text 'TODO' and @function tag):
+  var myObj = {
+    /**
+     * [TODO:description]
+     *
+     * @function myFunc
+     */
+    myFunc: function(/* inline comment */) {
+      //
+    },
+    /**
+     * [TODO:description]
+     *
+     * @function myArrowFunc
+     */
+    myArrowFunc: (/* inline comment */) => {
+      //
+    },
+  };
+
+
+# ==============================================================================
+# Async named functions with parameters without type hints.
+# ==============================================================================
+
+Given javascript (functions with punctation with parameters without type hints):
+  var myObj = {
+    'my-func': async function test($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) {
+      //
+    },
+    'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) => {
+      //
+    },
+  };
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :15\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @async, @function and @param tags):
+  var myObj = {
+    /**
+     * [TODO:description]
+     *
+     * @async
+     * @function my-func
+     * @param {string} $p1 [TODO:description]
+     * @param {array} p2 [TODO:description]
+     * @param {[TODO:type]} p3 [TODO:description]
+     * @param {[TODO:type]} p4 [TODO:description]
+     */
+    'my-func': async function test($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) {
+      //
+    },
+    /**
+     * [TODO:description]
+     *
+     * @async
+     * @function my-arrow-func
+     * @param {string} $p1 [TODO:description]
+     * @param {array} p2 [TODO:description]
+     * @param {[TODO:type]} p3 [TODO:description]
+     * @param {[TODO:type]} p4 [TODO:description]
+     */
+    'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) => {
+      //
+    },
+  };

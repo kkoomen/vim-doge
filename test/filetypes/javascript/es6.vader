@@ -7,7 +7,7 @@ Given javascript (fat-arrow function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description @function tags):
+Expect javascript (generated comment with the 'TODO' text and @function tags):
   /**
    * [TODO:description]
    *
