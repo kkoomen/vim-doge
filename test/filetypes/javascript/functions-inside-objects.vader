@@ -39,15 +39,15 @@ Expect javascript (generated comment with nothing but the text 'TODO' and @funct
 
 
 # ==============================================================================
-# Async named functions with parameters without type hints.
+# Async named functions with parameters with/without type hints.
 # ==============================================================================
 
-Given javascript (functions with punctation with parameters without type hints):
+Given javascript (functions with punctation with parameters with/without type hints):
   var myObj = {
     'my-func': async function test($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) {
       //
     },
-    'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) => {
+    'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */): ( 1 | 2 | 3 ) => {
       //
     },
   };
@@ -82,8 +82,9 @@ Expect javascript (generated comment with @async, @function and @param tags):
      * @param {array} p2 [TODO:description]
      * @param {[TODO:type]} p3 [TODO:description]
      * @param {[TODO:type]} p4 [TODO:description]
+     * @return {1|2|3} [TODO:description]
      */
-    'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) => {
+    'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */): ( 1 | 2 | 3 ) => {
       //
     },
   };
