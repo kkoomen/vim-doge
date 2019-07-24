@@ -286,7 +286,7 @@ fails to capture a value. Example: `{type|}`. This will result in:
 
 #### Conditional rendering
 
-The syntax for a conditional render is `#(<token>|<value>)` where `<token>` is
+The syntax for a conditional render is `%(<token>|<value>)%` where `<token>` is
 the name of the token and `<value>` the value you want to render when `<token>`
 is _not empty_.
 
@@ -303,10 +303,10 @@ call add(b:doge_patterns, {
 \      'numpy': [
 \        '"""',
 \        '!description',
-\        '#(parameters|)',              " Render an empty line if '{parameters}' is not empty
-\        '#(parameters|Parameters)',    " Renders 'Parameters' if '{parameters}' is not empty
-\        '#(parameters|----------)',    " Renders '----------' if '{parameters}' is not empty
-\        '#(parameters|{parameters})',  " Renders '{parameters}' if '{parameters}' is not empty
+\        '%(parameters|)%',              " Render an empty line if '{parameters}' is not empty
+\        '%(parameters|Parameters)%',    " Renders 'Parameters' if '{parameters}' is not empty
+\        '%(parameters|----------)%',    " Renders '----------' if '{parameters}' is not empty
+\        '%(parameters|{parameters})%',  " Renders '{parameters}' if '{parameters}' is not empty
 \        '"""',
 \      ],
 \    }

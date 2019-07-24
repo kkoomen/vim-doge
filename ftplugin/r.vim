@@ -60,8 +60,8 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'roxygen2': [
 \        "#' !description",
-\        "#(parameters|#')",
-\        "#(parameters|#' {parameters})",
+\        "%(parameters|#')%",
+\        "%(parameters|#' {parameters})%",
 \        "#'",
 \        "#' @return !description",
 \        "#' @export",

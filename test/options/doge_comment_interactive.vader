@@ -13,10 +13,10 @@ Do (trigger doge):
 
 Then (expect the cursor to be in the same position but shifted by the amount of lines inserted):
   AssertEqual 'n', mode()
-  AssertEqual 13, line('.')
+  AssertEqual 15, line('.')
   AssertEqual 1, col('.')
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
@@ -24,9 +24,11 @@ Expect php (generated comment with @param tags):
    *   [TODO:description]
    * @param string $p2
    *   [TODO:description]
-   * @param [TODO:type] $p3
+   * @param [TODO:type] $p3 (optional)
    *   [TODO:description]
    * @param \Drupal\core\Entity\Node $p4
+   *   [TODO:description]
+   * @return [TODO:type]
    *   [TODO:description]
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
@@ -46,7 +48,7 @@ Then (expect the first TODO in the comment to be selected):
   AssertEqual 2, line('.')
   AssertEqual 4, col('.')
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
@@ -54,9 +56,11 @@ Expect php (generated comment with @param tags):
    *   [TODO:description]
    * @param string $p2
    *   [TODO:description]
-   * @param [TODO:type] $p3
+   * @param [TODO:type] $p3 (optional)
    *   [TODO:description]
    * @param \Drupal\core\Entity\Node $p4
+   *   [TODO:description]
+   * @return [TODO:type]
    *   [TODO:description]
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
@@ -81,12 +85,14 @@ Do (trigger doge and try to jump forwards outside of the comment):
   \<Tab>
   \<Tab>
   \<Tab>
-# 5x <Tab will already be at the last TODO, so we'll trigger it 5 times.
+  \<Tab>
+  \<Tab>
+# 7x <Tab will already be at the last TODO, so we'll trigger it 8 times.
   \<Tab>
 
 Then (expect the last TODO in the comment to be selected):
   AssertEqual 's', mode()
-  AssertEqual 11, line('.')
+  AssertEqual 13, line('.')
   AssertEqual 6, col('.')
 
 # ------------------------------------------------------------------------------
@@ -112,7 +118,7 @@ Do (trigger doge and jump forward until the last TODO item):
 
 Then (expect the last TODO in the comment to be selected):
   AssertEqual 's', mode()
-  AssertEqual 11, line('.')
+  AssertEqual 13, line('.')
   AssertEqual 6, col('.')
 
 # ------------------------------------------------------------------------------
@@ -131,6 +137,10 @@ Do (trigger doge and jump forward while filling in text):
   Lorem ipsum dor sit amet.
   \<Tab>
   Lorem ipsum dor sit amet.
+  \<Tab>
+  string
+  \<Tab>
+  Lorem ipsum dor sit amet.
 # Enter two extra tabs to test whether we receive actual <Tab> characters
   \<Tab>
   \<Tab>
@@ -146,9 +156,11 @@ Expect php (generated comment with @param tags with brief descriptions):
    *   Lorem ipsum.
    * @param string $p2
    *   Dor sit amet.
-   * @param mixed $p3
+   * @param mixed $p3 (optional)
    *   Lorem ipsum dor sit amet.
    * @param \Drupal\core\Entity\Node $p4
+   *   Lorem ipsum dor sit amet.
+   * @return string
    *   Lorem ipsum dor sit amet.    
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}

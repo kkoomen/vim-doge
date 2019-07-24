@@ -49,7 +49,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'YARD': [
 \        '# !description',
-\        '#(parameters|# {parameters})',
+\        '%(parameters|# {parameters})%',
 \      ],
 \    },
 \  },

@@ -10,6 +10,9 @@ Do (trigger doge):
 Expect php (generated comment with nothing but the text 'TODO'):
   /**
    * [TODO:description]
+   *
+   * @return [TODO:type]
+   *   [TODO:description]
    */
   function myFunc(/* inline comment */) {}
 
@@ -21,7 +24,7 @@ Given php (function with parameters):
     array &$p1 /* inline comment */,
     string $p2,
     &$p3 = NULL,
-    \Drupal\core\Entity\Node $p4 // inline comment
+    \Test\Lorem\Ipsum $p4 // inline comment
   ) {
     //
   }
@@ -29,7 +32,7 @@ Given php (function with parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
@@ -37,16 +40,18 @@ Expect php (generated comment with @param tags):
    *   [TODO:description]
    * @param string $p2
    *   [TODO:description]
-   * @param [TODO:type] $p3
+   * @param [TODO:type] $p3 (optional)
    *   [TODO:description]
-   * @param \Drupal\core\Entity\Node $p4
+   * @param \Test\Lorem\Ipsum $p4
+   *   [TODO:description]
+   * @return [TODO:type]
    *   [TODO:description]
    */
   function myFunction(
     array &$p1 /* inline comment */,
     string $p2,
     &$p3 = NULL,
-    \Drupal\core\Entity\Node $p4 // inline comment
+    \Test\Lorem\Ipsum $p4 // inline comment
   ) {
     //
   }

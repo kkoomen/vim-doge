@@ -12,11 +12,14 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (class method with nothing but the text 'TODO'):
+Expect php (class method with nothing but the text 'TODO' and the @return tag):
   class Test {
 
     /**
      * [TODO:description]
+     *
+     * @return [TODO:type]
+     *   [TODO:description]
      */
     public function myMethod() {}
 
@@ -38,13 +41,15 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   class Test {
 
     /**
      * [TODO:description]
      *
      * @param array $p1
+     *   [TODO:description]
+     * @return [TODO:type]
      *   [TODO:description]
      */
     public function myMethod(array &$p1) {}
@@ -64,13 +69,15 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   class Test {
 
     /**
      * [TODO:description]
      *
      * @param array $p1
+     *   [TODO:description]
+     * @return [TODO:type]
      *   [TODO:description]
      */
     protected static function myMethod(array &$p1) {}
@@ -90,13 +97,15 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   class Test {
 
     /**
      * [TODO:description]
      *
      * @param array $p1
+     *   [TODO:description]
+     * @return [TODO:type]
      *   [TODO:description]
      */
     public final function myMethod(array &$p1) {}
@@ -116,13 +125,15 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect php (generated comment with @param tags):
+Expect php (generated comment with @param and @return tags):
   class Test {
 
     /**
      * [TODO:description]
      *
      * @param array $p1
+     *   [TODO:description]
+     * @return [TODO:type]
      *   [TODO:description]
      */
     private static final function myMethod(array &$p1) {}
@@ -139,7 +150,9 @@ Given php (constructor method with parameters):
     public function __construct(
       \Drupal\Core\Config\Entity\Query\QueryFactory $eqf,
       AbstractController $controller
-    ) {}
+    ) {
+      //
+    }
 
   }
 
@@ -163,6 +176,8 @@ Expect php (generated comment with @param tags):
     public function __construct(
       \Drupal\Core\Config\Entity\Query\QueryFactory $eqf,
       AbstractController $controller
-    ) {}
+    ) {
+      //
+    }
 
   }

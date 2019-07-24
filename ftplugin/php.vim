@@ -51,6 +51,40 @@ call add(b:doge_patterns, {
 \})
 
 " ==============================================================================
+" Matches a constructor function.
+" ==============================================================================
+"
+" Matches the following scenarios:
+"
+"   public function __construct(...) {}
+call add(b:doge_patterns, {
+\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*__construct\s*(\(.\{-}\))\s*{',
+\  'match_group_names': ['parameters'],
+\  'parameters': {
+\    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'match_group_names': ['type', 'name', 'default'],
+\    'format': {
+\      'phpdoc': [
+\        '@param {type|!type} {name}%(default| (optional))%',
+\        ' * \t!description',
+\      ],
+\    },
+\  },
+\  'comment': {
+\    'insert': 'above',
+\    'template': {
+\      'phpdoc': [
+\        '/**',
+\        ' * !description',
+\        ' *',
+\        '%(parameters| * {parameters})%',
+\        ' */',
+\      ],
+\    },
+\  },
+\})
+
+" ==============================================================================
 " Matches regular function expressions and class methods.
 " ==============================================================================
 "
@@ -71,11 +105,11 @@ call add(b:doge_patterns, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\%([^(]\+\)\s*(\(.\{-}\))\s*{',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
-\    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
-\    'match_group_names': ['type', 'name'],
+\    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'match_group_names': ['type', 'name', 'default'],
 \    'format': {
 \      'phpdoc': [
-\        '@param {type|!type} {name}',
+\        '@param {type|!type} {name}%(default| (optional))%',
 \        ' * \t!description',
 \      ],
 \    },
@@ -86,8 +120,10 @@ call add(b:doge_patterns, {
 \      'phpdoc': [
 \        '/**',
 \        ' * !description',
-\        '#(parameters| *)',
-\        '#(parameters| * {parameters})',
+\        ' *',
+\        '%(parameters| * {parameters})%',
+\        ' * @return !type',
+\        ' * \t!description',
 \        ' */',
 \      ],
 \    },

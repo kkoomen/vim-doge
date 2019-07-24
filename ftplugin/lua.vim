@@ -54,7 +54,7 @@ call add(b:doge_patterns, {
 \      'ldoc': [
 \        '-- !summary',
 \        '-- !description',
-\        '#(parameters|-- {parameters})',
+\        '%(parameters|-- {parameters})%',
 \      ],
 \    },
 \  },
@@ -86,7 +86,7 @@ call add(b:doge_patterns, {
 \      'ldoc': [
 \        '-- !summary',
 \        '-- !description',
-\        '#(parameters|-- {parameters})',
+\        '%(parameters|-- {parameters})%',
 \      ],
 \    },
 \  },

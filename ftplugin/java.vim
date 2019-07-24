@@ -50,7 +50,7 @@ call add(b:doge_patterns, {
 \      'javadoc': [
 \        '/**',
 \        ' * !description',
-\        '#(parameters| * {parameters})',
+\        '%(parameters| * {parameters})%',
 \        ' * @return {returnType|void} !description',
 \        ' */',
 \      ],

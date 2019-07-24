@@ -23,6 +23,8 @@ Expect php (generated comment containing the FQN):
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1
    *   [TODO:description]
+   * @return [TODO:type]
+   *   [TODO:description]
    */
   function myFunction(Response $p1) {}
 
@@ -45,6 +47,8 @@ Expect php (generated comment containing the FQN):
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1
    *   [TODO:description]
+   * @return [TODO:type]
+   *   [TODO:description]
    */
   function myFunction(Response $p1) {}
 
@@ -66,6 +70,8 @@ Expect php (generated comment containing the FQN):
    * [TODO:description]
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1
+   *   [TODO:description]
+   * @return [TODO:type]
    *   [TODO:description]
    */
   function myFunction(Response $p1) {}
@@ -90,6 +96,8 @@ Expect php (generated comment not containing the FQN):
    *
    * @param BaseRoute $p1
    *   [TODO:description]
+   * @return [TODO:type]
+   *   [TODO:description]
    */
   function myFunction(BaseRoute $p1) {}
 
@@ -112,6 +120,8 @@ Expect php (generated comment not containing the FQN):
    *
    * @param BaseRoute $p1
    *   [TODO:description]
+   * @return [TODO:type]
+   *   [TODO:description]
    */
   function myFunction(BaseRoute $p1) {}
 
@@ -133,6 +143,8 @@ Expect php (generated comment not containing the FQN):
    * [TODO:description]
    *
    * @param BaseRoute $p1
+   *   [TODO:description]
+   * @return [TODO:type]
    *   [TODO:description]
    */
   function myFunction(BaseRoute $p1) {}

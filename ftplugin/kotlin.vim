@@ -78,7 +78,7 @@ call add(b:doge_patterns, {
 \      'kdoc': [
 \        '/**',
 \        ' * !description',
-\        '#(parameters| * {parameters})',
+\        '%(parameters| * {parameters})%',
 \        ' * @return !description',
 \        ' */',
 \      ],
@@ -129,7 +129,7 @@ call add(b:doge_patterns, {
 \      'kdoc': [
 \        '/**',
 \        ' * !description',
-\        '#(parameters| * {parameters})',
+\        '%(parameters| * {parameters})%',
 \        ' */',
 \      ],
 \    },
@@ -159,7 +159,7 @@ call add(b:doge_patterns, {
 \      'kdoc': [
 \        '/**',
 \        ' * !description',
-\        '#(parameters| * {parameters})',
+\        '%(parameters| * {parameters})%',
 \        ' */',
 \      ],
 \    },

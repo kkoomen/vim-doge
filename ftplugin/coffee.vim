@@ -73,7 +73,7 @@ call add(b:doge_patterns, {
 \        '!description',
 \        '',
 \        '@function {funcName|}',
-\        '#(parameters|{parameters})',
+\        '%(parameters|{parameters})%',
 \        '###',
 \      ],
 \    }
