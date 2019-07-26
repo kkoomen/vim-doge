@@ -32,6 +32,7 @@ Supported:
   - Fat-arrow functions
   - Classes
   - Class methods
+  - Class properties
   - Destructuring in parameter lists
 - FlowJS/TypeScript-like type hints
 

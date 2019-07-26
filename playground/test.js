@@ -573,6 +573,38 @@ const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float)
 class Child extends Parent {
   /**
    * [TODO:description]
+   * @type {[TODO:type]}
+   */
+  classProperty;
+
+  /**
+   * [TODO:description]
+   * @type {[TODO:type]}
+   */
+  classProperty
+
+  /**
+   * [TODO:description]
+   * @static
+   * @type {string}
+   */
+  static classProperty: string
+
+  /**
+   * [TODO:description]
+   * @type {string}
+   */
+  classProperty: string = 'default value'
+
+  /**
+   * [TODO:description]
+   * @static
+   * @type {[TODO:type]}
+   */
+  static classProperty = function() {}
+
+  /**
+   * [TODO:description]
    *
    * @param {number} b [TODO:description]
    */
@@ -586,17 +618,16 @@ class Child extends Parent {
    * @function myMethod
    * @param {number} b [TODO:description]
    */
-  myMethod = (b: number) => {
+  static myMethod = (b: number) => {
     return this.add(b);
   }
 
   /**
    * [TODO:description]
-   *
-   * @param {number} b [TODO:description]
-   * @return {number} [TODO:description]
+   * @static
+   * @type {type|[TODO:type]}
    */
-  myMethod({ b: number }): number {
+  static myMethod({ b: number }): number {
     return this.add(b);
   }
 

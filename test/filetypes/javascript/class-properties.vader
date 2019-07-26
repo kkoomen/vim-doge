@@ -1,0 +1,167 @@
+# ==============================================================================
+# Class properties without type hints without default value
+# ==============================================================================
+Given javascript (class properties without type hints without default value):
+  class MyClass {
+
+    classProperty;
+
+    classProperty
+
+    static classProperty
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+  :15\<CR>
+  \<C-d>
+
+Expect javascript (generated comments with @static and @type tags):
+  class MyClass {
+
+    /**
+     * [TODO:description]
+     * @type {[TODO:type]}
+     */
+    classProperty;
+
+    /**
+     * [TODO:description]
+     * @type {[TODO:type]}
+     */
+    classProperty
+
+    /**
+     * [TODO:description]
+     * @static
+     * @type {[TODO:type]}
+     */
+    static classProperty
+
+  }
+
+# ==============================================================================
+# Class properties with type hints without default value
+# ==============================================================================
+Given javascript (class properties with type hints without default value):
+  class MyClass {
+
+    classProperty: bool;
+
+    classProperty: string
+
+    static classProperty: User[T]
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+  :15\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @static and @type tags):
+  class MyClass {
+
+    /**
+     * [TODO:description]
+     * @type {bool}
+     */
+    classProperty: bool;
+
+    /**
+     * [TODO:description]
+     * @type {string}
+     */
+    classProperty: string
+
+    /**
+     * [TODO:description]
+     * @static
+     * @type {Test[T]}
+     */
+    static classProperty: Test[T]
+
+  }
+
+# ==============================================================================
+# Class properties without type hints with default values
+# ==============================================================================
+Given javascript (class properties without type hints with default values):
+  class MyClass {
+
+    classProperty = 'default value'
+
+    static classProperty = function() {}
+
+  }
+
+Do (trigger doge):
+  :4\<CR>
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @static, @default and @type tags):
+  class MyClass {
+
+    /**
+     * [TODO:description]
+     * @default
+     * @type {[TODO:type]}
+     */
+    classProperty = 'default value'
+
+    /**
+     * [TODO:description]
+     * @static
+     * @default
+     * @type {[TODO:type]}
+     */
+    static classProperty = function() {}
+
+  }
+
+# ==============================================================================
+# Class properties with type hints with default value
+# ==============================================================================
+Given javascript (class properties without type hints without default value):
+  class MyClass {
+
+    static classProperty: bool = true;
+
+    classProperty: string = 'default value'
+
+  }
+
+Do (trigger doge):
+  :4\<CR>
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @static, @default and @ytype tags):
+  class MyClass {
+
+    /**
+     * [TODO:description]
+     * @static
+     * @default
+     * @type {bool}
+     */
+    static classProperty: bool = true;
+
+    /**
+     * [TODO:description]
+     * @default
+     * @type {string}
+     */
+    classProperty: string = 'default value'
+
+  }

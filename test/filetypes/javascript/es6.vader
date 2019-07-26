@@ -78,7 +78,7 @@ Given javascript (fat-arrow functions with destructuring):
       return this.add(b);
     }
 
-    myMethod({ b: number }): number {
+    static myMethod({ b: number }): number {
       return this.add(b);
     }
   }
@@ -89,7 +89,7 @@ Do (trigger doge):
   :11\<CR>
   \<C-d>
 
-Expect javascript (generated comments with @function, @param and @return tags):
+Expect javascript (generated comments with @static, @function, @param and @return tags):
   class Test {
     /**
      * [TODO:description]
@@ -102,10 +102,11 @@ Expect javascript (generated comments with @function, @param and @return tags):
 
     /**
      * [TODO:description]
+     * @static
      * @param {number} b - [TODO:description]
      * @return {number} [TODO:description]
      */
-    myMethod({ b: number }): number {
+    static myMethod({ b: number }): number {
       return this.add(b);
     }
   }

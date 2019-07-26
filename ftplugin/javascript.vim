@@ -23,7 +23,7 @@ let b:doge_patterns = []
 
 " Matches the following pattern:
 "   <param-access> <param-name>: <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?'
+let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?'
 
 " ==============================================================================
 " Matches fat-arrow / functions inside objects.
@@ -111,8 +111,8 @@ call add(b:doge_patterns, {
 "
 "   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s\+\)\?\(async\s*\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-\  'match_group_names': ['async', 'parameters', 'returnType'],
+\  'match': '\m^\%(export\s\+\)\?\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match_group_names': ['static', 'async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -126,7 +126,8 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        '%(async| * @{async})%',
+\        '%(static| * @static)%',
+\        '%(async| * @async)%',
 \        '%(parameters| * {parameters})%',
 \        '%(returnType| * @return {{returnType}} !description)%',
 \        ' */',
@@ -147,7 +148,7 @@ call add(b:doge_patterns, {
 "
 "   Person.prototype.greet = function*(p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
 call add(b:doge_patterns, {
-\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s*\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s\+\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
 \  'match_group_names': ['className', 'funcName', 'async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -162,7 +163,7 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        '%(async| * @{async})%',
+\        '%(async| * @async)%',
 \        ' * @function {className}#{funcName}',
 \        '%(parameters| * {parameters})%',
 \        '%(returnType| * @return {{returnType}} !description)%',
@@ -184,6 +185,12 @@ call add(b:doge_patterns, {
 "
 "   (p1: array = []) => (p2: string) => { console.log(5); }
 "
+"   (p1: array = []) => (p2: string) => { console.log(5); }
+"
+"   static myMethod({ b: number }): number {}
+"
+"   static async myMethod({ b: number }): number {}
+"
 "   const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
 "
 "   (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
@@ -196,8 +203,8 @@ call add(b:doge_patterns, {
 "
 "   var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\(async\s*\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],
+\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'match_group_names': ['funcName', 'static', 'async',  'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -211,10 +218,48 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        '%(async| * @{async})%',
+\        '%(static| * @static)%',
+\        '%(async| * @async)%',
 \        ' * @function {funcName|}',
 \        '%(parameters| * {parameters})%',
 \        '%(returnType| * @return {{returnType}} !description)%',
+\        ' */',
+\      ],
+\    },
+\  },
+\})
+
+" ==============================================================================
+" Matches class properties.
+" ==============================================================================
+"
+" Matches the following scenarios:
+"
+"   class MyClass {
+"
+"     classProperty;
+"
+"     classProperty
+"
+"     static classProperty
+"
+"     classProperty = 'default value'
+"
+"     static classProperty = function() {}
+"
+"   }
+call add(b:doge_patterns, {
+\  'match': '\m^\%(\(static\)\s\+\)\?\%([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\(\s*=\s*\)\?',
+\  'match_group_names': ['static', 'type', 'default'],
+\  'comment': {
+\    'insert': 'above',
+\    'template': {
+\      'jsdoc': [
+\        '/**',
+\        ' * !description',
+\        '%(static| * @static)%',
+\        '%(default| * @default)%',
+\        ' * @type {{type|!type}}',
 \        ' */',
 \      ],
 \    },
