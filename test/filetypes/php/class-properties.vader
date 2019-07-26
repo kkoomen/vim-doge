@@ -38,24 +38,11 @@ Expect php (generated comments at all properties and constructor function):
   class Test {
 
     /**
-     * @var string
-     */
-    protected $migrationName;
-
-    /**
-     * @var Migration
-     */
-    protected $migration;
-
-    /**
-     * [TODO:description]
+     * @var string [TODO:description]
      *
-     * @param string $name
-     *   [TODO:description]
-     * @param Migration $migration
-     *   [TODO:description]
-     * @param \Symfony\Component\HttpFoundation\Response $response
-     *   [TODO:description]
+     * @param string $name [TODO:description]
+     * @param Migration $migration [TODO:description]
+     * @param \Symfony\Component\HttpFoundation\Response $response [TODO:description]
      */
     public function __construct(string $name, Migration $migration, Response $response) {
       $this->migrationName = $name;

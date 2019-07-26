@@ -18,8 +18,7 @@ Expect php (class method with nothing but the text 'TODO' and the @return tag):
     /**
      * [TODO:description]
      *
-     * @return [TODO:type]
-     *   [TODO:description]
+     * @return [TODO:type] [TODO:description]
      */
     public function myMethod() {}
 
@@ -47,10 +46,8 @@ Expect php (generated comment with @param and @return tags):
     /**
      * [TODO:description]
      *
-     * @param array $p1
-     *   [TODO:description]
-     * @return [TODO:type]
-     *   [TODO:description]
+     * @param array $p1 [TODO:description]
+     * @return [TODO:type] [TODO:description]
      */
     public function myMethod(array &$p1) {}
 
@@ -75,10 +72,8 @@ Expect php (generated comment with @param and @return tags):
     /**
      * [TODO:description]
      *
-     * @param array $p1
-     *   [TODO:description]
-     * @return [TODO:type]
-     *   [TODO:description]
+     * @param array $p1 [TODO:description]
+     * @return [TODO:type] [TODO:description]
      */
     protected static function myMethod(array &$p1) {}
 
@@ -103,10 +98,8 @@ Expect php (generated comment with @param and @return tags):
     /**
      * [TODO:description]
      *
-     * @param array $p1
-     *   [TODO:description]
-     * @return [TODO:type]
-     *   [TODO:description]
+     * @param array $p1 [TODO:description]
+     * @return [TODO:type] [TODO:description]
      */
     public final function myMethod(array &$p1) {}
 
@@ -131,10 +124,8 @@ Expect php (generated comment with @param and @return tags):
     /**
      * [TODO:description]
      *
-     * @param array $p1
-     *   [TODO:description]
-     * @return [TODO:type]
-     *   [TODO:description]
+     * @param array $p1 [TODO:description]
+     * @return [TODO:type] [TODO:description]
      */
     private static final function myMethod(array &$p1) {}
 
@@ -168,10 +159,8 @@ Expect php (generated comment with @param tags):
     /**
      * [TODO:description]
      *
-     * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf
-     *   [TODO:description]
-     * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $controller
-     *   [TODO:description]
+     * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf [TODO:description]
+     * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $controller [TODO:description]
      */
     public function __construct(
       \Drupal\Core\Config\Entity\Query\QueryFactory $eqf,

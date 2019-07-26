@@ -11,8 +11,7 @@ Expect php (generated comment with nothing but the text 'TODO'):
   /**
    * [TODO:description]
    *
-   * @return [TODO:type]
-   *   [TODO:description]
+   * @return [TODO:type] [TODO:description]
    */
   function myFunc(/* inline comment */) {}
 
@@ -36,16 +35,11 @@ Expect php (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @param array $p1
-   *   [TODO:description]
-   * @param string $p2
-   *   [TODO:description]
-   * @param [TODO:type] $p3 (optional)
-   *   [TODO:description]
-   * @param \Test\Lorem\Ipsum $p4
-   *   [TODO:description]
-   * @return [TODO:type]
-   *   [TODO:description]
+   * @param array $p1 [TODO:description]
+   * @param string $p2 [TODO:description]
+   * @param [TODO:type] $p3 (optional) [TODO:description]
+   * @param \Test\Lorem\Ipsum $p4 [TODO:description]
+   * @return [TODO:type] [TODO:description]
    */
   function myFunction(
     array &$p1 /* inline comment */,

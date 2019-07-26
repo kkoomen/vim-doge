@@ -65,8 +65,7 @@ call add(b:doge_patterns, {
 \    'match_group_names': ['type', 'name', 'default'],
 \    'format': {
 \      'phpdoc': [
-\        '@param {type|!type} {name}%(default| (optional))%',
-\        ' * \t!description',
+\        '@param {type|!type} {name}%(default| (optional))% !description',
 \      ],
 \    },
 \  },
@@ -109,8 +108,7 @@ call add(b:doge_patterns, {
 \    'match_group_names': ['type', 'name', 'default'],
 \    'format': {
 \      'phpdoc': [
-\        '@param {type|!type} {name}%(default| (optional))%',
-\        ' * \t!description',
+\        '@param {type|!type} {name}%(default| (optional))% !description',
 \      ],
 \    },
 \  },
@@ -122,8 +120,7 @@ call add(b:doge_patterns, {
 \        ' * !description',
 \        ' *',
 \        '%(parameters| * {parameters})%',
-\        ' * @return !type',
-\        ' * \t!description',
+\        ' * @return !type !description',
 \        ' */',
 \      ],
 \    },
