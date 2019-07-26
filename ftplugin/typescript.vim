@@ -26,7 +26,7 @@ let b:doge_patterns = []
 
 " Matches the following pattern:
 "   <param-access> <param-name>: <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\+\)\?'
+let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:][:space:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?'
 
 " ==============================================================================
 " Matches fat-arrow / functions inside objects.
@@ -42,13 +42,13 @@ let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\
 "
 "   myKey: async (p1, p2) => {}
 call add(b:doge_patterns, {
-\  'match': '\m^\([[:alnum:]_]\+\)\s*:\s*\(async\)\?\%(function\)\?\s*\%([[:alnum:]_]\+\)\?(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\%(\s*=>\s*\)\?\s*[({]',
+\  'match': '\m^[[:punct:]]\?\([[:alnum:]_-]\+\)[[:punct:]]\?\s*:\s*\(async\)\?\s*\%(function\)\?\s*\%([[:alnum:]_]\+\)\?(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\%(\s*=>\s*\)\?\s*[({]',
 \  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} !description',
+\      'jsdoc': '@param {{type|!type}} {name} - !description',
 \    },
 \  },
 \  'comment': {
@@ -57,7 +57,6 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        ' *',
 \        '%(async| * @{async})%',
 \        ' * @function {funcName|}',
 \        '%(parameters| * {parameters})%',
@@ -90,7 +89,6 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        ' *',
 \        '%(parentClassName| * @extends {parentClassName})%',
 \        '%(interfaceName| * @implements {interfaceName})%',
 \        ' */',
@@ -122,7 +120,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} !description',
+\      'jsdoc': '@param {{type|!type}} {name} - !description',
 \    },
 \  },
 \  'comment': {
@@ -131,7 +129,6 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        ' *',
 \        '%(async| * @{async})%',
 \        '%(parameters| * {parameters})%',
 \        '%(returnType| * @return {{returnType}} !description)%',
@@ -159,7 +156,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} !description',
+\      'jsdoc': '@param {{type|!type}} {name} - !description',
 \    },
 \  },
 \  'comment': {
@@ -168,7 +165,6 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        ' *',
 \        '%(async| * @{async})%',
 \        ' * @function {className}#{funcName}',
 \        '%(parameters| * {parameters})%',
@@ -209,7 +205,7 @@ call add(b:doge_patterns, {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
 \    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} !description',
+\      'jsdoc': '@param {{type|!type}} {name} - !description',
 \    },
 \  },
 \  'comment': {
@@ -218,7 +214,6 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
-\        ' *',
 \        '%(async| * @{async})%',
 \        ' * @function {funcName|}',
 \        '%(parameters| * {parameters})%',
@@ -230,4 +225,4 @@ call add(b:doge_patterns, {
 \})
 
 let &cpoptions = s:save_cpo
-unlet s:save_cpo
+u

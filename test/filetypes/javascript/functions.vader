@@ -10,7 +10,6 @@ Do (trigger doge):
 Expect javascript (generated comment with nothing but the text 'TODO'):
   /**
    * [TODO:description]
-   *
    */
   function myFunc(/* inline comment */) {}
 
@@ -26,11 +25,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   /**
    * [TODO:description]
-   *
-   * @param {[TODO:type]} $p1 [TODO:description]
-   * @param {[TODO:type]} p2 [TODO:description]
-   * @param {[TODO:type]} p3 [TODO:description]
-   * @param {[TODO:type]} p4 [TODO:description]
+   * @param {[TODO:type]} $p1 - [TODO:description]
+   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} p3 - [TODO:description]
+   * @param {[TODO:type]} p4 - [TODO:description]
    */
   function myFunc($p1 = 'value', p2 = [], p3, p4 /* inline comment */) {}
 
@@ -46,11 +44,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
-   *
-   * @param {string} $p1 [TODO:description]
-   * @param {string[]} p2 [TODO:description]
-   * @param {number} p3 [TODO:description]
-   * @param {float} p4 [TODO:description]
+   * @param {string} $p1 - [TODO:description]
+   * @param {string[]} p2 - [TODO:description]
+   * @param {number} p3 - [TODO:description]
+   * @param {float} p4 - [TODO:description]
    * @return {string[]} [TODO:description]
    */
   function myFunc($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
@@ -67,12 +64,11 @@ Do (trigger doge):
 Expect javascript (generated comment with @functon and @param tags):
   /**
    * [TODO:description]
-   *
    * @function myFunc
-   * @param {[TODO:type]} $p1 [TODO:description]
-   * @param {[TODO:type]} p2 [TODO:description]
-   * @param {[TODO:type]} p3 [TODO:description]
-   * @param {[TODO:type]} p4 [TODO:description]
+   * @param {[TODO:type]} $p1 - [TODO:description]
+   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} p3 - [TODO:description]
+   * @param {[TODO:type]} p4 - [TODO:description]
    */
   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -88,12 +84,11 @@ Do (trigger doge):
 Expect javascript (generated comment with @function and @param tags):
   /**
    * [TODO:description]
-   *
    * @function myFunc
-   * @param {string} $p1 [TODO:description]
-   * @param {string[]} p2 [TODO:description]
-   * @param {number} p3 [TODO:description]
-   * @param {float} p4 [TODO:description]
+   * @param {string} $p1 - [TODO:description]
+   * @param {string[]} p2 - [TODO:description]
+   * @param {number} p3 - [TODO:description]
+   * @param {float} p4 - [TODO:description]
    * @return {string[]} [TODO:description]
    */
   var myFunc = function($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
@@ -141,10 +136,9 @@ Do (trigger doge):
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
-   *
    * @function Person#greet
-   * @param {string} p1 [TODO:description]
-   * @param {Immutable.List} p2 [TODO:description]
+   * @param {string} p1 - [TODO:description]
+   * @param {Immutable.List} p2 - [TODO:description]
    * @return {string[]} [TODO:description]
    */
   Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] {};
@@ -161,7 +155,6 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @function tags):
   /**
    * [TODO:description]
-   *
    * @function Person#greet
    */
   Person.prototype.greet = function () {}
@@ -178,9 +171,8 @@ Do (trigger doge):
 Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
-   *
-   * @param {string} $p1 [TODO:description]
-   * @param {Foo|Bar|Baz} p2 [TODO:description]
+   * @param {string} $p1 - [TODO:description]
+   * @param {Foo|Bar|Baz} p2 - [TODO:description]
    * @return {Foo|Bar} [TODO:description]
    */
   function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
@@ -197,12 +189,11 @@ Do (trigger doge):
 Expect javascript (generated comment with @async, and @param tags):
   /**
    * [TODO:description]
-   *
    * @async
-   * @param {[TODO:type]} $p1 [TODO:description]
-   * @param {[TODO:type]} p2 [TODO:description]
-   * @param {[TODO:type]} p3 [TODO:description]
-   * @param {[TODO:type]} p4 [TODO:description]
+   * @param {[TODO:type]} $p1 - [TODO:description]
+   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} p3 - [TODO:description]
+   * @param {[TODO:type]} p4 - [TODO:description]
    */
   async function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -218,11 +209,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @description and @param tags):
   /**
    * [TODO:description]
-   *
-   * @param {[TODO:type]} $p1 [TODO:description]
-   * @param {[TODO:type]} p2 [TODO:description]
-   * @param {[TODO:type]} p3 [TODO:description]
-   * @param {[TODO:type]} p4 [TODO:description]
+   * @param {[TODO:type]} $p1 - [TODO:description]
+   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} p3 - [TODO:description]
+   * @param {[TODO:type]} p4 - [TODO:description]
    */
   function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -238,11 +228,10 @@ Do (trigger doge):
 Expect javascript (generated comment with @async, and @param tags):
   /**
    * [TODO:description]
-   *
    * @async
-   * @param {[TODO:type]} $p1 [TODO:description]
-   * @param {[TODO:type]} p2 [TODO:description]
-   * @param {[TODO:type]} p3 [TODO:description]
-   * @param {[TODO:type]} p4 [TODO:description]
+   * @param {[TODO:type]} $p1 - [TODO:description]
+   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} p3 - [TODO:description]
+   * @param {[TODO:type]} p4 - [TODO:description]
    */
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
