@@ -7,6 +7,7 @@ CONTENTS                                                       *doge-contents*
   2. Configuration...............................................|doge-config|
   3. Functions................................................|doge-functions|
       1. Preprocessors....................................|doge-preprocessors|
+  4. Commands..................................................|doge-commands|
 
 ==============================================================================
 INTRODUCTION                                                      *doge-intro*
@@ -118,5 +119,10 @@ a comment. The following preprocess functions are available:
 
   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
 
+==============================================================================
+COMMANDS                                                       *doge-commands*
+
+:DogeGererate                                                  *:DogeGenerate*
+  Command to generate documentation.
 
 vim:tw=78:ts=8:ft=help:norl:

@@ -38,6 +38,8 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+- [Commands](#commands)
+  * [`:DogeGenerate`](#dogegenerate)
 - [Help](#help)
 - [FAQ](#faq)
     + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
@@ -153,6 +155,12 @@ The mapping to jump backward to the next `TODO` item in a comment. Requires
 Default: `1`
 
 Jumps interactively through all `TODO` items in the generated comment.
+
+# Commands
+
+### `:DogeGenerate`
+
+Command to generate documentation.
 
 # Help
 

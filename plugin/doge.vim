@@ -79,6 +79,8 @@ if !exists('g:doge_comment_interactive')
   let g:doge_comment_interactive = 1
 endif
 
+command! -nargs=0 DogeGenerate call doge#generate()
+
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
 nnoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
 nnoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
