@@ -151,7 +151,7 @@ function! doge#generate#pattern(pattern) abort
         " Go to the top of the comment and select the first TODO.
         exe l:comment_lnum_insert_position + 1
         call search(s:comment_placeholder, 'W')
-        execute("normal! gno\<C-g>")
+        call execute("normal! gno\<C-g>")
       endif
     endif
   endif

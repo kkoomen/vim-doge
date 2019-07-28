@@ -79,8 +79,6 @@ if !exists('g:doge_comment_interactive')
   let g:doge_comment_interactive = 1
 endif
 
-command! -nargs=0 DogeGenerate call doge#generate()
-
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
 nnoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
 nnoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
@@ -96,6 +94,10 @@ execute(printf('imap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapp
 execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
 execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+
+""
+" Command to generate documentation.
+command! -nargs=0 DogeGenerate normal <Plug>(doge-generate)
 
 augroup doge
   autocmd!
