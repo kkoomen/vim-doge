@@ -45,6 +45,14 @@ if exists('g:loaded_doge')
 endif
 let g:loaded_doge = 1
 
+if !exists('g:doge_enable_mappings')
+  ""
+  " (Default: 1)
+  "
+  " Whether or not to enable builtin mappings.
+  let g:doge_enable_mappings = 1
+endif
+
 if !exists('g:doge_mapping')
   ""
   " (Default: '<Leader>d')
@@ -87,13 +95,15 @@ inoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
 snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
 snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
 
-execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
-execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
-execute(printf('imap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
-execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+if g:doge_enable_mappings == v:true
+  execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
+  execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+  execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+  execute(printf('imap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+  execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+  execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+  execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+endif
 
 ""
 " Command to generate documentation.
