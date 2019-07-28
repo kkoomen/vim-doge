@@ -135,7 +135,7 @@ Here is the full list of available doc standards per filetype:
 
 Default: `1`
 
-Whether or not to enable builtin mappings.
+Whether or not to enable built-in mappings.
 
 ### `g:doge_mapping`
 

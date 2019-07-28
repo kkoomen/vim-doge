@@ -49,7 +49,7 @@ if !exists('g:doge_enable_mappings')
   ""
   " (Default: 1)
   "
-  " Whether or not to enable builtin mappings.
+  " Whether or not to enable built-in mappings.
   let g:doge_enable_mappings = 1
 endif
 
