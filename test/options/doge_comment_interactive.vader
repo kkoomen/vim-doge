@@ -176,7 +176,7 @@ Expect python (generated comment with :param tags with brief descriptions):
   def myFunc(p1: str = 'string', p2: int = 5):
       """
       Lorem ipsum dor sit amet.
-      
+
       :param p1 str: This is a string.
       :param p2 int: This is an integer.      
       """

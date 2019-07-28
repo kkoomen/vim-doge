@@ -17,7 +17,7 @@ Expect python (generated comment with :param tags):
       def __init__(self: MyClass):
           """
           [TODO:description]
-          
+
           :param self MyClass: [TODO:description]
           """
           pass
@@ -40,7 +40,7 @@ Expect python (generated comment with :param tags):
       def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
           """
           [TODO:description]
-          
+
           :param self MyClass: [TODO:description]
           :param p1 Sequence[T]: [TODO:description]
           :rtype Generator[int, float, str]: [TODO:description]
@@ -66,7 +66,7 @@ Expect python (generated comment with :param tags):
       def call(self, *args: str, **kwargs: str) -> str:
           """
           [TODO:description]
-          
+
           :param self [TODO:type]: [TODO:description]
           :param args str: [TODO:description]
           :param kwargs str: [TODO:description]

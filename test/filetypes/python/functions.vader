@@ -12,7 +12,7 @@ Expect python (no changes):
   def myFunc(): # inline comment
     """
     [TODO:description]
-    
+
     """
     pass
 
@@ -30,7 +30,7 @@ Expect python (generated comment with :param tags):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
     """
     [TODO:description]
-    
+
     :param p1 [TODO:type]: [TODO:description]
     :param p2 [TODO:type]: [TODO:description]
     :param p3 [TODO:type]: [TODO:description]
@@ -52,7 +52,7 @@ Expect python (generated comment with :param tags):
   def myFunc(p1: str = 'string', p2: int = 5):
       """
       [TODO:description]
-      
+
       :param p1 str: [TODO:description]
       :param p2 int: [TODO:description]
       """
@@ -77,7 +77,7 @@ Expect python (generated comments with :param tags):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
       """
       [TODO:description]
-      
+
       :param p1 Callable[[int], None]: [TODO:description]
       :param p2 Callable[[int, Exception], None]: [TODO:description]
       :rtype Sequence[T]: [TODO:description]
@@ -87,7 +87,7 @@ Expect python (generated comments with :param tags):
   def myFunc(p1: Sequence[T], p2: my_module.types) -> Generator[int, float, str]:
       """
       [TODO:description]
-      
+
       :param p1 Sequence[T]: [TODO:description]
       :param p2 my_module.types: [TODO:description]
       :rtype Generator[int, float, str]: [TODO:description]
@@ -110,7 +110,7 @@ Expect python (generated comment with :param and :rtype tags):
           p3: list, p4: tuple) -> Iterator[int]:
       """
       [TODO:description]
-      
+
       :param p1 str: [TODO:description]
       :param p2 dict: [TODO:description]
       :param p3 list: [TODO:description]

@@ -14,7 +14,7 @@ Expect python (generated comment with nothing but the summary and description 'T
   def myFunc():
       """
       [TODO:summary]
-      
+
       [TODO:description]
       """
       pass
@@ -33,9 +33,9 @@ Expect python (generated comment with Parameters tag):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
       """
       [TODO:summary]
-      
+
       [TODO:description]
-      
+
       Parameters
       ----------
       p1 : Callable[[int], None]
@@ -59,16 +59,16 @@ Expect python (generated comment with Parameters and Returns tag):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
       """
       [TODO:summary]
-      
+
       [TODO:description]
-      
+
       Parameters
       ----------
       p1 : Callable[[int], None]
           [TODO:description]
       p2 : Callable[[int, Exception], None]
           [TODO:description]
-      
+
       Returns
       -------
       Sequence[T]:
