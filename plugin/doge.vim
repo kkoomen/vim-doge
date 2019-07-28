@@ -97,7 +97,7 @@ execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_map
 
 ""
 " Command to generate documentation.
-command! -nargs=0 DogeGenerate normal <Plug>(doge-generate)
+command! -nargs=0 DogeGenerate call doge#generate()
 
 augroup doge
   autocmd!
