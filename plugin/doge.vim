@@ -95,6 +95,10 @@ execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_map
 execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
 execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 
+""
+" Command to generate documentation.
+command! -nargs=0 DogeGenerate call doge#generate()
+
 augroup doge
   autocmd!
   autocmd TextChangedI * call doge#comment#update_interactive_comment_info()

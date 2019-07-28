@@ -23,6 +23,7 @@ function! doge#helpers#count(word, ...) abort
       let l:range = printf('%s,%s', a:2, a:1)
     endif
   endif
+
   try
     let l:cnt = execute(l:range . 's/' . a:word . '//gn')
   catch /^Vim\%((\a\+)\)\=:E486/

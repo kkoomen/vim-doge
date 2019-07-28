@@ -1,3 +1,4 @@
+:DogeGenerate	doge.txt	/*:DogeGenerate*
 doge	doge.txt	/*doge*
 doge#comment#jump()	doge.txt	/*doge#comment#jump()*
 doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_interactive_comment_info()*
@@ -9,6 +10,7 @@ doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
+doge-commands	doge.txt	/*doge-commands*
 doge-config	doge.txt	/*doge-config*
 doge-contents	doge.txt	/*doge-contents*
 doge-functions	doge.txt	/*doge-functions*
