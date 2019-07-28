@@ -5,7 +5,8 @@ Kim Koomen                                                              *doge*
 CONTENTS                                                       *doge-contents*
   1. Introduction.................................................|doge-intro|
   2. Configuration...............................................|doge-config|
-  3. Functions................................................|doge-functions|
+  3. Commands..................................................|doge-commands|
+  4. Functions................................................|doge-functions|
       1. Preprocessors....................................|doge-preprocessors|
 
 ==============================================================================
@@ -49,6 +50,12 @@ The mapping to jump backward to the previous TODO item in a comment. Requires
 (Default: 1)
 
 Jumps interactively through all TODO items in the generated comment.
+
+==============================================================================
+COMMANDS                                                       *doge-commands*
+
+:DogeGenerate                                                  *:DogeGenerate*
+  Command to generate documentation.
 
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
