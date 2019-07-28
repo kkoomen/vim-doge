@@ -34,6 +34,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Configuration](#configuration)
   * [Choosing a different doc standard](#choosing-a-different-doc-standard)
   * [Options](#options)
+    + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
@@ -127,6 +128,12 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen'`                                 |
 
 ## Options
+
+### `g:doge_enable_mappings`
+
+Default: `1`
+
+Whether or not to enable builtin mappings.
 
 ### `g:doge_mapping`
 
