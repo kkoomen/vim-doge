@@ -24,6 +24,11 @@ coding!
 ==============================================================================
 CONFIGURATION                                                    *doge-config*
 
+                                                      *g:doge_enable_mappings*
+(Default: 1)
+
+Whether or not to enable built-in mappings.
+
                                                               *g:doge_mapping*
 (Default: '<Leader>d')
 
