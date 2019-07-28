@@ -11,14 +11,13 @@ Do (trigger doge):
   :3\<CR>
   \<C-d>
 
-Expect python (generated comment with :param tags):
+Expect python (generated comment with no :param tags):
   class MyClass(object):
 
       def __init__(self: MyClass):
           """
           [TODO:description]
 
-          :param self MyClass: [TODO:description]
           """
           pass
 # ==============================================================================
@@ -41,7 +40,6 @@ Expect python (generated comment with :param tags):
           """
           [TODO:description]
 
-          :param self MyClass: [TODO:description]
           :param p1 Sequence[T]: [TODO:description]
           :rtype Generator[int, float, str]: [TODO:description]
           """
@@ -67,7 +65,6 @@ Expect python (generated comment with :param tags):
           """
           [TODO:description]
 
-          :param self [TODO:type]: [TODO:description]
           :param args str: [TODO:description]
           :param kwargs str: [TODO:description]
           :rtype str: [TODO:description]
