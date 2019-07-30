@@ -80,9 +80,7 @@ endfunction
 function! doge#preprocessors#php#tokens(tokens) abort
   if has_key(a:tokens, 'propertyName') && !empty(a:tokens['propertyName'])
     let l:fqn = s:get_property_type_via_constructor(a:tokens['propertyName'])
-    if !empty(l:fqn)
-      let a:tokens['type'] = l:fqn
-    endif
+    let a:tokens['type'] = l:fqn
   endif
 endfunction
 

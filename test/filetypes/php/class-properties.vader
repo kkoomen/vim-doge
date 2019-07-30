@@ -20,6 +20,8 @@ Given php (class properties above and below the constructor should should resolv
 
     private $response;
 
+    private $random;
+
   }
 
 Do (trigger doge):
@@ -29,7 +31,9 @@ Do (trigger doge):
   \<C-d>
   :15\<CR>
   \<C-d>
-  :31\<CR>
+  :28\<CR>
+  \<C-d>
+  :33\<CR>
   \<C-d>
 
 Expect php (generated comments at all properties and constructor function):
@@ -38,7 +42,17 @@ Expect php (generated comments at all properties and constructor function):
   class Test {
 
     /**
-     * @var string [TODO:description]
+     * @var string
+     */
+    protected $migrationName;
+
+    /**
+     * @var Migration
+     */
+    protected $migration;
+
+    /**
+     * [TODO:description]
      *
      * @param string $name [TODO:description]
      * @param Migration $migration [TODO:description]
@@ -54,5 +68,10 @@ Expect php (generated comments at all properties and constructor function):
      * @var \Symfony\Component\HttpFoundation\Response
      */
     private $response;
+
+    /**
+     * @var [TODO:type]
+     */
+    private $random;
 
   }
