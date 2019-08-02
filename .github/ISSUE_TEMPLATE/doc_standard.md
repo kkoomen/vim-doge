@@ -8,7 +8,9 @@ assignees: ''
 ---
 
 **Documentation standard**
+<!--
 Specify a link to the documentation standard section containing the tags.
+-->
 
 **How popular is the doc standard?**
 - [ ] Not popular at all

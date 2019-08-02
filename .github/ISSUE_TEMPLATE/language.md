@@ -8,8 +8,10 @@ assignees: ''
 ---
 
 **Documentation standard**
+<!--
 Specify the name and a link to the documentation standard section containing the
 tags that you want to support with the language.
+-->
 
 **How popular is the doc standard?**
 - [ ] Not popular at all
