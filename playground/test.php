@@ -27,10 +27,10 @@ function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Nod
 /**
  * [TODO:description]
  *
- * @param \Symfony\Component\HttpFoundation\Response $p4 [TODO:description]
+ * @param \Symfony\Component\HttpFoundation\Response $p1 [TODO:description]
  * @return [TODO:type] [TODO:description]
  */
-function myFunction(Response $p4) {
+function myFunction(Response $p1) {
   // This should return \Symfony\Component\HttpFoundation\Response since
   // 'Response' is not defined as a an alias.
 }
@@ -38,20 +38,20 @@ function myFunction(Response $p4) {
 /**
  * [TODO:description]
  *
- * @param BaseRoute $p4 [TODO:description]
+ * @param BaseRoute $p1 [TODO:description]
  * @return [TODO:type] [TODO:description]
  */
-function myFunction(BaseRoute $p4) {
+function myFunction(BaseRoute $p1) {
   // This should return 'BaseRoute' since it is defined as an alias.
 }
 
 /**
  * [TODO:description]
  *
- * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $p4 [TODO:description]
+ * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $p1 [TODO:description]
  * @return [TODO:type] [TODO:description]
  */
-function myFunction(AbstractController $p4) {
+function myFunction(AbstractController $p1) {
   // This should return
   // \Symfony\Bundle\FrameworkBundle\Controller\AbstractController since
   // 'AbstractController' is not defined as an alias.
@@ -60,10 +60,10 @@ function myFunction(AbstractController $p4) {
 /**
  * [TODO:description]
  *
- * @param RedirectResponse $p4 [TODO:description]
+ * @param RedirectResponse $p1 [TODO:description]
  * @return [TODO:type] [TODO:description]
  */
-function myFunction(RedirectResponse $p4) {
+function myFunction(RedirectResponse $p1) {
   // This should return 'RedirectResponse' since it is defined as an alias.
 }
 
