@@ -17,7 +17,7 @@ Supported:
 - Class methods
 - Functions
 
-[![Demo PHP](https://asciinema.org/a/OvTglKYTEH0FiYKQO3X0H23oB.svg)](https://asciinema.org/a/OvTglKYTEH0FiYKQO3X0H23oB)
+[![Demo PHP](https://asciinema.org/a/PXtgawXXnDOVbAm6Kk4cS2MmC.svg)](https://asciinema.org/a/PXtgawXXnDOVbAm6Kk4cS2MmC)
 
 ## JavaScript
 
