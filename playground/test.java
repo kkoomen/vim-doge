@@ -11,6 +11,12 @@ class Test {
 
   /**
    * [TODO:description]
+   * @return void [TODO:description]
+   */
+  void foo();
+
+  /**
+   * [TODO:description]
    * @param int childId [TODO:description]
    * @return MstRelation [TODO:description]
    */

@@ -4,10 +4,14 @@
 Given java (method without parameters):
   class Test {
     List<Element> createSortedList() {}
+
+    void foo();
   }
 
 Do (trigger doge):
   :2\<CR>
+  \<C-d>
+  :8\<CR>
   \<C-d>
 
 Expect java (method with 'TODO' and a @return tag):
@@ -17,6 +21,12 @@ Expect java (method with 'TODO' and a @return tag):
      * @return List [TODO:description]
      */
     List<Element> createSortedList() {}
+
+    /**
+     * [TODO:description]
+     * @return void [TODO:description]
+     */
+    void foo();
   }
 
 # ==============================================================================
