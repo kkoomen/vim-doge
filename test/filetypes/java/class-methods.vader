@@ -18,7 +18,7 @@ Expect java (method with 'TODO' and a @return tag):
   class Test {
     /**
      * [TODO:description]
-     * @return List [TODO:description]
+     * @return [TODO:description]
      */
     List<Element> createSortedList() {}
 
@@ -68,19 +68,19 @@ Expect java (generated comments with @param and @return tags):
   class Test {
     /**
      * [TODO:description]
-     * @param String p1 [TODO:description]
-     * @param int p2 [TODO:description]
-     * @param Boolean params [TODO:description]
-     * @return MstRelation [TODO:description]
+     * @param p1 [TODO:description]
+     * @param p2 [TODO:description]
+     * @param params [TODO:description]
+     * @return [TODO:description]
      */
     private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) {}
 
     /**
      * [TODO:description]
-     * @param String p1 [TODO:description]
-     * @param int p2 [TODO:description]
-     * @param Boolean params [TODO:description]
-     * @return ListResultBean [TODO:description]
+     * @param p1 [TODO:description]
+     * @param p2 [TODO:description]
+     * @param params [TODO:description]
+     * @return [TODO:description]
      */
     ListResultBean<MstRelation> MyParameterizedMethod(String p1, int p2, Boolean... params) {}
   }
@@ -102,8 +102,8 @@ Expect java (generated comments with @param and @return tags inserted above the 
   class Test {
     /**
      * [TODO:description]
-     * @param String p1 [TODO:description]
-     * @param int p2 [TODO:description]
+     * @param p1 [TODO:description]
+     * @param p2 [TODO:description]
      */
     @Override
     protected void MyParameterizedMethod(String p1, int p2) {}

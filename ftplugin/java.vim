@@ -41,7 +41,7 @@ call add(b:doge_patterns, {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
 \    'match_group_names': ['type', 'name'],
 \    'format': {
-\      'javadoc': '@param {type} {name} !description',
+\      'javadoc': '@param {name} !description',
 \    },
 \  },
 \  'comment': {
@@ -51,7 +51,7 @@ call add(b:doge_patterns, {
 \        '/**',
 \        ' * !description',
 \        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {returnType} !description)%',
+\        '%(returnType| * @return !description)%',
 \        ' */',
 \      ],
 \    },
