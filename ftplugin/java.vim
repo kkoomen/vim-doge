@@ -51,7 +51,7 @@ call add(b:doge_patterns, {
 \        '/**',
 \        ' * !description',
 \        '%(parameters| * {parameters})%',
-\        ' * @return {returnType|void} !description',
+\        '%(returnType| * @return {returnType} !description)%',
 \        ' */',
 \      ],
 \    },

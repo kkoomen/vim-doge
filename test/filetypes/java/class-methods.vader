@@ -24,7 +24,6 @@ Expect java (method with 'TODO' and a @return tag):
 
     /**
      * [TODO:description]
-     * @return void [TODO:description]
      */
     void foo();
   }
@@ -41,11 +40,10 @@ Do (trigger doge):
   :2\<CR>
   \<C-d>
 
-Expect java (method with 'TODO' and a @return tag containing 'void'):
+Expect java (method with 'TODO' and a description):
   class Test {
     /**
      * [TODO:description]
-     * @return void [TODO:description]
      */
     public createSortedList() {}
   }
@@ -106,7 +104,6 @@ Expect java (generated comments with @param and @return tags inserted above the 
      * [TODO:description]
      * @param String p1 [TODO:description]
      * @param int p2 [TODO:description]
-     * @return void [TODO:description]
      */
     @Override
     protected void MyParameterizedMethod(String p1, int p2) {}
