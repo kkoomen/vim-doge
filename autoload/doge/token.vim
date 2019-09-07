@@ -23,8 +23,8 @@ function! s:token_replace(tokens, text) abort
     " so if the line contains a pipe character with a default value then we
     " grab that value and remove it from the text.
     let l:stripped_token = matchlist(l:text, '\m{\([^|{}]\+\)\(|[^}]*\)\?}')
-    let l:token_default_value = trim(get(l:stripped_token, 2, '|'))[1:]
-    let l:has_token_default_value = !empty(trim(get(l:stripped_token, 2, '')))
+    let l:token_default_value = doge#helpers#trim(get(l:stripped_token, 2, '|'))[1:]
+    let l:has_token_default_value = !empty(doge#helpers#trim(get(l:stripped_token, 2, '')))
     if l:has_token_default_value
       let l:text = substitute(
             \ l:text,
@@ -125,7 +125,7 @@ function! doge#token#extract(text, regex, regex_group_names) abort
   let l:submatches = []
   call substitute(a:text, a:regex, '\=add(l:submatches, submatch(0))', 'g')
 
-  let l:matches = map(l:submatches, { key, val -> trim(val) })
+  let l:matches = map(l:submatches, { key, val -> doge#helpers#trim(val) })
   let l:tokens = []
 
   " We can expect a list of matches like:
@@ -148,7 +148,7 @@ function! doge#token#extract(text, regex, regex_group_names) abort
       for l:token in a:regex_group_names
         let l:group_idx = index(a:regex_group_names, l:token)
         let l:token_value = l:values[l:group_idx + 1]
-        let l:group[l:token] = trim(l:token_value)
+        let l:group[l:token] = doge#helpers#trim(l:token_value)
       endfor
 
       call add(l:tokens, l:group)
