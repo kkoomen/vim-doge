@@ -104,12 +104,6 @@ snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
 
 if g:doge_enable_mappings == v:true
   execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
-  execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-  execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
-  execute(printf('imap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-  execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
-  execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-  execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
 endif
 
 ""
