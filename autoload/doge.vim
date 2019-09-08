@@ -5,9 +5,6 @@ set cpoptions&vim
 " @public
 " Generates documentation based on available patterns in b:doge_patterns.
 function! doge#generate() abort
-  if exists('b:doge_interactive')
-    return doge#deactivate()
-  endif
   let success = v:false
   if exists('b:doge_patterns')
     for l:pattern in get(b:, 'doge_patterns')
