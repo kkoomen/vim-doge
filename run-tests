@@ -180,8 +180,8 @@ trap cancel_tests INT TERM
 file_number=0
 pid_list=''
 for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
-  if ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ) \
-  || ( [[ $vim =~ ^vim-v7.4 ]] && ((run_vim_74_tests)) ) \
+  if ( [[ $vim =~ ^vim-v7.4 ]] && ((run_vim_74_tests)) ) \
+  || ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.3 ]] && ((run_neovim_03_tests)) ); then
     echo "Starting Vim: $vim..."
