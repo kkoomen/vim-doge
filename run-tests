@@ -29,15 +29,16 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=54344e231921
+current_docker_image_id=9b13c964383b
 
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
 verbose_flag=''
 verbose=0
-run_vim_80_tests=1
+run_vim_74_tests=1
 run_vim_81_tests=1
+run_neovim_02_tests=1
 run_neovim_03_tests=1
 run_linter=1
 
@@ -55,30 +56,48 @@ while [ $# -ne 0 ]; do
   ;;
   --vim-only)
     run_linter=0
+    run_neovim_02_tests=0
     run_neovim_03_tests=0
     shift
   ;;
-  --vim-80-only)
+  --vim-74-only)
     run_linter=0
     run_vim_81_tests=0
+    run_neovim_02_tests=0
     run_neovim_03_tests=0
     shift
   ;;
   --vim-81-only)
     run_linter=0
-    run_vim_80_tests=0
+    run_vim_74_tests=0
+    run_neovim_02_tests=0
+    run_neovim_03_tests=0
+    shift
+  ;;
+  --neovim-only)
+    run_linter=0
+    run_vim_74_tests=0
+    run_vim_81_tests=0
+    shift
+  ;;
+  --neovim-02-only)
+    run_linter=0
+    run_vim_74_tests=0
+    run_vim_81_tests=0
     run_neovim_03_tests=0
     shift
   ;;
   --neovim-03-only)
     run_linter=0
-    run_vim_80_tests=0
+    run_vim_74_tests=0
     run_vim_81_tests=0
+    run_neovim_02_tests=0
     shift
   ;;
   --linter-only)
-    run_vim_80_tests=0
+    run_vim_74_tests=0
     run_vim_81_tests=0
+    run_neovim_02_tests=0
     run_neovim_03_tests=0
     shift
   ;;
@@ -91,8 +110,10 @@ while [ $# -ne 0 ]; do
       echo 'Options:'
       echo '  -v                Enable verbose output'
       echo '  --vim-only        Run tests only for Vim 8.0 and 8.1'
-      echo '  --vim-80-only     Run tests only for Vim 8.0'
+      echo '  --vim-74-only     Run tests only for Vim 7.4'
       echo '  --vim-81-only     Run tests only for Vim 8.1'
+      echo '  --neovim-only     Run tests only for NeoVim 0.2 and 0.3'
+      echo '  --neovim-02-only  Run tests only for NeoVim 0.2'
       echo '  --neovim-03-only  Run tests only for NeoVim 0.3'
       echo '  --linters-only    Run only Vint'
       echo '  --help            Show this help text'
@@ -160,7 +181,8 @@ file_number=0
 pid_list=''
 for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
   if ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ) \
-  || ( [[ $vim =~ ^vim-v8.0 ]] && ((run_vim_80_tests)) ) \
+  || ( [[ $vim =~ ^vim-v7.4 ]] && ((run_vim_74_tests)) ) \
+  || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.3 ]] && ((run_neovim_03_tests)) ); then
     echo "Starting Vim: $vim..."
     file_number=$((file_number+1))
