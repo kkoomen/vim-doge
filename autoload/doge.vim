@@ -8,13 +8,13 @@ function! doge#generate() abort
   if exists('b:doge_interactive')
     return doge#deactivate()
   endif
-  let success = 0
+  let success = v:false
   if exists('b:doge_patterns')
     for l:pattern in get(b:, 'doge_patterns')
       if doge#generate#pattern(l:pattern) == v:false
         continue
       else
-        let success = 1
+        let success = v:true
       endif
       if success
         call doge#activate()
@@ -28,6 +28,9 @@ endfunction
 " @public
 " Activate doge mappings
 function! doge#activate() abort
+  if !get(g:, 'doge_comment_interactive', 1)
+    return
+  endif
   let [f, b] = [g:doge_mapping_comment_jump_forward, g:doge_mapping_comment_jump_backward]
   execute 'nmap <nowait><silent><buffer>' f '<Plug>(doge-comment-jump-forward)'
   execute 'nmap <nowait><silent><buffer>' b '<Plug>(doge-comment-jump-backward)'
@@ -49,6 +52,9 @@ endfunction
 " Can print a message with the reason of deactivation/termination.
 function! doge#deactivate(...) abort
   unlet b:doge_interactive
+  if !get(g:, 'doge_comment_interactive', 1)
+    return
+  endif
   execute 'nunmap <buffer>' g:doge_mapping_comment_jump_forward
   execute 'nunmap <buffer>' g:doge_mapping_comment_jump_backward
   execute 'iunmap <buffer>' g:doge_mapping_comment_jump_forward
