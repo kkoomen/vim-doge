@@ -79,10 +79,19 @@ function! doge#comment#jump(direction) abort
 
       if l:jump_keyseq != v:false
         if l:todo_count == 1
-          " Last placeholder reached
+          " One placeholder left
           call doge#deactivate('reached last placeholder')
         endif
         return l:jump_keyseq
+      elseif a:direction == 'forward'
+        " Last placeholder, go forward to first
+        exe b:doge_interactive['lnum_comment_start_pos']
+        return doge#comment#jump('forward')
+      elseif a:direction == 'backward'
+        " First placeholder, go back to last
+        let l = b:doge_interactive['lnum_comment_end_pos']
+        call cursor(l, col([l, '$']))
+        return doge#comment#jump('backward')
       endif
     else
       " All the TODO items have been resolved, so we're done.
