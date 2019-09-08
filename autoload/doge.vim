@@ -25,7 +25,7 @@ endfunction
 " @public
 " Activate doge mappings
 function! doge#activate() abort
-  if !get(g:, 'doge_comment_interactive', 1)
+  if !get(g:, 'doge_comment_interactive', 1) || !get(g:, 'doge_buffer_mappings', 0)
     return
   endif
   let [f, b] = [g:doge_mapping_comment_jump_forward, g:doge_mapping_comment_jump_backward]
@@ -35,7 +35,7 @@ function! doge#activate() abort
   execute 'imap <nowait><silent><buffer>' b '<Plug>(doge-comment-jump-backward)'
   execute 'smap <nowait><silent><buffer>' f '<Plug>(doge-comment-jump-forward)'
   execute 'smap <nowait><silent><buffer>' b '<Plug>(doge-comment-jump-backward)'
-  if get(g:, 'doge_activation_message', 1)
+  if get(g:, 'doge_activation_message', 0)
     echo '[vim-doge] '
     echohl Label
     echon 'activated'
@@ -49,7 +49,7 @@ endfunction
 " Can print a message with the reason of deactivation/termination.
 function! doge#deactivate(...) abort
   unlet b:doge_interactive
-  if !get(g:, 'doge_comment_interactive', 1)
+  if !get(g:, 'doge_comment_interactive', 1) || !get(g:, 'doge_buffer_mappings', 0)
     return
   endif
   execute 'nunmap <buffer>' g:doge_mapping_comment_jump_forward
@@ -58,7 +58,7 @@ function! doge#deactivate(...) abort
   execute 'iunmap <buffer>' g:doge_mapping_comment_jump_backward
   execute 'sunmap <buffer>' g:doge_mapping_comment_jump_forward
   execute 'sunmap <buffer>' g:doge_mapping_comment_jump_backward
-  if get(g:, 'doge_deactivation_message', 1)
+  if get(g:, 'doge_deactivation_message', 0)
     echo '[vim-doge] '
     echohl WarningMsg
     echon 'deactivated'

@@ -68,6 +68,15 @@ if !exists('g:doge_mapping')
   let g:doge_mapping = '<Leader>d'
 endif
 
+if !exists('g:doge_buffer_mappings')
+  ""
+  " (Default: 0)
+  "
+  " Mappings to jump forward/backward are applied as buffer mappings when
+  " interactive mode starts, and removed when it ends.
+  let g:doge_buffer_mappings = 0
+endif
+
 if !exists('g:doge_mapping_comment_jump_forward')
   ""
   " (Default: '<Tab>')
@@ -104,6 +113,14 @@ snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
 
 if g:doge_enable_mappings == v:true
   execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
+  if !g:doge_buffer_mappings
+    execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+    execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+    execute(printf('imap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+    execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+    execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
+    execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+  endif
 endif
 
 ""
