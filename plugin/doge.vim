@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:unsupported_vim = !has('nvim') && (v:version < 700 && !has('patch-7.4.2219'))
+let s:unsupported_vim = !has('nvim') && (v:version < 700 || !has('patch-7.4.2219'))
 let s:unsupported_nvim = has('nvim') && !has('nvim-0.2.0')
 let s:unsupported_msg = '[DoGe] Unsupported version. %s is required.'
 
