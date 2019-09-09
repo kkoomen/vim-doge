@@ -36,7 +36,7 @@ function! doge#activate() abort
   execute 'smap <nowait><silent><buffer>' f '<Plug>(doge-comment-jump-forward)'
   execute 'smap <nowait><silent><buffer>' b '<Plug>(doge-comment-jump-backward)'
   if get(g:, 'doge_activation_message', 0)
-    echo '[vim-doge] '
+    echo '[DoGe] '
     echohl Label
     echon 'activated'
     echohl None
@@ -59,7 +59,7 @@ function! doge#deactivate(...) abort
   execute 'sunmap <buffer>' g:doge_mapping_comment_jump_forward
   execute 'sunmap <buffer>' g:doge_mapping_comment_jump_backward
   if get(g:, 'doge_deactivation_message', 0)
-    echo '[vim-doge] '
+    echo '[DoGe] '
     echohl WarningMsg
     echon 'deactivated'
     echohl None
