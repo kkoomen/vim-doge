@@ -73,7 +73,7 @@ endfunction
 let s:no_trim = ( has('nvim') && !has('nvim-0.3.2') ) ||
       \         ( !has('nvim') && (v:version < 800 || (v:version == 800 && !has('patch1630'))) )
 
-let s:trim_pattern = '^[ \t\x0B\xA0]*\(.\{-}\)[ \t\x0B\xA0]*$'
+let s:trim_pattern = '^[ \t\n\r\x0B\xA0]*\(.\{-}\)[ \t\n\r\x0B\xA0]*$'
 
 function! doge#helpers#trim(string) abort
   return s:no_trim ? substitute(a:string, s:trim_pattern, '\1', '') : trim(a:string)
