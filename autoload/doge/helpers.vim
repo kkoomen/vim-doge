@@ -2,7 +2,7 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
-      \         (!has('nvim') && (v:version < 800 || !has('patch8.0.1630')))
+      \         (!has('nvim') && (v:version < 800 || !has('patch-8.0.1630')))
 
 ""
 " @public
