@@ -10,7 +10,7 @@ if !has('nvim') && (v:version < 700 || !has('patch-7.4.2119'))
   finish
 endif
 
-if has('nvim') && !has('nvim-0.2.0') == v:true
+if has('nvim') && !has('nvim-0.2.0')
   echohl WarningMsg
   echo printf(s:unsupported_msg, 'NeoVim v0.2.0+')
   echohl None
