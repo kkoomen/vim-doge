@@ -77,18 +77,30 @@ function! doge#comment#jump(direction) abort
 
       let l:jump_keyseq = call(printf('s:jump_%s', a:direction), [])
 
-      if l:jump_keyseq != v:false
+      " If buffer mappings are used, we deactivate them as soon as the last
+      " placeholder is reached. Moreover we keep cycling placeholders when
+      " pressing <Tab>, as long as there is more than one left.
+      " NOTE: this is not default behaviour otherwise, because of failing tests.
+
+      if !g:doge_buffer_mappings
+        if l:jump_keyseq != v:false
+          return l:jump_keyseq
+        endif
+
+      elseif l:jump_keyseq != v:false
         if l:todo_count == 1
           " One placeholder left
           call doge#deactivate('reached last placeholder')
         endif
         return l:jump_keyseq
+
       elseif a:direction == 'forward'
-        " Last placeholder, go forward to first
+        " Last placeholder, go to first
         exe b:doge_interactive['lnum_comment_start_pos']
         return doge#comment#jump('forward')
+
       elseif a:direction == 'backward'
-        " First placeholder, go back to last
+        " First placeholder, go to last
         let l = b:doge_interactive['lnum_comment_end_pos']
         call cursor(l, col([l, '$']))
         return doge#comment#jump('backward')
