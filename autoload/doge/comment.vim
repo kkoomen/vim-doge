@@ -60,7 +60,7 @@ function! doge#comment#jump(direction) abort
   if exists('b:doge_interactive')
     " Quit interactive mode if the cursor is outside of the comment.
     if line('.') < b:doge_interactive['lnum_comment_start_pos'] || line('.') > b:doge_interactive['lnum_comment_end_pos']
-      unlet b:doge_interactive
+      call doge#deactivate('outside of comment area')
       return l:regular_mapping
     endif
 
@@ -81,7 +81,7 @@ function! doge#comment#jump(direction) abort
       endif
     else
       " All the TODO items have been resolved, so we're done.
-      unlet b:doge_interactive
+      call doge#deactivate('end of placeholders')
     endif
   endif
 
