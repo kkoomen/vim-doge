@@ -94,15 +94,15 @@ function! doge#comment#jump(direction) abort
         endif
         return l:jump_keyseq
 
-      elseif a:direction == 'forward'
+      elseif a:direction ==# 'forward'
         " Last placeholder, go to first
         exe b:doge_interactive['lnum_comment_start_pos']
         return doge#comment#jump('forward')
 
-      elseif a:direction == 'backward'
+      elseif a:direction ==# 'backward'
         " First placeholder, go to last
-        let l = b:doge_interactive['lnum_comment_end_pos']
-        call cursor(l, col([l, '$']))
+        let l:line = b:doge_interactive['lnum_comment_end_pos']
+        call cursor(l:line, col([l:line, '$']))
         return doge#comment#jump('backward')
       endif
     else
