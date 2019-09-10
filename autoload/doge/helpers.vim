@@ -72,8 +72,9 @@ endfunction
 " @public
 " Helper for compatibility with vim versions without the trim() function.
 function! doge#helpers#trim(string) abort
+  let l:chars = '[ \t\n\r\x0B\xA0]*'
   return s:no_trim
-        \ ? substitute(a:string, '^[ \t\n\r\x0B\xA0]*\(.\{-}\)[ \t\n\r\x0B\xA0]*$', '\1', '')
+        \ ? substitute(a:string, printf('^%s\(.\{-}\)%s$', l:chars, l:chars), '\1', '')
         \ : trim(a:string)
 endfunction
 
