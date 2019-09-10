@@ -68,6 +68,15 @@ if !exists('g:doge_mapping')
   let g:doge_mapping = '<Leader>d'
 endif
 
+if !exists('g:doge_wrap_around')
+  ""
+  " (Default: 0)
+  "
+  " Cycle among placeholders when reaching last one (or first if jumping
+  " backward)
+  let g:doge_wrap_around = 0
+endif
+
 if !exists('g:doge_mapping_comment_jump_forward')
   ""
   " (Default: '<Tab>')

@@ -51,6 +51,12 @@ The mapping to jump backward to the previous TODO item in a comment. Requires
 
 Jumps interactively through all TODO items in the generated comment.
 
+                                                          *g:doge_wrap_around*
+(Default: 0)
+
+Cycle among placeholders when reaching the last one (or first one if jumping
+backwards).
+
 ==============================================================================
 COMMANDS                                                       *doge-commands*
 

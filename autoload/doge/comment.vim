@@ -5,7 +5,8 @@ let s:comment_placeholder = doge#helpers#placeholder()
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
-  let l:next_pos = search(s:comment_placeholder, 'nW')
+  let l:wrap = g:doge_wrap_around ? 'w' : 'W'
+  let l:next_pos = search(s:comment_placeholder, 'n' . l:wrap)
 
   " Check if the next pos we want to jump to is still inside the comment.
   if l:next_pos != 0 && l:next_pos <= b:doge_interactive['lnum_comment_end_pos']
@@ -28,7 +29,8 @@ endfunction
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_backward() abort
-  let l:prev_pos = search(s:comment_placeholder, 'bnW')
+  let l:wrap = g:doge_wrap_around ? 'w' : 'W'
+  let l:prev_pos = search(s:comment_placeholder, 'bn' . l:wrap)
 
   " Check if the prev pos we want to jump to is still inside the comment.
   if l:prev_pos != 0 && l:prev_pos >= b:doge_interactive['lnum_comment_start_pos']
