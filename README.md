@@ -9,6 +9,7 @@
   </a>
   <img src="https://img.shields.io/badge/vim-7.4.2119%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.2.0%2B-informational.svg" alt="Minimum supported NeoVim version" />
+  <img src="https://img.shields.io/github/v/tag/kkoomen/vim-doge?label=version" alt="Latest version" />
   <a href="https://github.com/kkoomen/vim-doge/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/kkoomen/vim-doge.svg" alt="License" />
   </a>
