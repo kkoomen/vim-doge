@@ -68,15 +68,15 @@ endfunction
 
 ""
 " @public
-" Helper for compatibility with vim versions without the trim() function
-
-let s:no_trim = ( has('nvim') && !has('nvim-0.3.2') ) ||
-      \         ( !has('nvim') && (v:version < 800 || (v:version == 800 && !has('patch1630'))) )
-
-let s:trim_pattern = '^[ \t\n\r\x0B\xA0]*\(.\{-}\)[ \t\n\r\x0B\xA0]*$'
-
+" Helper for compatibility with vim versions without the trim() function.
 function! doge#helpers#trim(string) abort
-  return s:no_trim ? substitute(a:string, s:trim_pattern, '\1', '') : trim(a:string)
+  let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
+        \         (!has('nvim') && (v:version < 800 || !has('patch8.0.1630')))
+
+  let s:trim_pattern = '^[ \t\n\r\x0B\xA0]*\(.\{-}\)[ \t\n\r\x0B\xA0]*$'
+  return s:no_trim
+        \ ? substitute(a:string, s:trim_pattern, '\1', '')
+        \ : trim(a:string)
 endfunction
 
 let &cpoptions = s:save_cpo
