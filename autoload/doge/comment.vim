@@ -119,8 +119,8 @@ function! doge#comment#update_interactive_comment_info() abort
       " So the idea is to just loop through every line until we come across a
       " non-comment line.
       let l:lnum_comment_end_pos = line('.')
-      let l:comment_last_line = trim(b:doge_interactive['comment'][-1])[0]
-      while trim(getline(l:lnum_comment_end_pos)) =~# printf('\m^%s', l:comment_last_line)
+      let l:comment_last_line = doge#helpers#trim(b:doge_interactive['comment'][-1])[0]
+      while doge#helpers#trim(getline(l:lnum_comment_end_pos)) =~# printf('\m^%s', l:comment_last_line)
         let l:lnum_comment_end_pos += 1
       endwhile
 

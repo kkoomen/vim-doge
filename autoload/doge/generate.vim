@@ -13,12 +13,12 @@ function! doge#generate#pattern(pattern) abort
         \ substitute(line, b:doge_pattern_single_line_comment, '' ,'g') })
 
   " Skip if the cursor doesn't start with text.
-  if empty(trim(l:lines[0]))
+  if empty(doge#helpers#trim(l:lines[0]))
     return 0
   endif
 
   " Skip if the current line does not match the main pattern.
-  let l:curr_line_raw = escape(trim(join(l:lines, ' ')), '\')
+  let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
   if l:curr_line_raw !~# a:pattern['match']
     return 0
   endif

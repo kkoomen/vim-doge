@@ -1,11 +1,18 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:unsupported_vim = !has('nvim') && (v:version < 800 || (v:version == 800 && !has('patch1630')))
-let s:unsupported_nvim = has('nvim') && !has('nvim-0.3.2')
-if s:unsupported_vim == v:true || s:unsupported_nvim == v:true
+let s:unsupported_msg = '[DoGe] Unsupported version. %s is required.'
+
+if !has('nvim') && (v:version < 700 || !has('patch-7.4.2119'))
   echohl WarningMsg
-  echo '[DoGe] Unsupported version. Vim v8.0.1630+ is required.'
+  echo printf(s:unsupported_msg, 'Vim v7.4.2219+')
+  echohl None
+  finish
+endif
+
+if has('nvim') && !has('nvim-0.2.0')
+  echohl WarningMsg
+  echo printf(s:unsupported_msg, 'NeoVim v0.2.0+')
   echohl None
   finish
 endif

@@ -9,7 +9,7 @@ function! doge#preprocessors#groovy#insert_position(lnum_insert_pos) abort
   " Example:
   "   @Override
   "   public void myFunc() {}
-  if trim(getline(line('.') - 1)) ==? '@Override'
+  if doge#helpers#trim(getline(line('.') - 1)) ==? '@Override'
     return a:lnum_insert_pos - 1
   endif
 

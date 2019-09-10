@@ -1,6 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
+      \         (!has('nvim') && (v:version < 800 || !has('patch-8.0.1630')))
+
 ""
 " @public
 " @function doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
@@ -30,7 +33,7 @@ function! doge#helpers#count(word, ...) abort
     return 0
   endtry
   call setpos('.', l:cursor_pos)
-  return trim(strpart(l:cnt, 0, stridx(l:cnt, ' ')))
+  return doge#helpers#trim(strpart(l:cnt, 0, stridx(l:cnt, ' ')))
 endfunction
 
 ""
@@ -44,7 +47,6 @@ function! doge#helpers#keyseq(seq) abort
   let l:keyseq = eval(l:escaped_keyseq)
   return l:keyseq
 endfunction
-
 
 ""
 " @public
@@ -64,6 +66,16 @@ function! doge#helpers#placeholder(...) abort
   else
     return printf('[TODO:%s]', a:1)
   endif
+endfunction
+
+""
+" @public
+" Helper for compatibility with vim versions without the trim() function.
+function! doge#helpers#trim(string) abort
+  let l:chars = '[ \t\n\r\x0B\xA0]*'
+  return s:no_trim
+        \ ? substitute(a:string, printf('\m^%s\(.\{-}\)%s$', l:chars, l:chars), '\1', '')
+        \ : trim(a:string)
 endfunction
 
 let &cpoptions = s:save_cpo
