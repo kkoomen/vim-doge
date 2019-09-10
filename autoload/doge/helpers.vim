@@ -1,6 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
+      \         (!has('nvim') && (v:version < 800 || !has('patch8.0.1630')))
+
 ""
 " @public
 " @function doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
@@ -45,7 +48,6 @@ function! doge#helpers#keyseq(seq) abort
   return l:keyseq
 endfunction
 
-
 ""
 " @public
 " Generate a placeholder with optionally a context. Optionally, you can pass the
@@ -70,12 +72,8 @@ endfunction
 " @public
 " Helper for compatibility with vim versions without the trim() function.
 function! doge#helpers#trim(string) abort
-  let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
-        \         (!has('nvim') && (v:version < 800 || !has('patch8.0.1630')))
-
-  let s:trim_pattern = '^[ \t\n\r\x0B\xA0]*\(.\{-}\)[ \t\n\r\x0B\xA0]*$'
   return s:no_trim
-        \ ? substitute(a:string, s:trim_pattern, '\1', '')
+        \ ? substitute(a:string, '^[ \t\n\r\x0B\xA0]*\(.\{-}\)[ \t\n\r\x0B\xA0]*$', '\1', '')
         \ : trim(a:string)
 endfunction
 
