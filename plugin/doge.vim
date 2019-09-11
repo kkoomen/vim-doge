@@ -103,6 +103,14 @@ if !exists('g:doge_comment_interactive')
   let g:doge_comment_interactive = 1
 endif
 
+if !exists('g:doge_comment_jump_wrap')
+  ""
+  " (Default: 1)
+  "
+  " Continue to cycle among placeholders when reaching the start or end.
+  let g:doge_comment_jump_wrap = 1
+endif
+
 " Register all the <Plug> mappings.
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
 for g:mode in ['n', 'i', 's']

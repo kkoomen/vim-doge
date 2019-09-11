@@ -20,7 +20,7 @@ Then (all buffer mappings should not exists anymore):
   AssertEqual 0, hasmapto('<Plug>(doge-comment-jump-forward)', 'nis')
   AssertEqual 0, hasmapto('<Plug>(doge-comment-jump-backward)', 'nis')
 
-Expect php (generated comment with @param and @return tags):
+Expect php (generated comment with a description and @return tag):
   /**
    * Lorem ipsum
    *

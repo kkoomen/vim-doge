@@ -37,14 +37,14 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
   * [Options](#options)
     + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     + [`g:doge_mapping`](#gdoge_mapping)
+    + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+    + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
 - [Commands](#commands)
     + [`:DogeGenerate`](#dogegenerate)
 - [Help](#help)
-- [FAQ](#faq)
-    + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
 - [Contributing](#contributing)
 - [Motivation](#motivation)
 - [Supporting DoGe](#supporting-doge)
@@ -144,6 +144,13 @@ Default: `'<Leader>d'`
 
 The mapping to trigger DoGe.
 
+### `g:doge_buffer_mappings`
+
+Default: `1`
+
+Mappings to jump forward/backward are applied as buffer mappings when
+interactive mode starts, and removed when it ends.
+
 ### `g:doge_mapping_comment_jump_forward`
 
 Default: `'<Tab>'`
@@ -164,6 +171,12 @@ Default: `1`
 
 Jumps interactively through all `TODO` items in the generated comment.
 
+### `g:doge_comment_jump_wrap`
+
+Default: `1`
+
+Continue to cycle among placeholders when reaching the start or end.
+
 # Commands
 
 ### `:DogeGenerate`
@@ -173,22 +186,6 @@ Command to generate documentation.
 # Help
 
 To open all the help pages, run `:help doge`.
-
-# FAQ
-
-### Jump-forward trigger requires to be pressed 2 times in order to jump forward
-
-**Problem:**
-This is because you have another plugin that overrides the DoGe default `<Tab>`
-mapping in select mode. UltiSnips could be one of them for most people or any
-other plugin that maps the `<Tab>` character in select mode.
-
-
-**Solution:**
-You can solve this by re-mapping the jump forward/backward keys using
-`g:doge_mapping_comment_jump_forward` and `g:doge_mapping_comment_jump_backward`
-or re-map the other plugins. You can also load DoGe earlier since it uses `nore`
-and thus should prevent other plugins from overwriting at a later stage.
 
 # Contributing
 
