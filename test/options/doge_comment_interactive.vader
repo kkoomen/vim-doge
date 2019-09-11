@@ -1,8 +1,5 @@
 # ==============================================================================
 # Tests the functionality for the g:doge_comment_interactive option.
-#
-# We test PHP because we will test the functionality of a commment being
-# inserted above.
 # ==============================================================================
 Given php (PHP function with parameters where g:doge_comment_interactive = 0):
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
@@ -183,4 +180,5 @@ Expect python (generated comment with :param tags with brief descriptions):
       pass
 
 Do (let g:doge_comment_interactive = 0):
+# Disable the option again so that upcoming tests will not fail.
   :let g:doge_comment_interactive = 0\<CR>

@@ -5,7 +5,7 @@ let s:unsupported_msg = '[DoGe] Unsupported version. %s is required.'
 
 if !has('nvim') && (v:version < 700 || !has('patch-7.4.2119'))
   echohl WarningMsg
-  echo printf(s:unsupported_msg, 'Vim v7.4.2219+')
+  echo printf(s:unsupported_msg, 'Vim v7.4.2119+')
   echohl None
   finish
 endif
@@ -68,6 +68,15 @@ if !exists('g:doge_mapping')
   let g:doge_mapping = '<Leader>d'
 endif
 
+if !exists('g:doge_buffer_mappings')
+  ""
+  " (Default: 1)
+  "
+  " Mappings to jump forward/backward are applied as buffer mappings when
+  " interactive mode starts, and removed when it ends.
+  let g:doge_buffer_mappings = 1
+endif
+
 if !exists('g:doge_mapping_comment_jump_forward')
   ""
   " (Default: '<Tab>')
@@ -102,22 +111,23 @@ if !exists('g:doge_comment_jump_wrap')
   let g:doge_comment_jump_wrap = 1
 endif
 
+" Register all the <Plug> mappings.
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
-nnoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
-nnoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
-inoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
-inoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
-snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump('forward')
-snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump('backward')
+for g:mode in ['n', 'i', 's']
+  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', g:mode))
+  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', g:mode))
+endfor
+unlet g:mode
 
 if g:doge_enable_mappings == v:true
   execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
-  execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-  execute(printf('nmap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
-  execute(printf('imap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-  execute(printf('imap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
-  execute(printf('smap <silent> %s <Plug>(doge-comment-jump-forward)', g:doge_mapping_comment_jump_forward))
-  execute(printf('smap <silent> %s <Plug>(doge-comment-jump-backward)', g:doge_mapping_comment_jump_backward))
+  if g:doge_buffer_mappings == v:false
+    for g:mode in ['n', 'i', 's']
+      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-forward)', g:mode, g:doge_mapping_comment_jump_forward))
+      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-backward)', g:mode, g:doge_mapping_comment_jump_backward))
+    endfor
+    unlet g:mode
+  endif
 endif
 
 ""
