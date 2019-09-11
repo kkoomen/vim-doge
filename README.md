@@ -37,10 +37,20 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
   * [Options](#options)
     + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     + [`g:doge_mapping`](#gdoge_mapping)
+    + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
     + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
+- [Commands](#commands)
+    + [`:DogeGenerate`](#dogegenerate)
+- [Help](#help)
+- [FAQ](#faq)
+    + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
+- [Contributing](#contributing)
+- [Motivation](#motivation)
+- [Supporting DoGe](#supporting-doge)
+- [License](#license)
 - [Commands](#commands)
     + [`:DogeGenerate`](#dogegenerate)
 - [Help](#help)
@@ -144,6 +154,13 @@ Whether or not to enable built-in mappings.
 Default: `'<Leader>d'`
 
 The mapping to trigger DoGe.
+
+### `g:doge_buffer_mappings`
+
+Default: `1`
+
+Mappings to jump forward/backward are applied as buffer mappings when
+interactive mode starts, and removed when it ends.
 
 ### `g:doge_mapping_comment_jump_forward`
 
