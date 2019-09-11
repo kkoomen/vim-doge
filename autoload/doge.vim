@@ -25,6 +25,12 @@ endfunction
 " @public
 " Activate doge buffer mappings, if option is set.
 function! doge#activate() abort
+  " Ensure lazyredraw is enabled
+  if get(g:, 'doge_lazyredraw', 1) && &lazyredraw == v:false
+    set lazyredraw
+    let s:doge_lazyredraw = 1
+  endif
+
   if g:doge_comment_interactive == v:false || g:doge_buffer_mappings == v:false
     return
   endif
@@ -44,6 +50,11 @@ endfunction
 " Deactivate doge mappings and unlet buffer variable.
 " Can print a message with the reason of deactivation/termination.
 function! doge#deactivate() abort
+  " Disable lazyredraw if it was previously enabled
+  if exists('s:doge_lazyredraw')
+    set nolazyredraw
+    unlet s:doge_lazyredraw
+  endif
   unlet b:doge_interactive
 
   if g:doge_comment_interactive == v:false || g:doge_buffer_mappings == v:false
