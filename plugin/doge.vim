@@ -73,7 +73,7 @@ if !exists('g:doge_buffer_mappings')
   " (Default: 1)
   "
   " Mappings to jump forward/backward are applied as buffer mappings when
-  " interactive mode starts, and removed when it ends.
+  " interactive mode starts and removed when it ends.
   let g:doge_buffer_mappings = 1
 endif
 

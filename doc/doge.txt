@@ -38,7 +38,7 @@ The mapping to trigger DoGe.
 (Default: 1)
 
 Mappings to jump forward/backward are applied as buffer mappings when
-interactive mode starts, and removed when it ends.
+interactive mode starts and removed when it ends.
 
                                          *g:doge_mapping_comment_jump_forward*
 (Default: '<Tab>')
