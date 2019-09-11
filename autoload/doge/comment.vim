@@ -5,17 +5,13 @@ let s:comment_placeholder = doge#helpers#placeholder()
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
-  let l:wrap = g:doge_comment_jump_wrap == v:true ? 'w' : 'W'
-  let l:next_pos = search(s:comment_placeholder, 'n' . l:wrap)
+  let l:next_pos = search(s:comment_placeholder, 'nW')
 
-  if l:next_pos != 0
-        \ && l:next_pos > b:doge_interactive['lnum_comment_end_pos']
-        \ && g:doge_comment_jump_wrap == v:true
-        \ && mode() ==# 's'
-    " If we have more TODO items below the comment then we'll go back to the
-    " start position of the comment so we can continue to cycle. This option is
-    " a 2nd solution besides the 'w' or 'W' being used in the initial search()
-    " function (called at the top of this function).
+  if (l:next_pos != 0 && l:next_pos > b:doge_interactive['lnum_comment_end_pos'] || l:next_pos == 0)
+    \ && g:doge_comment_jump_wrap == v:true
+    " If we have more TODO items below the comment or we are at the last TODO
+    " inside the comment, then we'll go backward to the start position of the
+    " comment so we can continue to cycle.
     return "\<Esc>:" . b:doge_interactive['lnum_comment_start_pos'] . "\<CR>/" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
   endif
 
@@ -40,17 +36,13 @@ endfunction
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_backward() abort
-  let l:wrap = g:doge_comment_jump_wrap == v:true ? 'w' : 'W'
-  let l:prev_pos = search(s:comment_placeholder, 'bn' . l:wrap)
+  let l:prev_pos = search(s:comment_placeholder, 'bnW')
 
-  if l:prev_pos != 0
-        \ && l:prev_pos < b:doge_interactive['lnum_comment_start_pos']
-        \ && g:doge_comment_jump_wrap == v:true
-        \ && mode() ==# 's'
-    " If we have more TODO items above the comment then we'll go forward to the
-    " end position of the comment so we can continue to cycle. This option is
-    " a 2nd solution besides the 'w' or 'W' being used in the initial search()
-    " function (called at the top of this function).
+  if (l:prev_pos != 0 && l:prev_pos < b:doge_interactive['lnum_comment_start_pos'] || l:prev_pos == 0)
+    \ && g:doge_comment_jump_wrap == v:true
+    " If we have more TODO items above the comment or we are at the first TODO
+    " inside the comment, then we'll go forward to the end position of the
+    " comment so we can continue to cycle.
     return "\<Esc>:" . b:doge_interactive['lnum_comment_end_pos'] . "\<CR>?" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
   endif
 
