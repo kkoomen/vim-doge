@@ -34,6 +34,12 @@ Whether or not to enable built-in mappings.
 
 The mapping to trigger DoGe.
 
+                                                      *g:doge_buffer_mappings*
+(Default: 1)
+
+Mappings to jump forward/backward are applied as buffer mappings when
+interactive mode starts, and removed when it ends.
+
                                          *g:doge_mapping_comment_jump_forward*
 (Default: '<Tab>')
 
@@ -62,6 +68,13 @@ FUNCTIONS                                                     *doge-functions*
 
 doge#generate()                                              *doge#generate()*
   Generates documentation based on available patterns in b:doge_patterns.
+
+doge#activate()                                              *doge#activate()*
+  Activate doge buffer mappings, if option is set.
+
+doge#deactivate()                                          *doge#deactivate()*
+  Deactivate doge mappings and unlet buffer variable. Can print a message with
+  the reason of deactivation/termination.
 
 doge#comment#jump({direction})                           *doge#comment#jump()*
   Jumps to the previous and next TODO item in the comment based on the
