@@ -34,6 +34,11 @@ Whether or not to enable built-in mappings.
 
 The mapping to trigger DoGe.
 
+                                                    *g:doge_comment_jump_wrap*
+(Default: 1)
+
+Continue to cycle among placeholders when reaching the start or end.
+
                                          *g:doge_mapping_comment_jump_forward*
 (Default: '<Tab>')
 
@@ -50,12 +55,6 @@ The mapping to jump backward to the previous TODO item in a comment. Requires
 (Default: 1)
 
 Jumps interactively through all TODO items in the generated comment.
-
-                                                    *g:doge_comment_jump_wrap*
-(Default: 0)
-
-Cycle among placeholders when reaching the last one (or first one if jumping
-backwards).
 
 ==============================================================================
 COMMANDS                                                       *doge-commands*

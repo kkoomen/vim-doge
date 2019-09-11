@@ -40,6 +40,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+    + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
 - [Commands](#commands)
     + [`:DogeGenerate`](#dogegenerate)
 - [Help](#help)
@@ -163,6 +164,12 @@ The mapping to jump backward to the next `TODO` item in a comment. Requires
 Default: `1`
 
 Jumps interactively through all `TODO` items in the generated comment.
+
+### `g:doge_comment_jump_wrap`
+
+Default: `1`
+
+Continue to cycle among placeholders when reaching the start or end.
 
 # Commands
 

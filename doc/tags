@@ -7,6 +7,7 @@ doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
+doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*

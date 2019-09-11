@@ -11,6 +11,9 @@ endif
 " Since the <Leader> key is not an easy way for Vader we'll use <C-d>.
 let g:doge_mapping = '<C-d>'
 
+" Disable the continues comment cyling since this breaks existing tests.
+let g:doge_comment_jump_wrap = 0
+
 " Disable interactive mode in tests, because it will break existing tests and we
 " want to test this manually.
 let g:doge_comment_interactive = 0

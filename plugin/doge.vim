@@ -68,15 +68,6 @@ if !exists('g:doge_mapping')
   let g:doge_mapping = '<Leader>d'
 endif
 
-if !exists('g:doge_comment_jump_wrap')
-  ""
-  " (Default: 0)
-  "
-  " Cycle among placeholders when reaching last one (or first if jumping
-  " backward)
-  let g:doge_comment_jump_wrap = 0
-endif
-
 if !exists('g:doge_mapping_comment_jump_forward')
   ""
   " (Default: '<Tab>')
@@ -101,6 +92,14 @@ if !exists('g:doge_comment_interactive')
   "
   " Jumps interactively through all TODO items in the generated comment.
   let g:doge_comment_interactive = 1
+endif
+
+if !exists('g:doge_comment_jump_wrap')
+  ""
+  " (Default: 1)
+  "
+  " Continue to cycle among placeholders when reaching the start or end.
+  let g:doge_comment_jump_wrap = 1
 endif
 
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
