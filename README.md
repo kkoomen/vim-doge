@@ -51,15 +51,6 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Motivation](#motivation)
 - [Supporting DoGe](#supporting-doge)
 - [License](#license)
-- [Commands](#commands)
-    + [`:DogeGenerate`](#dogegenerate)
-- [Help](#help)
-- [FAQ](#faq)
-    + [Jump-forward trigger requires to be pressed 2 times in order to jump forward](#jump-forward-trigger-requires-to-be-pressed-2-times-in-order-to-jump-forward)
-- [Contributing](#contributing)
-- [Motivation](#motivation)
-- [Supporting DoGe](#supporting-doge)
-- [License](#license)
 
 # Supported languages and doc standards
 
