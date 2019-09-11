@@ -51,7 +51,7 @@ The mapping to jump backward to the previous TODO item in a comment. Requires
 
 Jumps interactively through all TODO items in the generated comment.
 
-                                                       *g:doge_buffer_mappings*
+                                                      *g:doge_buffer_mappings*
 (Default: 0)
 
 Mappings to jump forward/backward are applied as buffer mappings when
