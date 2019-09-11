@@ -1,12 +1,15 @@
 :DogeGenerate	doge.txt	/*:DogeGenerate*
 doge	doge.txt	/*doge*
+doge#activate()	doge.txt	/*doge#activate()*
 doge#comment#jump()	doge.txt	/*doge#comment#jump()*
 doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_interactive_comment_info()*
+doge#deactivate()	doge.txt	/*doge#deactivate()*
 doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
+doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
@@ -17,6 +20,7 @@ doge-functions	doge.txt	/*doge-functions*
 doge-intro	doge.txt	/*doge-intro*
 doge-preprocessors	doge.txt	/*doge-preprocessors*
 doge.txt	doge.txt	/*doge.txt*
+g:doge_buffer_mappings	doge.txt	/*g:doge_buffer_mappings*
 g:doge_comment_interactive	doge.txt	/*g:doge_comment_interactive*
 g:doge_enable_mappings	doge.txt	/*g:doge_enable_mappings*
 g:doge_mapping	doge.txt	/*g:doge_mapping*

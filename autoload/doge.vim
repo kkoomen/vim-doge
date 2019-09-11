@@ -5,7 +5,7 @@ set cpoptions&vim
 " @public
 " Generates documentation based on available patterns in b:doge_patterns.
 function! doge#generate() abort
-  let l:success = v:false
+  let l:success = 0
   if exists('b:doge_patterns')
     for l:pattern in get(b:, 'doge_patterns')
       if doge#generate#pattern(l:pattern) == v:false
@@ -13,7 +13,7 @@ function! doge#generate() abort
       else
         let l:success = v:true
       endif
-      if l:success
+      if l:success == v:true
         call doge#activate()
       endif
       return l:success
@@ -25,48 +25,39 @@ endfunction
 " @public
 " Activate doge buffer mappings, if option is set.
 function! doge#activate() abort
-  if !g:doge_comment_interactive || !g:doge_buffer_mappings
+  if g:doge_comment_interactive == v:false || g:doge_buffer_mappings == v:false
     return
   endif
-  let [l:f, l:b] = [g:doge_mapping_comment_jump_forward, g:doge_mapping_comment_jump_backward]
-  execute 'nmap <nowait><silent><buffer>' l:f '<Plug>(doge-comment-jump-forward)'
-  execute 'nmap <nowait><silent><buffer>' l:b '<Plug>(doge-comment-jump-backward)'
-  execute 'imap <nowait><silent><buffer>' l:f '<Plug>(doge-comment-jump-forward)'
-  execute 'imap <nowait><silent><buffer>' l:b '<Plug>(doge-comment-jump-backward)'
-  execute 'smap <nowait><silent><buffer>' l:f '<Plug>(doge-comment-jump-forward)'
-  execute 'smap <nowait><silent><buffer>' l:b '<Plug>(doge-comment-jump-backward)'
-  if get(g:, 'doge_activation_message', 0)
-    echo '[DoGe] '
-    echohl Label
-    echon 'activated'
-    echohl None
-  endif
+
+  let [l:f, l:b] = [
+        \ g:doge_mapping_comment_jump_forward,
+        \ g:doge_mapping_comment_jump_backward,
+        \ ]
+  for l:mode in ['n', 'i', 's']
+    execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-forward)', l:mode, l:f))
+    execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-backward)', l:mode, l:b))
+  endfor
 endfunction
 
 ""
 " @public
 " Deactivate doge mappings and unlet buffer variable.
 " Can print a message with the reason of deactivation/termination.
-function! doge#deactivate(...) abort
+function! doge#deactivate() abort
   unlet b:doge_interactive
-  if !g:doge_comment_interactive || !g:doge_buffer_mappings
+
+  if g:doge_comment_interactive == v:false || g:doge_buffer_mappings == v:false
     return
   endif
-  execute 'nunmap <buffer>' g:doge_mapping_comment_jump_forward
-  execute 'nunmap <buffer>' g:doge_mapping_comment_jump_backward
-  execute 'iunmap <buffer>' g:doge_mapping_comment_jump_forward
-  execute 'iunmap <buffer>' g:doge_mapping_comment_jump_backward
-  execute 'sunmap <buffer>' g:doge_mapping_comment_jump_forward
-  execute 'sunmap <buffer>' g:doge_mapping_comment_jump_backward
-  if get(g:, 'doge_deactivation_message', 0)
-    echo '[DoGe] '
-    echohl WarningMsg
-    echon 'deactivated'
-    echohl None
-    if a:0
-      echon ': ' a:1
-    endif
-  endif
+
+  let [l:f, l:b] = [
+        \ g:doge_mapping_comment_jump_forward,
+        \ g:doge_mapping_comment_jump_backward,
+        \ ]
+  for l:mode in ['n', 'i', 's']
+    execute(printf('%sunmap <buffer> %s', l:mode, l:f))
+    execute(printf('%sunmap <buffer> %s', l:mode, l:b))
+  endfor
 endfunction
 
 let &cpoptions = s:save_cpo
