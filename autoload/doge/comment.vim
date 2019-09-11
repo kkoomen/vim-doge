@@ -12,7 +12,7 @@ function! s:jump_forward() abort
     " If we have more TODO items below the comment or we are at the last TODO
     " inside the comment, then we'll go backward to the start position of the
     " comment so we can continue to cycle.
-    return "\<Esc>:" . b:doge_interactive['lnum_comment_start_pos'] . "\<CR>/" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+    return "\<Esc>:" . b:doge_interactive['lnum_comment_start_pos'] . "\<CR>^/" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
   endif
 
   " Check if the next pos we want to jump to is still inside the comment.
