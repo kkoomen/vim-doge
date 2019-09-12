@@ -70,7 +70,7 @@ function myFunction(RedirectResponse $p1) {
 class MyClass {
 
   /**
-   * @var \Drupal\Core\Config\Entity\Query\QueryFactory [TODO:description]
+   * [TODO:description]
    *
    * @param \Drupal\Core\Config\Entity\Query\QueryFactory $eqf [TODO:description]
    * @param \Symfony\Bundle\FrameworkBundle\Controller\AbstractController $controller [TODO:description]
@@ -81,7 +81,7 @@ class MyClass {
   }
 
   /**
-   * @var \Symfony\Bundle\FrameworkBundle\Controller\AbstractController [TODO:description]
+   * [TODO:description]
    *
    * @param array $p1 [TODO:description]
    * @param \Test\Namespacing\With\A\ClassInterface $p2 [TODO:description]
