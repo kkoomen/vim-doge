@@ -7,7 +7,7 @@ set cpoptions&vim
 function! doge#generate() abort
   let l:success = 0
 
-  " Store old search register
+  " Store old search register.
   let s:oldsearch = @/
 
   if exists('b:doge_patterns')
@@ -29,7 +29,7 @@ endfunction
 " @public
 " Activate doge buffer mappings, if option is set.
 function! doge#activate() abort
-  " Ensure lazyredraw is enabled
+  " Ensure lazyredraw is enabled.
   if get(g:, 'doge_lazyredraw', 1) && &lazyredraw == v:false
     set lazyredraw
     let s:doge_lazyredraw = 1
