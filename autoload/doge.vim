@@ -54,14 +54,14 @@ endfunction
 " Deactivate doge mappings and unlet buffer variable.
 " Can print a message with the reason of deactivation/termination.
 function! doge#deactivate() abort
-  " Disable lazyredraw if it was previously enabled
+  " Disable lazyredraw if it was previously enabled.
   if exists('s:doge_lazyredraw')
     set nolazyredraw
     unlet s:doge_lazyredraw
   endif
   unlet b:doge_interactive
 
-  " Restore saved search register
+  " Restore saved search register.
   let @/ = s:oldsearch
 
   if g:doge_comment_interactive == v:false || g:doge_buffer_mappings == v:false
