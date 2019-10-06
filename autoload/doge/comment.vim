@@ -153,5 +153,19 @@ function! doge#comment#update_interactive_comment_info() abort
   endif
 endfunction
 
+function! doge#comment#check_if_placeholders_left() abort
+  " Called on InsertLeave.
+  " If there are no placeholders left at this point, it's safe to assume that
+  " we're finished and interactive mode should be terminated.
+  if exists('b:doge_interactive')
+    let l:pos = getcurpos()[1:2]
+    call cursor(b:doge_interactive['lnum_comment_start_pos'], 1)
+    if search(s:comment_placeholder, 'W', b:doge_interactive['lnum_comment_end_pos']) == v:false
+      call doge#deactivate()
+    endif
+    call cursor(l:pos)
+  endif
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
