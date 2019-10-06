@@ -112,7 +112,7 @@ if !exists('g:doge_comment_jump_wrap')
 endif
 
 " Register all the <Plug> mappings.
-nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
+nnoremap <Plug>(doge-generate) :<c-u>call doge#generate(v:count)<CR>
 for g:mode in ['n', 'i', 's']
   execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', g:mode))
   execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', g:mode))
@@ -132,7 +132,7 @@ endif
 
 ""
 " Command to generate documentation.
-command! -nargs=0 DogeGenerate call doge#generate()
+command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
 
 augroup doge
   autocmd!

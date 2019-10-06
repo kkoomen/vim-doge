@@ -32,7 +32,8 @@ Whether or not to enable built-in mappings.
                                                               *g:doge_mapping*
 (Default: '<Leader>d')
 
-The mapping to trigger DoGe.
+The mapping to trigger DoGe. The mapping accepts a count, to select a specific
+doc standard, if more than one is defined.
 
                                                       *g:doge_buffer_mappings*
 (Default: 1)
@@ -65,8 +66,10 @@ Continue to cycle among placeholders when reaching the start or end.
 ==============================================================================
 COMMANDS                                                       *doge-commands*
 
-:DogeGenerate                                                  *:DogeGenerate*
-  Command to generate documentation.
+:DogeGenerate [N] [doc_standard]                               *:DogeGenerate*
+  Command to generate documentation. It accepts a count or a string as
+  argument, and it can complete the available doc standards for the current
+  buffer.
 
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
