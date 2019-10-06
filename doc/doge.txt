@@ -62,6 +62,12 @@ Jumps interactively through all TODO items in the generated comment.
 
 Continue to cycle among placeholders when reaching the start or end.
 
+                                                   *g:doge_comment_jump_modes*
+(Default: ['n', 'i', 's'])
+
+Defines the modes in which doge jump mapping should work. For example,
+removing 'i' would allow you to use <Tab> for autocompletion in insert mode.
+
 ==============================================================================
 COMMANDS                                                       *doge-commands*
 
