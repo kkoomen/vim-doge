@@ -98,7 +98,14 @@ function! doge#generate#pattern(pattern) abort
     endfor
   endfor
 
-  if a:pattern['comment']['insert'] ==# 'below'
+  " The insertion point can be defined as:
+  " a string (it will be the same for all standards)
+  " a dictionary (its value will be specific for each doc standard)
+  let l:insert_point = type(a:pattern['comment']['insert']) == type({})
+        \              ? a:pattern['comment']['insert'][b:doge_doc_standard]
+        \              : a:pattern['comment']['insert']
+
+  if l:insert_point ==# 'below'
     let l:comment_lnum_insert_position = line('.')
     let l:comment_lnum_inherited_indent = line('.') + 1
   else
@@ -114,7 +121,7 @@ function! doge#generate#pattern(pattern) abort
     " Update the inherited_indent variable based on the new insert position.
     " For now we only have to do this for languages like Python where we insert
     " below the declaration.
-    if a:pattern['comment']['insert'] ==# 'below'
+    if l:insert_point ==# 'below'
       let l:comment_lnum_inherited_indent = l:comment_lnum_insert_position + 1
     endif
   catch /^Vim\%((\a\+)\)\=:E117/
@@ -131,7 +138,7 @@ function! doge#generate#pattern(pattern) abort
 
   " Enable interactive mode.
   if g:doge_comment_interactive == v:true
-    if a:pattern['comment']['insert'] ==# 'below'
+    if l:insert_point ==# 'below'
       let l:todo_match = search(s:comment_placeholder, 'nW', l:comment_lnum_insert_position + len(l:comment))
     else
       let l:todo_match = search(s:comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
