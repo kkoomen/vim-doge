@@ -138,6 +138,7 @@ augroup doge
   autocmd!
   autocmd TextChangedI * call doge#comment#update_interactive_comment_info()
   autocmd InsertLeave  * call doge#comment#check_if_placeholders_left()
+  autocmd TextChanged  * call doge#comment#check_if_placeholders_left()
 augroup END
 
 let &cpoptions = s:save_cpo
