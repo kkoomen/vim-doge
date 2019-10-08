@@ -115,7 +115,9 @@ if !exists('g:doge_comment_jump_modes')
   ""
   " (Default: ['n', 'i', 's'])
   "
-  " Define the modes in which doge jump mapping should work.
+  " Defines the modes in which doge will jump forward and backward when
+  " interactive mode is active. For example: removing 'i' would allow you to use
+  " <Tab> for autocompletion in insert mode.
   let g:doge_comment_jump_modes = ['n', 'i', 's']
 endif
 

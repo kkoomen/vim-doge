@@ -177,6 +177,14 @@ Default: `1`
 
 Continue to cycle among placeholders when reaching the start or end.
 
+### `g:doge_comment_jump_modes`
+
+Default: `['n', 'i', 's']`
+
+Defines the modes in which doge will jump forward and backward when interactive
+mode is active. For example: removing 'i' would allow you to use <Tab> for
+autocompletion in insert mode.
+
 # Commands
 
 ### `:DogeGenerate`
