@@ -111,24 +111,33 @@ if !exists('g:doge_comment_jump_wrap')
   let g:doge_comment_jump_wrap = 1
 endif
 
+if !exists('g:doge_comment_jump_modes')
+  ""
+  " (Default: ['n', 'i', 's'])
+  "
+  " Defines the modes in which doge will jump forward and backward when
+  " interactive mode is active. For example: removing 'i' would allow you to use
+  " <Tab> for autocompletion in insert mode.
+  let g:doge_comment_jump_modes = ['n', 'i', 's']
+endif
+
 " Register all the <Plug> mappings.
 nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
-for g:mode in ['n', 'i', 's']
-  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', g:mode))
-  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', g:mode))
+for s:mode in g:doge_comment_jump_modes
+  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', s:mode))
+  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', s:mode))
 endfor
-unlet g:mode
 
 if g:doge_enable_mappings == v:true
   execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
   if g:doge_buffer_mappings == v:false
-    for g:mode in ['n', 'i', 's']
-      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-forward)', g:mode, g:doge_mapping_comment_jump_forward))
-      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-backward)', g:mode, g:doge_mapping_comment_jump_backward))
+    for s:mode in g:doge_comment_jump_modes
+      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-forward)', s:mode, g:doge_mapping_comment_jump_forward))
+      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-backward)', s:mode, g:doge_mapping_comment_jump_backward))
     endfor
-    unlet g:mode
   endif
 endif
+unlet s:mode
 
 ""
 " Command to generate documentation.
