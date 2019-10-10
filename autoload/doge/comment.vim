@@ -151,7 +151,6 @@ function! doge#comment#update_interactive_comment_info() abort
       let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos - 1
     endif
 
-
     " Update the amount of TODO items left.
     let b:doge_interactive['todo_count'] = doge#helpers#count(
           \ s:comment_placeholder,
