@@ -150,20 +150,27 @@ function! doge#comment#update_interactive_comment_info() abort
 
       let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos - 1
     endif
+
+
+    " Update the amount of TODO items left.
+    let b:doge_interactive['todo_count'] = doge#helpers#count(
+          \ s:comment_placeholder,
+          \ b:doge_interactive['lnum_comment_start_pos'],
+          \ b:doge_interactive['lnum_comment_end_pos']
+          \ )
   endif
 endfunction
 
-function! doge#comment#check_if_placeholders_left() abort
-  " Called on InsertLeave.
-  " If there are no placeholders left at this point, it's safe to assume that
-  " we're finished and interactive mode should be terminated.
+""
+" @public
+" This function is trigged by the auto-commands InsertLeave and TextChanged and
+" will deactivate doge when there are no more TODO items left. Requires
+" @setting(g:doge_comment_interactive) to be enabled.
+function! doge#comment#deactivate_when_done(...) abort
   if exists('b:doge_interactive')
-    let l:pos = getcurpos()[1:2]
-    call cursor(b:doge_interactive['lnum_comment_start_pos'], 1)
-    if search(s:comment_placeholder, 'W', b:doge_interactive['lnum_comment_end_pos']) == v:false
+    if b:doge_interactive['todo_count'] == 0
       call doge#deactivate()
     endif
-    call cursor(l:pos)
   endif
 endfunction
 
