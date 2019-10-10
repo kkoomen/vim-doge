@@ -145,7 +145,6 @@ function! doge#generate#pattern(pattern) abort
       if l:todo_count > 0
         let b:doge_interactive = {
               \ 'comment': l:comment,
-              \ 'todo_count': l:todo_count,
               \ 'lnum_comment_start_pos': (l:comment_lnum_insert_position + 1),
               \ 'lnum_comment_end_pos': (l:comment_lnum_insert_position + len(l:comment)),
               \ }

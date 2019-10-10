@@ -150,13 +150,6 @@ function! doge#comment#update_interactive_comment_info() abort
 
       let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos - 1
     endif
-
-    " Update the amount of TODO items left.
-    let b:doge_interactive['todo_count'] = doge#helpers#count(
-          \ s:comment_placeholder,
-          \ b:doge_interactive['lnum_comment_start_pos'],
-          \ b:doge_interactive['lnum_comment_end_pos']
-          \ )
   endif
 endfunction
 
@@ -167,7 +160,12 @@ endfunction
 " @setting(g:doge_comment_interactive) to be enabled.
 function! doge#comment#deactivate_when_done(...) abort
   if exists('b:doge_interactive')
-    if b:doge_interactive['todo_count'] == 0
+    let l:todo_count = doge#helpers#count(
+          \ s:comment_placeholder,
+          \ b:doge_interactive['lnum_comment_start_pos'],
+          \ b:doge_interactive['lnum_comment_end_pos']
+          \ )
+    if l:todo_count == 0
       call doge#deactivate()
     endif
   endif
