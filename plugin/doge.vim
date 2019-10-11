@@ -146,6 +146,8 @@ command! -nargs=0 DogeGenerate call doge#generate()
 augroup doge
   autocmd!
   autocmd TextChangedI * call doge#comment#update_interactive_comment_info()
+  autocmd InsertLeave  * call doge#comment#deactivate_when_done()
+  autocmd TextChanged  * call doge#comment#deactivate_when_done()
 augroup END
 
 let &cpoptions = s:save_cpo

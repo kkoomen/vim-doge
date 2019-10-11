@@ -100,6 +100,11 @@ doge#comment#update_interactive_comment_info()
   the b:doge_interactive variable where needed. Requires
   |g:doge_comment_interactive| to be enabled.
 
+doge#comment#deactivate_when_done()      *doge#comment#deactivate_when_done()*
+  This function is trigged by the auto-commands InsertLeave and TextChanged
+  and will deactivate doge when there are no more TODO items left. Requires
+  |g:doge_comment_interactive| to be enabled.
+
 doge#generate#pattern({pattern})                     *doge#generate#pattern()*
   Generates a comment based on a given pattern.
 

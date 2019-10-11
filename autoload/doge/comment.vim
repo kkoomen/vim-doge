@@ -153,5 +153,21 @@ function! doge#comment#update_interactive_comment_info() abort
   endif
 endfunction
 
+""
+" @public
+" This function is trigged by the auto-commands InsertLeave and TextChanged and
+" will deactivate doge when there are no more TODO items left. Requires
+" @setting(g:doge_comment_interactive) to be enabled.
+function! doge#comment#deactivate_when_done(...) abort
+  if exists('b:doge_interactive')
+    let l:pos = getcurpos()[1:2]
+    call cursor(b:doge_interactive['lnum_comment_start_pos'], 1)
+    if search(s:comment_placeholder, 'W', b:doge_interactive['lnum_comment_end_pos']) == v:false
+      call doge#deactivate()
+    endif
+    call cursor(l:pos)
+  endif
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

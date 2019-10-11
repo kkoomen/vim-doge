@@ -1,6 +1,7 @@
 :DogeGenerate	doge.txt	/*:DogeGenerate*
 doge	doge.txt	/*doge*
 doge#activate()	doge.txt	/*doge#activate()*
+doge#comment#deactivate_when_done()	doge.txt	/*doge#comment#deactivate_when_done()*
 doge#comment#jump()	doge.txt	/*doge#comment#jump()*
 doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_interactive_comment_info()*
 doge#deactivate()	doge.txt	/*doge#deactivate()*
