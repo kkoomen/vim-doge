@@ -160,14 +160,12 @@ endfunction
 " @setting(g:doge_comment_interactive) to be enabled.
 function! doge#comment#deactivate_when_done(...) abort
   if exists('b:doge_interactive')
-    let l:todo_count = doge#helpers#count(
-          \ s:comment_placeholder,
-          \ b:doge_interactive['lnum_comment_start_pos'],
-          \ b:doge_interactive['lnum_comment_end_pos']
-          \ )
-    if l:todo_count == 0
+    let l:pos = getcurpos()[1:2]
+    call cursor(b:doge_interactive['lnum_comment_start_pos'], 1)
+    if search(s:comment_placeholder, 'W', b:doge_interactive['lnum_comment_end_pos']) == v:false
       call doge#deactivate()
     endif
+    call cursor(l:pos)
   endif
 endfunction
 
