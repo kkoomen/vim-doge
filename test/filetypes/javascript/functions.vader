@@ -7,9 +7,10 @@ Given javascript (function without parameters):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with nothing but the text 'TODO'):
+Expect javascript (generated comment with a description and a @return tag):
   /**
    * [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
    */
   function myFunc(/* inline comment */) {}
 
@@ -22,13 +23,14 @@ Given javascript (function with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description and @param tags):
+Expect javascript (generated comment with a description, @param and @return tags):
   /**
    * [TODO:description]
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
    */
   function myFunc($p1 = 'value', p2 = [], p3, p4 /* inline comment */) {}
 
@@ -69,6 +71,7 @@ Expect javascript (generated comment with @functon and @param tags):
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
    */
   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -92,37 +95,6 @@ Expect javascript (generated comment with @function and @param tags):
    * @return {string[]} [TODO:description]
    */
   var myFunc = function($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
-
-# ==============================================================================
-# Functions that should be ignored by DoGe.
-# ==============================================================================
-Given javascript (function that should be ignored):
-  var myObj = {
-    /* This function should be ignored by DoGe */
-    myFunc: function() {
-      /* This function should be ignored by DoGe */
-      return function() {
-        //
-      }
-    },
-  };
-
-Do (trigger doge):
-  :3\<CR>
-  \<C-d>
-  :5\<CR>
-  \<C-d>
-
-Expect javascript (no changes):
-  var myObj = {
-    /* This function should be ignored by DoGe */
-    myFunc: function() {
-      /* This function should be ignored by DoGe */
-      return function() {
-        //
-      }
-    },
-  };
 
 # ==============================================================================
 # Prototype functions with parameters with type hints.
@@ -152,10 +124,11 @@ Given javascript (prototype function without parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description and @function tags):
+Expect javascript (generated comment with a description, @function and @return tags):
   /**
    * [TODO:description]
    * @function Person#greet
+   * @return {[TODO:type]} [TODO:description]
    */
   Person.prototype.greet = function () {}
 
@@ -186,7 +159,7 @@ Given javascript (async function with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @async, and @param tags):
+Expect javascript (generated comment with @async, @param and @return tags):
   /**
    * [TODO:description]
    * @async
@@ -194,6 +167,7 @@ Expect javascript (generated comment with @async, and @param tags):
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
    */
   async function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -206,13 +180,14 @@ Given javascript (generator function with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @description and @param tags):
+Expect javascript (generated comment with a description, @param and @return tags):
   /**
    * [TODO:description]
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
    */
   function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -225,7 +200,7 @@ Given javascript (async generator function with parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @async, and @param tags):
+Expect javascript (generated comment with @async, @param and @return tags):
   /**
    * [TODO:description]
    * @async
@@ -233,5 +208,6 @@ Expect javascript (generated comment with @async, and @param tags):
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
    */
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}

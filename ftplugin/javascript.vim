@@ -23,7 +23,7 @@ let b:doge_patterns = []
 
 " Matches the following pattern:
 "   <param-access> <param-name>: <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?'
+let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?'
 
 " ==============================================================================
 " Matches fat-arrow / functions inside objects.
@@ -57,7 +57,7 @@ call add(b:doge_patterns, {
 \        '%(async| * @{async})%',
 \        ' * @function {funcName|}',
 \        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType}} !description)%',
+\        ' * @return {{returnType|!type}} !description',
 \        ' */',
 \      ],
 \    },
@@ -78,7 +78,7 @@ call add(b:doge_patterns, {
 "
 "   export class Child extends Parent implements CustomInterfaceName {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$]\+\)\)\?\s*{',
+\  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$.]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$.]\+\)\)\?\s*{',
 \  'match_group_names': ['parentClassName', 'interfaceName'],
 \  'comment': {
 \    'insert': 'above',
@@ -129,7 +129,7 @@ call add(b:doge_patterns, {
 \        '%(static| * @static)%',
 \        '%(async| * @async)%',
 \        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType}} !description)%',
+\        ' * @return {{returnType|!type}} !description',
 \        ' */',
 \      ],
 \    },
@@ -166,7 +166,7 @@ call add(b:doge_patterns, {
 \        '%(async| * @async)%',
 \        ' * @function {className}#{funcName}',
 \        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType}} !description)%',
+\        ' * @return {{returnType|!type}} !description',
 \        ' */',
 \      ],
 \    },
@@ -177,11 +177,13 @@ call add(b:doge_patterns, {
 " Matches fat-arrow functions.
 " ==============================================================================
 "
-" Matches the following scenarios:
+"   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 "
-"   ((window, document, $) => {
-"     // ...
-"   })(window, document, jQuery);
+"   var myFunc = function*($p1 = 'value', p2 = [], p3, p4) {}
+"
+"   var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
+"
+"   var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 "
 "   (p1: array = []) => (p2: string) => { console.log(5); }
 "
@@ -194,17 +196,9 @@ call add(b:doge_patterns, {
 "   const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
 "
 "   (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
-"
-"   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
-"
-"   var myFunc = function*($p1 = 'value', p2 = [], p3, p4) {}
-"
-"   var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
-"
-"   var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\([[:alnum:]_$]\+\)\s*=\s*\)\?\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'match_group_names': ['funcName', 'static', 'async',  'parameters', 'returnType'],
+\  'match': '\m^\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
+\  'match_group_names': ['static', 'funcName', 'static', 'async',  'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
 \    'match_group_names': ['name', 'type'],
@@ -222,44 +216,7 @@ call add(b:doge_patterns, {
 \        '%(async| * @async)%',
 \        ' * @function {funcName|}',
 \        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType}} !description)%',
-\        ' */',
-\      ],
-\    },
-\  },
-\})
-
-" ==============================================================================
-" Matches class properties.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   class MyClass {
-"
-"     classProperty;
-"
-"     classProperty
-"
-"     static classProperty
-"
-"     classProperty = 'default value'
-"
-"     static classProperty = function() {}
-"
-"   }
-call add(b:doge_patterns, {
-\  'match': '\m^\%(\(static\)\s\+\)\?\%([[:alnum:]_$]\+\)\%(\s*:\s*\([[:alnum:]._|]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\(\s*=\s*\)\?',
-\  'match_group_names': ['static', 'type', 'default'],
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '/**',
-\        ' * !description',
-\        '%(static| * @static)%',
-\        '%(default| * @default)%',
-\        ' * @type {{type|!type}}',
+\        ' * @return {{returnType|!type}} !description',
 \        ' */',
 \      ],
 \    },

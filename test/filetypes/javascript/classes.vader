@@ -28,7 +28,7 @@ Expect javascript (generated comment with nothing but the text 'TODO'):
 Given javascript (class with extends without implements):
   class Child extends Parent {}
 
-  export class Child extends Parent {}
+  export class Child extends React.Component {}
 
 Do (trigger doge):
   \<C-d>
@@ -44,9 +44,9 @@ Expect javascript (generated comment with @extends):
 
   /**
    * [TODO:description]
-   * @extends Parent
+   * @extends React.Component
    */
-  export class Child extends Parent {}
+  export class Child extends React.Component {}
 
 # ==============================================================================
 # Classes without 'extends' with 'implements'.
@@ -78,9 +78,9 @@ Expect javascript (generated comment with @implements tag):
 # Classes with 'extends' and 'implements'.
 # ==============================================================================
 Given javascript (class with extends and with implements):
-  class Child extends Parent implements CustomInterfaceName {}
+  class Child extends React.Component implements CustomInterfaceName {}
 
-  export class Child extends Parent implements CustomInterfaceName {}
+  export class Child extends React.Component implements CustomInterfaceName {}
 
 Do (trigger doge):
   \<C-d>
@@ -90,14 +90,14 @@ Do (trigger doge):
 Expect javascript (generated comment with @extends and @implements tags):
   /**
    * [TODO:description]
-   * @extends Parent
+   * @extends React.Component
    * @implements CustomInterfaceName
    */
-  class Child extends Parent implements CustomInterfaceName {}
+  class Child extends React.Component implements CustomInterfaceName {}
 
   /**
    * [TODO:description]
-   * @extends Parent
+   * @extends React.Component
    * @implements CustomInterfaceName
    */
-  export class Child extends Parent implements CustomInterfaceName {}
+  export class Child extends React.Component implements CustomInterfaceName {}
