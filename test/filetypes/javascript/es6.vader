@@ -32,7 +32,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
    */
-  const foo = bar => bar
+  export const foo = bar => bar
 
   /**
    * [TODO:description]
@@ -40,7 +40,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
    */
-  const foo = bar => {
+  export const foo = bar => {
     return bar
   }
 
@@ -48,9 +48,9 @@ Expect javascript (generated comment with @function, @param and @return tags):
 # Fat-arrow functions with a single parameter with return type.
 # ==============================================================================
 Given javascript (fat-arrow function with a single parameter with return type):
-  const foo = bar: Test => bar
+  export const foo = bar: Test => bar
 
-  const foo = bar: Test => {
+  export const foo = bar: Test => {
     return bar
   }
 
@@ -66,7 +66,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {Test} [TODO:description]
    */
-  const foo = bar: Test => bar
+  export const foo = bar: Test => bar
 
   /**
    * [TODO:description]
@@ -74,7 +74,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {Test} [TODO:description]
    */
-  const foo = bar: Test => {
+  export const foo = bar: Test => {
     return bar
   }
 

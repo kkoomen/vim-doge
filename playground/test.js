@@ -357,6 +357,22 @@ const rollDice = (): 1 | 2 | 3 | 4 | 5 | 6 => { console.log(5); }
 
 /**
  * [TODO:description]
+ * @function foo
+ * @param {[TODO:type]} bar - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+const foo = bar => baz;
+
+/**
+ * [TODO:description]
+ * @function foo
+ * @param {[TODO:type]} bar - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+export const foo = bar => baz;
+
+/**
+ * [TODO:description]
  * @function myFunc
  * @param {[TODO:type]} children - [TODO:description]
  * @return {PropTypes.Element|null} [TODO:description]
