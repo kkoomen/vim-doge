@@ -17,25 +17,36 @@ function! doge#generate#pattern(pattern) abort
     return 0
   endif
 
-  " Skip if the current line does not match the main pattern.
-  let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
-  if l:curr_line_raw !~# a:pattern['match']
-    return 0
+  " Check if we should execute a generator or regex.
+  let l:use_generator = has_key(a:pattern, 'generator')
+  if l:use_generator
+    let l:tokens = doge#helpers#generator(a:pattern['generator'])
+    if type(l:tokens) != v:t_dict
+      return 0
+    endif
+  else
+    " Skip if the current line does not match the main pattern.
+    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
+    if l:curr_line_raw !~# a:pattern['match']
+      return 0
+    endif
+
+    " Remove comments to ensure we can match
+    " our patterns with and without comments.
+    let l:curr_line = substitute(
+          \ l:curr_line_raw,
+          \ b:doge_pattern_multi_line_comment,
+          \ '',
+          \ 'g'
+          \ )
+
+    " Extract the primary tokens.
+    let l:tokens = doge#token#extract(
+          \ l:curr_line,
+          \ a:pattern['match'],
+          \ a:pattern['match_group_names']
+          \ )[0]
   endif
-
-  let l:curr_line = substitute(
-        \ l:curr_line_raw,
-        \ b:doge_pattern_multi_line_comment,
-        \ '',
-        \ 'g'
-        \ )
-
-  " Extract the primary tokens.
-  let l:tokens = doge#token#extract(
-        \ l:curr_line,
-        \ a:pattern['match'],
-        \ a:pattern['match_group_names']
-        \ )[0]
 
   try
     let l:preprocess_fn = printf('doge#preprocessors#%s#tokens', &filetype)
@@ -51,7 +62,8 @@ function! doge#generate#pattern(pattern) abort
     " Go through each parameter, match the regex, extract the token values and
     " replace the 'parameters' key with the formatted version.
     let l:formatted_params = []
-    let l:param_tokens = doge#token#extract(
+
+    let l:param_tokens = l:use_generator ? l:params : doge#token#extract(
           \ l:params,
           \ l:params_dict['match'],
           \ l:params_dict['match_group_names']

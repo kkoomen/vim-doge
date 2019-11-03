@@ -78,5 +78,15 @@ function! doge#helpers#trim(string) abort
         \ : trim(a:string)
 endfunction
 
+function doge#helpers#generator(path) abort
+  let l:generator = g:doge_dir . '/generators/' . a:path
+  if filereadable(l:generator) != v:false
+    let l:call = l:generator . ' ' . expand('%:p') . ' ' . line('.')
+    echo l:call
+    return json_encode(trim(system(l:call)))
+  endif
+endfunction
+
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
