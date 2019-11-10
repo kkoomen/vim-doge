@@ -14,9 +14,9 @@ Expect javascript (no generated comment):
 # Fat-arrow functions with a single parameter without return type.
 # ==============================================================================
 Given javascript (fat-arrow function with a single parameter without return type):
-  const foo = bar => bar
+  export const foo = bar => bar
 
-  const foo = bar => {
+  export const foo = bar => {
     return bar
   }
 
