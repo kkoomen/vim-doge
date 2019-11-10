@@ -32,15 +32,25 @@ Make sure that your $PATH and $LD_LIBRARY_PATH are set correctly.
 The libclang binary its location should be defined in the $LD_LIBRARY_PATH.
 """
 
-from clang.cindex import Index, CursorKind
+from clang.cindex import Index, CursorKind, Cursor
+import sys
 import json
 import vim
 import os
 import tempfile
+from typing import Union
 
-func = {}
+FUNCTION = {}
 
-def get_token(node, key):
+
+def get_next_token(node: Cursor, key: str) -> Union[str, None]:
+    """
+    Get the next token from a node.
+
+    :param node clang.cindex.Cursor: The node itself.
+    :param key str: The key to get from the next token.
+    :rtype str/none: The requested token or None otherwise.
+    """
     try:
         token = next(node.get_tokens())
         return getattr(token, key)
@@ -48,25 +58,29 @@ def get_token(node, key):
         return None
 
 
-def find_func(node, line):
+def find_node(node: Cursor, line: int) -> Union[Cursor, bool]:
+    """
+    Find a node based on a given line number.
+
+    :param node clang.cindex.Cursor: The node itself.
+    :param line int: The line number where the node is located at.
+    :rtype clang.cindex.Cursor/bool: The found node or False otherwise.
+    """
     if node.location.line == line:
-        if node.kind in [CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL]:
-            if 'parameters' not in func.keys():
-                func['parameters'] = []
-            func['name'] = node.spelling
-            func['returnType'] = get_token(node, 'spelling')
-        elif node.kind == CursorKind.PARM_DECL:
-            func['parameters'].append({
-                'name': node.spelling,
-            })
+        return node
     for child in node.get_children():
-        find_func(child, line)
+        result = find_node(child, line)
+        if result:
+            return result
+    return False
 
 
 def main():
-    ext = vim.eval("&filetype")
-    lines = vim.eval("getline(line(0), line('$'))")
-    line = int(vim.eval("line('.')"))
+    file_ext = vim.eval("expand('%:p:e')")
+    ext = file_ext if file_ext else vim.eval('&filetype')
+
+    lines = vim.eval("getline(line(1), line('$'))")
+    current_line = int(vim.eval("line('.')"))
 
     # Save the lines to a temp file and parse that file.
     fd, filename = tempfile.mkstemp('.{}'.format(ext))
@@ -77,9 +91,25 @@ def main():
         index = Index.create()
         tu = index.parse(filename)
         if tu:
-            find_func(tu.cursor, line)
-            if len(func.keys()) > 0:
-                print(json.dumps(func))
+            node = find_node(tu.cursor, current_line)
+            while node:
+                if node.kind in [CursorKind.TEMPLATE_NON_TYPE_PARAMETER, CursorKind.TEMPLATE_TYPE_PARAMETER]:
+                    current_line += 1
+                    node = find_node(tu.cursor, current_line)
+                elif node.kind in [CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL, CursorKind.FUNCTION_TEMPLATE]:
+                    FUNCTION['name'] = node.spelling
+                    FUNCTION['returnType'] = get_next_token(node, 'spelling')
+                    if 'parameters' not in FUNCTION.keys():
+                        FUNCTION['parameters'] = []
+                    for child in node.get_children():
+                        if child.kind == CursorKind.PARM_DECL:
+                            FUNCTION['parameters'].append({
+                                'name': child.spelling,
+                            })
+                    print(json.dumps(FUNCTION))
+                    break
+                else:
+                    break
     except Exception as e:
         print(e)
     finally:

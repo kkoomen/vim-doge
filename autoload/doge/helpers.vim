@@ -82,11 +82,12 @@ function doge#helpers#generator(path) abort
   let l:generator = g:doge_dir . '/generators/' . a:path
   if filereadable(l:generator) != v:false
     let l:result = doge#python#file(l:generator)
-    let l:json = json_decode(l:result)
-    if type(l:json) != v:t_dict
-      echoerr l:result
-    endif
-    return l:json
+    try
+      return json_decode(l:result)
+    catch /.*/
+      echo '[DoGe] ' . a:path . ' generator failed.'
+      echo l:result
+    endtry
   endif
   return 0
 endfunction
