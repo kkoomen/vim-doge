@@ -1,110 +1,73 @@
 # ==============================================================================
 # Functions without parameters.
 # ==============================================================================
-Given cpp (function without parameters):
-  void Emitter::append_token(/* inline comment */) // another comment
+Given cpp (function without parameters with return type):
+  int myFunc(/* inline comment */) // another comment
   {
-    //
+
   }
 
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with nothing but the text 'TODO' and @return tag):
+Expect cpp (generated comment with nothing but a description and @return tag):
   /**
    * [TODO:description]
+   *
+   * @return [TODO:description]
    */
-  void Emitter::append_token(/* inline comment */) // another comment
+  int myFunc(/* inline comment */) // another comment
   {
-    //
+
   }
 
 # ==============================================================================
 # Functions with parameters.
 # ==============================================================================
-Given cpp (function with parameters):
-  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node) // another comment
-  {
-    //
-  }
+Given cpp (function with parameters without return type):
+  using namespace std;
+
+  class TestClass {
+    public:
+      int myFunc();
+  };
+
+  int TestClass::myFunc(const std::string& text, const Node* node) {}
 
 Do (trigger doge):
+  :8\<CR>
   \<C-d>
 
-Expect cpp (generated comment with @param and @return tags):
+Expect cpp (generated comment with a description, @param and @return tags):
+  using namespace std;
+
+  class TestClass {
+    public:
+      int myFunc();
+  };
+
   /**
    * [TODO:description]
    *
    * @param text [TODO:description]
    * @param node [TODO:description]
+   * @return [TODO:description]
    */
-  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node) // another comment
-  {
-    //
-  }
+  int TestClass::myFunc(const std::string& text, const Node* node) {}
 
 # ==============================================================================
 # Functions with parameters with default values.
 # ==============================================================================
-Given cpp (function with parameters with default values):
-  void f(A* p = this)
-  {
-    //
-  }
+Given cpp (function with parameters with default values with void return type):
+  void f(A* p = this) {}
 
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with @param and @return tags):
+Expect cpp (generated comment with a description and @param tag):
   /**
    * [TODO:description]
    *
    * @param p [TODO:description]
    */
-  void f(A* p = this)
-  {
-    //
-  }
-
-# ==============================================================================
-# Functions with parameters with advanced return types.
-# ==============================================================================
-Given cpp (functions with parameters with advanced return types):
-  lowest_layer_type& my_func(std::string& text)
-  {
-    //
-  }
-
-  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec)
-  {
-    //
-  }
-
-Do (trigger doge):
-  \<C-d>
-  :12\<CR>
-  \<C-d>
-
-Expect cpp (generated comments with @param and @return tags):
-  /**
-   * [TODO:description]
-   *
-   * @param text [TODO:description]
-   * @return [TODO:description]
-   */
-  lowest_layer_type& my_func(std::string& text)
-  {
-    //
-  }
-
-  /**
-   * [TODO:description]
-   *
-   * @param v [TODO:description]
-   * @param ec [TODO:description]
-   * @return [TODO:description]
-   */
-  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec)
-  {
-    //
-  }
+  void f(A* p = this) {}

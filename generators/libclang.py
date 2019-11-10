@@ -3,23 +3,40 @@
 # vim: fenc=utf-8 ts=4 sw=4 et
 
 """
-Python binding of the clang tool used to generate information of a given file
-along with a specific line number where a function or method might be defined.
+Python binding of the clang tool used to extract information of a function
+declaration within Vim.
 
 Prerequisites (MacOS):
 - pip3 install clang
 - brew install llvm
 
-Make sure that your $PATH and $LD_LIBRARY_PATH are set correctly.
-The libclang binary its directory should be defined in the $LD_LIBRARY_PATH.
+--------------------------------------------------------------------------------
 
-Usage: ./libclang.py <file> <line>
+If you've installed clang via your package manager then you might have a file
+called 'libclang.so.<libclang-major-version>', for example: 'libclang.so.8'.
+Go into the directory where this file exists using 'cd' and create a symlink:
+
+    ln -s libclang.so.<libclang-major-version> libclang.so
+
+Now it should be detectable via python if you do:
+
+    $ python3
+    >>> from clang.cindex import Index
+    >>> Index.create()
+    >>> <clang.cindex.Index object at 0x1084763d0>
+
+--------------------------------------------------------------------------------
+
+If you compiled manually:
+Make sure that your $PATH and $LD_LIBRARY_PATH are set correctly.
+The libclang binary its location should be defined in the $LD_LIBRARY_PATH.
 """
 
-from clang.cindex import Index, CursorKind, Config
-from optparse import OptionParser, OptionGroup
+from clang.cindex import Index, CursorKind
 import json
-import sys
+import vim
+import os
+import tempfile
 
 func = {}
 
@@ -38,20 +55,12 @@ def get_token(node, key):
     try:
         token = next(node.get_tokens())
         return getattr(token, key)
-    except Exception as e:
+    except Exception:
         return None
 
 
-def find_func(node, line, opts):
-    if opts.verbose:
-        print('-'*30)
-        print('node location line', node.location.line)
-        print('node kind', node.kind)
-        print('node spelling', node.spelling)
-        print('token spelling', get_token(node, 'spelling'))
+def find_func(node, line):
     if node.location.line == line:
-        for token in node.get_tokens():
-            print(token.kind, token.spelling)
         if node.kind in [CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL]:
             if 'parameters' not in func.keys():
                 func['parameters'] = []
@@ -62,36 +71,31 @@ def find_func(node, line, opts):
                 'name': node.spelling,
             })
     for child in node.get_children():
-        find_func(child, line, opts)
+        find_func(child, line)
 
 
 def main():
-    parser = OptionParser("usage: %prog [options] {filename} {line} [clang-args*]")
-    parser.add_option("-v", "--verbose", dest="verbose",
-                      help="Show verbose output",
-                      action="store_true", default=False)
-    parser.add_option("-d", "--diagnostics", dest="diagnostics",
-                      help="Show verbose output",
-                      action="store_true", default=False)
-    parser.disable_interspersed_args()
-    (opts, args) = parser.parse_args()
-    filename, line = args
+    ext = vim.eval("&filetype")
+    lines = vim.eval("getline(line(0), line('$'))")
+    line = int(vim.eval("line('.')"))
 
-    if len(args) == 0:
-        parser.error('invalid number arguments')
-    print(args)
+    # Save the lines to a temp file and parse that file.
+    fd, filename = tempfile.mkstemp('.{}'.format(ext))
+    try:
+        with os.fdopen(fd, 'w') as tmp:
+            tmp.write('\n'.join(lines))
 
-    index = Index.create()
-    tu = index.parse(filename)
-    if not tu:
-        sys.exit(0)
+        index = Index.create()
+        tu = index.parse(filename)
+        if tu:
 
-    find_func(tu.cursor, line, opts)
-    diags = [get_diag_info(d, line) for d in tu.diagnostics]
-    if diags and opts.diagnostics:
-        print(diags)
-    if len(func.keys()) > 0:
-        print(json.dumps(func))
+            find_func(tu.cursor, line)
+            if len(func.keys()) > 0:
+                print(json.dumps(func))
+    except Exception as e:
+        print(e)
+    finally:
+        os.remove(filename)
 
 if __name__ == '__main__':
     main()

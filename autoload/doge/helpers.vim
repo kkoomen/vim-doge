@@ -81,10 +81,14 @@ endfunction
 function doge#helpers#generator(path) abort
   let l:generator = g:doge_dir . '/generators/' . a:path
   if filereadable(l:generator) != v:false
-    let l:call = l:generator . ' ' . expand('%:p') . ' ' . line('.')
-    echo l:call
-    return json_encode(trim(system(l:call)))
+    let l:result = doge#python#file(l:generator)
+    let l:json = json_decode(l:result)
+    if type(l:json) != v:t_dict
+      echoerr l:result
+    endif
+    return l:json
   endif
+  return 0
 endfunction
 
 

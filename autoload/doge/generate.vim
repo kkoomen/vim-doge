@@ -17,7 +17,7 @@ function! doge#generate#pattern(pattern) abort
     return 0
   endif
 
-  " Check if we should execute a generator or regex.
+  " Check if a generator is available. Otherwise we do a fallback on the regex.
   let l:use_generator = has_key(a:pattern, 'generator')
   if l:use_generator
     let l:tokens = doge#helpers#generator(a:pattern['generator'])
