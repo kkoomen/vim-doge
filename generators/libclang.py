@@ -40,17 +40,6 @@ import tempfile
 
 func = {}
 
-
-def get_diag_info(diag, line):
-    return {
-        'severity': diag.severity,
-        'location': diag.location,
-        'spelling': diag.spelling,
-        'ranges': diag.ranges,
-        'fixits': diag.fixits
-    }
-
-
 def get_token(node, key):
     try:
         token = next(node.get_tokens())
@@ -88,7 +77,6 @@ def main():
         index = Index.create()
         tu = index.parse(filename)
         if tu:
-
             find_func(tu.cursor, line)
             if len(func.keys()) > 0:
                 print(json.dumps(func))
