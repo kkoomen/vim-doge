@@ -10,9 +10,9 @@ Given cpp (function without parameters with return type):
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with nothing but a description and @return tag):
+Expect cpp (generated comment with nothing but @brief and @return tag):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
    * @return [TODO:description]
    */
@@ -38,7 +38,7 @@ Do (trigger doge):
   :8\<CR>
   \<C-d>
 
-Expect cpp (generated comment with a description, @param and @return tags):
+Expect cpp (generated comment with @brief, @param and @return tags):
   using namespace std;
 
   class TestClass {
@@ -47,7 +47,7 @@ Expect cpp (generated comment with a description, @param and @return tags):
   };
 
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
    * @param text [TODO:description]
    * @param node [TODO:description]
@@ -64,9 +64,9 @@ Given cpp (function with parameters with default values with void return type):
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with a description and @param tag):
+Expect cpp (generated comment with @brief and @param tag):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
    * @param p [TODO:description]
    */

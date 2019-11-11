@@ -33,7 +33,7 @@ call add(b:doge_patterns, {
 \    'template': {
 \      'doxygen': [
 \        '/**',
-\        ' * !description',
+\        ' * @brief !description',
 \        ' *',
 \        '%(parameters| * {parameters})%',
 \        '%(returnType| * @return !description)%',
