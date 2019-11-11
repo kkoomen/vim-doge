@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-function doge#python#file(path) abort
+function! doge#python#file(path) abort
   if has('python3')
     let l:python = 'py3file'
   elseif has('python')
