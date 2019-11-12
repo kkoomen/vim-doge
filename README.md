@@ -73,7 +73,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Scala                                          | [ScalaDoc][scaladoc]                                                         |
 | :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                                                                 |
 | :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
-| :white_check_mark: | C++ (WIP, see [#56](pull-56))                  | [Doxygen][doxygen]                                                           |
+| :white_check_mark: | C++ (WIP, see #56)                             | [Doxygen][doxygen]                                                           |
 
 # Getting started
 
@@ -254,5 +254,3 @@ DoGe is licensed under the GPL-3.0 license.
 [contrib-guide]: https://github.com/kkoomen/vim-doge/blob/master/CONTRIBUTING.md
 [coc]: https://github.com/kkoomen/vim-doge/blob/master/CODE_OF_CONDUCT.md
 [vim-script]: https://www.vim.org/scripts/script.php?script_id=5801
-
-[pull-56]: https://github.com/kkoomen/vim-doge/pull/56
