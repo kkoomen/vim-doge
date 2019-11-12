@@ -8,10 +8,10 @@ class Emitter {
 }
 
 /**
- * @brief 
- * 
- * @param text 
- * @param node 
+ * @brief
+ *
+ * @param text
+ * @param node
  */
 void Emitter::append_token(const std::string& text, const AST_Node* node)
 {
@@ -19,16 +19,16 @@ void Emitter::append_token(const std::string& text, const AST_Node* node)
 }
 
 /**
- * @brief 
- * 
- * @return std::vector<std::string> 
+ * @brief
+ *
+ * @return std::vector<std::string>
  */
 std::vector<std::string> someFunction();
 
 /**
- * @brief 
- * 
- * @return const next_layer_type& 
+ * @brief
+ *
+ * @return const next_layer_type&
  */
 const next_layer_type& my_func()
 {
@@ -36,10 +36,10 @@ const next_layer_type& my_func()
 }
 
 /**
- * @brief 
- * 
- * @param text 
- * @return lowest_layer_type& 
+ * @brief
+ *
+ * @param text
+ * @return lowest_layer_type&
  */
 lowest_layer_type& my_func(std::string& text)
 {
@@ -47,11 +47,11 @@ lowest_layer_type& my_func(std::string& text)
 }
 
 /**
- * @brief 
- * 
- * @param v 
- * @param ec 
- * @return ASIO_SYNC_OP_VOID 
+ * @brief
+ *
+ * @param v
+ * @param ec
+ * @return ASIO_SYNC_OP_VOID
  */
 ASIO_SYNC_OP_VOID myFunc(
     verify_mode v, asio::error_code& ec)
@@ -60,18 +60,18 @@ ASIO_SYNC_OP_VOID myFunc(
 }
 
 /**
- * @brief 
- * 
- * @param line 
- * @return std::string 
+ * @brief
+ *
+ * @param line
+ * @return std::string
  */
 std::string trimLine(const std::string &line);
 
 /**
- * @brief 
- * 
- * @param e 
- * @return project::error_code 
+ * @brief
+ *
+ * @param e
+ * @return project::error_code
  */
 inline project::error_code my_func(ssl_errors e)
 {
@@ -80,10 +80,10 @@ inline project::error_code my_func(ssl_errors e)
 
 /**
  * @brief Construct a new Vector object
- * 
- * @tparam T 
- * @param it_begin 
- * @param _end 
+ *
+ * @tparam T
+ * @param it_begin
+ * @param _end
  */
 template<typename T>
 Vector(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) {
@@ -91,9 +91,9 @@ Vector(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) {
 }
 
 /**
- * @brief 
- * 
- * @param p 
+ * @brief
+ *
+ * @param p
  */
 void f(A* p = this)
 {
@@ -102,11 +102,11 @@ void f(A* p = this)
 
 /**
  * @brief Get the Max object
- * 
- * @tparam T 
- * @param a 
- * @param b 
- * @return T 
+ *
+ * @tparam T
+ * @param a
+ * @param b
+ * @return T
  */
 template <class T>
 T GetMax (T a, T b) {
@@ -116,11 +116,11 @@ T GetMax (T a, T b) {
 }
 
 /**
- * @brief 
- * 
- * @tparam T 
- * @param i 
- * @param args 
+ * @brief
+ *
+ * @tparam T
+ * @param i
+ * @param args
  */
 template<class...T> void h(int i = 0, T... args) {
   //
@@ -131,12 +131,12 @@ template<class...T> void h(int i = 0, T... args) {
 // =============================================================================
 
 /**
- * @brief 
- * 
- * @tparam n 
- * @param it_begin 
- * @param _end 
- * @return std::pair<decltype(n), decltype(n)> 
+ * @brief
+ *
+ * @tparam n
+ * @param it_begin
+ * @param _end
+ * @return std::pair<decltype(n), decltype(n)>
  */
 template<auto n>
 auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // test
@@ -145,12 +145,12 @@ auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> st
 }
 
 /**
- * @brief 
- * 
- * @tparam T 
- * @tparam Args 
- * @param args 
- * @return T* 
+ * @brief
+ *
+ * @tparam T
+ * @tparam Args
+ * @param args
+ * @return T*
  */
 template<typename T, typename... Args>
 static T* create(Args&& ... args)
@@ -159,22 +159,22 @@ static T* create(Args&& ... args)
 }
 
 /**
- * @brief 
- * 
- * @tparam  
- * @param args 
- * @return T* 
+ * @brief
+ *
+ * @tparam
+ * @param args
+ * @return T*
  */
 template<> static T* create(Args&& ... args);
 
 /**
- * @brief 
- * 
- * @tparam BasicJsonType 
- * @tparam ValueType 
- * @param j 
- * @param val 
- * @return decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void()) 
+ * @brief
+ *
+ * @tparam BasicJsonType
+ * @tparam ValueType
+ * @param j
+ * @param val
+ * @return decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
  */
 template<typename BasicJsonType, typename ValueType>
 static auto
@@ -186,13 +186,13 @@ static auto
 }
 
 /**
- * @brief 
- * 
- * @tparam F 
- * @tparam Args 
- * @param fun 
- * @param args 
- * @return decltype(auto) 
+ * @brief
+ *
+ * @tparam F
+ * @tparam Args
+ * @param fun
+ * @param args
+ * @return decltype(auto)
  */
 template<class F, class... Args>
 decltype(auto) PerfectForward(F fun, Args&&... args)
