@@ -50,3 +50,8 @@ augroup END
 
 " The encoding must be explicitly set for tests for Windows.
 execute 'set encoding=utf-8'
+
+" @see https://github.com/vim/vim/issues/3117
+if has('python3')
+  silent! python3 1
+endif
