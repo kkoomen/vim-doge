@@ -1,0 +1,66 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given cpp (function without parameters with return type):
+  int myFunc(/* inline comment */) {}
+
+Do (trigger doge):
+  :let b:doge_doc_standard='doxygen_javadoc_banner'\<CR>
+  \<C-d>
+
+Expect cpp (generated comment with nothing but @brief and @return tag):
+  /*******************************************************************************
+   * @brief [TODO:description]
+   *
+   * @return [TODO:description]
+   ******************************************************************************/
+  int myFunc(/* inline comment */) {}
+
+# ==============================================================================
+# Functions with parameters.
+# ==============================================================================
+Given cpp (function with parameters without return type):
+  class TestClass {
+    public:
+      int myFunc();
+  };
+
+  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
+
+Do (trigger doge):
+  :let b:doge_doc_standard='doxygen_javadoc_banner'\<CR>
+  :8\<CR>
+  \<C-d>
+
+Expect cpp (generated comment with @brief, @param and @return tags):
+  class TestClass {
+    public:
+      int myFunc();
+  };
+
+  /*******************************************************************************
+   * @brief [TODO:description]
+   *
+   * @param text [TODO:description]
+   * @param node [TODO:description]
+   * @return [TODO:description]
+   ******************************************************************************/
+  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
+
+# ==============================================================================
+# Functions with parameters with default values.
+# ==============================================================================
+Given cpp (function with parameters with default values with void return type):
+  void f(A* p = this) {}
+
+Do (trigger doge):
+  :let b:doge_doc_standard='doxygen_javadoc_banner'\<CR>
+  \<C-d>
+
+Expect cpp (generated comment with @brief and @param tag):
+  /*******************************************************************************
+   * @brief [TODO:description]
+   *
+   * @param p [TODO:description]
+   ******************************************************************************/
+  void f(A* p = this) {}

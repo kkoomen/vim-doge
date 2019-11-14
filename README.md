@@ -119,21 +119,22 @@ If you want to change the doc standard specifically for a buffer you can do:
 
 Here is the full list of available doc standards per filetype:
 
-| Variable                           | Default      | Supported                                   |
-| :--------------------------------- | :----------- | :------------------------------------------ |
-| `g:doge_doc_standard_python`       | `'reST'`     | `'reST'`, `'numpy'`, `'google'`, `'sphinx'` |
-| `g:doge_doc_standard_php`          | `'phpdoc'`   | `'phpdoc'`                                  |
-| `g:doge_doc_standard_javascript`   | `'jsdoc'`    | `'jsdoc'`                                   |
-| `g:doge_doc_standard_typescript`   | `'jsdoc'`    | `'jsdoc'`                                   |
-| `g:doge_doc_standard_coffeescript` | `'jsdoc'`    | `'jsdoc'`                                   |
-| `g:doge_doc_standard_lua`          | `'ldoc'`     | `'ldoc'`                                    |
-| `g:doge_doc_standard_java`         | `'javadoc'`  | `'javadoc'`                                 |
-| `g:doge_doc_standard_groovy`       | `'javadoc'`  | `'javadoc'`                                 |
-| `g:doge_doc_standard_ruby`         | `'YARD'`     | `'YARD'`                                    |
-| `g:doge_doc_standard_scala`        | `'scaladoc'` | `'scaladoc'`                                |
-| `g:doge_doc_standard_kotlin`       | `'kdoc'`     | `'kdoc'`                                    |
-| `g:doge_doc_standard_r`            | `'roxygen2'` | `'roxygen2'`                                |
-| `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen'`                                 |
+| Variable                           | Default      | Supported                                                                                                                    |
+| :--------------------------------- | :----------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| `g:doge_doc_standard_python`       | `'reST'`     | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                  |
+| `g:doge_doc_standard_php`          | `'phpdoc'`   | `'phpdoc'`                                                                                                                   |
+| `g:doge_doc_standard_javascript`   | `'jsdoc'`    | `'jsdoc'`                                                                                                                    |
+| `g:doge_doc_standard_typescript`   | `'jsdoc'`    | `'jsdoc'`                                                                                                                    |
+| `g:doge_doc_standard_coffeescript` | `'jsdoc'`    | `'jsdoc'`                                                                                                                    |
+| `g:doge_doc_standard_lua`          | `'ldoc'`     | `'ldoc'`                                                                                                                     |
+| `g:doge_doc_standard_java`         | `'javadoc'`  | `'javadoc'`                                                                                                                  |
+| `g:doge_doc_standard_groovy`       | `'javadoc'`  | `'javadoc'`                                                                                                                  |
+| `g:doge_doc_standard_ruby`         | `'YARD'`     | `'YARD'`                                                                                                                     |
+| `g:doge_doc_standard_scala`        | `'scaladoc'` | `'scaladoc'`                                                                                                                 |
+| `g:doge_doc_standard_kotlin`       | `'kdoc'`     | `'kdoc'`                                                                                                                     |
+| `g:doge_doc_standard_r`            | `'roxygen2'` | `'roxygen2'`                                                                                                                 |
+| `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
+
 
 ## Options
 
