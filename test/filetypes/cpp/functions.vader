@@ -2,10 +2,7 @@
 # Functions without parameters.
 # ==============================================================================
 Given cpp (function without parameters with return type):
-  int myFunc(/* inline comment */) // another comment
-  {
-
-  }
+  int myFunc(/* inline comment */) {}
 
 Do (trigger doge):
   \<C-d>
@@ -16,10 +13,7 @@ Expect cpp (generated comment with nothing but @brief and @return tag):
    *
    * @return [TODO:description]
    */
-  int myFunc(/* inline comment */) // another comment
-  {
-
-  }
+  int myFunc(/* inline comment */) {}
 
 # ==============================================================================
 # Functions with parameters.
@@ -32,15 +26,13 @@ Given cpp (function with parameters without return type):
       int myFunc();
   };
 
-  int TestClass::myFunc(const std::string& text, const Node* node) {}
+  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
 
 Do (trigger doge):
   :8\<CR>
   \<C-d>
 
 Expect cpp (generated comment with @brief, @param and @return tags):
-  using namespace std;
-
   class TestClass {
     public:
       int myFunc();
@@ -53,7 +45,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
    * @param node [TODO:description]
    * @return [TODO:description]
    */
-  int TestClass::myFunc(const std::string& text, const Node* node) {}
+  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
 
 # ==============================================================================
 # Functions with parameters with default values.

@@ -74,6 +74,12 @@ def find_node(node: Cursor, line: int) -> Union[Cursor, bool]:
             return result
     return False
 
+def get_diag_info(diag):
+    return { 'severity' : diag.severity,
+             'location' : diag.location,
+             'spelling' : diag.spelling,
+             'ranges' : diag.ranges,
+             'fixits' : diag.fixits }
 
 def main():
     file_ext = vim.eval("expand('%:p:e')")
@@ -81,6 +87,12 @@ def main():
 
     lines = vim.eval("getline(line(1), line('$'))")
     current_line = int(vim.eval("line('.')"))
+
+    # Normalize the expression by transforming everything into 1 line.
+    opener_pos = int(vim.eval("search('\m[{;]', 'n')"))
+    normalized_expr = vim.eval("join(map(getline(line('.'), {}), 'doge#helpers#trim(v:val)'), ' ')".format(opener_pos))
+    del lines[current_line-1:opener_pos]
+    lines.insert(current_line-1, normalized_expr)
 
     # Save the lines to a temp file and parse that file.
     fd, filename = tempfile.mkstemp('.{}'.format(ext))
@@ -92,24 +104,22 @@ def main():
         tu = index.parse(filename)
         if tu:
             node = find_node(tu.cursor, current_line)
-            while node:
-                if node.kind in [CursorKind.TEMPLATE_NON_TYPE_PARAMETER, CursorKind.TEMPLATE_TYPE_PARAMETER]:
-                    current_line += 1
-                    node = find_node(tu.cursor, current_line)
-                elif node.kind in [CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL, CursorKind.FUNCTION_TEMPLATE]:
+            if node:
+                if node.kind in [CursorKind.CONSTRUCTOR, CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL, CursorKind.FUNCTION_TEMPLATE]:
                     FUNCTION['name'] = node.spelling
-                    FUNCTION['returnType'] = get_next_token(node, 'spelling')
+                    FUNCTION['returnType'] = node.result_type.spelling
                     if 'parameters' not in FUNCTION.keys():
                         FUNCTION['parameters'] = []
                     for child in node.get_children():
-                        if child.kind == CursorKind.PARM_DECL:
+                        if child.kind in [CursorKind.PARM_DECL, CursorKind.TEMPLATE_TYPE_PARAMETER]:
+                            param_type = 'param'
+                            if child.kind == CursorKind.TEMPLATE_TYPE_PARAMETER:
+                                param_type = 'tparam'
                             FUNCTION['parameters'].append({
+                                'param-type': param_type,
                                 'name': child.spelling,
                             })
                     print(json.dumps(FUNCTION))
-                    break
-                else:
-                    break
     except Exception as e:
         print(e)
     finally:

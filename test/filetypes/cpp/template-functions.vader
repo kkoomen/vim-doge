@@ -1,51 +1,40 @@
 # ==============================================================================
-# Template functions with parameters with advanced return types.
+# Template functions with parameters with return type.
 # ==============================================================================
-Given cpp (template function with parameters with advanced return types):
+Given cpp (template function with parameters with return type):
   template <typename HandshakeHandler>
-  INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
-  myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler)
-  {
-    //
-  }
+  void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
 
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with @param and @return tags):
+Expect cpp (generated comment with @brief, @tparam, and @param tags):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
+   * @tparam HandshakeHandler [TODO:description]
    * @param type [TODO:description]
-   * @param handler [TODO:description]
-   * @return [TODO:description]
+   * @param param [TODO:description]
    */
   template <typename HandshakeHandler>
-  INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
-  myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler)
-  {
-    //
-  }
+  void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
 
 # ==============================================================================
 # Template functions with parameters with advanced return types with default
 # values.
 # ==============================================================================
 Given cpp (template function with parameters with advanced return types with default values):
-  template<class...T> void h(int i = 0, T... args) {
-    //
-  }
+  template<class...T> void h(int i = 0, T... args) {}
 
 Do (trigger doge):
   \<C-d>
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
+   * @tparam T [TODO:description]
    * @param i [TODO:description]
    * @param args [TODO:description]
    */
-  template<class...T> void h(int i = 0, T... args) {
-    //
-  }
+  template<class...T> void h(int i = 0, T... args) {}

@@ -1,23 +1,18 @@
 # ==============================================================================
-# Inline functions with parameters with return types.
+# Inline functions with parameters with return type.
 # ==============================================================================
-Given cpp (inline function with parameters with advanced return types):
-  inline project::error_code my_func(ssl_errors e)
-  {
-    //
-  }
+Given cpp (inline function with parameters with return type):
+  inline bool operator<(const value_t lhs, const value_t rhs) noexcept {}
 
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with @param and @return tags):
+Expect cpp (generated comment with @brief, @param and @return tags):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
-   * @param e [TODO:description]
+   * @param lhs [TODO:description]
+   * @param rhs [TODO:description]
    * @return [TODO:description]
    */
-  inline project::error_code my_func(ssl_errors e)
-  {
-    //
-  }
+  inline bool operator<(const value_t lhs, const value_t rhs) noexcept {}

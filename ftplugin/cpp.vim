@@ -25,7 +25,7 @@ call add(b:doge_patterns, {
 \  'generator': 'libclang.py',
 \  'parameters': {
 \    'format': {
-\      'doxygen': '@param {name} !description',
+\      'doxygen': '@{param-type|param} {name} !description',
 \    },
 \  },
 \  'comment': {

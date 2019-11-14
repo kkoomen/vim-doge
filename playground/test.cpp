@@ -1,201 +1,61 @@
-// =============================================================================
-// Regular functions
-// =============================================================================
+/**
+ * @brief [TODO:description]
+ *
+ * @return [TODO:description]
+ */
+int myFunc(/* inline comment */) {}
 
-class Emitter {
+class TestClass {
   public:
-      void append_token();
-}
+    int myFunc();
+};
 
 /**
- * @brief
+ * @brief [TODO:description]
  *
- * @param text
- * @param node
+ * @param text [TODO:description]
+ * @param node [TODO:description]
+ * @return [TODO:description]
  */
-void Emitter::append_token(const std::string& text, const AST_Node* node)
-{
-  //
-}
+int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
 
 /**
- * @brief
+ * @brief [TODO:description]
  *
- * @return std::vector<std::string>
+ * @param p [TODO:description]
  */
-std::vector<std::string> someFunction();
+void f(A* p = this) {}
 
 /**
- * @brief
+ * @brief [TODO:description]
  *
- * @return const next_layer_type&
- */
-const next_layer_type& my_func()
-{
-  //
-}
-
-/**
- * @brief
- *
- * @param text
- * @return lowest_layer_type&
- */
-lowest_layer_type& my_func(std::string& text)
-{
-  //
-}
-
-/**
- * @brief
- *
- * @param v
- * @param ec
- * @return ASIO_SYNC_OP_VOID
- */
-ASIO_SYNC_OP_VOID myFunc(
-    verify_mode v, asio::error_code& ec)
-{
-  //
-}
-
-/**
- * @brief
- *
- * @param line
- * @return std::string
- */
-std::string trimLine(const std::string &line);
-
-/**
- * @brief
- *
- * @param e
- * @return project::error_code
- */
-inline project::error_code my_func(ssl_errors e)
-{
-  //
-}
-
-/**
- * @brief Construct a new Vector object
- *
- * @tparam T
- * @param it_begin
- * @param _end
- */
-template<typename T>
-Vector(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) {
-  assert(N == std::distance(it_begin, it_end));
-}
-
-/**
- * @brief
- *
- * @param p
- */
-void f(A* p = this)
-{
-  //
-}
-
-/**
- * @brief Get the Max object
- *
- * @tparam T
- * @param a
- * @param b
- * @return T
- */
-template <class T>
-T GetMax (T a, T b) {
-  T result;
-  result = (a>b)? a : b;
-  return (result);
-}
-
-/**
- * @brief
- *
- * @tparam T
- * @param i
- * @param args
- */
-template<class...T> void h(int i = 0, T... args) {
-  //
-}
-
-// =============================================================================
-// PTS/auto-functions (placeholder type specifiers)
-// =============================================================================
-
-/**
- * @brief
- *
- * @tparam n
- * @param it_begin
- * @param _end
- * @return std::pair<decltype(n), decltype(n)>
- */
-template<auto n>
-auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // test
-{
-  //
-}
-
-/**
- * @brief
- *
- * @tparam T
- * @tparam Args
- * @param args
- * @return T*
- */
-template<typename T, typename... Args>
-static T* create(Args&& ... args)
-{
-  //
-}
-
-/**
- * @brief
- *
- * @tparam
- * @param args
- * @return T*
- */
-template<> static T* create(Args&& ... args);
-
-/**
- * @brief
- *
- * @tparam BasicJsonType
- * @tparam ValueType
- * @param j
- * @param val
- * @return decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
- */
-template<typename BasicJsonType, typename ValueType>
-static auto
-  from_json(BasicJsonType&& j, ValueType& val)
-  noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
--> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
-{
-  //
-}
-
-/**
- * @brief
- *
- * @tparam F
- * @tparam Args
- * @param fun
- * @param args
- * @return decltype(auto)
+ * @tparam F [TODO:description]
+ * @tparam Args [TODO:description]
+ * @param fun [TODO:description]
+ * @param args [TODO:description]
+ * @return [TODO:description]
  */
 template<class F, class... Args>
 decltype(auto) PerfectForward(F fun, Args&&... args)
 {
   //
 }
+
+/**
+ * @brief [TODO:description]
+ *
+ * @param lhs [TODO:description]
+ * @param rhs [TODO:description]
+ * @return [TODO:description]
+ */
+inline bool operator<(const value_t lhs, const value_t rhs) noexcept {}
+
+/**
+ * @brief [TODO:description]
+ *
+ * @tparam HandshakeHandler [TODO:description]
+ * @param type [TODO:description]
+ * @param param [TODO:description]
+ */
+template <typename HandshakeHandler>
+void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
