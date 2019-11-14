@@ -78,6 +78,9 @@ function! doge#helpers#trim(string) abort
         \ : trim(a:string)
 endfunction
 
+""
+" @public
+" Run a generator which will produce all the parameters and return the output.
 function! doge#helpers#generator(path) abort
   let l:generator = g:doge_dir . '/generators/' . a:path
   if filereadable(l:generator) != v:false

@@ -1,6 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+""
+" @public
+" Run a python file using the py[3]file command.
 function! doge#python#file(path) abort
   if has('python3')
     let l:python = 'py3file'

@@ -13,8 +13,9 @@ Prerequisites (MacOS):
 --------------------------------------------------------------------------------
 
 If you've installed clang via your package manager then you might have a file
-called 'libclang.so.<libclang-major-version>', for example: 'libclang.so.8'.
-Go into the directory where this file exists using 'cd' and create a symlink:
+called 'libclang.so.<libclang-major-version>' somewhere in your system, for
+example: 'libclang.so.8'. Go into the directory where this file exists using
+'cd' and create a symlink:
 
     ln -s libclang.so.<libclang-major-version> libclang.so
 
