@@ -201,7 +201,7 @@ Command to generate documentation.
 ### Using C / C++
 
 If you use a language that belongs to the C-family then you have to use `clang`.
-This is the parser used for generating proper documentation.
+This is the parser that is being used for generating proper documentation.
 
 #### Package manager
 
