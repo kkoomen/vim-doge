@@ -19,8 +19,6 @@ Expect cpp (generated comment with nothing but @brief and @return tag):
 # Functions with parameters.
 # ==============================================================================
 Given cpp (function with parameters without return type):
-  using namespace std;
-
   class TestClass {
     public:
       int myFunc();
