@@ -105,13 +105,33 @@ def main():
         tu = index.parse(filename)
         if tu:
             node = find_node(tu.cursor, current_line)
+            # print(('diags', [get_diag_info(d) for d in  tu.diagnostics]))
             if node:
-                if node.kind in [CursorKind.CONSTRUCTOR, CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL, CursorKind.FUNCTION_TEMPLATE]:
+                # print('node kind', node.kind)
+                # print('node spelling', node.spelling)
+                allowed_types = [
+                    CursorKind.CONSTRUCTOR,
+                    CursorKind.CXX_METHOD,
+                    CursorKind.FUNCTION_DECL,
+                    CursorKind.FUNCTION_TEMPLATE,
+                    CursorKind.CLASS_TEMPLATE,
+                ]
+                if node.kind in allowed_types:
                     FUNCTION['funcName'] = node.spelling
                     FUNCTION['returnType'] = node.result_type.spelling
+                    # print('<TOKENS>')
+                    # for t in node.get_tokens():
+                    #         print(t.kind, t.spelling)
+                    # print('</TOKENS>')
                     if 'parameters' not in FUNCTION.keys():
                         FUNCTION['parameters'] = []
                     for child in node.get_children():
+                        # print('child kind', child.kind)
+                        # print('child spelling', child.spelling)
+                        # print('<CHILD-TOKENS>')
+                        # for t in child.get_tokens():
+                        #         print(t.kind, t.spelling)
+                        # print('</CHILD-TOKENS>')
                         if child.kind in [CursorKind.PARM_DECL, CursorKind.TEMPLATE_TYPE_PARAMETER]:
                             param_type = 'param'
                             if child.kind == CursorKind.TEMPLATE_TYPE_PARAMETER:
