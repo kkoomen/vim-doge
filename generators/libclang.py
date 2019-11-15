@@ -106,7 +106,14 @@ def main():
         if tu:
             node = find_node(tu.cursor, current_line)
             if node:
-                if node.kind in [CursorKind.CONSTRUCTOR, CursorKind.CXX_METHOD, CursorKind.FUNCTION_DECL, CursorKind.FUNCTION_TEMPLATE]:
+                allowed_types = [
+                    CursorKind.CONSTRUCTOR,
+                    CursorKind.CXX_METHOD,
+                    CursorKind.FUNCTION_DECL,
+                    CursorKind.FUNCTION_TEMPLATE,
+                    CursorKind.CLASS_TEMPLATE,
+                ]
+                if node.kind in allowed_types:
                     FUNCTION['funcName'] = node.spelling
                     FUNCTION['returnType'] = node.result_type.spelling
                     if 'parameters' not in FUNCTION.keys():

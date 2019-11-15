@@ -59,3 +59,11 @@ inline bool operator<(const value_t lhs, const value_t rhs) noexcept {}
  */
 template <typename HandshakeHandler>
 void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
+
+/**
+ * @brief [TODO:description]
+ *
+ * @param val [TODO:description]
+ * @return [TODO:description]
+ */
+virtual bool boolean(bool val) = 0;
