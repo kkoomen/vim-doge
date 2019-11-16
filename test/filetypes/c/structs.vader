@@ -1,0 +1,23 @@
+# ==============================================================================
+# Struct with childs
+# ==============================================================================
+Given c (struct with childs):
+  struct foo {
+    int bar;
+  };
+
+Do (trigger doge):
+  \<C-d>
+  :5\<CR>
+  \<C-d>
+
+Expect c (generated comments):
+  /**
+   * struct foo - [TODO:description]
+   */
+  struct foo {
+    /**
+     * @bar [TODO:description]
+     */
+    int bar;
+  };

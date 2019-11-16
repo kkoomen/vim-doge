@@ -8,10 +8,12 @@ doge#deactivate()	doge.txt	/*doge#deactivate()*
 doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
+doge#helpers#generator()	doge.txt	/*doge#helpers#generator()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#python#file()	doge.txt	/*doge#python#file()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
 doge-commands	doge.txt	/*doge-commands*

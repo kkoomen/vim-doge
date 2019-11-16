@@ -29,7 +29,7 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=9b13c964383b
+current_docker_image_id=5233c4250426
 
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE

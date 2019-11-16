@@ -1,0 +1,18 @@
+# ==============================================================================
+# Function declarations with parameters.
+# ==============================================================================
+Given c (function declaration with parameters):
+  int add(int x, int y);
+
+Do (trigger doge):
+  \<C-d>
+
+Expect c (generated comment with @brief, @param and @return tags):
+  /**
+   * @brief [TODO:description]
+   *
+   * @param x [TODO:description]
+   * @param y [TODO:description]
+   * @return [TODO:description]
+   */
+  int add(int x, int y);

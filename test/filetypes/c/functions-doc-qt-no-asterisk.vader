@@ -1,0 +1,38 @@
+# ==============================================================================
+# Function declarations with parameters with return type.
+# ==============================================================================
+Given c (function declaration with parameters with return type):
+  int add(int x, int y) {}
+
+Do (trigger doge):
+  :let b:doge_doc_standard='doxygen_qt_no_asterisk'\<CR>
+  \<C-d>
+
+Expect c (generated comment with @brief, @param and @return tags):
+  /*!
+  @brief [TODO:description]
+
+  @param x [TODO:description]
+  @param y [TODO:description]
+  @return [TODO:description]
+  */
+  int add(int x, int y) {}
+
+# ==============================================================================
+# Function declarations with parameters with 'void' return type.
+# ==============================================================================
+Given c (function declaration with parameters with 'void' return type):
+  void add(int x, int y) {}
+
+Do (trigger doge):
+  :let b:doge_doc_standard='doxygen_qt_no_asterisk'\<CR>
+  \<C-d>
+
+Expect c (generated comment with @brief and @param tags):
+  /*!
+  @brief [TODO:description]
+
+  @param x [TODO:description]
+  @param y [TODO:description]
+  */
+  void add(int x, int y) {}

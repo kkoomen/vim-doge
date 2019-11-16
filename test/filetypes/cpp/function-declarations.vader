@@ -2,69 +2,16 @@
 # Function declarations with parameters.
 # ==============================================================================
 Given cpp (function declaration with parameters):
-  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node);
+  void append_token(const std::string& text /* inline comment */, const AST_Node* node);
 
 Do (trigger doge):
   \<C-d>
 
 Expect cpp (generated comment with @param and @return tags):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
    * @param text [TODO:description]
    * @param node [TODO:description]
    */
-  void Emitter::append_token(const std::string& text /* inline comment */, const AST_Node* node);
-
-# ==============================================================================
-# Function declarations with parameters with advanced return types.
-# ==============================================================================
-Given cpp (function declarations with parameters with advanced return types):
-  lowest_layer_type& my_func(std::string& text);
-
-  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec);
-
-  std::string myFunc(const std::string &line);
-
-  std::vector<std::string> myFunc();
-
-Do (trigger doge):
-  \<C-d>
-  :9\<CR>
-  \<C-d>
-  :18\<CR>
-  \<C-d>
-  :27\<CR>
-  \<C-d>
-
-Expect cpp (generated comments with @param and @return tags):
-  /**
-   * [TODO:description]
-   *
-   * @param text [TODO:description]
-   * @return [TODO:description]
-   */
-  lowest_layer_type& my_func(std::string& text);
-
-  /**
-   * [TODO:description]
-   *
-   * @param v [TODO:description]
-   * @param ec [TODO:description]
-   * @return [TODO:description]
-   */
-  ASIO_SYNC_OP_VOID myFunc(verify_mode v, asio::error_code& ec);
-
-  /**
-   * [TODO:description]
-   *
-   * @param line [TODO:description]
-   * @return [TODO:description]
-   */
-  std::string myFunc(const std::string &line);
-
-  /**
-   * [TODO:description]
-   * @return [TODO:description]
-   */
-  std::vector<std::string> myFunc();
+  void append_token(const std::string& text /* inline comment */, const AST_Node* node);

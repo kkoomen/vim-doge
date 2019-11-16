@@ -137,8 +137,14 @@ doge#helpers#placeholder()                        *doge#helpers#placeholder()*
 doge#helpers#trim({string})                              *doge#helpers#trim()*
   Helper for compatibility with vim versions without the trim() function.
 
+doge#helpers#generator({path})                      *doge#helpers#generator()*
+  Run a generator which will produce all the parameters and return the output.
+
 doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
+
+doge#python#file({path})                                  *doge#python#file()*
+  Run a python file using the py[3]file command.
 
 doge#token#replace({tokens}, {text})                    *doge#token#replace()*
   Replace all tokens in the text parameter based on a given dictionary

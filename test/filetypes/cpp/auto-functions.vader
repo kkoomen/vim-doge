@@ -1,5 +1,5 @@
 # ==============================================================================
-# Auto-functions with parameters.
+# Auto-functions with parameters using return type 'decltype(auto)'
 # ==============================================================================
 Given cpp (auto-function with parameters using return type 'decltype(auto)'):
   template<class F, class... Args>
@@ -11,10 +11,12 @@ Given cpp (auto-function with parameters using return type 'decltype(auto)'):
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with @param and @return tags):
+Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
+   * @tparam F [TODO:description]
+   * @tparam Args [TODO:description]
    * @param fun [TODO:description]
    * @param args [TODO:description]
    * @return [TODO:description]
@@ -26,11 +28,11 @@ Expect cpp (generated comment with @param and @return tags):
   }
 
 # ==============================================================================
-# Auto-functions with parameters with advanced type hints.
+# Auto-functions with parameters with type hints using return type 'auto'
 # ==============================================================================
 Given cpp (auto-function with parameters with advanced type hints using return type 'auto'):
-  template<auto n>
-  auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // inline comment
+  template<class T, class U>
+  auto add(T t, U u)
   {
     //
   }
@@ -38,75 +40,18 @@ Given cpp (auto-function with parameters with advanced type hints using return t
 Do (trigger doge):
   \<C-d>
 
-Expect cpp (generated comment with @param and @return tags):
+Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
   /**
-   * [TODO:description]
+   * @brief [TODO:description]
    *
-   * @param it_begin [TODO:description]
-   * @param _end [TODO:description]
+   * @tparam T [TODO:description]
+   * @tparam U [TODO:description]
+   * @param t [TODO:description]
+   * @param u [TODO:description]
    * @return [TODO:description]
    */
-  template<auto n>
-  auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // inline comment
-  {
-    //
-  }
-
-# ==============================================================================
-# Auto-functions with parameters with advanced type hints and void return type.
-# ==============================================================================
-Given cpp (auto-function with parameters with advanced type hints with void return type using return type 'auto'):
-  template<auto n>
-  auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> void // inline comment
-  {
-    //
-  }
-
-Do (trigger doge):
-  \<C-d>
-
-Expect cpp (generated comment with @param and @return tags):
-  /**
-   * [TODO:description]
-   *
-   * @param it_begin [TODO:description]
-   * @param _end [TODO:description]
-   */
-  template<auto n>
-  auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> void // inline comment
-  {
-    //
-  }
-
-# ==============================================================================
-# Auto-functions with advanced syntax.
-# ==============================================================================
-Given cpp (auto-function with advanced syntax):
-  template<typename BasicJsonType, typename ValueType>
-  static auto
-    from_json(BasicJsonType&& j, ValueType& val) 
-    noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
-  -> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
-  {
-    //
-  }
-
-Do (trigger doge):
-  \<C-d>
-
-Expect cpp (generated comment with @param and @return tags):
-  /**
-   * [TODO:description]
-   *
-   * @param j [TODO:description]
-   * @param val [TODO:description]
-   * @return [TODO:description]
-   */
-  template<typename BasicJsonType, typename ValueType>
-  static auto
-    from_json(BasicJsonType&& j, ValueType& val) 
-    noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
-  -> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
+  template<class T, class U>
+  auto add(T t, U u)
   {
     //
   }

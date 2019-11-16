@@ -1,186 +1,68 @@
-// =============================================================================
-// Regular functions
-// =============================================================================
+/**
+ * @brief [TODO:description]
+ *
+ * @return [TODO:description]
+ */
+int myFunc(/* inline comment */) {}
+
+class TestClass {
+  public:
+    int myFunc();
+};
 
 /**
- * [TODO:description]
+ * struct foo - [TODO:description]
+ */
+struct foo {
+      /**
+       * @foo [TODO:description]
+       */
+      int foo;
+
+      /**
+       * @bar [TODO:description]
+       */
+      int bar;
+
+      /**
+       * @baz [TODO:description]
+       */
+      int baz;
+      union {
+              /**
+               * @foobar [TODO:description]
+               */
+              int foobar;
+      };
+      struct {
+              /**
+               * @barbar [TODO:description]
+               */
+              int barbar;
+      } bar2;
+};
+
+/**
+ * @brief [TODO:description]
  *
  * @param text [TODO:description]
  * @param node [TODO:description]
- */
-void Emitter::append_token(const std::string& text, const AST_Node* node)
-{
-  //
-}
-
-/**
- * [TODO:description]
  * @return [TODO:description]
  */
-std::vector<std::string> someFunction();
+int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
 
 /**
- * [TODO:description]
- * @return [TODO:description]
- */
-const next_layer_type& my_func()
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
- * @param text [TODO:description]
- * @return [TODO:description]
- */
-lowest_layer_type& my_func(std::string& text)
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
- * @param v [TODO:description]
- * @param ec [TODO:description]
- * @return [TODO:description]
- */
-ASIO_SYNC_OP_VOID myFunc(
-    verify_mode v, asio::error_code& ec)
-{
-  //
-}
-
-std::string trimLine(const std::string &line);
-
-/**
- * [TODO:description]
- *
- * @param e [TODO:description]
- * @return [TODO:description]
- */
-inline project::error_code my_func(ssl_errors e)
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
- * @param type [TODO:description]
- * @param handler [TODO:description]
- * @return [TODO:description]
- */
-template <typename HandshakeHandler>
-INITFN_RESULT_TYPE(HandshakeHandler, void (project::error_code))
-myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler)
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
- * @param it_begin [TODO:description]
- * @param _end [TODO:description]
- * @return [TODO:description]
- */
-template<typename T>
-Vector(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) {
-  assert(N == std::distance(it_begin, it_end));
-}
-
-/**
- * [TODO:description]
+ * @brief [TODO:description]
  *
  * @param p [TODO:description]
  */
-void f(A* p = this)
-{
-  //
-}
+void f(A* p = this) {}
 
 /**
- * [TODO:description]
+ * @brief [TODO:description]
  *
- * @param a [TODO:description]
- * @param b [TODO:description]
- * @return [TODO:description]
- */
-template <class T>
-T GetMax (T a, T b) {
-  T result;
-  result = (a>b)? a : b;
-  return (result);
-}
-
-/**
- * [TODO:description]
- *
- * @param i [TODO:description]
- * @param args [TODO:description]
- */
-template<class...T> void h(int i = 0, T... args) {
-  //
-}
-
-// =============================================================================
-// PTS/auto-functions (placeholder type specifiers)
-// =============================================================================
-
-/**
- * [TODO:description]
- *
- * @param it_begin [TODO:description]
- * @param _end [TODO:description]
- * @return [TODO:description]
- */
-template<auto n>
-auto f(std::enable_if<is_foreach_iterator<T>, T>::type& it_begin, T& _end) -> std::pair<decltype(n), decltype(n)> // test
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
- * @param args [TODO:description]
- * @return [TODO:description]
- */
-template<typename T, typename... Args>
-static T* create(Args&& ... args)
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
- * @param args [TODO:description]
- * @return [TODO:description]
- */
-template<> static T* create(Args&& ... args);
-
-/**
- * [TODO:description]
- *
- * @param j [TODO:description]
- * @param val [TODO:description]
- * @return [TODO:description]
- */
-template<typename BasicJsonType, typename ValueType>
-static auto
-  from_json(BasicJsonType&& j, ValueType& val)
-  noexcept(noexcept(::somename::from_json(std::forward<BasicJsonType>(j), val)))
--> decltype(::somename::from_json(std::forward<BasicJsonType>(j), val), void())
-{
-  //
-}
-
-/**
- * [TODO:description]
- *
+ * @tparam F [TODO:description]
+ * @tparam Args [TODO:description]
  * @param fun [TODO:description]
  * @param args [TODO:description]
  * @return [TODO:description]
@@ -190,3 +72,30 @@ decltype(auto) PerfectForward(F fun, Args&&... args)
 {
   //
 }
+
+/**
+ * @brief [TODO:description]
+ *
+ * @param lhs [TODO:description]
+ * @param rhs [TODO:description]
+ * @return [TODO:description]
+ */
+inline bool operator<(const value_t lhs, const value_t rhs) noexcept {}
+
+/**
+ * @brief [TODO:description]
+ *
+ * @tparam HandshakeHandler [TODO:description]
+ * @param type [TODO:description]
+ * @param param [TODO:description]
+ */
+template <typename HandshakeHandler>
+void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
+
+/**
+ * @brief [TODO:description]
+ *
+ * @param val [TODO:description]
+ * @return [TODO:description]
+ */
+virtual bool boolean(bool val) = 0;

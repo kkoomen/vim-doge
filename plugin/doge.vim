@@ -139,6 +139,8 @@ if g:doge_enable_mappings == v:true
 endif
 unlet s:mode
 
+let g:doge_dir = expand('<sfile>:p:h:h')
+
 ""
 " Command to generate documentation.
 command! -nargs=0 DogeGenerate call doge#generate()
