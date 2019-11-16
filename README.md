@@ -208,7 +208,7 @@ If you use a language that belongs to the C-family then you have to use `clang`.
 This is the parser that is being used for generating proper documentation.
 
 #### Prerequisites
-- Vim required to be compiled with python 3.
+- Vim requires to be compiled with python 3.
 - Python 3.5+
 
 #### Package manager
