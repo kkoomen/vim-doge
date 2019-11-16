@@ -79,7 +79,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                                                                 |
 | :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
 | :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
-| :white_check_mark: | C                                              | [Doxygen][doxygen], [Kernel doc][kerneldoc]                                  |
+| :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
 
 # Getting started
 
