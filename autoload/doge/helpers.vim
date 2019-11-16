@@ -81,14 +81,14 @@ endfunction
 ""
 " @public
 " Run a generator which will produce all the parameters and return the output.
-function! doge#helpers#generator(path) abort
-  let l:generator = g:doge_dir . '/generators/' . a:path
+function! doge#helpers#generator(generator) abort
+  let l:generator = g:doge_dir . '/generators/' . a:generator['file']
   if filereadable(l:generator) != v:false
-    let l:result = doge#python#file(l:generator)
+    let l:result = doge#python#file(l:generator, a:generator['args'])
     try
       return json_decode(l:result)
     catch /.*/
-      echo '[DoGe] ' . a:path . ' generator failed.'
+      echo '[DoGe] ' . a:generator['file'] . ' generator failed.'
       echo l:result
     endtry
   endif

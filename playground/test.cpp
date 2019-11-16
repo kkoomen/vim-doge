@@ -11,6 +11,38 @@ class TestClass {
 };
 
 /**
+ * struct foo - [TODO:description]
+ */
+struct foo {
+      /**
+       * @foo [TODO:description]
+       */
+      int foo;
+
+      /**
+       * @bar [TODO:description]
+       */
+      int bar;
+
+      /**
+       * @baz [TODO:description]
+       */
+      int baz;
+      union {
+              /**
+               * @foobar [TODO:description]
+               */
+              int foobar;
+      };
+      struct {
+              /**
+               * @barbar [TODO:description]
+               */
+              int barbar;
+      } bar2;
+};
+
+/**
  * @brief [TODO:description]
  *
  * @param text [TODO:description]

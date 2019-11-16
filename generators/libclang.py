@@ -3,8 +3,7 @@
 # vim: fenc=utf-8 ts=4 sw=4 et
 
 """
-Python binding of the clang tool used to extract information of a function
-declaration within Vim.
+Python binding of the clang tool used to extract information of an expression.
 
 Prerequisites (MacOS):
 - pip3 install clang
@@ -40,9 +39,7 @@ import vim
 import os
 import tempfile
 from typing import Union
-
-FUNCTION = {}
-
+from optparse import OptionParser, OptionGroup
 
 def get_next_token(node: Cursor, key: str) -> Union[str, None]:
     """
@@ -75,14 +72,69 @@ def find_node(node: Cursor, line: int) -> Union[Cursor, bool]:
             return result
     return False
 
-def get_diag_info(diag):
-    return { 'severity' : diag.severity,
-             'location' : diag.location,
-             'spelling' : diag.spelling,
-             'ranges' : diag.ranges,
-             'fixits' : diag.fixits }
+def print_field_decl(node: Cursor):
+    """
+    Parse a FIELD_DECL expression and print its output.
+
+    :param node Cursor: The node to parse.
+    """
+    has_children = sum(1 for _ in node.get_children())
+    if not has_children:
+        output = {}
+        output['name'] = node.spelling
+        print(json.dumps(output))
+
+def print_struct_decl(node: Cursor):
+    """
+    Parse a STRUCT_DECL expression and print its output.
+
+    :param node Cursor: The node to parse.
+    """
+    if node.spelling:
+        output = {}
+        output['name'] = node.spelling
+        output['parameters'] = []
+
+        # The code below will result in listing out all the properties as well.
+        # ---------------------------------------------------------------------
+        # for child in node.get_children():
+        #     has_children = sum(1 for _ in child.get_children())
+        #     if child.kind == CursorKind.FIELD_DECL and not has_children:
+        #         output['parameters'].append({
+        #             'name': child.spelling,
+        #         })
+
+        print(json.dumps(output))
+
+def print_func_decl(node: Cursor):
+    """
+    Parse a function-like expression and print its output.
+
+    :param node Cursor: The node to parse.
+    """
+    output = {}
+    output['name'] = node.spelling
+    output['returnType'] = node.result_type.spelling
+    output['parameters'] = []
+    for child in node.get_children():
+        if child.kind in [CursorKind.PARM_DECL, CursorKind.TEMPLATE_TYPE_PARAMETER]:
+            param_type = 'param'
+            if child.kind == CursorKind.TEMPLATE_TYPE_PARAMETER:
+                param_type = 'tparam'
+            output['parameters'].append({
+                'param-type': param_type,
+                'name': child.spelling,
+            })
+    print(json.dumps(output))
 
 def main():
+    # This script should be run using filters and only those nodes who match the
+    # filter types will be processed.
+    #
+    # Example:
+    #   ./libclang.py CXX_METHOD FUNCTION_DECL
+    filters = [getattr(CursorKind, arg) for arg in sys.argv]
+
     file_ext = vim.eval("expand('%:p:e')")
     ext = file_ext if file_ext else vim.eval('&filetype')
 
@@ -105,42 +157,17 @@ def main():
         tu = index.parse(filename)
         if tu:
             node = find_node(tu.cursor, current_line)
-            # print(('diags', [get_diag_info(d) for d in  tu.diagnostics]))
-            if node:
-                # print('node kind', node.kind)
-                # print('node spelling', node.spelling)
-                allowed_types = [
-                    CursorKind.CONSTRUCTOR,
-                    CursorKind.CXX_METHOD,
-                    CursorKind.FUNCTION_DECL,
-                    CursorKind.FUNCTION_TEMPLATE,
-                    CursorKind.CLASS_TEMPLATE,
-                ]
-                if node.kind in allowed_types:
-                    FUNCTION['funcName'] = node.spelling
-                    FUNCTION['returnType'] = node.result_type.spelling
-                    # print('<TOKENS>')
-                    # for t in node.get_tokens():
-                    #         print(t.kind, t.spelling)
-                    # print('</TOKENS>')
-                    if 'parameters' not in FUNCTION.keys():
-                        FUNCTION['parameters'] = []
-                    for child in node.get_children():
-                        # print('child kind', child.kind)
-                        # print('child spelling', child.spelling)
-                        # print('<CHILD-TOKENS>')
-                        # for t in child.get_tokens():
-                        #         print(t.kind, t.spelling)
-                        # print('</CHILD-TOKENS>')
-                        if child.kind in [CursorKind.PARM_DECL, CursorKind.TEMPLATE_TYPE_PARAMETER]:
-                            param_type = 'param'
-                            if child.kind == CursorKind.TEMPLATE_TYPE_PARAMETER:
-                                param_type = 'tparam'
-                            FUNCTION['parameters'].append({
-                                'param-type': param_type,
-                                'name': child.spelling,
-                            })
-                    print(json.dumps(FUNCTION))
+            if node and node.kind in filters:
+                if node.kind == CursorKind.FIELD_DECL:
+                    print_field_decl(node)
+                elif node.kind == CursorKind.STRUCT_DECL:
+                    print_struct_decl(node)
+                elif node.kind in [CursorKind.CONSTRUCTOR,
+                                   CursorKind.CXX_METHOD,
+                                   CursorKind.FUNCTION_DECL,
+                                   CursorKind.FUNCTION_TEMPLATE,
+                                   CursorKind.CLASS_TEMPLATE]:
+                    print_func_decl(node)
     except Exception as e:
         print(e)
     finally:
