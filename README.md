@@ -47,6 +47,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`:DogeGenerate`](#dogegenerate)
 - [FAQ](#faq)
     + [Using C / C++](#using-c--c)
+      - [Prerequisites](#prerequisites)
       - [Package manager](#package-manager)
       - [Manual compiling](#manual-compiling)
 - [Help](#help)
@@ -205,6 +206,10 @@ Command to generate documentation.
 
 If you use a language that belongs to the C-family then you have to use `clang`.
 This is the parser that is being used for generating proper documentation.
+
+#### Prerequisites
+- Vim required to be compiled with python 3.
+- Python 3.5+
 
 #### Package manager
 

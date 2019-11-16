@@ -379,4 +379,4 @@ within the project. Think wisely if you want to suggest a _differrent_ language.
 Generators can be used easily. The format is the same as the regex format, but
 the `match` and `match_group_names` can be replaced with a `generator` key.
 
-For an example usage, checkout the [c++](https://github.com/kkoomen/vim-doge/blob/master/ftplugin/cpp.vim) implementation.
+For an example usage, checkout the [C++](https://github.com/kkoomen/vim-doge/blob/master/ftplugin/cpp.vim) implementation.
