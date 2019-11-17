@@ -219,7 +219,7 @@ The Python binding for clang allows additional arguments. These arguments can be
 set with `g:doge_clang_args`. For example:
 
 ```vim
-g:doge_clang_args = ['-I', '/my/include/path']
+let g:doge_clang_args = ['-I', '/my/include/path']
 ```
 
 #### Package manager
