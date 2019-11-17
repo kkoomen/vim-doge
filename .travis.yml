@@ -7,7 +7,7 @@ env:
   - OPTIONS=--vim-74-only
   - OPTIONS=--vim-81-only
   - OPTIONS=--neovim-02-only
-  - OPTIONS=--neovim-03-only
+  - OPTIONS=--neovim-04-only
   - OPTIONS=--linter-only
 script: |
   ./run-tests -v $OPTIONS
