@@ -137,6 +137,7 @@ def main():
 
     file_ext = vim.eval("expand('%:p:e')")
     ext = file_ext if file_ext else vim.eval('&filetype')
+    workdir = vim.eval("expand('%:p:h')")
 
     lines = vim.eval("getline(line(1), line('$'))")
     current_line = int(vim.eval("line('.')"))
@@ -148,7 +149,7 @@ def main():
     lines.insert(current_line-1, normalized_expr)
 
     # Save the lines to a temp file and parse that file.
-    fd, filename = tempfile.mkstemp('.{}'.format(ext))
+    fd, filename = tempfile.mkstemp('.{}'.format(ext), dir=workdir)
     try:
         with os.fdopen(fd, 'w') as tmp:
             tmp.write('\n'.join(lines))
