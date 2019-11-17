@@ -86,7 +86,7 @@ while [ $# -ne 0 ]; do
     run_neovim_04_tests=0
     shift
   ;;
-  --neovim-03-only)
+  --neovim-04-only)
     run_linter=0
     run_vim_74_tests=0
     run_vim_81_tests=0
