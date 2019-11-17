@@ -210,6 +210,7 @@ This is the parser that is being used for generating proper documentation.
 #### Prerequisites
 - Vim requires to be compiled with python 3.
 - Python 3.5+
+- `pip3 install clang`
 
 #### Package manager
 
@@ -237,6 +238,13 @@ $ python3
 If you compiled libclang manually, then make sure that your `$PATH` and
 `$LD_LIBRARY_PATH` are set correctly. The libclang binary its location should
 be defined in the `$LD_LIBRARY_PATH`.
+
+E.g.
+
+```sh
+# for macOS
+export LD_LIBRARY_PATH="/Library/Developer/CommandLineTools/usr/lib/"
+```
 
 # Help
 
