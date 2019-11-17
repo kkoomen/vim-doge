@@ -139,6 +139,11 @@ def main():
     ext = file_ext if file_ext else vim.eval('&filetype')
     workdir = vim.eval("expand('%:p:h')")
 
+    try:
+        args = vim.eval('g:doge_clang_args')
+    except vim.error:
+        args = []
+
     lines = vim.eval("getline(line(1), line('$'))")
     current_line = int(vim.eval("line('.')"))
 
@@ -155,7 +160,7 @@ def main():
             tmp.write('\n'.join(lines))
 
         index = Index.create()
-        tu = index.parse(filename)
+        tu = index.parse(filename, args=args)
         if tu:
             node = find_node(tu.cursor, current_line)
             if node and node.kind in filters:

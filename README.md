@@ -48,6 +48,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [FAQ](#faq)
     + [Using C / C++](#using-c--c)
       - [Prerequisites](#prerequisites)
+      - [Adding additional clang args](#adding-additional-clang-args)
       - [Package manager](#package-manager)
       - [Manual compiling](#manual-compiling)
 - [Help](#help)
@@ -212,6 +213,15 @@ This is the parser that is being used for generating proper documentation.
 - Python 3.5+
 - `pip3 install clang`
 
+#### Adding additional clang args
+
+The Python binding for clang allows additional arguments. These arguments can be
+set with `g:doge_clang_args`. For example:
+
+```vim
+g:doge_clang_args = ['-I', '/my/include/path']
+```
+
 #### Package manager
 
 If you've installed clang via your package manager then you might have a file
@@ -236,7 +246,7 @@ $ python3
 #### Manual compiling
 
 If you compiled libclang manually, then make sure that your `$PATH` and
-`$LD_LIBRARY_PATH` are set correctly. 
+`$LD_LIBRARY_PATH` are set correctly.
 
 The libclang binary its location should be defined in the `$LD_LIBRARY_PATH`:
 
