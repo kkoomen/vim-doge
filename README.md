@@ -236,13 +236,12 @@ $ python3
 #### Manual compiling
 
 If you compiled libclang manually, then make sure that your `$PATH` and
-`$LD_LIBRARY_PATH` are set correctly. The libclang binary its location should
-be defined in the `$LD_LIBRARY_PATH`.
+`$LD_LIBRARY_PATH` are set correctly. 
 
-E.g.
+The libclang binary its location should be defined in the `$LD_LIBRARY_PATH`:
 
 ```sh
-# for macOS
+# MacOS
 export LD_LIBRARY_PATH="/Library/Developer/CommandLineTools/usr/lib/"
 ```
 
