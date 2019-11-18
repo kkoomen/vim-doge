@@ -312,7 +312,7 @@ DoGe is licensed under the GPL-3.0 license.
 [roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
 [kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
-[sh-style-guide]: https://google.github.io/styleguide/shell.xml#Function_Comments
+[sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
 
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
