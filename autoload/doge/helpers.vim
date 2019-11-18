@@ -62,7 +62,7 @@ endfunction
 " If no context is specified the todo-pattern is returned to search for.
 function! doge#helpers#placeholder(...) abort
   if !has_key(a:, 1)
-    return '\(\[TODO:[[:alnum:] ]\+\]\|TODO\)'
+    return '\(\[TODO:[[:alnum:]-]\+\]\|TODO\)'
   else
     return printf('[TODO:%s]', a:1)
   endif

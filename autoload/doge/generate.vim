@@ -41,11 +41,11 @@ function! doge#generate#pattern(pattern) abort
           \ )
 
     " Extract the primary tokens.
-    let l:tokens = doge#token#extract(
+    let l:tokens = get(doge#token#extract(
           \ l:curr_line,
           \ a:pattern['match'],
           \ a:pattern['match_group_names']
-          \ )[0]
+          \ ), 0, {})
   endif
 
   try

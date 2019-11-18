@@ -79,7 +79,7 @@ function! s:token_replace(tokens, text) abort
   endfor
 
   " Replace !<name> with [TODO:<name>].
-  let l:text = substitute(l:text, '\m!\([[:alpha:]]\+\)', '[TODO:\1]', 'g')
+  let l:text = substitute(l:text, '\m!\([[:alpha:]-]\+\)', '[TODO:\1]', 'g')
 
   " Replace 2 or more white-spaces with 1 single white-space, except for leading
   " white-spaces and/or newlines. Those should be preserved.

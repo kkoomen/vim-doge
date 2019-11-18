@@ -82,6 +82,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
 | :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
+| :white_check_mark: | Shell                                          | [Google][sh-google]                                                          |
 
 # Getting started
 
@@ -123,7 +124,7 @@ If you want to change the doc standard specifically for a buffer you can do:
 Here is the full list of available doc standards per filetype:
 
 | Variable                           | Default             | Supported                                                                                                                                    |
-| :--------------------------------- | :-----------        | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| :--------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
 | `g:doge_doc_standard_python`       | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                  |
 | `g:doge_doc_standard_php`          | `'phpdoc'`          | `'phpdoc'`                                                                                                                                   |
 | `g:doge_doc_standard_javascript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
@@ -138,6 +139,7 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_r`            | `'roxygen2'`        | `'roxygen2'`                                                                                                                                 |
 | `g:doge_doc_standard_cpp`          | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
 | `g:doge_doc_standard_c`            | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
+| `g:doge_doc_standard_sh`           | `'google'`          | `'google'`                                                                                                                                   |
 
 
 ## Options
@@ -310,6 +312,7 @@ DoGe is licensed under the GPL-3.0 license.
 [roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
 [kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
+[sh-style-guide]: https://google.github.io/styleguide/shell.xml#Function_Comments
 
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
