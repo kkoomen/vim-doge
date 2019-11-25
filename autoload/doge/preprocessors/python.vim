@@ -20,8 +20,14 @@ endfunction
 " A callback function being called after the parameter tokens have been
 " extracted. This function will adjust the input if needed.
 function! doge#preprocessors#python#parameter_tokens(tokens) abort
-  " Filer out the 'self' variable in methods.
-  return filter(a:tokens, {_, token -> token['name'] !=# 'self'})
+  " Filer out the 'self'-type variable in methods.
+  return filter(a:tokens, {index, token ->
+        \ !(index == 0 && (
+        \   token['name'] ==# 'self'
+        \   || token['name'] ==# 'klass'
+        \   || token['name'] ==# 'cls'
+        \ ))
+        \ })
 endfunction
 
 let &cpoptions = s:save_cpo

@@ -51,7 +51,7 @@ Expect python (generated comment with :param tags):
 Given python (class method parameters with *args and **kwargs):
   class MyClass(object):
 
-      def call(self, *args: str, **kwargs: str) -> str:
+      def call(cls, *args: str, **kwargs: str) -> str:
           pass
 
 Do (trigger doge):
@@ -61,7 +61,7 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   class MyClass(object):
 
-      def call(self, *args: str, **kwargs: str) -> str:
+      def call(cls, *args: str, **kwargs: str) -> str:
           """
           [TODO:description]
 
