@@ -64,7 +64,8 @@ if !exists('g:doge_mapping')
   ""
   " (Default: '<Leader>d')
   "
-  " The mapping to trigger DoGe.
+  " The mapping to trigger DoGe. The mapping accepts a count, to select a
+  " specific doc standard, if more than one is defined.
   let g:doge_mapping = '<Leader>d'
 endif
 
@@ -122,7 +123,8 @@ if !exists('g:doge_comment_jump_modes')
 endif
 
 " Register all the <Plug> mappings.
-nnoremap <Plug>(doge-generate) :call doge#generate()<CR>
+
+nnoremap <Plug>(doge-generate) :<C-u>call doge#generate(v:count)<CR>
 for s:mode in g:doge_comment_jump_modes
   execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', s:mode))
   execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', s:mode))
@@ -142,8 +144,10 @@ unlet s:mode
 let g:doge_dir = expand('<sfile>:p:h:h')
 
 ""
-" Command to generate documentation.
-command! -nargs=0 DogeGenerate call doge#generate()
+" @command DogeGenerate [N] [doc_standard]
+" Command to generate documentation. It accepts a count or a string as argument,
+" and it can complete the available doc standards for the current buffer.
+command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
 
 augroup doge
   autocmd!

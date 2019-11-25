@@ -154,7 +154,8 @@ Whether or not to enable built-in mappings.
 
 Default: `'<Leader>d'`
 
-The mapping to trigger DoGe.
+The mapping to trigger DoGe. The mapping accepts a count, to select a specific
+doc standard, if more than one is defined.
 
 ### `g:doge_buffer_mappings`
 
@@ -199,9 +200,10 @@ autocompletion in insert mode.
 
 # Commands
 
-### `:DogeGenerate`
+### `:DogeGenerate [N] [doc_standard]`
 
-Command to generate documentation.
+Command to generate documentation. It accepts a count or a string as argument,
+and it can complete the available doc standards for the current buffer.
 
 # FAQ
 

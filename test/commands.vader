@@ -1,0 +1,79 @@
+# ==============================================================================
+#
+#                            Test the DogeGenerate command
+#
+# ==============================================================================
+
+# ==============================================================================
+# Test the C doxygen_javadoc style doc standard generation.
+# ==============================================================================
+Given c (functions with x and y parameters):
+  int testA(int x, int y) {}
+
+  int testB(int x, int y) {}
+
+Do (trigger 'DogeGenerate doxygen_javadoc' and 'DogeGenerate 3'):
+# Test by name
+  :DogeGenerate doxygen_javadoc\<CR>
+
+# Test by index
+  :10\<CR>
+  :DogeGenerate 1\<CR>
+
+Expect c (generated comments):
+  /**
+   * @brief [TODO:description]
+   *
+   * @param x [TODO:description]
+   * @param y [TODO:description]
+   * @return [TODO:description]
+   */
+  int testA(int x, int y) {}
+
+  /**
+   * @brief [TODO:description]
+   *
+   * @param x [TODO:description]
+   * @param y [TODO:description]
+   * @return [TODO:description]
+   */
+  int testB(int x, int y) {}
+
+# ==============================================================================
+# Test the C kernel doc standard generation.
+# ==============================================================================
+Given c (functions with x and y parameters):
+  int testA(int x, int y) {}
+
+  int testB(int x, int y) {}
+
+Do (trigger 'DogeGenerate doxygen_javadoc' and 'DogeGenerate 3'):
+# Test by name
+  :DogeGenerate kernel_doc\<CR>
+
+# Test by index
+  :12\<CR>
+  :DogeGenerate 6\<CR>
+
+Expect c (generated comments):
+  /**
+   * testA(): [TODO:description]
+   * @x: [TODO:description]
+   * @y: [TODO:description]
+   *
+   * [TODO:description]
+   *
+   * Return: [TODO:description]
+   */
+  int testA(int x, int y) {}
+
+  /**
+   * testB(): [TODO:description]
+   * @x: [TODO:description]
+   * @y: [TODO:description]
+   *
+   * [TODO:description]
+   *
+   * Return: [TODO:description]
+   */
+  int testB(int x, int y) {}
