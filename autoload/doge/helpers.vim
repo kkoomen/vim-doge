@@ -62,7 +62,7 @@ endfunction
 " If no context is specified the todo-pattern is returned to search for.
 function! doge#helpers#placeholder(...) abort
   if !has_key(a:, 1)
-    return '\(\[TODO:[[:alnum:] ]\+\]\|TODO\)'
+    return '\(\[TODO:[[:alnum:]-]\+\]\|TODO\)'
   else
     return printf('[TODO:%s]', a:1)
   endif
@@ -77,6 +77,24 @@ function! doge#helpers#trim(string) abort
         \ ? substitute(a:string, printf('\m^%s\(.\{-}\)%s$', l:chars, l:chars), '\1', '')
         \ : trim(a:string)
 endfunction
+
+""
+" @public
+" Run a generator which will produce all the parameters and return the output.
+function! doge#helpers#generator(generator) abort
+  let l:generator = g:doge_dir . '/generators/' . a:generator['file']
+  if filereadable(l:generator) != v:false
+    let l:result = doge#python#file(l:generator, a:generator['args'])
+    try
+      return json_decode(l:result)
+    catch /.*/
+      echo '[DoGe] ' . a:generator['file'] . ' generator failed.'
+      echo l:result
+    endtry
+  endif
+  return 0
+endfunction
+
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

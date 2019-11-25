@@ -42,8 +42,15 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
     + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
     + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
+    + [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
     + [`:DogeGenerate`](#dogegenerate)
+- [FAQ](#faq)
+    + [Using C / C++](#using-c--c)
+      - [Prerequisites](#prerequisites)
+      - [Adding additional clang args](#adding-additional-clang-args)
+      - [Package manager](#package-manager)
+      - [Manual compiling](#manual-compiling)
 - [Help](#help)
 - [Contributing](#contributing)
 - [Motivation](#motivation)
@@ -74,6 +81,8 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                                                                 |
 | :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
 | :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
+| :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
+| :white_check_mark: | Shell                                          | [Google][sh-google]                                                          |
 
 # Getting started
 
@@ -114,21 +123,24 @@ If you want to change the doc standard specifically for a buffer you can do:
 
 Here is the full list of available doc standards per filetype:
 
-| Variable                           | Default      | Supported                                   |
-| :--------------------------------- | :----------- | :------------------------------------------ |
-| `g:doge_doc_standard_python`       | `'reST'`     | `'reST'`, `'numpy'`, `'google'`, `'sphinx'` |
-| `g:doge_doc_standard_php`          | `'phpdoc'`   | `'phpdoc'`                                  |
-| `g:doge_doc_standard_javascript`   | `'jsdoc'`    | `'jsdoc'`                                   |
-| `g:doge_doc_standard_typescript`   | `'jsdoc'`    | `'jsdoc'`                                   |
-| `g:doge_doc_standard_coffeescript` | `'jsdoc'`    | `'jsdoc'`                                   |
-| `g:doge_doc_standard_lua`          | `'ldoc'`     | `'ldoc'`                                    |
-| `g:doge_doc_standard_java`         | `'javadoc'`  | `'javadoc'`                                 |
-| `g:doge_doc_standard_groovy`       | `'javadoc'`  | `'javadoc'`                                 |
-| `g:doge_doc_standard_ruby`         | `'YARD'`     | `'YARD'`                                    |
-| `g:doge_doc_standard_scala`        | `'scaladoc'` | `'scaladoc'`                                |
-| `g:doge_doc_standard_kotlin`       | `'kdoc'`     | `'kdoc'`                                    |
-| `g:doge_doc_standard_r`            | `'roxygen2'` | `'roxygen2'`                                |
-| `g:doge_doc_standard_cpp`          | `'doxygen'`  | `'doxygen'`                                 |
+| Variable                           | Default             | Supported                                                                                                                                    |
+| :--------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| `g:doge_doc_standard_python`       | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                  |
+| `g:doge_doc_standard_php`          | `'phpdoc'`          | `'phpdoc'`                                                                                                                                   |
+| `g:doge_doc_standard_javascript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
+| `g:doge_doc_standard_typescript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
+| `g:doge_doc_standard_coffeescript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
+| `g:doge_doc_standard_lua`          | `'ldoc'`            | `'ldoc'`                                                                                                                                     |
+| `g:doge_doc_standard_java`         | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
+| `g:doge_doc_standard_groovy`       | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
+| `g:doge_doc_standard_ruby`         | `'YARD'`            | `'YARD'`                                                                                                                                     |
+| `g:doge_doc_standard_scala`        | `'scaladoc'`        | `'scaladoc'`                                                                                                                                 |
+| `g:doge_doc_standard_kotlin`       | `'kdoc'`            | `'kdoc'`                                                                                                                                     |
+| `g:doge_doc_standard_r`            | `'roxygen2'`        | `'roxygen2'`                                                                                                                                 |
+| `g:doge_doc_standard_cpp`          | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
+| `g:doge_doc_standard_c`            | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
+| `g:doge_doc_standard_sh`           | `'google'`          | `'google'`                                                                                                                                   |
+
 
 ## Options
 
@@ -177,11 +189,73 @@ Default: `1`
 
 Continue to cycle among placeholders when reaching the start or end.
 
+### `g:doge_comment_jump_modes`
+
+Default: `['n', 'i', 's']`
+
+Defines the modes in which doge will jump forward and backward when interactive
+mode is active. For example: removing 'i' would allow you to use <Tab> for
+autocompletion in insert mode.
+
 # Commands
 
 ### `:DogeGenerate`
 
 Command to generate documentation.
+
+# FAQ
+
+### Using C / C++
+
+If you use a language that belongs to the C-family then you have to use `clang`.
+This is the parser that is being used for generating proper documentation.
+
+#### Prerequisites
+- Vim requires to be compiled with python 3.
+- Python 3.5+
+- `pip3 install clang`
+
+#### Adding additional clang args
+
+The Python binding for clang allows additional arguments. These arguments can be
+set with `g:doge_clang_args`. For example:
+
+```vim
+let g:doge_clang_args = ['-I', '/my/include/path']
+```
+
+#### Package manager
+
+If you've installed clang via your package manager then you might have a file
+called `libclang.so.<libclang-major-version>` somewhere in your system, for
+example: `/usr/lib/libclang.so.8`. Go into the directory where this file exists
+using `cd` and create a symlink:
+
+```
+cd /usr/lib/
+ln -s libclang.so.8 libclang.so
+```
+
+Now it should be detectable via python if you do:
+
+```
+$ python3
+>>> from clang.cindex import Index
+>>> Index.create()
+>>> <clang.cindex.Index object at 0x1084763d0>
+```
+
+#### Manual compiling
+
+If you compiled libclang manually, then make sure that your `$PATH` and
+`$LD_LIBRARY_PATH` are set correctly.
+
+The libclang binary its location should be defined in the `$LD_LIBRARY_PATH`:
+
+```sh
+# MacOS
+export LD_LIBRARY_PATH="/Library/Developer/CommandLineTools/usr/lib/"
+```
 
 # Help
 
@@ -237,6 +311,8 @@ DoGe is licensed under the GPL-3.0 license.
 [kdoc]: https://kotlinlang.org/docs/reference/kotlin-doc.html
 [roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
+[kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
+[sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
 
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>

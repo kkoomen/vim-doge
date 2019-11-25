@@ -26,6 +26,7 @@ When contributing make sure you have read and understood the
       - [Default value](#default-value)
       - [Conditional rendering](#conditional-rendering)
   * [Writing proper regex](#writing-proper-regex)
+- [Generators](#generators)
 
 # How does DoGe work?
 
@@ -361,3 +362,21 @@ below the one you're generating documentation for.
 
 If you need help with your regex you can visit the IRC Freenode #regex or #vim channel
 or [ask a question](https://github.com/kkoomen/vim-doge/issues/new?labels=question&template=question.md) in the issue tracker.
+
+# Generators
+
+Since [v1.15.0](https://github.com/kkoomen/vim-doge/tree/v1.15.0) DoGe supports
+generators. These are scripts will have language-specific parsers and generate
+all the necessary tokens. For example: For C and C++ there is the `libclang.py`
+generator which is parsing the current file and will print a json format of the
+necessary tokens.
+
+Generators should output json format, since this can be decoded by Vim easily.
+
+It is also suggested to use Python because these scripts can be shipped easily
+within the project. Think wisely if you want to suggest a _differrent_ language.
+
+Generators can be used easily. The format is the same as the regex format, but
+the `match` and `match_group_names` can be replaced with a `generator` key.
+
+For an example usage, checkout the [C++](https://github.com/kkoomen/vim-doge/blob/master/ftplugin/cpp.vim) implementation.

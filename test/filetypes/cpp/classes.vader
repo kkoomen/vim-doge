@@ -1,0 +1,24 @@
+# ==============================================================================
+# Class templates.
+# ==============================================================================
+Given cpp (class template):
+  template<typename Test>
+  class test
+  {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @brief, @tparam tags):
+  /**
+   * @brief [TODO:description]
+   *
+   * @tparam Test [TODO:description]
+   */
+  template<typename Test>
+  class test
+  {
+    //
+  }

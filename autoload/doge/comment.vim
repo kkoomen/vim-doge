@@ -5,29 +5,33 @@ let s:comment_placeholder = doge#helpers#placeholder()
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
-  let l:next_pos = search(s:comment_placeholder, 'nW')
+  let @/ = s:comment_placeholder
+  let l:next_pos = searchpos(s:comment_placeholder, 'nW')
+  let l:cpos = getpos('.')
+  let l:cpos[1] = l:next_pos[0]
+  let l:cpos[2] = l:next_pos[1]
 
-  if (l:next_pos > b:doge_interactive['lnum_comment_end_pos'] || l:next_pos == 0)
+  if (l:next_pos[0] > b:doge_interactive['lnum_comment_end_pos'] || l:next_pos[0] == 0)
     \ && g:doge_comment_jump_wrap == v:true
     " If we have more TODO items below the comment or we are at the last TODO
     " inside the comment, then we'll go backward to the start position of the
     " comment so we can continue to cycle.
-    return "\<Esc>:" . b:doge_interactive['lnum_comment_start_pos'] . "\<CR>^/" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+    return "\<Esc>:" . b:doge_interactive['lnum_comment_start_pos'] . "\<CR>^:call search('" . s:comment_placeholder . "')\<CR>gno\<C-g>"
   endif
 
   " Check if the next pos we want to jump to is still inside the comment.
-  if l:next_pos != 0 && l:next_pos <= b:doge_interactive['lnum_comment_end_pos']
+  if l:next_pos[0] != 0 && l:next_pos[0] <= b:doge_interactive['lnum_comment_end_pos']
     if mode() ==# 'i'
-      return "\<C-O>/" . s:comment_placeholder . "\<CR>\<C-O>:silent! noh\<CR>\<C-O>gno\<C-g>"
+      return "\<C-o>:call setpos('.', " . string(l:cpos) . ")\<CR>\<C-o>gno\<C-g>"
     elseif mode() ==# 's'
-      return "\<Esc>/" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+      return "\<Esc>:call setpos('.', " . string(l:cpos) . ")\<CR>gno\<C-g>"
     elseif mode() ==# 'n'
-      return '/' . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+      return ":call setpos('.', " . string(l:cpos) . ")\<CR>gno\<C-g>"
     else
       return "viw\<C-g>"
     endif
   elseif expand('<cword>') ==# s:comment_placeholder && mode() ==# 'i'
-    return "\<C-O>viw\<C-g>"
+    return "\<C-o>viw\<C-g>"
   endif
 
   " No more next TODOs found.
@@ -36,29 +40,33 @@ endfunction
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_backward() abort
-  let l:prev_pos = search(s:comment_placeholder, 'bnW')
+  let @/ = s:comment_placeholder
+  let l:prev_pos = searchpos(s:comment_placeholder, 'bnW')
+  let l:cpos = getpos('.')
+  let l:cpos[1] = l:prev_pos[0]
+  let l:cpos[2] = l:prev_pos[1]
 
-  if (l:prev_pos < b:doge_interactive['lnum_comment_start_pos'] || l:prev_pos == 0)
+  if (l:prev_pos[0] < b:doge_interactive['lnum_comment_start_pos'] || l:prev_pos[0] == 0)
     \ && g:doge_comment_jump_wrap == v:true
     " If we have more TODO items above the comment or we are at the first TODO
     " inside the comment, then we'll go forward to the end position of the
     " comment so we can continue to cycle.
-    return "\<Esc>:" . b:doge_interactive['lnum_comment_end_pos'] . "\<CR>$?" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+    return "\<Esc>:" . b:doge_interactive['lnum_comment_end_pos'] . "\<CR>$:call search('" . s:comment_placeholder . "', 'b')\<CR>gno\<C-g>"
   endif
 
   " Check if the prev pos we want to jump to is still inside the comment.
-  if l:prev_pos != 0 && l:prev_pos >= b:doge_interactive['lnum_comment_start_pos']
+  if l:prev_pos[0] != 0 && l:prev_pos[0] >= b:doge_interactive['lnum_comment_start_pos']
     if mode() ==# 'i'
-      return "\<C-O>?" . s:comment_placeholder . "\<CR>\<C-O>:silent! noh\<CR>\<C-O>gno\<C-g>"
+      return "\<C-o>:call setpos('.', " . string(l:cpos) . ")\<CR>\<C-o>gNo\<C-g>"
     elseif mode() ==# 's'
-      return "\<Esc>?" . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+      return "\<Esc>:call setpos('.', " . string(l:cpos) . ")\<CR>gno\<C-g>"
     elseif mode() ==# 'n'
-      return '?' . s:comment_placeholder . "\<CR>:silent! noh\<CR>gno\<C-g>"
+      return ":call setpos('.', " . string(l:cpos) . ")\<CR>gno\<C-g>"
     else
       return "viW\<C-g>"
     endif
   elseif expand('<cword>') ==# s:comment_placeholder && mode() ==# 'i'
-    return "\<C-O>viw\<C-g>"
+    return "\<C-o>viw\<C-g>"
   endif
 
   " No more previous TODOs found.
@@ -150,6 +158,22 @@ function! doge#comment#update_interactive_comment_info() abort
 
       let b:doge_interactive['lnum_comment_end_pos'] = l:lnum_comment_end_pos - 1
     endif
+  endif
+endfunction
+
+""
+" @public
+" This function is trigged by the auto-commands InsertLeave and TextChanged and
+" will deactivate doge when there are no more TODO items left. Requires
+" @setting(g:doge_comment_interactive) to be enabled.
+function! doge#comment#deactivate_when_done(...) abort
+  if exists('b:doge_interactive')
+    let l:pos = getcurpos()[1:2]
+    call cursor(b:doge_interactive['lnum_comment_start_pos'], 1)
+    if search(s:comment_placeholder, 'W', b:doge_interactive['lnum_comment_end_pos']) == v:false
+      call doge#deactivate()
+    endif
+    call cursor(l:pos)
   endif
 endfunction
 

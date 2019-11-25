@@ -60,7 +60,7 @@ function! doge#activate() abort
         \ g:doge_mapping_comment_jump_forward,
         \ g:doge_mapping_comment_jump_backward,
         \ ]
-  for l:mode in ['n', 'i', 's']
+  for l:mode in g:doge_comment_jump_modes
     execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-forward)', l:mode, l:f))
     execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-backward)', l:mode, l:b))
   endfor
@@ -89,7 +89,7 @@ function! doge#deactivate() abort
         \ g:doge_mapping_comment_jump_forward,
         \ g:doge_mapping_comment_jump_backward,
         \ ]
-  for l:mode in ['n', 'i', 's']
+  for l:mode in g:doge_comment_jump_modes
     execute(printf('%sunmap <buffer> %s', l:mode, l:f))
     execute(printf('%sunmap <buffer> %s', l:mode, l:b))
   endfor

@@ -24,6 +24,9 @@ let g:doge_mapping = '<Leader>f'
 -->
 
 **To Reproduce**
+<!--
+If applicable, provide the scenario you used to generate documentation for.
+-->
 Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'

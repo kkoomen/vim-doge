@@ -17,25 +17,36 @@ function! doge#generate#pattern(pattern) abort
     return 0
   endif
 
-  " Skip if the current line does not match the main pattern.
-  let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
-  if l:curr_line_raw !~# a:pattern['match']
-    return 0
+  " Check if a generator is available. Otherwise we do a fallback on the regex.
+  let l:use_generator = has_key(a:pattern, 'generator')
+  if l:use_generator
+    let l:tokens = doge#helpers#generator(a:pattern['generator'])
+    if type(l:tokens) != v:t_dict
+      return 0
+    endif
+  else
+    " Skip if the current line does not match the main pattern.
+    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
+    if l:curr_line_raw !~# a:pattern['match']
+      return 0
+    endif
+
+    " Remove comments to ensure we can match
+    " our patterns with and without comments.
+    let l:curr_line = substitute(
+          \ l:curr_line_raw,
+          \ b:doge_pattern_multi_line_comment,
+          \ '',
+          \ 'g'
+          \ )
+
+    " Extract the primary tokens.
+    let l:tokens = get(doge#token#extract(
+          \ l:curr_line,
+          \ a:pattern['match'],
+          \ a:pattern['match_group_names']
+          \ ), 0, {})
   endif
-
-  let l:curr_line = substitute(
-        \ l:curr_line_raw,
-        \ b:doge_pattern_multi_line_comment,
-        \ '',
-        \ 'g'
-        \ )
-
-  " Extract the primary tokens.
-  let l:tokens = doge#token#extract(
-        \ l:curr_line,
-        \ a:pattern['match'],
-        \ a:pattern['match_group_names']
-        \ )[0]
 
   try
     let l:preprocess_fn = printf('doge#preprocessors#%s#tokens', &filetype)
@@ -44,14 +55,15 @@ function! doge#generate#pattern(pattern) abort
   endtry
 
   " Split the 'parameters' token value into a list.
-  if has_key(a:pattern, 'parameters')
+  if has_key(a:pattern, 'parameters') && has_key(l:tokens, 'parameters')
     let l:params_dict = a:pattern['parameters']
     let l:params = l:tokens['parameters']
 
     " Go through each parameter, match the regex, extract the token values and
     " replace the 'parameters' key with the formatted version.
     let l:formatted_params = []
-    let l:param_tokens = doge#token#extract(
+
+    let l:param_tokens = l:use_generator ? l:params : doge#token#extract(
           \ l:params,
           \ l:params_dict['match'],
           \ l:params_dict['match_group_names']
@@ -65,9 +77,12 @@ function! doge#generate#pattern(pattern) abort
     endtry
 
     for l:param_token in l:param_tokens
+      let l:format_doc_standard = has_key(l:params_dict['format'], b:doge_doc_standard)
+            \ ? l:params_dict['format'][b:doge_doc_standard]
+            \ : l:params_dict['format'][b:doge_supported_doc_standards[0]]
       let l:format = doge#token#replace(
             \ l:param_token,
-            \ l:params_dict['format'][b:doge_doc_standard]
+            \ l:format_doc_standard
             \ )
       if type(l:format) == v:t_list
         call add(l:formatted_params, join(l:format, "\n"))
@@ -81,7 +96,10 @@ function! doge#generate#pattern(pattern) abort
   " Create the comment by replacing the tokens in the template with their
   " corresponding values.
   let l:comment = []
-  for l:line in a:pattern['comment']['template'][b:doge_doc_standard]
+  let l:comment_template_doc_standard = has_key(a:pattern['comment']['template'], b:doge_doc_standard)
+        \ ? a:pattern['comment']['template'][b:doge_doc_standard]
+        \ : a:pattern['comment']['template'][b:doge_supported_doc_standards[0]]
+  for l:line in l:comment_template_doc_standard
     " If empty lines are present, just append them to ensure a whiteline is
     " inserted rather then completely removed. This allows us to insert some
     " whitelines in the comment template.

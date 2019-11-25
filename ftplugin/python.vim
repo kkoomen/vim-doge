@@ -1,6 +1,5 @@
 " ==============================================================================
-" The Python documentation should follow the 'reST' or 'Numpy' conventions.
-" see:
+" The Python documentation should follow one of the following conventions:
 " - reST: http://daouzli.com/blog/docstring.html#restructuredtext
 " - Numpy: http://daouzli.com/blog/docstring.html#numpydoc
 " - Google: https://github.com/google/styleguide/blob/gh-pages/pyguide.md

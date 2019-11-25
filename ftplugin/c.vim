@@ -1,6 +1,7 @@
 " ==============================================================================
-" The C++ documentation should follow the 'Doxygen' conventions.
-" see http://www.doxygen.nl/manual/docblocks.html
+" The C documentation should follow the 'Doxygen' conventions.
+" - Doxygen: http://www.doxygen.nl/manual/docblocks.html
+" - KernelDoc: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
@@ -15,11 +16,12 @@ let b:doge_supported_doc_standards = [
       \ 'doxygen_javadoc_banner',
       \ 'doxygen_qt',
       \ 'doxygen_qt_no_asterisk',
+      \ 'kernel_doc'
       \ ]
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_cpp', b:doge_supported_doc_standards[0])
+let b:doge_doc_standard = get(g:, 'doge_doc_standard_c', b:doge_supported_doc_standards[0])
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
-  \ '[DoGe] %s is not a valid C++ doc standard, available doc standard are: %s',
+  \ '[DoGe] %s is not a valid C doc standard, available doc standard are: %s',
   \ b:doge_doc_standard,
   \ join(b:doge_supported_doc_standards, ', ')
   \ )
@@ -44,6 +46,7 @@ call add(b:doge_patterns, {
 \  'parameters': {
 \    'format': {
 \      'doxygen_javadoc': '@{param-type|param} {name} !description',
+\      'kernel_doc': '@{name}: !description',
 \    },
 \  },
 \  'comment': {
@@ -88,6 +91,16 @@ call add(b:doge_patterns, {
 \        '%(parameters|{parameters})%',
 \        '%(returnType|@return !description)%',
 \        '*/',
+\      ],
+\      'kernel_doc': [
+\        '/**',
+\        ' * {name}(): !description',
+\        '%(parameters| * {parameters})%',
+\        ' *',
+\        ' * !description',
+\        '%(returnType| *)%',
+\        '%(returnType| * Return: !description)%',
+\        ' */',
 \      ],
 \    },
 \  },
@@ -143,6 +156,13 @@ call add(b:doge_patterns, {
 \        '%(parameters|)%',
 \        '%(parameters|{parameters})%',
 \        '*/',
+\      ],
+\      'kernel_doc': [
+\        '/**',
+\        ' * struct {name} - !description',
+\        '%(parameters|)%',
+\        '%(parameters| * {parameters})%',
+\        ' */',
 \      ],
 \    },
 \  },

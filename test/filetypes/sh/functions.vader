@@ -1,0 +1,43 @@
+# ==============================================================================
+# Regular functions.
+# ==============================================================================
+Given sh (regular functions):
+  function test {
+    print "foobar"
+  }
+
+  test() {
+    print "foobar"
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :14\<CR>
+  \<C-d>
+
+Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 'Returns' keywords):
+  ################################################################################
+  # [TODO:description]
+  # Globals:
+  #   [TODO:var-name]
+  # Arguments:
+  #   $1: [TODO:description]
+  # Returns:
+  #   [TODO:description]
+  ################################################################################
+  function test {
+    print "foobar"
+  }
+
+  ################################################################################
+  # [TODO:description]
+  # Globals:
+  #   [TODO:var-name]
+  # Arguments:
+  #   $1: [TODO:description]
+  # Returns:
+  #   [TODO:description]
+  ################################################################################
+  test() {
+    print "foobar"
+  }
