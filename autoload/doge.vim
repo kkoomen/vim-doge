@@ -4,16 +4,17 @@ set cpoptions&vim
 ""
 " @public
 " Generates documentation based on available patterns in b:doge_patterns.
-" 'arg' is either a count (0 by default) or a string (empty by default).
+"
+" arg: Either a count (0 by default) or a string (empty by default).
 function! doge#generate(arg) abort
   let l:success = 0
 
   " Store old search register.
   let s:oldsearch = @/
 
-  " if the command is run with a count or a string as argument, the user is
-  " requesting for a specific doc standard
-  " if no matching standards are found, or no arg (count or string) is given,
+  " If the command is run with a count or a string as argument, the user is
+  " requesting for a specific doc standard.
+  " If no matching standards are found, or no arg (count or string) is given,
   " just use whatever is currently set
   if exists('b:doge_supported_doc_standards')
     if type(a:arg) ==# type(0) && a:arg != 0

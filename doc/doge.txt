@@ -32,8 +32,7 @@ Whether or not to enable built-in mappings.
                                                               *g:doge_mapping*
 (Default: '<Leader>d')
 
-The mapping to trigger DoGe. The mapping accepts a count, to select a specific
-doc standard, if more than one is defined.
+The mapping to trigger DoGe.
 
                                                       *g:doge_buffer_mappings*
 (Default: 1)
@@ -81,8 +80,10 @@ COMMANDS                                                       *doge-commands*
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
 
-doge#generate()                                              *doge#generate()*
+doge#generate({arg})                                         *doge#generate()*
   Generates documentation based on available patterns in b:doge_patterns.
+
+  arg: Either a count (0 by default) or a string (empty by default).
 
 doge#activate()                                              *doge#activate()*
   Activate doge buffer mappings, if option is set.
@@ -90,6 +91,9 @@ doge#activate()                                              *doge#activate()*
 doge#deactivate()                                          *doge#deactivate()*
   Deactivate doge mappings and unlet buffer variable. Can print a message with
   the reason of deactivation/termination.
+
+doge#command_complete()                              *doge#command_complete()*
+  Return a list of supported doc standards for the current buffer.
 
 doge#comment#jump({direction})                           *doge#comment#jump()*
   Jumps to the previous and next TODO item in the comment based on the
@@ -140,13 +144,13 @@ doge#helpers#placeholder()                        *doge#helpers#placeholder()*
 doge#helpers#trim({string})                              *doge#helpers#trim()*
   Helper for compatibility with vim versions without the trim() function.
 
-doge#helpers#generator({path})                      *doge#helpers#generator()*
+doge#helpers#generator({generator})                 *doge#helpers#generator()*
   Run a generator which will produce all the parameters and return the output.
 
 doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
 
-doge#python#file({path})                                  *doge#python#file()*
+doge#python#file({path}, {args})                          *doge#python#file()*
   Run a python file using the py[3]file command.
 
 doge#token#replace({tokens}, {text})                    *doge#token#replace()*

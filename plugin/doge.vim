@@ -64,7 +64,8 @@ if !exists('g:doge_mapping')
   ""
   " (Default: '<Leader>d')
   "
-  " The mapping to trigger DoGe.
+  " The mapping to trigger DoGe. The mapping accepts a count, to select a
+  " specific doc standard, if more than one is defined.
   let g:doge_mapping = '<Leader>d'
 endif
 
@@ -143,7 +144,9 @@ unlet s:mode
 let g:doge_dir = expand('<sfile>:p:h:h')
 
 ""
-" Command to generate documentation.
+" @command DogeGenerate [N] [doc_standard]
+" Command to generate documentation. It accepts a count or a string as argument,
+" and it can complete the available doc standards for the current buffer.
 command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
 
 augroup doge
