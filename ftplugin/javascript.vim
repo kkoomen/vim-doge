@@ -54,6 +54,7 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
+\        ' *',
 \        '%(async| * @{async})%',
 \        ' * @function {funcName|}',
 \        '%(parameters| * {parameters})%',
@@ -111,7 +112,7 @@ call add(b:doge_patterns, {
 "
 "   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s\+\)\?\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match': '\m^\%(\%(export\|public\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
 \  'match_group_names': ['static', 'async', 'parameters', 'returnType'],
 \  'parameters': {
 \    'match': s:parameters_match_pattern,
@@ -126,6 +127,7 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
+\        ' *',
 \        '%(static| * @static)%',
 \        '%(async| * @async)%',
 \        '%(parameters| * {parameters})%',
@@ -163,6 +165,7 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
+\        ' *',
 \        '%(async| * @async)%',
 \        ' * @function {className}#{funcName}',
 \        '%(parameters| * {parameters})%',
@@ -216,6 +219,7 @@ call add(b:doge_patterns, {
 \      'jsdoc': [
 \        '/**',
 \        ' * !description',
+\        ' *',
 \        '%(static| * @static)%',
 \        '%(async| * @async)%',
 \        ' * @function {funcName|}',

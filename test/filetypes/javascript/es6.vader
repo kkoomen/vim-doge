@@ -22,12 +22,13 @@ Given javascript (fat-arrow function with a single parameter without return type
 
 Do (trigger doge):
   \<C-d>
-  :9\<CR>
+  :10\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function foo
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
@@ -36,6 +37,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
 
   /**
    * [TODO:description]
+   *
    * @function foo
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
@@ -56,12 +58,13 @@ Given javascript (fat-arrow function with a single parameter with return type):
 
 Do (trigger doge):
   \<C-d>
-  :9\<CR>
+  :10\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function foo
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {Test} [TODO:description]
@@ -70,6 +73,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
 
   /**
    * [TODO:description]
+   *
    * @function foo
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {Test} [TODO:description]
@@ -88,12 +92,13 @@ Given javascript (fat-arrow function with parameters without type hints using 'c
 
 Do (trigger doge):
   \<C-d>
-  :12\<CR>
+  :13\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function myFunc
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
@@ -105,6 +110,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
 
   /**
    * [TODO:description]
+   *
    * @function myFunc
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
@@ -126,6 +132,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function myFunc
    * @param {string} $p1 - [TODO:description]
    * @param {string[]} p2 - [TODO:description]
@@ -152,13 +159,14 @@ Given javascript (fat-arrow functions with destructuring):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :12\<CR>
+  :13\<CR>
   \<C-d>
 
 Expect javascript (generated comments with @static, @function, @param and @return tags):
   class Test {
     /**
      * [TODO:description]
+     *
      * @function myMethod
      * @param {number} b - [TODO:description]
      * @return {[TODO:type]} [TODO:description]
@@ -169,6 +177,7 @@ Expect javascript (generated comments with @static, @function, @param and @retur
 
     /**
      * [TODO:description]
+     *
      * @static
      * @param {number} b - [TODO:description]
      * @return {number} [TODO:description]
@@ -196,6 +205,7 @@ Expect javascript (generated comment with a description, @param and @return tags
   class Test {
     /**
      * [TODO:description]
+     *
      * @param {number} b - [TODO:description]
      * @return {[TODO:type]} [TODO:description]
      */
@@ -216,6 +226,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function Person#greet
    * @param {string} p1 - [TODO:description]
    * @param {Immutable.List} p2 - [TODO:description]
@@ -235,6 +246,7 @@ Do (trigger doge):
 Expect javascript (generated comment with a description, @function and @return tags):
   /**
    * [TODO:description]
+   *
    * @function Person#greet
    * @return {[TODO:type]} [TODO:description]
    */
@@ -252,6 +264,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function myFunc
    * @param {string} $p1 - [TODO:description]
    * @param {Foo|Bar|Baz} p2 - [TODO:description]
@@ -271,6 +284,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @async, @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @async
    * @function myFunc
    * @param {string} $p1 - [TODO:description]

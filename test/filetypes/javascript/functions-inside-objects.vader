@@ -14,13 +14,14 @@ Given javascript (anonymous function inside object without parameters):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :10\<CR>
+  :11\<CR>
   \<C-d>
 
 Expect javascript (generated comment with a description, @function and @return tag):
   var myObj = {
     /**
      * [TODO:description]
+     *
      * @function myFunc
      * @return {[TODO:type]} [TODO:description]
      */
@@ -29,6 +30,7 @@ Expect javascript (generated comment with a description, @function and @return t
     },
     /**
      * [TODO:description]
+     *
      * @function myArrowFunc
      * @return {[TODO:type]} [TODO:description]
      */
@@ -54,13 +56,14 @@ Given javascript (functions with punctation with parameters with/without type hi
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :15\<CR>
+  :16\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @async, @function, @param and @return tags):
   var myObj = {
     /**
      * [TODO:description]
+     *
      * @async
      * @function my-func
      * @param {string} $p1 - [TODO:description]
@@ -74,6 +77,7 @@ Expect javascript (generated comment with @async, @function, @param and @return 
     },
     /**
      * [TODO:description]
+     *
      * @async
      * @function my-arrow-func
      * @param {string} $p1 - [TODO:description]

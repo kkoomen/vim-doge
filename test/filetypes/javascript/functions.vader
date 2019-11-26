@@ -10,6 +10,7 @@ Do (trigger doge):
 Expect javascript (generated comment with a description and a @return tag):
   /**
    * [TODO:description]
+   *
    * @return {[TODO:type]} [TODO:description]
    */
   function myFunc(/* inline comment */) {}
@@ -26,6 +27,7 @@ Do (trigger doge):
 Expect javascript (generated comment with a description, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
@@ -46,6 +48,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @param {string} $p1 - [TODO:description]
    * @param {string[]} p2 - [TODO:description]
    * @param {number} p3 - [TODO:description]
@@ -66,6 +69,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @functon and @param tags):
   /**
    * [TODO:description]
+   *
    * @function myFunc
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
@@ -87,6 +91,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @function and @param tags):
   /**
    * [TODO:description]
+   *
    * @function myFunc
    * @param {string} $p1 - [TODO:description]
    * @param {string[]} p2 - [TODO:description]
@@ -108,6 +113,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @function Person#greet
    * @param {string} p1 - [TODO:description]
    * @param {Immutable.List} p2 - [TODO:description]
@@ -127,6 +133,7 @@ Do (trigger doge):
 Expect javascript (generated comment with a description, @function and @return tags):
   /**
    * [TODO:description]
+   *
    * @function Person#greet
    * @return {[TODO:type]} [TODO:description]
    */
@@ -144,6 +151,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @param {string} $p1 - [TODO:description]
    * @param {Foo|Bar|Baz} p2 - [TODO:description]
    * @return {Foo|Bar} [TODO:description]
@@ -162,6 +170,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @async, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @async
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
@@ -183,6 +192,7 @@ Do (trigger doge):
 Expect javascript (generated comment with a description, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
@@ -203,6 +213,7 @@ Do (trigger doge):
 Expect javascript (generated comment with @async, @param and @return tags):
   /**
    * [TODO:description]
+   *
    * @async
    * @param {[TODO:type]} $p1 - [TODO:description]
    * @param {[TODO:type]} p2 - [TODO:description]
@@ -211,3 +222,30 @@ Expect javascript (generated comment with @async, @param and @return tags):
    * @return {[TODO:type]} [TODO:description]
    */
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
+
+# ==============================================================================
+# Class with a public function with parameters and return type.
+# ==============================================================================
+Given javascript (class with a public function with parameters and return type):
+  export class Test {
+
+    public printSomething(something: string): void {}
+
+  }
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with a description, @param and @return tags):
+  export class Test {
+
+    /**
+     * [TODO:description]
+     *
+     * @param {string} something - [TODO:description]
+     * @return {void} [TODO:description]
+     */
+    public printSomething(something: string): void {}
+
+  }
