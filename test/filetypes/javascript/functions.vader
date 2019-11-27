@@ -229,7 +229,7 @@ Expect javascript (generated comment with @async, @param and @return tags):
 Given javascript (class with a public function with parameters and return type):
   export class Test {
 
-    public printSomething(something: string): void {}
+    public printSomething(something?: string): void {}
 
   }
 
@@ -246,6 +246,6 @@ Expect javascript (generated comment with a description, @param and @return tags
      * @param {string} something - [TODO:description]
      * @return {void} [TODO:description]
      */
-    public printSomething(something: string): void {}
+    public printSomething(something?: string): void {}
 
   }

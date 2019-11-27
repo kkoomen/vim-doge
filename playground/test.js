@@ -559,6 +559,17 @@ class Child extends Parent {
 
   /**
    * [TODO:description]
+   *
+   * @param {number} arg0 - [TODO:description]
+   * @param {string} arg1 - [TODO:description]
+   * @return {void} [TODO:description]
+   */
+  public funcA(arg0: number, arg1?: string): void {
+
+  }
+
+  /**
+   * [TODO:description]
    * @static
    * @function myMethod
    * @param {number} b - [TODO:description]
