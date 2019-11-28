@@ -8,6 +8,9 @@ else
   set runtimepath=/home/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,/testplugin,/vader
 endif
 
+" Set a variable to indicate we're inside a test env.
+let g:doge_test_env = 1
+
 " Since the <Leader> key is not an easy way for Vader we'll use <C-d>.
 let g:doge_mapping = '<C-d>'
 
@@ -45,7 +48,9 @@ set smarttab
 
 augroup styles
   autocmd!
-  autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4
+
+  " Force 2 spaces for Python to prevent other filetypes inherit these settings.
+  autocmd FileType python setlocal tabstop=2 shiftwidth=2 softtabstop=2
 augroup END
 
 " The encoding must be explicitly set for tests for Windows.

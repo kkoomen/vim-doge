@@ -9,8 +9,8 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 
-let b:doge_supported_doc_standards = ['scaladoc']
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_scala', b:doge_supported_doc_standards[0])
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['scaladoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('scala')
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
   \ '[DoGe] %s is not a valid Scala doc standard, available doc standard are: %s',
@@ -19,11 +19,13 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = {}
+let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
+"
 " Define our base for every pattern.
 "
+" ==============================================================================
 " The parameters.match describes the following pattern:
 "   <param-name>: <param-type> = <param-default-value>
 " ==============================================================================
@@ -37,7 +39,9 @@ let s:pattern_base = {
 \}
 
 " ==============================================================================
+"
 " Define the pattern types.
+"
 " ==============================================================================
 
 " ------------------------------------------------------------------------------
@@ -79,7 +83,9 @@ let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \})
 
 " ==============================================================================
+"
 " Define the doc standards.
+"
 " ==============================================================================
 let b:doge_patterns.scaladoc = [
 \  doge#helpers#deepextend(s:function_pattern, {

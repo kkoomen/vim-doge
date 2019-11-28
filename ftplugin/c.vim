@@ -15,15 +15,15 @@ endif
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 
-let b:doge_supported_doc_standards = [
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
       \ 'doxygen_javadoc',
       \ 'doxygen_javadoc_no_asterisk',
       \ 'doxygen_javadoc_banner',
       \ 'doxygen_qt',
       \ 'doxygen_qt_no_asterisk',
       \ 'kernel_doc'
-      \ ]
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_c', b:doge_supported_doc_standards[0])
+      \ ])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('c')
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
   \ '[DoGe] %s is not a valid C doc standard, available doc standard are: %s',
@@ -32,10 +32,12 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = {}
+let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
+"
 " Define our base for every pattern.
+"
 " ==============================================================================
 let s:pattern_base = {
 \  'generator': {
@@ -48,7 +50,9 @@ let s:pattern_base = {
 \}
 
 " ==============================================================================
+"
 " Define the pattern types.
+"
 " ==============================================================================
 
 " ------------------------------------------------------------------------------
@@ -94,9 +98,11 @@ let s:field_pattern = doge#helpers#deepextend(s:pattern_base, {
 \})
 
 " ==============================================================================
+"
 " Define the doc standards.
+"
 " ==============================================================================
-let b:doge_patterns.doxygen_javadoc = [
+call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/**',
@@ -117,9 +123,9 @@ let b:doge_patterns.doxygen_javadoc = [
 \    ],
 \  }),
 \  s:field_pattern,
-\]
+\])
 
-let b:doge_patterns.doxygen_javadoc_no_asterisk = [
+call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc_no_asterisk', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/**',
@@ -140,9 +146,9 @@ let b:doge_patterns.doxygen_javadoc_no_asterisk = [
 \    ],
 \  }),
 \  s:field_pattern,
-\]
+\])
 
-let b:doge_patterns.doxygen_javadoc_banner = [
+call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc_banner', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*******************************************************************************',
@@ -163,9 +169,9 @@ let b:doge_patterns.doxygen_javadoc_banner = [
 \    ],
 \  }),
 \  s:field_pattern,
-\]
+\])
 
-let b:doge_patterns.doxygen_qt = [
+call doge#register_doc_standard(b:doge_patterns, 'doxygen_qt', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*!',
@@ -186,9 +192,9 @@ let b:doge_patterns.doxygen_qt = [
 \    ],
 \  }),
 \  s:field_pattern,
-\]
+\])
 
-let b:doge_patterns.doxygen_qt_no_asterisk = [
+call doge#register_doc_standard(b:doge_patterns, 'doxygen_qt_no_asterisk', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*!',
@@ -209,10 +215,10 @@ let b:doge_patterns.doxygen_qt_no_asterisk = [
 \    ],
 \  }),
 \  s:field_pattern,
-\]
+\])
 
 let s:kernel_doc_pattern_base = {'parameters': {'format': '@{name}: !description'}}
-let b:doge_patterns.kernel_doc = [
+call doge#register_doc_standard(b:doge_patterns, 'kernel_doc', [
 \  doge#helpers#deepextend(s:function_pattern, s:kernel_doc_pattern_base, {
 \    'template': [
 \      '/**',
@@ -235,7 +241,7 @@ let b:doge_patterns.kernel_doc = [
 \    ],
 \  }),
 \  s:field_pattern,
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -9,8 +9,8 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 
-let b:doge_supported_doc_standards = ['kdoc']
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_kotlin', b:doge_supported_doc_standards[0])
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['kdoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('kotlin')
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
   \ '[DoGe] %s is not a valid Kotlin doc standard, available doc standard are: %s',
@@ -19,11 +19,13 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = {}
+let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
+"
 " Define our base for every pattern.
 "
+" ==============================================================================
 " The parameters.match describes the following pattern:
 "   <param-name>: <param-type>
 "
@@ -38,6 +40,7 @@ let b:doge_patterns = {}
 "   (map: MutableMap, str: String)
 "
 "   (onetime: Boolean = true, callback: () -> Unit)
+" ==============================================================================
 let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%(\s*:\s*\%([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,<>:?*]\{-1,}>\|[^,]\+\)\?\)\?',
@@ -48,7 +51,9 @@ let s:pattern_base = {
 \}
 
 " ==============================================================================
+"
 " Define the pattern types.
+"
 " ==============================================================================
 
 " ------------------------------------------------------------------------------
@@ -104,7 +109,9 @@ let s:class_constructor_pattern = doge#helpers#deepextend(s:pattern_base, {
 
 
 " ==============================================================================
+"
 " Define the doc standards.
+"
 " ==============================================================================
 let b:doge_patterns.kdoc = [
 \  doge#helpers#deepextend(s:function_pattern, {

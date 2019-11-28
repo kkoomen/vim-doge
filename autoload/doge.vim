@@ -103,5 +103,12 @@ function! doge#command_complete(...) abort
   return filter(copy(get(b:, 'doge_supported_doc_standards', [])), "v:val =~ '^'.a:1")
 endfunction
 
+function! doge#register_doc_standard(variable, doc_standard, patterns) abort
+  if has_key(a:variable, a:doc_standard) == v:false
+    let a:variable[a:doc_standard] = a:patterns
+  endif
+  return a:variable
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -10,8 +10,8 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m#\@<!##\@!.\+$'
 let b:doge_pattern_multi_line_comment = '\m###.\{-}###'
 
-let b:doge_supported_doc_standards = ['jsdoc']
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_coffee', b:doge_supported_doc_standards[0])
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['jsdoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('coffee')
 if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   echoerr printf(
   \ '[DoGe] %s is not a valid CoffeeScript doc standard, available doc standard are: %s',
@@ -20,10 +20,12 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = {}
+let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
+"
 " Define our base for every pattern.
+"
 " ==============================================================================
 let s:pattern_base = {
 \  'parameters': {
@@ -33,7 +35,9 @@ let s:pattern_base = {
 \}
 
 " ==============================================================================
+"
 " Define the pattern types.
+"
 " ==============================================================================
 let s:prototype_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)::\([[:alnum:]_$]\+\)\s*=\s*[-=]>',
@@ -50,9 +54,11 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \})
 
 " ==============================================================================
+"
 " Define the doc standards.
+"
 " ==============================================================================
-let b:doge_patterns.jsdoc = [
+call doge#register_doc_standard(b:doge_patterns, 'jsdoc', [
 \  doge#helpers#deepextend(s:prototype_function_pattern, {
 \    'template': [
 \      '###',
@@ -72,7 +78,7 @@ let b:doge_patterns.jsdoc = [
 \      '###',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

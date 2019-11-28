@@ -153,7 +153,7 @@ Expect php (generated comment with @param tags with brief descriptions):
 # ==============================================================================
 Given python (Python function with parameters):
   def myFunc(p1: str = 'string', p2: int = 5):
-      pass
+    pass
 
 Do (trigger doge and jump forward while filling in text):
   \<C-d>
@@ -171,13 +171,13 @@ Then (expect b:doge_interactive to be destroyed):
 
 Expect python (generated comment with :param tags with brief descriptions):
   def myFunc(p1: str = 'string', p2: int = 5):
-      """
-      Lorem ipsum dor sit amet.
+    """
+    Lorem ipsum dor sit amet.
 
-      :param p1 str: This is a string.
-      :param p2 int: This is an integer.      
-      """
-      pass
+    :param p1 str: This is a string.
+    :param p2 int: This is an integer.    
+    """
+    pass
 
 Do (let g:doge_comment_interactive = 0):
 # Disable the option again so that upcoming tests will not fail.
