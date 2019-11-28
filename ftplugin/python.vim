@@ -22,93 +22,121 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
         \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
 " ==============================================================================
-" Matches regular function expressions and class methods.
+" Define our base for every pattern.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   def __init__(self: MyClass):
-"
-"   def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
-"
-"   def call(self, *args: str, **kwargs: str) -> str:
-"
-"   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None]) -> Sequence[T]:
-call add(b:doge_patterns, {
-\  'match': '\m^def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
-\  'match_group_names': ['parameters', 'returnType'],
+let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*:\s*\([[:alnum:]_.]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
 \    'match_group_names': ['name', 'type', 'default'],
-\    'format': {
-\      'reST': ':param {name} {type|!type}: !description',
-\      'sphinx': [
+\  },
+\  'insert': 'below',
+\}
+
+" ==============================================================================
+" Define the pattern types.
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
+" Matches regular function expressions and class methods.
+" ------------------------------------------------------------------------------
+" def __init__(self: MyClass):
+" def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
+" def call(self, *args: str, **kwargs: str) -> str:
+" def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None]) -> Sequence[T]:
+" ------------------------------------------------------------------------------
+let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'match': '\m^def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
+\  'match_group_names': ['parameters', 'returnType'],
+\})
+
+" ==============================================================================
+" Define the doc standards.
+" ==============================================================================
+let b:doge_patterns.reST = [
+\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\    'parameters': {
+\      'format': ':param {name} {type|!type}: !description',
+\    },
+\    'template': [
+\      '"""',
+\      '!description',
+\      '',
+\      '%(parameters|{parameters})%',
+\      '%(returnType|:rtype {returnType}: !description)%',
+\      '"""',
+\    ],
+\  }),
+\]
+
+let b:doge_patterns.sphinx = [
+\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\    'parameters': {
+\      'format': [
 \        ':param {name}: !description%(default|, defaults to {default})%',
 \        ':type {name}: {type|!type}%(default|, optional)%',
 \      ],
-\      'numpy': [
+\    },
+\    'template': [
+\      '"""',
+\      '!description',
+\      '',
+\      '%(parameters|{parameters})%',
+\      '%(returnType|:return: !description)%',
+\      '%(returnType|:rtype: {returnType})%',
+\      '"""',
+\    ],
+\  }),
+\]
+
+let b:doge_patterns.numpy = [
+\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\    'parameters': {
+\      'format': [
 \        '{name} : {type|!type}',
 \        '\t!description',
 \      ],
-\      'google': [
-\        '{name} ({type|!type}%(default|, optional)%): !description',
-\      ],
 \    },
-\  },
-\  'comment': {
-\    'insert': 'below',
-\    'template': {
-\      'reST': [
-\        '"""',
-\        '!description',
-\        '',
-\        '%(parameters|{parameters})%',
-\        '%(returnType|:rtype {returnType}: !description)%',
-\        '"""',
-\      ],
-\      'sphinx': [
-\        '"""',
-\        '!description',
-\        '',
-\        '%(parameters|{parameters})%',
-\        '%(returnType|:return: !description)%',
-\        '%(returnType|:rtype: {returnType})%',
-\        '"""',
-\      ],
-\      'numpy': [
-\        '"""',
-\        '!summary',
-\        '',
-\        '!description',
-\        '%(parameters|)%',
-\        '%(parameters|Parameters)%',
-\        '%(parameters|----------)%',
-\        '%(parameters|{parameters})%',
-\        '%(returnType|)%',
-\        '%(returnType|Returns)%',
-\        '%(returnType|-------)%',
-\        '%(returnType|{returnType}:)%',
-\        '%(returnType|\t!description)%',
-\        '"""',
-\      ],
-\      'google': [
-\        '"""!summary',
-\        '',
-\        '!description',
-\        '%(parameters|)%',
-\        '%(parameters|Args:)%',
-\        '%(parameters|\t{parameters})%',
-\        '%(returnType|)%',
-\        '%(returnType|Returns:)%',
-\        '%(returnType|\t{returnType}: !description)%',
-\        '"""',
-\      ],
+\    'template': [
+\      '"""',
+\      '!summary',
+\      '',
+\      '!description',
+\      '%(parameters|)%',
+\      '%(parameters|Parameters)%',
+\      '%(parameters|----------)%',
+\      '%(parameters|{parameters})%',
+\      '%(returnType|)%',
+\      '%(returnType|Returns)%',
+\      '%(returnType|-------)%',
+\      '%(returnType|{returnType}:)%',
+\      '%(returnType|\t!description)%',
+\      '"""',
+\    ],
+\  }),
+\]
+
+let b:doge_patterns.google = [
+\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\    'parameters': {
+\      'format': '{name} ({type|!type}%(default|, optional)%): !description',
 \    },
-\  },
-\})
+\    'template': [
+\      '"""!summary',
+\      '',
+\      '!description',
+\      '%(parameters|)%',
+\      '%(parameters|Args:)%',
+\      '%(parameters|\t{parameters})%',
+\      '%(returnType|)%',
+\      '%(returnType|Returns:)%',
+\      '%(returnType|\t{returnType}: !description)%',
+\      '"""',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

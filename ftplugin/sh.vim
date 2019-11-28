@@ -19,37 +19,48 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
 " ==============================================================================
-" Matches regular functions.
+" Define our base for every pattern.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   function test {}
-"
-"   test() {}
-call add(b:doge_patterns, {
+let s:pattern_base = {
+\  'insert': 'above',
+\}
+
+" ==============================================================================
+" Define the pattern types.
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
+" Matches regular functions.
+" ------------------------------------------------------------------------------
+" function test {}
+" test() {}
+" ------------------------------------------------------------------------------
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\(function\s\+[[:alnum:]_-]\+\|[[:alnum:]_-]\+\s*(.\{-})\)\s*{',
 \  'match_group_names': [],
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'google': [
-\        '################################################################################',
-\        '# !description',
-\        '# Globals:',
-\        '# \t!var-name',
-\        '# Arguments:',
-\        '# \t$1: !description',
-\        '# Returns:',
-\        '# \t!description',
-\        '################################################################################',
-\      ],
-\    },
-\  },
 \})
+
+" ==============================================================================
+" Define the doc standards.
+" ==============================================================================
+let b:doge_patterns.google = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '################################################################################',
+\      '# !description',
+\      '# Globals:',
+\      '# \t!var-name',
+\      '# Arguments:',
+\      '# \t$1: !description',
+\      '# Returns:',
+\      '# \t!description',
+\      '################################################################################',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -19,12 +19,13 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
-" Matches the following pattern:
-"   <param-name>: <param-type>
+" ==============================================================================
+" Define our base for every pattern.
 "
-" Matches the following scenarios:
+" The parameters.match describes the following pattern:
+"   <param-name>: <param-type>
 "
 "   (map: MutableMap<String, Any?>, str: String.() -> Unit)
 "
@@ -37,134 +38,101 @@ let b:doge_patterns = []
 "   (map: MutableMap, str: String)
 "
 "   (onetime: Boolean = true, callback: () -> Unit)
-let s:parameters_match_pattern = '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%(\s*:\s*\%([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,<>:?*]\{-1,}>\|[^,]\+\)\?\)\?'
+let s:pattern_base = {
+\  'parameters': {
+\    'match': '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%(\s*:\s*\%([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,<>:?*]\{-1,}>\|[^,]\+\)\?\)\?',
+\    'match_group_names': ['name'],
+\    'format': '@param {name} !description'
+\  },
+\  'insert': 'above',
+\}
 
 " ==============================================================================
-" Matches regular functions, class methods and extension functions.
+" Define the pattern types.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   fun MutableList<Int>.swap<Int>(index1: Int, index2: Int) {
-"
-"   fun listenForPackageChanges(onetime: Boolean = true, callback: () -> Unit) = object : BroadcastReceiver() {}
-"
-"   inline fun <reified T : Enum<T>> printAllValues() {}
-"
-"   fun <T> id(x: T): T = x
-"
-"   fun readOut(group: Group<out Animal>) {}
-"
-"   fun readIn(group: Group<in Nothing>) {}
-"
-"   fun acceptAnyList(list: List<Any?>) {}
-"
-"   inline fun <reified T: Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java)
-"
-"   open fun f() { println("Foo.f()") }
-call add(b:doge_patterns, {
+
+" ------------------------------------------------------------------------------
+" Matches regular functions, class methods and extension functions.
+" ------------------------------------------------------------------------------
+" fun MutableList<Int>.swap<Int>(index1: Int, index2: Int) {
+" fun listenForPackageChanges(onetime: Boolean = true, callback: () -> Unit) = object : BroadcastReceiver() {}
+" inline fun <reified T : Enum<T>> printAllValues() {}
+" fun <T> id(x: T): T = x
+" fun readOut(group: Group<out Animal>) {}
+" fun readIn(group: Group<in Nothing>) {}
+" fun acceptAnyList(list: List<Any?>) {}
+" inline fun <reified T: Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java)
+" open fun f() { println("Foo.f()") }
+" ------------------------------------------------------------------------------
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|protected\|private\|final\|inline\|abstract\|override\|operator\|open\|data\)\s\+\)*fun\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*[[:alnum:]_:\.]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\??\?\)\?\s*[={]',
 \  'match_group_names': ['parameters'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name'],
-\    'format': {
-\      'kdoc': '@param {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'kdoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parameters| * {parameters})%',
-\        ' * @return !description',
-\        ' */',
-\      ],
-\    },
-\  },
 \})
 
-" ==============================================================================
+" ------------------------------------------------------------------------------
 " Matches classes.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   class Outer() {}
-"
-"   inner class Inner() {}
-"
-"   data class User(val name: String, val age: Int) {}
-"
-"   enum class Color(val rgb: Int) {}
-"
-"   class Person constructor(firstName: String) {}
-"
-"   class C private constructor(a: Int) {}
-"
-"   class Person(firstName: String) {}
-"
-"   class MyView() : View()) {}
-"
-"   inline class Name(val s: String) {}
-"
-"   abstract class Vehicle(val name: String, val color: String, val weight: Double) {}
-"
-"   external class MyClass() {}
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" class Outer() {}
+" inner class Inner() {}
+" data class User(val name: String, val age: Int) {}
+" enum class Color(val rgb: Int) {}
+" class Person constructor(firstName: String) {}
+" class C private constructor(a: Int) {}
+" class Person(firstName: String) {}
+" class MyView() : View()) {}
+" inline class Name(val s: String) {}
+" abstract class Vehicle(val name: String, val color: String, val weight: Double) {}
+" external class MyClass() {}
+" ------------------------------------------------------------------------------
+let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(inner\|inline\|data\|enum\|external\|open\|abstract\|sealed\)\s\+\)*class\s\+\%([[:alnum:]_]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\?\)\s*\%(\%(public\|private\|protected\)\s*\)\?\%(constructor\s*\)\?(\(.\{-}\))',
 \  'match_group_names': ['parameters'],
 \  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name'],
-\    'format': {
-\      'kdoc': '@property {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'kdoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parameters| * {parameters})%',
-\        ' */',
-\      ],
-\    },
+\    'format': '@property {name} !description',
 \  },
 \})
 
-" ==============================================================================
-" Matches constructors inside a class.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   constructor(parent: Person, query: Query<*, <T>>) {}
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" Matches class constructors.
+" ------------------------------------------------------------------------------
+" constructor(parent: Person, query: Query<*, <T>>) {}
+" ------------------------------------------------------------------------------
+let s:class_constructor_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\)\s\+\)\?constructor\s*(\(.\{-}\))',
 \  'match_group_names': ['parameters'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name'],
-\    'format': {
-\      'kdoc': '@param {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'kdoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parameters| * {parameters})%',
-\        ' */',
-\      ],
-\    },
-\  },
 \})
+
+
+" ==============================================================================
+" Define the doc standards.
+" ==============================================================================
+let b:doge_patterns.kdoc = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      '%(parameters| * {parameters})%',
+\      ' * @return !description',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:class_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      '%(parameters| * {parameters})%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:class_constructor_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      '%(parameters| * {parameters})%',
+\      ' */',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

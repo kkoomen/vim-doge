@@ -1,4 +1,4 @@
-# Groovy tests should be equal to Java tests.
+# Groovy tests should be equal to groovy tests.
 
 # ==============================================================================
 # Method without parameters.
@@ -6,19 +6,28 @@
 Given groovy (method without parameters):
   class Test {
     List<Element> createSortedList() {}
+
+    void foo();
   }
 
 Do (trigger doge):
   :2\<CR>
+  \<C-d>
+  :8\<CR>
   \<C-d>
 
 Expect groovy (method with 'TODO' and a @return tag):
   class Test {
     /**
      * [TODO:description]
-     * @return List [TODO:description]
+     * @return [TODO:description]
      */
     List<Element> createSortedList() {}
+
+    /**
+     * [TODO:description]
+     */
+    void foo();
   }
 
 # ==============================================================================
@@ -33,11 +42,10 @@ Do (trigger doge):
   :2\<CR>
   \<C-d>
 
-Expect groovy (method with 'TODO' and a @return tag containing 'void'):
+Expect groovy (method with 'TODO' and a description):
   class Test {
     /**
      * [TODO:description]
-     * @return void [TODO:description]
      */
     public createSortedList() {}
   }
@@ -55,26 +63,28 @@ Given groovy (methods with parameters):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :11\<CR>
+  :12\<CR>
   \<C-d>
 
 Expect groovy (generated comments with @param and @return tags):
   class Test {
     /**
      * [TODO:description]
-     * @param String p1 [TODO:description]
-     * @param int p2 [TODO:description]
-     * @param Boolean params [TODO:description]
-     * @return MstRelation [TODO:description]
+     *
+     * @param p1 [TODO:description]
+     * @param p2 [TODO:description]
+     * @param params [TODO:description]
+     * @return [TODO:description]
      */
     private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) {}
 
     /**
      * [TODO:description]
-     * @param String p1 [TODO:description]
-     * @param int p2 [TODO:description]
-     * @param Boolean params [TODO:description]
-     * @return ListResultBean [TODO:description]
+     *
+     * @param p1 [TODO:description]
+     * @param p2 [TODO:description]
+     * @param params [TODO:description]
+     * @return [TODO:description]
      */
     ListResultBean<MstRelation> MyParameterizedMethod(String p1, int p2, Boolean... params) {}
   }
@@ -96,9 +106,9 @@ Expect groovy (generated comments with @param and @return tags inserted above th
   class Test {
     /**
      * [TODO:description]
-     * @param String p1 [TODO:description]
-     * @param int p2 [TODO:description]
-     * @return void [TODO:description]
+     *
+     * @param p1 [TODO:description]
+     * @param p2 [TODO:description]
      */
     @Override
     protected void MyParameterizedMethod(String p1, int p2) {}

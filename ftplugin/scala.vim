@@ -19,114 +19,96 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
-" Matches the following pattern:
+" ==============================================================================
+" Define our base for every pattern.
+"
+" The parameters.match describes the following pattern:
 "   <param-name>: <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(val\s\+\)\?\([[:alnum:]_]\+\)\)\%(\s*:\s*\([^,(\)=]\+\)\)\?\%(\s*=\s*[^,(\)]\+\)\?'
+" ==============================================================================
+let s:pattern_base = {
+\  'parameters': {
+\    'match': '\m\%(\%(val\s\+\)\?\([[:alnum:]_]\+\)\)\%(\s*:\s*\([^,(\)=]\+\)\)\?\%(\s*=\s*[^,(\)]\+\)\?',
+\    'match_group_names': ['name', 'type'],
+\    'format': '@param {name} {type} !description',
+\  },
+\  'insert': 'above',
+\}
 
 " ==============================================================================
-" Functions
+" Define the pattern types.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   (x: Int) => x + 1
-"
-"   val getTheAnswer = () => 42
-call add(b:doge_patterns, {
+
+" ------------------------------------------------------------------------------
+" Matches regular functions.
+" ------------------------------------------------------------------------------
+" (x: Int) => x + 1
+" val getTheAnswer = () => 42
+" ------------------------------------------------------------------------------
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(val\s\+\%([[:alnum:]_]\+\)\s*=\s*\)\?(\(.\{-}\))\s*=>\s*',
 \  'match_group_names': ['parameters'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'scaladoc': '@param {name} {type} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'scaladoc': [
-\        '/** !description',
-\        ' *',
-\        '%(parameters| * {parameters})%',
-\        ' * @return !description',
-\        ' */',
-\      ],
-\    },
-\  },
 \})
 
-" ==============================================================================
-" Methods
-" ==============================================================================
+" ------------------------------------------------------------------------------
+" Matches class methods.
+" ------------------------------------------------------------------------------
+" def urlBuilder(ssl: Boolean = true, domainName: String = 'some domain value'): (String, String) => String = {}
 "
-" Matches the following scenarios:
+" def main(args: Array[String]): Unit =
+"   println("Hello, Scala developer!")
 "
-"   def urlBuilder(ssl: Boolean = true, domainName: String = 'some domain value'): (String, String) => String = {}
-"
-"   def main(args: Array[String]): Unit =
-"     println("Hello, Scala developer!")
-"
-"   def move(dx: Int, dy: Int): Unit = {}
-call add(b:doge_patterns, {
+" def move(dx: Int, dy: Int): Unit = {}
+" ------------------------------------------------------------------------------
+let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\|override\)\s\+\)*def\s\+\%([[:alnum:]_]\+\)\%(\[.*\]\)\?\%(\s*=\s*\)\?(\(.\{-}\)):',
 \  'match_group_names': ['parameters'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'scaladoc': '@param {name} {type} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'scaladoc': [
-\        '/** !description',
-\        ' *',
-\        '%(parameters| * {parameters})%',
-\        ' * @return !description',
-\        ' */',
-\      ],
-\    },
-\  },
+\})
+
+" ------------------------------------------------------------------------------
+" Matches classes.
+" ------------------------------------------------------------------------------
+" class Cat(val name: String) extends Pet
+" class IntIterator(to: Int) extends Iterator[Int] {}
+" protected case class LoremIpsum(name: String, age: Int) extends B with C with D {}
+" ------------------------------------------------------------------------------
+let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'match': '\m^\%(\%(public\|private\|protected\|package\|case\)\s\+\)*class\s\+\%([[:alnum:]_]\+\)\%(\[.*\]\)\?(\(.\{-}\))\([^{]\+{\)\?',
+\  'match_group_names': ['parameters'],
 \})
 
 " ==============================================================================
-" Classes
+" Define the doc standards.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   class Cat(val name: String) extends Pet
-"
-"   class IntIterator(to: Int) extends Iterator[Int] {}
-"
-"   protected case class LoremIpsum(name: String, age: Int) extends B with C with D {}
-call add(b:doge_patterns, {
-\  'match': '\m^\%(\%(public\|private\|protected\|package\|case\)\s\+\)*class\s\+\%([[:alnum:]_]\+\)\%(\[.*\]\)\?(\(.\{-}\))\([^{]\+{\)\?',
-\  'match_group_names': ['parameters'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'scaladoc': '@param {name} {type} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'scaladoc': [
-\        '/** !description',
-\        ' *',
-\        '%(parameters| * {parameters})%',
-\        ' */',
-\      ],
-\    },
-\  },
-\})
+let b:doge_patterns.scaladoc = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/** !description',
+\      ' *',
+\      '%(parameters| * {parameters})%',
+\      ' * @return !description',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:class_method_pattern, {
+\    'template': [
+\      '/** !description',
+\      ' *',
+\      '%(parameters| * {parameters})%',
+\      ' * @return !description',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:class_pattern, {
+\    'template': [
+\      '/** !description',
+\      ' *',
+\      '%(parameters| * {parameters})%',
+\      ' */',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

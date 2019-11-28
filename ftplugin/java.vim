@@ -19,44 +19,45 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
 " ==============================================================================
-" Matches class methods.
+" Define our base for every pattern.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   private void setChildrenRecursively(ElementDto childDto, int childId) {}
-"
-"   private List<ElementDto> createSortedList(Map<Integer, ElementDto> map, int type) {}
-"
-"   void foo(Map<String, Object> parameters) {}
-"
-"   void MyParameterizedFunction(String p1, int p2, Boolean ...params) {}
-call add(b:doge_patterns, {
+let s:pattern_base = {
+\  'parameters': {
+\    'format': '@param {name} !description',
+\  },
+\  'insert': 'above',
+\}
+
+" ==============================================================================
+" Define the pattern types.
+" ==============================================================================
+let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\%([[:alnum:]_]\+\)(\(.\{-}\))\s*[;{]',
 \  'match_group_names': ['returnType', 'parameters'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
 \    'match_group_names': ['type', 'name'],
-\    'format': {
-\      'javadoc': '@param {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'javadoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return !description)%',
-\        ' */',
-\      ],
-\    },
 \  },
 \})
+
+" ==============================================================================
+" Define the doc standards.
+" ==============================================================================
+let b:doge_patterns.javadoc = [
+\  doge#helpers#deepextend(s:class_method_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      '%(parameters| *)%',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return !description)%',
+\      ' */',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

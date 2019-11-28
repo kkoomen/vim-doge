@@ -19,41 +19,48 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
 " ==============================================================================
-" Matches regular function expressions and class methods.
+" Define our base for every pattern.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   def myFunc(p1, p_2 = some_default_value)
-"
-"   def def parameters (p1,p2=4, p3*)
-"
-"   def where(attribute, type = nil, **options)
-"
-"   def each(&block)
-call add(b:doge_patterns, {
-\  'match': '\m^def\s\+\%([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
-\  'match_group_names': ['parameters'],
+let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
 \    'match_group_names': ['name'],
-\    'format': {
-\      'YARD': '@param {name} [!type] !description',
-\    },
+\    'format': '@param {name} [!type] !description',
 \  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'YARD': [
-\        '# !description',
-\        '%(parameters|# {parameters})%',
-\      ],
-\    },
-\  },
+\  'insert': 'above',
+\}
+
+" ==============================================================================
+" Define the pattern types.
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
+" Matches regular function expressions and class methods.
+" ------------------------------------------------------------------------------
+" def myFunc(p1, p_2 = some_default_value)
+" def def parameters (p1,p2=4, p3*)
+" def where(attribute, type = nil, **options)
+" def each(&block)
+" ------------------------------------------------------------------------------
+let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'match': '\m^def\s\+\%([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
+\  'match_group_names': ['parameters'],
 \})
+
+" ==============================================================================
+" Define the doc standards.
+" ==============================================================================
+let b:doge_patterns.YARD = [
+\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\    'template': [
+\      '# !description',
+\      '%(parameters|# {parameters})%',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

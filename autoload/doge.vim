@@ -15,7 +15,7 @@ function! doge#generate(arg) abort
   " If the command is run with a count or a string as argument, the user is
   " requesting for a specific doc standard.
   " If no matching standards are found, or no arg (count or string) is given,
-  " just use whatever is currently set
+  " just use whatever is currently set.
   if exists('b:doge_supported_doc_standards')
     if type(a:arg) ==# type(0) && a:arg != 0
       if a:arg <= len(b:doge_supported_doc_standards)
@@ -29,7 +29,7 @@ function! doge#generate(arg) abort
   endif
 
   if exists('b:doge_patterns')
-    for l:pattern in get(b:, 'doge_patterns')
+    for l:pattern in get(b:doge_patterns, b:doge_doc_standard)
       if doge#generate#pattern(l:pattern) == v:false
         continue
       else

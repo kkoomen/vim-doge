@@ -25,14 +25,32 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
 " ==============================================================================
-" Functions and methods.
+" Define our base for every pattern.
 " ==============================================================================
-call add(b:doge_patterns, {
+let s:pattern_base = {
 \  'generator': {
 \    'file': 'libclang.py',
+\  },
+\  'parameters': {
+\    'format': '@{param-type|param} {name} !description',
+\  },
+\  'insert': 'above',
+\}
+
+" ==============================================================================
+" Define the pattern types.
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
+" Matches (template) function- and class method declarations.
+" ------------------------------------------------------------------------------
+" int add(int x, int y) {}
+" ------------------------------------------------------------------------------
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'generator': {
 \    'args': [
 \      'CONSTRUCTOR',
 \      'CXX_METHOD',
@@ -41,132 +59,155 @@ call add(b:doge_patterns, {
 \      'CLASS_TEMPLATE'
 \    ],
 \  },
-\  'parameters': {
-\    'format': {
-\      'doxygen_javadoc': '@{param-type|param} {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'doxygen_javadoc': [
-\        '/**',
-\        ' * @brief !description',
-\        ' *',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return !description)%',
-\        ' */',
-\      ],
-\      'doxygen_javadoc_no_asterisk': [
-\        '/**',
-\        '@brief !description',
-\        '',
-\        '%(parameters|{parameters})%',
-\        '%(returnType|@return !description)%',
-\        '*/',
-\      ],
-\      'doxygen_javadoc_banner': [
-\        '/*******************************************************************************',
-\        ' * @brief !description',
-\        ' *',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return !description)%',
-\        ' ******************************************************************************/',
-\      ],
-\      'doxygen_qt': [
-\        '/*!',
-\        ' * @brief !description',
-\        ' *',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return !description)%',
-\        ' */',
-\      ],
-\      'doxygen_qt_no_asterisk': [
-\        '/*!',
-\        '@brief !description',
-\        '',
-\        '%(parameters|{parameters})%',
-\        '%(returnType|@return !description)%',
-\        '*/',
-\      ],
-\    },
-\  },
 \})
 
-" ==============================================================================
-" Struct declarations.
-" ==============================================================================
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" Matches structs.
+" ------------------------------------------------------------------------------
+" struct foo {  };
+" ------------------------------------------------------------------------------
+let s:struct_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'generator': {
-\    'file': 'libclang.py',
 \    'args': ['STRUCT_DECL'],
 \  },
-\  'parameters': {
-\    'format': {
-\      'doxygen_javadoc': '@{name}: !description',
-\    },
+\})
+
+" ------------------------------------------------------------------------------
+" Matches field declarations inside structs.
+" ------------------------------------------------------------------------------
+" struct foo {
+"   int bar;
+" };
+" ------------------------------------------------------------------------------
+let s:field_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'generator': {
+\    'args': ['FIELD_DECL'],
 \  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'doxygen_javadoc': [
-\        '/**',
-\        ' * struct {name} - !description',
-\        '%(parameters| *)%',
-\        '%(parameters| * {parameters})%',
-\        ' */',
-\      ],
-\      'doxygen_javadoc_no_asterisk': [
-\        '/**',
-\        'struct {name} - !description',
-\        '%(parameters|)%',
-\        '%(parameters|{parameters})%',
-\        '*/',
-\      ],
-\      'doxygen_javadoc_banner': [
-\        '/*******************************************************************************',
-\        ' * struct {name} - !description',
-\        '%(parameters| *)%',
-\        '%(parameters| * {parameters})%',
-\        ' ******************************************************************************/',
-\      ],
-\      'doxygen_qt': [
-\        '/*!',
-\        ' * struct {name} - !description',
-\        '%(parameters| *)%',
-\        '%(parameters| * {parameters})%',
-\        ' */',
-\      ],
-\      'doxygen_qt_no_asterisk': [
-\        '/*!',
-\        'struct {name} - !description',
-\        '%(parameters|)%',
-\        '%(parameters|{parameters})%',
-\        '*/',
-\      ],
-\    },
-\  },
+\  'parameters': v:false,
+\  'template': [
+\    '/**',
+\    ' * @{name} !description',
+\    ' */',
+\  ],
 \})
 
 " ==============================================================================
-" Field declarations.
+" Define the doc standards.
 " ==============================================================================
-call add(b:doge_patterns, {
-\  'generator': {
-\    'file': 'libclang.py',
-\    'args': ['FIELD_DECL'],
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'doxygen_javadoc': [
-\        '/**',
-\        ' * @{name} !description',
-\        ' */',
-\      ],
-\    },
-\  },
-\})
+let b:doge_patterns.doxygen_javadoc = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/**',
+\      ' * @brief !description',
+\      ' *',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return !description)%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '/**',
+\      ' * struct {name} - !description',
+\      '%(parameters| *)%',
+\      '%(parameters| * {parameters})%',
+\      ' */',
+\    ],
+\  }),
+\  s:field_pattern,
+\]
+
+let b:doge_patterns.doxygen_javadoc_no_asterisk = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/**',
+\      '@brief !description',
+\      '',
+\      '%(parameters|{parameters})%',
+\      '%(returnType|@return !description)%',
+\      '*/',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '/**',
+\      'struct {name} - !description',
+\      '%(parameters|)%',
+\      '%(parameters|{parameters})%',
+\      '*/',
+\    ],
+\  }),
+\  s:field_pattern,
+\]
+
+let b:doge_patterns.doxygen_javadoc_banner = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/*******************************************************************************',
+\      ' * @brief !description',
+\      ' *',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return !description)%',
+\      ' ******************************************************************************/',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '/*******************************************************************************',
+\      ' * struct {name} - !description',
+\      '%(parameters| *)%',
+\      '%(parameters| * {parameters})%',
+\      ' ******************************************************************************/',
+\    ],
+\  }),
+\  s:field_pattern,
+\]
+
+let b:doge_patterns.doxygen_qt = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/*!',
+\      ' * @brief !description',
+\      ' *',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return !description)%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '/*!',
+\      ' * struct {name} - !description',
+\      '%(parameters| *)%',
+\      '%(parameters| * {parameters})%',
+\      ' */',
+\    ],
+\  }),
+\  s:field_pattern,
+\]
+
+let b:doge_patterns.doxygen_qt_no_asterisk = [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/*!',
+\      '@brief !description',
+\      '',
+\      '%(parameters|{parameters})%',
+\      '%(returnType|@return !description)%',
+\      '*/',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '/*!',
+\      'struct {name} - !description',
+\      '%(parameters|)%',
+\      '%(parameters|{parameters})%',
+\      '*/',
+\    ],
+\  }),
+\  s:field_pattern,
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

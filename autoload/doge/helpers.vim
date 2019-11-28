@@ -95,6 +95,25 @@ function! doge#helpers#generator(generator) abort
   return 0
 endfunction
 
+"" @public
+" Recursively merge nested dictionaries.
+" a:1 is the base dictionary and every other parameter will be merged onto a:1.
+function! doge#helpers#deepextend(...) abort
+  " Thanks to: https://vi.stackexchange.com/a/20843
+  let l:new = deepcopy(a:1)
+  for l:arg in a:000
+    let l:index = index(a:000, l:arg)
+    if l:index == 0
+      continue
+    endif
+    for [l:k, l:v] in items(l:arg)
+      let l:new[l:k] = (type(l:v) is v:t_dict && type(get(l:new, l:k)) is v:t_dict)
+            \ ? doge#helpers#deepextend(l:new[l:k], l:v)
+            \ : l:v
+    endfor
+  endfor
+  return l:new
+endfunction
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

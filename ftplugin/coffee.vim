@@ -20,65 +20,59 @@ if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
   \ )
 endif
 
-let b:doge_patterns = []
+let b:doge_patterns = {}
 
 " ==============================================================================
-" Matches prototype functions.
+" Define our base for every pattern.
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   Person::greet = (name) ->
-call add(b:doge_patterns, {
+let s:pattern_base = {
+\  'parameters': {
+\    'format': '@param {!type} {name} !description',
+\  },
+\  'insert': 'above',
+\}
+
+" ==============================================================================
+" Define the pattern types.
+" ==============================================================================
+let s:prototype_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)::\([[:alnum:]_$]\+\)\s*=\s*[-=]>',
 \  'match_group_names': ['className', 'funcName'],
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '###',
-\        '!description',
-\        '',
-\        '@function {className}#{funcName}',
-\        '###',
-\      ],
-\    }
-\  },
 \})
 
-" ==============================================================================
-" Matches regular functions.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   myFunc = (x) -> x * x
-"
-"   myFunc = (p1, p2, p3) ->
-call add(b:doge_patterns, {
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\s*=\s*(\(.\{-}\))\s*[-=]>',
 \  'match_group_names': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': '\m\([^,]\+\)',
 \    'match_group_names': ['name'],
-\    'format': {
-\      'jsdoc': '@param {!type} {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '###',
-\        '!description',
-\        '',
-\        '@function {funcName|}',
-\        '%(parameters|{parameters})%',
-\        '###',
-\      ],
-\    }
 \  },
 \})
+
+" ==============================================================================
+" Define the doc standards.
+" ==============================================================================
+let b:doge_patterns.jsdoc = [
+\  doge#helpers#deepextend(s:prototype_function_pattern, {
+\    'template': [
+\      '###',
+\      '!description',
+\      '',
+\      '@function {className}#{funcName}',
+\      '###',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '###',
+\      '!description',
+\      '',
+\      '@function {funcName|}',
+\      '%(parameters|{parameters})%',
+\      '###',
+\    ],
+\  }),
+\]
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
