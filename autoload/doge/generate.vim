@@ -44,7 +44,7 @@ function! doge#generate#pattern(pattern) abort
     let l:tokens = get(doge#token#extract(
           \ l:curr_line,
           \ a:pattern['match'],
-          \ a:pattern['match_group_names']
+          \ a:pattern['tokens']
           \ ), 0, {})
   endif
 
@@ -66,7 +66,7 @@ function! doge#generate#pattern(pattern) abort
     let l:param_tokens = l:use_generator ? l:params : doge#token#extract(
           \ l:params,
           \ l:params_dict['match'],
-          \ l:params_dict['match_group_names']
+          \ l:params_dict['tokens']
           \ )
 
     " Preprocess the extracted parameter tokens.

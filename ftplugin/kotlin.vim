@@ -44,7 +44,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\%(\%(var\|val\)\s\+\)\?\([[:alnum:]_]\+\)\%(\s*:\s*\%([[:alnum:]_]\+\)\?\%(<[[:alnum:][:space:]_,<>:?*]\{-1,}>\|[^,]\+\)\?\)\?',
-\    'match_group_names': ['name'],
+\    'tokens': ['name'],
 \    'format': '@param {name} !description'
 \  },
 \  'insert': 'above',
@@ -71,7 +71,7 @@ let s:pattern_base = {
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|protected\|private\|final\|inline\|abstract\|override\|operator\|open\|data\)\s\+\)*fun\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*[[:alnum:]_:\.]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\??\?\)\?\s*[={]',
-\  'match_group_names': ['parameters'],
+\  'tokens': ['parameters'],
 \})
 
 " ------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ------------------------------------------------------------------------------
 let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(inner\|inline\|data\|enum\|external\|open\|abstract\|sealed\)\s\+\)*class\s\+\%([[:alnum:]_]\+\%(<[[:alnum:][:space:]_,<>:?*]\{-}>\)\?\)\s*\%(\%(public\|private\|protected\)\s*\)\?\%(constructor\s*\)\?(\(.\{-}\))',
-\  'match_group_names': ['parameters'],
+\  'tokens': ['parameters'],
 \  'parameters': {
 \    'format': '@property {name} !description',
 \  },
@@ -104,7 +104,7 @@ let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ------------------------------------------------------------------------------
 let s:class_constructor_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\)\s\+\)\?constructor\s*(\(.\{-}\))',
-\  'match_group_names': ['parameters'],
+\  'tokens': ['parameters'],
 \})
 
 

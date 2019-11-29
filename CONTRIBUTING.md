@@ -153,7 +153,7 @@ about the dictionary structure per pattern.
 
 The generation is done using the patterns as the following:
 - Start by matching the given pattern.
-- Extract all the tokens using the `match_group_names`.
+- Extract all the tokens using the `tokens`.
   - Extract the parameter tokens based on the `parameter` token.
 - Render the tokens in the `template`.
 
@@ -167,10 +167,10 @@ call add(b:doge_patterns, {
    " and start with ^ to make sure it's not matching in middle.
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
 
-   " The 'match_group_names' are names for the captured groups where the index
+   " The 'tokens' are names for the captured groups where the index
    " is equivalent to the captured groups' index. These names become tokens
    " that can be used in the 'template' key.
-\  'match_group_names': ['funcName', 'parameters'],
+\  'tokens': ['funcName', 'parameters'],
 
    " The 'parameters' key is an optional key, since not every expression has a
    " parameter list.
@@ -184,10 +184,10 @@ call add(b:doge_patterns, {
      " should not contain ^ at the beginning or $ at the end.
 \    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
 
-     " The 'match_group_names' are names for the captured groups where the index
+     " The 'tokens' are names for the captured groups where the index
      " is equivalent to the captured groups' index. These names become tokens
      " that can be used in the 'format' key.
-\    'match_group_names': ['type', 'name'],
+\    'tokens': ['type', 'name'],
 
      " The 'format' key describes how the format of each parameter should be.
      " It contains a format for each supported doc standard.
@@ -377,6 +377,6 @@ It is also suggested to use Python because these scripts can be shipped easily
 within the project. Think wisely if you want to suggest a _differrent_ language.
 
 Generators can be used easily. The format is the same as the regex format, but
-the `match` and `match_group_names` can be replaced with a `generator` key.
+the `match` and `tokens` can be replaced with a `generator` key.
 
 For an example usage, checkout the [C++](https://github.com/kkoomen/vim-doge/blob/master/ftplugin/cpp.vim) implementation.

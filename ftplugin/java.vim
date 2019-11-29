@@ -40,10 +40,10 @@ let s:pattern_base = {
 " ==============================================================================
 let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\%([[:alnum:]_]\+\)(\(.\{-}\))\s*[;{]',
-\  'match_group_names': ['returnType', 'parameters'],
+\  'tokens': ['returnType', 'parameters'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
-\    'match_group_names': ['type', 'name'],
+\    'tokens': ['type', 'name'],
 \  },
 \})
 

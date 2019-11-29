@@ -37,7 +37,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\([[:alnum:]_]\+\)\%(\s*:\s*\([[:alnum:]_.]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
-\    'match_group_names': ['name', 'type', 'default'],
+\    'tokens': ['name', 'type', 'default'],
 \  },
 \  'insert': 'below',
 \}
@@ -58,7 +58,7 @@ let s:pattern_base = {
 " ------------------------------------------------------------------------------
 let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
-\  'match_group_names': ['parameters', 'returnType'],
+\  'tokens': ['parameters', 'returnType'],
 \})
 
 " ==============================================================================

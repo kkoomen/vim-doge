@@ -41,15 +41,15 @@ let s:pattern_base = {
 " ==============================================================================
 let s:prototype_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)::\([[:alnum:]_$]\+\)\s*=\s*[-=]>',
-\  'match_group_names': ['className', 'funcName'],
+\  'tokens': ['className', 'funcName'],
 \})
 
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\s*=\s*(\(.\{-}\))\s*[-=]>',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'tokens': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': '\m\([^,]\+\)',
-\    'match_group_names': ['name'],
+\    'tokens': ['name'],
 \  },
 \})
 

@@ -32,7 +32,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
-\    'match_group_names': ['name', 'type'],
+\    'tokens': ['name', 'type'],
 \    'format': '@param {{type|!type}} {name} - !description',
 \  },
 \  'insert': 'above',
@@ -54,7 +54,7 @@ let s:pattern_base = {
 " ------------------------------------------------------------------------------
 let s:object_functions_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^[[:punct:]]\?\([[:alnum:]_-]\+\)[[:punct:]]\?\s*:\s*\(async\)\?\s*\%(function\)\?\s*\%([[:alnum:]_]\+\)\?(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\%(\s*=>\s*\)\?\s*[({]',
-\  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],
+\  'tokens': ['funcName', 'async', 'parameters', 'returnType'],
 \})
 
 " ------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ let s:object_functions_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ------------------------------------------------------------------------------
 let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$.]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$.]\+\)\)\?\s*{',
-\  'match_group_names': ['parentClassName', 'interfaceName'],
+\  'tokens': ['parentClassName', 'interfaceName'],
 \  'parameters': v:false,
 \})
 
@@ -82,7 +82,7 @@ let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(export\|public\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-\  'match_group_names': ['static', 'async', 'parameters', 'returnType'],
+\  'tokens': ['static', 'async', 'parameters', 'returnType'],
 \})
 
 " ------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ------------------------------------------------------------------------------
 let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s\+\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'match_group_names': ['className', 'funcName', 'async', 'parameters', 'returnType'],
+\  'tokens': ['className', 'funcName', 'async', 'parameters', 'returnType'],
 \})
 
 " ------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ------------------------------------------------------------------------------
 let s:fat_arrow_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(export\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
-\  'match_group_names': ['static', 'funcName', 'static', 'async',  'parameters', 'returnType'],
+\  'tokens': ['static', 'funcName', 'static', 'async',  'parameters', 'returnType'],
 \})
 
 " ==============================================================================
