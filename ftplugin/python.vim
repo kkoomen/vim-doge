@@ -19,14 +19,6 @@ let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
       \ 'sphinx',
       \ ])
 let b:doge_doc_standard = doge#buffer#get_doc_standard('python')
-if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
-  echoerr printf(
-        \ '[DoGe] %s is not a valid Python doc standard, available doc standard are: %s',
-        \ b:doge_doc_standard,
-        \ join(b:doge_supported_doc_standards, ', ')
-        \ )
-endif
-
 let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================

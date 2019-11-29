@@ -7,6 +7,16 @@ set cpoptions&vim
 "
 " arg: Either a count (0 by default) or a string (empty by default).
 function! doge#generate(arg) abort
+  " Immediately validate if the doc standard is allowed.
+  if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+    echoerr printf(
+    \  '[DoGe] "%s" is not a valid %s doc standard, available doc standard are: %s',
+    \  b:doge_doc_standard,
+    \  &filetype,
+    \  join(b:doge_supported_doc_standards, ', ')
+    \)
+  endif
+
   let l:success = 0
 
   " Store old search register.
