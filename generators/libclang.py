@@ -154,7 +154,7 @@ def main():
     lines.insert(current_line-1, normalized_expr)
 
     # Save the lines to a temp file and parse that file.
-    fd, filename = tempfile.mkstemp('.{}'.format(ext), dir=workdir)
+    fd, filename = tempfile.mkstemp(dir=workdir, prefix='vim-doge-', suffix='.{}'.format(ext))
     try:
         with os.fdopen(fd, 'w') as tmp:
             tmp.write('\n'.join(lines))
