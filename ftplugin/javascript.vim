@@ -123,7 +123,7 @@ let s:fat_arrow_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.jsdoc = [
+call doge#buffer#register_doc_standard('jsdoc', [
 \  doge#helpers#deepextend(s:object_functions_pattern, {
 \    'template': [
 \      '/**',
@@ -182,7 +182,7 @@ let b:doge_patterns.jsdoc = [
 \      ' */',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

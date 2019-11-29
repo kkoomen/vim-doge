@@ -58,7 +58,7 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-call doge#register_doc_standard(b:doge_patterns, 'jsdoc', [
+call doge#buffer#register_doc_standard('jsdoc', [
 \  doge#helpers#deepextend(s:prototype_function_pattern, {
 \    'template': [
 \      '###',

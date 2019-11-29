@@ -52,7 +52,7 @@ let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.javadoc = [
+call doge#buffer#register_doc_standard('javadoc', [
 \  doge#helpers#deepextend(s:class_method_pattern, {
 \    'template': [
 \      '/**',
@@ -63,7 +63,7 @@ let b:doge_patterns.javadoc = [
 \      ' */',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

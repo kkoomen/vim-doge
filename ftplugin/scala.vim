@@ -87,7 +87,7 @@ let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.scaladoc = [
+call doge#buffer#register_doc_standard('scaladoc', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/** !description',
@@ -114,7 +114,7 @@ let b:doge_patterns.scaladoc = [
 \      ' */',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

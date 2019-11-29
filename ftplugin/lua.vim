@@ -71,7 +71,7 @@ let s:variable_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.ldoc = [
+call doge#buffer#register_doc_standard('ldoc', [
 \  doge#helpers#deepextend(s:function_and_class_method_pattern, {
 \    'template': [
 \      '-- !summary',
@@ -86,7 +86,7 @@ let b:doge_patterns.ldoc = [
 \      '%(parameters|-- {parameters})%',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

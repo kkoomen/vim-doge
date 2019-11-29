@@ -66,7 +66,7 @@ let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.reST = [
+call doge#buffer#register_doc_standard('reST', [
 \  doge#helpers#deepextend(s:function_and_class_method_pattern, {
 \    'parameters': {
 \      'format': ':param {name} {type|!type}: !description',
@@ -80,9 +80,9 @@ let b:doge_patterns.reST = [
 \      '"""',
 \    ],
 \  }),
-\]
+\])
 
-let b:doge_patterns.sphinx = [
+call doge#buffer#register_doc_standard('sphinx', [
 \  doge#helpers#deepextend(s:function_and_class_method_pattern, {
 \    'parameters': {
 \      'format': [
@@ -100,9 +100,9 @@ let b:doge_patterns.sphinx = [
 \      '"""',
 \    ],
 \  }),
-\]
+\])
 
-let b:doge_patterns.numpy = [
+call doge#buffer#register_doc_standard('numpy', [
 \  doge#helpers#deepextend(s:function_and_class_method_pattern, {
 \    'parameters': {
 \      'format': [
@@ -127,9 +127,9 @@ let b:doge_patterns.numpy = [
 \      '"""',
 \    ],
 \  }),
-\]
+\])
 
-let b:doge_patterns.google = [
+call doge#buffer#register_doc_standard('google', [
 \  doge#helpers#deepextend(s:function_and_class_method_pattern, {
 \    'parameters': {
 \      'format': '{name} ({type|!type}%(default|, optional)%): !description',
@@ -147,7 +147,7 @@ let b:doge_patterns.google = [
 \      '"""',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

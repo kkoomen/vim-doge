@@ -102,7 +102,7 @@ let s:field_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc', [
+call doge#buffer#register_doc_standard('doxygen_javadoc', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/**',
@@ -125,7 +125,7 @@ call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc', [
 \  s:field_pattern,
 \])
 
-call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc_no_asterisk', [
+call doge#buffer#register_doc_standard('doxygen_javadoc_no_asterisk', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/**',
@@ -148,7 +148,7 @@ call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc_no_asterisk', 
 \  s:field_pattern,
 \])
 
-call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc_banner', [
+call doge#buffer#register_doc_standard('doxygen_javadoc_banner', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*******************************************************************************',
@@ -171,7 +171,7 @@ call doge#register_doc_standard(b:doge_patterns, 'doxygen_javadoc_banner', [
 \  s:field_pattern,
 \])
 
-call doge#register_doc_standard(b:doge_patterns, 'doxygen_qt', [
+call doge#buffer#register_doc_standard('doxygen_qt', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*!',
@@ -194,7 +194,7 @@ call doge#register_doc_standard(b:doge_patterns, 'doxygen_qt', [
 \  s:field_pattern,
 \])
 
-call doge#register_doc_standard(b:doge_patterns, 'doxygen_qt_no_asterisk', [
+call doge#buffer#register_doc_standard('doxygen_qt_no_asterisk', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*!',
@@ -218,7 +218,7 @@ call doge#register_doc_standard(b:doge_patterns, 'doxygen_qt_no_asterisk', [
 \])
 
 let s:kernel_doc_pattern_base = {'parameters': {'format': '@{name}: !description'}}
-call doge#register_doc_standard(b:doge_patterns, 'kernel_doc', [
+call doge#buffer#register_doc_standard('kernel_doc', [
 \  doge#helpers#deepextend(s:function_pattern, s:kernel_doc_pattern_base, {
 \    'template': [
 \      '/**',

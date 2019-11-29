@@ -52,7 +52,7 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.google = [
+call doge#buffer#register_doc_standard('google', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '################################################################################',
@@ -66,7 +66,7 @@ let b:doge_patterns.google = [
 \      '################################################################################',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

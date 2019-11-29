@@ -2,8 +2,8 @@ let s:save_cpo = &cpoptions
 set cpoptions&vim
 
 " The testing framework Vader is running everything inside a single buffer, so
-" we disable the inheritance of the b:doge_supported_doc_standards variable to
-" prevent extra work and/or failing tests.
+" we disable the inheritance of some buffer-local variables to prevent extra
+" work and/or failing tests.
 
 ""
 " @public
@@ -25,10 +25,23 @@ function! doge#buffer#get_doc_standard(filetype) abort
     \ : get(b:, 'doge_doc_standard', get(g:, 'doge_doc_standard_' . a:filetype, b:doge_supported_doc_standards[0]))
 endfunction
 
+""
+" @public
+" Returns the b:doge_patterns variable value.
 function! doge#buffer#get_patterns() abort
   return get(g:, 'doge_test_env', 0)
     \ ? {}
     \ : get(b:, 'doge_patterns', {})
+endfunction
+
+""
+" @public
+" Add a doc standard to the b:doge_patterns variable.
+function! doge#buffer#register_doc_standard(doc_standard, patterns) abort
+  if has_key(b:doge_patterns, a:doc_standard) == v:false
+    let b:doge_patterns[a:doc_standard] = a:patterns
+  endif
+  return b:doge_patterns
 endfunction
 
 let &cpoptions = s:save_cpo

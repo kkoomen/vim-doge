@@ -73,7 +73,7 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.roxygen2 = [
+call doge#buffer#register_doc_standard('roxygen2', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \        "#' !description",
@@ -87,7 +87,7 @@ let b:doge_patterns.roxygen2 = [
 \        "#' !example",
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

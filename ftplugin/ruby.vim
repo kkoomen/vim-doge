@@ -59,14 +59,14 @@ let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base
 " Define the doc standards.
 "
 " ==============================================================================
-let b:doge_patterns.YARD = [
+call doge#buffer#register_doc_standard('YARD', [
 \  doge#helpers#deepextend(s:function_and_class_method_pattern, {
 \    'template': [
 \      '# !description',
 \      '%(parameters|# {parameters})%',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

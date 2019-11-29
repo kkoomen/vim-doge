@@ -91,7 +91,7 @@ let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base
 "   The {type} will be added by the doge#preprocess#php#tokens() function.
 "   See doge#preprocessors#php#tokens().
 " ==============================================================================
-let b:doge_patterns.phpdoc = [
+call doge#buffer#register_doc_standard('phpdoc', [
 \  doge#helpers#deepextend(s:class_property_pattern, {
 \    'template': [
 \      '/**',
@@ -118,7 +118,7 @@ let b:doge_patterns.phpdoc = [
 \      ' */',
 \    ],
 \  }),
-\]
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
