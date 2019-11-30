@@ -12,7 +12,7 @@ set cpoptions&vim
 function! doge#buffer#get_supported_doc_standards(defaults) abort
   return get(g:, 'doge_test_env', 0)
     \ ? a:defaults
-    \ : uniq(extend(get(b:, 'doge_supported_doc_standards', []), a:defaults))
+    \ : uniq(sort(extend(get(b:, 'doge_supported_doc_standards', []), a:defaults)))
 endfunction
 
 ""
