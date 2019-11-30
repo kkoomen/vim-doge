@@ -10,7 +10,6 @@ doge#comment#deactivate_when_done()	doge.txt	/*doge#comment#deactivate_when_done
 doge#comment#jump()	doge.txt	/*doge#comment#jump()*
 doge#comment#update_interactive_comment_info()	doge.txt	/*doge#comment#update_interactive_comment_info()*
 doge#deactivate()	doge.txt	/*doge#deactivate()*
-doge#generate#pattern()	doge.txt	/*doge#generate#pattern()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#deepextend()	doge.txt	/*doge#helpers#deepextend()*
@@ -19,6 +18,7 @@ doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#pattern#generate()	doge.txt	/*doge#pattern#generate()*
 doge#python#file()	doge.txt	/*doge#python#file()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*

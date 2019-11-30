@@ -129,9 +129,6 @@ doge#comment#deactivate_when_done()      *doge#comment#deactivate_when_done()*
   and will deactivate doge when there are no more TODO items left. Requires
   |g:doge_comment_interactive| to be enabled.
 
-doge#generate#pattern({pattern})                     *doge#generate#pattern()*
-  Generates a comment based on a given pattern.
-
 doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
                                                         *doge#helpers#count()*
   Returns the amount of occurences of a word.
@@ -170,6 +167,9 @@ doge#helpers#deepextend()                          *doge#helpers#deepextend()*
 
 doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
+
+doge#pattern#generate({pattern})                     *doge#pattern#generate()*
+  Generates a comment based on a given pattern.
 
 doge#python#file({path}, {args})                          *doge#python#file()*
   Run a python file using the py[3]file command.

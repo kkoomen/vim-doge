@@ -17,8 +17,6 @@ function! doge#generate(arg) abort
     \)
   endif
 
-  let l:success = 0
-
   " Store old search register.
   let s:oldsearch = @/
 
@@ -40,15 +38,12 @@ function! doge#generate(arg) abort
 
   if exists('b:doge_patterns')
     for l:pattern in get(b:doge_patterns, b:doge_doc_standard)
-      if doge#generate#pattern(l:pattern) == v:false
+      if doge#pattern#generate(l:pattern) == v:false
         continue
-      else
-        let l:success = v:true
       endif
-      if l:success == v:true
-        call doge#activate()
-      endif
-      return l:success
+
+      call doge#activate()
+      return 1
     endfor
   endif
 endfunction

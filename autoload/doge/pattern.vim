@@ -6,7 +6,7 @@ let s:comment_placeholder = doge#helpers#placeholder()
 ""
 " @public
 " Generates a comment based on a given pattern.
-function! doge#generate#pattern(pattern) abort
+function! doge#pattern#generate(pattern) abort
   " Assuming multiline function expressions won't be longer than 15 lines.
   let l:lines_raw = getline('.', line('.') + 15)
   let l:lines = map(l:lines_raw, { key, line ->
