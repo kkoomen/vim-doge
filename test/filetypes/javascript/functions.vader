@@ -224,17 +224,25 @@ Expect javascript (generated comment with @async, @param and @return tags):
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
-# Class with a public function with parameters and return type.
+# Class with functions with parameters and return type.
 # ==============================================================================
-Given javascript (class with a public function with parameters and return type):
+Given javascript (class with functions with parameters and return type and differrent data modifiers):
   export class Test {
 
     public printSomething(something?: string): void {}
+
+    protected printSomething(something?: string): void {}
+
+    private printSomething(something?: string): void {}
 
   }
 
 Do (trigger doge):
   :3\<CR>
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+  :17\<CR>
   \<C-d>
 
 Expect javascript (generated comment with a description, @param and @return tags):
@@ -246,5 +254,19 @@ Expect javascript (generated comment with a description, @param and @return tags
      * @param {string} something - [TODO:description]
      */
     public printSomething(something?: string): void {}
+
+    /**
+     * [TODO:description]
+     *
+     * @param {string} something - [TODO:description]
+     */
+    protected printSomething(something?: string): void {}
+
+    /**
+     * [TODO:description]
+     *
+     * @param {string} something - [TODO:description]
+     */
+    private printSomething(something?: string): void {}
 
   }
