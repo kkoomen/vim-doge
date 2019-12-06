@@ -79,13 +79,13 @@ let s:field_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'generator': {
 \    'args': ['FIELD_DECL'],
 \  },
-\  'parameters': v:false,
 \  'template': [
 \    '/**',
 \    ' * @{name} !description',
 \    ' */',
 \  ],
 \})
+unlet s:field_pattern['parameters']
 
 " ==============================================================================
 "

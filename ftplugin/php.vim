@@ -41,8 +41,8 @@ let s:pattern_base = {
 let s:class_property_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|var\|const\)\s\+\)*\$\([[:alnum:]_]\+\)',
 \  'tokens': ['propertyName'],
-\  'parameters': v:false,
 \})
+unlet s:class_property_pattern['parameters']
 
 " ------------------------------------------------------------------------------
 " Matches a constructor function.

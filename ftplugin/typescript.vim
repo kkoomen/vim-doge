@@ -63,8 +63,8 @@ let s:object_functions_pattern = doge#helpers#deepextend(s:pattern_base, {
 let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$.]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$.]\+\)\)\?\s*{',
 \  'tokens': ['parentClassName', 'interfaceName'],
-\  'parameters': v:false,
 \})
+unlet s:class_pattern['parameters']
 
 " ------------------------------------------------------------------------------
 " Matches regular and typed functions with default parameters.
