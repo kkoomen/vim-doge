@@ -213,8 +213,8 @@ call add(b:doge_patterns, {
 \      'phpdoc': [
 \        '/**',
 \        ' * !description',
-\        '#(parameters| *)',
-\        '#(parameters| * {parameters})',
+\        '%(parameters| *)%',
+\        '%(parameters| * {parameters})%',
 \        ' */',
 \      ],
 \    },
