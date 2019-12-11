@@ -172,5 +172,101 @@ function! doge#pattern#generate(pattern) abort
   return 1
 endfunction
 
+
+
+""
+" @public
+" Generates a template for a custom doc standard, and places it in
+" after/ftplugin/{&ft}.vim
+fun! doge#pattern#custom(name) abort
+  let l:this_ft = &filetype
+
+  " maybe there aren't available doc standards for this filetype
+  if !exists('b:doge_patterns')
+    let b:doge_patterns = {}
+    let l:unsupported_filetype = 1
+    let l:comment = substitute(escape(&commentstring, '\/*.~$'), '%s', '.\\{-}', '')
+    let l:comment = string(printf('\m%s$', l:comment))
+  else
+    let l:unsupported_filetype = 0
+  endif
+
+  " if the given name is an existing doc standard, use it as base for our
+  " template, otherwise create an empty one
+  if has_key(b:doge_patterns, a:name)
+    let l:template = deepcopy(b:doge_patterns[a:name][0])
+    let l:name = a:name . '_custom'
+  else
+    let l:template = {'match': '', 'tokens':['parameters'], 'template': [], 'insert': 'above', 'parameters': {'match': '', 'tokens':'', 'format': ''}}
+    let l:name = a:name
+  endif
+
+  " get the path for the after/ftplugin file and open it if existing
+  " otherwise create a new file with an appropriate path
+  let l:path = ''
+  for l:p in ['~/.vim', '~/vimfiles']
+    if isdirectory(expand(l:p))
+      let l:path = expand(l:p)
+    endif
+  endfor
+  if has('nvim') && empty(l:path)
+    let l:path = stdpath('config')
+  endif
+  if !empty(l:path)
+    let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
+  endif
+  if filereadable(l:path)
+    exe 'split' fnameescape(l:path)
+  else
+    new
+    setfiletype vim
+    if !empty(l:path)
+      exe 'file' fnameescape(l:path)
+    endif
+  endif
+
+  " generate the template and paste it at the top of the file
+  let l:doc = []
+  call add(l:doc, '" preserve existing doge settings')
+  call add(l:doc, 'let b:doge_patterns = get(b:, "doge_patterns", {})')
+  call add(l:doc, 'let b:doge_supported_doc_standards = get(b:, "doge_supported_doc_standards", [])')
+  call add(l:doc, 'if index(b:doge_supported_doc_standards, "'.l:name.'") < 0')
+  call add(l:doc, 'call add(b:doge_supported_doc_standards, "'.l:name.'")')
+  call add(l:doc, 'endif')
+  call add(l:doc, '')
+  if l:unsupported_filetype
+    call add(l:doc, '" doge uses these patterns to identify comments, change if needed')
+    call add(l:doc, 'let b:doge_pattern_single_line_comment = '.l:comment)
+    call add(l:doc, 'let b:doge_pattern_multi_line_comment = '.l:comment)
+    call add(l:doc, '')
+  endif
+  call add(l:doc, '" set the new doc standard as default')
+  call add(l:doc, 'let b:doge_doc_standard = "'.l:name.'"')
+  call add(l:doc, '')
+  call add(l:doc, '" do not overwrite an existing doc standard')
+  call add(l:doc, 'if !has_key(b:doge_patterns, "'.l:name.'")')
+  call add(l:doc, 'let b:doge_patterns["'.l:name.'"] = [{')
+  call add(l:doc, '\  "match": '.string(l:template.match).',')
+  call add(l:doc, '\  "tokens": '.string(l:template.tokens).',')
+  for l:key in l:template.tokens
+    if has_key(l:template, l:key)
+      call add(l:doc, '\  "'.l:key.'": {')
+      call add(l:doc, '\    "match": '.string(l:template[l:key].match).',')
+      call add(l:doc, '\    "tokens": '.string(l:template[l:key].tokens).',')
+      call add(l:doc, '\    "format": '.string(l:template[l:key].format).',')
+      call add(l:doc, '\  },')
+    endif
+  endfor
+  call add(l:doc, '\  "template": '.string(l:template.template).',')
+  call add(l:doc, '\  "insert": '.string(l:template.insert).',')
+  call add(l:doc, '\}]')
+  call add(l:doc, 'endif')
+  call add(l:doc, '')
+  call setreg('"', l:doc)
+  1
+  normal! P'[=']
+endfun
+
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

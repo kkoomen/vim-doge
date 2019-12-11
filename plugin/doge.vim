@@ -149,6 +149,14 @@ let g:doge_dir = expand('<sfile>:p:h:h')
 " and it can complete the available doc standards for the current buffer.
 command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
 
+""
+" @command DogeCreateDocStandard {doc_standard}
+" Command to generate a custom template. The mandatory argument is the name of
+" the new doc standard. If it exists, the existing doc standard with the same
+" name will be used as base for the custom template.
+" It can complete the available doc standards for the current buffer.
+command -nargs=1 -complete=customlist,doge#command_complete DogeCreateDocStandard call doge#pattern#custom(<q-args>)
+
 augroup doge
   autocmd!
   autocmd TextChangedI * call doge#comment#update_interactive_comment_info()
