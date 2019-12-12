@@ -216,11 +216,12 @@ fun! doge#pattern#custom(name) abort
     let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
   endif
   if filereadable(l:path)
-    exe 'tabedit' fnameescape(l:path)
+    let l:cmd = &showtabline ? 'tabedit' : 'split'
+    exe l:cmd fnameescape(l:path)
   elseif bufexists(l:path)
     exe 'drop' fnameescape(l:path)
   else
-    tabnew
+    exe (&showtabline ? 'tabnew' : 'new')
     setfiletype vim
     if !empty(l:path)
       exe 'file' fnameescape(l:path)
