@@ -216,9 +216,11 @@ fun! doge#pattern#custom(name) abort
     let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
   endif
   if filereadable(l:path)
-    exe 'split' fnameescape(l:path)
+    exe 'tabedit' fnameescape(l:path)
+  elseif bufexists(l:path)
+    exe 'drop' fnameescape(l:path)
   else
-    new
+    tabnew
     setfiletype vim
     if !empty(l:path)
       exe 'file' fnameescape(l:path)
@@ -264,7 +266,7 @@ fun! doge#pattern#custom(name) abort
   call add(l:doc, '')
   call setreg('"', l:doc)
   1
-  normal! P'[=']
+  normal! ""P'[=']
 endfun
 
 
