@@ -126,16 +126,16 @@ endif
 
 nnoremap <Plug>(doge-generate) :<C-u>call doge#generate(v:count)<CR>
 for s:mode in g:doge_comment_jump_modes
-  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', s:mode))
-  execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', s:mode))
+  call execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-forward) doge#comment#jump("forward")', s:mode), 'silent!')
+  call execute(printf('%snoremap <expr> <Plug>(doge-comment-jump-backward) doge#comment#jump("backward")', s:mode), 'silent!')
 endfor
 
 if g:doge_enable_mappings == v:true
-  execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping))
+  call execute(printf('nmap <silent> %s <Plug>(doge-generate)', g:doge_mapping), 'silent!')
   if g:doge_buffer_mappings == v:false
     for s:mode in g:doge_comment_jump_modes
-      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-forward)', s:mode, g:doge_mapping_comment_jump_forward))
-      execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-backward)', s:mode, g:doge_mapping_comment_jump_backward))
+      call execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-forward)', s:mode, g:doge_mapping_comment_jump_forward), 'silent!')
+      call execute(printf('%smap <silent> %s <Plug>(doge-comment-jump-backward)', s:mode, g:doge_mapping_comment_jump_backward), 'silent!')
     endfor
   endif
 endif

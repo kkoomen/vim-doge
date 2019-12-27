@@ -163,7 +163,7 @@ function! doge#pattern#generate(pattern) abort
         " Go to the top of the comment and select the first TODO.
         exe l:comment_lnum_insert_position + 1
         call search(s:comment_placeholder, 'W')
-        call execute("normal! gno\<C-g>")
+        call execute("normal! gno\<C-g>", 'silent!')
       endif
     endif
   endif
@@ -234,14 +234,14 @@ function! doge#pattern#custom(name) abort
   endif
   if filereadable(l:path)
     let l:cmd = &showtabline ? 'tabedit' : 'split'
-    call execute(l:cmd . fnameescape(l:path))
+    call execute(l:cmd . fnameescape(l:path), 'silent!')
   elseif bufexists(l:path)
-    call execute('drop ' . fnameescape(l:path))
+    call execute('drop ' . fnameescape(l:path), 'silent!')
   else
-    execute(&showtabline ? 'tabnew' : 'new')
+    call execute(&showtabline ? 'tabnew' : 'new', 'silent!')
     setfiletype vim
     if !empty(l:path)
-      execute('file ' . fnameescape(l:path))
+      call execute('file ' . fnameescape(l:path), 'silent!')
     endif
   endif
 
@@ -290,6 +290,7 @@ function! doge#pattern#custom(name) abort
   call setreg('"', l:doc)
   1
   normal! ""P'[=']Gdipgg
+  call execute('w', 'silent!')
 endfunction
 
 let &cpoptions = s:save_cpo
