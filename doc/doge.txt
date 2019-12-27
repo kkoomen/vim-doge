@@ -78,6 +78,12 @@ COMMANDS                                                       *doge-commands*
   argument, and it can complete the available doc standards for the current
   buffer.
 
+:DogeCreateDocStandard {doc_standard}                 *:DogeCreateDocStandard*
+  Command to generate a custom template. The mandatory argument is the name of
+  the new doc standard. If it exists, the existing doc standard with the same
+  name will be used as base for the custom template. It completes the
+  available doc standards for the current buffer.
+
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
 
@@ -170,6 +176,10 @@ doge#indent#add({lnum}, {text})                            *doge#indent#add()*
 
 doge#pattern#generate({pattern})                     *doge#pattern#generate()*
   Generates a comment based on a given pattern.
+
+doge#pattern#custom({name})                            *doge#pattern#custom()*
+  Generates a template for a custom doc standard, and places it in
+  after/ftplugin/{&ft}.vim
 
 doge#python#file({path}, {args})                          *doge#python#file()*
   Run a python file using the py[3]file command.

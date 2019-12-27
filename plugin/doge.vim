@@ -154,7 +154,7 @@ command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate 
 " Command to generate a custom template. The mandatory argument is the name of
 " the new doc standard. If it exists, the existing doc standard with the same
 " name will be used as base for the custom template.
-" It can complete the available doc standards for the current buffer.
+" It completes the available doc standards for the current buffer.
 command -nargs=1 -complete=customlist,doge#command_complete DogeCreateDocStandard call doge#pattern#custom(<q-args>)
 
 augroup doge

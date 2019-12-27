@@ -1,3 +1,4 @@
+:DogeCreateDocStandard	doge.txt	/*:DogeCreateDocStandard*
 :DogeGenerate	doge.txt	/*:DogeGenerate*
 doge	doge.txt	/*doge*
 doge#activate()	doge.txt	/*doge#activate()*
@@ -18,6 +19,7 @@ doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#pattern#custom()	doge.txt	/*doge#pattern#custom()*
 doge#pattern#generate()	doge.txt	/*doge#pattern#generate()*
 doge#python#file()	doge.txt	/*doge#python#file()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
