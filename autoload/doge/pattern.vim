@@ -227,9 +227,12 @@ function! doge#pattern#custom(name) abort
     let l:path = stdpath('config')
   endif
   if !empty(l:path)
-    if !exists(l:path . '/after/ftplugin/')
-      call mkdir(l:path . '/after/ftplugin/', 'p')
-    endif
+    try
+      if !exists(l:path . '/after/ftplugin/')
+        call mkdir(l:path . '/after/ftplugin/', 'p')
+      endif
+      catch /^Vim\%((\a\+)\)\=:E739/
+    endtry
     let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
   endif
   if filereadable(l:path)
