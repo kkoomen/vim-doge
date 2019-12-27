@@ -214,7 +214,7 @@ function! doge#pattern#custom(name) abort
     let l:name = a:name
   endif
 
-  " Get the path for the after/ftplugin file and open it if existing
+  " Get the path for the after/ftplugin/ file and open it if it exists,
   " otherwise create a new file with an appropriate path.
   let l:path = ''
   for l:p in ['~/.vim', '~/vimfiles']
