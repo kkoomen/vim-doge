@@ -235,6 +235,7 @@ function! doge#pattern#custom(name) abort
   if filereadable(l:path)
     let l:cmd = &showtabline ? 'tabedit' : 'split'
     call execute(l:cmd . fnameescape(l:path), 'silent!')
+    return 1
   elseif bufexists(l:path)
     call execute('drop ' . fnameescape(l:path), 'silent!')
   else
@@ -263,7 +264,7 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, '" Set the new doc standard as default.')
   call add(l:doc, "let b:doge_doc_standard = '" . l:name . "'")
   call add(l:doc, '')
-  call add(l:doc, '" Do not overwrite an existing doc standard.')
+  call add(l:doc, '" Ensure we do not overwrite an existing doc standard.')
   call add(l:doc, "if !has_key(b:doge_patterns, '" . l:name . "')")
   call add(l:doc, "let b:doge_patterns['" . l:name . "'] = [")
   call add(l:doc, "\\  {")
@@ -289,7 +290,7 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, 'endif')
   call setreg('"', l:doc)
   1
-  normal! ""P'[=']Gdipgg
+  call execute("normal! \"\"P'[=']Gdipgg", 'silent!')
   call execute('w', 'silent!')
 endfunction
 
