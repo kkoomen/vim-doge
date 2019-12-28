@@ -140,7 +140,7 @@ if [ $# -ne 0 ]; then
   # Do not run any other tools when targeting specific tests.
   run_linter=0
 else
-  tests="test/*.vader test/options/*.vader test/filetypes/*/*.vader"
+  tests="test/*.vader test/commands/*.vader test/options/*.vader test/filetypes/*/*.vader"
 fi
 
 # Delete .swp files in the test directory, which cause Vim 8 to hang.

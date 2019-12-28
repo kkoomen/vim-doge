@@ -28,7 +28,7 @@ function! doge#helpers#count(word, ...) abort
   endif
 
   try
-    let l:cnt = execute(l:range . 's/' . a:word . '//gn')
+    let l:cnt = execute(l:range . 's/' . a:word . '//gn', 'silent!')
   catch /^Vim\%((\a\+)\)\=:E486/
     return 0
   endtry

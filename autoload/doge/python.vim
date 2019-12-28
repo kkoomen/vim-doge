@@ -15,8 +15,8 @@ function! doge#python#file(path, args) abort
     echoerr 'Vim is not compiled with Python3 or Python.'
   endif
 
-  execute(l:python . ' ' . 'sys.argv = [' . join(map(copy(a:args), { key, value -> '"' . value . '"' }), ', ') . ']')
-  return doge#helpers#trim(execute(l:pyfile . ' ' . a:path))
+  call execute(l:python . ' ' . 'sys.argv = [' . join(map(copy(a:args), { key, value -> '"' . value . '"' }), ', ') . ']', 'silent!')
+  return doge#helpers#trim(execute(l:pyfile . ' ' . a:path, 'silent!'))
 endfunction
 
 let &cpoptions = s:save_cpo

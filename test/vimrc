@@ -60,3 +60,7 @@ execute 'set encoding=utf-8'
 if !has('patch-8.1.201')
   silent! python3 1
 endif
+
+if !exists(expand('~/.vim/'))
+  call mkdir(expand('~/.vim/'), 'p')
+endif

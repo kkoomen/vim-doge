@@ -73,10 +73,24 @@ interactive mode is active. For example: removing 'i' would allow you to use
 ==============================================================================
 COMMANDS                                                       *doge-commands*
 
-:DogeGenerate [N] [doc_standard]                               *:DogeGenerate*
-  Command to generate documentation. It accepts a count or a string as
-  argument, and it can complete the available doc standards for the current
-  buffer.
+:DogeGenerate {doc_standard}                                   *:DogeGenerate*
+  Command to generate documentation. The `{doc_standard}` accepts a count or a
+  string as argument, and it can complete the available doc standards for the
+  current buffer.
+
+  The numeric value should point to an index key from the
+  `b:doge_supported_doc_standards` variable.
+
+  The string value should point to a doc standard name listed in the
+  `b:doge_supported_doc_standards` variable.
+
+:DogeCreateDocStandard {doc_standard}                 *:DogeCreateDocStandard*
+  Command to generate a custom doc standard template. The `{doc_standard}` is
+  a mandatory argument which is the name of the new doc standard. If it
+  exists, the existing doc standard with the same name will be used as base
+  for the custom template.
+
+  It can complete the available doc standards for the current buffer.
 
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
@@ -170,6 +184,10 @@ doge#indent#add({lnum}, {text})                            *doge#indent#add()*
 
 doge#pattern#generate({pattern})                     *doge#pattern#generate()*
   Generates a comment based on a given pattern.
+
+doge#pattern#custom({name})                            *doge#pattern#custom()*
+  Generates a template for a custom doc standard, and places it in
+  after/ftplugin/{&ft}.vim
 
 doge#python#file({path}, {args})                          *doge#python#file()*
   Run a python file using the py[3]file command.
