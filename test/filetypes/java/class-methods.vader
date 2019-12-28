@@ -61,13 +61,14 @@ Given java (methods with parameters):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :11\<CR>
+  :12\<CR>
   \<C-d>
 
 Expect java (generated comments with @param and @return tags):
   class Test {
     /**
      * [TODO:description]
+     *
      * @param p1 [TODO:description]
      * @param p2 [TODO:description]
      * @param params [TODO:description]
@@ -77,6 +78,7 @@ Expect java (generated comments with @param and @return tags):
 
     /**
      * [TODO:description]
+     *
      * @param p1 [TODO:description]
      * @param p2 [TODO:description]
      * @param params [TODO:description]
@@ -102,6 +104,7 @@ Expect java (generated comments with @param and @return tags inserted above the 
   class Test {
     /**
      * [TODO:description]
+     *
      * @param p1 [TODO:description]
      * @param p2 [TODO:description]
      */

@@ -9,54 +9,53 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 
-let b:doge_supported_doc_standards = ['javadoc']
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_java', b:doge_supported_doc_standards[0])
-if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
-  echoerr printf(
-  \ '[DoGe] %s is not a valid Java doc standard, available doc standard are: %s',
-  \ b:doge_doc_standard,
-  \ join(b:doge_supported_doc_standards, ', ')
-  \ )
-endif
-
-let b:doge_patterns = []
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['javadoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('java')
+let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
-" Matches class methods.
+"
+" Define our base for every pattern.
+"
+" ==============================================================================
+let s:pattern_base = {
+\  'parameters': {
+\    'format': '@param {name} !description',
+\  },
+\  'insert': 'above',
+\}
+
 " ==============================================================================
 "
-" Matches the following scenarios:
+" Define the pattern types.
 "
-"   private void setChildrenRecursively(ElementDto childDto, int childId) {}
-"
-"   private List<ElementDto> createSortedList(Map<Integer, ElementDto> map, int type) {}
-"
-"   void foo(Map<String, Object> parameters) {}
-"
-"   void MyParameterizedFunction(String p1, int p2, Boolean ...params) {}
-call add(b:doge_patterns, {
+" ==============================================================================
+let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\%([[:alnum:]_]\+\)(\(.\{-}\))\s*[;{]',
-\  'match_group_names': ['returnType', 'parameters'],
+\  'tokens': ['returnType', 'parameters'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
-\    'match_group_names': ['type', 'name'],
-\    'format': {
-\      'javadoc': '@param {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'javadoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return !description)%',
-\        ' */',
-\      ],
-\    },
+\    'tokens': ['type', 'name'],
 \  },
 \})
+
+" ==============================================================================
+"
+" Define the doc standards.
+"
+" ==============================================================================
+call doge#buffer#register_doc_standard('javadoc', [
+\  doge#helpers#deepextend(s:class_method_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      '%(parameters| *)%',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return !description)%',
+\      ' */',
+\    ],
+\  }),
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

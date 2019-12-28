@@ -152,80 +152,77 @@ noticed the buffer-local variable patterns. Below will be some explanation
 about the dictionary structure per pattern.
 
 The generation is done using the patterns as the following:
-- Start by matching the given pattern.
-- Extract all the tokens using the `match_group_names`.
-  - Extract the parameter tokens based on the `parameter` token.
+- Start by matching the given pattern using the `match` key.
+- Extract all the tokens using the `tokens` key.
+  - Extract the parameter tokens based on the `parameters` token.
 - Render the tokens in the `template`.
 
 ```vim
 " Example taken from ftplugin/php.vim
 
-call add(b:doge_patterns, {
-   " The 'match' key is the main pattern to detect the actual expression.
-   " The example below will match: 'public static function myFunc($p1 = NULL) {'
-   " NOTE: The 'match' key should always start with \m to force magic notation
-   " and start with ^ to make sure it's not matching in middle.
-\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
+let b:doge_patterns = {
+\  'phpdoc': [
+\    {
+        " The 'match' key is the main pattern to detect the actual expression.
+        " The example below will match: 'public static function myFunc($p1 = NULL) {'
+        " NOTE: The 'match' key should always start with \m to force magic notation
+        " and start with ^ to make sure it's not matching in middle.
+\       'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\([^(]\+\)\s*(\(.\{-}\))\s*{',
 
-   " The 'match_group_names' are names for the captured groups where the index
-   " is equivalent to the captured groups' index. These names become tokens
-   " that can be used in the 'template' key.
-\  'match_group_names': ['funcName', 'parameters'],
+        " The 'tokens' are names for the captured groups where the index
+        " is equivalent to the captured groups' index. These names become tokens
+        " that can be used in the 'template' key.
+\       'tokens': ['funcName', 'parameters'],
 
-   " The 'parameters' key is an optional key, since not every expression has a
-   " parameter list.
-\  'parameters': {
-     " The 'match' key is a pattern describing a single parameter. DoGe will
-     " strip matches until none are found. For example:
-     " PHP is using the parameter syntax pattern:
-     "   '<param-type> $<param-name> = <param-default-value>'.
-     " So when this ^ is your pattern, you should write the regex for that.
-     " NOTE: The 'match' key should start with \m to force magic notation and
-     " should not contain ^ at the beginning or $ at the end.
-\    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
+        " The 'parameters' key is an optional key, since not every expression has a
+        " parameter list.
+\       'parameters': {
+          " The 'match' key is a pattern describing a single parameter. DoGe will
+          " strip matches until none are found. For example:
+          " PHP is using the parameter syntax pattern:
+          "   '<param-type> $<param-name> = <param-default-value>'.
+          " So when this ^ is your pattern, you should write the regex for that.
+          " NOTE: The 'match' key should start with \m to force magic notation and
+          " should not contain ^ at the beginning or $ at the end.
+\         'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\($[[:alnum:]_]\+\)\%(\s*=\s*\%([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
 
-     " The 'match_group_names' are names for the captured groups where the index
-     " is equivalent to the captured groups' index. These names become tokens
-     " that can be used in the 'format' key.
-\    'match_group_names': ['type', 'name'],
+          " The 'tokens' are names for the captured groups where the index
+          " is equivalent to the captured groups' index. These names become tokens
+          " that can be used in the 'format' key.
+\         'tokens': ['type', 'name'],
 
-     " The 'format' key describes how the format of each parameter should be.
-     " It contains a format for each supported doc standard.
-     " Use a list for multi-line.
-     " Use a tab '\t' to indent properly based on the user setting.
-\    'format': {
-\      'phpdoc': '@param {type|!type} {name} !description',
-\    },
-\  },
+          " The 'format' key describes how the format of each parameter should be.
+          " It contains a format for each supported doc standard.
+          " Use a list for multi-line.
+          " Use a tab '\t' to indent properly based on the user setting.
+\         'format': '@param {type|!type} {name} !description',
+\       },
 
-   " The 'comment' key determines how to generate the final comment.
-\  'comment': {
+        " The 'insert' key may contain the value 'above' or 'below'.
+        " Examples:
+        " - PHP comments will be inserted above the function expression.
+        " - Python comments will be inserted below the function expression.
+\       'insert': 'above',
 
-     " The 'insert' key may contain the value 'above' or 'below'.
-     " Examples:
-     " - PHP comments will be inserted above the function expression.
-     " - Python comments will be inserted below the function expression.
-\    'insert': 'above',
-
-     " The 'template' key is a dictonary containing a list for each doc standard.
-     " Each key in the template list is a new line when rendering the comment.
-\    'template': {
-\      'phpdoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parameters| *)%',
-\        '%(parameters| * {parameters})%',
-\        ' */',
-\      ],
-\    },
-\  },
-\})
+        " The 'template' key is a new line when rendering the comment.
+        " All the tokens (except the `parameters` tokens) can be used here.
+\       'template': {
+\         '/**',
+\         ' * !description',
+\         '%(parameters| *)%',
+\         '%(parameters| * {parameters})%',
+\         ' */',
+\       },
+\     }
+\  ],
+\}
 ```
 
 ### Additional token formatting
 
 Additional formatting is available when using tokens in the `template` or
-`parameters.format` keys.
+`parameters.format` keys. The following subsections will elaborate more on the
+types of token formatting that are available.
 
 #### Creating TODO placeholders
 
@@ -236,11 +233,10 @@ automatically be searched for when jumping forward or backward.
 Inside a DoGe pattern you can use the token format `!<context>` which will be
 replaced with `[TODO:<context>]`. To give the user a clear understanding what to
 add at this TODO it's recommended to add a context. You may use the following in
-a context: `[a-zA-Z0-9\s]`, although it is recommended to keep it _very_ short.
+a context: `[[:alpha:]-]`.
 
-For example: some Python doc
-standards require a summary at the start of the doc block followed by a
-description (separated by a whiteline).
+For example: some Python doc standards require a summary at the start of the doc
+block followed by a description (separated by a whiteline).
 
 If you see this:
 ```python
@@ -296,23 +292,23 @@ Example:
 ```vim
 " Example taken from ftplugin/python.vim
 
-call add(b:doge_patterns, {
-\  " ...
-\  'comment': {
-\    'insert': 'below',
-\    'template': {
-\      'numpy': [
-\        '"""',
-\        '!description',
-\        '%(parameters|)%',              " Render an empty line if '{parameters}' is not empty
-\        '%(parameters|Parameters)%',    " Renders 'Parameters' if '{parameters}' is not empty
-\        '%(parameters|----------)%',    " Renders '----------' if '{parameters}' is not empty
-\        '%(parameters|{parameters})%',  " Renders '{parameters}' if '{parameters}' is not empty
-\        '"""',
+let b:doge_patterns = {
+\  'numpy': [
+\    {
+       " ...
+\      'insert': 'below',
+\      'template': [
+\          '"""',
+\          '!description',
+\          '%(parameters|)%',              " Render an empty line if '{parameters}' is not empty
+\          '%(parameters|Parameters)%',    " Renders 'Parameters' if '{parameters}' is not empty
+\          '%(parameters|----------)%',    " Renders '----------' if '{parameters}' is not empty
+\          '%(parameters|{parameters})%',  " Renders '{parameters}' if '{parameters}' is not empty
+\          '"""',
 \      ],
-\    }
-\  },
-\})
+\    },
+\  ],
+\}
 ```
 
 ## Writing proper regex
@@ -371,12 +367,12 @@ all the necessary tokens. For example: For C and C++ there is the `libclang.py`
 generator which is parsing the current file and will print a json format of the
 necessary tokens.
 
-Generators should output json format, since this can be decoded by Vim easily.
+Generators should output json format, since this can be decoded by Vim.
 
 It is also suggested to use Python because these scripts can be shipped easily
 within the project. Think wisely if you want to suggest a _differrent_ language.
 
 Generators can be used easily. The format is the same as the regex format, but
-the `match` and `match_group_names` can be replaced with a `generator` key.
+the `match` and `tokens` can be replaced with a `generator` key.
 
 For an example usage, checkout the [C++](https://github.com/kkoomen/vim-doge/blob/master/ftplugin/cpp.vim) implementation.

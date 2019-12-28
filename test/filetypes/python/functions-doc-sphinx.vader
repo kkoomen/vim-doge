@@ -3,7 +3,7 @@
 # ==============================================================================
 Given python(function without parameters without return type where b:doge_doc_standard='sphinx'):
   def myFunc():
-      pass
+    pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
@@ -11,17 +11,17 @@ Do (trigger doge):
 
 Expect python (generated comment with nothing but the text 'TODO'):
   def myFunc():
-      """
-      [TODO:description]
+    """
+    [TODO:description]
 
-      """
-      pass
+    """
+    pass
 
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters without type hints without return type where b:doge_doc_standard='sphinx'):
   def myFunc(p1, p2, p3 = ''):
-      pass
+    pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
@@ -29,23 +29,23 @@ Do (trigger doge):
 
 Expect python (generated comment without type hints with defaults and optional):
   def myFunc(p1, p2, p3 = ''):
-      """
-      [TODO:description]
+    """
+    [TODO:description]
 
-      :param p1: [TODO:description]
-      :type p1: [TODO:type]
-      :param p2: [TODO:description]
-      :type p2: [TODO:type]
-      :param p3: [TODO:description], defaults to ''
-      :type p3: [TODO:type], optional
-      """
-      pass
+    :param p1: [TODO:description]
+    :type p1: [TODO:type]
+    :param p2: [TODO:description]
+    :type p2: [TODO:type]
+    :param p3: [TODO:description], defaults to ''
+    :type p3: [TODO:type], optional
+    """
+    pass
 
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters with type hints without return type where b:doge_doc_standard='sphinx'):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
-      pass
+    pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
@@ -53,23 +53,23 @@ Do (trigger doge):
 
 Expect python (generated comment with type hints, defaults and optional):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
-      """
-      [TODO:description]
+    """
+    [TODO:description]
 
-      :param p1: [TODO:description]
-      :type p1: [TODO:type]
-      :param p2: [TODO:description]
-      :type p2: Callable[[int], None]
-      :param p3: [TODO:description], defaults to []
-      :type p3: Callable[[int, Exception], None], optional
-      """
-      pass
+    :param p1: [TODO:description]
+    :type p1: [TODO:type]
+    :param p2: [TODO:description]
+    :type p2: Callable[[int], None]
+    :param p3: [TODO:description], defaults to []
+    :type p3: Callable[[int, Exception], None], optional
+    """
+    pass
 
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters with type hints with return type where b:doge_doc_standard='sphinx'):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
-      pass
+    pass
 
 Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
@@ -77,16 +77,16 @@ Do (trigger doge):
 
 Expect python (generated comment with :param, :type, :return and :rtype tags):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
-      """
-      [TODO:description]
+    """
+    [TODO:description]
 
-      :param p1: [TODO:description]
-      :type p1: [TODO:type]
-      :param p2: [TODO:description]
-      :type p2: Callable[[int], None]
-      :param p3: [TODO:description], defaults to []
-      :type p3: Callable[[int, Exception], None], optional
-      :return: [TODO:description]
-      :rtype: Sequence[T]
-      """
-      pass
+    :param p1: [TODO:description]
+    :type p1: [TODO:type]
+    :param p2: [TODO:description]
+    :type p2: Callable[[int], None]
+    :param p3: [TODO:description], defaults to []
+    :type p3: Callable[[int, Exception], None], optional
+    :return: [TODO:description]
+    :rtype: Sequence[T]
+    """
+    pass

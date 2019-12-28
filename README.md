@@ -44,7 +44,8 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
     + [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
-    + [`:DogeGenerate`](#dogegenerate)
+    + [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
+    + [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [FAQ](#faq)
     + [Using C / C++](#using-c--c)
       - [Prerequisites](#prerequisites)
@@ -200,10 +201,27 @@ autocompletion in insert mode.
 
 # Commands
 
-### `:DogeGenerate [N] [doc_standard]`
+### `:DogeGenerate {doc_standard}`
 
-Command to generate documentation. It accepts a count or a string as argument,
-and it can complete the available doc standards for the current buffer.
+Command to generate documentation. The `{doc_standard}` accepts a count or a
+string as argument, and it can complete the available doc standards for the
+current buffer.
+
+The numeric value should point to an index key from the
+`b:doge_supported_doc_standards` variable.
+
+The string value should point to a doc standard name listed in the
+`b:doge_supported_doc_standards` variable.
+
+### `:DogeCreateDocStandard {doc_standard}`
+
+Command to generate a custom doc standard template. The `{doc_standard}` is a
+mandatory argument which is the name of the new doc standard. If it exists, the
+existing doc standard with the same name will be used as base for the custom
+template. It can complete the available doc standards for the current buffer.
+
+For more information on how to create custom doc standards you can read
+[Writing your first pattern](./CONTRIBUTING.md#writing-your-first-pattern).
 
 # FAQ
 

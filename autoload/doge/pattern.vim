@@ -6,7 +6,7 @@ let s:comment_placeholder = doge#helpers#placeholder()
 ""
 " @public
 " Generates a comment based on a given pattern.
-function! doge#generate#pattern(pattern) abort
+function! doge#pattern#generate(pattern) abort
   " Assuming multiline function expressions won't be longer than 15 lines.
   let l:lines_raw = getline('.', line('.') + 15)
   let l:lines = map(l:lines_raw, { key, line ->
@@ -44,7 +44,7 @@ function! doge#generate#pattern(pattern) abort
     let l:tokens = get(doge#token#extract(
           \ l:curr_line,
           \ a:pattern['match'],
-          \ a:pattern['match_group_names']
+          \ a:pattern['tokens']
           \ ), 0, {})
   endif
 
@@ -66,7 +66,7 @@ function! doge#generate#pattern(pattern) abort
     let l:param_tokens = l:use_generator ? l:params : doge#token#extract(
           \ l:params,
           \ l:params_dict['match'],
-          \ l:params_dict['match_group_names']
+          \ l:params_dict['tokens']
           \ )
 
     " Preprocess the extracted parameter tokens.
@@ -77,12 +77,9 @@ function! doge#generate#pattern(pattern) abort
     endtry
 
     for l:param_token in l:param_tokens
-      let l:format_doc_standard = has_key(l:params_dict['format'], b:doge_doc_standard)
-            \ ? l:params_dict['format'][b:doge_doc_standard]
-            \ : l:params_dict['format'][b:doge_supported_doc_standards[0]]
       let l:format = doge#token#replace(
             \ l:param_token,
-            \ l:format_doc_standard
+            \ l:params_dict['format']
             \ )
       if type(l:format) == v:t_list
         call add(l:formatted_params, join(l:format, "\n"))
@@ -96,10 +93,7 @@ function! doge#generate#pattern(pattern) abort
   " Create the comment by replacing the tokens in the template with their
   " corresponding values.
   let l:comment = []
-  let l:comment_template_doc_standard = has_key(a:pattern['comment']['template'], b:doge_doc_standard)
-        \ ? a:pattern['comment']['template'][b:doge_doc_standard]
-        \ : a:pattern['comment']['template'][b:doge_supported_doc_standards[0]]
-  for l:line in l:comment_template_doc_standard
+  for l:line in a:pattern['template']
     " If empty lines are present, just append them to ensure a whiteline is
     " inserted rather then completely removed. This allows us to insert some
     " whitelines in the comment template.
@@ -116,7 +110,7 @@ function! doge#generate#pattern(pattern) abort
     endfor
   endfor
 
-  if a:pattern['comment']['insert'] ==# 'below'
+  if a:pattern['insert'] ==# 'below'
     let l:comment_lnum_insert_position = line('.')
     let l:comment_lnum_inherited_indent = line('.') + 1
   else
@@ -132,7 +126,7 @@ function! doge#generate#pattern(pattern) abort
     " Update the inherited_indent variable based on the new insert position.
     " For now we only have to do this for languages like Python where we insert
     " below the declaration.
-    if a:pattern['comment']['insert'] ==# 'below'
+    if a:pattern['insert'] ==# 'below'
       let l:comment_lnum_inherited_indent = l:comment_lnum_insert_position + 1
     endif
   catch /^Vim\%((\a\+)\)\=:E117/
@@ -149,7 +143,7 @@ function! doge#generate#pattern(pattern) abort
 
   " Enable interactive mode.
   if g:doge_comment_interactive == v:true
-    if a:pattern['comment']['insert'] ==# 'below'
+    if a:pattern['insert'] ==# 'below'
       let l:todo_match = search(s:comment_placeholder, 'nW', l:comment_lnum_insert_position + len(l:comment))
     else
       let l:todo_match = search(s:comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
@@ -169,13 +163,138 @@ function! doge#generate#pattern(pattern) abort
         " Go to the top of the comment and select the first TODO.
         exe l:comment_lnum_insert_position + 1
         call search(s:comment_placeholder, 'W')
-        call execute("normal! gno\<C-g>")
+        call execute("normal! gno\<C-g>", 'silent!')
       endif
     endif
   endif
 
   " Return 1 to indicate we have succesfully inserted the comment.
   return 1
+endfunction
+
+""
+" @public
+" Generates a template for a custom doc standard, and places it in
+" after/ftplugin/{&ft}.vim
+function! doge#pattern#custom(name) abort
+  if &filetype ==# ''
+    echo '[DoGe] A filetype is required in order to create a custom pattern.'
+    return 0
+  endif
+
+  let l:this_ft = &filetype
+
+  " Maybe there aren't available doc standards for this filetype.
+  if !exists('b:doge_patterns')
+    let b:doge_patterns = {}
+    let l:unsupported_filetype = 1
+    let l:comment = substitute(escape(&commentstring, '\/*.~$'), '%s', '.\\{-}', '')
+    let l:comment = string(printf('\m%s$', l:comment))
+  else
+    let l:unsupported_filetype = 0
+  endif
+
+  " If the given name is an existing doc standard, use it as base for our
+  " template, otherwise create an empty one.
+  if has_key(b:doge_patterns, a:name)
+    let l:template = deepcopy(b:doge_patterns[a:name][0])
+    let l:name = a:name . '_custom'
+  else
+    let l:template = {
+          \   'match': '',
+          \   'tokens': ['parameters'],
+          \   'template': [],
+          \   'insert': 'above',
+          \   'parameters': {
+          \     'match': '',
+          \     'tokens': '',
+          \     'format': '',
+          \   },
+          \ }
+    let l:name = a:name
+  endif
+
+  " Get the path for the after/ftplugin/ file and open it if it exists,
+  " otherwise create a new file with an appropriate path.
+  let l:path = ''
+  for l:p in ['~/.vim', '~/vimfiles']
+    if isdirectory(expand(l:p))
+      let l:path = expand(l:p)
+      break
+    endif
+  endfor
+  if has('nvim') && empty(l:path)
+    let l:path = stdpath('config')
+  endif
+  if !empty(l:path)
+    try
+      if !exists(l:path . '/after/ftplugin/')
+        call mkdir(l:path . '/after/ftplugin/', 'p')
+      endif
+      catch /^Vim\%((\a\+)\)\=:E739/
+    endtry
+    let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
+  endif
+  if filereadable(l:path)
+    let l:cmd = &showtabline ? 'tabedit' : 'split'
+    call execute(l:cmd . fnameescape(l:path), 'silent!')
+    return 1
+  elseif bufexists(l:path)
+    call execute('drop ' . fnameescape(l:path), 'silent!')
+  else
+    call execute(&showtabline ? 'tabnew' : 'new', 'silent!')
+    setfiletype vim
+    if !empty(l:path)
+      call execute('file ' . fnameescape(l:path), 'silent!')
+    endif
+  endif
+
+  " Generate the template and paste it at the top of the file.
+  let l:doc = []
+  call add(l:doc, '" Preserve existing doge settings.')
+  call add(l:doc, "let b:doge_patterns = get(b:, 'doge_patterns', {})")
+  call add(l:doc, "let b:doge_supported_doc_standards = get(b:, 'doge_supported_doc_standards', [])")
+  call add(l:doc, "if index(b:doge_supported_doc_standards, '" . l:name . "') < 0")
+  call add(l:doc, "call add(b:doge_supported_doc_standards, '" . l:name . "')")
+  call add(l:doc, 'endif')
+  call add(l:doc, '')
+  if l:unsupported_filetype
+    call add(l:doc, '" DoGe uses these patterns to identify comments, change if needed.')
+    call add(l:doc, 'let b:doge_pattern_single_line_comment = ' . l:comment)
+    call add(l:doc, 'let b:doge_pattern_multi_line_comment = ' . l:comment)
+    call add(l:doc, '')
+  endif
+  call add(l:doc, '" Set the new doc standard as default.')
+  call add(l:doc, "let b:doge_doc_standard = '" . l:name . "'")
+  call add(l:doc, '')
+  call add(l:doc, '" Ensure we do not overwrite an existing doc standard.')
+  call add(l:doc, "if !has_key(b:doge_patterns, '" . l:name . "')")
+  call add(l:doc, "let b:doge_patterns['" . l:name . "'] = [")
+  call add(l:doc, "\\  {")
+  call add(l:doc, "\\    'match': " . string(l:template.match) . ',')
+  call add(l:doc, "\\    'tokens': " . string(l:template.tokens) . ',')
+  for l:key in l:template.tokens
+    if has_key(l:template, l:key)
+      call add(l:doc, "\\    '" . l:key . "': {")
+      call add(l:doc, "\\      'match': " . string(l:template[l:key].match) . ',')
+      call add(l:doc, "\\      'tokens': " . string(l:template[l:key].tokens) . ',')
+      call add(l:doc, "\\      'format': " . string(l:template[l:key].format) . ',')
+      call add(l:doc, '\    },')
+    endif
+  endfor
+  call add(l:doc, "\\    'insert': " . string(l:template.insert) . ',')
+  call add(l:doc, "\\    'template': [")
+  for l:line in l:template.template
+    call add(l:doc, '\      ' . string(l:line) . ',')
+  endfor
+  call add(l:doc, '\    ],')
+  call add(l:doc, '\  },')
+  call add(l:doc, '\]')
+  call add(l:doc, 'endif')
+  call setreg('"', l:doc)
+  1
+  call execute("normal! \"\"P'[=']Gdipgg", 'silent!')
+  call execute('w', 'silent!')
 endfunction
 
 let &cpoptions = s:save_cpo

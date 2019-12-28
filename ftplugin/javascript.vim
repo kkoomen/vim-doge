@@ -9,227 +9,172 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 
-let b:doge_supported_doc_standards = ['jsdoc']
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_javascript', b:doge_supported_doc_standards[0])
-if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
-  echoerr printf(
-  \ '[DoGe] %s is not a valid JavaScript doc standard, available doc standard are: %s',
-  \ b:doge_doc_standard,
-  \ join(b:doge_supported_doc_standards, ', ')
-  \ )
-endif
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['jsdoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('javascript')
+let b:doge_patterns = doge#buffer#get_patterns()
 
-let b:doge_patterns = []
-
-" Matches the following pattern:
+" ==============================================================================
+"
+" Define our base for every pattern.
+"
+" ==============================================================================
+" The parameters.match describes the following pattern:
 "   <param-access> <param-name>: <param-type> = <param-default-value>
-let s:parameters_match_pattern = '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?'
+" ==============================================================================
+let s:pattern_base = {
+\  'parameters': {
+\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'tokens': ['name', 'type'],
+\    'format': '@param {{type|!type}} {name} - !description',
+\  },
+\  'insert': 'above',
+\}
 
 " ==============================================================================
+"
+" Define the pattern types.
+"
+" ==============================================================================
+
+" ------------------------------------------------------------------------------
 " Matches fat-arrow / functions inside objects.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   myKey: function myRealFunction(p1, p2) {}
-"
-"   myKey: async function myRealFunction(p1, p2) {}
-"
-"   myKey: (p1, p2) => {}
-"
-"   myKey: async (p1, p2) => {}
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" myKey: function myRealFunction(p1, p2) {}
+" myKey: async function myRealFunction(p1, p2) {}
+" myKey: (p1, p2) => {}
+" myKey: async (p1, p2) => {}
+" ------------------------------------------------------------------------------
+let s:object_functions_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^[[:punct:]]\?\([[:alnum:]_-]\+\)[[:punct:]]\?\s*:\s*\(async\)\?\s*\%(function\)\?\s*\%([[:alnum:]_]\+\)\?(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\%(\s*=>\s*\)\?\s*[({]',
-\  'match_group_names': ['funcName', 'async', 'parameters', 'returnType'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} - !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '/**',
-\        ' * !description',
-\        ' *',
-\        '%(async| * @{async})%',
-\        ' * @function {funcName|}',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType|!type}} !description)%',
-\        ' */',
-\      ],
-\    },
-\  },
+\  'tokens': ['funcName', 'async', 'parameters', 'returnType'],
 \})
 
-" ==============================================================================
+" ------------------------------------------------------------------------------
 " Matches class declarations.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   export class Child {}
-"
-"   class Child extends Parent {}
-"
-"   class Child implements CustomInterfaceName {}
-"
-"   export class Child extends Parent implements CustomInterfaceName {}
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" export class Child {}
+" class Child extends Parent {}
+" class Child implements CustomInterfaceName {}
+" export class Child extends Parent implements CustomInterfaceName {}
+" ------------------------------------------------------------------------------
+let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$.]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$.]\+\)\)\?\s*{',
-\  'match_group_names': ['parentClassName', 'interfaceName'],
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '/**',
-\        ' * !description',
-\        '%(parentClassName| * @extends {parentClassName})%',
-\        '%(interfaceName| * @implements {interfaceName})%',
-\        ' */',
-\      ],
-\    },
-\  },
+\  'tokens': ['parentClassName', 'interfaceName'],
 \})
+unlet s:class_pattern['parameters']
 
-""
-" ==============================================================================
+" ------------------------------------------------------------------------------
 " Matches regular and typed functions with default parameters.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   function add(one: any, two: any = 'default'): number {}
-
-"   export function configureStore(history: History, initialState: object): Store<AppState> {}
-"
-"   function configureStore(history: History, initialState: object): Store {}
-"
-"   function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {}
-"
-"   function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" function add(one: any, two: any = 'default'): number {}
+" export function configureStore(history: History, initialState: object): Store<AppState> {}
+" function configureStore(history: History, initialState: object): Store {}
+" function rollDice(): 1 | 2 | 3 | 4 | 5 | 6 {}
+" function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
+" ------------------------------------------------------------------------------
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\%(\%(export\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-\  'match_group_names': ['static', 'async', 'parameters', 'returnType'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} - !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '/**',
-\        ' * !description',
-\        ' *',
-\        '%(static| * @static)%',
-\        '%(async| * @async)%',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType|!type}} !description)%',
-\        ' */',
-\      ],
-\    },
-\  },
+\  'tokens': ['static', 'async', 'parameters', 'returnType'],
 \})
 
-" ==============================================================================
+" ------------------------------------------------------------------------------
 " Matches prototype functions.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()) => {};
-"
-"   Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
-"
-"   Person.prototype.greet = function*(p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
-call add(b:doge_patterns, {
+" ------------------------------------------------------------------------------
+" Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()) => {};
+" Person.prototype.greet = function (p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
+" Person.prototype.greet = function*(p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
+" ------------------------------------------------------------------------------
+let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s\+\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'match_group_names': ['className', 'funcName', 'async', 'parameters', 'returnType'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} - !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '/**',
-\        ' * !description',
-\        ' *',
-\        '%(async| * @async)%',
-\        ' * @function {className}#{funcName}',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType|!type}} !description)%',
-\        ' */',
-\      ],
-\    },
-\  },
+\  'tokens': ['className', 'funcName', 'async', 'parameters', 'returnType'],
+\})
+
+" ------------------------------------------------------------------------------
+" Matches fat-arrow functions.
+" ------------------------------------------------------------------------------
+" var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
+" var myFunc = function*($p1 = 'value', p2 = [], p3, p4) {}
+" var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
+" var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
+" (p1: array = []) => (p2: string) => { console.log(5); }
+" (p1: array = []) => (p2: string) => { console.log(5); }
+" static myMethod({ b: number }): number {}
+" static async myMethod({ b: number }): number {}
+" const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
+" const foo = bar => baz
+" export const foo = bar => baz
+" (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
+" ------------------------------------------------------------------------------
+let s:fat_arrow_function_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'match': '\m^\%(export\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
+\  'tokens': ['static', 'funcName', 'static', 'async',  'parameters', 'returnType'],
 \})
 
 " ==============================================================================
-" Matches fat-arrow functions.
+"
+" Define the doc standards.
+"
 " ==============================================================================
-"
-"   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
-"
-"   var myFunc = function*($p1 = 'value', p2 = [], p3, p4) {}
-"
-"   var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
-"
-"   var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
-"
-"   (p1: array = []) => (p2: string) => { console.log(5); }
-"
-"   (p1: array = []) => (p2: string) => { console.log(5); }
-"
-"   static myMethod({ b: number }): number {}
-"
-"   static async myMethod({ b: number }): number {}
-"
-"   const user = (p1 = 'default') => (subp1, subp2 = 'default') => 5;
-"
-"   const foo = bar => baz
-"
-"   export const foo = bar => baz
-"
-"   (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
-call add(b:doge_patterns, {
-\  'match': '\m^\%(export\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
-\  'match_group_names': ['static', 'funcName', 'static', 'async',  'parameters', 'returnType'],
-\  'parameters': {
-\    'match': s:parameters_match_pattern,
-\    'match_group_names': ['name', 'type'],
-\    'format': {
-\      'jsdoc': '@param {{type|!type}} {name} - !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '/**',
-\        ' * !description',
-\        ' *',
-\        '%(static| * @static)%',
-\        '%(async| * @async)%',
-\        ' * @function {funcName|}',
-\        '%(parameters| * {parameters})%',
-\        '%(returnType| * @return {{returnType|!type}} !description)%',
-\        ' */',
-\      ],
-\    },
-\  },
-\})
+call doge#buffer#register_doc_standard('jsdoc', [
+\  doge#helpers#deepextend(s:object_functions_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      ' *',
+\      '%(async| * @{async})%',
+\      ' * @function {funcName|}',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:class_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      '%(parentClassName| * @extends {parentClassName})%',
+\      '%(interfaceName| * @implements {interfaceName})%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      ' *',
+\      '%(static| * @static)%',
+\      '%(async| * @async)%',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:prototype_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      ' *',
+\      '%(async| * @async)%',
+\      ' * @function {className}#{funcName}',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      ' */',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:fat_arrow_function_pattern, {
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      ' *',
+\      '%(static| * @static)%',
+\      '%(async| * @async)%',
+\      ' * @function {funcName|}',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      ' */',
+\    ],
+\  }),
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

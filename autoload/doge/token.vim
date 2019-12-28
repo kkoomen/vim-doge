@@ -91,7 +91,7 @@ function! s:token_replace(tokens, text) abort
   " For JSDoc we replace the type hints 'typeA | type B' with 'typeA|typeB'.
   let l:text = substitute(l:text, '\m\s*|\s*', '|', 'g')
 
-  " Empty lines will be added to the empty in the doge#generate#pattern()
+  " Empty lines will be added to the empty in the doge#pattern#generate()
   " function and to indicate it should be prevented from rendering we have to
   " add some kind of format. We use a dash '-' as an indication that it should
   " be removed.

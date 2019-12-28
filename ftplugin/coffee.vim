@@ -10,75 +10,67 @@ set cpoptions&vim
 let b:doge_pattern_single_line_comment = '\m#\@<!##\@!.\+$'
 let b:doge_pattern_multi_line_comment = '\m###.\{-}###'
 
-let b:doge_supported_doc_standards = ['jsdoc']
-let b:doge_doc_standard = get(g:, 'doge_doc_standard_coffee', b:doge_supported_doc_standards[0])
-if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
-  echoerr printf(
-  \ '[DoGe] %s is not a valid CoffeeScript doc standard, available doc standard are: %s',
-  \ b:doge_doc_standard,
-  \ join(b:doge_supported_doc_standards, ', ')
-  \ )
-endif
-
-let b:doge_patterns = []
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['jsdoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('coffee')
+let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
-" Matches prototype functions.
+"
+" Define our base for every pattern.
+"
 " ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   Person::greet = (name) ->
-call add(b:doge_patterns, {
-\  'match': '\m^\([[:alnum:]_$]\+\)::\([[:alnum:]_$]\+\)\s*=\s*[-=]>',
-\  'match_group_names': ['className', 'funcName'],
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '###',
-\        '!description',
-\        '',
-\        '@function {className}#{funcName}',
-\        '###',
-\      ],
-\    }
+let s:pattern_base = {
+\  'parameters': {
+\    'format': '@param {!type} {name} !description',
 \  },
+\  'insert': 'above',
+\}
+
+" ==============================================================================
+"
+" Define the pattern types.
+"
+" ==============================================================================
+let s:prototype_function_pattern = doge#helpers#deepextend(s:pattern_base, {
+\  'match': '\m^\([[:alnum:]_$]\+\)::\([[:alnum:]_$]\+\)\s*=\s*[-=]>',
+\  'tokens': ['className', 'funcName'],
 \})
 
-" ==============================================================================
-" Matches regular functions.
-" ==============================================================================
-"
-" Matches the following scenarios:
-"
-"   myFunc = (x) -> x * x
-"
-"   myFunc = (p1, p2, p3) ->
-call add(b:doge_patterns, {
+let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'match': '\m^\([[:alnum:]_$]\+\)\s*=\s*(\(.\{-}\))\s*[-=]>',
-\  'match_group_names': ['funcName', 'parameters'],
+\  'tokens': ['funcName', 'parameters'],
 \  'parameters': {
 \    'match': '\m\([^,]\+\)',
-\    'match_group_names': ['name'],
-\    'format': {
-\      'jsdoc': '@param {!type} {name} !description',
-\    },
-\  },
-\  'comment': {
-\    'insert': 'above',
-\    'template': {
-\      'jsdoc': [
-\        '###',
-\        '!description',
-\        '',
-\        '@function {funcName|}',
-\        '%(parameters|{parameters})%',
-\        '###',
-\      ],
-\    }
+\    'tokens': ['name'],
 \  },
 \})
+
+" ==============================================================================
+"
+" Define the doc standards.
+"
+" ==============================================================================
+call doge#buffer#register_doc_standard('jsdoc', [
+\  doge#helpers#deepextend(s:prototype_function_pattern, {
+\    'template': [
+\      '###',
+\      '!description',
+\      '',
+\      '@function {className}#{funcName}',
+\      '###',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '###',
+\      '!description',
+\      '',
+\      '@function {funcName|}',
+\      '%(parameters|{parameters})%',
+\      '###',
+\    ],
+\  }),
+\])
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -7,7 +7,15 @@ set cpoptions&vim
 "
 " arg: Either a count (0 by default) or a string (empty by default).
 function! doge#generate(arg) abort
-  let l:success = 0
+  " Immediately validate if the doc standard is allowed.
+  if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
+    echoerr printf(
+    \  '[DoGe] "%s" is not a valid %s doc standard, available doc standard are: %s',
+    \  b:doge_doc_standard,
+    \  &filetype,
+    \  join(b:doge_supported_doc_standards, ', ')
+    \)
+  endif
 
   " Store old search register.
   let s:oldsearch = @/
@@ -15,7 +23,7 @@ function! doge#generate(arg) abort
   " If the command is run with a count or a string as argument, the user is
   " requesting for a specific doc standard.
   " If no matching standards are found, or no arg (count or string) is given,
-  " just use whatever is currently set
+  " just use whatever is currently set.
   if exists('b:doge_supported_doc_standards')
     if type(a:arg) ==# type(0) && a:arg != 0
       if a:arg <= len(b:doge_supported_doc_standards)
@@ -29,16 +37,13 @@ function! doge#generate(arg) abort
   endif
 
   if exists('b:doge_patterns')
-    for l:pattern in get(b:, 'doge_patterns')
-      if doge#generate#pattern(l:pattern) == v:false
+    for l:pattern in get(b:doge_patterns, b:doge_doc_standard)
+      if doge#pattern#generate(l:pattern) == v:false
         continue
-      else
-        let l:success = v:true
       endif
-      if l:success == v:true
-        call doge#activate()
-      endif
-      return l:success
+
+      call doge#activate()
+      return 1
     endfor
   endif
 endfunction
@@ -62,8 +67,8 @@ function! doge#activate() abort
         \ g:doge_mapping_comment_jump_backward,
         \ ]
   for l:mode in g:doge_comment_jump_modes
-    execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-forward)', l:mode, l:f))
-    execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-backward)', l:mode, l:b))
+    call execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-forward)', l:mode, l:f), 'silent!')
+    call execute(printf('%smap <nowait> <silent> <buffer> %s <Plug>(doge-comment-jump-backward)', l:mode, l:b), 'silent!')
   endfor
 endfunction
 
@@ -91,8 +96,8 @@ function! doge#deactivate() abort
         \ g:doge_mapping_comment_jump_backward,
         \ ]
   for l:mode in g:doge_comment_jump_modes
-    execute(printf('%sunmap <buffer> %s', l:mode, l:f))
-    execute(printf('%sunmap <buffer> %s', l:mode, l:b))
+    call execute(printf('%sunmap <buffer> %s', l:mode, l:f), 'silent!')
+    call execute(printf('%sunmap <buffer> %s', l:mode, l:b), 'silent!')
   endfor
 endfunction
 
