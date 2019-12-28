@@ -221,8 +221,8 @@ let b:doge_patterns = {
 ### Additional token formatting
 
 Additional formatting is available when using tokens in the `template` or
-`parameters.format` keys. An example of a token format would be '!<context>'
-which is described in the next section _"Creating TODO placeholders"_.
+`parameters.format` keys. The following subsections will elaborate more on the
+types of token formatting that are available.
 
 #### Creating TODO placeholders
 
