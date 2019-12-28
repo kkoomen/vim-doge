@@ -83,14 +83,14 @@ class MyClass {
   /**
    * [TODO:description]
    *
-   * @param array $p1 [TODO:description]
+   * @param array|ListInterface $p1 [TODO:description]
    * @param \Test\Namespacing\With\A\ClassInterface $p2 [TODO:description]
    * @param int $p3 [TODO:description]
    * @param [TODO:type] $p4 [TODO:description]
    * @param [TODO:type] $p5 (optional) [TODO:description]
-   * @return [TODO:type] [TODO:description]
+   * @return ?array [TODO:description]
    */
-  public function myPublicMethod(array &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL) {
+  public function myPublicMethod(array|ListInterface &$p1, \Test\Namespacing\With\A\ClassInterface $p2, int $p3, $p4, $p5 = NULL): ?array {
     //
   }
 

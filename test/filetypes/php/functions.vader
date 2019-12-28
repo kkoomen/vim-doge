@@ -49,3 +49,53 @@ Expect php (generated comment with @param and @return tags):
   ) {
     //
   }
+
+# ==============================================================================
+# Functions with parameters with return types
+# ==============================================================================
+Given php (function with union-typed parameters with return types):
+  function myFunction(
+    array|ListInterface &$p1 /* inline comment */,
+    string $p2,
+    &$p3 = NULL,
+    \Test\Lorem\Ipsum $p4 // inline comment
+  ): object|array|null {
+    //
+  }
+
+  function myFunction2(): ?array {
+    //
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :19\<CR>
+  \<C-d>
+
+Expect php (generated comment with @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @param array|ListInterface $p1 [TODO:description]
+   * @param string $p2 [TODO:description]
+   * @param [TODO:type] $p3 (optional) [TODO:description]
+   * @param \Test\Lorem\Ipsum $p4 [TODO:description]
+   * @return object|array|null [TODO:description]
+   */
+  function myFunction(
+    array|ListInterface &$p1 /* inline comment */,
+    string $p2,
+    &$p3 = NULL,
+    \Test\Lorem\Ipsum $p4 // inline comment
+  ): object|array|null {
+    //
+  }
+
+  /**
+   * [TODO:description]
+   *
+   * @return ?array [TODO:description]
+   */
+  function myFunction2(): ?array {
+    //
+  }

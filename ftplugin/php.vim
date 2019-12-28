@@ -18,7 +18,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " ==============================================================================
 let s:pattern_base = {
 \  'parameters': {
-\    'match': '\m\%(\([[:alnum:]_\\]\+\)\s\+\)\?&\?\(\$[[:alnum:]_]\+\)\%(\s*=\s*\([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'match': '\m\%(\([?|[:alnum:]_\\]\+\)\s\+\)\?&\?\(\$[[:alnum:]_]\+\)\%(\s*=\s*\([[:alnum:]_]\+(.\{-})\|[^,]\+\)\+\)\?',
 \    'tokens': ['type', 'name', 'default'],
 \    'format': '@param {type|!type} {name}%(default| (optional))% !description',
 \  },
@@ -70,8 +70,8 @@ let s:constructor_pattern = doge#helpers#deepextend(s:pattern_base, {
 " ) {}
 " ------------------------------------------------------------------------------
 let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\%([^(]\+\)\s*(\(.\{-}\))\s*{',
-\  'tokens': ['parameters'],
+\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s\+\)*function\s*\%([^(]\+\)\s*(\(.\{-}\))\%(\s*:\s*\([?[:alnum:]_|]\+\)\)\?\s*{',
+\  'tokens': ['parameters', 'returnType'],
 \})
 
 " ==============================================================================
@@ -106,7 +106,7 @@ call doge#buffer#register_doc_standard('phpdoc', [
 \      ' * !description',
 \      ' *',
 \      '%(parameters| * {parameters})%',
-\      ' * @return !type !description',
+\      ' * @return {returnType|!type} !description',
 \      ' */',
 \    ],
 \  }),
