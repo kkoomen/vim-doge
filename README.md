@@ -37,6 +37,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
   * [Options](#options)
     + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     + [`g:doge_mapping`](#gdoge_mapping)
+    + [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
     + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
     + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
     + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
