@@ -158,6 +158,36 @@ Default: `'<Leader>d'`
 The mapping to trigger DoGe. The mapping accepts a count, to select a specific
 doc standard, if more than one is defined.
 
+### `g:doge_filetype_aliases`
+
+Default:
+```
+{
+  'javascript': [
+    'javascript.jsx',
+    'javascriptreact',
+    'javascript.tsx',
+    'typescriptreact',
+    'typescript',
+  ],
+  'java': ['groovy'],
+}
+```
+
+Set filetypes as an alias for other filetypes. The key should be the filetype
+that is defined in `ftplugin/<key>.vim`. The value must be a list of 1 or more
+filetypes that will be aliases.
+
+Example:
+```vim
+let g:doge_filetype_aliases = {
+\  'javascript': ['vue']
+\}
+```
+
+If you use the above settings and you open `myfile.vue` then it will behave like
+you're opening a javascript filetype.
+
 ### `g:doge_buffer_mappings`
 
 Default: `1`

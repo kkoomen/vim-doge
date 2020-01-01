@@ -13,7 +13,7 @@ function! doge#generate(arg) abort
     \  '[DoGe] "%s" is not a valid %s doc standard, available doc standard are: %s',
     \  b:doge_doc_standard,
     \  &filetype,
-    \  join(b:doge_supported_doc_standards, ', ')
+    \  string(b:doge_supported_doc_standards)
     \)
   endif
 
@@ -110,25 +110,52 @@ endfunction
 
 ""
 " @public
-" This function will be triggered on the FileType autocmd and will remove
-" conflicting doc standards from the previous filetype.
+" This function will be triggered on the FileType autocmd and will:
+" - apply aliases
+" - remove conflicting doc standards from the previous filetype.
 function! doge#on_filetype_change() abort
-  if !exists('b:doge_prev_supported_doc_standards') && exists('b:doge_supported_doc_standards')
+  " Check if the current filetype is an alias, if so, initialize that filetype.
+  if get(g:, 'doge_ignore_on_filetype_change', 0) == v:true
+    return 0
+  else
+    let l:orig_ft = &filetype
+    for [l:ft, l:aliases] in items(get(g:, 'doge_filetype_aliases'))
+      if index(l:aliases, l:orig_ft) >= 0
+        let g:doge_ignore_on_filetype_change = 1
+        execute('setlocal ft=' . l:ft)
+        execute('setlocal ft=' . l:orig_ft)
+        let g:doge_ignore_on_filetype_change = 0
+        break
+      endif
+    endfor
+  endif
+
+  " Remove conflicting doc standards from the previous filetype.
+  if !exists('b:doge_prev_supported_doc_standards')
+    \ && exists('b:doge_supported_doc_standards')
     " Save the current supported doc standards
     let b:doge_prev_supported_doc_standards = copy(get(b:, 'doge_supported_doc_standards', []))
-  elseif exists('b:doge_prev_supported_doc_standards') && exists('b:doge_supported_doc_standards')
+    let b:doge_prev_ft = &filetype
+  elseif exists('b:doge_prev_supported_doc_standards')
+    \ && exists('b:doge_supported_doc_standards')
+    \ && get(b:, 'doge_prev_ft', '') != &filetype
     " Remove all the doc standards from the previous filetype.
     for l:doc in get(b:, 'doge_prev_supported_doc_standards', [])
-      if has_key(get(b:, 'doge_patterns', {}), l:doc)
-        unlet b:doge_patterns[l:doc]
-      endif
+      " If the current filetype is not an alias of the previous filetype then we
+      " will remove the doc standard.
+      if index(get(g:doge_filetype_aliases, &filetype, []), b:doge_prev_ft) < 0
+        let l:doc_idx = index(get(b:, 'doge_supported_doc_standards', []), l:doc)
+        if l:doc_idx >= 0
+          call remove(b:doge_supported_doc_standards, l:doc_idx)
+        endif
 
-      let l:doc_idx = index(get(b:, 'doge_supported_doc_standards', []), l:doc)
-      if l:doc_idx >= 0
-        call remove(b:doge_supported_doc_standards, l:doc_idx)
+        if has_key(get(b:, 'doge_patterns', {}), l:doc)
+          unlet b:doge_patterns[l:doc]
+        endif
       endif
     endfor
     let b:doge_prev_supported_doc_standards = copy(b:doge_supported_doc_standards)
+    let b:doge_prev_ft = &filetype
   endif
 endfunction
 

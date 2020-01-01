@@ -69,6 +69,40 @@ if !exists('g:doge_mapping')
   let g:doge_mapping = '<Leader>d'
 endif
 
+""
+" (Default: {
+"   'javascript': [
+"     'javascript.jsx',
+"     'javascriptreact',
+"     'javascript.tsx',
+"     'typescriptreact',
+"     'typescript',
+"   ],
+"   'java': ['groovy'],
+" })
+
+" Set filetypes as an alias for other filetypes.
+" The key should be the filetype that is defined in ftplugin/<key>.vim.
+" The value must be a list of 1 or more filetypes that will be aliases.
+"
+" Example:
+" let g:doge_filetype_aliases = {
+" \  'javascript': ['vue']
+" \}
+"
+" If you use the above settings and you open `myfile.vue` then it will behave
+" like you're opening a javascript filetype.
+let g:doge_filetype_aliases = doge#helpers#deepextend({
+\  'javascript': [
+\    'javascript.jsx',
+\    'javascriptreact',
+\    'javascript.tsx',
+\    'typescriptreact',
+\    'typescript',
+\  ],
+\  'java': ['groovy'],
+\}, get(g:, 'doge_filetype_aliases', {}), 1)
+
 if !exists('g:doge_buffer_mappings')
   ""
   " (Default: 1)
