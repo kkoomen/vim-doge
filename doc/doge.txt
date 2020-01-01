@@ -110,6 +110,10 @@ doge#deactivate()                                          *doge#deactivate()*
 doge#command_complete()                              *doge#command_complete()*
   Return a list of supported doc standards for the current buffer.
 
+doge#on_filetype_change()                          *doge#on_filetype_change()*
+  This function will be triggered on the FileType autocmd and will remove
+  conflicting doc standards from the previous filetype.
+
 doge#buffer#get_supported_doc_standards({defaults})
                                    *doge#buffer#get_supported_doc_standards()*
   'defaults': A list of supported doc standards that should be allowed.

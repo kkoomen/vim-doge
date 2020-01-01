@@ -108,5 +108,29 @@ function! doge#command_complete(...) abort
   return filter(copy(get(b:, 'doge_supported_doc_standards', [])), "v:val =~ '^'.a:1")
 endfunction
 
+""
+" @public
+" This function will be triggered on the FileType autocmd and will remove
+" conflicting doc standards from the previous filetype.
+function! doge#on_filetype_change() abort
+  if !exists('b:doge_prev_supported_doc_standards') && exists('b:doge_supported_doc_standards')
+    " Save the current supported doc standards
+    let b:doge_prev_supported_doc_standards = copy(get(b:, 'doge_supported_doc_standards', []))
+  elseif exists('b:doge_prev_supported_doc_standards') && exists('b:doge_supported_doc_standards')
+    " Remove all the doc standards from the previous filetype.
+    for l:doc in get(b:, 'doge_prev_supported_doc_standards', [])
+      if has_key(get(b:, 'doge_patterns', {}), l:doc)
+        unlet b:doge_patterns[l:doc]
+      endif
+
+      let l:doc_idx = index(get(b:, 'doge_supported_doc_standards', []), l:doc)
+      if l:doc_idx >= 0
+        call remove(b:doge_supported_doc_standards, l:doc_idx)
+      endif
+    endfor
+    let b:doge_prev_supported_doc_standards = copy(b:doge_supported_doc_standards)
+  endif
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

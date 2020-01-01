@@ -1,0 +1,26 @@
+# ==============================================================================
+# Switch from PHP to JavaScript and make sure doc standards of PHP get removed.
+# ==============================================================================
+
+Execute (switch from PHP to JavaScript):
+  setfiletype php
+  AssertEqual exists('b:doge_prev_supported_doc_standards'), 1
+  AssertEqual has_key(b:doge_patterns, 'phpdoc'), 1
+  AssertEqual has_key(b:doge_patterns, 'jsdoc'), 0
+
+  Assert index(b:doge_supported_doc_standards, 'phpdoc') >= 0
+  Assert index(b:doge_supported_doc_standards, 'jsdoc') < 0
+
+  Assert index(b:doge_prev_supported_doc_standards, 'phpdoc') >= 0
+  Assert index(b:doge_prev_supported_doc_standards, 'jsdoc') < 0
+
+# Change to JavaScript and make sure the phpdoc gets removed.
+  setfiletype javascript
+  AssertEqual 0, has_key(b:doge_patterns, 'phpdoc')
+  AssertEqual 1, has_key(b:doge_patterns, 'jsdoc')
+
+  Assert index(b:doge_supported_doc_standards, 'phpdoc') < 0
+  Assert index(b:doge_supported_doc_standards, 'jsdoc') >=  0
+
+  Assert index(b:doge_prev_supported_doc_standards, 'phpdoc') < 0
+  Assert index(b:doge_prev_supported_doc_standards, 'jsdoc') >= 0

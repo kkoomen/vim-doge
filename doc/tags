@@ -19,6 +19,7 @@ doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#on_filetype_change()	doge.txt	/*doge#on_filetype_change()*
 doge#pattern#custom()	doge.txt	/*doge#pattern#custom()*
 doge#pattern#generate()	doge.txt	/*doge#pattern#generate()*
 doge#python#file()	doge.txt	/*doge#python#file()*
