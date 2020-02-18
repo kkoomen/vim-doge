@@ -270,3 +270,25 @@ Expect javascript (generated comment with a description, @param and @return tags
     private printSomething(something?: string): void {}
 
   }
+
+Given javascript (advanced function type parameters):
+  export function test<MapItem = unknown, MapKey = unknown>(
+    x: (xs: MapItem) => Boolean,
+    y: (xs: MapItem) => Boolean,
+  ): (xs: Map<MapKey, MapItem>) => MapItem[] {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with a description, @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @param {(xs: MapItem) => Boolean} x - [TODO:description]
+   * @param {(xs: MapItem) => Boolean} y - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  export function test<MapItem = unknown, MapKey = unknown>(
+    x: (xs: MapItem) => Boolean,
+    y: (xs: MapItem) => Boolean,
+  ): (xs: Map<MapKey, MapItem>) => MapItem[] {}

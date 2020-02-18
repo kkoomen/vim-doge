@@ -525,6 +525,18 @@ const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float)
 
 /**
  * [TODO:description]
+ *
+ * @param {(xs: MapItem) => Boolean} x - [TODO:description]
+ * @param {(xs: MapItem) => Boolean} y - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+export function rejectMapByValue<MapItem = unknown, MapKey = unknown>(
+  x: (xs: MapItem) => Boolean,
+  y: (xs: MapItem) => Boolean,
+): (xs: Map<MapKey, MapItem>) => MapItem[] {}
+
+/**
+ * [TODO:description]
  * @extends Parent
  */
 /**

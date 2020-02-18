@@ -23,7 +23,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " ==============================================================================
 let s:pattern_base = {
 \  'parameters': {
-\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\|([[:alnum:].:_| ]\+)\s*=>\s*[[:alnum:]_.]\+\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
 \    'tokens': ['name', 'type'],
 \    'format': '@param {{type|!type}} {name} - !description',
 \  },
@@ -73,7 +73,7 @@ unlet s:class_pattern['parameters']
 " function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(export\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\s*(\([^>]\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match': '\m^\%(\%(export\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
 \  'tokens': ['static', 'async', 'parameters', 'returnType'],
 \})
 
