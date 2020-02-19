@@ -7,6 +7,13 @@ set cpoptions&vim
 
 ""
 " @public
+" Returns a bool whether the current buffer is a supported filetype.
+function! doge#buffer#initialized() abort
+  return exists('b:doge_supported_doc_standards') == v:true
+endfunction
+
+""
+" @public
 " 'defaults': A list of supported doc standards that should be allowed.
 " Returns a list of accepted doc standards.
 function! doge#buffer#get_supported_doc_standards(defaults) abort

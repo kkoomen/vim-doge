@@ -7,6 +7,10 @@ set cpoptions&vim
 "
 " arg: Either a count (0 by default) or a string (empty by default).
 function! doge#generate(arg) abort
+  if doge#buffer#initialized() == v:false
+    return 0
+  endif
+
   " Immediately validate if the doc standard is allowed.
   if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
     echoerr printf(

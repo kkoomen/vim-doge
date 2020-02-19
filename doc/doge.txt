@@ -115,6 +115,9 @@ doge#on_filetype_change()                          *doge#on_filetype_change()*
   apply aliases
   remove conflicting doc standards from the previous filetype.
 
+doge#buffer#initialized()                          *doge#buffer#initialized()*
+  Returns a bool whether the current buffer is a supported filetype.
+
 doge#buffer#get_supported_doc_standards({defaults})
                                    *doge#buffer#get_supported_doc_standards()*
   'defaults': A list of supported doc standards that should be allowed.
