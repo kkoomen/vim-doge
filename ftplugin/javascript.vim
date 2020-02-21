@@ -21,11 +21,12 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " The parameters.match describes the following pattern:
 "   <param-access> <param-name>: <param-type> = <param-default-value>
 " ==============================================================================
+
 let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\|([[:alnum:].:_| ]\+)\s*=>\s*[[:alnum:]_.]\+\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
-\    'tokens': ['name', 'type'],
-\    'format': '@param {{type|!type}} {name} - !description',
+\    'tokens': ['name', 'type', 'default'],
+\    'format': '@param {{type|!type}} %(default|[)%{name}%(default|])% - !description',
 \  },
 \  'insert': 'above',
 \}
@@ -73,8 +74,8 @@ unlet s:class_pattern['parameters']
 " function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(export\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
-\  'tokens': ['static', 'async', 'parameters', 'returnType'],
+\  'match': '\m^\%(\%(export\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'tokens': ['static', 'async', 'generator', 'parameters', 'returnType'],
 \})
 
 " ------------------------------------------------------------------------------
@@ -85,8 +86,8 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " Person.prototype.greet = function*(p1: string = 'default', p2: Immutable.List = Immutable.List()) {};
 " ------------------------------------------------------------------------------
 let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s\+\)\?\%(function\*\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-\  'tokens': ['className', 'funcName', 'async', 'parameters', 'returnType'],
+\  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
+\  'tokens': ['className', 'funcName', 'async', 'generator', 'parameters', 'returnType'],
 \})
 
 " ------------------------------------------------------------------------------
@@ -106,8 +107,8 @@ let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 " (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
 " ------------------------------------------------------------------------------
 let s:fat_arrow_function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(export\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\*\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
-\  'tokens': ['static', 'funcName', 'static', 'async',  'parameters', 'returnType'],
+\  'match': '\m^\%(export\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
+\  'tokens': ['static', 'funcName', 'static', 'async', 'generator', 'parameters', 'returnType'],
 \})
 
 " ==============================================================================
@@ -144,6 +145,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      ' *',
 \      '%(static| * @static)%',
 \      '%(async| * @async)%',
+\      '%(generator| * @generator)%',
 \      '%(parameters| * {parameters})%',
 \      '%(returnType| * @return {{returnType|!type}} !description)%',
 \      ' */',
@@ -156,6 +158,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      ' *',
 \      '%(async| * @async)%',
 \      ' * @function {className}#{funcName}',
+\      '%(generator| * @generator)%',
 \      '%(parameters| * {parameters})%',
 \      '%(returnType| * @return {{returnType|!type}} !description)%',
 \      ' */',
@@ -169,6 +172,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(static| * @static)%',
 \      '%(async| * @async)%',
 \      ' * @function {funcName|}',
+\      '%(generator| * @generator)%',
 \      '%(parameters| * {parameters})%',
 \      '%(returnType| * @return {{returnType|!type}} !description)%',
 \      ' */',

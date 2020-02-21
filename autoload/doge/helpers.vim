@@ -129,5 +129,12 @@ function! doge#helpers#deepextend(...) abort
   return l:new
 endfunction
 
+"" @public
+" Substitute input recursively.
+function! doge#helpers#deepsubstitute(input, search, replacement, flags) abort
+  return eval(substitute(string(a:input), a:search, a:replacement, a:flags))
+endfunction
+
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

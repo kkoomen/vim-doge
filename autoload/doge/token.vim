@@ -22,17 +22,16 @@ function! s:token_replace(tokens, text) abort
     " - {name|default}
     " so if the line contains a pipe character with a default value then we
     " grab that value and remove it from the text.
-    let l:stripped_token = matchlist(l:text, '\m{\([^|{}]\+\)\(|[^}]*\)\?}')
-    let l:token_default_value = doge#helpers#trim(get(l:stripped_token, 2, '|'))[1:]
-    let l:has_token_default_value = !empty(doge#helpers#trim(get(l:stripped_token, 2, '')))
-    if l:has_token_default_value
-      let l:text = substitute(
-            \ l:text,
-            \ '{' . l:token . '|' . fnameescape(l:token_default_value) . '}',
-            \ '{' . l:token . '}',
-            \ 'g'
-            \ )
-    endif
+    let l:stripped_token = matchlist(l:text, '\m{\([^|{}]\+\)\%(|\([^}]*\)\)\?}')
+    let l:token_default_value = doge#helpers#trim(get(l:stripped_token, 2, ''))
+    let l:has_token_default_value = !empty(l:token_default_value)
+
+    let l:text = substitute(
+          \ l:text,
+          \ '{' . l:token . '|' . fnameescape(l:token_default_value) . '}',
+          \ '{' . l:token . '}',
+          \ 'g'
+          \ )
 
     let l:conditional_pattern = '\m%(' . l:token . '|\(.\{-}\))%'
     if l:text =~# l:conditional_pattern
@@ -41,6 +40,7 @@ function! s:token_replace(tokens, text) abort
         let l:conditional_pattern_replacement_value = ''
         let l:empty_conditional_pattern_value = 1
       endif
+
       let l:text = substitute(
             \ l:text,
             \ l:conditional_pattern,
@@ -88,6 +88,9 @@ function! s:token_replace(tokens, text) abort
   " Remove trailing whitespace.
   let l:text = substitute(l:text, '\m\s\+$', '', 'g')
 
+  " Replace the <Bar> back to a pipe character.
+  let l:text = substitute(l:text, '\m<Bar>', '|', 'g')
+
   " For JSDoc we replace the type hints 'typeA | type B' with 'typeA|typeB'.
   let l:text = substitute(l:text, '\m\s*|\s*', '|', 'g')
 
@@ -125,7 +128,7 @@ function! doge#token#extract(text, regex, regex_group_names) abort
   let l:submatches = []
   call substitute(a:text, a:regex, '\=add(l:submatches, submatch(0))', 'g')
 
-  let l:matches = map(l:submatches, { key, val -> doge#helpers#trim(val) })
+  let l:matches = map(l:submatches, { k, v -> doge#helpers#trim(v) })
   let l:tokens = []
 
   " We can expect a list of matches like:

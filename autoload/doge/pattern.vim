@@ -76,6 +76,12 @@ function! doge#pattern#generate(pattern) abort
     catch /^Vim\%((\a\+)\)\=:E117/
     endtry
 
+    " Some values may contain pipe characters as input. This will happen in
+    " typed languages where the type hint allows multiple types.
+    " JavaScript/TypeScript Example: function test($p1: string, p2: Foo | Bar | Baz) { ... }
+    " Therefore, we have to escape the pipe characters in the input.
+    let l:param_tokens = doge#helpers#deepsubstitute(l:param_tokens, '\m|', '<Bar>', 'g')
+
     for l:param_token in l:param_tokens
       let l:format = doge#token#replace(
             \ l:param_token,

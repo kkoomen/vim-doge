@@ -66,8 +66,8 @@ Expect javascript (generated comment with @async, @function, @param and @return 
      *
      * @async
      * @function my-func
-     * @param {string} $p1 - [TODO:description]
-     * @param {array} p2 - [TODO:description]
+     * @param {string} [$p1] - [TODO:description]
+     * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
      * @param {[TODO:type]} p4 - [TODO:description]
      * @return {[TODO:type]} [TODO:description]
@@ -80,8 +80,8 @@ Expect javascript (generated comment with @async, @function, @param and @return 
      *
      * @async
      * @function my-arrow-func
-     * @param {string} $p1 - [TODO:description]
-     * @param {array} p2 - [TODO:description]
+     * @param {string} [$p1] - [TODO:description]
+     * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
      * @param {[TODO:type]} p4 - [TODO:description]
      * @return {1|2|3} [TODO:description]

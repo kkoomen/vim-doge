@@ -194,6 +194,10 @@ doge#helpers#deepextend()                          *doge#helpers#deepextend()*
 
   The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
 
+doge#helpers#deepsubstitute({input}, {search}, {replacement}, {flags})
+                                               *doge#helpers#deepsubstitute()*
+  Substitute input recursively.
+
 doge#indent#add({lnum}, {text})                            *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
 

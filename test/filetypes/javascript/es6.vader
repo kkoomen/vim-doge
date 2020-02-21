@@ -100,8 +100,8 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * [TODO:description]
    *
    * @function myFunc
-   * @param {[TODO:type]} $p1 - [TODO:description]
-   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} [$p1] - [TODO:description]
+   * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
@@ -112,8 +112,8 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * [TODO:description]
    *
    * @function myFunc
-   * @param {[TODO:type]} $p1 - [TODO:description]
-   * @param {[TODO:type]} p2 - [TODO:description]
+   * @param {[TODO:type]} [$p1] - [TODO:description]
+   * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
@@ -134,8 +134,8 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * [TODO:description]
    *
    * @function myFunc
-   * @param {string} $p1 - [TODO:description]
-   * @param {string[]} p2 - [TODO:description]
+   * @param {string} [$p1] - [TODO:description]
+   * @param {string[]} [p2] - [TODO:description]
    * @param {number} p3 - [TODO:description]
    * @param {float} p4 - [TODO:description]
    * @return {string[]} [TODO:description]
@@ -228,8 +228,8 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * [TODO:description]
    *
    * @function Person#greet
-   * @param {string} p1 - [TODO:description]
-   * @param {Immutable.List} p2 - [TODO:description]
+   * @param {string} [p1] - [TODO:description]
+   * @param {Immutable.List} [p2] - [TODO:description]
    * @return {string[]} [TODO:description]
    */
   Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] => {};
