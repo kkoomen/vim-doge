@@ -187,7 +187,7 @@ let g:doge_filetype_aliases = {
 ```
 
 If you use the above settings and you open `myfile.vue` then it will behave like
-you're opening a javascript filetype.
+you're opening a JavaScript filetype.
 
 ### `g:doge_buffer_mappings`
 
@@ -207,7 +207,7 @@ The mapping to jump forward to the next `TODO` item in a comment. Requires
 
 Default: `'<S-Tab>'`
 
-The mapping to jump backward to the next `TODO` item in a comment. Requires
+The mapping to jump backward to the previous `TODO` item in a comment. Requires
 `g:doge_comment_interactive` to be enabled.
 
 ### `g:doge_comment_interactive`
@@ -227,7 +227,7 @@ Continue to cycle among placeholders when reaching the start or end.
 Default: `['n', 'i', 's']`
 
 Defines the modes in which doge will jump forward and backward when interactive
-mode is active. For example: removing 'i' would allow you to use <Tab> for
+mode is active. For example: removing `i` would allow you to use `<Tab>` for
 autocompletion in insert mode.
 
 # Commands
