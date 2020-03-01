@@ -28,6 +28,7 @@ Nonetheless, DoGe supports all of it.
 Supported:
 - Regular functions
 - Prototype functions
+- Generator functions
 - ES6
   - Fat-arrow functions
   - Classes
@@ -44,7 +45,7 @@ All of the above is _also_ supported for TypeScript and NodeJS.
 
 Supported:
 - Functions
-- Class methods.
+- Class methods
 - Doc standards
   - reST
   - Sphinx
