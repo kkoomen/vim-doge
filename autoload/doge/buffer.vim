@@ -17,9 +17,21 @@ endfunction
 " 'defaults': A list of supported doc standards that should be allowed.
 " Returns a list of accepted doc standards.
 function! doge#buffer#get_supported_doc_standards(defaults) abort
-  return get(g:, 'doge_test_env', 0)
-    \ ? a:defaults
-    \ : uniq(sort(extend(get(b:, 'doge_supported_doc_standards', []), a:defaults)))
+  if get(g:, 'doge_test_env', 0)
+    return a:defaults
+  endif
+
+  " We sort them so that we can use uniq() on it.
+  let l:docs = uniq(sort(extend(get(b:, 'doge_supported_doc_standards', []), a:defaults)))
+
+  " After sorted it, we will remove the defaults and prepend the defaults so
+  " that we can reset the order as we defined it in the ftplugin/{ft}.vim.
+  for l:default in a:defaults
+    call remove(l:docs, index(l:docs, l:default))
+  endfor
+
+  " Prepend the defaults to the filtered docs list.
+  return extend(a:defaults, l:docs)
 endfunction
 
 ""
