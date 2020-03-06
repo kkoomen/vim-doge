@@ -129,7 +129,6 @@ function! doge#token#extract(text, regex, regex_group_names) abort
   call substitute(a:text, a:regex, '\=add(l:submatches, submatch(0))', 'g')
 
   let l:matches = map(l:submatches, { k, v -> doge#helpers#trim(v) })
-
   let l:tokens = []
 
   " We can expect a list of matches like:
