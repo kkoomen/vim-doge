@@ -29,14 +29,15 @@ end
 # @param p1 [[TODO:type]] [TODO:description]
 # @param p2 [[TODO:type]] [TODO:description]
 # @param p3 [[TODO:type]] [TODO:description]
-def parameters (p1,p2=4, *p3)
+# @param p4 [[TODO:type]] [TODO:description]
+def parameters (p1,p2=4, *p3,**p4)
 end
 
 # [TODO:description]
 # @param p1 [[TODO:type]] [TODO:description]
 # @param p2 [[TODO:type]] [TODO:description]
 # @param p3 [[TODO:type]] [TODO:description]
-def parameters p1,p2=4, *p3
+def parameters p1,p2=4, *p3,**p4
 end
 
 # [TODO:description]
