@@ -125,8 +125,10 @@ endfunction
 " value of that group. The regex groups in the 'regex' parameter should be
 " symmetrical in length to the 'regex_group_names' parameter.
 function! doge#token#extract(text, regex, regex_group_names) abort
-  let l:matches = []
-  call substitute(a:text, a:regex, '\=add(l:matches, submatch(0))', 'g')
+  let l:submatches = []
+  call substitute(a:text, a:regex, '\=add(l:submatches, submatch(0))', 'g')
+
+  let l:matches = map(l:submatches, { k, v -> doge#helpers#trim(v) })
 
   let l:tokens = []
 
