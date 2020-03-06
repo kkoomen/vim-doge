@@ -44,13 +44,8 @@ let s:pattern_base = {
 " def self.class_method(attribute)
 " def self.class_parameters p1,p2=4, *p3
 " ------------------------------------------------------------------------------
-let s:parameters_matches = [
-\   '(\(.\{-}\))',
-\   '\s\+\([^\n]*\)',
-\   '\n',
-\ ]
 let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': map(s:parameters_matches, { i, m -> '\m^def\s\+\%([^=(!\n ]\+\)[=!]\?\s*' . m}),
+\  'match': '\m^def\s\+\%([^=(! ]\+\)[=!]\?\s*(\?\s*\(\(\%(\*\{0,2}&\?[[:alnum:]_]\+\%(\s*=\s*[^, ]\+\)\?\)\%(\s*,\s*\)\?\)*\)\s*)\?.\{-}',
 \  'tokens': ['parameters'],
 \})
 

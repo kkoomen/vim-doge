@@ -110,7 +110,7 @@ Expect ruby (generated comment with @param tags):
 # ------------------------------------------------------------------------------
 
 Given ruby (function with paramters containing '*' in its name):
-  def parameters (p1,p2=4, p3*)
+  def parameters (p1,p2=4, *p3, **p4)
   end
 
 Do (trigger doge):
@@ -121,7 +121,26 @@ Expect ruby (generated comment with @param tags):
   # @param p1 [[TODO:type]] [TODO:description]
   # @param p2 [[TODO:type]] [TODO:description]
   # @param p3 [[TODO:type]] [TODO:description]
-  def parameters (p1,p2=4, p3*)
+  # @param p4 [[TODO:type]] [TODO:description]
+  def parameters (p1,p2=4, *p3, **p4)
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with paramters containing '*' in its name and without parentheses):
+  def parameters p1,p2=4, *p3, **p4
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p2 [[TODO:type]] [TODO:description]
+  # @param p3 [[TODO:type]] [TODO:description]
+  # @param p4 [[TODO:type]] [TODO:description]
+  def parameters p1,p2=4, *p3, **p4
   end
 
 # ------------------------------------------------------------------------------
