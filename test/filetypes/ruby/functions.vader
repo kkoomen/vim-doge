@@ -13,10 +13,24 @@ Expect ruby (generated comment with nothing but the text 'TODO'):
   def myFunc() # inline comment
   end
 
+# ------------------------------------------------------------------------------
+
+Given ruby (function without parameters and parentheses):
+  def myFunc # inline comment
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with nothing but the text 'TODO'):
+  # [TODO:description]
+  def myFunc # inline comment
+  end
+
 # ==============================================================================
 # Functions with parameters.
-Given ruby (function with parameters):
 # ==============================================================================
+Given ruby (function with parameters):
   def myFunc(p1, p_2 = some_default_value)
   end
 
@@ -28,6 +42,54 @@ Expect ruby (generated comment with @param tags):
   # @param p1 [[TODO:type]] [TODO:description]
   # @param p_2 [[TODO:type]] [TODO:description]
   def myFunc(p1, p_2 = some_default_value)
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with parameters but without parentheses):
+  def myFunc p1, p_2 = some_default_value
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc p1, p_2 = some_default_value
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with keyword parameters):
+  def myFunc(p1, p_2: some_default_value)
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc(p1, p_2: some_default_value)
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with keyword parameters but without parentheses):
+  def myFunc p1, p_2: some_default_value
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc p1, p_2: some_default_value
   end
 
 # ------------------------------------------------------------------------------

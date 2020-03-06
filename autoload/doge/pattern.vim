@@ -26,8 +26,21 @@ function! doge#pattern#generate(pattern) abort
     endif
   else
     " Skip if the current line does not match the main pattern.
-    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
-    if l:curr_line_raw !~# a:pattern['match']
+    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, "\n")), '\')
+    let l:match = v:null
+    if type(a:pattern['match']) == type('')
+      if l:curr_line_raw =~# a:pattern['match']
+        let l:match = a:pattern['match']
+      endif
+    elseif type(a:pattern['match']) == type([])
+      for l:m in a:pattern['match']
+        if l:curr_line_raw =~# l:m
+          let l:match = l:m
+          break
+        endif
+      endfor
+    endif
+    if l:match is v:null
       return 0
     endif
 
@@ -43,7 +56,7 @@ function! doge#pattern#generate(pattern) abort
     " Extract the primary tokens.
     let l:tokens = get(doge#token#extract(
           \ l:curr_line,
-          \ a:pattern['match'],
+          \ l:match,
           \ a:pattern['tokens']
           \ ), 0, {})
   endif

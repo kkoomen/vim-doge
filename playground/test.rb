@@ -12,10 +12,31 @@ def myFunc (format = :html)
 end
 
 # [TODO:description]
+def myFunc
+end
+
+# [TODO:description]
+# @param format [[TODO:type]] [TODO:description]
+def myFunc format = :html
+end
+
+# [TODO:description]
+# @param format [[TODO:type]] [TODO:description]
+def myFunc(format: :html)
+end
+
+# [TODO:description]
 # @param p1 [[TODO:type]] [TODO:description]
 # @param p2 [[TODO:type]] [TODO:description]
 # @param p3 [[TODO:type]] [TODO:description]
-def parameters (p1,p2=4, p3*)
+def parameters (p1,p2=4, *p3)
+end
+
+# [TODO:description]
+# @param p1 [[TODO:type]] [TODO:description]
+# @param p2 [[TODO:type]] [TODO:description]
+# @param p3 [[TODO:type]] [TODO:description]
+def parameters p1,p2=4, *p3
 end
 
 # [TODO:description]
@@ -55,3 +76,4 @@ module ClassMethods
     # @param block [[TODO:type]] [TODO:description]
     def each(&block)
     end
+end
