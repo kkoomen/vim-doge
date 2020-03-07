@@ -26,7 +26,9 @@ function! doge#pattern#generate(pattern) abort
     endif
   else
     " Skip if the current line does not match the main pattern.
-    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, ' ')), '\')
+    let l:glue = has_key(a:pattern, 'normalize')
+          \ && a:pattern['normalize'] == v:false ? "\n" : ' '
+    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, l:glue)), '\')
     if l:curr_line_raw !~# a:pattern['match']
       return 0
     endif
