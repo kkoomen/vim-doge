@@ -20,7 +20,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " ==============================================================================
 let s:pattern_base = {
 \  'parameters': {
-\    'match': '\m\([[:alnum:]_]\+\)\%(\s*=\s*[^,]\+\)\?',
+\    'match': '\m\([[:alnum:]_]\+\)\%(\s*[=:]\s*[^,]\+\)\?',
 \    'tokens': ['name'],
 \    'format': '@param {name} [!type] !description',
 \  },
@@ -37,12 +37,16 @@ let s:pattern_base = {
 " Matches regular function expressions and class methods.
 " ------------------------------------------------------------------------------
 " def myFunc(p1, p_2 = some_default_value)
-" def def parameters (p1,p2=4, p3*)
+" def parameters (p1,p2=4, *p3)
+" def parameters p1, p2 = 4, *p3
 " def where(attribute, type = nil, **options)
 " def each(&block)
+" def self.class_method(attribute)
+" def self.class_parameters p1,p2=4, *p3
 " ------------------------------------------------------------------------------
 let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^def\s\+\%([^=(!]\+\)[=!]\?\s*(\(.\{-}\))',
+\  'normalize': 0,
+\  'match': '\m^def\s\+\%([^=(!\n ]\+\)[=!]\?\s*\((\_.\{-})\|[^\n]\+\)\?',
 \  'tokens': ['parameters'],
 \})
 

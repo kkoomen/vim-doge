@@ -1,8 +1,9 @@
 # ==============================================================================
 # Functions without parameters.
 # ==============================================================================
-Given ruby (function without parameters):
+Given ruby (function without parameters and with parentheses):
   def myFunc() # inline comment
+    val = 1
   end
 
 Do (trigger doge):
@@ -11,13 +12,31 @@ Do (trigger doge):
 Expect ruby (generated comment with nothing but the text 'TODO'):
   # [TODO:description]
   def myFunc() # inline comment
+    val = 1
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function without parameters and parentheses):
+  def myFunc # inline comment
+    val = 1
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with nothing but the text 'TODO'):
+  # [TODO:description]
+  def myFunc # inline comment
+    val = 1
   end
 
 # ==============================================================================
 # Functions with parameters.
-Given ruby (function with parameters):
 # ==============================================================================
-  def myFunc(p1, p_2 = some_default_value)
+Given ruby (function with parameters):
+  def myFunc(p1, p_2 = some_default_value) # inline comment
+    val = 1
   end
 
 Do (trigger doge):
@@ -27,13 +46,82 @@ Expect ruby (generated comment with @param tags):
   # [TODO:description]
   # @param p1 [[TODO:type]] [TODO:description]
   # @param p_2 [[TODO:type]] [TODO:description]
-  def myFunc(p1, p_2 = some_default_value)
+  def myFunc(p1, p_2 = some_default_value) # inline comment
+    val = 1
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with parameters without parentheses):
+  def myFunc p1, p_2 = some_default_value # inline comment
+    val = 1
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc p1, p_2 = some_default_value # inline comment
+    val = 1
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with keyword parameters):
+  def myFunc(p1, p_2: some_default_value) # inline comment
+    val = 1
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc(p1, p_2: some_default_value) # inline comment
+    val = 1
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with keyword parameters but without parentheses):
+  def myFunc p1, p_2: some_default_value # inline comment
+    val = 1
+  end
+
+  def myFunc p1, p_2: # inline comment
+    val = 1
+  end
+
+Do (trigger doge):
+  \<C-d>
+  :8\<CR>
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc p1, p_2: some_default_value # inline comment
+    val = 1
+  end
+
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p_2 [[TODO:type]] [TODO:description]
+  def myFunc p1, p_2: # inline comment
+    val = 1
   end
 
 # ------------------------------------------------------------------------------
 
 Given ruby (function with parameters with a '&' in its name):
-  def each(&block)
+  def each(&block) # inline comment
+    val = 1
   end
 
 Do (trigger doge):
@@ -42,13 +130,15 @@ Do (trigger doge):
 Expect ruby (generated comment with @param tags):
   # [TODO:description]
   # @param block [[TODO:type]] [TODO:description]
-  def each(&block)
+  def each(&block) # inline comment
+    val = 1
   end
 
 # ------------------------------------------------------------------------------
 
 Given ruby (function with paramters containing '*' in its name):
-  def parameters (p1,p2=4, p3*)
+  def parameters (p1,p2=4, *p3, **p4)
+    val = 1
   end
 
 Do (trigger doge):
@@ -59,13 +149,66 @@ Expect ruby (generated comment with @param tags):
   # @param p1 [[TODO:type]] [TODO:description]
   # @param p2 [[TODO:type]] [TODO:description]
   # @param p3 [[TODO:type]] [TODO:description]
-  def parameters (p1,p2=4, p3*)
+  # @param p4 [[TODO:type]] [TODO:description]
+  def parameters (p1,p2=4, *p3, **p4)
+    val = 1
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with multiline parameters):
+  def parameters ( #inline comment
+    p1,
+    p2=4,
+    *p3,
+    **p4
+  )
+    val = 1
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p2 [[TODO:type]] [TODO:description]
+  # @param p3 [[TODO:type]] [TODO:description]
+  # @param p4 [[TODO:type]] [TODO:description]
+  def parameters ( #inline comment
+    p1,
+    p2=4,
+    *p3,
+    **p4
+  )
+    val = 1
+  end
+
+# ------------------------------------------------------------------------------
+
+Given ruby (function with paramters containing '*' in its name and without parentheses):
+  def parameters p1,p2=4, *p3, **p4
+    val = 1
+  end
+
+Do (trigger doge):
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  # [TODO:description]
+  # @param p1 [[TODO:type]] [TODO:description]
+  # @param p2 [[TODO:type]] [TODO:description]
+  # @param p3 [[TODO:type]] [TODO:description]
+  # @param p4 [[TODO:type]] [TODO:description]
+  def parameters p1,p2=4, *p3, **p4
+    val = 1
   end
 
 # ------------------------------------------------------------------------------
 
 Given ruby (function with paramters containing ':' in its name):
   def myFunc (format = :html)
+    val = 1
   end
 
 Do (trigger doge):
@@ -75,6 +218,7 @@ Expect ruby (generated comment with @param tags):
   # [TODO:description]
   # @param format [[TODO:type]] [TODO:description]
   def myFunc (format = :html)
+    val = 1
   end
 
 # ==============================================================================
