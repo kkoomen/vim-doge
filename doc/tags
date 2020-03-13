@@ -17,6 +17,7 @@ doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#deepextend()	doge.txt	/*doge#helpers#deepextend()*
 doge#helpers#deepsubstitute()	doge.txt	/*doge#helpers#deepsubstitute()*
 doge#helpers#generator()	doge.txt	/*doge#helpers#generator()*
+doge#helpers#get_filetype()	doge.txt	/*doge#helpers#get_filetype()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*

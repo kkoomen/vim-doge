@@ -135,6 +135,17 @@ function! doge#helpers#deepsubstitute(input, search, replacement, flags) abort
   return eval(substitute(string(a:input), a:search, a:replacement, a:flags))
 endfunction
 
+"" @public
+" Get the current filetype. Returns the original filetype if the current
+" filetype is an alias.
+function! doge#helpers#get_filetype() abort
+  for [l:ft, l:aliases] in items(get(g:, 'doge_filetype_aliases', []))
+    if index(l:aliases, &filetype) >= 0
+      return l:ft
+    endif
+  endfor
+  return &filetype
+endfunction
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

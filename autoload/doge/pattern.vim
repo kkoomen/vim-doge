@@ -51,7 +51,7 @@ function! doge#pattern#generate(pattern) abort
   endif
 
   try
-    let l:preprocess_fn = printf('doge#preprocessors#%s#tokens', &filetype)
+    let l:preprocess_fn = printf('doge#preprocessors#%s#tokens', doge#helpers#get_filetype())
     call function(l:preprocess_fn)(l:tokens)
   catch /^Vim\%((\a\+)\)\=:E117/
   endtry
@@ -73,7 +73,7 @@ function! doge#pattern#generate(pattern) abort
 
     " Preprocess the extracted parameter tokens.
     try
-      let l:preprocess_fn = printf('doge#preprocessors#%s#parameter_tokens', &filetype)
+      let l:preprocess_fn = printf('doge#preprocessors#%s#parameter_tokens', doge#helpers#get_filetype())
       call function(l:preprocess_fn)(l:param_tokens)
     catch /^Vim\%((\a\+)\)\=:E117/
     endtry
@@ -127,7 +127,7 @@ function! doge#pattern#generate(pattern) abort
   endif
 
   try
-    let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', &filetype)
+    let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', doge#helpers#get_filetype())
     let l:preprocessed_insert_position = function(l:preprocess_fn)(l:comment_lnum_insert_position)
     let l:comment_lnum_insert_position = l:preprocessed_insert_position
 
