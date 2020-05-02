@@ -6,6 +6,10 @@ Given sh (regular functions):
     print "foobar"
   }
 
+  function test() {
+    print "foobar"
+  }
+
   test() {
     print "foobar"
   }
@@ -13,6 +17,8 @@ Given sh (regular functions):
 Do (trigger doge):
   \<C-d>
   :14\<CR>
+  \<C-d>
+  :27\<CR>
   \<C-d>
 
 Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 'Returns' keywords):
@@ -26,6 +32,19 @@ Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 
   #   [TODO:description]
   ################################################################################
   function test {
+    print "foobar"
+  }
+
+  ################################################################################
+  # [TODO:description]
+  # Globals:
+  #   [TODO:var-name]
+  # Arguments:
+  #   $1: [TODO:description]
+  # Returns:
+  #   [TODO:description]
+  ################################################################################
+  function test() {
     print "foobar"
   }
 
