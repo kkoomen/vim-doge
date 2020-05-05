@@ -32,10 +32,11 @@ let s:pattern_base = {
 " Matches regular functions.
 " ------------------------------------------------------------------------------
 " function test {}
+" function test() {}
 " test() {}
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\(function\s\+[[:alnum:]_-]\+\|[[:alnum:]_-]\+\s*(.\{-})\)\s*{',
+\  'match': '\m^\%(function\)\?\s*[[:alnum:]_-]\+\s*\%((.\{-})\)\?\s*{',
 \  'tokens': [],
 \})
 
