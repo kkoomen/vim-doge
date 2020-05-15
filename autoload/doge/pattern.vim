@@ -80,7 +80,10 @@ function! doge#pattern#generate(pattern) abort
 
     " Some values may contain pipe characters as input. This will happen in
     " typed languages where the type hint allows multiple types.
-    " JavaScript/TypeScript Example: function test($p1: string, p2: Foo | Bar | Baz) { ... }
+    "
+    " JavaScript/TypeScript Example:
+    "   function test($p1: string, p2: Foo | Bar | Baz) { ... }
+    "
     " Therefore, we have to escape the pipe characters in the input.
     let l:param_tokens = doge#helpers#deepsubstitute(l:param_tokens, '\m|', '<Bar>', 'g')
 
@@ -119,10 +122,10 @@ function! doge#pattern#generate(pattern) abort
   endfor
 
   if a:pattern['insert'] ==# 'below'
+    let l:comment_indent = shiftwidth()
     let l:comment_lnum_insert_position = line('.')
-    let l:comment_lnum_inherited_indent = line('.') + 1
   else
-    let l:comment_lnum_inherited_indent = line('.')
+    let l:comment_indent = 0
     let l:comment_lnum_insert_position = line('.') - 1
   endif
 
@@ -130,18 +133,11 @@ function! doge#pattern#generate(pattern) abort
     let l:preprocess_fn = printf('doge#preprocessors#%s#insert_position', doge#helpers#get_filetype())
     let l:preprocessed_insert_position = function(l:preprocess_fn)(l:comment_lnum_insert_position)
     let l:comment_lnum_insert_position = l:preprocessed_insert_position
-
-    " Update the inherited_indent variable based on the new insert position.
-    " For now we only have to do this for languages like Python where we insert
-    " below the declaration.
-    if a:pattern['insert'] ==# 'below'
-      let l:comment_lnum_inherited_indent = l:comment_lnum_insert_position + 1
-    endif
   catch /^Vim\%((\a\+)\)\=:E117/
   endtry
 
   " vint: next-line -ProhibitUnusedVariable
-  let l:Indent = function('doge#indent#add', [l:comment_lnum_inherited_indent])
+  let l:Indent = function('doge#indent#add', [l:comment_indent])
 
   " Indent the comment.
   let l:comment = map(l:comment, { k, line -> l:Indent(line) })

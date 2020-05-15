@@ -3,40 +3,40 @@
 # ==============================================================================
 Given python (function without parameters):
   def myFunc(): # inline comment
-  pass
+    pass
 
 Do (trigger doge):
   \<C-d>
 
 Expect python (no changes):
   def myFunc(): # inline comment
-  """
-  [TODO:description]
+    """
+    [TODO:description]
 
-  """
-  pass
+    """
+    pass
 
 # ==============================================================================
 # Functions without type hints.
 # ==============================================================================
 Given python (function without type hints):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
-  pass
+    pass
 
 Do (trigger doge):
   \<C-d>
 
 Expect python (generated comment with :param tags):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
-  """
-  [TODO:description]
+    """
+    [TODO:description]
 
-  :param p1 [TODO:type]: [TODO:description]
-  :param p2 [TODO:type]: [TODO:description]
-  :param p3 [TODO:type]: [TODO:description]
-  :param p4 [TODO:type]: [TODO:description]
-  """
-  pass
+    :param p1 [TODO:type]: [TODO:description]
+    :param p2 [TODO:type]: [TODO:description]
+    :param p3 [TODO:type]: [TODO:description]
+    :param p4 [TODO:type]: [TODO:description]
+    """
+    pass
 
 # ==============================================================================
 # Functions with parameters.
@@ -63,6 +63,7 @@ Expect python (generated comment with :param tags):
 # ==============================================================================
 Given python (functions with advanced type hint parameters):
   def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+
     pass
 
   def myFunc(p1: Sequence[T], p2: my_module.types) -> Generator[int, float, str]:
@@ -70,7 +71,7 @@ Given python (functions with advanced type hint parameters):
 
 Do (trigger doge):
   \<C-d>
-  :11\<CR>
+  :12\<CR>
   \<C-d>
 
 Expect python (generated comments with :param tags):
@@ -82,6 +83,7 @@ Expect python (generated comments with :param tags):
     :param p2 Callable[[int, Exception], None]: [TODO:description]
     :rtype Sequence[T]: [TODO:description]
     """
+
     pass
 
   def myFunc(p1: Sequence[T], p2: my_module.types) -> Generator[int, float, str]:
