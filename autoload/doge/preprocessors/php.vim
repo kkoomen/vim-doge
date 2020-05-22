@@ -59,7 +59,7 @@ function! s:get_property_type_via_constructor(propertyName) abort
 
   " Search for the constructor function in that class.
   if match(l:class_content, '__construct(') != -1
-    let l:constructor_func_match = filter(matchlist(l:class_content, '\m\(__construct(.\{-})\s*{.\{-}}\)'), "!empty(v:val)")
+    let l:constructor_func_match = filter(matchlist(l:class_content, '\m\(__construct(.\{-})\s*{.\{-}}\)'), '!empty(v:val)')
     let l:constructor_func_contents = l:constructor_func_match[1]
     if l:constructor_func_contents != v:false
       " Constructor exists, grab the type hint and if it exists then set it.
