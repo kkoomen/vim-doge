@@ -70,7 +70,7 @@ Expect javascript (generated comment with @async, @function, @param and @return 
      * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
      * @param {[TODO:type]} p4 - [TODO:description]
-     * @return {[TODO:type]} [TODO:description]
+     * @return {Promise<[TODO:type]>} [TODO:description]
      */
     'my-func': async function test($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) {
       //

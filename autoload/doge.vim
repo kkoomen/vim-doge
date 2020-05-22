@@ -33,7 +33,7 @@ function! doge#generate(arg) abort
       if a:arg <= len(b:doge_supported_doc_standards)
         let b:doge_doc_standard = b:doge_supported_doc_standards[a:arg - 1]
       endif
-    elseif type(a:arg) ==# type('') && a:arg !=# ''
+    elseif type(a:arg) ==# type('') && !empty(a:arg)
       if index(b:doge_supported_doc_standards, a:arg) >= 0
         let b:doge_doc_standard = a:arg
       endif

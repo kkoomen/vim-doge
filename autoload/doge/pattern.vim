@@ -181,7 +181,7 @@ endfunction
 " Generates a template for a custom doc standard, and places it in
 " after/ftplugin/{&ft}.vim
 function! doge#pattern#custom(name) abort
-  if &filetype ==# ''
+  if empty(&filetype)
     echo '[DoGe] A filetype is required in order to create a custom pattern.'
     return 0
   endif

@@ -176,7 +176,7 @@ Expect javascript (generated comment with @async, @param and @return tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @return {Promise<[TODO:type]>} [TODO:description]
    */
   async function myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -221,7 +221,7 @@ Expect javascript (generated comment with @async, @param and @return tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @return {Promise<[TODO:type]>} [TODO:description]
    */
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
