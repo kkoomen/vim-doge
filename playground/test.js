@@ -535,6 +535,27 @@ export function rejectMapByValue<MapItem = unknown, MapKey = unknown>(
   y: (xs: MapItem) => Boolean,
 ): (xs: Map<MapKey, MapItem>) => MapItem[] {}
 
+// Example of ES7 with decorators
+class Test {
+  /**
+   * [TODO:description]
+   *
+   * @async
+   * @param {User} user - [TODO:description]
+   * @param {Request} req - [TODO:description]
+   * @return {Promise<User>} [TODO:description]
+   */
+  @Get()
+  @UseGuards(LocalAuthGuard([
+    'foo',
+    'bar'
+  ]))
+  @SkipJwtAuth()
+  async login(@CurrentUser() user: User, @Req() req: Request): Promise<User> {
+    //
+  }
+}
+
 /**
  * [TODO:description]
  * @extends Parent

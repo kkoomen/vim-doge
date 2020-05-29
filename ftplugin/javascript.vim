@@ -19,12 +19,12 @@ let b:doge_patterns = doge#buffer#get_patterns()
 "
 " ==============================================================================
 " The parameters.match describes the following pattern:
-"   <param-access> <param-name>: <param-type> = <param-default-value>
+"   <param-access> @<decorator> <param-name>: <param-type> = <param-default-value>
 " ==============================================================================
 
 let s:pattern_base = {
 \  'parameters': {
-\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\|([[:alnum:].:_| ]\+)\s*=>\s*[[:alnum:]_.]\+\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\%(@[[:alnum:]_]\+(.\{-})\s\+\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\|([[:alnum:].:_| ]\+)\s*=>\s*[[:alnum:]_.]\+\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
 \    'tokens': ['name', 'type', 'default'],
 \    'format': '@param {{type|!type}} %(default|[)%{name}%(default|])% - !description',
 \  },

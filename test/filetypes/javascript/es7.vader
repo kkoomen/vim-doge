@@ -1,0 +1,36 @@
+# ==============================================================================
+# Class method with decorators
+# ==============================================================================
+Given javascript (class method with decorators):
+  class Test {
+    @Get()
+    @UseGuards(LocalAuthGuard([
+      'foo',
+      'bar'
+    ]))
+    @SkipJwtAuth()
+    async login(@CurrentUser() user: User, @Req() req: Request): Promise<User> {}
+  }
+
+Do (trigger doge):
+  :8\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with @async, @param and @return tags):
+  class Test {
+    /**
+     * [TODO:description]
+     *
+     * @async
+     * @param {User} user - [TODO:description]
+     * @param {Request} req - [TODO:description]
+     * @return {Promise<User>} [TODO:description]
+     */
+    @Get()
+    @UseGuards(LocalAuthGuard([
+      'foo',
+      'bar'
+    ]))
+    @SkipJwtAuth()
+    async login(@CurrentUser() user: User, @Req() req: Request): Promise<User> {}
+  }
