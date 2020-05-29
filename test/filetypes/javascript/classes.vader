@@ -28,7 +28,7 @@ Expect javascript (generated comment with nothing but the text 'TODO'):
 Given javascript (class with extends without implements):
   class Child extends Parent {}
 
-  export class Child extends React.Component {}
+  export default class Child extends React.Component {}
 
 Do (trigger doge):
   \<C-d>
@@ -46,7 +46,7 @@ Expect javascript (generated comment with @extends):
    * [TODO:description]
    * @extends React.Component
    */
-  export class Child extends React.Component {}
+  export default class Child extends React.Component {}
 
 # ==============================================================================
 # Classes without 'extends' with 'implements'.

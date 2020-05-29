@@ -59,7 +59,7 @@ let s:object_functions_pattern = doge#helpers#deepextend(s:pattern_base, {
 " export class Child extends Parent implements CustomInterfaceName {}
 " ------------------------------------------------------------------------------
 let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(export\s*\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$.]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$.]\+\)\)\?\s*{',
+\  'match': '\m^\%(\%(export\|export\s\+default\)\s\+\)\?class\s\+\%([[:alnum:]_$]\+\)\%(\s\+extends\s\+\([[:alnum:]_$.]\+\)\)\?\%(\s\+implements\s\+\([[:alnum:]_$.]\+\)\)\?\s*{',
 \  'tokens': ['parentClassName', 'interfaceName'],
 \})
 unlet s:class_pattern['parameters']
@@ -74,7 +74,7 @@ unlet s:class_pattern['parameters']
 " function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(export\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match': '\m^\%(\%(export\|export\s\+default\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
 \  'tokens': ['static', 'async', 'generator', 'parameters', 'returnType'],
 \})
 
@@ -107,7 +107,7 @@ let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 " (p1: string = 'default', p2: int = 5, p3, p4: Immutable.List = [], p5: string[] = [], p6: float = 0.5): number[] => { };
 " ------------------------------------------------------------------------------
 let s:fat_arrow_function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(export\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
+\  'match': '\m^\%(\%(export\|export\s\+default\)\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
 \  'tokens': ['static', 'funcName', 'static', 'async', 'generator', 'parameters', 'returnType'],
 \})
 

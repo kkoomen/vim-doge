@@ -14,7 +14,7 @@ Expect javascript (no generated comment):
 # Fat-arrow functions with a single parameter without return type.
 # ==============================================================================
 Given javascript (fat-arrow function with a single parameter without return type):
-  export const foo = bar => bar
+  export default const foo = bar => bar
 
   export const foo = bar => {
     return bar
@@ -33,7 +33,7 @@ Expect javascript (generated comment with @function, @param and @return tags):
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
    */
-  export const foo = bar => bar
+  export default const foo = bar => bar
 
   /**
    * [TODO:description]
