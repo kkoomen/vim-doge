@@ -231,12 +231,6 @@ function! doge#pattern#custom(name) abort
     let l:path = stdpath('config')
   endif
   if !empty(l:path)
-    try
-      if !exists(l:path . '/after/ftplugin/')
-        call mkdir(l:path . '/after/ftplugin/', 'p')
-      endif
-      catch /^Vim\%((\a\+)\)\=:E739/
-    endtry
     let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
   endif
   if filereadable(l:path)
@@ -298,7 +292,6 @@ function! doge#pattern#custom(name) abort
   call setreg('"', l:doc)
   1
   call execute("normal! \"\"P'[=']Gdipgg", 'silent!')
-  call execute('w', 'silent!')
 endfunction
 
 let &cpoptions = s:save_cpo
