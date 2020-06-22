@@ -6,6 +6,8 @@
 #   [TODO:var-name]
 # Arguments:
 #   $1: [TODO:description]
+# Outputs:
+#   [TODO:description]
 # Returns:
 #   [TODO:description]
 ################################################################################
@@ -19,9 +21,26 @@ function test {
 #   [TODO:var-name]
 # Arguments:
 #   $1: [TODO:description]
+# Outputs:
+#   [TODO:description]
 # Returns:
 #   [TODO:description]
 ################################################################################
 test() {
+  print "foobar"
+}
+
+################################################################################
+# [TODO:description]
+# Globals:
+#   [TODO:var-name]
+# Arguments:
+#   $1: [TODO:description]
+# Outputs:
+#   [TODO:description]
+# Returns:
+#   [TODO:description]
+################################################################################
+function test() {
   print "foobar"
 }
