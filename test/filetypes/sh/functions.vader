@@ -16,9 +16,9 @@ Given sh (regular functions):
 
 Do (trigger doge):
   \<C-d>
-  :14\<CR>
+  :16\<CR>
   \<C-d>
-  :27\<CR>
+  :31\<CR>
   \<C-d>
 
 Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 'Returns' keywords):
@@ -28,6 +28,8 @@ Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 
   #   [TODO:var-name]
   # Arguments:
   #   $1: [TODO:description]
+  # Outputs:
+  #   [TODO:description]
   # Returns:
   #   [TODO:description]
   ################################################################################
@@ -41,6 +43,8 @@ Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 
   #   [TODO:var-name]
   # Arguments:
   #   $1: [TODO:description]
+  # Outputs:
+  #   [TODO:description]
   # Returns:
   #   [TODO:description]
   ################################################################################
@@ -54,6 +58,8 @@ Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 
   #   [TODO:var-name]
   # Arguments:
   #   $1: [TODO:description]
+  # Outputs:
+  #   [TODO:description]
   # Returns:
   #   [TODO:description]
   ################################################################################
