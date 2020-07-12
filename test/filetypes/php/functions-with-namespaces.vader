@@ -70,6 +70,30 @@ Expect php (generated comment containing the FQN):
    */
   function myFunction(Response $p1) {}
 
+# ------------------------------------------------------------------------------
+
+Given php (function where the type should NOT result in its FQN if let g:doge_php_settings = {'resolve_fqn': 1} is set):
+  use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
+
+  function myFunction(Response $p1) {}
+
+Do (trigger doge):
+  :let g:doge_php_settings = {'resolve_fqn': 0}\<CR>
+  :3\<CR>
+  \<C-d>
+  :let g:doge_php_settings = {'resolve_fqn': 1}\<CR>
+
+Expect php (generated comment containing the FQN):
+  use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
+
+  /**
+   * [TODO:description]
+   *
+   * @param Response $p1 [TODO:description]
+   * @return [TODO:type] [TODO:description]
+   */
+  function myFunction(Response $p1) {}
+
 # This should return 'BaseRoute' since it is defined as an alias.
 # ------------------------------------------------------------------------------
 

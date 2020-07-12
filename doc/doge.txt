@@ -202,7 +202,7 @@ doge#helpers#get_filetype()                      *doge#helpers#get_filetype()*
   Get the current filetype. Returns the original filetype if the current
   filetype is an alias.
 
-doge#indent#add({lnum}, {text})                            *doge#indent#add()*
+doge#indent#add({indent}, {text})                          *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
 
 doge#pattern#generate({pattern})                     *doge#pattern#generate()*

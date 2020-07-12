@@ -47,6 +47,8 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Commands](#commands)
     + [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
     + [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
+- [Language-specific configuration](#language-specific-configuration)
+    + [PHP](#php)
 - [FAQ](#faq)
     + [Using C / C++](#using-c--c)
       - [Prerequisites](#prerequisites)
@@ -253,6 +255,19 @@ template. It can complete the available doc standards for the current buffer.
 
 For more information on how to create custom doc standards you can read
 [Writing your first pattern](./CONTRIBUTING.md#writing-your-first-pattern).
+
+# Language-specific configuration
+
+Below is a list of language-specific configuration and their default values.
+Values can be changed inside your `.vimrc`.
+
+### PHP
+
+```vim
+let g:doge_php_settings = {
+\  'resolve_fqn': 1
+\}
+```
 
 # FAQ
 

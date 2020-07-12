@@ -22,6 +22,11 @@ set cpoptions&vim
 "        * @param QueryFactory $query_factory TODO
 "        */
 function! s:get_parameter_type_fqn(type) abort
+  " Don't resolve the FQN if the user disabled it.
+  if exists('g:doge_php_settings') && !get(g:doge_php_settings, 'resolve_fqn', 0)
+    return a:type
+  endif
+
   let l:fqn = a:type
 
   if a:type !~# '\\'
