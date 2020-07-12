@@ -39,6 +39,7 @@ Expect php (generated comment with @param and @return tags):
    * @param string $p2 [TODO:description]
    * @param [TODO:type] $p3 (optional) [TODO:description]
    * @param \Test\Lorem\Ipsum $p4 [TODO:description]
+   *
    * @return [TODO:type] [TODO:description]
    */
   function myFunction(
@@ -69,7 +70,7 @@ Given php (function with union-typed parameters with return types):
 
 Do (trigger doge):
   \<C-d>
-  :19\<CR>
+  :20\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
@@ -80,6 +81,7 @@ Expect php (generated comment with @param and @return tags):
    * @param string $p2 [TODO:description]
    * @param [TODO:type] $p3 (optional) [TODO:description]
    * @param \Test\Lorem\Ipsum $p4 [TODO:description]
+   *
    * @return object|array|null [TODO:description]
    */
   function myFunction(

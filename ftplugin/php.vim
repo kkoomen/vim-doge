@@ -106,6 +106,7 @@ call doge#buffer#register_doc_standard('phpdoc', [
 \      ' * !description',
 \      ' *',
 \      '%(parameters| * {parameters})%',
+\      '%(parameters| *)%',
 \      ' * @return {returnType|!type} !description',
 \      ' */',
 \    ],
