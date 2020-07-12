@@ -259,7 +259,6 @@ For more information on how to create custom doc standards you can read
 # Language-specific configuration
 
 Below is a list of language-specific configuration and their default values.
-Values can be changed inside your `.vimrc`.
 
 ### PHP
 
