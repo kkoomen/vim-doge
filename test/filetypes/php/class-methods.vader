@@ -32,7 +32,7 @@ Expect php (class method with nothing but the text 'TODO' and the @return tag):
 Given php (class method with parameters):
   class Test {
 
-    public function myMethod(array &$p1) {}
+    public function myMethod(?array &$p1) {}
 
   }
 
@@ -46,11 +46,11 @@ Expect php (generated comment with @param and @return tags):
     /**
      * [TODO:description]
      *
-     * @param array $p1 [TODO:description]
+     * @param array|null $p1 [TODO:description]
      *
      * @return [TODO:type] [TODO:description]
      */
-    public function myMethod(array &$p1) {}
+    public function myMethod(?array &$p1) {}
 
   }
 

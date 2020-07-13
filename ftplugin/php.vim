@@ -6,6 +6,12 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+if !exists('g:doge_php_settings')
+  let g:doge_php_settings = {
+  \  'resolve_fqn': 1,
+  \}
+endif
+
 let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
 let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
 

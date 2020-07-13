@@ -21,12 +21,8 @@ set cpoptions&vim
 "       /**
 "        * @param QueryFactory $query_factory TODO
 "        */
+" vint: next-line -ProhibitUnusedVariable
 function! s:get_parameter_type_fqn(type) abort
-  " Don't resolve the FQN if the user disabled it.
-  if exists('g:doge_php_settings') && !get(g:doge_php_settings, 'resolve_fqn', 0)
-    return a:type
-  endif
-
   let l:fqn = a:type
 
   if a:type !~# '\\'
@@ -52,6 +48,7 @@ endfunction
 " passed via the __construct() function. We use the {propValue} to strip out the
 " type hint of the {propValue} from the parameter list of the __construct()
 " function.
+" vint: next-line -ProhibitUnusedVariable
 function! s:get_property_type_via_constructor(propertyName) abort
   let l:type = ''
 
@@ -70,7 +67,7 @@ function! s:get_property_type_via_constructor(propertyName) abort
       " Constructor exists, grab the type hint and if it exists then set it.
       let l:property_type_hint_pattern = printf('\m\<\([[:alnum:]_\\]\+\)\s\+\($[[:alnum:]_]\+\)\>\ze\%(.\{-}$this->%s\s*=\s*\2\>\)', a:propertyName)
       let l:matches = matchlist(l:constructor_func_contents, l:property_type_hint_pattern)
-      if len(l:matches) > 1
+      if len(l:matches) > 1 && get(g:doge_php_settings, 'resolve_fqn', 1)
         let l:fqn = <SID>get_parameter_type_fqn(l:matches[1])
         let l:type = l:fqn
       endif
@@ -84,7 +81,7 @@ endfunction
 " function will adjust the input if needed.
 function! doge#preprocessors#php#tokens(tokens) abort
   if has_key(a:tokens, 'propertyName') && !empty(a:tokens['propertyName'])
-    let l:fqn = s:get_property_type_via_constructor(a:tokens['propertyName'])
+    let l:fqn = <SID>get_property_type_via_constructor(a:tokens['propertyName'])
     let a:tokens['type'] = l:fqn
   endif
 endfunction
@@ -95,8 +92,14 @@ function! doge#preprocessors#php#parameter_tokens(tokens) abort
   for l:token in a:tokens
     let l:token_idx = index(a:tokens, l:token)
     if has_key(l:token, 'type') && !empty(l:token['type'])
-      let l:fqn = s:get_parameter_type_fqn(l:token['type'])
-      let a:tokens[l:token_idx]['type'] = l:fqn
+      if get(g:doge_php_settings, 'resolve_fqn', 1)
+        let l:fqn = <SID>get_parameter_type_fqn(l:token['type'])
+        let a:tokens[l:token_idx]['type'] = l:fqn
+      endif
+
+      if l:token['type'][0] ==# '?' && l:token['type'] !~? 'null'
+        let a:tokens[l:token_idx]['type'] = a:tokens[l:token_idx]['type'][1:] . '|null'
+      endif
     endif
   endfor
   return a:tokens
