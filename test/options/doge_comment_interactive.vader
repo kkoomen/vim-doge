@@ -10,7 +10,7 @@ Do (trigger doge):
 
 Then (expect the cursor to be in the same position but shifted by the amount of lines inserted):
   AssertEqual 'n', mode()
-  AssertEqual 10, line('.')
+  AssertEqual 11, line('.')
   AssertEqual 1, col('.')
 
 Expect php (generated comment with @param and @return tags):
@@ -21,6 +21,7 @@ Expect php (generated comment with @param and @return tags):
    * @param string $p2 [TODO:description]
    * @param [TODO:type] $p3 (optional) [TODO:description]
    * @param \Drupal\core\Entity\Node $p4 [TODO:description]
+   *
    * @return [TODO:type] [TODO:description]
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
@@ -48,6 +49,7 @@ Expect php (generated comment with @param and @return tags):
    * @param string $p2 [TODO:description]
    * @param [TODO:type] $p3 (optional) [TODO:description]
    * @param \Drupal\core\Entity\Node $p4 [TODO:description]
+   *
    * @return [TODO:type] [TODO:description]
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
@@ -79,7 +81,7 @@ Do (trigger doge and try to jump forwards outside of the comment):
 
 Then (expect the last TODO in the comment to be selected):
   AssertEqual 's', mode()
-  AssertEqual 8, line('.')
+  AssertEqual 9, line('.')
   AssertEqual 24, col('.')
 
 # ------------------------------------------------------------------------------
@@ -143,6 +145,7 @@ Expect php (generated comment with @param tags with brief descriptions):
    * @param string $p2 Dor sit amet.
    * @param mixed $p3 (optional) Lorem ipsum dor sit amet.
    * @param \Drupal\core\Entity\Node $p4 Lorem ipsum dor sit amet.
+   *
    * @return string Lorem ipsum dor sit amet.   
    */
   function myFunction(array &$p1, string $p2, &$p3 = NULL, \Drupal\core\Entity\Node $p4) {}
