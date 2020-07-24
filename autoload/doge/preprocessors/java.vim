@@ -23,7 +23,7 @@ function! doge#preprocessors#java#tokens(tokens) abort
     let a:tokens['returnType'] = ''
   endif
   if has_key(a:tokens, 'exceptions') && !empty(a:tokens['exceptions'])
-    let a:tokens['exceptions'] = map(split(a:tokens['exceptions'], ','), {k, v -> doge#helpers#trim(v)})
+    let a:tokens['exceptions'] = map(split(a:tokens['exceptions'], ','), {k, v -> doge#helpers#trim(v) . ' !description'})
   endif
 endfunction
 

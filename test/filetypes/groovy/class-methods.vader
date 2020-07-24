@@ -78,8 +78,8 @@ Expect groovy (generated comments with @param and @return tags):
      *
      * @return [TODO:description]
      *
-     * @throws IOException
-     * @throws IndexOutOfBoundsException
+     * @throws IOException [TODO:description]
+     * @throws IndexOutOfBoundsException [TODO:description]
      */
     private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) throws IOException, IndexOutOfBoundsException {}
 
