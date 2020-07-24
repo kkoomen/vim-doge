@@ -1,9 +1,9 @@
 class Test {
   /**
    * [TODO:description]
-   * @param ElementDto childDto [TODO:description]
-   * @param int childId [TODO:description]
-   * @return void [TODO:description]
+   *
+   * @param childDto [TODO:description]
+   * @param childId [TODO:description]
    */
   private void setChildrenRecursively(ElementDto childDto, int childId) {
     //
@@ -11,14 +11,15 @@ class Test {
 
   /**
    * [TODO:description]
-   * @return void [TODO:description]
    */
   void foo();
 
   /**
    * [TODO:description]
-   * @param int childId [TODO:description]
-   * @return MstRelation [TODO:description]
+   *
+   * @param childId [TODO:description]
+   *
+   * @return [TODO:description]
    */
   @Override
   private MstRelation getUpwardRelation(int childId) {
@@ -27,8 +28,10 @@ class Test {
 
   /**
    * [TODO:description]
-   * @param int childId [TODO:description]
-   * @return MstRelation [TODO:description]
+   *
+   * @param childId [TODO:description]
+   *
+   * @return [TODO:description]
    */
   private MstRelation getUpwardRelation(int childId) {
     //
@@ -36,8 +39,10 @@ class Test {
 
   /**
    * [TODO:description]
-   * @param int parentId [TODO:description]
-   * @return ListResultBean [TODO:description]
+   *
+   * @param parentId [TODO:description]
+   *
+   * @return [TODO:description]
    */
   private ListResultBean<MstRelation> getAllRelation(int parentId) {
     //
@@ -45,9 +50,11 @@ class Test {
 
   /**
    * [TODO:description]
-   * @param Map map [TODO:description]
-   * @param int type [TODO:description]
-   * @return List [TODO:description]
+   *
+   * @param map [TODO:description]
+   * @param type [TODO:description]
+   *
+   * @return [TODO:description]
    */
   private List<Element> createSortedList(Map<Integer, ElementDto> map, int type) {
     //
@@ -55,9 +62,9 @@ class Test {
 
   /**
    * [TODO:description]
-   * @param int parentId [TODO:description]
-   * @param ListResultBean rels [TODO:description]
-   * @return void [TODO:description]
+   *
+   * @param parentId [TODO:description]
+   * @param rels [TODO:description]
    */
   private void removeRelations(int parentId, ListResultBean<MstRelation> rels) {
     //
@@ -66,59 +73,67 @@ class Test {
 
 /**
  * [TODO:description]
- * @param Map parameters [TODO:description]
- * @return void [TODO:description]
+ *
+ * @param parameters [TODO:description]
  */
 void foo(Map<String, Object> parameters) {
   //
 }
-/**
 
+/**
  * [TODO:description]
- * @param String p1 [TODO:description]
- * @param int p2 [TODO:description]
- * @param Boolean params [TODO:description]
- * @return void [TODO:description]
+ *
+ * @param p1 [TODO:description]
+ * @param p2 [TODO:description]
+ * @param params [TODO:description]
  */
 void MyParameterizedFunction(String p1, int p2, Boolean... params) {}
 
 /**
  * [TODO:description]
- * @param String p1 [TODO:description]
- * @param int p2 [TODO:description]
- * @param Boolean params [TODO:description]
- * @return void [TODO:description]
+ *
+ * @param p1 [TODO:description]
+ * @param p2 [TODO:description]
+ * @param params [TODO:description]
  */
 void MyParameterizedFunction(String p1, int p2, Boolean ... params) {}
 
 /**
  * [TODO:description]
- * @param String p1 [TODO:description]
- * @param int p2 [TODO:description]
- * @param Boolean params [TODO:description]
- * @return void [TODO:description]
+ *
+ * @param p1 [TODO:description]
+ * @param p2 [TODO:description]
+ * @param params [TODO:description]
  */
 void MyParameterizedFunction(String p1, int p2, Boolean ...params) {}
 
 /**
  * [TODO:description]
- * @return List [TODO:description]
+ *
+ * @return [TODO:description]
  */
 List<Element> createSortedList() {}
 
 /**
  * [TODO:description]
- * @param Collection scriptRequests [TODO:description]
- * @return Collection [TODO:description]
+ *
+ * @param scriptRequests [TODO:description]
+ *
+ * @return [TODO:description]
  */
 protected Collection<ScriptRequest> createSecureScriptRequests(Collection<ScriptRequest> scriptRequests) {}
 
 /**
  * [TODO:description]
- * @param IndexSettings indexSettings [TODO:description]
- * @param Environment env [TODO:description]
- * @param String name [TODO:description]
- * @param Settings settings [TODO:description]
- * @return void [TODO:description]
+ *
+ * @param indexSettings [TODO:description]
+ * @param env [TODO:description]
+ * @param name [TODO:description]
+ * @param settings [TODO:description]
+ *
+ * @return [TODO:description]
+ *
+ * @throws IOException
+ * @throws IndexOutOfBoundsException
  */
-public UkrainianAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) {}
+public Collection<ScriptRequest> UkrainianAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) throws IOException, IndexOutOfBoundsException {}

@@ -31,8 +31,8 @@ let s:pattern_base = {
 "
 " ==============================================================================
 let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\%([[:alnum:]_]\+\)(\(.\{-}\))\s*[;{]',
-\  'tokens': ['returnType', 'parameters'],
+\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\%([[:alnum:]_]\+\)(\(.\{-}\))\s*\%(throws\s\+\(\%(\%([[:alnum:]_]\+\)\%(,\s\+\)\?\)\+\)\)\?\s*[;{]',
+\  'tokens': ['returnType', 'parameters', 'exceptions'],
 \  'parameters': {
 \    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
 \    'tokens': ['type', 'name'],
@@ -51,7 +51,10 @@ call doge#buffer#register_doc_standard('javadoc', [
 \      ' * !description',
 \      '%(parameters| *)%',
 \      '%(parameters| * {parameters})%',
+\      '%(returnType| *)%',
 \      '%(returnType| * @return !description)%',
+\      '%(exceptions| *)%',
+\      '%(exceptions| * @throws {exceptions})%',
 \      ' */',
 \    ],
 \  }),
