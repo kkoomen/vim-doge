@@ -137,3 +137,17 @@ protected Collection<ScriptRequest> createSecureScriptRequests(Collection<Script
  * @throws IndexOutOfBoundsException
  */
 public Collection<ScriptRequest> UkrainianAnalyzerProvider(IndexSettings indexSettings, Environment env, String name, Settings settings) throws IOException, IndexOutOfBoundsException {}
+
+/**
+ * [TODO:description]
+ *
+ * @param p1 [TODO:description]
+ * @param p2 [TODO:description]
+ * @param params [TODO:description]
+ *
+ * @return [TODO:description]
+ *
+ * @throws IOException
+ * @throws IndexOutOfBoundsException
+ */
+private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) throws IOException, IndexOutOfBoundsException {}

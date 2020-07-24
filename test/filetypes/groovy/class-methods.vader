@@ -13,13 +13,14 @@ Given groovy (method without parameters):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :8\<CR>
+  :9\<CR>
   \<C-d>
 
 Expect groovy (method with 'TODO' and a @return tag):
   class Test {
     /**
      * [TODO:description]
+     *
      * @return [TODO:description]
      */
     List<Element> createSortedList() {}
@@ -55,7 +56,7 @@ Expect groovy (method with 'TODO' and a description):
 # ==============================================================================
 Given groovy (methods with parameters):
   class Test {
-    private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) {}
+    private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) throws IOException, IndexOutOfBoundsException {}
 
     ListResultBean<MstRelation> MyParameterizedMethod(String p1, int p2, Boolean... params) {}
   }
@@ -63,7 +64,7 @@ Given groovy (methods with parameters):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :12\<CR>
+  :16\<CR>
   \<C-d>
 
 Expect groovy (generated comments with @param and @return tags):
@@ -74,9 +75,13 @@ Expect groovy (generated comments with @param and @return tags):
      * @param p1 [TODO:description]
      * @param p2 [TODO:description]
      * @param params [TODO:description]
+     *
      * @return [TODO:description]
+     *
+     * @throws IOException
+     * @throws IndexOutOfBoundsException
      */
-    private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) {}
+    private static MstRelation MyParameterizedMethod(String p1, int p2, Boolean ...params) throws IOException, IndexOutOfBoundsException {}
 
     /**
      * [TODO:description]
@@ -84,6 +89,7 @@ Expect groovy (generated comments with @param and @return tags):
      * @param p1 [TODO:description]
      * @param p2 [TODO:description]
      * @param params [TODO:description]
+     *
      * @return [TODO:description]
      */
     ListResultBean<MstRelation> MyParameterizedMethod(String p1, int p2, Boolean... params) {}
