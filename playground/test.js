@@ -631,3 +631,56 @@ class Child extends Parent {
     return this.add(b);
   }
 }
+
+/**
+ * [TODO:description]
+ *
+ * @param {[TODO:type]} [TODO:name] - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+test({ idUser, userModel }: { idUser: ObjectId, userModel: string }) {}
+
+/**
+ * [TODO:description]
+ *
+ * @param {[TODO:type]} [TODO:name] - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+test(@Body() { idUser, userModel }: { idUser: ObjectId, userModel: string }) {}
+
+/**
+ * [TODO:description]
+ *
+ * @param {Model<T>} $model - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+test(@InjectModel(User.name) private readonly $model: Model<T>) {}
+
+/**
+ * [TODO:description]
+ *
+ * @param {Model<T>} model - [TODO:description]
+ * @return {[TODO:type]} [TODO:description]
+ */
+test(@InjectModel('User') private readonly model: Model<T>) {}
+
+class Test {
+  /**
+   * [TODO:description]
+   *
+   * @async
+   * @param {[TODO:type]} [TODO:name] - [TODO:description]
+   * @return {UserA & UserB} [TODO:description]
+   */
+  @Test()
+  async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }): UserA & UserB {}
+
+  /**
+   * [TODO:description]
+   *
+   * @async
+   * @param {[TODO:type]} [TODO:name] - [TODO:description]
+   * @return {Promise<UserA|UserB>} [TODO:description]
+   */
+  async test(@Body() { idUser, userModel }: { idUser: ObjectId, userModel: string }): Promise<UserA | UserB> {}
+}

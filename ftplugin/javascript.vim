@@ -24,7 +24,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 let s:pattern_base = {
 \  'parameters': {
-\    'match': '\m\%(\%(public\|private\|protected\)\?\s*\)\?\%(@[[:alnum:]_]\+(.\{-})\s\+\)\?\([[:alnum:]_$]\+\)?\?\%(\s*:\s*\([[:alnum:]._| ]\+\%(\[[[:alnum:][:space:]_[\],]*\]\)\?\|([[:alnum:].:_| ]\+)\s*=>\s*[[:alnum:]_.]\+\)\)\?\%(\s*=\s*\([[:alnum:]_.]\+(.\{-})\|[^,]\+\)\+\)\?',
+\    'match': '\m\%(\%(@[[:alnum:]_]\+(.\{-})\)\s\+\)\?\%(\%(\%(private\|protected\|public\|readonly\)\s\+\)\+\)\?\({\s*\%(\%([[:alnum:]_]\+\)\s*,\?\s*\)*\s*}\|[[:alnum:]_$]\+\)?\?\%(\s*:\s*\(\%(\%({\s*\%(\%([[:alnum:]_.]\+\s*:\s*[[:alnum:]_]\+\)\s*,\?\s*\)*\s*}\|[[:alnum:]|.]\+\[[[:alnum:]_[\]<>, ]*\]\|[[:alnum:]_.]\+\%(<[[:alnum:]_,<> ]\+>\)\?\|(.\{-})\s*=>\s*[[:alnum:]_]\+\)\%(\s*[&|]\s*\)\?\)\+\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
 \    'tokens': ['name', 'type', 'default'],
 \    'format': '@param {{type|!type}} %(default|[)%{name}%(default|])% - !description',
 \  },
@@ -74,7 +74,7 @@ unlet s:class_pattern['parameters']
 " function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(export\|export\s\+default\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*[{(]',
+\  'match': '\m^\%(\%(export\|export\s\+default\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(\%(\%(@[[:alnum:]_]\+(.\{-})\)\s\+\)\?.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>&]\+\))\?\)\?\s*[{(]',
 \  'tokens': ['static', 'async', 'generator', 'parameters', 'returnType'],
 \})
 
@@ -97,7 +97,6 @@ let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 " var myFunc = function*($p1 = 'value', p2 = [], p3, p4) {}
 " var myFunc = async function*($p1 = 'value', p2 = [], p3, p4) {}
 " var myFunc = async ($p1 = 'value', p2 = [], p3, p4) => {}
-" (p1: array = []) => (p2: string) => { console.log(5); }
 " (p1: array = []) => (p2: string) => { console.log(5); }
 " static myMethod({ b: number }): number {}
 " static async myMethod({ b: number }): number {}

@@ -70,6 +70,10 @@ function! s:token_replace(tokens, text) abort
       endfor
       let l:text = join(l:multiline_replacement, "\n")
     else
+      " A return type in some languages mightbe definedas 'TypeA & TypeB'.
+      " For the sake of the substitution process, we need to escape the '&'.
+      let l:token_value = substitute(l:token_value, '&', '\\&', 'g')
+
       if empty(l:token_value) && l:has_token_default_value
         let l:text = substitute(l:text, l:formatted_token, l:token_default_value, 'g')
       elseif !empty(l:token_value)

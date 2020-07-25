@@ -66,5 +66,19 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
   endif
 endfunction
 
+" A callback function being called after the parameter tokens have been
+" extracted. This function will adjust the input if needed.
+function! doge#preprocessors#javascript#parameter_tokens(tokens) abort
+  for l:token in a:tokens
+    let l:token_idx = index(a:tokens, l:token)
+    if has_key(l:token, 'type') && !empty(l:token['type']) && match(l:token['type'], '\m^\s*{') >= 0
+      let a:tokens[l:token_idx]['type'] = '!type'
+    endif
+    if has_key(l:token, 'name') && !empty(l:token['name']) && match(l:token['name'], '\m^\s*{') >= 0
+      let a:tokens[l:token_idx]['name'] = '!name'
+    endif
+  endfor
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

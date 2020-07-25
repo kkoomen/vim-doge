@@ -1,0 +1,71 @@
+# ==============================================================================
+# Functions with destructured parameters.
+# ==============================================================================
+Given typescript (functions with destructured parameters):
+  class Test {
+    @Test()
+    @Test()
+    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }) {}
+
+    @Test()
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }): UserA & UserB {}
+  }
+
+Do (trigger doge):
+  :4\<CR>
+  \<C-d>
+  :13\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with a description, @param and @return tags):
+  class Test {
+    /**
+     * [TODO:description]
+     *
+     * @param {[TODO:type]} [TODO:name] - [TODO:description]
+     * @return {[TODO:type]} [TODO:description]
+     */
+    @Test()
+    @Test()
+    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }) {}
+
+    /**
+     * [TODO:description]
+     *
+     * @async
+     * @param {[TODO:type]} [TODO:name] - [TODO:description]
+     * @return {UserA & UserB} [TODO:description]
+     */
+    @Test()
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }): UserA & UserB {}
+  }
+
+# ==============================================================================
+# Functions with destructured parameters.
+# ==============================================================================
+Given typescript (constructor with decorator and scoped parameters):
+  class Test {
+    constructor(
+      @InjectModel(User.name) private readonly $model: Model<T>,
+      @InjectModel('User') private readonly model: Model<T> 
+    ) {}
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with a description, @param and @return tags):
+  class Test {
+    /**
+     * [TODO:description]
+     *
+     * @param {Model<T>} $model - [TODO:description]
+     * @param {Model<T>} model - [TODO:description]
+     * @return {[TODO:type]} [TODO:description]
+     */
+    constructor(
+      @InjectModel(User.name) private readonly $model: Model<T>,
+      @InjectModel('User') private readonly model: Model<T> 
+    ) {}
+  }
