@@ -9,6 +9,13 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+if !exists('g:doge_python_settings')
+  let g:doge_python_settings = {
+  \  'single_quotes': 0,
+  \}
+endif
+
+
 let b:doge_pattern_single_line_comment = '\m#.\{-}$'
 let b:doge_pattern_multi_line_comment = '\m\(""".\{-}"""\|' . "'''.\\{-}'''" . '\)'
 

@@ -44,6 +44,8 @@ endif
 "   doge#preprocessors#<filetype>#parameter_tokens(tokens)
 "
 "   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
+"
+"   doge#preprocessors#<filetype>#template(template)
 
 " }}}
 

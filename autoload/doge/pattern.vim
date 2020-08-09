@@ -101,10 +101,19 @@ function! doge#pattern#generate(pattern) abort
     let l:tokens['parameters'] = l:formatted_params
   endif
 
+  let l:template = deepcopy(a:pattern['template'])
+
+  " Preprocess the template.
+  try
+    let l:preprocess_fn = printf('doge#preprocessors#%s#template', doge#helpers#get_filetype())
+    call function(l:preprocess_fn)(l:template)
+  catch /^Vim\%((\a\+)\)\=:E117/
+  endtry
+
   " Create the comment by replacing the tokens in the template with their
   " corresponding values.
   let l:comment = []
-  for l:line in a:pattern['template']
+  for l:line in l:template
     " If empty lines are present, just append them to ensure a whiteline is
     " inserted rather then completely removed. This allows us to insert some
     " whitelines in the comment template.
