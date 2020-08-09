@@ -67,7 +67,7 @@ function! s:get_property_type_via_constructor(propertyName) abort
       " Constructor exists, grab the type hint and if it exists then set it.
       let l:property_type_hint_pattern = printf('\m\<\([[:alnum:]_\\]\+\)\s\+\($[[:alnum:]_]\+\)\>\ze\%(.\{-}$this->%s\s*=\s*\2\>\)', a:propertyName)
       let l:matches = matchlist(l:constructor_func_contents, l:property_type_hint_pattern)
-      if len(l:matches) > 1 && get(g:doge_php_settings, 'resolve_fqn', 1)
+      if len(l:matches) > 1 && get(g:doge_php_settings, 'resolve_fqn')
         let l:fqn = <SID>get_parameter_type_fqn(l:matches[1])
         let l:type = l:fqn
       endif
@@ -92,7 +92,7 @@ function! doge#preprocessors#php#parameter_tokens(tokens) abort
   for l:token in a:tokens
     let l:token_idx = index(a:tokens, l:token)
     if has_key(l:token, 'type') && !empty(l:token['type'])
-      if get(g:doge_php_settings, 'resolve_fqn', 1)
+      if get(g:doge_php_settings, 'resolve_fqn')
         let l:fqn = <SID>get_parameter_type_fqn(l:token['type'])
         let a:tokens[l:token_idx]['type'] = l:fqn
       endif

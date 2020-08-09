@@ -49,6 +49,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
     + [PHP](#php)
+    + [Python](#python)
 - [FAQ](#faq)
     + [Using C / C++](#using-c--c)
       - [Prerequisites](#prerequisites)
@@ -265,6 +266,14 @@ Below is a list of language-specific configuration and their default values.
 ```vim
 let g:doge_php_settings = {
 \  'resolve_fqn': 1
+\}
+```
+
+### Python
+
+```vim
+let g:doge_python_settings = {
+\  'single_quotes': 1
 \}
 ```
 

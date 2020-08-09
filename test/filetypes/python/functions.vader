@@ -120,3 +120,24 @@ Expect python (generated comment with :param and :rtype tags):
     :rtype Iterator[int]: [TODO:description]
     """
     pass
+
+# ==============================================================================
+# Single quotes using the {'single_quote': 1} option.
+# ==============================================================================
+Given python (function where the quotes should be single quotes when {'single_quote': 1} is set):
+  def myFunc(p1 = 'string'):
+    pass
+
+Do (trigger doge):
+  :let g:doge_python_settings = {'single_quotes': 1}\<CR>
+  \<C-d>
+  :let g:doge_python_settings = {'single_quotes': 0}\<CR>
+
+Expect python (generated comment with :param tags):
+  def myFunc(p1 = 'string'):
+    '''
+    [TODO:description]
+
+    :param p1 [TODO:type]: [TODO:description]
+    '''
+    pass
