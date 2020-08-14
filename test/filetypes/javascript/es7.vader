@@ -9,7 +9,10 @@ Given javascript (class method with decorators):
       'bar'
     ]))
     @SkipJwtAuth()
-    async login(@CurrentUser() user: User, @Req() req: Request): Promise<User> {}
+    async login(
+      @CurrentUser() { id }: User,
+      @Req() req: Request
+    ): Promise<User> {}
   }
 
 Do (trigger doge):
@@ -22,7 +25,7 @@ Expect javascript (generated comment with @async, @param and @return tags):
      * [TODO:description]
      *
      * @async
-     * @param {User} user - [TODO:description]
+     * @param {User} [TODO:name] - [TODO:description]
      * @param {Request} req - [TODO:description]
      * @return {Promise<User>} [TODO:description]
      */
@@ -32,5 +35,8 @@ Expect javascript (generated comment with @async, @param and @return tags):
       'bar'
     ]))
     @SkipJwtAuth()
-    async login(@CurrentUser() user: User, @Req() req: Request): Promise<User> {}
+    async login(
+      @CurrentUser() { id }: User,
+      @Req() req: Request
+    ): Promise<User> {}
   }

@@ -22,6 +22,17 @@ let b:doge_patterns = doge#buffer#get_patterns()
 "   <param-access> @<decorator> <param-name>: <param-type> = <param-default-value>
 " ==============================================================================
 
+" \m
+" \%(\%(@[[:alnum:]_]\+(.\{-})\)\s\+\)\?
+"
+" \%(\%(\%(private\|protected\|public\|readonly\)\s\+\)\+\)\?
+"
+" \({\s*\%(\%([[:alnum:]_]\+\)\s*,\?\s*\)*\s*}\|[[:alnum:]_$]\+\)?\?
+"
+" \%(\s*:\s*\(\%(\%({\s*\%(\%([[:alnum:]_.]\+\s*:\s*[[:alnum:]_]\+\)\s*,\?\s*\)*\s*}\|[[:alnum:]|.]\+\[[[:alnum:]_[\]<>, ]*\]\|[[:alnum:]_.]\+\%(<[[:alnum:]_,<> ]\+>\)\?\|(.\{-})\s*=>\s*[[:alnum:]_]\+\)\%(\s*[&|]\s*\)\?\)\+\)\)\?
+"
+" \%(\s*=\s*\([^,]\+\)\)\?
+
 let s:pattern_base = {
 \  'parameters': {
 \    'match': '\m\%(\%(@[[:alnum:]_]\+(.\{-})\)\s\+\)\?\%(\%(\%(private\|protected\|public\|readonly\)\s\+\)\+\)\?\({\s*\%(\%([[:alnum:]_]\+\)\s*,\?\s*\)*\s*}\|[[:alnum:]_$]\+\)?\?\%(\s*:\s*\(\%(\%({\s*\%(\%([[:alnum:]_.]\+\s*:\s*[[:alnum:]_]\+\)\s*,\?\s*\)*\s*}\|[[:alnum:]|.]\+\[[[:alnum:]_[\]<>, ]*\]\|[[:alnum:]_.]\+\%(<[[:alnum:]_,<> ]\+>\)\?\|(.\{-})\s*=>\s*[[:alnum:]_]\+\)\%(\s*[&|]\s*\)\?\)\+\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
@@ -74,7 +85,7 @@ unlet s:class_pattern['parameters']
 " function pluck<T, K extends keyof T>(o: T, names: K[]): T[K][] {}
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(export\|export\s\+default\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\(\%(\%(@[[:alnum:]_]\+(.\{-})\)\s\+\)\?.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>&]\+\))\?\)\?\s*[{(]',
+\  'match': '\m^\%(\%(export\|export\s\+default\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\s*\(\%(\%(@[[:alnum:]_]\+(\s*.\{-})\s*\)\s\+\)\?.\{-}\)\s*)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>&]\+\))\?\)\?\s*[{(]',
 \  'tokens': ['static', 'async', 'generator', 'parameters', 'returnType'],
 \})
 
