@@ -32,8 +32,9 @@ Make sure that your $PATH and $LD_LIBRARY_PATH are set correctly.
 The libclang binary its location should be defined in the $LD_LIBRARY_PATH.
 """
 
-from clang.cindex import Index, CursorKind, Cursor
+from clang.cindex import Index, CursorKind, Cursor, Config
 import sys
+import subprocess
 import json
 import vim
 import os
@@ -133,6 +134,10 @@ def main():
     #
     # Example:
     #   ./libclang.py CXX_METHOD FUNCTION_DECL
+    config_distros_required = [b'"Manjaro Linux"\n', b'"Arch Linux"\n']
+    if subprocess.run(["lsb_release","-ds"],capture_output=True).stdout in config_distros_required:
+      Config.set_library_file("libclang.so")
+      
     filters = [getattr(CursorKind, arg) for arg in sys.argv]
 
     file_ext = vim.eval("expand('%:p:e')")
