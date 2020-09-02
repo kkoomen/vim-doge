@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "vim-doge",
+  "version": "2.8.0",
+  "description": "A Vim polyglot plugin for generating documentation",
+  "scripts": {
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkoomen/vim-doge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kkoomen/vim-doge/issues"
+  },
+  "homepage": "https://github.com/kkoomen/vim-doge#readme",
+  "author": "Kim 金可明 <koomen@protonmail.com>",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "conventional-changelog-cli": "^2.1.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^4.2.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
+}
