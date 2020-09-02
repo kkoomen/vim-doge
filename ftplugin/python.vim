@@ -56,7 +56,7 @@ let s:pattern_base = {
 " def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None]) -> Sequence[T]:
 " ------------------------------------------------------------------------------
 let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
+\  'match': '\m^\%(async\s\+\)\?def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
 \  'tokens': ['parameters', 'returnType'],
 \})
 

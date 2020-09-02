@@ -23,11 +23,27 @@ Given python (function without type hints):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
     pass
 
+  async def myFunc(p1 = 'string', p2 = 5, p3, p4):
+    pass
+
 Do (trigger doge):
+  \<C-d>
+  :12\<CR>
   \<C-d>
 
 Expect python (generated comment with :param tags):
   def myFunc(p1 = 'string', p2 = 5, p3, p4):
+    """
+    [TODO:description]
+
+    :param p1 [TODO:type]: [TODO:description]
+    :param p2 [TODO:type]: [TODO:description]
+    :param p3 [TODO:type]: [TODO:description]
+    :param p4 [TODO:type]: [TODO:description]
+    """
+    pass
+
+  async def myFunc(p1 = 'string', p2 = 5, p3, p4):
     """
     [TODO:description]
 
