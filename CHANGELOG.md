@@ -1,3 +1,7 @@
+## [2.8.1](https://github.com/kkoomen/vim-doge/compare/v2.8.0...v2.8.1) (2020-09-02)
+
+
+
 # [2.8.0](https://github.com/kkoomen/vim-doge/compare/v2.7.1...v2.8.0) (2020-09-02)
 
 
