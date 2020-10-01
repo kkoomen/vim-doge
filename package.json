@@ -32,5 +32,9 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "tree-sitter": "^0.17.0",
+    "tree-sitter-typescript": "^0.16.1"
   }
 }

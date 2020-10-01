@@ -36,7 +36,10 @@ function! s:token_replace(tokens, text) abort
     let l:conditional_pattern = '\m%(' . l:token . '|\(.\{-}\))%'
     if l:text =~# l:conditional_pattern
       let l:conditional_pattern_replacement_value = '\1'
-      if (type(l:token_value) == v:t_string && empty(l:token_value)) || (type(l:token_value) == v:t_list && len(l:token_value) < 1)
+      if (type(l:token_value) == v:t_string && empty(l:token_value))
+            \ || (type(l:token_value) == v:t_list && len(l:token_value) == 0)
+            \ || (type(l:token_value) == v:t_none && l:token_value == v:null)
+            \ || (type(l:token_value) == v:t_bool && l:token_value == v:false)
         let l:conditional_pattern_replacement_value = ''
         let l:empty_conditional_pattern_value = 1
       endif
@@ -48,6 +51,7 @@ function! s:token_replace(tokens, text) abort
             \ 'g'
             \)
     endif
+
 
     " Skip if the token does not exists in the text.
     if l:text !~# l:formatted_token
@@ -70,9 +74,12 @@ function! s:token_replace(tokens, text) abort
       endfor
       let l:text = join(l:multiline_replacement, "\n")
     else
+
       " A return type in some languages mightbe definedas 'TypeA & TypeB'.
       " For the sake of the substitution process, we need to escape the '&'.
-      let l:token_value = substitute(l:token_value, '&', '\\&', 'g')
+      if !empty(l:token_value)
+        let l:token_value = substitute(l:token_value, '&', '\\&', 'g')
+      endif
 
       if empty(l:token_value) && l:has_token_default_value
         let l:text = substitute(l:text, l:formatted_token, l:token_default_value, 'g')

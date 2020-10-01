@@ -80,15 +80,16 @@ endfunction
 
 ""
 " @public
-" Run a generator which will produce all the parameters and return the output.
-function! doge#helpers#generator(generator) abort
-  let l:generator = g:doge_dir . '/generators/' . a:generator['file']
-  if filereadable(l:generator) != v:false
-    let l:result = doge#python#file(l:generator, a:generator['args'])
+" Run a parser which will produce all the parameters and return the output.
+function! doge#helpers#parser(args) abort
+  let l:parser = g:doge_dir . '/parsers/' . b:doge_parser . '.js'
+  if filereadable(l:parser) != v:false
+    let l:args = [expand('%:p'), line('.')] + a:args
+    let l:result = system('node ' . l:parser . ' ' . join(l:args, ' '))
     try
       return json_decode(l:result)
     catch /.*/
-      echo '[DoGe] ' . a:generator['file'] . ' generator failed.'
+      echo '[DoGe] ' . b:doge_parser . ' parser failed'
       echo l:result
     endtry
   endif

@@ -7,47 +7,9 @@ let s:comment_placeholder = doge#helpers#placeholder()
 " @public
 " Generates a comment based on a given pattern.
 function! doge#pattern#generate(pattern) abort
-  " Assuming multiline function expressions won't be longer than 15 lines.
-  let l:lines_raw = getline('.', line('.') + 15)
-  let l:lines = map(l:lines_raw, { key, line ->
-        \ substitute(line, b:doge_pattern_single_line_comment, '' ,'g') })
-
-  " Skip if the cursor doesn't start with text.
-  if empty(doge#helpers#trim(l:lines[0]))
+  let l:tokens = doge#helpers#parser(a:pattern['node_types'])
+  if type(l:tokens) != v:t_dict
     return 0
-  endif
-
-  " Check if a generator is available. Otherwise we do a fallback on the regex.
-  let l:use_generator = has_key(a:pattern, 'generator')
-  if l:use_generator
-    let l:tokens = doge#helpers#generator(a:pattern['generator'])
-    if type(l:tokens) != v:t_dict
-      return 0
-    endif
-  else
-    " Skip if the current line does not match the main pattern.
-    let l:glue = has_key(a:pattern, 'normalize')
-          \ && a:pattern['normalize'] == v:false ? "\n" : ' '
-    let l:curr_line_raw = escape(doge#helpers#trim(join(l:lines, l:glue)), '\')
-    if l:curr_line_raw !~# a:pattern['match']
-      return 0
-    endif
-
-    " Remove comments to ensure we can match
-    " our patterns with and without comments.
-    let l:curr_line = substitute(
-          \ l:curr_line_raw,
-          \ b:doge_pattern_multi_line_comment,
-          \ '',
-          \ 'g'
-          \ )
-
-    " Extract the primary tokens.
-    let l:tokens = get(doge#token#extract(
-          \ l:curr_line,
-          \ a:pattern['match'],
-          \ a:pattern['tokens']
-          \ ), 0, {})
   endif
 
   try
@@ -58,25 +20,16 @@ function! doge#pattern#generate(pattern) abort
 
   " Split the 'parameters' token value into a list.
   if has_key(a:pattern, 'parameters') && has_key(l:tokens, 'parameters')
-    let l:params_dict = a:pattern['parameters']
     let l:params = l:tokens['parameters']
-
-    " Go through each parameter, match the regex, extract the token values and
-    " replace the 'parameters' key with the formatted version.
-    let l:formatted_params = []
-
-    let l:param_tokens = l:use_generator ? l:params : doge#token#extract(
-          \ l:params,
-          \ l:params_dict['match'],
-          \ l:params_dict['tokens']
-          \ )
 
     " Preprocess the extracted parameter tokens.
     try
       let l:preprocess_fn = printf('doge#preprocessors#%s#parameter_tokens', doge#helpers#get_filetype())
-      call function(l:preprocess_fn)(l:param_tokens)
+      call function(l:preprocess_fn)(l:params)
     catch /^Vim\%((\a\+)\)\=:E117/
     endtry
+
+    let l:formatted_params = []
 
     " Some values may contain pipe characters as input. This will happen in
     " typed languages where the type hint allows multiple types.
@@ -85,12 +38,12 @@ function! doge#pattern#generate(pattern) abort
     "   function test($p1: string, p2: Foo | Bar | Baz) { ... }
     "
     " Therefore, we have to escape the pipe characters in the input.
-    let l:param_tokens = doge#helpers#deepsubstitute(l:param_tokens, '\m|', '<Bar>', 'g')
+    let l:params = doge#helpers#deepsubstitute(l:params, '\m|', '<Bar>', 'g')
 
-    for l:param_token in l:param_tokens
+    for l:param in l:params
       let l:format = doge#token#replace(
-            \ l:param_token,
-            \ l:params_dict['format']
+            \ l:param,
+            \ a:pattern['parameters']['format']
             \ )
       if type(l:format) == v:t_list
         call add(l:formatted_params, join(l:format, "\n"))
@@ -130,7 +83,7 @@ function! doge#pattern#generate(pattern) abort
     endfor
   endfor
 
-  if a:pattern['insert'] ==# 'below'
+  if b:doge_insert ==# 'below'
     let l:comment_indent = shiftwidth()
     let l:comment_lnum_insert_position = line('.')
   else
@@ -156,7 +109,7 @@ function! doge#pattern#generate(pattern) abort
 
   " Enable interactive mode.
   if g:doge_comment_interactive == v:true
-    if a:pattern['insert'] ==# 'below'
+    if b:doge_insert ==# 'below'
       let l:todo_match = search(s:comment_placeholder, 'nW', l:comment_lnum_insert_position + len(l:comment))
     else
       let l:todo_match = search(s:comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
