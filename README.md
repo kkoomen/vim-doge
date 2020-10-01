@@ -130,7 +130,7 @@ Here is the full list of available doc standards per filetype:
 
 | Variable                           | Default             | Supported                                                                                                                                    |
 | :--------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| `g:doge_doc_standard_python`       | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                  |
+| `g:doge_doc_standard_python`       | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'google_no_types'`, `'sphinx'`                                                                              |
 | `g:doge_doc_standard_php`          | `'phpdoc'`          | `'phpdoc'`                                                                                                                                   |
 | `g:doge_doc_standard_javascript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
 | `g:doge_doc_standard_typescript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
