@@ -23,6 +23,7 @@ let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
       \ 'reST',
       \ 'numpy',
       \ 'google',
+      \ 'google_no_types',
       \ 'sphinx',
       \ ])
 let b:doge_doc_standard = doge#buffer#get_doc_standard('python')
