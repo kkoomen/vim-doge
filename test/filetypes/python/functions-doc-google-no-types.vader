@@ -1,0 +1,91 @@
+# ==============================================================================
+# Functions using the Google_no_types doc standard without types.
+# ==============================================================================
+Given python(function without paramters without return type where b:doge_doc_standard='google_no_types'):
+  def myFunc():
+    pass
+
+
+Do (trigger doge):
+  :let b:doge_doc_standard='google_no_types'\<CR>
+  \<C-d>
+
+Expect python (generated comment with nothing but the summary and description 'TODO'):
+  def myFunc():
+    """[TODO:summary]
+
+    [TODO:description]
+    """
+    pass
+
+# ------------------------------------------------------------------------------
+
+Given python(function with parameters without type hints without return type where b:doge_doc_standard='google_no_types'):
+  def myFunc(p1, p2, p3 = ''):
+    pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='google_no_types'\<CR>
+  \<C-d>
+
+Expect python (generated comment with Args tags):
+  def myFunc(p1, p2, p3 = ''):
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1: [TODO:description]
+      p2: [TODO:description]
+      p3: [TODO:description]
+    """
+    pass
+
+# ------------------------------------------------------------------------------
+
+Given python(function with parameters with type hints without return type where b:doge_doc_standard='google_no_types'):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
+    pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='google_no_types'\<CR>
+  \<C-d>
+
+Expect python (generated comment with Args tags):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []):
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1: [TODO:description]
+      p2: [TODO:description]
+      p3: [TODO:description]
+    """
+    pass
+
+# ------------------------------------------------------------------------------
+
+Given python(function with parameters with type hints with return type where b:doge_doc_standard='google_no_types'):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
+    pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='google_no_types'\<CR>
+  \<C-d>
+
+Expect python (generated comment with Args and Returns tags):
+  def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1: [TODO:description]
+      p2: [TODO:description]
+      p3: [TODO:description]
+
+    Returns:
+      [TODO:description]
+    """
+    pass
