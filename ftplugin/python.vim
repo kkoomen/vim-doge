@@ -148,5 +148,25 @@ call doge#buffer#register_doc_standard('google', [
 \  }),
 \])
 
+call doge#buffer#register_doc_standard('google_no_types', [
+\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\    'parameters': {
+\      'format': '{name}: !description',
+\    },
+\    'template': [
+\      '"""!summary',
+\      '',
+\      '!description',
+\      '%(parameters|)%',
+\      '%(parameters|Args:)%',
+\      '%(parameters|\t{parameters})%',
+\      '%(returnType|)%',
+\      '%(returnType|Returns:)%',
+\      '%(returnType|\t!description)%',
+\      '"""',
+\    ],
+\  }),
+\])
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
