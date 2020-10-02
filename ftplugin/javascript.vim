@@ -18,7 +18,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 " let s:object_functions_pattern = doge#helpers#deepextend(s:pattern_base, {
 " \  'match': '\m^[[:punct:]]\?\([[:alnum:]_-]\+\)[[:punct:]]\?\s*:\s*\(async\)\?\s*\%(function\)\?\s*\%([[:alnum:]_]\+\)\?(\(.\{-}\))\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\%(\s*=>\s*\)\?\s*[({]',
-" \  'tokens': ['funcName', 'async', 'parameters', 'return_type'],
+" \  'tokens': ['funcName', 'async', 'parameters', 'returnType'],
 " \})
 
 " let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
@@ -29,17 +29,17 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 " let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " \  'match': '\m^\%(\%(export\|export\s\+default\|public\|private\|protected\)\s\+\)*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\%([[:alnum:]_$]\+\)\?\s*\%(<[[:alnum:][:space:]_,=]*>\)\?\s*(\s*\(\%(\%(@[[:alnum:]_]\+(\s*.\{-})\)\s\+\)\?.\{-}\)\s*)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>&]\+\))\?\)\?\s*[{(]',
-" \  'tokens': ['static', 'async', 'generator', 'parameters', 'return_type'],
+" \  'tokens': ['static', 'async', 'generator', 'parameters', 'returnType'],
 " \})
 
 " let s:prototype_pattern = doge#helpers#deepextend(s:pattern_base, {
 " \  'match': '\m^\([[:alnum:]_$]\+\)\.prototype\.\([[:alnum:]_$]\+\)\s*=\s*\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?({\?\([^>]\{-}\)}\?)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\(=>\s*\)\?[{(]',
-" \  'tokens': ['className', 'funcName', 'async', 'generator', 'parameters', 'return_type'],
+" \  'tokens': ['className', 'funcName', 'async', 'generator', 'parameters', 'returnType'],
 " \})
 
 " let s:fat_arrow_function_pattern = doge#helpers#deepextend(s:pattern_base, {
 " \  'match': '\m^\%(\%(export\|export\s\+default\)\s\+\)\?\%(\%(\%(var\|const\|let\)\s\+\)\?\%(\(static\)\s\+\)\?\([[:alnum:]_$]\+\)\)\?\s*=\s*\(static\s\+\)\?\(async\s\+\)\?\%(function\(\*\)\?\s*\)\?\(({\?[^>]\{-}}\?)\|[[:alnum:]_$]\+\)\%(\s*:\s*(\?\([[:alnum:][:space:]_[\].,|<>]\+\))\?\)\?\s*\%(=>\s*\)\?[^ ]\{-}',
-" \  'tokens': ['static', 'funcName', 'static', 'async', 'generator', 'parameters', 'return_type'],
+" \  'tokens': ['static', 'funcName', 'static', 'async', 'generator', 'parameters', 'returnType'],
 " \})
 
 " ==============================================================================
@@ -50,7 +50,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 call doge#buffer#register_doc_standard('jsdoc', [
 \  {
-\    'node_types': ['class_declaration'],
+\    'node_types': ['class_declaration', 'class'],
 \    'template': [
 \      '/**',
 \      ' * !description',
@@ -60,9 +60,26 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \    ],
 \  },
 \  {
+\    'node_types': ['member_expression'],
+\    'parameters': {
+\      'format': '@param {{type|!type}} %(default|[)%{name|!name}%(default|])% - !description',
+\    },
+\    'template': [
+\      '/**',
+\      ' * !description',
+\      ' *',
+\      ' * @function {functionName}#{propertyName}',
+\      '%(async| * @async)%',
+\      '%(generator| * @generator)%',
+\      '%(parameters| * {parameters})%',
+\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      ' */',
+\    ],
+\  },
+\  {
 \    'node_types': ['arrow_function', 'function', 'function_declaration', 'method_definition', 'generator_function_declaration'],
 \    'parameters': {
-\      'format': '@param {{type|!type}} %(default|[)%{name}%(default|])% - !description',
+\      'format': '@param {{type|!type}} %(default|[)%{name|!name}%(default|])% - !description',
 \    },
 \    'template': [
 \      '/**',
@@ -72,7 +89,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(async| * @async)%',
 \      '%(generator| * @generator)%',
 \      '%(parameters| * {parameters})%',
-\      '%(return_type| * @return {{return_type|!type}} !description)%',
+\      '%(returnType| * @return {{returnType|!type}} !description)%',
 \      ' */',
 \    ],
 \  },

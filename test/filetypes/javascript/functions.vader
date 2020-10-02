@@ -70,7 +70,6 @@ Expect javascript (generated comment with @functon and @param tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {[TODO:type]} [$p1] - [TODO:description]
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
@@ -88,11 +87,9 @@ Given javascript (function as variable with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function and @param tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {string} [$p1] - [TODO:description]
    * @param {string[]} [p2] - [TODO:description]
    * @param {number} p3 - [TODO:description]
@@ -130,11 +127,9 @@ Given javascript (prototype function without parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with a description, @function and @return tags):
   /**
    * [TODO:description]
    *
-   * @function Person#greet
    * @return {[TODO:type]} [TODO:description]
    */
   Person.prototype.greet = function () {}
@@ -153,8 +148,8 @@ Expect javascript (generated comment with @param and @return tags):
    * [TODO:description]
    *
    * @param {string} $p1 - [TODO:description]
-   * @param {Foo|Bar|Baz} p2 - [TODO:description]
-   * @return {Foo|Bar} [TODO:description]
+   * @param {Foo | Bar | Baz} p2 - [TODO:description]
+   * @return {(Foo | Bar)} [TODO:description]
    */
   function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
@@ -288,7 +283,7 @@ Expect javascript (generated comment with a description, @param and @return tags
    *
    * @param {(xs: MapItem) => Boolean} x - [TODO:description]
    * @param {(xs: MapItem) => Boolean} y - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @return {(xs: Map<MapKey, MapItem>) => MapItem[]} [TODO:description]
    */
   export function test<MapItem = unknown, MapKey = unknown>(
     x: (xs: MapItem) => Boolean,

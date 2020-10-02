@@ -22,7 +22,7 @@ function! s:token_replace(tokens, text) abort
     " - {name|default}
     " so if the line contains a pipe character with a default value then we
     " grab that value and remove it from the text.
-    let l:stripped_token = matchlist(l:text, '\m{\([^|{}]\+\)\%(|\([^}]*\)\)\?}')
+    let l:stripped_token = matchlist(l:text, '\m{\(' . l:token . '\)\%(|\([^}]*\)\)\?}')
     let l:token_default_value = doge#helpers#trim(get(l:stripped_token, 2, ''))
     let l:has_token_default_value = !empty(l:token_default_value)
 
@@ -101,9 +101,6 @@ function! s:token_replace(tokens, text) abort
 
   " Replace the <Bar> back to a pipe character.
   let l:text = substitute(l:text, '\m<Bar>', '|', 'g')
-
-  " For JSDoc we replace the type hints 'typeA | type B' with 'typeA|typeB'.
-  let l:text = substitute(l:text, '\m\s*|\s*', '|', 'g')
 
   " Empty lines will be added to the empty in the doge#pattern#generate()
   " function and to indicate it should be prevented from rendering we have to

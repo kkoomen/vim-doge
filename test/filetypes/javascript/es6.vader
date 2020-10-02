@@ -8,77 +8,32 @@ Do (trigger doge):
   \<C-d>
 
 Expect javascript (no generated comment):
+  /**
+   * [TODO:description]
+   *
+   * @return {[TODO:type]} [TODO:description]
+   */
   () => {}
 
 # ==============================================================================
 # Fat-arrow functions with a single parameter without return type.
 # ==============================================================================
 Given javascript (fat-arrow function with a single parameter without return type):
-  export default const foo = bar => bar
-
   export const foo = bar => {
     return bar
   }
 
 Do (trigger doge):
   \<C-d>
-  :10\<CR>
-  \<C-d>
 
-Expect javascript (generated comment with @function, @param and @return tags):
+Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @function foo
-   * @param {[TODO:type]} bar - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
-   */
-  export default const foo = bar => bar
-
-  /**
-   * [TODO:description]
-   *
-   * @function foo
    * @param {[TODO:type]} bar - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
    */
   export const foo = bar => {
-    return bar
-  }
-
-# ==============================================================================
-# Fat-arrow functions with a single parameter with return type.
-# ==============================================================================
-Given javascript (fat-arrow function with a single parameter with return type):
-  export const foo = bar: Test => bar
-
-  export const foo = bar: Test => {
-    return bar
-  }
-
-Do (trigger doge):
-  \<C-d>
-  :10\<CR>
-  \<C-d>
-
-Expect javascript (generated comment with @function, @param and @return tags):
-  /**
-   * [TODO:description]
-   *
-   * @function foo
-   * @param {[TODO:type]} bar - [TODO:description]
-   * @return {Test} [TODO:description]
-   */
-  export const foo = bar: Test => bar
-
-  /**
-   * [TODO:description]
-   *
-   * @function foo
-   * @param {[TODO:type]} bar - [TODO:description]
-   * @return {Test} [TODO:description]
-   */
-  export const foo = bar: Test => {
     return bar
   }
 
@@ -95,11 +50,10 @@ Do (trigger doge):
   :13\<CR>
   \<C-d>
 
-Expect javascript (generated comment with @function, @param and @return tags):
+Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {[TODO:type]} [$p1] - [TODO:description]
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
@@ -111,7 +65,6 @@ Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {[TODO:type]} [$p1] - [TODO:description]
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
@@ -124,23 +77,22 @@ Expect javascript (generated comment with @function, @param and @return tags):
 # Fat-arrow functions with parameters with type hints.
 # ==============================================================================
 Given javascript (fat-arrow function with parameters with type hints):
-  const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
+  const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[] => {}
 
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function, @param and @return tags):
+Expect javascript (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {string} [$p1] - [TODO:description]
    * @param {string[]} [p2] - [TODO:description]
    * @param {number} p3 - [TODO:description]
    * @param {float} p4 - [TODO:description]
    * @return {string[]} [TODO:description]
    */
-  const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[]  {}
+  const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[] => {}
 
 # ==============================================================================
 # Fat-arrow functions with destructuring.
@@ -159,16 +111,15 @@ Given javascript (fat-arrow functions with destructuring):
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :13\<CR>
+  :12\<CR>
   \<C-d>
 
-Expect javascript (generated comments with @static, @function, @param and @return tags):
+Expect javascript (generated comments with @static, @param and @return tags):
   class Test {
     /**
      * [TODO:description]
      *
-     * @function myMethod
-     * @param {number} b - [TODO:description]
+     * @param {[TODO:type]} [TODO:name] - [TODO:description]
      * @return {[TODO:type]} [TODO:description]
      */
     myMethod = ({ b: number }) => {
@@ -179,7 +130,7 @@ Expect javascript (generated comments with @static, @function, @param and @retur
      * [TODO:description]
      *
      * @static
-     * @param {number} b - [TODO:description]
+     * @param {[TODO:type]} [TODO:name] - [TODO:description]
      * @return {number} [TODO:description]
      */
     static myMethod({ b: number }): number {
@@ -243,11 +194,9 @@ Given javascript (prototype fat-arrow function without parameters without type h
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with a description, @function and @return tags):
   /**
    * [TODO:description]
    *
-   * @function Person#greet
    * @return {[TODO:type]} [TODO:description]
    */
   Person.prototype.greet = () => {};
@@ -265,10 +214,9 @@ Expect javascript (generated comment with @function, @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {string} $p1 - [TODO:description]
-   * @param {Foo|Bar|Baz} p2 - [TODO:description]
-   * @return {Foo|Bar} [TODO:description]
+   * @param {Foo | Bar | Baz} p2 - [TODO:description]
+   * @return {(Foo | Bar)} [TODO:description]
    */
   const myFunc = ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
 
@@ -286,9 +234,8 @@ Expect javascript (generated comment with @async, @function, @param and @return 
    * [TODO:description]
    *
    * @async
-   * @function myFunc
    * @param {string} $p1 - [TODO:description]
-   * @param {Foo|Bar|Baz} p2 - [TODO:description]
-   * @return {Foo|Bar} [TODO:description]
+   * @param {Foo | Bar | Baz} p2 - [TODO:description]
+   * @return {(Foo | Bar)} [TODO:description]
    */
   const myFunc = async ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};

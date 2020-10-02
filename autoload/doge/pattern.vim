@@ -45,6 +45,7 @@ function! doge#pattern#generate(pattern) abort
             \ l:param,
             \ a:pattern['parameters']['format']
             \ )
+
       if type(l:format) == v:t_list
         call add(l:formatted_params, join(l:format, "\n"))
       else

@@ -8,7 +8,10 @@ const NodeType = {
   FUNCTION_DECLARATION: 'function_declaration',
   METHOD_DEFINITION: 'method_definition',
   GENERATOR_FUNCTION_DECLARATION: 'generator_function_declaration',
+  GENERATOR_FUNCTION: 'generator_function',
   CLASS_DECLARATION: 'class_declaration',
+  CLASS: 'class',
+  MEMBER_EXPRESSION: 'member_expression',
 }
 
 const parser = new Parser();
@@ -43,26 +46,48 @@ function traverse(node, lineNumber) {
           generator: false,
           async: false,
           name: null,
-          type_parameters: [],
+          typeParameters: [],
           parameters: [],
-          return_type: null,
+          returnType: null,
         };
         parseFunction(node, result);
-        done = true;
         console.log(JSON.stringify(result));
+        done = true;
         break;
       }
 
+      case NodeType.MEMBER_EXPRESSION: {
+        var result = {
+          functionName: null,
+          propertyName: null,
+          generator: false,
+          async: false,
+          typeParameters: [],
+          parameters: [],
+          returnType: null,
+        };
+        parsePrototypeFunction(node, result);
+        console.log(JSON.stringify(result));
+        done = true;
+        break;
+      }
+
+      case NodeType.CLASS:
       case NodeType.CLASS_DECLARATION: {
         var result = {
           name: null,
-          type_parameters: [],
+          typeParameters: [],
           parentName: null,
           interfaceName: null,
         };
         parseClass(node, result);
-        done = true;
         console.log(JSON.stringify(result));
+        done = true;
+        break;
+      }
+
+      default: {
+        console.error(`Unable to handle node type: ${node.type}`)
         break;
       }
     }
@@ -89,7 +114,7 @@ function parseClass(node, result) {
           .children
           .filter((n) => n.type === 'type_parameter')
           .forEach((cn) => {
-            var typeparam = {};
+            var typeparam = { name: null, default: null };
 
             cn.children.forEach((tpn) => {
               if (tpn.type === 'type_identifier') {
@@ -101,9 +126,7 @@ function parseClass(node, result) {
               }
             })
 
-            if (Object.keys(typeparam).length > 0) {
-              result.type_parameters.push(typeparam);
-            }
+            result.typeParameters.push(typeparam);
           });
         break;
       }
@@ -121,7 +144,7 @@ function parseClass(node, result) {
                     .text;
                 }
 
-                if (cn.type === 'type_identifier') {
+                if (['type_identifier', 'nested_type_identifier'].includes(cn.type)) {
                   result.parentName = cn.text
                 }
               });
@@ -151,18 +174,55 @@ function parseClass(node, result) {
   });
 }
 
-function parseFunction(node, result) {
+function parsePrototypeFunction(node, result) {
   if (node.childCount === 0) return;
 
-  if (node.type === 'arrow_function' && node.parent.type === 'variable_declarator') {
+  node.children.forEach(((childNode) => {
+    switch (childNode.type) {
+      case 'member_expression': {
+        result.functionName = childNode.child(0).text;
+        break;
+      }
+      case 'property_identifier': {
+        result.propertyName = childNode.text;
+        break;
+      }
+    }
+  }));
+
+  const funcNode = node.parent.children.pop();
+  if (funcNode) {
+    parseFunction(funcNode, result);
+  }
+}
+
+
+function parseFunction(node, result) {
+  if (node.childCount === 0) return;
+  let isSingleParamArrowFunc = false;
+
+  if ([NodeType.GENERATOR_FUNCTION_DECLARATION, NodeType.GENERATOR_FUNCTION].includes(node.type)) {
+    result.generator = true;
+  }
+
+  if (['arrow_function', 'function'].includes(node.type) && node.parent.type === 'variable_declarator') {
+    // handle scenario: const foo = (bar) => bar;
     result.name = node.parent.child(0).text;
+
+    if (node.child(0).type === 'identifier') {
+      // handle scenario: const foo = bar => bar;
+      result.parameters.push({ name: node.child(0).text, type: null, default: null });
+      isSingleParamArrowFunc = true;
+    }
   }
 
   node.children.forEach((childNode) => {
     switch (childNode.type) {
       case 'property_identifier':
       case 'identifier': {
-        result.name = childNode.text;
+        if (childNode.parent.parent.type !== 'variable_declarator') {
+          result.name = childNode.text;
+        }
         break;
       }
       case 'accessibility_modifier': {
@@ -193,73 +253,39 @@ function parseFunction(node, result) {
               }
             })
 
-            if (Object.keys(typeparam).length > 0) {
-              result.type_parameters.push(typeparam);
-            }
+            result.typeParameters.push(typeparam);
           });
         break;
       }
       case 'type_annotation': {
-        result.return_type = childNode.children.filter((n) => n.type !== ':').shift().text;
+        result.returnType = childNode.children.filter((n) => n.type !== ':').shift().text;
         break;
       }
       case 'formal_parameters': {
-        childNode
-          .children
-          .filter((cn) => ['required_parameter', 'rest_parameter'].includes(cn.type))
-          .forEach((cn) => {
-            const param = { type: null, name: null, default: null };
+        if (!isSingleParamArrowFunc) {
+          childNode
+            .children
+            .filter((cn) => ['required_parameter', 'rest_parameter', 'optional_parameter'].includes(cn.type))
+            .forEach((cn) => {
+              const param = { name: null, type: null, default: null };
 
-            cn.children.forEach((pn) => {
-              if (pn.type === 'object_pattern') {
-                pn
-                  .children
-                  .filter((spn) => ['pair', 'shorthand_property_identifier'].includes(spn.type))
-                  .forEach((spn) => {
-                    if (!param.props) {
-                      param.props = [];
-                    }
+              cn.children.forEach((pn) => {
+                if (pn.type === 'identifier') {
+                  param.name = pn.text;
+                }
 
-                    const subparam = {};
+                if (pn.type === 'type_annotation') {
+                  param.type = pn.children.filter((tc) => tc.type !== ':').shift().text;
+                }
 
-                    if (spn.type === 'shorthand_property_identifier') {
-                      subparam.name = spn.text;
-                    }
+                if (pn.previousSibling && pn.previousSibling.type === '=') {
+                  param.default = pn.text;
+                }
+              });
 
-                    if (spn.type === 'pair') {
-                      subparam.name = spn.children.shift().text;
-                      const paramTypeChild = spn.children.pop();
-                      if (paramTypeChild.type === 'assignment_expression') {
-                        subparam.type = paramTypeChild.children.shift().text;
-                        subparam.default = paramTypeChild.children.pop().text;
-                      } else {
-                        subparam.type = paramTypeChild.text;
-                      }
-                    }
-
-                    if (Object.keys(subparam).length > 0) {
-                      param.props.push(subparam);
-                    }
-                  });
-              }
-
-              if (pn.type === 'identifier') {
-                param.name = pn.text;
-              }
-
-              if (pn.type === 'type_annotation') {
-                param.type = pn.children.filter((tc) => tc.type !== ':').shift().text;
-              }
-
-              if (pn.previousSibling?.type === '=') {
-                param.default = pn.text;
-              }
-            });
-
-            if (Object.keys(param).length > 0) {
               result.parameters.push(param);
-            }
-          });
+            });
+        }
         break;
       }
     }

@@ -32,7 +32,7 @@ Given javascript (class with extends without implements):
 
 Do (trigger doge):
   \<C-d>
-  :8\<CR>
+  :7\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @extends):

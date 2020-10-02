@@ -84,13 +84,21 @@ endfunction
 function! doge#helpers#parser(args) abort
   let l:parser = g:doge_dir . '/parsers/' . b:doge_parser . '.js'
   if filereadable(l:parser) != v:false
-    let l:args = [expand('%:p'), line('.')] + a:args
+    let l:cursor_pos = getpos('.')
+    let l:current_line = l:cursor_pos[1]
+    let l:tempfile = tempname()
+    call execute('%!tee ' . l:tempfile, 'silent!')
+    let l:args = [l:tempfile, l:current_line] + a:args
     let l:result = system('node ' . l:parser . ' ' . join(l:args, ' '))
+
     try
       return json_decode(l:result)
     catch /.*/
       echo '[DoGe] ' . b:doge_parser . ' parser failed'
       echo l:result
+    finally
+      call setpos('.', l:cursor_pos)
+      call delete(l:tempfile)
     endtry
   endif
   return 0
