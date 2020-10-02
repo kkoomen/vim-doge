@@ -2,12 +2,15 @@
 # Functions without parameters.
 # ==============================================================================
 Given php (function without parameters):
+  <?php
   function myFunc(/* inline comment */) {}
 
 Do (trigger doge):
+  :2\<CR>
   \<C-d>
 
 Expect php (generated comment with nothing but the text 'TODO'):
+  <?php
   /**
    * [TODO:description]
    *
@@ -19,6 +22,7 @@ Expect php (generated comment with nothing but the text 'TODO'):
 # Functions with parameters.
 # ==============================================================================
 Given php (function with parameters):
+  <?php
   function myFunction(
     array &$p1 /* inline comment */,
     string $p2,
@@ -29,9 +33,11 @@ Given php (function with parameters):
   }
 
 Do (trigger doge):
+  :2\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   /**
    * [TODO:description]
    *
@@ -55,12 +61,13 @@ Expect php (generated comment with @param and @return tags):
 # Functions with parameters with return types
 # ==============================================================================
 Given php (function with union-typed parameters with return types):
+  <?php
   function myFunction(
-    array|ListInterface &$p1 /* inline comment */,
+    ListInterface &$p1 /* inline comment */,
     string $p2,
     &$p3 = NULL,
     \Test\Lorem\Ipsum $p4 // inline comment
-  ): object|array|null {
+  ): object {
     //
   }
 
@@ -69,27 +76,29 @@ Given php (function with union-typed parameters with return types):
   }
 
 Do (trigger doge):
+  :2\<CR>
   \<C-d>
-  :20\<CR>
+  :21\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   /**
    * [TODO:description]
    *
-   * @param array|ListInterface $p1 [TODO:description]
+   * @param ListInterface $p1 [TODO:description]
    * @param string $p2 [TODO:description]
    * @param [TODO:type] $p3 (optional) [TODO:description]
    * @param \Test\Lorem\Ipsum $p4 [TODO:description]
    *
-   * @return object|array|null [TODO:description]
+   * @return object [TODO:description]
    */
   function myFunction(
-    array|ListInterface &$p1 /* inline comment */,
+    ListInterface &$p1 /* inline comment */,
     string $p2,
     &$p3 = NULL,
     \Test\Lorem\Ipsum $p4 // inline comment
-  ): object|array|null {
+  ): object {
     //
   }
 

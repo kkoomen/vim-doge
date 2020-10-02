@@ -4,6 +4,7 @@
 # Should resolve its corresponding type defined in the constructor.
 # ==============================================================================
 Given php (class properties above and below the constructor should should resolve its corresponding type via the constructor):
+  <?php
   use Symfony\Component\HttpFoundation\Response;
 
   class Test {
@@ -25,18 +26,19 @@ Given php (class properties above and below the constructor should should resolv
   }
 
 Do (trigger doge):
-  :5\<CR>
+  :6\<CR>
   \<C-d>
-  :10\<CR>
+  :11\<CR>
   \<C-d>
-  :15\<CR>
+  :16\<CR>
   \<C-d>
-  :28\<CR>
+  :29\<CR>
   \<C-d>
-  :33\<CR>
+  :34\<CR>
   \<C-d>
 
 Expect php (generated comments at all properties and constructor function):
+  <?php
   use Symfony\Component\HttpFoundation\Response;
 
   class Test {

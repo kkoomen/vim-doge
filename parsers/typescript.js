@@ -34,6 +34,7 @@ traverse(tree.rootNode, lineNumber);
 // =============================================================================
 
 function parserHandler(parser, node, result) {
+  if (node.childCount === 0) return;
   parser(node, result);
   console.log(JSON.stringify(result));
   done = true;
@@ -107,8 +108,6 @@ function traverse(node, lineNumber) {
 }
 
 function parseClass(node, result) {
-  if (node.childCount === 0) return;
-
   node.children.forEach((childNode) => {
     switch(childNode.type) {
       case 'type_identifier': {
@@ -181,8 +180,6 @@ function parseClass(node, result) {
 }
 
 function parsePrototypeFunction(node, result) {
-  if (node.childCount === 0) return;
-
   node.children.forEach(((childNode) => {
     switch (childNode.type) {
       case 'member_expression': {
@@ -203,7 +200,6 @@ function parsePrototypeFunction(node, result) {
 }
 
 function parseFunction(node, result) {
-  if (node.childCount === 0) return;
   let isSingleParamArrowFunc = false;
 
   if ([NodeType.GENERATOR_FUNCTION_DECLARATION, NodeType.GENERATOR_FUNCTION].includes(node.type)) {

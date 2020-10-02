@@ -87,7 +87,7 @@ function! doge#helpers#parser(args) abort
     let l:cursor_pos = getpos('.')
     let l:current_line = l:cursor_pos[1]
     let l:tempfile = tempname()
-    call execute('%!tee ' . l:tempfile, 'silent!')
+    keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
     let l:args = [l:tempfile, l:current_line] + a:args
     let l:result = system('node ' . l:parser . ' ' . join(l:args, ' '))
 
