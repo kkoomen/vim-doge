@@ -33,16 +33,52 @@ traverse(tree.rootNode, lineNumber);
 // METHODS
 // =============================================================================
 
+function parserHandler(parser, node, result) {
+  parser(node, result);
+  console.log(JSON.stringify(result));
+  done = true;
+}
+
 function traverse(node, lineNumber) {
   if (node.startPosition.row === lineNumber && nodeTypes.includes(node.type) && done === false) {
     switch (node.type) {
+      case NodeType.MEMBER_EXPRESSION: {
+        const result = {
+          functionName: null,
+          propertyName: null,
+          generator: false,
+          async: false,
+          typeParameters: [],
+          parameters: [],
+          returnType: null,
+        };
+        const prototypeIdentifier = node.child(0).children.pop();
+        if (prototypeIdentifier && prototypeIdentifier.text === 'prototype') {
+          parserHandler(parsePrototypeFunction, node, result);
+        }
+        break;
+      }
+
+      case NodeType.CLASS:
+      case NodeType.CLASS_DECLARATION: {
+        const result = {
+          name: null,
+          typeParameters: [],
+          parentName: null,
+          interfaceName: null,
+        };
+        parserHandler(parseClass, node, result);
+        break;
+      }
+
       case NodeType.ARROW_FUNCTION:
       case NodeType.FUNCTION:
       case NodeType.FUNCTION_DECLARATION:
       case NodeType.FUNCTION_SIGNATURE:
       case NodeType.METHOD_DEFINITION:
+      case NodeType.GENERATOR_FUNCTION:
       case NodeType.GENERATOR_FUNCTION_DECLARATION: {
-        var result = {
+        const result = {
           visibility: null,
           static: false,
           generator: false,
@@ -52,39 +88,7 @@ function traverse(node, lineNumber) {
           parameters: [],
           returnType: null,
         };
-        parseFunction(node, result);
-        console.log(JSON.stringify(result));
-        done = true;
-        break;
-      }
-
-      case NodeType.MEMBER_EXPRESSION: {
-        var result = {
-          functionName: null,
-          propertyName: null,
-          generator: false,
-          async: false,
-          typeParameters: [],
-          parameters: [],
-          returnType: null,
-        };
-        parsePrototypeFunction(node, result);
-        console.log(JSON.stringify(result));
-        done = true;
-        break;
-      }
-
-      case NodeType.CLASS:
-      case NodeType.CLASS_DECLARATION: {
-        var result = {
-          name: null,
-          typeParameters: [],
-          parentName: null,
-          interfaceName: null,
-        };
-        parseClass(node, result);
-        console.log(JSON.stringify(result));
-        done = true;
+        parserHandler(parseFunction, node, result);
         break;
       }
 
@@ -116,7 +120,7 @@ function parseClass(node, result) {
           .children
           .filter((n) => n.type === 'type_parameter')
           .forEach((cn) => {
-            var typeparam = { name: null, default: null };
+            const typeparam = { name: null, default: null };
 
             cn.children.forEach((tpn) => {
               if (tpn.type === 'type_identifier') {
@@ -243,7 +247,7 @@ function parseFunction(node, result) {
           .children
           .filter((n) => n.type === 'type_parameter')
           .forEach((cn) => {
-            var typeparam = { name: null, default: null };
+            const typeparam = { name: null, default: null };
 
             cn.children.forEach((tpn) => {
               if (tpn.type === 'type_identifier') {
@@ -269,7 +273,12 @@ function parseFunction(node, result) {
             .children
             .filter((cn) => ['required_parameter', 'rest_parameter', 'optional_parameter'].includes(cn.type))
             .forEach((cn) => {
-              const param = { name: null, type: null, default: null };
+              const param = {
+                name: null,
+                type: null,
+                default: null,
+                optional: cn.type === 'optional_parameter',
+              };
 
               cn.children.forEach((pn) => {
                 if (pn.type === 'identifier') {
@@ -282,6 +291,7 @@ function parseFunction(node, result) {
 
                 if (pn.previousSibling && pn.previousSibling.type === '=') {
                   param.default = pn.text;
+                  param.optional = true;
                 }
               });
 

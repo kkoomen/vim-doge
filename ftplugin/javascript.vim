@@ -82,9 +82,9 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \    ],
 \  },
 \  {
-\    'node_types': ['arrow_function', 'function', 'function_declaration', 'function_signature', 'method_definition', 'generator_function_declaration'],
+\    'node_types': ['arrow_function', 'function', 'function_declaration', 'function_signature', 'method_definition', 'generator_function', 'generator_function_declaration'],
 \    'parameters': {
-\      'format': '@param {{type|!type}} %(default|[)%{name|!name}%(default|])% - !description',
+\      'format': '@param {{type|!type}} %(optional|[)%{name|!name}%(optional|])% - !description',
 \    },
 \    'typeParameters': {
 \      'format': '@template {name|!name} - !description',

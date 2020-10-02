@@ -198,12 +198,16 @@ Expect javascript (generated comment with a description, @param and @return tags
   function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
-# Async generator functions with parameters without type-hints.
+# Generator functions.
 # ==============================================================================
-Given javascript (async generator function with parameters without type hints):
+Given javascript (generator functions):
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
+  var perfectSquares = function*(p1) {};
+
 Do (trigger doge):
+  \<C-d>
+  :14\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @async, @param and @return tags):
@@ -219,6 +223,15 @@ Expect javascript (generated comment with @async, @param and @return tags):
    * @return {Promise<[TODO:type]>} [TODO:description]
    */
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
+
+  /**
+   * [TODO:description]
+   *
+   * @generator
+   * @param {[TODO:type]} p1 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  var perfectSquares = function*(p1) {};
 
 # ==============================================================================
 # Class with functions with parameters and return type.
@@ -267,25 +280,3 @@ Expect javascript (generated comment with a description, @param and @return tags
     private printSomething(something?: string): void {}
 
   }
-
-Given javascript (advanced function type parameters):
-  export function test<MapItem = unknown, MapKey = unknown>(
-    x: (xs: MapItem) => Boolean,
-    y: (xs: MapItem) => Boolean,
-  ): (xs: Map<MapKey, MapItem>) => MapItem[] {}
-
-Do (trigger doge):
-  \<C-d>
-
-Expect javascript (generated comment with a description, @param and @return tags):
-  /**
-   * [TODO:description]
-   *
-   * @param {(xs: MapItem) => Boolean} x - [TODO:description]
-   * @param {(xs: MapItem) => Boolean} y - [TODO:description]
-   * @return {(xs: Map<MapKey, MapItem>) => MapItem[]} [TODO:description]
-   */
-  export function test<MapItem = unknown, MapKey = unknown>(
-    x: (xs: MapItem) => Boolean,
-    y: (xs: MapItem) => Boolean,
-  ): (xs: Map<MapKey, MapItem>) => MapItem[] {}
