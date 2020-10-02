@@ -6,6 +6,7 @@ const NodeType = {
   ARROW_FUNCTION: 'arrow_function',
   FUNCTION: 'function',
   FUNCTION_DECLARATION: 'function_declaration',
+  FUNCTION_SIGNATURE: 'function_signature',
   METHOD_DEFINITION: 'method_definition',
   GENERATOR_FUNCTION_DECLARATION: 'generator_function_declaration',
   GENERATOR_FUNCTION: 'generator_function',
@@ -38,6 +39,7 @@ function traverse(node, lineNumber) {
       case NodeType.ARROW_FUNCTION:
       case NodeType.FUNCTION:
       case NodeType.FUNCTION_DECLARATION:
+      case NodeType.FUNCTION_SIGNATURE:
       case NodeType.METHOD_DEFINITION:
       case NodeType.GENERATOR_FUNCTION_DECLARATION: {
         var result = {
@@ -139,7 +141,7 @@ function parseClass(node, result) {
                 if (cn.type === 'generic_type') {
                   result.parentName = cn
                     .children
-                    .filter((n) => n.type === 'type_identifier')
+                  .filter((n) => ['type_identifier', 'nested_type_identifier'].includes(n.type))
                     .shift()
                     .text;
                 }
@@ -241,7 +243,7 @@ function parseFunction(node, result) {
           .children
           .filter((n) => n.type === 'type_parameter')
           .forEach((cn) => {
-            var typeparam = { type: null, name: null, default: null };
+            var typeparam = { name: null, default: null };
 
             cn.children.forEach((tpn) => {
               if (tpn.type === 'type_identifier') {

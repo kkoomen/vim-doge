@@ -55,6 +55,34 @@ function! doge#pattern#generate(pattern) abort
     let l:tokens['parameters'] = l:formatted_params
   endif
 
+  " Split the 'parameters' token value into a list.
+  if has_key(a:pattern, 'typeParameters') && has_key(l:tokens, 'typeParameters')
+    let l:typeparams = l:tokens['typeParameters']
+
+    " Preprocess the extracted parameter tokens.
+    try
+      let l:preprocess_fn = printf('doge#preprocessors#%s#type_parameter_tokens', doge#helpers#get_filetype())
+      call function(l:preprocess_fn)(l:typeparams)
+    catch /^Vim\%((\a\+)\)\=:E117/
+    endtry
+
+    let l:formatted_typeparams = []
+
+    for l:param in l:typeparams
+      let l:format = doge#token#replace(
+            \ l:param,
+            \ a:pattern['typeParameters']['format']
+            \ )
+
+      if type(l:format) == v:t_list
+        call add(l:formatted_typeparams, join(l:format, "\n"))
+      else
+        call add(l:formatted_typeparams, l:format)
+      endif
+    endfor
+    let l:tokens['typeParameters'] = l:formatted_typeparams
+  endif
+
   let l:template = deepcopy(a:pattern['template'])
 
   " Preprocess the template.

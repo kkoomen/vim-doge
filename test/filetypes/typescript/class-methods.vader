@@ -5,16 +5,16 @@ Given typescript (functions with destructured parameters):
   class Test {
     @Test()
     @Test()
-    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }) {}
+    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2? = false) {}
 
     @Test()
-    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }): UserA & UserB {}
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2? = false): UserA & UserB {}
   }
 
 Do (trigger doge):
   :4\<CR>
   \<C-d>
-  :13\<CR>
+  :14\<CR>
   \<C-d>
 
 Expect typescript (generated comment with a description, @param and @return tags):
@@ -23,21 +23,23 @@ Expect typescript (generated comment with a description, @param and @return tags
      * [TODO:description]
      *
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
+     * @param {[TODO:type]} [p2] - [TODO:description]
      * @return {[TODO:type]} [TODO:description]
      */
     @Test()
     @Test()
-    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }) {}
+    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2? = false) {}
 
     /**
      * [TODO:description]
      *
      * @async
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
+     * @param {[TODO:type]} [p2] - [TODO:description]
      * @return {UserA & UserB} [TODO:description]
      */
     @Test()
-    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }): UserA & UserB {}
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2? = false): UserA & UserB {}
   }
 
 # ==============================================================================
