@@ -202,7 +202,6 @@ function parsePrototypeFunction(node, result) {
   }
 }
 
-
 function parseFunction(node, result) {
   if (node.childCount === 0) return;
   let isSingleParamArrowFunc = false;
