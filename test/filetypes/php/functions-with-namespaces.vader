@@ -10,7 +10,7 @@ Given php (function where the type should result in its FQN):
   <?php
   use Symfony\Component\HttpFoundation\Response;
 
-  function myFunction(Response $p1) {}
+  function myFunction(Response $p1): Response {}
 
 Do (trigger doge):
   :4\<CR>
@@ -25,9 +25,9 @@ Expect php (generated comment containing the FQN):
    *
    * @param \Symfony\Component\HttpFoundation\Response $p1 [TODO:description]
    *
-   * @return [TODO:type] [TODO:description]
+   * @return \Symfony\Component\HttpFoundation\Response [TODO:description]
    */
-  function myFunction(Response $p1) {}
+  function myFunction(Response $p1): Response {}
 
 # ------------------------------------------------------------------------------
 
