@@ -261,21 +261,21 @@ Expect javascript (generated comment with a description, @param and @return tags
     /**
      * [TODO:description]
      *
-     * @param {string} something - [TODO:description]
+     * @param {string} [something] - [TODO:description]
      */
     public printSomething(something?: string): void {}
 
     /**
      * [TODO:description]
      *
-     * @param {string} something - [TODO:description]
+     * @param {string} [something] - [TODO:description]
      */
     protected printSomething(something?: string): void {}
 
     /**
      * [TODO:description]
      *
-     * @param {string} something - [TODO:description]
+     * @param {string} [something] - [TODO:description]
      */
     private printSomething(something?: string): void {}
 

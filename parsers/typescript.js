@@ -212,7 +212,7 @@ function parseFunction(node, result) {
 
     if (node.child(0).type === 'identifier') {
       // handle scenario: const foo = bar => bar;
-      result.parameters.push({ name: node.child(0).text, type: null, default: null });
+      result.parameters.push({ name: node.child(0).text, type: null, default: null, optional: false });
       isSingleParamArrowFunc = true;
     }
   }
