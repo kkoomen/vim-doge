@@ -15,9 +15,10 @@ RUN npm install -g node-gyp
 
 ENV NODE_PATH="/usr/lib/node_modules"
 RUN npm -g config set user root
-RUN npm install -g tree-sitter \
-      tree-sitter-typescript \
-      tree-sitter-php
+RUN npm install -g tree-sitter
+RUN npm install -g tree-sitter-php
+RUN npm install -g tree-sitter-typescript
+RUN npm install -g tree-sitter-python
 
 # Install addition python modules.
 RUN pip3 install --upgrade pip vim-vint==0.3.15 setuptools

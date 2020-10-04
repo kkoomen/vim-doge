@@ -15,9 +15,8 @@ if !exists('g:doge_python_settings')
   \}
 endif
 
-
-let b:doge_pattern_single_line_comment = '\m#.\{-}$'
-let b:doge_pattern_multi_line_comment = '\m\(""".\{-}"""\|' . "'''.\\{-}'''" . '\)'
+let b:doge_parser = 'python'
+let b:doge_insert = 'below'
 
 let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
       \ 'reST',
@@ -28,45 +27,16 @@ let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
 let b:doge_doc_standard = doge#buffer#get_doc_standard('python')
 let b:doge_patterns = doge#buffer#get_patterns()
 
-" ==============================================================================
-"
-" Define our base for every pattern.
-"
-" ==============================================================================
-let s:pattern_base = {
-\  'parameters': {
-\    'match': '\m\([[:alnum:]_]\+\)\%(\s*:\s*\([[:alnum:]_.]\+\%(\[[[:alnum:]_[\],[:space:]]*\]\)\?\)\)\?\%(\s*=\s*\([^,]\+\)\)\?',
-\    'tokens': ['name', 'type', 'default'],
-\  },
-\  'insert': 'below',
-\}
-
-" ==============================================================================
-"
-" Define the pattern types.
-"
-" ==============================================================================
-
-" ------------------------------------------------------------------------------
-" Matches regular function expressions and class methods.
-" ------------------------------------------------------------------------------
-" def __init__(self: MyClass):
-" def myMethod(self: MyClass, p1: Sequence[T]) -> Generator[int, float, str]:
-" def call(self, *args: str, **kwargs: str) -> str:
-" def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None]) -> Sequence[T]:
-" ------------------------------------------------------------------------------
-let s:function_and_class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(async\s\+\)\?def\s\+\%([^(]\+\)\s*(\(.\{-}\))\%(\s*->\s*\(.\{-}\)\)\?\s*:',
-\  'tokens': ['parameters', 'returnType'],
-\})
 
 " ==============================================================================
 "
 " Define the doc standards.
 "
 " ==============================================================================
+
 call doge#buffer#register_doc_standard('reST', [
-\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\  {
+\    'node_types': ['function_definition'],
 \    'parameters': {
 \      'format': ':param {name} {type|!type}: !description',
 \    },
@@ -78,11 +48,12 @@ call doge#buffer#register_doc_standard('reST', [
 \      '%(returnType|:rtype {returnType}: !description)%',
 \      '"""',
 \    ],
-\  }),
+\  },
 \])
 
 call doge#buffer#register_doc_standard('sphinx', [
-\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\  {
+\    'node_types': ['function_definition'],
 \    'parameters': {
 \      'format': [
 \        ':param {name}: !description%(default|, defaults to {default})%',
@@ -98,11 +69,12 @@ call doge#buffer#register_doc_standard('sphinx', [
 \      '%(returnType|:rtype: {returnType})%',
 \      '"""',
 \    ],
-\  }),
+\  },
 \])
 
 call doge#buffer#register_doc_standard('numpy', [
-\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\  {
+\    'node_types': ['function_definition'],
 \    'parameters': {
 \      'format': [
 \        '{name} : {type|!type}',
@@ -125,11 +97,12 @@ call doge#buffer#register_doc_standard('numpy', [
 \      '%(returnType|\t!description)%',
 \      '"""',
 \    ],
-\  }),
+\  },
 \])
 
 call doge#buffer#register_doc_standard('google', [
-\  doge#helpers#deepextend(s:function_and_class_method_pattern, {
+\  {
+\    'node_types': ['function_definition'],
 \    'parameters': {
 \      'format': '{name} ({type|!type}%(default|, optional)%): !description',
 \    },
@@ -145,7 +118,7 @@ call doge#buffer#register_doc_standard('google', [
 \      '%(returnType|\t{returnType}: !description)%',
 \      '"""',
 \    ],
-\  }),
+\  },
 \])
 
 let &cpoptions = s:save_cpo
