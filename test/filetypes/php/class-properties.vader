@@ -3,7 +3,7 @@
 #
 # Should resolve its corresponding type defined in the constructor.
 # ==============================================================================
-Given php (class properties above and below the constructor should should resolve its corresponding type via the constructor):
+Given php (class properties above and below the constructor which should resolve its corresponding type via the constructor):
   <?php
   use Symfony\Component\HttpFoundation\Response;
 
