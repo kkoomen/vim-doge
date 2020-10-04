@@ -9,9 +9,11 @@ enum NodeType {
   FIELD_DECLARATION = 'field_declaration',
 }
 
-export class CParserService extends BaseParserService implements CustomParserService {
+export class CParserService
+  extends BaseParserService
+  implements CustomParserService {
   constructor(
-    private readonly rootNode: SyntaxNode,
+    readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
     private readonly nodeTypes: string[],
   ) {
@@ -19,7 +21,11 @@ export class CParserService extends BaseParserService implements CustomParserSer
   }
 
   public traverse(node: SyntaxNode): void {
-    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
+    if (
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
+    ) {
       switch (node.type) {
         case NodeType.FUNCTION_DEFINITION:
         case NodeType.DECLARATION: {
@@ -45,7 +51,7 @@ export class CParserService extends BaseParserService implements CustomParserSer
         }
 
         default: {
-          console.error(`Unable to handle node type: ${node.type}`)
+          console.error(`Unable to handle node type: ${node.type}`);
           break;
         }
       }
@@ -66,13 +72,23 @@ export class CParserService extends BaseParserService implements CustomParserSer
         }
 
         case 'function_declarator': {
-          this.result.name = childNode.children.filter((n: SyntaxNode) => n.type === 'identifier').shift()?.text;
+          this.result.name = childNode.children
+            .filter((n: SyntaxNode) => n.type === 'identifier')
+            .shift()?.text;
 
-          childNode
-            .children
-            .filter((n: SyntaxNode) => ['parameter_list', 'parameter_declaration'].includes(n.type))
-            .map((n: SyntaxNode) => n.children.filter((cn: SyntaxNode) => cn.type === 'parameter_declaration'))
-            .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
+          childNode.children
+            .filter((n: SyntaxNode) =>
+              ['parameter_list', 'parameter_declaration'].includes(n.type),
+            )
+            .map((n: SyntaxNode) =>
+              n.children.filter(
+                (cn: SyntaxNode) => cn.type === 'parameter_declaration',
+              ),
+            )
+            .reduce(
+              (items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr],
+              [],
+            )
             .forEach((n: SyntaxNode) => {
               const param: Record<string, any> = { name: null, type: null };
 
@@ -82,18 +98,23 @@ export class CParserService extends BaseParserService implements CustomParserSer
                 }
 
                 if (cn.type === 'pointer_declarator') {
-                  param.name = cn.children.filter((cn: SyntaxNode) => cn.type === 'identifier').shift()?.text;
+                  param.name = cn.children
+                    .filter((c: SyntaxNode) => c.type === 'identifier')
+                    .shift()?.text;
                 }
 
                 if (cn.type === 'identifier') {
                   param.name = cn.text;
                 }
-              })
+              });
 
               this.result.parameters.push(param);
-            })
+            });
           break;
         }
+
+        default:
+          break;
       }
     });
   }
@@ -103,7 +124,11 @@ export class CParserService extends BaseParserService implements CustomParserSer
       switch (childNode.type) {
         case 'type_identifier': {
           this.result.name = childNode.text;
+          break;
         }
+
+        default:
+          break;
       }
     });
   }
@@ -113,7 +138,11 @@ export class CParserService extends BaseParserService implements CustomParserSer
       switch (childNode.type) {
         case 'field_identifier': {
           this.result.name = childNode.text;
+          break;
         }
+
+        default:
+          break;
       }
     });
   }

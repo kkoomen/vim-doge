@@ -5,9 +5,13 @@
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "preversion": "npm run format && npm run lint && npm run build",
+    "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
-    "build": "rimraf ./dist && tsc -p tsconfig.json",
-    "start": "npm run build && node dist/index.js"
+    "build": "npm run prebuild && tsc -p tsconfig.json",
+    "start": "npm run build && node dist/index.js",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\""
   },
   "repository": {
     "type": "git",
@@ -26,8 +30,18 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --ext ts"
+    ],
+    "*.{md,html,json,js}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "tree-sitter": "^0.17.0",
@@ -41,10 +55,18 @@
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^9.1.2",
     "@types/node": "^14.11.2",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
     "conventional-changelog-cli": "^2.1.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-typescript": "^11.0.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
     "husky": "^4.2.5",
+    "lint-staged": "^10.4.0",
     "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
     "ts-node": "^9.0.0"
   }

@@ -15,9 +15,11 @@ enum NodeType {
   MEMBER_EXPRESSION = 'member_expression',
 }
 
-export class TypeScriptParserService extends BaseParserService implements CustomParserService {
+export class TypeScriptParserService
+  extends BaseParserService
+  implements CustomParserService {
   constructor(
-    private readonly rootNode: SyntaxNode,
+    readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
     private readonly nodeTypes: string[],
   ) {
@@ -25,7 +27,11 @@ export class TypeScriptParserService extends BaseParserService implements Custom
   }
 
   public traverse(node: SyntaxNode): void {
-    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
+    if (
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
+    ) {
       switch (node.type) {
         case NodeType.MEMBER_EXPRESSION: {
           this.result = {
@@ -78,7 +84,7 @@ export class TypeScriptParserService extends BaseParserService implements Custom
         }
 
         default: {
-          console.error(`Unable to handle node type: ${node.type}`)
+          console.error(`Unable to handle node type: ${node.type}`);
           break;
         }
       }
@@ -91,17 +97,20 @@ export class TypeScriptParserService extends BaseParserService implements Custom
 
   private parseClass(node: SyntaxNode): void {
     node.children.forEach((childNode: SyntaxNode) => {
-      switch(childNode.type) {
+      switch (childNode.type) {
         case 'type_identifier': {
           this.result.name = childNode.text;
           break;
         }
+
         case 'type_parameters': {
-          childNode
-            .children
+          childNode.children
             .filter((n: SyntaxNode) => n.type === 'type_parameter')
             .forEach((cn: SyntaxNode) => {
-              const typeparam: Record<string, any> = { name: null, default: null };
+              const typeparam: Record<string, any> = {
+                name: null,
+                default: null,
+              };
 
               cn.children.forEach((tpn: SyntaxNode) => {
                 if (tpn.type === 'type_identifier') {
@@ -111,69 +120,77 @@ export class TypeScriptParserService extends BaseParserService implements Custom
                 if (tpn.type === 'default_type') {
                   typeparam.default = tpn.children.pop()?.text;
                 }
-              })
+              });
 
               this.result.typeParameters.push(typeparam);
             });
           break;
         }
+
         case 'class_heritage': {
           childNode.children.forEach((cn: SyntaxNode) => {
             if (cn.type === 'extends_clause') {
-              cn
-                .children
-                .forEach((cn: SyntaxNode) => {
-                  if (cn.type === 'generic_type') {
-                    this.result.parentName = cn
-                      ?.children
-                      .filter((n: SyntaxNode) => ['type_identifier', 'nested_type_identifier'].includes(n.type))
-                      .shift()
-                      ?.text;
-                  }
+              cn.children.forEach((n: SyntaxNode) => {
+                if (n.type === 'generic_type') {
+                  this.result.parentName = n?.children
+                    .filter((c: SyntaxNode) =>
+                      ['type_identifier', 'nested_type_identifier'].includes(
+                        c.type,
+                      ),
+                    )
+                    .shift()?.text;
+                }
 
-                  if (['type_identifier', 'nested_type_identifier'].includes(cn.type)) {
-                    this.result.parentName = cn.text
-                  }
-                });
+                if (
+                  ['type_identifier', 'nested_type_identifier'].includes(
+                    cn.type,
+                  )
+                ) {
+                  this.result.parentName = cn.text;
+                }
+              });
             }
 
             if (cn.type === 'implements_clause') {
-              cn
-                .children
-                .forEach((cn: SyntaxNode) => {
-                  if (cn.type === 'generic_type') {
-                    this.result.interfaceName = cn
-                      ?.children
-                      .filter((n) => n.type === 'type_identifier')
-                      .shift()
-                      ?.text;
-                  }
+              cn.children.forEach((c: SyntaxNode) => {
+                if (c.type === 'generic_type') {
+                  this.result.interfaceName = c?.children
+                    .filter((n) => n.type === 'type_identifier')
+                    .shift()?.text;
+                }
 
-                  if (cn.type === 'type_identifier') {
-                    this.result.interfaceName = cn.text
-                  }
-                });
+                if (cn.type === 'type_identifier') {
+                  this.result.interfaceName = cn.text;
+                }
+              });
             }
-          })
+          });
           break;
         }
+
+        default:
+          break;
       }
     });
   }
 
   private parsePrototypeFunction(node: SyntaxNode): void {
-    node.children.forEach(((childNode: SyntaxNode) => {
+    node.children.forEach((childNode: SyntaxNode) => {
       switch (childNode.type) {
         case 'member_expression': {
           this.result.functionName = childNode.child(0)?.text;
           break;
         }
+
         case 'property_identifier': {
           this.result.propertyName = childNode.text;
           break;
         }
+
+        default:
+          break;
       }
-    }));
+    });
 
     const funcNode = node?.parent?.children.pop();
     if (funcNode) {
@@ -184,17 +201,30 @@ export class TypeScriptParserService extends BaseParserService implements Custom
   private parseFunction(node: SyntaxNode): void {
     let isSingleParamArrowFunc = false;
 
-    if ([NodeType.GENERATOR_FUNCTION_DECLARATION, NodeType.GENERATOR_FUNCTION].includes(node.type as NodeType)) {
+    if (
+      [
+        NodeType.GENERATOR_FUNCTION_DECLARATION,
+        NodeType.GENERATOR_FUNCTION,
+      ].includes(node.type as NodeType)
+    ) {
       this.result.generator = true;
     }
 
-    if (['arrow_function', 'function'].includes(node.type) && node.parent?.type === 'variable_declarator') {
+    if (
+      ['arrow_function', 'function'].includes(node.type) &&
+      node.parent?.type === 'variable_declarator'
+    ) {
       // handle scenario: const foo = (bar) => bar;
       this.result.name = node.parent?.child(0)?.text;
 
       if (node.child(0)?.type === 'identifier') {
         // handle scenario: const foo = bar => bar;
-        this.result.parameters.push({ name: node?.child(0)?.text, type: null, default: null, optional: false });
+        this.result.parameters.push({
+          name: node?.child(0)?.text,
+          type: null,
+          default: null,
+          optional: false,
+        });
         isSingleParamArrowFunc = true;
       }
     }
@@ -208,23 +238,30 @@ export class TypeScriptParserService extends BaseParserService implements Custom
           }
           break;
         }
+
         case 'accessibility_modifier': {
           this.result.visibility = childNode.text;
           break;
         }
+
         case 'async': {
           this.result.async = true;
           break;
         }
+
         case 'static': {
           this.result.static = true;
+          break;
         }
+
         case 'type_parameters': {
-          childNode
-            .children
+          childNode.children
             .filter((n: SyntaxNode) => n.type === 'type_parameter')
             .forEach((cn: SyntaxNode) => {
-              const typeparam: Record<string, any> = { name: null, default: null };
+              const typeparam: Record<string, any> = {
+                name: null,
+                default: null,
+              };
 
               cn.children.forEach((tpn: SyntaxNode) => {
                 if (tpn.type === 'type_identifier') {
@@ -234,21 +271,30 @@ export class TypeScriptParserService extends BaseParserService implements Custom
                 if (tpn.type === 'default_type') {
                   typeparam.default = tpn.children.pop()?.text;
                 }
-              })
+              });
 
               this.result.typeParameters.push(typeparam);
             });
           break;
         }
+
         case 'type_annotation': {
-          this.result.returnType = childNode.children.filter((n) => n.type !== ':').shift()?.text;
+          this.result.returnType = childNode.children
+            .filter((n) => n.type !== ':')
+            .shift()?.text;
           break;
         }
+
         case 'formal_parameters': {
           if (!isSingleParamArrowFunc) {
-            childNode
-              .children
-              .filter((cn: SyntaxNode) => ['required_parameter', 'rest_parameter', 'optional_parameter'].includes(cn.type))
+            childNode.children
+              .filter((cn: SyntaxNode) =>
+                [
+                  'required_parameter',
+                  'rest_parameter',
+                  'optional_parameter',
+                ].includes(cn.type),
+              )
               .forEach((cn: SyntaxNode) => {
                 const param: Record<string, any> = {
                   name: null,
@@ -263,7 +309,9 @@ export class TypeScriptParserService extends BaseParserService implements Custom
                   }
 
                   if (pn.type === 'type_annotation') {
-                    param.type = pn.children.filter((tc: SyntaxNode) => tc.type !== ':').shift()?.text;
+                    param.type = pn.children
+                      .filter((tc: SyntaxNode) => tc.type !== ':')
+                      .shift()?.text;
                   }
 
                   if (pn.previousSibling?.type === '=') {
@@ -277,6 +325,9 @@ export class TypeScriptParserService extends BaseParserService implements Custom
           }
           break;
         }
+
+        default:
+          break;
       }
     });
   }

@@ -1,7 +1,8 @@
-import { SyntaxNode } from "tree-sitter";
+import { SyntaxNode } from 'tree-sitter';
 
 export class BaseParserService {
   protected result: Record<string, any> = {};
+
   protected done = false;
 
   public output(): void {
@@ -15,8 +16,6 @@ export class BaseParserService {
     node: SyntaxNode,
   ): void {
     this.done = true;
-    if (node.childCount > 0) {
-      parser.bind(this)(node);
-    }
+    parser.bind(this)(node);
   }
 }

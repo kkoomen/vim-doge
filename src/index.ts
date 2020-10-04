@@ -11,14 +11,17 @@ const language: ValueOf<Language> = args.shift() as ValueOf<Language>;
 const lineNumber: number = Math.max(0, Number(args.shift()) - 1);
 const nodeTypes: string[] = args;
 
-
 const parser = new Parser();
-parser.setLanguage(parserLanguages[language as Language])
+parser.setLanguage(parserLanguages[language as Language]);
 
 const sourceCode = fs.readFileSync(filepath, { encoding: 'utf8', flag: 'r' });
 const tree = parser.parse(sourceCode);
 
-const parserService = getParserService(language, [tree.rootNode, lineNumber, nodeTypes]);
+const parserService = getParserService(language, [
+  tree.rootNode,
+  lineNumber,
+  nodeTypes,
+]);
 if (parserService) {
   parserService.traverse(tree.rootNode);
   parserService.output();

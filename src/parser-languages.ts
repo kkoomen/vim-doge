@@ -9,4 +9,4 @@ export const parserLanguages = {
   [Language.TYPESCRIPT]: TypeScript,
   [Language.PYTHON]: Python,
   [Language.C]: C,
-}
+};
