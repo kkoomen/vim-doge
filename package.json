@@ -4,7 +4,10 @@
   "version": "2.8.0",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "watch": "tsc -p tsconfig.json --watch true --sourceMap",
+    "build": "rimraf ./dist && tsc -p tsconfig.json",
+    "start": "npm run build && node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,13 +19,6 @@
   "homepage": "https://github.com/kkoomen/vim-doge#readme",
   "author": "Kim 金可明 <koomen@protonmail.com>",
   "license": "GPL-3.0",
-  "devDependencies": {
-    "@commitlint/cli": "^9.1.2",
-    "@commitlint/config-conventional": "^9.1.2",
-    "conventional-changelog-cli": "^2.1.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "husky": "^4.2.5"
-  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -36,6 +32,18 @@
   "dependencies": {
     "tree-sitter": "^0.17.0",
     "tree-sitter-php": "^0.16.2",
-    "tree-sitter-typescript": "^0.16.1"
+    "tree-sitter-typescript": "^0.16.1",
+    "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^9.1.2",
+    "@types/node": "^14.11.2",
+    "conventional-changelog-cli": "^2.1.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.4",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0"
   }
 }
