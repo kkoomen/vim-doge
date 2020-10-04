@@ -7,9 +7,7 @@ enum NodeType {
   MODULE = 'module',
 }
 
-export class PythonParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class PythonParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -19,11 +17,7 @@ export class PythonParserService
   }
 
   public traverse(node: SyntaxNode): void {
-    if (
-      node.startPosition.row === this.lineNumber &&
-      this.nodeTypes.includes(node.type) &&
-      this.done === false
-    ) {
+    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
       switch (node.type) {
         case NodeType.FUNCTION_DEFINITION: {
           this.result = {
@@ -63,12 +57,7 @@ export class PythonParserService
         case 'parameters': {
           childNode.children
             .filter((n: SyntaxNode) =>
-              [
-                'default_parameter',
-                'typed_parameter',
-                'typed_default_parameter',
-                'identifier',
-              ].includes(n.type),
+              ['default_parameter', 'typed_parameter', 'typed_default_parameter', 'identifier'].includes(n.type),
             )
             .forEach((cn: SyntaxNode) => {
               const param: Record<string, any> = {
@@ -89,9 +78,7 @@ export class PythonParserService
                   }
 
                   if (['dictionary_splat', 'list_splat'].includes(pn.type)) {
-                    param.name = pn.children
-                      .filter((cpn: SyntaxNode) => cpn.type === 'identifier')
-                      .shift()?.text;
+                    param.name = pn.children.filter((cpn: SyntaxNode) => cpn.type === 'identifier').shift()?.text;
                   }
 
                   if (pn.type === 'type') {
@@ -101,15 +88,9 @@ export class PythonParserService
               }
 
               if (cn.type === 'typed_default_parameter') {
-                param.name = cn.children
-                  .filter((pn: SyntaxNode) => pn.type === 'identifier')
-                  .shift()?.text;
-                param.type = cn.children
-                  .filter((pn: SyntaxNode) => pn.type === 'type')
-                  .shift()?.text;
-                param.default = cn.children
-                  .filter((pn: SyntaxNode) => pn.previousSibling?.type === '=')
-                  .shift()?.text;
+                param.name = cn.children.filter((pn: SyntaxNode) => pn.type === 'identifier').shift()?.text;
+                param.type = cn.children.filter((pn: SyntaxNode) => pn.type === 'type').shift()?.text;
+                param.default = cn.children.filter((pn: SyntaxNode) => pn.previousSibling?.type === '=').shift()?.text;
               }
 
               if (cn.type === 'identifier') {

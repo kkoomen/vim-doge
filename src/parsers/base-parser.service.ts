@@ -11,10 +11,7 @@ export class BaseParserService {
     }
   }
 
-  protected runNodeParser(
-    parser: (node: SyntaxNode) => void,
-    node: SyntaxNode,
-  ): void {
+  protected runNodeParser(parser: (node: SyntaxNode) => void, node: SyntaxNode): void {
     this.done = true;
     parser.bind(this)(node);
   }

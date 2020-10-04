@@ -6,11 +6,7 @@ import { PhpParserService } from './php.service';
 import { PythonParserService } from './python.service';
 import { TypeScriptParserService } from './typescript.service';
 
-export type ParserService =
-  | PhpParserService
-  | TypeScriptParserService
-  | PythonParserService
-  | CParserService;
+export type ParserService = PhpParserService | TypeScriptParserService | PythonParserService | CParserService;
 
 export function getParserService(
   language: ValueOf<Language>,
@@ -30,9 +26,7 @@ export function getParserService(
       return new CParserService(...args);
 
     default:
-      console.error(
-        `Could not get parser service for unknown language: ${language}`,
-      );
+      console.error(`Could not get parser service for unknown language: ${language}`);
       break;
   }
 }

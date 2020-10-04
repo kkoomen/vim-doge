@@ -15,9 +15,7 @@ enum NodeType {
   MEMBER_EXPRESSION = 'member_expression',
 }
 
-export class TypeScriptParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class TypeScriptParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -27,11 +25,7 @@ export class TypeScriptParserService
   }
 
   public traverse(node: SyntaxNode): void {
-    if (
-      node.startPosition.row === this.lineNumber &&
-      this.nodeTypes.includes(node.type) &&
-      this.done === false
-    ) {
+    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
       switch (node.type) {
         case NodeType.MEMBER_EXPRESSION: {
           this.result = {
@@ -133,19 +127,11 @@ export class TypeScriptParserService
               cn.children.forEach((n: SyntaxNode) => {
                 if (n.type === 'generic_type') {
                   this.result.parentName = n?.children
-                    .filter((c: SyntaxNode) =>
-                      ['type_identifier', 'nested_type_identifier'].includes(
-                        c.type,
-                      ),
-                    )
+                    .filter((c: SyntaxNode) => ['type_identifier', 'nested_type_identifier'].includes(c.type))
                     .shift()?.text;
                 }
 
-                if (
-                  ['type_identifier', 'nested_type_identifier'].includes(
-                    cn.type,
-                  )
-                ) {
+                if (['type_identifier', 'nested_type_identifier'].includes(cn.type)) {
                   this.result.parentName = cn.text;
                 }
               });
@@ -154,9 +140,7 @@ export class TypeScriptParserService
             if (cn.type === 'implements_clause') {
               cn.children.forEach((c: SyntaxNode) => {
                 if (c.type === 'generic_type') {
-                  this.result.interfaceName = c?.children
-                    .filter((n) => n.type === 'type_identifier')
-                    .shift()?.text;
+                  this.result.interfaceName = c?.children.filter((n) => n.type === 'type_identifier').shift()?.text;
                 }
 
                 if (cn.type === 'type_identifier') {
@@ -201,19 +185,15 @@ export class TypeScriptParserService
   private parseFunction(node: SyntaxNode): void {
     let isSingleParamArrowFunc = false;
 
-    if (
-      [
-        NodeType.GENERATOR_FUNCTION_DECLARATION,
-        NodeType.GENERATOR_FUNCTION,
-      ].includes(node.type as NodeType)
-    ) {
+    const isGeneratorFunction = [NodeType.GENERATOR_FUNCTION_DECLARATION, NodeType.GENERATOR_FUNCTION].includes(
+      node.type as NodeType,
+    );
+
+    if (isGeneratorFunction) {
       this.result.generator = true;
     }
 
-    if (
-      ['arrow_function', 'function'].includes(node.type) &&
-      node.parent?.type === 'variable_declarator'
-    ) {
+    if (['arrow_function', 'function'].includes(node.type) && node.parent?.type === 'variable_declarator') {
       // handle scenario: const foo = (bar) => bar;
       this.result.name = node.parent?.child(0)?.text;
 
@@ -279,9 +259,7 @@ export class TypeScriptParserService
         }
 
         case 'type_annotation': {
-          this.result.returnType = childNode.children
-            .filter((n) => n.type !== ':')
-            .shift()?.text;
+          this.result.returnType = childNode.children.filter((n) => n.type !== ':').shift()?.text;
           break;
         }
 
@@ -289,11 +267,7 @@ export class TypeScriptParserService
           if (!isSingleParamArrowFunc) {
             childNode.children
               .filter((cn: SyntaxNode) =>
-                [
-                  'required_parameter',
-                  'rest_parameter',
-                  'optional_parameter',
-                ].includes(cn.type),
+                ['required_parameter', 'rest_parameter', 'optional_parameter'].includes(cn.type),
               )
               .forEach((cn: SyntaxNode) => {
                 const param: Record<string, any> = {
@@ -309,9 +283,7 @@ export class TypeScriptParserService
                   }
 
                   if (pn.type === 'type_annotation') {
-                    param.type = pn.children
-                      .filter((tc: SyntaxNode) => tc.type !== ':')
-                      .shift()?.text;
+                    param.type = pn.children.filter((tc: SyntaxNode) => tc.type !== ':').shift()?.text;
                   }
 
                   if (pn.previousSibling?.type === '=') {
