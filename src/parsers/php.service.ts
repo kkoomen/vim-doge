@@ -62,7 +62,7 @@ export class PhpParserService extends BaseParserService implements CustomParserS
           const fqnNode: SyntaxNode = namespaceNode.children.filter((cn: SyntaxNode) => cn.type === 'qualified_name').shift() as SyntaxNode;
           const fqnName: string | undefined = fqnNode.children.filter((cn: SyntaxNode) => cn.type === 'name').shift()?.text;
           if (fqnName === type) {
-            fqn = `\\${fqnNode.text}`;
+            fqn = this.escapeFQN(`\\${fqnNode.text}`);
           }
         }
       });
@@ -134,13 +134,13 @@ export class PhpParserService extends BaseParserService implements CustomParserS
       .shift()
       ?.text;
 
-    return paramType;
+      return paramType;
   }
 
   private parseClassProperty(node: SyntaxNode): void {
-    const propertyType: string | undefined = this.getClassPropertyTypeViaConstructor(node);
+    const propertyType = this.getClassPropertyTypeViaConstructor(node);
     if (propertyType) {
-      this.result.type = propertyType;
+      this.result.type = this.escapeFQN(propertyType);
       this.result.fqn = this.resolveFQN(propertyType);
     }
   }
@@ -159,7 +159,7 @@ export class PhpParserService extends BaseParserService implements CustomParserS
         case 'optional_type':
         case 'type_name':
         case 'primitive_type': {
-          this.result.returnType = childNode.text;
+          this.result.returnType = this.escapeFQN(childNode.text);
           this.result.returnTypeFQN = this.resolveFQN(childNode.text);
           break;
         }
@@ -172,7 +172,7 @@ export class PhpParserService extends BaseParserService implements CustomParserS
 
                 // Param type.
                 if (['primitive_type', 'type_name', 'optional_type'].includes(pn.type)) {
-                  param.type = pn.text;
+                  param.type = this.escapeFQN(pn.text);
                   param.fqn = this.resolveFQN(pn.text);
                 }
 
@@ -192,5 +192,9 @@ export class PhpParserService extends BaseParserService implements CustomParserS
         }
       }
     });
+  }
+
+  private escapeFQN(fqn: string): string {
+    return fqn.replace(/\\/g, '\\\\');
   }
 }

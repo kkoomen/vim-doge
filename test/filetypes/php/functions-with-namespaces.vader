@@ -81,7 +81,7 @@ Expect php (generated comment containing the FQN):
 
 # ------------------------------------------------------------------------------
 
-Given php (function where the type should NOT result in its FQN if let g:doge_php_settings = {'resolve_fqn': 1} is set):
+Given php (function where the type should NOT result in its FQN if let g:doge_php_settings = {'resolve_fqn': 0} is set):
   <?php
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
@@ -93,7 +93,7 @@ Do (trigger doge):
   \<C-d>
   :let g:doge_php_settings = {'resolve_fqn': 1}\<CR>
 
-Expect php (generated comment containing the FQN):
+Expect php (generated comment not containing the FQN):
   <?php
   use Symfony\Component\Routing\Annotation\Route as BaseRoute, Symfony\Component\HttpFoundation\Response;
 
