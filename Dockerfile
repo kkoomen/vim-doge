@@ -19,6 +19,7 @@ RUN npm install -g tree-sitter
 RUN npm install -g tree-sitter-php
 RUN npm install -g tree-sitter-typescript
 RUN npm install -g tree-sitter-python
+RUN npm install -g tree-sitter-c
 
 # Install addition python modules.
 RUN pip3 install --upgrade pip vim-vint==0.3.15 setuptools

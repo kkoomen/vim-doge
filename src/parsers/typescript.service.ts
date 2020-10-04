@@ -82,12 +82,10 @@ export class TypeScriptParserService extends BaseParserService implements Custom
           break;
         }
       }
-    } else {
-      if (node.childCount > 0) {
-        node.children.forEach((childNode: SyntaxNode) => {
-          this.traverse(childNode);
-        });
-      }
+    } else if (node.childCount > 0) {
+      node.children.forEach((childNode: SyntaxNode) => {
+        this.traverse(childNode);
+      });
     }
   }
 

@@ -34,12 +34,10 @@ export class PythonParserService extends BaseParserService implements CustomPars
           break;
         }
       }
-    } else {
-      if (node.childCount > 0) {
-        node.children.forEach((childNode: SyntaxNode) => {
-          this.traverse(childNode);
-        });
-      }
+    } else if (node.childCount > 0) {
+      node.children.forEach((childNode: SyntaxNode) => {
+        this.traverse(childNode);
+      });
     }
   }
 

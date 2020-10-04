@@ -12,8 +12,8 @@ if &filetype !=? 'c'
   finish
 endif
 
-let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
-let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+let b:doge_parser = 'c'
+let b:doge_insert = 'above'
 
 let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
       \ 'doxygen_javadoc',
@@ -28,21 +28,6 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
 "
-" Define our base for every pattern.
-"
-" ==============================================================================
-let s:pattern_base = {
-\  'generator': {
-\    'file': 'libclang.py',
-\  },
-\  'parameters': {
-\    'format': '@{param-type|param} {name} !description',
-\  },
-\  'insert': 'above',
-\}
-
-" ==============================================================================
-"
 " Define the pattern types.
 "
 " ==============================================================================
@@ -50,50 +35,38 @@ let s:pattern_base = {
 " ------------------------------------------------------------------------------
 " Matches regular functions.
 " ------------------------------------------------------------------------------
-" int add(int x, int y) {}
-" template<class...T> void h(int i = 0, T... args) {}
-" ------------------------------------------------------------------------------
-let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'generator': {
-\    'args': ['FUNCTION_DECL'],
+let s:function_pattern = {
+\  'node_types': ['function_definition', 'declaration'],
+\  'parameters': {
+\    'format': '@param {name} !description',
 \  },
-\})
+\}
 
 " ------------------------------------------------------------------------------
 " Matches structs.
 " ------------------------------------------------------------------------------
-" struct foo {  };
-" ------------------------------------------------------------------------------
-let s:struct_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'generator': {
-\    'args': ['STRUCT_DECL'],
-\  },
-\})
+let s:struct_pattern = {
+\  'node_types': ['struct_specifier'],
+\}
 
 " ------------------------------------------------------------------------------
 " Matches field declarations inside structs.
 " ------------------------------------------------------------------------------
-" struct foo {
-"   int bar;
-" };
-" ------------------------------------------------------------------------------
-let s:field_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'generator': {
-\    'args': ['FIELD_DECL'],
-\  },
+let s:field_pattern = {
+\  'node_types': ['field_declaration'],
 \  'template': [
 \    '/**',
 \    ' * @{name} !description',
 \    ' */',
 \  ],
-\})
-unlet s:field_pattern['parameters']
+\}
 
 " ==============================================================================
 "
 " Define the doc standards.
 "
 " ==============================================================================
+
 call doge#buffer#register_doc_standard('doxygen_javadoc', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
@@ -109,8 +82,6 @@ call doge#buffer#register_doc_standard('doxygen_javadoc', [
 \    'template': [
 \      '/**',
 \      ' * struct {name} - !description',
-\      '%(parameters| *)%',
-\      '%(parameters| * {parameters})%',
 \      ' */',
 \    ],
 \  }),
@@ -132,8 +103,6 @@ call doge#buffer#register_doc_standard('doxygen_javadoc_no_asterisk', [
 \    'template': [
 \      '/**',
 \      'struct {name} - !description',
-\      '%(parameters|)%',
-\      '%(parameters|{parameters})%',
 \      '*/',
 \    ],
 \  }),
@@ -155,8 +124,6 @@ call doge#buffer#register_doc_standard('doxygen_javadoc_banner', [
 \    'template': [
 \      '/*******************************************************************************',
 \      ' * struct {name} - !description',
-\      '%(parameters| *)%',
-\      '%(parameters| * {parameters})%',
 \      ' ******************************************************************************/',
 \    ],
 \  }),
@@ -178,8 +145,6 @@ call doge#buffer#register_doc_standard('doxygen_qt', [
 \    'template': [
 \      '/*!',
 \      ' * struct {name} - !description',
-\      '%(parameters| *)%',
-\      '%(parameters| * {parameters})%',
 \      ' */',
 \    ],
 \  }),
@@ -201,8 +166,6 @@ call doge#buffer#register_doc_standard('doxygen_qt_no_asterisk', [
 \    'template': [
 \      '/*!',
 \      'struct {name} - !description',
-\      '%(parameters|)%',
-\      '%(parameters|{parameters})%',
 \      '*/',
 \    ],
 \  }),
@@ -227,8 +190,6 @@ call doge#buffer#register_doc_standard('kernel_doc', [
 \    'template': [
 \      '/**',
 \      ' * struct {name} - !description',
-\      '%(parameters|)%',
-\      '%(parameters| * {parameters})%',
 \      ' */',
 \    ],
 \  }),
