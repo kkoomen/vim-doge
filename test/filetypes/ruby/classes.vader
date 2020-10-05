@@ -1,0 +1,46 @@
+# ==============================================================================
+# Class methods without parameters.
+# ==============================================================================
+Given ruby (class method without parameters):
+  class Test
+    def self.foo
+      val = 1
+    end
+  end
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect ruby (generated comment with nothing but the text 'TODO'):
+  class Test
+    # [TODO:description]
+    def self.foo
+      val = 1
+    end
+  end
+
+# ==============================================================================
+# Class methods with parameters.
+# ==============================================================================
+Given ruby (class method with parameters):
+  class Test
+    def self.foo(x, y, z)
+      val = 1
+    end
+  end
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect ruby (generated comment with @param tags):
+  class Test
+    # [TODO:description]
+    # @param x [[TODO:type]] [TODO:description]
+    # @param y [[TODO:type]] [TODO:description]
+    # @param z [[TODO:type]] [TODO:description]
+    def self.foo(x, y, z)
+      val = 1
+    end
+  end

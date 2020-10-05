@@ -6,6 +6,7 @@ import { CParserService } from './c.service';
 import { CppParserService } from './cpp.service';
 import { PhpParserService } from './php.service';
 import { PythonParserService } from './python.service';
+import { RubyParserService } from './ruby.service';
 import { TypeScriptParserService } from './typescript.service';
 
 export type ParserService =
@@ -14,7 +15,8 @@ export type ParserService =
   | PythonParserService
   | CParserService
   | CppParserService
-  | BashParserService;
+  | BashParserService
+  | RubyParserService;
 
 export function getParserService(
   language: ValueOf<Language>,
@@ -38,6 +40,9 @@ export function getParserService(
 
     case Language.BASH:
       return new BashParserService(...args);
+
+    case Language.RUBY:
+      return new RubyParserService(...args);
 
     default:
       console.error(`Could not get parser service for unknown language: ${language}`);

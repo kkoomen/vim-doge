@@ -5,4 +5,5 @@ export enum Language {
   C = 'c',
   CPP = 'cpp',
   BASH = 'bash',
+  RUBY = 'ruby',
 }

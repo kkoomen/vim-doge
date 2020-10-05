@@ -3,6 +3,7 @@ import C from 'tree-sitter-c';
 import CPP from 'tree-sitter-cpp';
 import PHP from 'tree-sitter-php';
 import Python from 'tree-sitter-python';
+import Ruby from 'tree-sitter-ruby';
 import TypeScript from 'tree-sitter-typescript/typescript';
 import { Language } from './constants';
 
@@ -13,4 +14,5 @@ export const parserLanguages = {
   [Language.C]: C,
   [Language.CPP]: CPP,
   [Language.BASH]: Bash,
+  [Language.RUBY]: Ruby,
 };
