@@ -1,6 +1,7 @@
 import { SyntaxNode } from 'tree-sitter';
 import { Language } from '../constants';
 import { ValueOf } from '../helpers';
+import { BashParserService } from './bash.service';
 import { CParserService } from './c.service';
 import { CppParserService } from './cpp.service';
 import { PhpParserService } from './php.service';
@@ -12,7 +13,8 @@ export type ParserService =
   | TypeScriptParserService
   | PythonParserService
   | CParserService
-  | CppParserService;
+  | CppParserService
+  | BashParserService;
 
 export function getParserService(
   language: ValueOf<Language>,
@@ -33,6 +35,9 @@ export function getParserService(
 
     case Language.CPP:
       return new CppParserService(...args);
+
+    case Language.BASH:
+      return new BashParserService(...args);
 
     default:
       console.error(`Could not get parser service for unknown language: ${language}`);

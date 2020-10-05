@@ -6,21 +6,12 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let b:doge_pattern_single_line_comment = '\m#.\{-}$'
-let b:doge_pattern_multi_line_comment = '\m#.\{-}$'
+let b:doge_parser = 'bash'
+let b:doge_insert = 'above'
 
 let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['google'])
 let b:doge_doc_standard = doge#buffer#get_doc_standard('sh')
 let b:doge_patterns = doge#buffer#get_patterns()
-
-" ==============================================================================
-"
-" Define our base for every pattern.
-"
-" ==============================================================================
-let s:pattern_base = {
-\  'insert': 'above',
-\}
 
 " ==============================================================================
 "
@@ -31,20 +22,16 @@ let s:pattern_base = {
 " ------------------------------------------------------------------------------
 " Matches regular functions.
 " ------------------------------------------------------------------------------
-" function test {}
-" function test() {}
-" test() {}
-" ------------------------------------------------------------------------------
-let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(function\)\?\s*[[:alnum:]_-]\+\s*\%((.\{-})\)\?\s*{',
-\  'tokens': [],
-\})
+let s:function_pattern = {
+\  'node_types': ['function_definition'],
+\}
 
 " ==============================================================================
 "
 " Define the doc standards.
 "
 " ==============================================================================
+
 call doge#buffer#register_doc_standard('google', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [

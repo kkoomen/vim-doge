@@ -1,3 +1,4 @@
+import Bash from 'tree-sitter-bash';
 import C from 'tree-sitter-c';
 import CPP from 'tree-sitter-cpp';
 import PHP from 'tree-sitter-php';
@@ -11,4 +12,5 @@ export const parserLanguages = {
   [Language.PYTHON]: Python,
   [Language.C]: C,
   [Language.CPP]: CPP,
+  [Language.BASH]: Bash,
 };

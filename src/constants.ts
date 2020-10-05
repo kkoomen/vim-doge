@@ -4,4 +4,5 @@ export enum Language {
   PYTHON = 'python',
   C = 'c',
   CPP = 'cpp',
+  BASH = 'bash',
 }
