@@ -6,7 +6,9 @@ enum NodeType {
   FUNCTION_DEFINITION = 'function_definition',
 }
 
-export class BashParserService extends BaseParserService implements CustomParserService {
+export class BashParserService
+  extends BaseParserService
+  implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -16,7 +18,11 @@ export class BashParserService extends BaseParserService implements CustomParser
   }
 
   public traverse(node: SyntaxNode): void {
-    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
+    if (
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
+    ) {
       switch (node.type) {
         case NodeType.FUNCTION_DEFINITION: {
           this.result = { name: null };

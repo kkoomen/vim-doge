@@ -139,7 +139,7 @@ module.exports = {
     'id-blacklist': 'off',
     'id-length': 'off',
     'id-match': 'off',
-    'implicit-arrow-linebreak': ['warn', 'beside'],
+    'implicit-arrow-linebreak': ['off', 'beside'],
     'import/default': 'error',
     'import/dynamic-import-chunkname': [
       'off',

@@ -45,6 +45,7 @@ export function getParserService(
       return new RubyParserService(...args);
 
     default:
+      // prettier-ignore
       console.error(`Could not get parser service for unknown language: ${language}`);
       break;
   }

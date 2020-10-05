@@ -8,7 +8,9 @@ enum NodeType {
   PROPERTY_DECLARATION = 'property_declaration',
 }
 
-export class PhpParserService extends BaseParserService implements CustomParserService {
+export class PhpParserService
+  extends BaseParserService
+  implements CustomParserService {
   constructor(
     private readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -18,7 +20,11 @@ export class PhpParserService extends BaseParserService implements CustomParserS
   }
 
   public traverse(node: SyntaxNode): void {
-    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
+    if (
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
+    ) {
       switch (node.type) {
         case NodeType.PROPERTY_DECLARATION: {
           this.result = { type: null, fqn: null };
@@ -28,7 +34,9 @@ export class PhpParserService extends BaseParserService implements CustomParserS
 
         case NodeType.FUNCTION_DEFINITION:
         case NodeType.METHOD_DECLARATION: {
-          const methodName = node.children.filter((n: SyntaxNode) => n.type === 'name').shift()?.text;
+          const methodName = node.children
+            .filter((n: SyntaxNode) => n.type === 'name')
+            .shift()?.text;
 
           this.result = {
             visibility: null,
@@ -62,7 +70,9 @@ export class PhpParserService extends BaseParserService implements CustomParserS
           .filter((cn: SyntaxNode) => cn.type === 'namespace_use_clause')
           .forEach((namespaceNode: SyntaxNode) => {
             const isAlias: boolean =
-              namespaceNode.children.filter((cn: SyntaxNode) => cn.type === 'namespace_aliasing_clause').length > 0;
+              namespaceNode.children.filter(
+                (cn: SyntaxNode) => cn.type === 'namespace_aliasing_clause',
+              ).length > 0;
 
             if (!isAlias) {
               const fqnNode: SyntaxNode = namespaceNode.children
@@ -82,7 +92,9 @@ export class PhpParserService extends BaseParserService implements CustomParserS
     return fqn;
   }
 
-  private getClassPropertyTypeViaConstructor(node: SyntaxNode): string | undefined {
+  private getClassPropertyTypeViaConstructor(
+    node: SyntaxNode,
+  ): string | undefined {
     const propertyName: string | undefined = node?.children
       .filter((n: SyntaxNode) => n.type === 'property_element')
       .shift()
@@ -96,7 +108,9 @@ export class PhpParserService extends BaseParserService implements CustomParserS
     const constructorNode: SyntaxNode | undefined = node?.parent?.children
       .filter((n: SyntaxNode) => n.type === 'method_declaration')
       .filter((n: SyntaxNode) => {
-        const methodName: string | undefined = n.children.filter((cn) => cn.type === 'name').shift()?.text;
+        const methodName: string | undefined = n.children
+          .filter((cn) => cn.type === 'name')
+          .shift()?.text;
         return methodName === '__construct';
       })
       .shift();
@@ -121,7 +135,9 @@ export class PhpParserService extends BaseParserService implements CustomParserS
           ?.children.pop()?.text;
 
         if (propName === propertyName) {
-          paramName = expr.children.filter((cn: SyntaxNode) => cn.type === 'variable_name').shift()?.text;
+          paramName = expr.children
+            .filter((cn: SyntaxNode) => cn.type === 'variable_name')
+            .shift()?.text;
         }
       });
 
@@ -134,12 +150,15 @@ export class PhpParserService extends BaseParserService implements CustomParserS
       .shift()
       ?.children.filter((n: SyntaxNode) => n.type === 'simple_parameter')
       .filter((n: SyntaxNode) => {
-        const name: string | undefined = n.children.filter((cn: SyntaxNode) => cn.type === 'variable_name').shift()
-          ?.text;
+        const name: string | undefined = n.children
+          .filter((cn: SyntaxNode) => cn.type === 'variable_name')
+          .shift()?.text;
         return name === paramName;
       })
       .shift()
-      ?.children.filter((n: SyntaxNode) => ['optional_type', 'type_name', 'primitive_type'].includes(n.type))
+      ?.children.filter((n: SyntaxNode) =>
+        ['optional_type', 'type_name', 'primitive_type'].includes(n.type),
+      )
       .shift()?.text;
 
     return paramType;
@@ -186,6 +205,7 @@ export class PhpParserService extends BaseParserService implements CustomParserS
               };
               n.children.forEach((pn: SyntaxNode) => {
                 // Param type.
+                // prettier-ignore
                 if (['primitive_type', 'type_name', 'optional_type'].includes(pn.type)) {
                   param.type = this.escapeFQN(pn.text);
                   param.fqn = this.resolveFQN(pn.text);

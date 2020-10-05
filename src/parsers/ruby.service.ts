@@ -7,7 +7,9 @@ enum NodeType {
   SINGLETON_METHOD = 'singleton_method',
 }
 
-export class RubyParserService extends BaseParserService implements CustomParserService {
+export class RubyParserService
+  extends BaseParserService
+  implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -17,7 +19,11 @@ export class RubyParserService extends BaseParserService implements CustomParser
   }
 
   public traverse(node: SyntaxNode): void {
-    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
+    if (
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
+    ) {
       switch (node.type) {
         case NodeType.SINGLETON_METHOD:
         case NodeType.METHOD: {
@@ -60,10 +66,12 @@ export class RubyParserService extends BaseParserService implements CustomParser
                 param.name = cn.text;
               }
 
+              // prettier-ignore
               if (['optional_parameter', 'keyword_parameter'].includes(cn.type)) {
                 param.name = cn.children.shift()?.text;
               }
 
+              // prettier-ignore
               if (['splat_parameter', 'hash_splat_parameter', 'block_parameter'].includes(cn.type)) {
                 param.name = cn.children.pop()?.text;
               }

@@ -11,17 +11,30 @@ enum NodeType {
   TEMPLATE_DECLARATION = 'template_declaration',
 }
 
-export class CppParserService extends BaseParserService implements CustomParserService {
-  constructor(readonly rootNode: SyntaxNode, private lineNumber: number, private readonly nodeTypes: string[]) {
+export class CppParserService
+  extends BaseParserService
+  implements CustomParserService {
+  constructor(
+    readonly rootNode: SyntaxNode,
+    private lineNumber: number,
+    private readonly nodeTypes: string[],
+  ) {
     super();
   }
 
   public traverse(node: SyntaxNode): void {
-    if (node.startPosition.row === this.lineNumber && this.nodeTypes.includes(node.type) && this.done === false) {
+    if (
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
+    ) {
       switch (node.type) {
         case NodeType.TEMPLATE_DECLARATION: {
           const childNode: SyntaxNode = node.children
-            .filter((n: SyntaxNode) => n.previousSibling?.type === 'template_parameter_list')
+            .filter(
+              (n: SyntaxNode) =>
+                n.previousSibling?.type === 'template_parameter_list',
+            )
             .shift() as SyntaxNode;
           this.lineNumber = childNode.startPosition.row;
           this.traverse(childNode);
@@ -31,7 +44,10 @@ export class CppParserService extends BaseParserService implements CustomParserS
         case NodeType.FUNCTION_DEFINITION:
         case NodeType.DECLARATION: {
           this.result = {
-            typeParameters: node.parent?.type === 'template_declaration' ? this.getTypeParameters(node.parent) : [],
+            typeParameters:
+              node.parent?.type === 'template_declaration'
+                ? this.getTypeParameters(node.parent)
+                : [],
             name: null,
             parameters: [],
             returnType: null,
@@ -42,7 +58,10 @@ export class CppParserService extends BaseParserService implements CustomParserS
 
         case NodeType.STRUCT_SPECIFIER: {
           this.result = {
-            typeParameters: node.parent?.type === 'template_declaration' ? this.getTypeParameters(node.parent) : [],
+            typeParameters:
+              node.parent?.type === 'template_declaration'
+                ? this.getTypeParameters(node.parent)
+                : [],
             name: null,
           };
           this.runNodeParser(this.parseStruct, node);
@@ -57,7 +76,10 @@ export class CppParserService extends BaseParserService implements CustomParserS
 
         case NodeType.CLASS_SPECIFIER: {
           this.result = {
-            typeParameters: node.parent?.type === 'template_declaration' ? this.getTypeParameters(node.parent) : [],
+            typeParameters:
+              node.parent?.type === 'template_declaration'
+                ? this.getTypeParameters(node.parent)
+                : [],
             name: null,
           };
           this.runNodeParser(this.parseClass, node);
@@ -89,6 +111,7 @@ export class CppParserService extends BaseParserService implements CustomParserS
         case 'function_declarator': {
           // Return type for statement like:
           //   auto Person::getPersonType () -> PersonType
+          // prettier-ignore
           if (childNode.children.some((n) => n.type === 'trailing_return_type')) {
             this.result.returnType = childNode.children
               .filter((n: SyntaxNode) => n.type === 'trailing_return_type')
@@ -98,7 +121,9 @@ export class CppParserService extends BaseParserService implements CustomParserS
 
           // Method name.
           childNode.children
-            .filter((n: SyntaxNode) => ['identifier', 'scoped_identifier'].includes(n.type))
+            .filter((n: SyntaxNode) =>
+              ['identifier', 'scoped_identifier'].includes(n.type),
+            )
             .forEach((n: SyntaxNode) => {
               if (n.type === 'identifier') {
                 this.result.name = n.text;
@@ -111,7 +136,9 @@ export class CppParserService extends BaseParserService implements CustomParserS
 
           // Parameters.
           childNode.children
-            .filter((n: SyntaxNode) => ['parameter_list', 'parameter_declaration'].includes(n.type))
+            .filter((n: SyntaxNode) =>
+              ['parameter_list', 'parameter_declaration'].includes(n.type),
+            )
             .map((n: SyntaxNode) =>
               n.children.filter((cn: SyntaxNode) =>
                 [
@@ -122,7 +149,10 @@ export class CppParserService extends BaseParserService implements CustomParserS
                 ].includes(cn.type),
               ),
             )
-            .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
+            .reduce(
+              (items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr],
+              [],
+            )
             .forEach((n: SyntaxNode) => {
               const param: Record<string, any> = { name: null, type: null };
 
@@ -131,8 +161,11 @@ export class CppParserService extends BaseParserService implements CustomParserS
                   param.type = cn.text;
                 }
 
+                // prettier-ignore
                 if (['pointer_declarator', 'reference_declarator', 'variadic_declarator'].includes(cn.type)) {
-                  param.name = cn.children.filter((c: SyntaxNode) => c.type === 'identifier').shift()?.text;
+                  param.name = cn.children
+                    .filter((c: SyntaxNode) => c.type === 'identifier')
+                    .shift()?.text;
                 }
 
                 if (cn.type === 'identifier') {
@@ -193,23 +226,32 @@ export class CppParserService extends BaseParserService implements CustomParserS
     });
   }
 
-  private getTypeParameters(node: SyntaxNode): Array<Record<'name', null | string>> {
+  private getTypeParameters(
+    node: SyntaxNode,
+  ): Array<Record<'name', null | string>> {
     const typeparams: Array<Record<'name', null | string>> = [];
 
     node.children
       .filter((n: SyntaxNode) => ['template_parameter_list'].includes(n.type))
       .map((n: SyntaxNode) =>
         n.children.filter((cn: SyntaxNode) =>
-          ['type_parameter_declaration', 'parameter_declaration', 'variadic_type_parameter_declaration'].includes(
-            cn.type,
-          ),
+          [
+            'type_parameter_declaration',
+            'parameter_declaration',
+            'variadic_type_parameter_declaration',
+          ].includes(cn.type),
         ),
       )
-      .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
+      .reduce(
+        (items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr],
+        [],
+      )
       .forEach((n: SyntaxNode) => {
         const param: Record<string, any> = { name: null };
 
-        const name = n.children.filter((cn) => ['type_identifier', 'identifier'].includes(cn.type)).shift()?.text;
+        const name = n.children
+          .filter((cn) => ['type_identifier', 'identifier'].includes(cn.type))
+          .shift()?.text;
         param.name = name;
 
         typeparams.push(param);
