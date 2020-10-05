@@ -1,4 +1,5 @@
 import C from 'tree-sitter-c';
+import CPP from 'tree-sitter-cpp';
 import PHP from 'tree-sitter-php';
 import Python from 'tree-sitter-python';
 import TypeScript from 'tree-sitter-typescript/typescript';
@@ -9,4 +10,5 @@ export const parserLanguages = {
   [Language.TYPESCRIPT]: TypeScript,
   [Language.PYTHON]: Python,
   [Language.C]: C,
+  [Language.CPP]: CPP,
 };

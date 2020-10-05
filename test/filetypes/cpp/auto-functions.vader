@@ -1,11 +1,11 @@
 # ==============================================================================
-# Auto-functions with parameters using return type 'decltype(auto)'
+# Auto-functions with parameters using return type 'auto'
 # ==============================================================================
-Given cpp (auto-function with parameters using return type 'decltype(auto)'):
+Given cpp (auto-function with parameters using return type 'auto'):
   template<class F, class... Args>
-  decltype(auto) PerfectForward(F fun, Args&&... args)
+  auto Person::getPersonType (const Builder& builder) -> PersonType
   {
-    //
+      return _person_type;
   }
 
 Do (trigger doge):
@@ -17,14 +17,13 @@ Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
    *
    * @tparam F [TODO:description]
    * @tparam Args [TODO:description]
-   * @param fun [TODO:description]
-   * @param args [TODO:description]
+   * @param builder [TODO:description]
    * @return [TODO:description]
    */
   template<class F, class... Args>
-  decltype(auto) PerfectForward(F fun, Args&&... args)
+  auto Person::getPersonType (const Builder& builder) -> PersonType
   {
-    //
+      return _person_type;
   }
 
 # ==============================================================================

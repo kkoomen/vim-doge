@@ -3,7 +3,7 @@
 # ==============================================================================
 Given cpp (template function with parameters with return type):
   template <typename HandshakeHandler>
-  void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
+  void myFunc(handshake_type type, HandshakeHandler handler) {}
 
 Do (trigger doge):
   \<C-d>
@@ -14,17 +14,17 @@ Expect cpp (generated comment with @brief, @tparam, and @param tags):
    *
    * @tparam HandshakeHandler [TODO:description]
    * @param type [TODO:description]
-   * @param param [TODO:description]
+   * @param handler [TODO:description]
    */
   template <typename HandshakeHandler>
-  void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
+  void myFunc(handshake_type type, HandshakeHandler handler) {}
 
 # ==============================================================================
 # Template functions without template parameters with return type.
 # ==============================================================================
 Given cpp (template function without template parameters with return type):
   template <>
-  void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
+  void myFunc(handshake_type type, HandshakeHandler handler) {}
 
 Do (trigger doge):
   \<C-d>
@@ -34,10 +34,10 @@ Expect cpp (generated comment with @brief, and @param tags):
    * @brief [TODO:description]
    *
    * @param type [TODO:description]
-   * @param HandshakeHandler [TODO:description]
+   * @param handler [TODO:description]
    */
   template <>
-  void myFunc(handshake_type type, MOVE_ARG(HandshakeHandler) handler) {}
+  void myFunc(handshake_type type, HandshakeHandler handler) {}
 
 # ==============================================================================
 # Template functions with parameters with return types with default # values.
@@ -98,7 +98,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief, @tparam tags):
   /**
-   * @brief [TODO:description]
+   * struct test - [TODO:description]
    *
    * @tparam Test1 [TODO:description]
    * @tparam Test2 [TODO:description]

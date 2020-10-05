@@ -114,7 +114,7 @@ export class CParserService extends BaseParserService implements CustomParserSer
     });
   }
 
-  private parseFieldDeclaration(node: SyntaxNode) {
+  private parseFieldDeclaration(node: SyntaxNode): void {
     node.children.forEach((childNode: SyntaxNode) => {
       switch (childNode.type) {
         case 'field_identifier': {

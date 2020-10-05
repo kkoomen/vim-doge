@@ -3,4 +3,5 @@ export enum Language {
   TYPESCRIPT = 'typescript',
   PYTHON = 'python',
   C = 'c',
+  CPP = 'cpp',
 }

@@ -46,6 +46,7 @@
   "dependencies": {
     "tree-sitter": "^0.17.0",
     "tree-sitter-c": "^0.16.1",
+    "tree-sitter-cpp": "^0.16.0",
     "tree-sitter-php": "^0.16.2",
     "tree-sitter-python": "^0.16.1",
     "tree-sitter-typescript": "^0.16.1",
