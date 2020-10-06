@@ -18,70 +18,43 @@ function! doge#pattern#generate(pattern) abort
   catch /^Vim\%((\a\+)\)\=:E117/
   endtry
 
-  " Split the 'parameters' token value into a list.
-  if has_key(a:pattern, 'parameters') && has_key(l:tokens, 'parameters')
-    let l:params = l:tokens['parameters']
+  for l:key in ['parameters', 'typeParameters', 'exceptions']
+    if has_key(a:pattern, l:key) && has_key(l:tokens, l:key)
+      let l:params = l:tokens[l:key]
 
-    " Preprocess the extracted parameter tokens.
-    try
-      let l:preprocess_fn = printf('doge#preprocessors#%s#parameter_tokens', doge#helpers#get_filetype())
-      call function(l:preprocess_fn)(l:params)
-    catch /^Vim\%((\a\+)\)\=:E117/
-    endtry
+      " Preprocess the extracted parameter tokens.
+      try
+        let l:preprocess_fn = printf('doge#preprocessors#%s#%s_tokens', l:key, doge#helpers#get_filetype())
+        call function(l:preprocess_fn)(l:params)
+      catch /^Vim\%((\a\+)\)\=:E117/
+      endtry
 
-    let l:formatted_params = []
+      let l:formatted_params = []
 
-    " Some values may contain pipe characters as input. This will happen in
-    " typed languages where the type hint allows multiple types.
-    "
-    " JavaScript/TypeScript Example:
-    "   function test($p1: string, p2: Foo | Bar | Baz) { ... }
-    "
-    " Therefore, we have to escape the pipe characters in the input.
-    let l:params = doge#helpers#deepsubstitute(l:params, '\m|', '<Bar>', 'g')
+      " Some values may contain pipe characters as input. This will happen in
+      " typed languages where the type hint allows multiple types.
+      "
+      " JavaScript/TypeScript Example:
+      "   function test($p1: string, p2: Foo | Bar | Baz) { ... }
+      "
+      " Therefore, we have to escape the pipe characters in the input.
+      let l:params = doge#helpers#deepsubstitute(l:params, '\m|', '<Bar>', 'g')
 
-    for l:param in l:params
-      let l:format = doge#token#replace(
-            \ l:param,
-            \ a:pattern['parameters']['format']
-            \ )
+      for l:param in l:params
+        let l:format = doge#token#replace(
+              \ l:param,
+              \ a:pattern[l:key]['format']
+              \ )
 
-      if type(l:format) == v:t_list
-        call add(l:formatted_params, join(l:format, "\n"))
-      else
-        call add(l:formatted_params, l:format)
-      endif
-    endfor
-    let l:tokens['parameters'] = l:formatted_params
-  endif
-
-  " Split the 'parameters' token value into a list.
-  if has_key(a:pattern, 'typeParameters') && has_key(l:tokens, 'typeParameters')
-    let l:typeparams = l:tokens['typeParameters']
-
-    " Preprocess the extracted parameter tokens.
-    try
-      let l:preprocess_fn = printf('doge#preprocessors#%s#type_parameter_tokens', doge#helpers#get_filetype())
-      call function(l:preprocess_fn)(l:typeparams)
-    catch /^Vim\%((\a\+)\)\=:E117/
-    endtry
-
-    let l:formatted_typeparams = []
-
-    for l:param in l:typeparams
-      let l:format = doge#token#replace(
-            \ l:param,
-            \ a:pattern['typeParameters']['format']
-            \ )
-
-      if type(l:format) == v:t_list
-        call add(l:formatted_typeparams, join(l:format, "\n"))
-      else
-        call add(l:formatted_typeparams, l:format)
-      endif
-    endfor
-    let l:tokens['typeParameters'] = l:formatted_typeparams
-  endif
+        if type(l:format) == v:t_list
+          call add(l:formatted_params, join(l:format, "\n"))
+        else
+          call add(l:formatted_params, l:format)
+        endif
+      endfor
+      let l:tokens[l:key] = l:formatted_params
+    endif
+  endfor
 
   let l:template = deepcopy(a:pattern['template'])
 

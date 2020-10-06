@@ -1,6 +1,7 @@
 import Bash from 'tree-sitter-bash';
 import C from 'tree-sitter-c';
 import CPP from 'tree-sitter-cpp';
+import Java from 'tree-sitter-java';
 import Lua from 'tree-sitter-lua';
 import PHP from 'tree-sitter-php';
 import Python from 'tree-sitter-python';
@@ -17,4 +18,5 @@ export const parserLanguages = {
   [Language.BASH]: Bash,
   [Language.RUBY]: Ruby,
   [Language.LUA]: Lua,
+  [Language.JAVA]: Java,
 };

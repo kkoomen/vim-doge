@@ -7,4 +7,5 @@ export enum Language {
   BASH = 'bash',
   RUBY = 'ruby',
   LUA = 'lua',
+  JAVA = 'java',
 }
