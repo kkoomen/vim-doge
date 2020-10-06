@@ -4,6 +4,7 @@ import { ValueOf } from '../helpers';
 import { BashParserService } from './bash.service';
 import { CParserService } from './c.service';
 import { CppParserService } from './cpp.service';
+import { LuaParserService } from './lua.service';
 import { PhpParserService } from './php.service';
 import { PythonParserService } from './python.service';
 import { RubyParserService } from './ruby.service';
@@ -16,7 +17,8 @@ export type ParserService =
   | CParserService
   | CppParserService
   | BashParserService
-  | RubyParserService;
+  | RubyParserService
+  | LuaParserService;
 
 export function getParserService(
   language: ValueOf<Language>,
@@ -43,6 +45,9 @@ export function getParserService(
 
     case Language.RUBY:
       return new RubyParserService(...args);
+
+    case Language.LUA:
+      return new LuaParserService(...args);
 
     default:
       // prettier-ignore

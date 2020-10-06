@@ -1,6 +1,5 @@
 {
   "printWidth": 80,
   "singleQuote": true,
-  "trailingComma": "all",
-  "parser": "babel-ts"
+  "trailingComma": "all"
 }
