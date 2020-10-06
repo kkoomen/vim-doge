@@ -22,9 +22,14 @@ function! doge#pattern#generate(pattern) abort
     if has_key(a:pattern, l:key) && has_key(l:tokens, l:key)
       let l:params = l:tokens[l:key]
 
-      " Preprocess the extracted parameter tokens.
       try
-        let l:preprocess_fn = printf('doge#preprocessors#%s#%s_tokens', l:key, doge#helpers#get_filetype())
+        " Preprocess the extracted parameter tokens.
+        " Substitute the l:key from NamesLikeThis to names_like_this.
+        let l:preprocess_fn = printf(
+              \ 'doge#preprocessors#%s#%s_tokens',
+              \ doge#helpers#get_filetype(),
+              \ substitute(l:key, '\(\<\u\l\+\|\l\+\)\(\u\)', '\l\1_\l\2', 'g'),
+              \)
         call function(l:preprocess_fn)(l:params)
       catch /^Vim\%((\a\+)\)\=:E117/
       endtry
@@ -156,8 +161,6 @@ function! doge#pattern#custom(name) abort
   if !exists('b:doge_patterns')
     let b:doge_patterns = {}
     let l:unsupported_filetype = 1
-    let l:comment = substitute(escape(&commentstring, '\/*.~$'), '%s', '.\\{-}', '')
-    let l:comment = string(printf('\m%s$', l:comment))
   else
     let l:unsupported_filetype = 0
   endif
@@ -169,15 +172,10 @@ function! doge#pattern#custom(name) abort
     let l:name = a:name . '_custom'
   else
     let l:template = {
-          \   'match': '',
-          \   'tokens': ['parameters'],
-          \   'template': [],
-          \   'insert': 'above',
           \   'parameters': {
-          \     'match': '',
-          \     'tokens': '',
           \     'format': '',
           \   },
+          \   'template': [],
           \ }
     let l:name = a:name
   endif
@@ -221,9 +219,8 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, 'endif')
   call add(l:doc, '')
   if l:unsupported_filetype
-    call add(l:doc, '" DoGe uses these patterns to identify comments, change if needed.')
-    call add(l:doc, 'let b:doge_pattern_single_line_comment = ' . l:comment)
-    call add(l:doc, 'let b:doge_pattern_multi_line_comment = ' . l:comment)
+    call add(l:doc, "let b:doge_parser = 'PARSER_NAME_HERE'")
+    call add(l:doc, "let b:doge_insert = 'above'")
     call add(l:doc, '')
   endif
   call add(l:doc, '" Set the new doc standard as default.')
@@ -233,18 +230,10 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, "if !has_key(b:doge_patterns, '" . l:name . "')")
   call add(l:doc, "let b:doge_patterns['" . l:name . "'] = [")
   call add(l:doc, "\\  {")
-  call add(l:doc, "\\    'match': " . string(l:template.match) . ',')
-  call add(l:doc, "\\    'tokens': " . string(l:template.tokens) . ',')
-  for l:key in l:template.tokens
-    if has_key(l:template, l:key)
-      call add(l:doc, "\\    '" . l:key . "': {")
-      call add(l:doc, "\\      'match': " . string(l:template[l:key].match) . ',')
-      call add(l:doc, "\\      'tokens': " . string(l:template[l:key].tokens) . ',')
-      call add(l:doc, "\\      'format': " . string(l:template[l:key].format) . ',')
-      call add(l:doc, '\    },')
-    endif
-  endfor
-  call add(l:doc, "\\    'insert': " . string(l:template.insert) . ',')
+  call add(l:doc, "\\    'node_types': ['NODE_TYPE_A', 'NODE_TYPE_B'],")
+  call add(l:doc, "\\    'parameters': {")
+  call add(l:doc, "\\      'format': '@param {name} !description',")
+  call add(l:doc, "\\    },")
   call add(l:doc, "\\    'template': [")
   for l:line in l:template.template
     call add(l:doc, '\      ' . string(l:line) . ',')

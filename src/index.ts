@@ -2,8 +2,8 @@ import fs from 'fs';
 import Parser from 'tree-sitter';
 import { Language } from './constants';
 import { ValueOf } from './helpers';
-import { parserLanguages } from './parser-languages';
 import { getParserService } from './parsers';
+import { parserLanguages } from './parsers/languages';
 
 const args: string[] = process.argv.slice(2);
 const filepath: string = args.shift() as string;

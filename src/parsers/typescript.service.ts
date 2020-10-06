@@ -1,6 +1,6 @@
 import { SyntaxNode } from 'tree-sitter';
-import { CustomParserService } from '../parser-service.interface';
 import { BaseParserService } from './base-parser.service';
+import { CustomParserService } from './custom-parser-service.interface';
 
 enum NodeType {
   ARROW_FUNCTION = 'arrow_function',

@@ -101,6 +101,7 @@ function! doge#helpers#parser(args) abort
       call delete(l:tempfile)
     endtry
   endif
+
   return 0
 endfunction
 

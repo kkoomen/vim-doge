@@ -1,4 +1,4 @@
-*doge.txt*	(Do)cumentation (Ge)nerator
+*doge.txt*      (Do)cumentation (Ge)nerator
 Kim Koomen                                                              *doge*
 
 ==============================================================================
@@ -234,7 +234,7 @@ a comment. The following preprocess functions are available:
 
   doge#preprocessors#<filetype>#tokens(tokens)
 
-  doge#preprocessors#<filetype>#parameter_tokens(tokens)
+  doge#preprocessors#<filetype>#parameters_tokens(tokens)
 
   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
 

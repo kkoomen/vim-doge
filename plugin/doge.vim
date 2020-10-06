@@ -41,7 +41,11 @@ endif
 "
 "   doge#preprocessors#<filetype>#tokens(tokens)
 "
-"   doge#preprocessors#<filetype>#parameter_tokens(tokens)
+"   doge#preprocessors#<filetype>#parameters_tokens(tokens)
+"
+"   doge#preprocessors#<filetype>#type_parameters_tokens(tokens)
+"
+"   doge#preprocessors#<filetype>#exceptions_tokens(tokens)
 "
 "   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
 "

@@ -1,6 +1,6 @@
 import { SyntaxNode } from 'tree-sitter';
-import { CustomParserService } from '../parser-service.interface';
 import { BaseParserService } from './base-parser.service';
+import { CustomParserService } from './custom-parser-service.interface';
 
 enum NodeType {
   FUNCTION_DEFINITION = 'function_definition',

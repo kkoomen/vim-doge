@@ -7,7 +7,7 @@ import PHP from 'tree-sitter-php';
 import Python from 'tree-sitter-python';
 import Ruby from 'tree-sitter-ruby';
 import TypeScript from 'tree-sitter-typescript/typescript';
-import { Language } from './constants';
+import { Language } from '../constants';
 
 export const parserLanguages = {
   [Language.PHP]: PHP,

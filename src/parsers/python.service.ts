@@ -1,6 +1,6 @@
 import { SyntaxNode } from 'tree-sitter';
-import { CustomParserService } from '../parser-service.interface';
 import { BaseParserService } from './base-parser.service';
+import { CustomParserService } from './custom-parser-service.interface';
 
 enum NodeType {
   FUNCTION_DEFINITION = 'function_definition',
@@ -70,7 +70,16 @@ export class PythonParserService
                 'identifier',
               ].includes(n.type),
             )
-            .forEach((cn: SyntaxNode) => {
+            .forEach((cn: SyntaxNode, index: number) => {
+              // If this is a class method then we don't want to add the first
+              // parameter, because that will be the 'self' keyword.
+              if (
+                node.parent?.parent?.type === 'class_definition' &&
+                index === 0
+              ) {
+                return;
+              }
+
               const param: Record<string, any> = {
                 name: null,
                 type: null,

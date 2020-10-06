@@ -68,7 +68,7 @@ endfunction
 
 " A callback function being called after the parameter tokens have been
 " extracted. This function will adjust the input if needed.
-function! doge#preprocessors#javascript#parameter_tokens(tokens) abort
+function! doge#preprocessors#javascript#parameters_tokens(tokens) abort
   for l:token in a:tokens
     let l:token_idx = index(a:tokens, l:token)
     if has_key(l:token, 'type') && !empty(l:token['type']) && match(l:token['type'], '\m^\s*{') >= 0
