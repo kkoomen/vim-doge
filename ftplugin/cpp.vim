@@ -45,6 +45,7 @@ let s:pattern_base = {
 let s:class_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'node_types': ['class_specifier', 'template_declaration'],
 \})
+unlet s:class_pattern['parameters']
 
 " ------------------------------------------------------------------------------
 " Matches (template) function- and class method declarations.
@@ -59,6 +60,7 @@ let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
 let s:struct_pattern = doge#helpers#deepextend(s:pattern_base, {
 \  'node_types': ['struct_specifier', 'template_declaration'],
 \})
+unlet s:struct_pattern['parameters']
 
 " ------------------------------------------------------------------------------
 " Matches field declarations inside structs.

@@ -4,7 +4,7 @@
   "version": "2.8.0",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "version": "npm run preversion && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "preversion": "npm run format && npm run lint && npm run build",
     "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",

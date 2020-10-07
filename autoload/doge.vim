@@ -164,13 +164,12 @@ function! doge#on_filetype_change() abort
       endif
 
       if l:is_alias == v:false
-        let l:doc_idx = index(get(b:, 'doge_supported_doc_standards', []), l:doc)
-        if l:doc_idx >= 0
+        let l:doc_idx = index(b:doge_supported_doc_standards, l:doc)
+        if l:doc_idx >= 0 && b:doge_prev_supported_doc_standards != b:doge_supported_doc_standards
           call remove(b:doge_supported_doc_standards, l:doc_idx)
-        endif
-
-        if has_key(get(b:, 'doge_patterns', {}), l:doc)
-          unlet b:doge_patterns[l:doc]
+          if has_key(get(b:, 'doge_patterns', {}), l:doc)
+            unlet b:doge_patterns[l:doc]
+          endif
         endif
       endif
     endfor

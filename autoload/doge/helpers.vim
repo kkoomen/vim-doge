@@ -130,7 +130,7 @@ function! doge#helpers#deepextend(...) abort
       if type(l:v) is v:t_dict && type(get(l:new, l:k)) is v:t_dict
         let l:new[l:k] = doge#helpers#deepextend(l:new[l:k], l:v, l:merge_lists)
       elseif type(l:v) is v:t_list && type(get(l:new, l:k)) is v:t_list && l:merge_lists == v:true
-        let l:new[l:k] = uniq(sort(extend(get(l:new, l:k), l:v)))
+        let l:new[l:k] = uniq(sort(extend(copy(get(l:new, l:k)), l:v)))
       else
         let l:new[l:k] = l:v
       endif

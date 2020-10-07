@@ -38,7 +38,7 @@ function! s:token_replace(tokens, text) abort
       let l:conditional_pattern_replacement_value = '\1'
       if (type(l:token_value) == v:t_string && empty(l:token_value))
             \ || (type(l:token_value) == v:t_list && len(l:token_value) == 0)
-            \ || (type(l:token_value) == v:t_none && l:token_value == v:null)
+            \ || (type(l:token_value) == type(v:null) && l:token_value == v:null)
             \ || (type(l:token_value) == v:t_bool && l:token_value == v:false)
         let l:conditional_pattern_replacement_value = ''
         let l:empty_conditional_pattern_value = 1

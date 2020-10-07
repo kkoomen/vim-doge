@@ -132,7 +132,7 @@ export class TypeScriptParserService
             if (cn.type === 'extends_clause') {
               cn.children.forEach((n: SyntaxNode) => {
                 if (n.type === 'generic_type') {
-                  this.result.parentName = n?.children
+                  this.result.parentName = n.children
                     .filter((c: SyntaxNode) =>
                       ['type_identifier', 'nested_type_identifier'].includes(
                         c.type,
@@ -142,8 +142,8 @@ export class TypeScriptParserService
                 }
 
                 // prettier-ignore
-                if (['type_identifier', 'nested_type_identifier'].includes(cn.type)) {
-                  this.result.parentName = cn.text;
+                if (['type_identifier', 'nested_type_identifier'].includes(n.type)) {
+                  this.result.parentName = n.text;
                 }
               });
             }
@@ -151,13 +151,13 @@ export class TypeScriptParserService
             if (cn.type === 'implements_clause') {
               cn.children.forEach((c: SyntaxNode) => {
                 if (c.type === 'generic_type') {
-                  this.result.interfaceName = c?.children
+                  this.result.interfaceName = c.children
                     .filter((n) => n.type === 'type_identifier')
                     .shift()?.text;
                 }
 
-                if (cn.type === 'type_identifier') {
-                  this.result.interfaceName = cn.text;
+                if (c.type === 'type_identifier') {
+                  this.result.interfaceName = c.text;
                 }
               });
             }
