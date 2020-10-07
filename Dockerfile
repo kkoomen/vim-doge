@@ -11,16 +11,18 @@ RUN apk -v --progress add --no-cache bash git
 # Install NodeJS.
 RUN apk --no-cache add g++ gcc libgcc libstdc++ linux-headers make python
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community nodejs nodejs-npm
+
+# Setup NPM.
+ENV NODE_PATH="/usr/lib/node_modules"
+RUN npm -g config set user root
+
+# Install base packages.
 RUN npm install -g node-gyp \
       webpack \
       webpack-cli \
       webpack-node-externals \
       ts-loader \
       typescript
-
-# Setup NPM.
-ENV NODE_PATH="/usr/lib/node_modules"
-RUN npm -g config set user root
 
 # Install tree-sitter packages.
 RUN npm install -g tree-sitter
