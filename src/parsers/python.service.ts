@@ -30,6 +30,7 @@ export class PythonParserService
             name: null,
             parameters: [],
             returnType: null,
+            exceptions: [],
           };
           this.runNodeParser(this.parseFunction, node);
           break;
@@ -130,9 +131,31 @@ export class PythonParserService
           break;
         }
 
+        case 'block': {
+          this.parseExceptions(childNode);
+          break;
+        }
+
         default:
           break;
       }
     });
+  }
+
+  private parseExceptions(node: SyntaxNode): void {
+    if (node.type === 'raise_statement') {
+      const exceptionName = node.children
+        .filter((n: SyntaxNode) => n.type === 'expression_list')
+        .shift()
+        ?.children.shift()
+        ?.children.shift()?.text;
+      this.result.exceptions.push({ name: exceptionName });
+    }
+
+    if (node.childCount > 0) {
+      node.children.forEach((childNode: SyntaxNode) => {
+        this.parseExceptions(childNode);
+      });
+    }
   }
 }

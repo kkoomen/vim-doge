@@ -27,6 +27,15 @@ let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
 let b:doge_doc_standard = doge#buffer#get_doc_standard('python')
 let b:doge_patterns = doge#buffer#get_patterns()
 
+" ==============================================================================
+"
+" Define the pattern types.
+"
+" ==============================================================================
+let s:function_pattern = {
+\  'nodeTypes': ['function_definition'],
+\}
+
 
 " ==============================================================================
 "
@@ -35,10 +44,12 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " ==============================================================================
 
 call doge#buffer#register_doc_standard('reST', [
-\  {
-\    'nodeTypes': ['function_definition'],
+\  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
 \      'format': ':param {name} {type|!type}: !description',
+\    },
+\    'exceptions': {
+\      'format': ':raises {name|!name}: !description',
 \    },
 \    'template': [
 \      '"""',
@@ -46,19 +57,22 @@ call doge#buffer#register_doc_standard('reST', [
 \      '',
 \      '%(parameters|{parameters})%',
 \      '%(returnType|:rtype {returnType}: !description)%',
+\      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],
-\  },
+\  }),
 \])
 
 call doge#buffer#register_doc_standard('sphinx', [
-\  {
-\    'nodeTypes': ['function_definition'],
+\  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
 \      'format': [
 \        ':param {name}: !description%(default|, defaults to {default})%',
 \        ':type {name}: {type|!type}%(default|, optional)%',
 \      ],
+\    },
+\    'exceptions': {
+\      'format': ':raises {name|!name}: !description',
 \    },
 \    'template': [
 \      '"""',
@@ -67,17 +81,23 @@ call doge#buffer#register_doc_standard('sphinx', [
 \      '%(parameters|{parameters})%',
 \      '%(returnType|:return: !description)%',
 \      '%(returnType|:rtype: {returnType})%',
+\      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],
-\  },
+\  }),
 \])
 
 call doge#buffer#register_doc_standard('numpy', [
-\  {
-\    'nodeTypes': ['function_definition'],
+\  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
 \      'format': [
 \        '{name} : {type|!type}',
+\        '\t!description',
+\      ],
+\    },
+\    'exceptions': {
+\      'format': [
+\        '{name|!name}',
 \        '\t!description',
 \      ],
 \    },
@@ -95,16 +115,22 @@ call doge#buffer#register_doc_standard('numpy', [
 \      '%(returnType|-------)%',
 \      '%(returnType|{returnType}:)%',
 \      '%(returnType|\t!description)%',
+\      '%(exceptions|)%',
+\      '%(exceptions|Raises)%',
+\      '%(exceptions|------)%',
+\      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],
-\  },
+\  }),
 \])
 
 call doge#buffer#register_doc_standard('google', [
-\  {
-\    'nodeTypes': ['function_definition'],
+\  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
 \      'format': '{name} ({type|!type}%(default|, optional)%): !description',
+\    },
+\    'exceptions': {
+\      'format': '{name|!name}: !description',
 \    },
 \    'template': [
 \      '"""!summary',
@@ -116,9 +142,12 @@ call doge#buffer#register_doc_standard('google', [
 \      '%(returnType|)%',
 \      '%(returnType|Returns:)%',
 \      '%(returnType|\t{returnType}: !description)%',
+\      '%(exceptions|)%',
+\      '%(exceptions|Raises:)%',
+\      '%(exceptions|\t{exceptions})%',
 \      '"""',
 \    ],
-\  },
+\  }),
 \])
 
 let &cpoptions = s:save_cpo

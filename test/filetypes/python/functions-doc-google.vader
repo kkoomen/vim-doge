@@ -89,3 +89,37 @@ Expect python (generated comment with Args and Returns tags):
       Sequence[T]: [TODO:description]
     """
     pass
+
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given python (function with exceptions being raised in the body):
+  def myFunc(p1 = 'string'):
+    try:
+      raise ValueError('Represents a hidden bug, do not catch this')
+      raise Exception('This is the exception you expect to handle')
+    except Exception as error:
+      print('Caught this error: ' + repr(error))
+
+Do (trigger doge):
+  :let b:doge_doc_standard='google'\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param and :raises tags):
+  def myFunc(p1 = 'string'):
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1 ([TODO:type], optional): [TODO:description]
+
+    Raises:
+      ValueError: [TODO:description]
+      Exception: [TODO:description]
+    """
+    try:
+      raise ValueError('Represents a hidden bug, do not catch this')
+      raise Exception('This is the exception you expect to handle')
+    except Exception as error:
+      print('Caught this error: ' + repr(error))
