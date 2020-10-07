@@ -1,9 +1,9 @@
 FROM tweekmonster/vim-testbed:latest
 
 RUN install_vim -tag v7.4.2119 -py3 -build
-RUN install_vim -tag v8.1.2300 -py3 -build
+RUN install_vim -tag v8.2.1800 -py3 -build
 RUN install_vim -tag neovim:v0.2.0 -py3 -build
-RUN install_vim -tag neovim:v0.4.3 -py3 -build
+RUN install_vim -tag neovim:v0.4.4 -py3 -build
 
 # Install base dependencies.
 RUN apk -v --progress add --no-cache bash git

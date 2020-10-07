@@ -29,14 +29,14 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=3d8db15ac385
+current_docker_image_id=b3cdeee7a70f
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
 verbose_flag=''
 verbose=0
 run_vim_74_tests=1
-run_vim_81_tests=1
+run_vim_82_tests=1
 run_neovim_02_tests=1
 run_neovim_04_tests=1
 run_linter=1
@@ -61,12 +61,12 @@ while [ $# -ne 0 ]; do
   ;;
   --vim-74-only)
     run_linter=0
-    run_vim_81_tests=0
+    run_vim_82_tests=0
     run_neovim_02_tests=0
     run_neovim_04_tests=0
     shift
   ;;
-  --vim-81-only)
+  --vim-82-only)
     run_linter=0
     run_vim_74_tests=0
     run_neovim_02_tests=0
@@ -76,26 +76,26 @@ while [ $# -ne 0 ]; do
   --neovim-only)
     run_linter=0
     run_vim_74_tests=0
-    run_vim_81_tests=0
+    run_vim_82_tests=0
     shift
   ;;
   --neovim-02-only)
     run_linter=0
     run_vim_74_tests=0
-    run_vim_81_tests=0
+    run_vim_82_tests=0
     run_neovim_04_tests=0
     shift
   ;;
   --neovim-04-only)
     run_linter=0
     run_vim_74_tests=0
-    run_vim_81_tests=0
+    run_vim_82_tests=0
     run_neovim_02_tests=0
     shift
   ;;
   --linter-only)
     run_vim_74_tests=0
-    run_vim_81_tests=0
+    run_vim_82_tests=0
     run_neovim_02_tests=0
     run_neovim_04_tests=0
     shift
@@ -110,7 +110,7 @@ while [ $# -ne 0 ]; do
       echo '  -v                Enable verbose output'
       echo '  --vim-only        Run tests only for Vim 8.0 and 8.1'
       echo '  --vim-74-only     Run tests only for Vim 7.4'
-      echo '  --vim-81-only     Run tests only for Vim 8.1'
+      echo '  --vim-82-only     Run tests only for Vim 8.2'
       echo '  --neovim-only     Run tests only for NeoVim 0.2 and 0.3'
       echo '  --neovim-02-only  Run tests only for NeoVim 0.2'
       echo '  --neovim-04-only  Run tests only for NeoVim 0.4'
@@ -180,7 +180,7 @@ file_number=0
 pid_list=''
 for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
   if ( [[ $vim =~ ^vim-v7.4 ]] && ((run_vim_74_tests)) ) \
-  || ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_81_tests)) ) \
+  || ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_82_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
     echo "Starting Vim: $vim..."
