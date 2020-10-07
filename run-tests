@@ -33,8 +33,6 @@ current_docker_image_id=f7ea8ec251f8
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
-echo "which webpack?????? $(which webpack)"
-
 verbose_flag=''
 verbose=0
 run_vim_74_tests=1
@@ -178,6 +176,11 @@ cancel_tests() {
 
 trap cancel_tests INT TERM
 
+if [[ ! -f ./dist/index.js ]]; then
+  echo "$(pwd)/dist/index.js does not exists, run ./install.sh or "npm run buidl:webpack" to create a build"
+  exit 1
+fi
+
 file_number=0
 pid_list=''
 for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
@@ -185,11 +188,6 @@ for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neo
   || ( [[ $vim =~ ^vim-v8.2 ]] && ((run_vim_82_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
-    # Run a build if it doesn't exists yet.
-    if [[ ! -f ./dist/index.js ]]; then
-      webpack --mode production
-    fi
-
     echo "Starting Vim: $vim..."
     file_number=$((file_number+1))
     scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &

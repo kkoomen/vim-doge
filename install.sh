@@ -5,5 +5,10 @@
 set -e
 set -u
 
-npm install --only=production --no-save
-npm run build:webpack
+if [[ ! -d ./node_modules ]]; then
+  npm install --only=production --no-save
+fi
+
+if [[ ! -f ./dist/index.js ]]; then
+  npm run build:webpack
+fi

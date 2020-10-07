@@ -10,4 +10,4 @@ env:
   - OPTIONS=--neovim-04-only
   - OPTIONS=--linter-only
 script: |
-  ./run-tests -v $OPTIONS
+  ./install.sh && ./run-tests -v $OPTIONS
