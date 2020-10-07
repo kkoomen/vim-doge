@@ -29,7 +29,7 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=0c73be9ced09
+current_docker_image_id=a0efef30a1c2
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
@@ -177,6 +177,7 @@ cancel_tests() {
 trap cancel_tests INT TERM
 
 if [[ ! -f ./dist/index.js ]]; then
+  echo "Building dist/index.js"
   docker run --rm \
     -v "$PWD/autoload:/vim-doge/autoload" \
     -v "$PWD/ftplugin:/vim-doge/ftplugin" \
@@ -188,6 +189,7 @@ if [[ ! -f ./dist/index.js ]]; then
     -v "$PWD/webpack.config.js:/vim-doge/webpack.config.js" \
     -w /vim-doge "$DOGE_DOCKER_IMAGE" \
     npm run build:webpack
+  echo "[done] Building dist/index.js"
 fi
 
 file_number=0

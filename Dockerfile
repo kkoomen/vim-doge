@@ -28,6 +28,6 @@ RUN git clone https://github.com/junegunn/vader.vim vader \
 RUN mkdir /vim-doge
 WORKDIR /vim-doge
 COPY ./package*.json ./
-RUN npm i
+RUN npm ci
 
 CMD ["/bin/bash"]
