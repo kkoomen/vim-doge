@@ -41,9 +41,8 @@ set -o pipefail
 docker run \
   -a stdout \
   --rm \
-  -v "$PWD:/testplugin" \
-  -v "$PWD/test:/home" \
-  -w /testplugin "$DOGE_DOCKER_IMAGE" vint -s . || exit_code=$?
+  -v "$PWD:/vim-doge" \
+  -w /vim-doge "$DOGE_DOCKER_IMAGE" vint -s . || exit_code=$?
 set +o pipefail
 
 echo

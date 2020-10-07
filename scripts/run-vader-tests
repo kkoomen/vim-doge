@@ -147,13 +147,15 @@ while [ "$tries" -lt 5 ]; do
     -a stderr \
     -e VADER_OUTPUT_FILE=/dev/stderr \
     --rm \
-    -v "$PWD/autoload:/testplugin/autoload" \
-    -v "$PWD/ftplugin:/testplugin/ftplugin" \
-    -v "$PWD/plugin:/testplugin/plugin" \
-    -v "$PWD/src:/testplugin/src" \
-    -v "$PWD/test:/testplugin/test" \
-    -v "$PWD/dist:/testplugin/dist" \
-    -w /testplugin "$DOGE_DOCKER_IMAGE" \
+    -v "$PWD/autoload:/vim-doge/autoload" \
+    -v "$PWD/ftplugin:/vim-doge/ftplugin" \
+    -v "$PWD/plugin:/vim-doge/plugin" \
+    -v "$PWD/src:/vim-doge/src" \
+    -v "$PWD/test:/vim-doge/test" \
+    -v "$PWD/dist:/vim-doge/dist" \
+    -v "$PWD/tsconfig.json:/vim-doge/tsconfig.json" \
+    -v "$PWD/webpack.config.js:/vim-doge/webpack.config.js" \
+    -w /vim-doge "$DOGE_DOCKER_IMAGE" \
     "/vim-build/bin/$vim" -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
 
   set +o pipefail

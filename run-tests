@@ -29,7 +29,7 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=b878e664d3cc
+current_docker_image_id=0c73be9ced09
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
@@ -177,7 +177,7 @@ cancel_tests() {
 trap cancel_tests INT TERM
 
 if [[ ! -f ./dist/index.js ]]; then
-  npm run build:webpack
+  docker run --rm $DOGE_DOCKER_IMAGE npm run build:webpack
 fi
 
 file_number=0
