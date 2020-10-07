@@ -21,5 +21,5 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
-  externals: [nodeExternals()],
+  externals: process.env.TRAVIS ? [] : [nodeExternals()],
 };
