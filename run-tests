@@ -185,7 +185,7 @@ for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neo
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
     # Run a build if it doesn't exists yet.
     if [[ ! -f ./dist/index.js ]]; then
-      npm run build:webpack
+      webpack --mode production
     fi
 
     echo "Starting Vim: $vim..."
