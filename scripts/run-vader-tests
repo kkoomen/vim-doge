@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+u!/usr/bin/env bash
 # Copyright (c) 2016-2019, w0rp <devw0rp@gmail.com> {{{
 # All rights reserved.
 #
@@ -29,8 +29,12 @@ set -e
 set -u
 
 verbose=0
+travis=0
 while [ $# -ne 0 ]; do
   case $1 in
+  --travis)
+      travis=1
+      shift
   -v)
       verbose=1
       shift
@@ -142,15 +146,21 @@ while [ "$tries" -lt 5 ]; do
   echo "tests: $tests"
   exit_code=0
   set -o pipefail
+
+  if [[ $travis -eq 1]]; do
+    volumes='-v "$PWD:/testplugin" -v "$PWD/test:/home"'
+  else
+    volumes='-v "$PWD:/testplugin" -v "node_modules:/testplugin/node_modules" -v "$PWD/test:/home"'
+  done
+
   docker run \
     -a stderr \
     -e VADER_OUTPUT_FILE=/dev/stderr \
     --rm \
-    -v "$PWD:/testplugin" \
-    -v "node_modules:/testplugin/node_modules" \
-    -v "$PWD/test:/home" \
+    $volumes \
     -w /testplugin "$DOGE_DOCKER_IMAGE" \
     "/vim-build/bin/$vim" -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
+
   set +o pipefail
 
   if [ -s "$run_file" ]; then

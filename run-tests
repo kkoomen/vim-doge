@@ -36,6 +36,7 @@ docker_run="docker run --rm $DOGE_DOCKER_IMAGE"
 
 verbose_flag=''
 verbose=0
+travis_flag=''
 travis=0
 run_vim_74_tests=1
 run_vim_82_tests=1
@@ -56,6 +57,7 @@ while [ $# -ne 0 ]; do
       shift
   ;;
   --travis)
+    travis_flag='--travis'
     travis=1
     shift
   ;;
@@ -188,6 +190,9 @@ if [[ $travis -eq 1 ]]; then
   # node_modules folder.
   deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
   DOCKER_NODE_PATH=$($docker_run bash -c 'echo $NODE_PATH')
+
+  $docker_run mkdir -p /testplugin/node_modules/ 2>&1 /dev/null
+
   for module_name in "${deps[@]}"; do
     dest_path="$DOCKER_NODE_PATH/$module_name"
     src_path="/testplugin/node_modules/$module_name"
@@ -205,7 +210,7 @@ for vim in $($docker_run ls /vim-build/bin | grep '^neovim\|^vim'); do
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
     echo "Starting Vim: $vim..."
     file_number=$((file_number+1))
-    scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
+    scripts/run-vader-tests $verbose_flag $travis_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
     pid_list="$pid_list $!"
   fi
 done
