@@ -1,5 +1,7 @@
 const nodeExternals = require('webpack-node-externals');
 
+console.log("process.env.TRAVIS >>>>", process.env.TRAVIS);
+
 module.exports = {
   entry: './src/index.ts',
   output: {
@@ -21,5 +23,5 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
   },
-  externals: process.env.TRAVIS ? [] : [nodeExternals()],
+  externals: process.env.TRAVIS === 'true' ? [] : [nodeExternals()],
 };
