@@ -8,8 +8,9 @@
     "preversion": "npm run format && npm run lint && npm run build",
     "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
-    "build": "npm run prebuild && tsc -p tsconfig.json",
-    "start": "npm run build && node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "build:webpack": "webpack --mode production",
+    "start": "npm run build:webpack",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
   },
@@ -53,8 +54,7 @@
     "tree-sitter-php": "^0.16.2",
     "tree-sitter-python": "^0.16.1",
     "tree-sitter-ruby": "^0.16.2",
-    "tree-sitter-typescript": "^0.16.1",
-    "typescript": "^4.0.3"
+    "tree-sitter-typescript": "^0.16.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
@@ -73,6 +73,11 @@
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
-    "ts-node": "^9.0.0"
+    "ts-loader": "^8.0.4",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
   }
 }

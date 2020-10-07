@@ -183,6 +183,11 @@ for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neo
   || ( [[ $vim =~ ^vim-v8.2 ]] && ((run_vim_82_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
+    # Run a build if it doesn't exists yet.
+    if [[ ! -f ./dist/index.js ]]; then
+      npm run build:webpack
+    fi
+
     echo "Starting Vim: $vim..."
     file_number=$((file_number+1))
     scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
