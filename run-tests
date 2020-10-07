@@ -176,30 +176,6 @@ cancel_tests() {
 
 trap cancel_tests INT TERM
 
-if [[ $TRAVIS == "true" ]]; then
-  # Travis will use the globally installed packages inside the docker, but in
-  # order to run proper builds, we have to symlink these to the local project's
-  # node_modules folder.
-  deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
-  DOCKER_NODE_PATH=$(docker run --rm $DOGE_DOCKER_IMAGE bash -c 'echo $NODE_PATH')
-  docker_args=(
-    -e TRAVIS="true"
-    -v "$PWD:/testplugin"
-    -v "node_modules:/testplugin/node_modules"
-    -v "$PWD/test:/home"
-    -w /testplugin
-  )
-
-  for module_name in "${deps[@]}"; do
-    dest_path="$DOCKER_NODE_PATH/$module_name"
-    src_path="/testplugin/node_modules/$module_name"
-    echo "Linking $src_path -> $dest_path"
-    docker run --rm ${docker_args[@]} $DOGE_DOCKER_IMAGE ln -s $dest_path $src_path
-  done
-
-  docker run --rm ${docker_args[@]} $DOGE_DOCKER_IMAGE npm run build:webpack
-fi
-
 file_number=0
 pid_list=''
 for vim in $(docker run --rm $DOGE_DOCKER_IMAGE ls /vim-build/bin | grep '^neovim\|^vim'); do

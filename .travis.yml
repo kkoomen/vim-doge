@@ -3,10 +3,6 @@ sudo: required
 services:
   - docker
 language: generic
-addons:
-  apt:
-    packages:
-    - jq
 git:
   depth: 1
 env:
@@ -15,4 +11,6 @@ env:
   - OPTIONS=--neovim-02-only
   - OPTIONS=--neovim-04-only
   - OPTIONS=--linter-only
+before_script:
+  - ./install.sh
 script: ./run-tests -v $OPTIONS
