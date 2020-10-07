@@ -9,5 +9,6 @@ env:
   - OPTIONS=--neovim-02-only
   - OPTIONS=--neovim-04-only
   - OPTIONS=--linter-only
-script: |
-  ./install.sh && ./run-tests -v $OPTIONS
+before_script:
+  - curl https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 > /usr/lib/jq
+script: ./run-tests -v --travis $OPTIONS

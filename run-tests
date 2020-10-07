@@ -32,9 +32,11 @@ docker_image=kkoomen/doge
 current_docker_image_id=f7ea8ec251f8
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
+docker_run="docker run --rm $DOGE_DOCKER_IMAGE"
 
 verbose_flag=''
 verbose=0
+travis=0
 run_vim_74_tests=1
 run_vim_82_tests=1
 run_neovim_02_tests=1
@@ -52,6 +54,10 @@ while [ $# -ne 0 ]; do
       verbose_flag='-v'
       verbose=1
       shift
+  ;;
+  --travis)
+    travis=1
+    shift
   ;;
   --vim-only)
     run_linter=0
@@ -176,14 +182,23 @@ cancel_tests() {
 
 trap cancel_tests INT TERM
 
-if [[ ! -f ./dist/index.js ]]; then
-  echo "$(pwd)/dist/index.js does not exists, run ./install.sh or "npm run build:webpack" to create a build"
-  exit 1
+if [[ $travis -eq 1 ]]; then
+  # Travis will use the globally installed packages inside the docker, but in
+  # order to run proper builds, we have to symlink these to the local project's
+  # node_modules folder.
+  deps=($(jq --raw-output ".dependencies | keys | @sh" package.json))
+  DOCKER_NODE_PATH=$($docker_run bash -c 'echo $NODE_PATH')
+  for module_name in "${deps[@]}"; do
+    dest_path="$DOCKER_NODE_PATH/module_name"
+    src_path="/testplugin/node_modules/$module_name"
+    echo "Linking $src_path -> $dest_path"
+    $docker_run ln -s $dest_path $src_path
+  done
 fi
 
 file_number=0
 pid_list=''
-for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
+for vim in $($docker_run ls /vim-build/bin | grep '^neovim\|^vim'); do
   if ( [[ $vim =~ ^vim-v7.4 ]] && ((run_vim_74_tests)) ) \
   || ( [[ $vim =~ ^vim-v8.2 ]] && ((run_vim_82_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
