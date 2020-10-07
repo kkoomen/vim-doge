@@ -108,13 +108,13 @@ while [ $# -ne 0 ]; do
       echo
       echo 'Options:'
       echo '  -v                Enable verbose output'
-      echo '  --vim-only        Run tests only for Vim 8.0 and 8.1'
+      echo '  --vim-only        Run tests only for Vim 8.0 and 8.2'
       echo '  --vim-74-only     Run tests only for Vim 7.4'
       echo '  --vim-82-only     Run tests only for Vim 8.2'
-      echo '  --neovim-only     Run tests only for NeoVim 0.2 and 0.3'
+      echo '  --neovim-only     Run tests only for NeoVim 0.2 and 0.4'
       echo '  --neovim-02-only  Run tests only for NeoVim 0.2'
       echo '  --neovim-04-only  Run tests only for NeoVim 0.4'
-      echo '  --linters-only    Run only Vint'
+      echo '  --linter-only     Run Vint only'
       echo '  --help            Show this help text'
       echo '  --                Stop parsing options after this'
       exit 0
@@ -180,7 +180,7 @@ file_number=0
 pid_list=''
 for vim in $(docker run --rm "$DOGE_DOCKER_IMAGE" ls /vim-build/bin | grep '^neovim\|^vim'); do
   if ( [[ $vim =~ ^vim-v7.4 ]] && ((run_vim_74_tests)) ) \
-  || ( [[ $vim =~ ^vim-v8.1 ]] && ((run_vim_82_tests)) ) \
+  || ( [[ $vim =~ ^vim-v8.2 ]] && ((run_vim_82_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.2 ]] && ((run_neovim_02_tests)) ) \
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
     echo "Starting Vim: $vim..."
