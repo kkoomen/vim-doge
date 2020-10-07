@@ -85,17 +85,19 @@ Is your favorite doc standard not supported?
 
 Install `DoGe`:
 
+Using plug:
+
+- `Plug 'kkoomen/vim-doge', { 'do': './install.sh' }`
+
 Using vim-pack:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
+- `./install.sh`
 
 Using pathogen:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
-
-Using plug:
-
-- `Plug 'kkoomen/vim-doge'`
+- `./install.sh`
 
 # Configuration
 
