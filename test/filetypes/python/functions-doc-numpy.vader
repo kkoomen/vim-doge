@@ -105,9 +105,9 @@ Expect python (generated comment with :param and :raises tags):
 
     Raises
     ------
-    ValueError
+    ValueError:
       [TODO:description]
-    Exception
+    Exception:
       [TODO:description]
     """
     try:

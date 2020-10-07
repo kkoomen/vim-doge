@@ -97,7 +97,7 @@ call doge#buffer#register_doc_standard('numpy', [
 \    },
 \    'exceptions': {
 \      'format': [
-\        '{name|!name}',
+\        '{name|!name}:',
 \        '\t!description',
 \      ],
 \    },
