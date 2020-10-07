@@ -39,11 +39,16 @@ call doge#buffer#register_doc_standard('phpdoc', [
 \    'parameters': {
 \      'format': '@param {type|!type} {name}%(default| (optional))% !description'
 \    },
+\    'exceptions': {
+\      'format': '@throws {name|!name} !description'
+\    },
 \    'template': [
 \      '/**',
 \      ' * !description',
 \      '%(parameters| *)%',
 \      '%(parameters| * {parameters})%',
+\      '%(exceptions| *)%',
+\      '%(exceptions| * {exceptions})%',
 \      '%(isNoConstructorMethod| *)%',
 \      '%(isNoConstructorMethod| * @return {returnType|!type} !description)%',
 \      ' */',

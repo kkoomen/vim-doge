@@ -110,3 +110,32 @@ Expect php (generated comment with @param and @return tags):
   function myFunction2(): ?array {
     //
   }
+
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given php (function with exceptions being raised in the body):
+  <?php
+  function test() {
+    throw new FirstException('Foo');
+    throw new SecondException('Bar');
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect php (generated comment with @param, @throws and @return tags):
+  <?php
+  /**
+   * [TODO:description]
+   *
+   * @throws FirstException [TODO:description]
+   * @throws SecondException [TODO:description]
+   *
+   * @return [TODO:type] [TODO:description]
+   */
+  function test() {
+    throw new FirstException('Foo');
+    throw new SecondException('Bar');
+  }

@@ -44,6 +44,7 @@ export class PhpParserService
             parameters: [],
             returnType: null,
             isNoConstructorMethod: methodName !== '__construct',
+            exceptions: [],
           };
           this.runNodeParser(this.parseFunction, node);
           break;
@@ -226,10 +227,32 @@ export class PhpParserService
           break;
         }
 
+        case 'compound_statement': {
+          this.parseExceptions(childNode);
+          break;
+        }
+
         default:
           break;
       }
     });
+  }
+
+  private parseExceptions(node: SyntaxNode) {
+    if (node.type === 'throw_statement') {
+      const exceptionName = node.children
+        .filter((n: SyntaxNode) => n.type === 'object_creation_expression')
+        .shift()
+        ?.children.filter((n: SyntaxNode) => n.type === 'qualified_name')
+        .shift()?.text;
+      this.result.exceptions.push({ name: exceptionName || null });
+    }
+
+    if (node.childCount > 0) {
+      node.children.forEach((childNode: SyntaxNode) => {
+        this.parseExceptions(childNode);
+      });
+    }
   }
 
   private escapeFQN(fqn: string): string {
