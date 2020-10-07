@@ -189,7 +189,7 @@ if [[ $travis -eq 1 ]]; then
   # node_modules folder.
   deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
   DOCKER_NODE_PATH=$(docker run --rm $DOGE_DOCKER_IMAGE bash -c 'echo $NODE_PATH')
-  volumes='-v "$PWD:/testplugin" -v "node_modules:/testplugin/node_modules" -v "$PWD/test:/home"'
+  volumes="-v \"$PWD:/testplugin\" -v \"node_modules:/testplugin/node_modules\" -v \"$PWD/test:/home\""
 
   docker run --rm $volumes $DOGE_DOCKER_IMAGE mkdir -p /testplugin/node_modules/
 
