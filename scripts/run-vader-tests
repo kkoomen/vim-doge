@@ -31,10 +31,6 @@ set -u
 verbose=0
 while [ $# -ne 0 ]; do
   case $1 in
-  --travis)
-      TRAVIS="true"
-      shift
-  ;;
   -v)
       verbose=1
       shift
@@ -150,7 +146,6 @@ while [ "$tries" -lt 5 ]; do
   docker run \
     -a stderr \
     -e VADER_OUTPUT_FILE=/dev/stderr \
-    -e TRAVIS=$TRAVIS \
     --rm \
     -v "$PWD:/testplugin" \
     -v "node_modules:/testplugin/node_modules" \
