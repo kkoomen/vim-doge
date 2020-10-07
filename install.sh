@@ -5,5 +5,5 @@
 set -e
 set -u
 
-npm install --only=production
+npm install --only=production --no-save
 npm run build:webpack
