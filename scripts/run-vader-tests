@@ -35,6 +35,7 @@ while [ $# -ne 0 ]; do
   --travis)
       travis=1
       shift
+  ;;
   -v)
       verbose=1
       shift

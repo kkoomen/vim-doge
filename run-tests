@@ -195,14 +195,14 @@ if [[ $travis -eq 1 ]]; then
     -v "$PWD/test:/home"
   )
 
-  docker run --rm ${volumes[@]} $DOGE_DOCKER_IMAGE mkdir -p /testplugin/node_modules/
-
+  commands=()
   for module_name in "${deps[@]}"; do
     dest_path="$DOCKER_NODE_PATH/$module_name"
     src_path="/testplugin/node_modules/$module_name"
     echo "Linking $src_path -> $dest_path"
-    docker run --rm ${volumes[@]} $DOGE_DOCKER_IMAGE ln -s $dest_path $src_path
+    commands+=("ln -s $dest_path $src_path")
   done
+  docker run --rm ${volumes[@]} $DOGE_DOCKER_IMAGE $(IFS=';'; echo "${commands[*]}")
 fi
 
 file_number=0
