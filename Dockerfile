@@ -14,9 +14,6 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
 RUN npm install -g node-gyp
 RUN npm -g config set user root
 
-COPY package*.json ./
-RUN npm install
-
 # Install addition python modules.
 RUN pip3 install --upgrade pip vim-vint==0.3.15 setuptools
 
@@ -27,5 +24,8 @@ RUN rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 RUN git clone https://github.com/junegunn/vader.vim vader \
   && cd vader \
   && git checkout de8a976f1eae2c2b680604205c3e8b5c8882493c
+
+COPY ./package*.json ./
+RUN npm i
 
 CMD ["/bin/bash"]
