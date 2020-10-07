@@ -190,14 +190,15 @@ if [[ $travis -eq 1 ]]; then
   # node_modules folder.
   deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
   DOCKER_NODE_PATH=$($docker_run bash -c 'echo $NODE_PATH')
+  volumes='-v "$PWD:/testplugin" -v "$PWD/test:/home"'
 
-  $docker_run mkdir -p /testplugin/node_modules/
+  $docker_run $volumes mkdir -p /testplugin/node_modules/
 
   for module_name in "${deps[@]}"; do
     dest_path="$DOCKER_NODE_PATH/$module_name"
     src_path="/testplugin/node_modules/$module_name"
     echo "Linking $src_path -> $dest_path"
-    $docker_run ln -s $dest_path $src_path
+    $docker_run $volumes ln -s $dest_path $src_path
   done
 fi
 
