@@ -186,10 +186,10 @@ if [[ $travis -eq 1 ]]; then
   # Travis will use the globally installed packages inside the docker, but in
   # order to run proper builds, we have to symlink these to the local project's
   # node_modules folder.
-  deps=($(jq --raw-output ".dependencies | keys | @sh" package.json))
+  deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
   DOCKER_NODE_PATH=$($docker_run bash -c 'echo $NODE_PATH')
   for module_name in "${deps[@]}"; do
-    dest_path="$DOCKER_NODE_PATH/module_name"
+    dest_path="$DOCKER_NODE_PATH/$module_name"
     src_path="/testplugin/node_modules/$module_name"
     echo "Linking $src_path -> $dest_path"
     $docker_run ln -s $dest_path $src_path
