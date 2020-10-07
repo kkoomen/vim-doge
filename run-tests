@@ -191,7 +191,7 @@ if [[ $travis -eq 1 ]]; then
   deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
   DOCKER_NODE_PATH=$($docker_run bash -c 'echo $NODE_PATH')
 
-  $docker_run mkdir -p /testplugin/node_modules/ 2>&1 /dev/null
+  $docker_run mkdir -p /testplugin/node_modules/
 
   for module_name in "${deps[@]}"; do
     dest_path="$DOCKER_NODE_PATH/$module_name"
