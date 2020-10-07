@@ -1,4 +1,4 @@
-*doge.txt*      (Do)cumentation (Ge)nerator
+*doge.txt*	(Do)cumentation (Ge)nerator
 Kim Koomen                                                              *doge*
 
 ==============================================================================
@@ -180,8 +180,8 @@ doge#helpers#placeholder()                        *doge#helpers#placeholder()*
 doge#helpers#trim({string})                              *doge#helpers#trim()*
   Helper for compatibility with vim versions without the trim() function.
 
-doge#helpers#generator({generator})                 *doge#helpers#generator()*
-  Run a generator which will produce all the parameters and return the output.
+doge#helpers#parser({args})                            *doge#helpers#parser()*
+  Run a parser which will produce all the parameters and return the output.
 
 doge#helpers#deepextend()                          *doge#helpers#deepextend()*
   Recursively merge nested dictionaries and/or lists. a:1 is the base
@@ -236,7 +236,13 @@ a comment. The following preprocess functions are available:
 
   doge#preprocessors#<filetype>#parameters_tokens(tokens)
 
+  doge#preprocessors#<filetype>#type_parameters_tokens(tokens)
+
+  doge#preprocessors#<filetype>#exceptions_tokens(tokens)
+
   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
+
+  doge#preprocessors#<filetype>#template(template)
 
 
 vim:tw=78:ts=8:ft=help:norl:
