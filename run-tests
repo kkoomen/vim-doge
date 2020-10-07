@@ -183,7 +183,7 @@ if [[ $TRAVIS == "true" ]]; then
   deps=($(jq --raw-output ".dependencies | keys | @sh" package.json | xargs))
   DOCKER_NODE_PATH=$(docker run --rm $DOGE_DOCKER_IMAGE bash -c 'echo $NODE_PATH')
   docker_args=(
-    -e travis="true"
+    -e TRAVIS="true"
     -v "$PWD:/testplugin"
     -v "node_modules:/testplugin/node_modules"
     -v "$PWD/test:/home"
