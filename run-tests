@@ -177,7 +177,7 @@ cancel_tests() {
 trap cancel_tests INT TERM
 
 if [[ ! -f ./dist/index.js ]]; then
-  echo "$(pwd)/dist/index.js does not exists, run ./install.sh or "npm run buidl:webpack" to create a build"
+  echo "$(pwd)/dist/index.js does not exists, run ./install.sh or "npm run build:webpack" to create a build"
   exit 1
 fi
 
