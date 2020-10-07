@@ -35,6 +35,7 @@ export DOGE_DOCKER_IMAGE
 
 verbose_flag=''
 verbose=0
+travis_flag=''
 run_vim_74_tests=1
 run_vim_82_tests=1
 run_neovim_02_tests=1
@@ -177,6 +178,8 @@ cancel_tests() {
 trap cancel_tests INT TERM
 
 if [[ $TRAVIS == "true" ]]; then
+  travis_flag='--travis'
+
   # Travis will use the globally installed packages inside the docker, but in
   # order to run proper builds, we have to symlink these to the local project's
   # node_modules folder.
@@ -209,7 +212,7 @@ for vim in $(docker run --rm $DOGE_DOCKER_IMAGE ls /vim-build/bin | grep '^neovi
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
     echo "Starting Vim: $vim..."
     file_number=$((file_number+1))
-    scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
+    scripts/run-vader-tests $verbose_flag $travis_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
     pid_list="$pid_list $!"
   fi
 done

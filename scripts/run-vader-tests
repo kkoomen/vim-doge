@@ -31,6 +31,10 @@ set -u
 verbose=0
 while [ $# -ne 0 ]; do
   case $1 in
+  --travis)
+      TRAVIS="true"
+      shift
+  ;;
   -v)
       verbose=1
       shift
