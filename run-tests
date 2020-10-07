@@ -202,8 +202,8 @@ if [[ $travis -eq 1 ]]; then
     echo "Linking $src_path -> $dest_path"
     commands+=("ln -s $dest_path $src_path")
   done
-  commands+=("npm run build:webpack")
   docker run --rm ${volumes[@]} $DOGE_DOCKER_IMAGE $(IFS=';'; echo "${commands[*]}")
+  docker run --rm ${volumes[@]} $DOGE_DOCKER_IMAGE npm run build:webpack
 fi
 
 file_number=0
