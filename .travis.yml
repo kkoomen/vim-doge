@@ -11,6 +11,4 @@ env:
   - OPTIONS=--neovim-02-only
   - OPTIONS=--neovim-04-only
   - OPTIONS=--linter-only
-before_script:
-  - ./install.sh
 script: ./run-tests -v $OPTIONS
