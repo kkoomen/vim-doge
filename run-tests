@@ -176,6 +176,10 @@ cancel_tests() {
 
 trap cancel_tests INT TERM
 
+if [[ ! -f ./dist/index.js ]]; then
+  npm run build:webpack
+fi
+
 file_number=0
 pid_list=''
 for vim in $(docker run --rm $DOGE_DOCKER_IMAGE ls /vim-build/bin | grep '^neovim\|^vim'); do
