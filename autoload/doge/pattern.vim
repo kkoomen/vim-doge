@@ -7,7 +7,7 @@ let s:comment_placeholder = doge#helpers#placeholder()
 " @public
 " Generates a comment based on a given pattern.
 function! doge#pattern#generate(pattern) abort
-  let l:tokens = doge#helpers#parser(a:pattern['node_types'])
+  let l:tokens = doge#helpers#parser(a:pattern['nodeTypes'])
   if type(l:tokens) != v:t_dict
     return 0
   endif
@@ -230,7 +230,7 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, "if !has_key(b:doge_patterns, '" . l:name . "')")
   call add(l:doc, "let b:doge_patterns['" . l:name . "'] = [")
   call add(l:doc, "\\  {")
-  call add(l:doc, "\\    'node_types': ['NODE_TYPE_A', 'NODE_TYPE_B'],")
+  call add(l:doc, "\\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],")
   call add(l:doc, "\\    'parameters': {")
   call add(l:doc, "\\      'format': '@param {name} !description',")
   call add(l:doc, "\\    },")

@@ -27,7 +27,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 call doge#buffer#register_doc_standard('phpdoc', [
 \  {
-\    'node_types': ['property_declaration'],
+\    'nodeTypes': ['property_declaration'],
 \    'template': [
 \      '/**',
 \      ' * @var {type|!type}',
@@ -35,7 +35,7 @@ call doge#buffer#register_doc_standard('phpdoc', [
 \    ],
 \  },
 \  {
-\    'node_types': ['method_declaration', 'function_definition'],
+\    'nodeTypes': ['method_declaration', 'function_definition'],
 \    'parameters': {
 \      'format': '@param {type|!type} {name}%(default| (optional))% !description'
 \    },

@@ -21,7 +21,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 call doge#buffer#register_doc_standard('jsdoc', [
 \  {
-\    'node_types': ['class_declaration', 'class'],
+\    'nodeTypes': ['class_declaration', 'class'],
 \    'typeParameters': {
 \      'format': '@template {name|!name} - !description',
 \    },
@@ -35,7 +35,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \    ],
 \  },
 \  {
-\    'node_types': ['member_expression'],
+\    'nodeTypes': ['member_expression'],
 \    'parameters': {
 \      'format': '@param {{type|!type}} %(default|[)%{name|!name}%(default|])% - !description',
 \    },
@@ -53,7 +53,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \    ],
 \  },
 \  {
-\    'node_types': [
+\    'nodeTypes': [
 \      'arrow_function',
 \      'function',
 \      'function_declaration',

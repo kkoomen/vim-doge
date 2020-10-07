@@ -36,7 +36,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " Matches regular functions.
 " ------------------------------------------------------------------------------
 let s:function_pattern = {
-\  'node_types': ['function_definition', 'declaration'],
+\  'nodeTypes': ['function_definition', 'declaration'],
 \  'parameters': {
 \    'format': '@param {name} !description',
 \  },
@@ -46,14 +46,14 @@ let s:function_pattern = {
 " Matches structs.
 " ------------------------------------------------------------------------------
 let s:struct_pattern = {
-\  'node_types': ['struct_specifier'],
+\  'nodeTypes': ['struct_specifier'],
 \}
 
 " ------------------------------------------------------------------------------
 " Matches field declarations inside structs.
 " ------------------------------------------------------------------------------
 let s:field_pattern = {
-\  'node_types': ['field_declaration'],
+\  'nodeTypes': ['field_declaration'],
 \  'template': [
 \    '/**',
 \    ' * @{name} !description',

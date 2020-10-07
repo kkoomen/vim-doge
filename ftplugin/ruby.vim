@@ -23,7 +23,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " Matches regular function expressions and class methods.
 " ------------------------------------------------------------------------------
 let s:function_and_class_method_pattern = {
-\  'node_types': ['method', 'singleton_method'],
+\  'nodeTypes': ['method', 'singleton_method'],
 \  'parameters': {
 \    'format': '@param {name} [!type] !description',
 \  },

@@ -36,7 +36,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 call doge#buffer#register_doc_standard('reST', [
 \  {
-\    'node_types': ['function_definition'],
+\    'nodeTypes': ['function_definition'],
 \    'parameters': {
 \      'format': ':param {name} {type|!type}: !description',
 \    },
@@ -53,7 +53,7 @@ call doge#buffer#register_doc_standard('reST', [
 
 call doge#buffer#register_doc_standard('sphinx', [
 \  {
-\    'node_types': ['function_definition'],
+\    'nodeTypes': ['function_definition'],
 \    'parameters': {
 \      'format': [
 \        ':param {name}: !description%(default|, defaults to {default})%',
@@ -74,7 +74,7 @@ call doge#buffer#register_doc_standard('sphinx', [
 
 call doge#buffer#register_doc_standard('numpy', [
 \  {
-\    'node_types': ['function_definition'],
+\    'nodeTypes': ['function_definition'],
 \    'parameters': {
 \      'format': [
 \        '{name} : {type|!type}',
@@ -102,7 +102,7 @@ call doge#buffer#register_doc_standard('numpy', [
 
 call doge#buffer#register_doc_standard('google', [
 \  {
-\    'node_types': ['function_definition'],
+\    'nodeTypes': ['function_definition'],
 \    'parameters': {
 \      'format': '{name} ({type|!type}%(default|, optional)%): !description',
 \    },

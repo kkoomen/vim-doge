@@ -23,7 +23,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " Matches regular functions.
 " ------------------------------------------------------------------------------
 let s:function_pattern = {
-\  'node_types': ['function_definition'],
+\  'nodeTypes': ['function_definition'],
 \}
 
 " ==============================================================================

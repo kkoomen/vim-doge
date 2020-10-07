@@ -19,7 +19,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 "
 " ==============================================================================
 let s:class_method_pattern = {
-\  'node_types': ['method_declaration'],
+\  'nodeTypes': ['method_declaration'],
 \  'parameters': {
 \    'format': '@param {name} !description',
 \  },

@@ -10,7 +10,7 @@ Execute (Create a new doc standard based on phpdoc, setup dummy pattern and exec
   let b:doge_patterns = {
     \  'phpdoc': [
     \    {
-    \      'node_types': [
+    \      'nodeTypes': [
     \        'property_declaration',
     \      ],
     \      'typeParameters': {
@@ -23,7 +23,7 @@ Execute (Create a new doc standard based on phpdoc, setup dummy pattern and exec
     \      ],
     \    },
     \    {
-    \      'node_types': [
+    \      'nodeTypes': [
     \        'method_declaration',
     \        'function_definition',
     \      ],
@@ -65,7 +65,7 @@ Then (Expect a file to be created with specific content):
   \  "if !has_key(b:doge_patterns, 'phpdoc_custom')",
   \  "  let b:doge_patterns['phpdoc_custom'] = [",
   \  "        \\  {",
-  \  "        \\    'node_types': ['NODE_TYPE_A', 'NODE_TYPE_B'],",
+  \  "        \\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],",
   \  "        \\    'parameters': {",
   \  "        \\      'format': '@param {name} !description',",
   \  "        \\    },",
@@ -110,7 +110,7 @@ Then (Expect a file to be created with specific content):
   \  "if !has_key(b:doge_patterns, 'foo')",
   \  "  let b:doge_patterns['foo'] = [",
   \  "        \\  {",
-  \  "        \\    'node_types': ['NODE_TYPE_A', 'NODE_TYPE_B'],",
+  \  "        \\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],",
   \  "        \\    'parameters': {",
   \  "        \\      'format': '@param {name} !description',",
   \  "        \\    },",
