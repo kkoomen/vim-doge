@@ -127,7 +127,7 @@ call doge#buffer#register_doc_standard('numpy', [
 call doge#buffer#register_doc_standard('google', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
-\      'format': '{name} ({type|!type}%(default|, optional)%): !description',
+\      'format': '{name|!name}: !description',
 \    },
 \    'exceptions': {
 \      'format': '{name|!name}: !description',
