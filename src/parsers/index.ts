@@ -1,6 +1,6 @@
 import { SyntaxNode } from 'tree-sitter';
 import { Language } from '../constants';
-import { ValueOf } from '../helpers';
+import { ValueOf } from '../types';
 import { BashParserService } from './bash.service';
 import { CParserService } from './c.service';
 import { CppParserService } from './cpp.service';

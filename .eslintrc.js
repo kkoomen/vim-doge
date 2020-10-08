@@ -184,7 +184,7 @@ module.exports = {
     'import/no-default-export': 'off',
     'import/no-deprecated': 'warn',
     'import/no-duplicates': 'error',
-    'import/no-dynamic-require': 'error',
+    'import/no-dynamic-require': 'off',
     'import/no-internal-modules': ['off', { allow: [] }],
     'import/no-mutable-exports': 'error',
     'import/no-named-as-default': 'error',

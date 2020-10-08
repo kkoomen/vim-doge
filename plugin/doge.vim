@@ -58,6 +58,27 @@ if exists('g:loaded_doge')
 endif
 let g:loaded_doge = 1
 
+if !exists('g:doge_parsers')
+  ""
+  " (Default: [
+  "   'bash',
+  "   'c',
+  "   'cpp',
+  "   'java', // includes groovy
+  "   'lua',
+  "   'php',
+  "   'python',
+  "   'ruby',
+  "   'typescript', // used for JavaScript, ES6, FlowJS and NodeJS
+  " ])
+  "
+  " Defines the parsers that are enabled, which is useful if you only want to
+  " use specific languages. This also decreases installation time.
+  "
+  " NOTE: By default, all parsers will be installed.
+  let g:doge_parsers = []
+endif
+
 if !exists('g:doge_enable_mappings')
   ""
   " (Default: 1)

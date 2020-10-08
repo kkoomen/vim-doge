@@ -32,12 +32,13 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
-- [⚠️ Migration from v2 to v3](#%E2%9A%A0%EF%B8%8F---migration-from-v2-to-v3)
+- [Migrating from v2 to v3](#migrating-from-v2-to-v3)
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
 - [Configuration](#configuration)
   - [Choosing a different doc standard](#choosing-a-different-doc-standard)
   - [Options](#options)
+    - [`g:doge_parsers`](#gdoge_parsers)
     - [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     - [`g:doge_mapping`](#gdoge_mapping)
     - [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
@@ -83,9 +84,9 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 
-# ⚠️ Migration from v2 to v3
+# Migrating from v2 to v3
 
-If you've used DoGe v2 or less and upgraded to v3 then you are required to have
+⚠️ If you've used DoGe v2 or less and upgraded to v3 then you are required to have
 NodeJS + NPM on your local machine in order to use this plugin, because of the
 new usage of the [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
 parsers. This plugin is using the node bindings for tree-sitter, because the
@@ -94,7 +95,8 @@ amount of supported languages is a lot.
 If you just want to use v3, then read the [Getting started](#getting-started).
 
 If you feel more comfortable to use v2, then you can still do so by using
-[v2.8.0](https://github.com/kkoomen/vim-doge/tree/v2.8.0).
+[v2.8.0](https://github.com/kkoomen/vim-doge/tree/v2.8.0). **Please be aware that
+v2 might contain bugs and will not be maintained anymore.**
 
 Using Plug:
 
@@ -109,21 +111,25 @@ Make sure your local system contains the following prerequisites:
 - [NodeJS](https://nodejs.org)
 - [NPM](https://www.npmjs.com)
 
+**NOTE:** If you only want to use a specific amount of languages, then make sure
+you use [`g:doge_parsers`](#gdoge_parsers) in your `.vimrc` before running
+`doge#install()`.
+
 Install `DoGe`:
 
 Using plug:
 
-- `Plug 'kkoomen/vim-doge', { 'do': './install.sh' }`
+- `Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }`
 
 Using vim-pack:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
-- `./install.sh`
+- `:call doge#install()`
 
 Using pathogen:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
-- `./install.sh`
+- `:call doge#install()`
 
 # Configuration
 
@@ -141,11 +147,21 @@ Example:
 let g:doge_doc_standard_python = 'numpy'
 ```
 
-If you want to change the doc standard specifically for a buffer you can do:
+If you want to change the doc standard specifically for a buffer, then you can do:
 
 ```vim
 " Inside test.py
 :let b:doge_doc_standard = 'numpy'
+```
+
+If you want to generate a docblock using a different doc standard just for a
+specific expression, then you can use `DogeGenerate`:
+
+```vim
+" Inside test.py, cursor is at a function expression (cursor = `|`):
+"   |def foo(p1, p2):
+"       pass
+:DogeGenerate numpy
 ```
 
 Here is the full list of available doc standards per filetype:
@@ -165,6 +181,31 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                   |
 
 ## Options
+
+### `g:doge_parsers`
+
+Default:
+
+```
+Default: [
+  'bash',
+  'c',
+  'cpp',
+  'java', // includes groovy
+  'lua',
+  'php',
+  'python',
+  'ruby',
+  'typescript', // used for JavaScript, ES6, FlowJS and NodeJS
+]
+```
+
+Defines the parsers that are enabled, which is useful if you only want to use
+specific languages. This also decreases installation time.
+
+**NOTE:** By default, all parsers will be installed.
+
+Whether or not to enable built-in mappings.
 
 ### `g:doge_enable_mappings`
 

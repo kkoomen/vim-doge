@@ -24,6 +24,16 @@ coding!
 ==============================================================================
 CONFIGURATION                                                    *doge-config*
 
+                                                              *g:doge_parsers*
+(Default: [   'bash',   'c',   'cpp',   'java', // includes groovy   'lua',
+'php',   'python',   'ruby',   'typescript', // used for JavaScript, ES6,
+FlowJS and NodeJS ])
+
+Defines the parsers that are enabled, which is useful if you only want to use
+specific languages. This also decreases installation time.
+
+NOTE: By default, all parsers will be installed.
+
                                                       *g:doge_enable_mappings*
 (Default: 1)
 
@@ -115,6 +125,9 @@ doge#on_filetype_change()                          *doge#on_filetype_change()*
   apply aliases
   remove conflicting doc standards from the previous filetype.
 
+doge#install()                                                *doge#install()*
+  Install the necessary dependencies.
+
 doge#buffer#initialized()                          *doge#buffer#initialized()*
   Returns a bool whether the current buffer is a supported filetype.
 
@@ -193,6 +206,10 @@ doge#helpers#deepextend()                          *doge#helpers#deepextend()*
     doge#helpers#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
 
   The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
+
+doge#helpers#deepsubstitute({input}, {search}, {replacement}, {flags})
+                                               *doge#helpers#deepsubstitute()*
+  Substitute input recursively.
 
 doge#helpers#get_filetype()                      *doge#helpers#get_filetype()*
   Get the current filetype. Returns the original filetype if the current

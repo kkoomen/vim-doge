@@ -178,5 +178,32 @@ function! doge#on_filetype_change() abort
   endif
 endfunction
 
+"" @public
+" Install the necessary dependencies.
+function! doge#install() abort
+  let l:languages = [
+        \  'bash',
+        \  'c',
+        \  'cpp',
+        \  'java',
+        \  'lua',
+        \  'php',
+        \  'python',
+        \  'ruby',
+        \  'typescript',
+        \ ]
+
+  let l:langs = get(g:, 'doge_parsers', [])
+  for l:lang in l:langs
+    if index(l:languages, l:lang) < 0
+      echoerr '[DoGe] ' . l:lang . ' is not a supported parser'
+    endif
+  endfor
+
+  let l:args = !empty(l:langs) ? l:langs : l:languages
+  echo '[DoGe] Installating ' . join(l:args, ', ')
+  call execute('!' . g:doge_dir . '/install.sh ' . join(l:args, ' '))
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
