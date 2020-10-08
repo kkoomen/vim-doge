@@ -240,12 +240,18 @@ export class PhpParserService
 
   private parseExceptions(node: SyntaxNode) {
     if (node.type === 'throw_statement') {
-      const exceptionName = node.children
+      const exception: Record<string, any> = { name: null };
+
+      const name = node.children
         .filter((n: SyntaxNode) => n.type === 'object_creation_expression')
         .shift()
         ?.children.filter((n: SyntaxNode) => n.type === 'qualified_name')
         .shift()?.text;
-      this.result.exceptions.push({ name: exceptionName || null });
+      if (name) {
+        exception.name = name;
+      }
+
+      this.result.exceptions.push(exception);
     }
 
     if (node.childCount > 0) {

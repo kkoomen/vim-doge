@@ -117,7 +117,8 @@ Expect php (generated comment with @param and @return tags):
 Given php (function with exceptions being raised in the body):
   <?php
   function test() {
-    throw new FirstException('Foo');
+    $err = new FirstException('Foo');
+    throw $err;
     throw new SecondException('Bar');
   }
 
@@ -130,12 +131,13 @@ Expect php (generated comment with @param, @throws and @return tags):
   /**
    * [TODO:description]
    *
-   * @throws FirstException [TODO:description]
+   * @throws [TODO:name] [TODO:description]
    * @throws SecondException [TODO:description]
    *
    * @return [TODO:type] [TODO:description]
    */
   function test() {
-    throw new FirstException('Foo');
+    $err = new FirstException('Foo');
+    throw $err;
     throw new SecondException('Bar');
   }
