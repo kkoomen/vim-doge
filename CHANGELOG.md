@@ -1,3 +1,13 @@
+## [3.0.1](https://github.com/kkoomen/vim-doge/compare/v3.0.0...v3.0.1) (2020-10-08)
+
+### Bug Fixes
+
+- make rimraf a dep instead of devdep ([4085897](https://github.com/kkoomen/vim-doge/commit/4085897a2bb39d7a97596cbdc57171c5a9fd741d))
+
+### Features
+
+- **python:** remove types from google doc ([#97](https://github.com/kkoomen/vim-doge/issues/97)) ([92e9973](https://github.com/kkoomen/vim-doge/commit/92e9973abac3836271afeff52515434c9c7fbf32))
+
 # [3.0.0](https://github.com/kkoomen/vim-doge/compare/v2.8.0...v3.0.0) (2020-10-08)
 
 ### Bug Fixes
