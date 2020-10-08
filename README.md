@@ -359,6 +359,8 @@ If you want a new language to be supported but tree-sitter doesn't support it
 yet, then feel free to create a custom tree-sitter language parser for that
 language and then we'll integrate it into vim-doge.
 
+- [Creating parsers](https://tree-sitter.github.io/tree-sitter/creating-parsers)
+
 # Motivation
 
 I created DoGe mainly because I couldn't find a plugin that could generate
