@@ -35,6 +35,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Migrating from v2 to v3](#migrating-from-v2-to-v3)
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
+  - [Installation:](#installation)
 - [Configuration](#configuration)
   - [Choosing a different doc standard](#choosing-a-different-doc-standard)
   - [Options](#options)
@@ -114,7 +115,7 @@ Make sure your local system contains the following prerequisites:
 you use [`g:doge_parsers`](#gdoge_parsers) in your `.vimrc` before running
 `doge#install()`.
 
-Install `DoGe`:
+## Installation:
 
 Using plug:
 
