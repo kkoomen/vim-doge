@@ -32,26 +32,27 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
+- [⚠️ Migration from v2 to v3](#%E2%9A%A0%EF%B8%8F---migration-from-v2-to-v3)
 - [Getting started](#getting-started)
-  * [Prerequisites](#prerequisites)
+  - [Prerequisites](#prerequisites)
 - [Configuration](#configuration)
-  * [Choosing a different doc standard](#choosing-a-different-doc-standard)
-  * [Options](#options)
-    + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
-    + [`g:doge_mapping`](#gdoge_mapping)
-    + [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
-    + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
-    + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
-    + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
-    + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
-    + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
-    + [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
+  - [Choosing a different doc standard](#choosing-a-different-doc-standard)
+  - [Options](#options)
+    - [`g:doge_enable_mappings`](#gdoge_enable_mappings)
+    - [`g:doge_mapping`](#gdoge_mapping)
+    - [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
+    - [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
+    - [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
+    - [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
+    - [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+    - [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
+    - [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
-    + [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
-    + [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
+  - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
+  - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
-    + [PHP](#php)
-    + [Python](#python)
+  - [PHP](#php)
+  - [Python](#python)
 - [FAQ](#faq)
 - [Help](#help)
 - [Contributing](#contributing)
@@ -82,14 +83,31 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 
+# ⚠️ Migration from v2 to v3
+
+If you've used DoGe v2 or less and upgraded to v3 then you are required to have
+NodeJS + NPM on your local machine in order to use this plugin, because of the
+new usage of the [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
+parsers. This plugin is using the node bindings for tree-sitter, because the
+amount of supported languages is a lot.
+
+If you just want to use v3, then read the [Getting started](#getting-started).
+
+If you feel more comfortable to use v2, then you can still do so by using
+[v2.8.0](https://github.com/kkoomen/vim-doge/tree/v2.8.0).
+
+Using Plug:
+
+- `Plug 'kkoomen/vim-doge', { 'tag': 'v2.8.0' }`
+
 # Getting started
 
 ## Prerequisites
 
-Make sure your local system contains the following prerequites:
+Make sure your local system contains the following prerequisites:
 
-- [nodejs](https://nodejs.org)
-- [npm](https://www.npmjs.com)
+- [NodeJS](https://nodejs.org)
+- [NPM](https://www.npmjs.com)
 
 Install `DoGe`:
 
@@ -173,6 +191,7 @@ Default:
     'javascript.tsx',
     'typescriptreact',
     'typescript',
+    'typescript.tsx',
   ],
   'java': ['groovy'],
 }

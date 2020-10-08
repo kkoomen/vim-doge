@@ -15,7 +15,6 @@ doge#deactivate()	doge.txt	/*doge#deactivate()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#deepextend()	doge.txt	/*doge#helpers#deepextend()*
-doge#helpers#deepsubstitute()	doge.txt	/*doge#helpers#deepsubstitute()*
 doge#helpers#get_filetype()	doge.txt	/*doge#helpers#get_filetype()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#parser()	doge.txt	/*doge#helpers#parser()*
@@ -25,7 +24,6 @@ doge#indent#add()	doge.txt	/*doge#indent#add()*
 doge#on_filetype_change()	doge.txt	/*doge#on_filetype_change()*
 doge#pattern#custom()	doge.txt	/*doge#pattern#custom()*
 doge#pattern#generate()	doge.txt	/*doge#pattern#generate()*
-doge#python#file()	doge.txt	/*doge#python#file()*
 doge#token#extract()	doge.txt	/*doge#token#extract()*
 doge#token#replace()	doge.txt	/*doge#token#replace()*
 doge-commands	doge.txt	/*doge-commands*

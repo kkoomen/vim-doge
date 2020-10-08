@@ -194,10 +194,6 @@ doge#helpers#deepextend()                          *doge#helpers#deepextend()*
 
   The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
 
-doge#helpers#deepsubstitute({input}, {search}, {replacement}, {flags})
-                                               *doge#helpers#deepsubstitute()*
-  Substitute input recursively.
-
 doge#helpers#get_filetype()                      *doge#helpers#get_filetype()*
   Get the current filetype. Returns the original filetype if the current
   filetype is an alias.
@@ -211,9 +207,6 @@ doge#pattern#generate({pattern})                     *doge#pattern#generate()*
 doge#pattern#custom({name})                            *doge#pattern#custom()*
   Generates a template for a custom doc standard, and places it in
   after/ftplugin/{&ft}.vim
-
-doge#python#file({path}, {args})                          *doge#python#file()*
-  Run a python file using the py[3]file command.
 
 doge#token#replace({tokens}, {text})                    *doge#token#replace()*
   Replace all tokens in the text parameter based on a given dictionary

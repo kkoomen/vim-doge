@@ -52,7 +52,6 @@ function! s:token_replace(tokens, text) abort
             \)
     endif
 
-
     " Skip if the token does not exists in the text.
     if l:text !~# l:formatted_token
       continue
