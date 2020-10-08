@@ -164,19 +164,45 @@ function! doge#on_filetype_change() abort
       endif
 
       if l:is_alias == v:false
-        let l:doc_idx = index(get(b:, 'doge_supported_doc_standards', []), l:doc)
-        if l:doc_idx >= 0
+        let l:doc_idx = index(b:doge_supported_doc_standards, l:doc)
+        if l:doc_idx >= 0 && b:doge_prev_supported_doc_standards != b:doge_supported_doc_standards
           call remove(b:doge_supported_doc_standards, l:doc_idx)
-        endif
-
-        if has_key(get(b:, 'doge_patterns', {}), l:doc)
-          unlet b:doge_patterns[l:doc]
+          if has_key(get(b:, 'doge_patterns', {}), l:doc)
+            unlet b:doge_patterns[l:doc]
+          endif
         endif
       endif
     endfor
     let b:doge_prev_supported_doc_standards = copy(b:doge_supported_doc_standards)
     let b:doge_prev_ft = &filetype
   endif
+endfunction
+
+"" @public
+" Install the necessary dependencies.
+function! doge#install() abort
+  let l:languages = [
+        \  'bash',
+        \  'c',
+        \  'cpp',
+        \  'java',
+        \  'lua',
+        \  'php',
+        \  'python',
+        \  'ruby',
+        \  'typescript',
+        \ ]
+
+  let l:langs = get(g:, 'doge_parsers', [])
+  for l:lang in l:langs
+    if index(l:languages, l:lang) < 0
+      echoerr '[DoGe] ' . l:lang . ' is not a supported parser'
+    endif
+  endfor
+
+  let l:args = !empty(l:langs) ? l:langs : l:languages
+  echo '[DoGe] Installating ' . join(l:args, ', ')
+  call execute('!' . g:doge_dir . '/install.sh ' . join(l:args, ' '))
 endfunction
 
 let &cpoptions = s:save_cpo

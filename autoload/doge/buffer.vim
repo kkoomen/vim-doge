@@ -17,12 +17,8 @@ endfunction
 " 'defaults': A list of supported doc standards that should be allowed.
 " Returns a list of accepted doc standards.
 function! doge#buffer#get_supported_doc_standards(defaults) abort
-  if get(g:, 'doge_test_env', 0)
-    return a:defaults
-  endif
-
   " We sort them so that we can use uniq() on it.
-  let l:docs = uniq(sort(extend(get(b:, 'doge_supported_doc_standards', []), a:defaults)))
+  let l:docs = uniq(sort(extend(copy(get(b:, 'doge_supported_doc_standards', [])), a:defaults)))
 
   " After sorted it, we will remove the defaults and prepend the defaults so
   " that we can reset the order as we defined it in the ftplugin/{ft}.vim.
@@ -57,10 +53,7 @@ endfunction
 " @public
 " Add a doc standard to the b:doge_patterns variable.
 function! doge#buffer#register_doc_standard(doc_standard, patterns) abort
-  if has_key(b:doge_patterns, a:doc_standard) == v:false
-    let b:doge_patterns[a:doc_standard] = a:patterns
-  endif
-  return b:doge_patterns
+  let b:doge_patterns[a:doc_standard] = a:patterns
 endfunction
 
 let &cpoptions = s:save_cpo

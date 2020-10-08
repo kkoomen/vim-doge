@@ -1,7 +1,7 @@
 # ==============================================================================
-# Function declarations with parameters.
+# Function definition with parameters.
 # ==============================================================================
-Given c (function declaration with parameters):
+Given c (function definition with parameters):
   int add(int x, int y) {}
 
 Do (trigger doge):

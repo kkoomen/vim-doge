@@ -1,17 +1,18 @@
 # ==============================================================================
 # Virtual functions with parameters with return type.
 # ==============================================================================
-Given cpp (virtual function with parameters with return type):
-  virtual bool boolean(bool val) = 0;
-
-Do (trigger doge):
-  \<C-d>
-
-Expect cpp (generated comment with @brief, @param and @return tags):
-  /**
-   * @brief [TODO:description]
-   *
-   * @param val [TODO:description]
-   * @return [TODO:description]
-   */
-  virtual bool boolean(bool val) = 0;
+# TODO: Fix tests after https://github.com/tree-sitter/tree-sitter-cpp/issues/88
+" Given cpp (virtual function with parameters with return type):
+"   virtual bool my_virtual_func(bool val) = 0;
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect cpp (generated comment with @brief, @param and @return tags):
+"   /**
+"    * @brief [TODO:description]
+"    *
+"    * @param val [TODO:description]
+"    * @return [TODO:description]
+"    */
+"   virtual bool my_virtual_func(bool val) = 0;

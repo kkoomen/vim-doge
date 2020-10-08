@@ -75,3 +75,45 @@ Expect python (generated comment with Parameters and Returns tag):
       [TODO:description]
     """
     pass
+
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given python (function with exceptions being raised in the body):
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='numpy'\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param and :raises tags):
+  def myFunc(p1 = 'string'):
+    """
+    [TODO:summary]
+
+    [TODO:description]
+
+    Parameters
+    ----------
+    p1 : [TODO:type]
+      [TODO:description]
+
+    Raises
+    ------
+    [TODO:name]:
+      [TODO:description]
+    Exception:
+      [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass

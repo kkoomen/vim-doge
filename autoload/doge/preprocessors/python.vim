@@ -16,20 +16,6 @@ function! doge#preprocessors#python#insert_position(lnum_insert_pos) abort
   return a:lnum_insert_pos
 endfunction
 
-
-" A callback function being called after the parameter tokens have been
-" extracted. This function will adjust the input if needed.
-function! doge#preprocessors#python#parameter_tokens(tokens) abort
-  " Filer out the 'self'-type variable in methods.
-  return filter(a:tokens, {index, token ->
-        \ !(index == 0 && (
-        \   token['name'] ==# 'self'
-        \   || token['name'] ==# 'klass'
-        \   || token['name'] ==# 'cls'
-        \ ))
-        \ })
-endfunction
-
 " Alter the template for Python functions.
 function! doge#preprocessors#python#template(template) abort
   if get(g:doge_python_settings, 'single_quotes')

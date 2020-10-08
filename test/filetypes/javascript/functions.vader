@@ -70,7 +70,6 @@ Expect javascript (generated comment with @functon and @param tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {[TODO:type]} [$p1] - [TODO:description]
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
@@ -88,11 +87,9 @@ Given javascript (function as variable with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function and @param tags):
   /**
    * [TODO:description]
    *
-   * @function myFunc
    * @param {string} [$p1] - [TODO:description]
    * @param {string[]} [p2] - [TODO:description]
    * @param {number} p3 - [TODO:description]
@@ -130,11 +127,9 @@ Given javascript (prototype function without parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with a description, @function and @return tags):
   /**
    * [TODO:description]
    *
-   * @function Person#greet
    * @return {[TODO:type]} [TODO:description]
    */
   Person.prototype.greet = function () {}
@@ -153,8 +148,8 @@ Expect javascript (generated comment with @param and @return tags):
    * [TODO:description]
    *
    * @param {string} $p1 - [TODO:description]
-   * @param {Foo|Bar|Baz} p2 - [TODO:description]
-   * @return {Foo|Bar} [TODO:description]
+   * @param {Foo | Bar | Baz} p2 - [TODO:description]
+   * @return {(Foo | Bar)} [TODO:description]
    */
   function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
@@ -203,12 +198,16 @@ Expect javascript (generated comment with a description, @param and @return tags
   function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
 # ==============================================================================
-# Async generator functions with parameters without type-hints.
+# Generator functions.
 # ==============================================================================
-Given javascript (async generator function with parameters without type hints):
+Given javascript (generator functions):
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
+  var perfectSquares = function*(p1) {};
+
 Do (trigger doge):
+  \<C-d>
+  :14\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @async, @param and @return tags):
@@ -224,6 +223,15 @@ Expect javascript (generated comment with @async, @param and @return tags):
    * @return {Promise<[TODO:type]>} [TODO:description]
    */
   async function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
+
+  /**
+   * [TODO:description]
+   *
+   * @generator
+   * @param {[TODO:type]} p1 - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  var perfectSquares = function*(p1) {};
 
 # ==============================================================================
 # Class with functions with parameters and return type.
@@ -253,44 +261,75 @@ Expect javascript (generated comment with a description, @param and @return tags
     /**
      * [TODO:description]
      *
-     * @param {string} something - [TODO:description]
+     * @param {string} [something] - [TODO:description]
      */
     public printSomething(something?: string): void {}
 
     /**
      * [TODO:description]
      *
-     * @param {string} something - [TODO:description]
+     * @param {string} [something] - [TODO:description]
      */
     protected printSomething(something?: string): void {}
 
     /**
      * [TODO:description]
      *
-     * @param {string} something - [TODO:description]
+     * @param {string} [something] - [TODO:description]
      */
     private printSomething(something?: string): void {}
 
   }
 
-Given javascript (advanced function type parameters):
-  export function test<MapItem = unknown, MapKey = unknown>(
-    x: (xs: MapItem) => Boolean,
-    y: (xs: MapItem) => Boolean,
-  ): (xs: Map<MapKey, MapItem>) => MapItem[] {}
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given javascript (functions with exceptions being thrown in the body):
+  export class Test {
+    public printSomething(something?: string): void {
+      err = new CustomException();
+      throw err;
+      throw new CustomException();
+    }
+  }
+
+  function test() {
+    err = new CustomException();
+    throw err;
+    throw new CustomException();
+  }
 
 Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :16\<CR>
   \<C-d>
 
-Expect javascript (generated comment with a description, @param and @return tags):
+Expect javascript (generated comments with a description, @param, @throws and @return tags):
+  export class Test {
+    /**
+     * [TODO:description]
+     *
+     * @param {string} [something] - [TODO:description]
+     * @throws {[TODO:name]} - [TODO:description]
+     * @throws {CustomException} - [TODO:description]
+     */
+    public printSomething(something?: string): void {
+      err = new CustomException();
+      throw err;
+      throw new CustomException();
+    }
+  }
+
   /**
    * [TODO:description]
    *
-   * @param {(xs: MapItem) => Boolean} x - [TODO:description]
-   * @param {(xs: MapItem) => Boolean} y - [TODO:description]
+   * @throws {[TODO:name]} - [TODO:description]
+   * @throws {CustomException} - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
    */
-  export function test<MapItem = unknown, MapKey = unknown>(
-    x: (xs: MapItem) => Boolean,
-    y: (xs: MapItem) => Boolean,
-  ): (xs: Map<MapKey, MapItem>) => MapItem[] {}
+  function test() {
+    err = new CustomException();
+    throw err;
+    throw new CustomException();
+  }

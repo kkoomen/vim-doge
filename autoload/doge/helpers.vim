@@ -80,18 +80,28 @@ endfunction
 
 ""
 " @public
-" Run a generator which will produce all the parameters and return the output.
-function! doge#helpers#generator(generator) abort
-  let l:generator = g:doge_dir . '/generators/' . a:generator['file']
-  if filereadable(l:generator) != v:false
-    let l:result = doge#python#file(l:generator, a:generator['args'])
+" Run a parser which will produce all the parameters and return the output.
+function! doge#helpers#parser(args) abort
+  let l:script_path = g:doge_dir . '/dist/index.js'
+  if filereadable(l:script_path) != v:false
+    let l:cursor_pos = getpos('.')
+    let l:current_line = l:cursor_pos[1]
+    let l:tempfile = tempname()
+    keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
+    let l:args = [l:tempfile, b:doge_parser, l:current_line] + a:args
+    let l:result = system('node ' . l:script_path . ' ' . join(l:args, ' '))
+
     try
       return json_decode(l:result)
     catch /.*/
-      echo '[DoGe] ' . a:generator['file'] . ' generator failed.'
+      echo '[DoGe] ' . b:doge_parser . ' parser failed'
       echo l:result
+    finally
+      call setpos('.', l:cursor_pos)
+      call delete(l:tempfile)
     endtry
   endif
+
   return 0
 endfunction
 
@@ -120,7 +130,7 @@ function! doge#helpers#deepextend(...) abort
       if type(l:v) is v:t_dict && type(get(l:new, l:k)) is v:t_dict
         let l:new[l:k] = doge#helpers#deepextend(l:new[l:k], l:v, l:merge_lists)
       elseif type(l:v) is v:t_list && type(get(l:new, l:k)) is v:t_list && l:merge_lists == v:true
-        let l:new[l:k] = uniq(sort(extend(get(l:new, l:k), l:v)))
+        let l:new[l:k] = uniq(sort(extend(copy(get(l:new, l:k)), l:v)))
       else
         let l:new[l:k] = l:v
       endif

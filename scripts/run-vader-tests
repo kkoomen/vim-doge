@@ -142,14 +142,21 @@ while [ "$tries" -lt 5 ]; do
   echo "tests: $tests"
   exit_code=0
   set -o pipefail
+
   docker run \
     -a stderr \
     -e VADER_OUTPUT_FILE=/dev/stderr \
     --rm \
-    -v "$PWD:/testplugin" \
-    -v "$PWD/test:/home" \
-    -w /testplugin "$DOGE_DOCKER_IMAGE" \
+    -v "$PWD/autoload:/vim-doge/autoload" \
+    -v "$PWD/ftplugin:/vim-doge/ftplugin" \
+    -v "$PWD/plugin:/vim-doge/plugin" \
+    -v "$PWD/src:/vim-doge/src" \
+    -v "$PWD/test:/vim-doge/test" \
+    -v "$PWD/dist:/vim-doge/dist" \
+    -v "$PWD/tsconfig.json:/vim-doge/tsconfig.json" \
+    -w /vim-doge "$DOGE_DOCKER_IMAGE" \
     "/vim-build/bin/$vim" -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
+
   set +o pipefail
 
   if [ -s "$run_file" ]; then

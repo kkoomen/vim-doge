@@ -1,5 +1,36 @@
-__pycache__/
+# OS
 .DS_Store
+
+# Compiled output
+/dist
+/node_modules
+__pycache__/
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Tests
+/coverage
+/.nyc_output
+
+# Vim
 *.swo
 *.swp
-node_modules/
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/

@@ -1,0 +1,132 @@
+# ==============================================================================
+# Classes with 'extends' and 'implements'.
+# ==============================================================================
+Given typescript (class with extends and with implements):
+  class Child<A = any, B = any> extends React.Component<T> implements CustomInterfaceName<T> {}
+
+  export class Child<A, B> extends React.Component<T> implements CustomInterfaceName<T> {}
+
+Do (trigger doge):
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with @extends and @implements tags):
+  /**
+   * [TODO:description]
+   * @template A - [TODO:description]
+   * @template B - [TODO:description]
+   * @extends React.Component
+   * @implements CustomInterfaceName
+   */
+  class Child<A = any, B = any> extends React.Component<T> implements CustomInterfaceName<T> {}
+
+  /**
+   * [TODO:description]
+   * @template A - [TODO:description]
+   * @template B - [TODO:description]
+   * @extends React.Component
+   * @implements CustomInterfaceName
+   */
+  export class Child<A, B> extends React.Component<T> implements CustomInterfaceName<T> {}
+
+# ==============================================================================
+# Advanced functions generics signatures and declarations.
+# ==============================================================================
+Given typescript (signature function and declaration with advanced generics):
+  export function pipe<T1, T2, T3, T4, R>(
+    fn1: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
+    ...fns: Array<(a: R) => R>
+  ): (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R;
+
+  export function pipe<R>(
+    fn1: (...args: any[]) => R,
+    ...fns: Array<(a: R) => R>
+  ): (a: R) => R {}
+
+Do (trigger doge):
+  \<C-d>
+  :18\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with @template, @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @template T1 - [TODO:description]
+   * @template T2 - [TODO:description]
+   * @template T3 - [TODO:description]
+   * @template T4 - [TODO:description]
+   * @template R - [TODO:description]
+   * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} fn1 - [TODO:description]
+   * @param {Array<(a: R) => R>} fns - [TODO:description]
+   * @return {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} [TODO:description]
+   */
+  export function pipe<T1, T2, T3, T4, R>(
+    fn1: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
+    ...fns: Array<(a: R) => R>
+  ): (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R;
+
+  /**
+   * [TODO:description]
+   *
+   * @template R - [TODO:description]
+   * @param {(...args: any[]) => R} fn1 - [TODO:description]
+   * @param {Array<(a: R) => R>} fns - [TODO:description]
+   * @return {(a: R) => R} [TODO:description]
+   */
+  export function pipe<R>(
+    fn1: (...args: any[]) => R,
+    ...fns: Array<(a: R) => R>
+  ): (a: R) => R {}
+
+# ------------------------------------------------------------------------------
+
+Given typescript (async signature arrow function and declaration with advanced generics):
+  export const pipe = async <T1, T2, T3, T4, R>(
+    fn1: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
+    ...fns: Array<(a: R) => R>
+  ) => (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R;
+
+  export const pipe = async <R>(
+    fn1: (...args: any[]) => R,
+    ...fns: Array<(a: R) => R>
+    ): (a: R) => R => {}
+
+Do (trigger doge):
+  \<C-d>
+  :19\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with @async, @template, @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @async
+   * @template T1 - [TODO:description]
+   * @template T2 - [TODO:description]
+   * @template T3 - [TODO:description]
+   * @template T4 - [TODO:description]
+   * @template R - [TODO:description]
+   * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} fn1 - [TODO:description]
+   * @param {Array<(a: R) => R>} fns - [TODO:description]
+   * @return {Promise<[TODO:type]>} [TODO:description]
+   */
+  export const pipe = async <T1, T2, T3, T4, R>(
+    fn1: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
+    ...fns: Array<(a: R) => R>
+  ) => (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R;
+
+  /**
+   * [TODO:description]
+   *
+   * @async
+   * @template R - [TODO:description]
+   * @param {(...args: any[]) => R} fn1 - [TODO:description]
+   * @param {Array<(a: R) => R>} fns - [TODO:description]
+   * @return {(a: R) => R} [TODO:description]
+   */
+  export const pipe = async <R>(
+    fn1: (...args: any[]) => R,
+    ...fns: Array<(a: R) => R>
+    ): (a: R) => R => {}

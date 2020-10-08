@@ -90,3 +90,36 @@ Expect python (generated comment with :param, :type, :return and :rtype tags):
     :rtype: Sequence[T]
     """
     pass
+
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given python (function with exceptions being raised in the body):
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='sphinx'\<CR>
+  \<C-d>
+
+Expect python (generated comment with :param and :raises tags):
+  def myFunc(p1 = 'string'):
+    """
+    [TODO:description]
+
+    :param p1: [TODO:description], defaults to 'string'
+    :type p1: [TODO:type], optional
+    :raises [TODO:name]: [TODO:description]
+    :raises Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass

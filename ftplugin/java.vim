@@ -6,8 +6,8 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let b:doge_pattern_single_line_comment = '\m\(\/\*.\{-}\*\/\|\/\/.\{-}$\)'
-let b:doge_pattern_multi_line_comment = '\m\/\*.\{-}\*\/'
+let b:doge_parser = 'java'
+let b:doge_insert = 'above'
 
 let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['javadoc'])
 let b:doge_doc_standard = doge#buffer#get_doc_standard('java')
@@ -15,29 +15,18 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
 "
-" Define our base for every pattern.
-"
-" ==============================================================================
-let s:pattern_base = {
-\  'parameters': {
-\    'format': '@param {name} !description',
-\  },
-\  'insert': 'above',
-\}
-
-" ==============================================================================
-"
 " Define the pattern types.
 "
 " ==============================================================================
-let s:class_method_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'match': '\m^\%(\%(public\|private\|protected\|static\|final\)\s*\)*\%(\%(\([[:alnum:]_]\+\)\?\s*\%(<[[:alnum:][:space:]_,]*>\)\?\)\?\s\+\)\?\%([[:alnum:]_]\+\)(\(.\{-}\))\s*\%(throws\s\+\(\%(\%([[:alnum:]_]\+\)\%(,\s\+\)\?\)\+\)\)\?\s*[;{]',
-\  'tokens': ['returnType', 'parameters', 'exceptions'],
+let s:class_method_pattern = {
+\  'nodeTypes': ['method_declaration'],
 \  'parameters': {
-\    'match': '\m\%(\([[:alnum:]_]\+\)\%(<[[:alnum:][:space:]_,]\+>\)\?\)\%(\s\+[.]\{3}\s\+\|\s\+[.]\{3}\|[.]\{3}\s\+\|\s\+\)\([[:alnum:]_]\+\)',
-\    'tokens': ['type', 'name'],
+\    'format': '@param {name} !description',
 \  },
-\})
+\  'exceptions': {
+\    'format': '@throws {name} !description',
+\  },
+\}
 
 " ==============================================================================
 "
@@ -54,7 +43,7 @@ call doge#buffer#register_doc_standard('javadoc', [
 \      '%(returnType| *)%',
 \      '%(returnType| * @return !description)%',
 \      '%(exceptions| *)%',
-\      '%(exceptions| * @throws {exceptions})%',
+\      '%(exceptions| * {exceptions})%',
 \      ' */',
 \    ],
 \  }),

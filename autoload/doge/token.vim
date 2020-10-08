@@ -22,7 +22,7 @@ function! s:token_replace(tokens, text) abort
     " - {name|default}
     " so if the line contains a pipe character with a default value then we
     " grab that value and remove it from the text.
-    let l:stripped_token = matchlist(l:text, '\m{\([^|{}]\+\)\%(|\([^}]*\)\)\?}')
+    let l:stripped_token = matchlist(l:text, '\m{\(' . l:token . '\)\%(|\([^}]*\)\)\?}')
     let l:token_default_value = doge#helpers#trim(get(l:stripped_token, 2, ''))
     let l:has_token_default_value = !empty(l:token_default_value)
 
@@ -36,7 +36,10 @@ function! s:token_replace(tokens, text) abort
     let l:conditional_pattern = '\m%(' . l:token . '|\(.\{-}\))%'
     if l:text =~# l:conditional_pattern
       let l:conditional_pattern_replacement_value = '\1'
-      if (type(l:token_value) == v:t_string && empty(l:token_value)) || (type(l:token_value) == v:t_list && len(l:token_value) < 1)
+      if (type(l:token_value) == v:t_string && empty(l:token_value))
+            \ || (type(l:token_value) == v:t_list && len(l:token_value) == 0)
+            \ || (type(l:token_value) == type(v:null) && l:token_value == v:null)
+            \ || (type(l:token_value) == v:t_bool && l:token_value == v:false)
         let l:conditional_pattern_replacement_value = ''
         let l:empty_conditional_pattern_value = 1
       endif
@@ -70,9 +73,12 @@ function! s:token_replace(tokens, text) abort
       endfor
       let l:text = join(l:multiline_replacement, "\n")
     else
+
       " A return type in some languages mightbe definedas 'TypeA & TypeB'.
       " For the sake of the substitution process, we need to escape the '&'.
-      let l:token_value = substitute(l:token_value, '&', '\\&', 'g')
+      if !empty(l:token_value)
+        let l:token_value = substitute(l:token_value, '&', '\\&', 'g')
+      endif
 
       if empty(l:token_value) && l:has_token_default_value
         let l:text = substitute(l:text, l:formatted_token, l:token_default_value, 'g')
@@ -94,9 +100,6 @@ function! s:token_replace(tokens, text) abort
 
   " Replace the <Bar> back to a pipe character.
   let l:text = substitute(l:text, '\m<Bar>', '|', 'g')
-
-  " For JSDoc we replace the type hints 'typeA | type B' with 'typeA|typeB'.
-  let l:text = substitute(l:text, '\m\s*|\s*', '|', 'g')
 
   " Empty lines will be added to the empty in the doge#pattern#generate()
   " function and to indicate it should be prevented from rendering we have to

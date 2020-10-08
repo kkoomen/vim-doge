@@ -32,26 +32,6 @@ Expect groovy (method with 'TODO' and a @return tag):
   }
 
 # ==============================================================================
-# Methods without return type.
-# ==============================================================================
-Given groovy (method without return type):
-  class Test {
-    public createSortedList() {}
-  }
-
-Do (trigger doge):
-  :2\<CR>
-  \<C-d>
-
-Expect groovy (method with 'TODO' and a description):
-  class Test {
-    /**
-     * [TODO:description]
-     */
-    public createSortedList() {}
-  }
-
-# ==============================================================================
 # Methods with parameters.
 # ==============================================================================
 Given groovy (methods with parameters):
@@ -105,7 +85,7 @@ Given groovy (methods with parameters with '@Override'):
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :2\<CR>
   \<C-d>
 
 Expect groovy (generated comments with @param and @return tags inserted above the '@Override'):

@@ -4,58 +4,75 @@
 #
 # ==============================================================================
 
-Execute (Create a new doc standard based on ldoc, setup dummy pattern and execute the DogeCreateDocStandard command):
+Execute (Create a new doc standard based on phpdoc, setup dummy pattern and execute the DogeCreateDocStandard command):
   enew
-  setfiletype lua
+  setfiletype php
   let b:doge_patterns = {
-    \  'ldoc': [{
-    \    'match': '\m^\%(local\s*\)\?function\s*\%([[:alnum:]_:.]\+[:.]\)\?\%([[:alnum:]_]\+\)\s*(\(.\{-}\))',
-    \    'tokens': ['parameters'],
-    \    'parameters': {
-    \      'match': '\m\([^,]\+\)',
-    \      'tokens': ['name'],
-    \      'format': '@param {name} !description',
+    \  'phpdoc': [
+    \    {
+    \      'nodeTypes': [
+    \        'property_declaration',
+    \      ],
+    \      'typeParameters': {
+    \        'format': '@param {name} !description',
+    \      },
+    \      'template': [
+    \        '/**',
+    \        ' * @var {type|!type}',
+    \        ' */',
+    \      ],
     \    },
-    \    'insert': 'above',
-    \    'template': [
-    \      '-- !summary',
-    \      '-- !description',
-    \      '%(parameters|-- {parameters})%',
-    \    ],
-    \  }],
+    \    {
+    \      'nodeTypes': [
+    \        'method_declaration',
+    \        'function_definition',
+    \      ],
+    \      'parameters': {
+    \        'format': '@param {type|!type} {name}%(default| (optional))% !description',
+    \      },
+    \      'exceptions': {
+    \        'format': '@param {name} !description',
+    \      },
+    \      'template': [
+    \        '/**',
+    \        ' * !description',
+    \        '%(parameters| *)%',
+    \        '%(parameters| * {parameters})%',
+    \        '%(isNoConstructorMethod| *)%',
+    \        '%(isNoConstructorMethod| * @return {returnType|!type} !description)%',
+    \        ' */',
+    \      ],
+    \    },
+    \  ],
     \}
-  DogeCreateDocStandard ldoc
+  DogeCreateDocStandard phpdoc
 
 Then (Expect a file to be created with specific content):
-"   AssertEqual expand('~/.vim/after/ftplugin/lua.vim'), expand('%:p')
+  AssertEqual expand('~/.vim/after/ftplugin/php.vim'), expand('%:p')
 
   let b:content = join([
   \  '" Preserve existing doge settings.',
   \  "let b:doge_patterns = get(b:, 'doge_patterns', {})",
   \  "let b:doge_supported_doc_standards = get(b:, 'doge_supported_doc_standards', [])",
-  \  "if index(b:doge_supported_doc_standards, 'ldoc_custom') < 0",
-  \  "  call add(b:doge_supported_doc_standards, 'ldoc_custom')",
+  \  "if index(b:doge_supported_doc_standards, 'phpdoc_custom') < 0",
+  \  "  call add(b:doge_supported_doc_standards, 'phpdoc_custom')",
   \  "endif",
-  \  '',
+  \  "",
   \  '" Set the new doc standard as default.',
-  \  "let b:doge_doc_standard = 'ldoc_custom'",
-  \  '',
+  \  "let b:doge_doc_standard = 'phpdoc_custom'",
+  \  "",
   \  '" Ensure we do not overwrite an existing doc standard.',
-  \  "if !has_key(b:doge_patterns, 'ldoc_custom')",
-  \  "  let b:doge_patterns['ldoc_custom'] = [",
+  \  "if !has_key(b:doge_patterns, 'phpdoc_custom')",
+  \  "  let b:doge_patterns['phpdoc_custom'] = [",
   \  "        \\  {",
-  \  "        \\    'match': '\\m^\\%(local\\s*\\)\\?function\\s*\\%([[:alnum:]_:.]\\+[:.]\\)\\?\\%([[:alnum:]_]\\+\\)\\s*(\\(.\\{-}\\))',",
-  \  "        \\    'tokens': ['parameters'],",
+  \  "        \\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],",
   \  "        \\    'parameters': {",
-  \  "        \\      'match': '\\m\\([^,]\\+\\)',",
-  \  "        \\      'tokens': ['name'],",
   \  "        \\      'format': '@param {name} !description',",
   \  "        \\    },",
-  \  "        \\    'insert': 'above',",
   \  "        \\    'template': [",
-  \  "        \\      '-- !summary',",
-  \  "        \\      '-- !description',",
-  \  "        \\      '%(parameters|-- {parameters})%',",
+  \  "        \\      '/**',",
+  \  "        \\      ' * @var {type|!type}',",
+  \  "        \\      ' */',",
   \  "        \\    ],",
   \  "        \\  },",
   \  "        \\]",
@@ -64,5 +81,47 @@ Then (Expect a file to be created with specific content):
   AssertEqual b:content, join(getline(line('^'), line('$')), "\n")
   unlet b:content
 # Remove the buffer to ensure every test will create a new doc standard file.
-  call delete(expand('~/.vim/after/ftplugin/lua.vim'))
+  call delete(expand('~/.vim/after/ftplugin/php.vim'))
+  bdelete!
+
+Execute (Create a new doc standard for an unsupported filetype, setup dummy pattern and execute the DogeCreateDocStandard command):
+  enew
+  setfiletype foo
+  DogeCreateDocStandard foo
+
+Then (Expect a file to be created with specific content):
+  AssertEqual expand('~/.vim/after/ftplugin/foo.vim'), expand('%:p')
+
+  let b:content = join([
+  \  '" Preserve existing doge settings.',
+  \  "let b:doge_patterns = get(b:, 'doge_patterns', {})",
+  \  "let b:doge_supported_doc_standards = get(b:, 'doge_supported_doc_standards', [])",
+  \  "if index(b:doge_supported_doc_standards, 'foo') < 0",
+  \  "  call add(b:doge_supported_doc_standards, 'foo')",
+  \  "endif",
+  \  "",
+  \  "let b:doge_parser = 'PARSER_NAME_HERE'",
+  \  "let b:doge_insert = 'above'",
+  \  "",
+  \  '" Set the new doc standard as default.',
+  \  "let b:doge_doc_standard = 'foo'",
+  \  "",
+  \  '" Ensure we do not overwrite an existing doc standard.',
+  \  "if !has_key(b:doge_patterns, 'foo')",
+  \  "  let b:doge_patterns['foo'] = [",
+  \  "        \\  {",
+  \  "        \\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],",
+  \  "        \\    'parameters': {",
+  \  "        \\      'format': '@param {name} !description',",
+  \  "        \\    },",
+  \  "        \\    'template': [",
+  \  "        \\    ],",
+  \  "        \\  },",
+  \  "        \\]",
+  \  "endif",
+  \], "\n")
+  AssertEqual b:content, join(getline(line('^'), line('$')), "\n")
+  unlet b:content
+# Remove the buffer to ensure every test will create a new doc standard file.
+  call delete(expand('~/.vim/after/ftplugin/foo.vim'))
   bdelete!

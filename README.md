@@ -29,35 +29,36 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 [Visit the demo page][demo-readme]
 
 # Table of Contents
+
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
+- [Migrating from v2 to v3](#migrating-from-v2-to-v3)
 - [Getting started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Configuration](#configuration)
-  * [Choosing a different doc standard](#choosing-a-different-doc-standard)
-  * [Options](#options)
-    + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
-    + [`g:doge_mapping`](#gdoge_mapping)
-    + [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
-    + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
-    + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
-    + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
-    + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
-    + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
-    + [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
+  - [Choosing a different doc standard](#choosing-a-different-doc-standard)
+  - [Options](#options)
+    - [`g:doge_parsers`](#gdoge_parsers)
+    - [`g:doge_enable_mappings`](#gdoge_enable_mappings)
+    - [`g:doge_mapping`](#gdoge_mapping)
+    - [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
+    - [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
+    - [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
+    - [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
+    - [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+    - [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
+    - [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
-    + [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
-    + [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
+  - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
+  - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
-    + [PHP](#php)
-    + [Python](#python)
+  - [PHP](#php)
+  - [Python](#python)
 - [FAQ](#faq)
-    + [Using C / C++](#using-c--c)
-      - [Prerequisites](#prerequisites)
-      - [Adding additional clang args](#adding-additional-clang-args)
-      - [Package manager](#package-manager)
-      - [Manual compiling](#manual-compiling)
 - [Help](#help)
 - [Contributing](#contributing)
+  - [Tree sitter](#tree-sitter)
 - [Motivation](#motivation)
 - [Supporting DoGe](#supporting-doge)
 - [License](#license)
@@ -73,37 +74,63 @@ Is your favorite doc standard not supported?
 
 |                    | Language                                       | Doc standards                                                                |
 | :----------------- | :--------------------------------------------- | :--------------------------------------------------------------------------- |
-| :white_check_mark: | Python                                         | [reST][py-reST], [Numpy][py-numpy], [Google][py-google], [Sphinx][py-sphinx] |
+| :white_check_mark: | Python                                         | [reST][py-rest], [Numpy][py-numpy], [Google][py-google], [Sphinx][py-sphinx] |
 | :white_check_mark: | PHP                                            | [phpdoc][phpdoc]                                                             |
 | :white_check_mark: | JavaScript (Including: ES6, FlowJS and NodeJS) | [JSDoc][jsdoc]                                                               |
 | :white_check_mark: | TypeScript                                     | [JSDoc][jsdoc]                                                               |
-| :white_check_mark: | CoffeeScript                                   | [JSDoc][jsdoc]                                                               |
 | :white_check_mark: | Lua                                            | [LDoc][ldoc]                                                                 |
 | :white_check_mark: | Java                                           | [JavaDoc][javadoc]                                                           |
 | :white_check_mark: | Groovy                                         | [JavaDoc][javadoc]                                                           |
-| :white_check_mark: | Ruby                                           | [YARD][YARD]                                                                 |
-| :white_check_mark: | Scala                                          | [ScalaDoc][scaladoc]                                                         |
-| :white_check_mark: | Kotlin                                         | [KDoc][kdoc]                                                                 |
-| :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
+| :white_check_mark: | Ruby                                           | [YARD][yard]                                                                 |
 | :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
-| :white_check_mark: | Shell                                          | [Google][sh-google]                                                          |
+| :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
+
+# Migrating from v2 to v3
+
+⚠️ If you've used DoGe v2 or less and upgraded to v3 then you are required to have
+NodeJS + NPM on your local machine in order to use this plugin, because of the
+new usage of the [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
+parsers.
+
+If you just want to use v3, then read the [Getting started](#getting-started).
+
+If you feel more comfortable to use v2, then you can still do so by using
+[v2.8.0](https://github.com/kkoomen/vim-doge/tree/v2.8.0). **Please be aware that
+v2 might contain bugs and will not be maintained anymore.**
+
+Using Plug:
+
+- `Plug 'kkoomen/vim-doge', { 'tag': 'v2.8.0' }`
 
 # Getting started
 
-Install `DoGe`:
+## Prerequisites
+
+Make sure your local system contains the following prerequisites:
+
+- [NodeJS](https://nodejs.org)
+- [NPM](https://www.npmjs.com)
+
+## Installation
+
+**NOTE:** If you only want to use a specific amount of languages, then make sure
+you use [`g:doge_parsers`](#gdoge_parsers) in your `.vimrc` before running
+`doge#install()`.
+
+Using plug:
+
+- `Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }`
 
 Using vim-pack:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
+- `:call doge#install()`
 
 Using pathogen:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
-
-Using plug:
-
-- `Plug 'kkoomen/vim-doge'`
+- `:call doge#install()`
 
 # Configuration
 
@@ -116,38 +143,68 @@ your vimrc. Is your favorite doc standard not supported?
 [Suggest a new doc standard][suggest-doc-standard] :tada:
 
 Example:
+
 ```vim
 let g:doge_doc_standard_python = 'numpy'
 ```
 
-If you want to change the doc standard specifically for a buffer you can do:
+If you want to change the doc standard specifically for a buffer, then you can do:
+
 ```vim
 " Inside test.py
 :let b:doge_doc_standard = 'numpy'
 ```
 
+If you want to generate a docblock using a different doc standard just for a
+specific expression, then you can use `DogeGenerate`:
+
+```vim
+" Inside test.py, cursor is at a function expression (cursor = `|`):
+"   |def foo(p1, p2):
+"       pass
+:DogeGenerate numpy
+```
+
 Here is the full list of available doc standards per filetype:
 
-| Variable                           | Default             | Supported                                                                                                                                    |
-| :--------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| `g:doge_doc_standard_python`       | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                  |
-| `g:doge_doc_standard_php`          | `'phpdoc'`          | `'phpdoc'`                                                                                                                                   |
-| `g:doge_doc_standard_javascript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
-| `g:doge_doc_standard_typescript`   | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
-| `g:doge_doc_standard_coffeescript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
-| `g:doge_doc_standard_lua`          | `'ldoc'`            | `'ldoc'`                                                                                                                                     |
-| `g:doge_doc_standard_java`         | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
-| `g:doge_doc_standard_groovy`       | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
-| `g:doge_doc_standard_ruby`         | `'YARD'`            | `'YARD'`                                                                                                                                     |
-| `g:doge_doc_standard_scala`        | `'scaladoc'`        | `'scaladoc'`                                                                                                                                 |
-| `g:doge_doc_standard_kotlin`       | `'kdoc'`            | `'kdoc'`                                                                                                                                     |
-| `g:doge_doc_standard_r`            | `'roxygen2'`        | `'roxygen2'`                                                                                                                                 |
-| `g:doge_doc_standard_cpp`          | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
-| `g:doge_doc_standard_c`            | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
-| `g:doge_doc_standard_sh`           | `'google'`          | `'google'`                                                                                                                                   |
-
+| Variable                         | Default             | Supported                                                                                                                                    |
+| :------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| `g:doge_doc_standard_python`     | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                  |
+| `g:doge_doc_standard_php`        | `'phpdoc'`          | `'phpdoc'`                                                                                                                                   |
+| `g:doge_doc_standard_javascript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
+| `g:doge_doc_standard_typescript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
+| `g:doge_doc_standard_lua`        | `'ldoc'`            | `'ldoc'`                                                                                                                                     |
+| `g:doge_doc_standard_java`       | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
+| `g:doge_doc_standard_groovy`     | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
+| `g:doge_doc_standard_ruby`       | `'YARD'`            | `'YARD'`                                                                                                                                     |
+| `g:doge_doc_standard_cpp`        | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
+| `g:doge_doc_standard_c`          | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
+| `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                   |
 
 ## Options
+
+### `g:doge_parsers`
+
+Default:
+
+```
+Default: [
+  'bash',
+  'c',
+  'cpp',
+  'java', // includes groovy
+  'lua',
+  'php',
+  'python',
+  'ruby',
+  'typescript', // used for JavaScript, ES6, FlowJS and NodeJS
+]
+```
+
+Defines the parsers that are enabled, which is useful if you only want to use
+specific languages. This also decreases installation time.
+
+**NOTE:** By default, all parsers will be installed.
 
 ### `g:doge_enable_mappings`
 
@@ -165,6 +222,7 @@ doc standard, if more than one is defined.
 ### `g:doge_filetype_aliases`
 
 Default:
+
 ```
 {
   'javascript': [
@@ -173,6 +231,7 @@ Default:
     'javascript.tsx',
     'typescriptreact',
     'typescript',
+    'typescript.tsx',
   ],
   'java': ['groovy'],
 }
@@ -183,6 +242,7 @@ that is defined in `ftplugin/<key>.vim`. The value must be a list of 1 or more
 filetypes that will be aliases.
 
 Example:
+
 ```vim
 let g:doge_filetype_aliases = {
 \  'javascript': ['vue']
@@ -279,58 +339,6 @@ let g:doge_python_settings = {
 
 # FAQ
 
-### Using C / C++
-
-If you use a language that belongs to the C-family then you have to use `clang`.
-This is the parser that is being used for generating proper documentation.
-
-#### Prerequisites
-- Vim requires to be compiled with python 3.
-- Python 3.5+
-- `pip3 install clang`
-
-#### Adding additional clang args
-
-The Python binding for clang allows additional arguments. These arguments can be
-set with `g:doge_clang_args`. For example:
-
-```vim
-let g:doge_clang_args = ['-I', '/my/include/path']
-```
-
-#### Package manager
-
-If you've installed clang via your package manager then you might have a file
-called `libclang.so.<libclang-major-version>` somewhere in your system, for
-example: `/usr/lib/libclang.so.8`. Go into the directory where this file exists
-using `cd` and create a symlink:
-
-```
-cd /usr/lib/
-ln -s libclang.so.8 libclang.so
-```
-
-Now it should be detectable via python if you do:
-
-```
-$ python3
->>> from clang.cindex import Index
->>> Index.create()
->>> <clang.cindex.Index object at 0x1084763d0>
-```
-
-#### Manual compiling
-
-If you compiled libclang manually, then make sure that your `$PATH` and
-`$LD_LIBRARY_PATH` are set correctly.
-
-The libclang binary its location should be defined in the `$LD_LIBRARY_PATH`:
-
-```sh
-# MacOS
-export LD_LIBRARY_PATH="/Library/Developer/CommandLineTools/usr/lib/"
-```
-
 # Help
 
 To open all the help pages, run `:help doge`.
@@ -344,6 +352,14 @@ time to help out.
 
 Read the [Contribution Guidelines][contrib-guide] and [Code of Conduct][coc]
 when doing contributions.
+
+## Tree sitter
+
+If you want a new language to be supported but tree-sitter doesn't support it
+yet, then feel free to create a custom tree-sitter language parser for that
+language and then we'll integrate it into vim-doge.
+
+- [Creating parsers](https://tree-sitter.github.io/tree-sitter/creating-parsers)
 
 # Motivation
 
@@ -372,7 +388,7 @@ Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on
 
 DoGe is licensed under the GPL-3.0 license.
 
-[py-reST]: http://daouzli.com/blog/docstring.html#restructuredtext
+[py-rest]: http://daouzli.com/blog/docstring.html#restructuredtext
 [py-numpy]: http://daouzli.com/blog/docstring.html#numpydoc
 [py-google]: https://github.com/google/styleguide/blob/gh-pages/pyguide.md#38-comments-and-docstrings
 [py-sphinx]: https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html#the-sphinx-docstring-format
@@ -380,14 +396,11 @@ DoGe is licensed under the GPL-3.0 license.
 [jsdoc]: https://jsdoc.app
 [ldoc]: https://github.com/stevedonovan/LDoc
 [javadoc]: https://www.oracle.com/technetwork/articles/javase/index-137868.html
-[YARD]: https://www.rubydoc.info/gems/yard/file/docs/Tags.md
-[scaladoc]: https://docs.scala-lang.org/style/scaladoc.html
-[kdoc]: https://kotlinlang.org/docs/reference/kotlin-doc.html
+[yard]: https://www.rubydoc.info/gems/yard/file/docs/Tags.md
 [roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
 [kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
 [sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
-
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
 [suggest-doc-standard]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md

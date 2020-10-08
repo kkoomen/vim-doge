@@ -2,6 +2,7 @@
 # Class methods without parameters.
 # ==============================================================================
 Given php (class method without parameters):
+  <?php
   class Test {
 
     public function myMethod() {}
@@ -9,10 +10,11 @@ Given php (class method without parameters):
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :4\<CR>
   \<C-d>
 
 Expect php (class method with nothing but the text 'TODO' and the @return tag):
+  <?php
   class Test {
 
     /**
@@ -30,6 +32,7 @@ Expect php (class method with nothing but the text 'TODO' and the @return tag):
 
 # Scenario 1
 Given php (class method with parameters):
+  <?php
   class Test {
 
     public function myMethod(?array &$p1) {}
@@ -37,10 +40,11 @@ Given php (class method with parameters):
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :4\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   class Test {
 
     /**
@@ -57,6 +61,7 @@ Expect php (generated comment with @param and @return tags):
 # ------------------------------------------------------------------------------
 
 Given php (static protected class method with parameters):
+  <?php
   class Test {
 
     protected static function myMethod(array &$p1) {}
@@ -64,10 +69,11 @@ Given php (static protected class method with parameters):
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :4\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   class Test {
 
     /**
@@ -84,6 +90,7 @@ Expect php (generated comment with @param and @return tags):
 # ------------------------------------------------------------------------------
 
 Given php (final public class method with parameters):
+  <?php
   class Test {
 
     public final function myMethod(array &$p1) {}
@@ -91,10 +98,11 @@ Given php (final public class method with parameters):
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :4\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   class Test {
 
     /**
@@ -111,6 +119,7 @@ Expect php (generated comment with @param and @return tags):
 # ------------------------------------------------------------------------------
 
 Given php (private static final class method with parameters):
+  <?php
   class Test {
 
     private static final function myMethod(array &$p1) {}
@@ -118,10 +127,11 @@ Given php (private static final class method with parameters):
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :4\<CR>
   \<C-d>
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   class Test {
 
     /**
@@ -138,6 +148,7 @@ Expect php (generated comment with @param and @return tags):
 # ------------------------------------------------------------------------------
 
 Given php (constructor method with parameters):
+  <?php
   use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
   class Test {
@@ -152,10 +163,11 @@ Given php (constructor method with parameters):
   }
 
 Do (trigger doge):
-  :5\<CR>
+  :6\<CR>
   \<C-d>
 
 Expect php (generated comment with @param tags):
+  <?php
   use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
   class Test {

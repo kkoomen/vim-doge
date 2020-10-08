@@ -2,11 +2,13 @@
 # Tests the functionality for the g:doge_comment_jump_wrap option.
 # ==============================================================================
 Given php (PHP function without parameters where g:doge_comment_jump_wrap = 1):
+  <?php
   function myFunction() {}
 
 Do (trigger doge and jump forward):
   :let g:doge_comment_jump_wrap = 0\<CR>
   :let g:doge_comment_interactive = 1\<CR>
+  :2\<CR>
   \<C-d>
   \<Tab>
   \<Tab>
@@ -17,10 +19,11 @@ Do (trigger doge and jump forward):
   \<Tab>
 
 Then (the last TODO item should be selected):
-  AssertEqual 4, line('.')
+  AssertEqual 5, line('.')
   AssertEqual 24, col('.')
 
 Expect php (generated comment with a description and @return tag):
+  <?php
   /**
    * [TODO:description]
    *
@@ -32,6 +35,7 @@ Expect php (generated comment with a description and @return tag):
 Do (trigger doge and jump backwards):
   :let g:doge_comment_jump_wrap = 0\<CR>
   :let g:doge_comment_interactive = 1\<CR>
+  :2\<CR>
   \<C-d>
 # Trigger 2 <S-Tab> characters.
 # The cursor should stay on the first TODO item.
@@ -39,10 +43,11 @@ Do (trigger doge and jump backwards):
   \<S-Tab>
 
 Then (the first TODO item should be selected):
-  AssertEqual 2, line('.')
+  AssertEqual 3, line('.')
   AssertEqual 4, col('.')
 
 Expect php (generated comment with a description and @return tag):
+  <?php
   /**
    * [TODO:description]
    *
@@ -55,16 +60,18 @@ Expect php (generated comment with a description and @return tag):
 Do (trigger doge and jump forward):
   :let g:doge_comment_jump_wrap = 1\<CR>
   :let g:doge_comment_interactive = 1\<CR>
+  :2\<CR>
   \<C-d>
   \<Tab>
   \<Tab>
   \<Tab>
 
 Then (the first TODO item should be selected):
-  AssertEqual 2, line('.')
+  AssertEqual 3, line('.')
   AssertEqual 4, col('.')
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   /**
    * [TODO:description]
    *
@@ -76,16 +83,18 @@ Expect php (generated comment with @param and @return tags):
 Do (trigger doge and jump backwards):
   :let g:doge_comment_jump_wrap = 1\<CR>
   :let g:doge_comment_interactive = 1\<CR>
+  :2\<CR>
   \<C-d>
   \<S-Tab>
   \<S-Tab>
   \<S-Tab>
 
 Then (the first TODO item should be selected):
-  AssertEqual 2, line('.')
+  AssertEqual 3, line('.')
   AssertEqual 4, col('.')
 
 Expect php (generated comment with @param and @return tags):
+  <?php
   /**
    * [TODO:description]
    *

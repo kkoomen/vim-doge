@@ -157,3 +157,34 @@ Expect python (generated comment with :param tags):
     :param p1 [TODO:type]: [TODO:description]
     '''
     pass
+
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given python (function with exceptions being raised in the body):
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+Do (trigger doge):
+  \<C-d>
+
+Expect python (generated comment with :param and :raises tags):
+  def myFunc(p1 = 'string'):
+    """
+    [TODO:description]
+
+    :param p1 [TODO:type]: [TODO:description]
+    :raises [TODO:name]: [TODO:description]
+    :raises Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass

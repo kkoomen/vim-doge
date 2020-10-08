@@ -17,12 +17,10 @@ Do (trigger doge):
   :11\<CR>
   \<C-d>
 
-Expect javascript (generated comment with a description, @function and @return tag):
   var myObj = {
     /**
      * [TODO:description]
      *
-     * @function myFunc
      * @return {[TODO:type]} [TODO:description]
      */
     myFunc: function(/* inline comment */) {
@@ -31,7 +29,6 @@ Expect javascript (generated comment with a description, @function and @return t
     /**
      * [TODO:description]
      *
-     * @function myArrowFunc
      * @return {[TODO:type]} [TODO:description]
      */
     myArrowFunc: (/* inline comment */) => {
@@ -56,16 +53,15 @@ Given javascript (functions with punctation with parameters with/without type hi
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :16\<CR>
+  :15\<CR>
   \<C-d>
 
-Expect javascript (generated comment with @async, @function, @param and @return tags):
+Expect javascript (generated comment with @async, @param and @return tags):
   var myObj = {
     /**
      * [TODO:description]
      *
      * @async
-     * @function my-func
      * @param {string} [$p1] - [TODO:description]
      * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
@@ -79,12 +75,11 @@ Expect javascript (generated comment with @async, @function, @param and @return 
      * [TODO:description]
      *
      * @async
-     * @function my-arrow-func
      * @param {string} [$p1] - [TODO:description]
      * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
      * @param {[TODO:type]} p4 - [TODO:description]
-     * @return {1|2|3} [TODO:description]
+     * @return {( 1 | 2 | 3 )} [TODO:description]
      */
     'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */): ( 1 | 2 | 3 ) => {
       //
