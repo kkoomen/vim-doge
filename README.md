@@ -89,8 +89,7 @@ Is your favorite doc standard not supported?
 ⚠️ If you've used DoGe v2 or less and upgraded to v3 then you are required to have
 NodeJS + NPM on your local machine in order to use this plugin, because of the
 new usage of the [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
-parsers. This plugin is using the node bindings for tree-sitter, because the
-amount of supported languages is a lot.
+parsers.
 
 If you just want to use v3, then read the [Getting started](#getting-started).
 
@@ -204,8 +203,6 @@ Defines the parsers that are enabled, which is useful if you only want to use
 specific languages. This also decreases installation time.
 
 **NOTE:** By default, all parsers will be installed.
-
-Whether or not to enable built-in mappings.
 
 ### `g:doge_enable_mappings`
 
