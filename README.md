@@ -58,6 +58,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [FAQ](#faq)
 - [Help](#help)
 - [Contributing](#contributing)
+  - [Tree sitter](#tree-sitter)
 - [Motivation](#motivation)
 - [Supporting DoGe](#supporting-doge)
 - [License](#license)
@@ -351,6 +352,12 @@ time to help out.
 
 Read the [Contribution Guidelines][contrib-guide] and [Code of Conduct][coc]
 when doing contributions.
+
+## Tree sitter
+
+If you want a new language to be supported but tree-sitter doesn't support it
+yet, then feel free to create a custom tree-sitter language parser for that
+language and then we'll integrate it into vim-doge.
 
 # Motivation
 
