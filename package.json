@@ -44,6 +44,7 @@
     ]
   },
   "dependencies": {
+    "rimraf": "^3.0.2",
     "tree-sitter": "^0.17.0",
     "typescript": "^4.0.3"
   },
@@ -63,7 +64,6 @@
     "lint-staged": "^10.4.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
-    "rimraf": "^3.0.2",
     "ts-node": "^9.0.0"
   }
 }
