@@ -6,7 +6,7 @@
   "scripts": {
     "version": "npm run preversion && conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "preversion": "npm run format && npm run lint",
-    "prebuild": "rimraf dist",
+    "prebuild": "rimraf dist/*",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
     "start": "npm run build",
