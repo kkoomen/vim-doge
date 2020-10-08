@@ -39,6 +39,9 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \    'parameters': {
 \      'format': '@param {{type|!type}} %(default|[)%{name|!name}%(default|])% - !description',
 \    },
+\    'exceptions': {
+\      'format': '@throws {{name|!name}} - !description',
+\    },
 \    'template': [
 \      '/**',
 \      ' * !description',
@@ -48,6 +51,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(generator| * @generator)%',
 \      '%(typeParameters| * {typeParameters})%',
 \      '%(parameters| * {parameters})%',
+\      '%(exceptions| * {exceptions})%',
 \      '%(returnType| * @return {{returnType|!type}} !description)%',
 \      ' */',
 \    ],
@@ -68,6 +72,9 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \    'typeParameters': {
 \      'format': '@template {name|!name} - !description',
 \    },
+\    'exceptions': {
+\      'format': '@throws {{name|!name}} - !description',
+\    },
 \    'template': [
 \      '/**',
 \      ' * !description',
@@ -77,6 +84,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(generator| * @generator)%',
 \      '%(typeParameters| * {typeParameters})%',
 \      '%(parameters| * {parameters})%',
+\      '%(exceptions| * {exceptions})%',
 \      '%(returnType| * @return {{returnType|!type}} !description)%',
 \      ' */',
 \    ],

@@ -280,3 +280,56 @@ Expect javascript (generated comment with a description, @param and @return tags
     private printSomething(something?: string): void {}
 
   }
+
+# ==============================================================================
+# Read out the exceptions in the function body
+# ==============================================================================
+Given javascript (functions with exceptions being thrown in the body):
+  export class Test {
+    public printSomething(something?: string): void {
+      err = new CustomException();
+      throw err;
+      throw new CustomException();
+    }
+  }
+
+  function test() {
+    err = new CustomException();
+    throw err;
+    throw new CustomException();
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :16\<CR>
+  \<C-d>
+
+Expect javascript (generated comments with a description, @param, @throws and @return tags):
+  export class Test {
+    /**
+     * [TODO:description]
+     *
+     * @param {string} [something] - [TODO:description]
+     * @throws {[TODO:name]} - [TODO:description]
+     * @throws {CustomException} - [TODO:description]
+     */
+    public printSomething(something?: string): void {
+      err = new CustomException();
+      throw err;
+      throw new CustomException();
+    }
+  }
+
+  /**
+   * [TODO:description]
+   *
+   * @throws {[TODO:name]} - [TODO:description]
+   * @throws {CustomException} - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  function test() {
+    err = new CustomException();
+    throw err;
+    throw new CustomException();
+  }

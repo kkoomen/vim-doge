@@ -42,6 +42,7 @@ export class TypeScriptParserService
             typeParameters: [],
             parameters: [],
             returnType: null,
+            exceptions: [],
           };
           const prototypeIdentifier = node.child(0)?.children.pop();
           if (prototypeIdentifier && prototypeIdentifier.text === 'prototype') {
@@ -78,6 +79,7 @@ export class TypeScriptParserService
             typeParameters: [],
             parameters: [],
             returnType: null,
+            exceptions: [],
           };
           this.runNodeParser(this.parseFunction, node);
           break;
@@ -323,9 +325,38 @@ export class TypeScriptParserService
           break;
         }
 
+        case 'statement_block':
+        case 'class_body': {
+          this.parseExceptions(childNode);
+          break;
+        }
+
         default:
           break;
       }
     });
+  }
+
+  private parseExceptions(node: SyntaxNode): void {
+    if (node.type === 'throw_statement') {
+      const exception: Record<string, any> = { name: null };
+
+      const name = node.children
+        .filter((n: SyntaxNode) => n.type === 'new_expression')
+        .shift()
+        ?.children.filter((n: SyntaxNode) => n.type === 'identifier')
+        .shift()?.text;
+      if (name) {
+        exception.name = name;
+      }
+
+      this.result.exceptions.push(exception);
+    }
+
+    if (node.childCount > 0) {
+      node.children.forEach((childNode: SyntaxNode) => {
+        this.parseExceptions(childNode);
+      });
+    }
   }
 }

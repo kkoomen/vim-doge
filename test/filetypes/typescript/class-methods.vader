@@ -8,7 +8,11 @@ Given typescript (functions with destructured parameters):
     test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false) {}
 
     @Test()
-    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {}
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {
+      err = new CustomException();
+      throw err;
+      throw new CustomException();
+    }
   }
 
 Do (trigger doge):
@@ -38,10 +42,16 @@ Expect typescript (generated comment with a description, @param and @return tags
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
+     * @throws {[TODO:name]} - [TODO:description]
+     * @throws {CustomException} - [TODO:description]
      * @return {UserA & UserB} [TODO:description]
      */
     @Test()
-    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {}
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {
+      err = new CustomException();
+      throw err;
+      throw new CustomException();
+    }
   }
 
 # ==============================================================================
