@@ -140,6 +140,12 @@ function! doge#helpers#deepextend(...) abort
 endfunction
 
 "" @public
+" Substitute input recursively.
+function! doge#helpers#deepsubstitute(input, search, replacement, flags) abort
+  return eval(substitute(string(a:input), a:search, a:replacement, a:flags))
+endfunction
+
+"" @public
 " Get the current filetype. Returns the original filetype if the current
 " filetype is an alias.
 function! doge#helpers#get_filetype() abort
