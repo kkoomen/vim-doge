@@ -154,7 +154,6 @@ while [ "$tries" -lt 5 ]; do
     -v "$PWD/test:/vim-doge/test" \
     -v "$PWD/dist:/vim-doge/dist" \
     -v "$PWD/tsconfig.json:/vim-doge/tsconfig.json" \
-    -v "$PWD/webpack.config.js:/vim-doge/webpack.config.js" \
     -w /vim-doge "$DOGE_DOCKER_IMAGE" \
     "/vim-build/bin/$vim" -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
 

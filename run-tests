@@ -29,7 +29,7 @@ set -e
 set -u
 
 docker_image=kkoomen/doge
-current_docker_image_id=a0efef30a1c2
+current_docker_image_id=879e8382d1a2
 DOGE_DOCKER_IMAGE="$docker_image"
 export DOGE_DOCKER_IMAGE
 
@@ -186,9 +186,8 @@ if [[ ! -f ./dist/index.js ]]; then
     -v "$PWD/test:/vim-doge/test" \
     -v "$PWD/dist:/vim-doge/dist" \
     -v "$PWD/tsconfig.json:/vim-doge/tsconfig.json" \
-    -v "$PWD/webpack.config.js:/vim-doge/webpack.config.js" \
     -w /vim-doge "$DOGE_DOCKER_IMAGE" \
-    npm run build:webpack
+    npm run build
   echo "[done] Building dist/index.js"
 fi
 

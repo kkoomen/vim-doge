@@ -15,12 +15,14 @@ doge#deactivate()	doge.txt	/*doge#deactivate()*
 doge#generate()	doge.txt	/*doge#generate()*
 doge#helpers#count()	doge.txt	/*doge#helpers#count()*
 doge#helpers#deepextend()	doge.txt	/*doge#helpers#deepextend()*
+doge#helpers#deepsubstitute()	doge.txt	/*doge#helpers#deepsubstitute()*
 doge#helpers#get_filetype()	doge.txt	/*doge#helpers#get_filetype()*
 doge#helpers#keyseq()	doge.txt	/*doge#helpers#keyseq()*
 doge#helpers#parser()	doge.txt	/*doge#helpers#parser()*
 doge#helpers#placeholder()	doge.txt	/*doge#helpers#placeholder()*
 doge#helpers#trim()	doge.txt	/*doge#helpers#trim()*
 doge#indent#add()	doge.txt	/*doge#indent#add()*
+doge#install()	doge.txt	/*doge#install()*
 doge#on_filetype_change()	doge.txt	/*doge#on_filetype_change()*
 doge#pattern#custom()	doge.txt	/*doge#pattern#custom()*
 doge#pattern#generate()	doge.txt	/*doge#pattern#generate()*
@@ -41,3 +43,4 @@ g:doge_enable_mappings	doge.txt	/*g:doge_enable_mappings*
 g:doge_mapping	doge.txt	/*g:doge_mapping*
 g:doge_mapping_comment_jump_backward	doge.txt	/*g:doge_mapping_comment_jump_backward*
 g:doge_mapping_comment_jump_forward	doge.txt	/*g:doge_mapping_comment_jump_forward*
+g:doge_parsers	doge.txt	/*g:doge_parsers*

@@ -1,9 +1,8 @@
 import fs from 'fs';
 import Parser from 'tree-sitter';
 import { Language } from './constants';
-import { loadPackage } from './helpers';
+import { loadParserPackage } from './helpers';
 import { getParserService } from './parsers';
-import { parserLanguages } from './parsers/languages';
 import { ValueOf } from './types';
 
 const args: string[] = process.argv.slice(2);
@@ -12,10 +11,10 @@ const language: ValueOf<Language> = args.shift() as ValueOf<Language>;
 const lineNumber: number = Math.max(0, Number(args.shift()) - 1);
 const nodeTypes: string[] = args;
 
-const packageName = `tree-sitter-${language}`;
-if (loadPackage(packageName)) {
+const languageParser = loadParserPackage(language);
+if (languageParser) {
   const parser = new Parser();
-  parser.setLanguage(parserLanguages[language as Language]);
+  parser.setLanguage(languageParser);
 
   const sourceCode = fs.readFileSync(filepath, { encoding: 'utf8', flag: 'r' });
   const tree = parser.parse(sourceCode);
@@ -30,5 +29,5 @@ if (loadPackage(packageName)) {
     parserService.output();
   }
 } else {
-  console.error(`Could not load package: ${packageName}`);
+  console.error(`Could not load parser for ${language}`);
 }

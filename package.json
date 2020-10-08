@@ -9,8 +9,7 @@
     "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
-    "build:webpack": "webpack --mode production",
-    "start": "npm run build:webpack",
+    "start": "npm run build",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
   },
@@ -46,11 +45,7 @@
   },
   "dependencies": {
     "tree-sitter": "^0.17.0",
-    "ts-loader": "^8.0.4",
-    "typescript": "^4.0.3",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-node-externals": "^2.5.2"
+    "typescript": "^4.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",

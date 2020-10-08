@@ -25,5 +25,5 @@ if [[ "${packages[@]}" != "" ]]; then
 fi
 
 if [[ ! -f ./dist/index.js ]]; then
-  npm run build:webpack
+  npm run build
 fi
