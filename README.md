@@ -35,7 +35,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Migrating from v2 to v3](#migrating-from-v2-to-v3)
 - [Getting started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation:](#installation)
+  - [Installation](#installation)
 - [Configuration](#configuration)
   - [Choosing a different doc standard](#choosing-a-different-doc-standard)
   - [Options](#options)
@@ -111,11 +111,11 @@ Make sure your local system contains the following prerequisites:
 - [NodeJS](https://nodejs.org)
 - [NPM](https://www.npmjs.com)
 
+## Installation
+
 **NOTE:** If you only want to use a specific amount of languages, then make sure
 you use [`g:doge_parsers`](#gdoge_parsers) in your `.vimrc` before running
 `doge#install()`.
-
-## Installation:
 
 Using plug:
 
