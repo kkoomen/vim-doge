@@ -125,12 +125,17 @@ Using plug:
 Using vim-pack:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
-- `:call doge#install()`
+- Open Vim and run `:call doge#install()`
 
-Using pathogen:
+Using Pathogen:
 
 - `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
-- `:call doge#install()`
+- Open Vim and run `:call doge#install()`
+
+Using Vundle:
+
+- `Plugin 'kkoomen/vim-doge'`
+- Open Vim and run `:call doge#install()`
 
 # Configuration
 
