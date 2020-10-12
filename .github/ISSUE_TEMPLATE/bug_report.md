@@ -27,15 +27,24 @@ let g:doge_mapping = '<Leader>f'
 **To Reproduce**
 
 <!--
-If applicable, provide the scenario you used to generate documentation for.
+If you don't provide a minimal vimrc then we will close your issue very quickly.
 -->
+
+- Create file `doge.vim` with:
+
+```vim
+set nocompatible
+set runtimepath^=/path/to/vim-doge.nvim
+filetype plugin indent on
+syntax on
+set hidden
+```
+
+- Start (neo)vim with command: `vim -u doge.vim`
 
 Steps to reproduce the behavior:
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+1. ...
 
 **Expected behavior**
 
