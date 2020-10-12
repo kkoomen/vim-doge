@@ -203,6 +203,12 @@ function! doge#install() abort
   let l:args = !empty(l:langs) ? l:langs : l:languages
   echo '[DoGe] Installing parsers: ' . join(l:args, ', ')
   call execute('!' . g:doge_dir . '/install.sh ' . join(l:args, ' '))
+  if has('win32')
+    let l:install_script = 'install.bat'
+  else
+    let l:install_script = 'install.sh'
+  endif
+  execute('!' . g:doge_dir . '/' . l:install_script . ' ' . join(l:args, ' '))
 endfunction
 
 let &cpoptions = s:save_cpo
