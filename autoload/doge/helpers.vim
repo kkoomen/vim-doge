@@ -92,9 +92,12 @@ function! doge#helpers#parser(args) abort
     let l:result = system('node ' . l:script_path . ' ' . join(l:args, ' '))
 
     try
-      return json_decode(l:result)
+      if !empty(l:result)
+        return json_decode(l:result)
+      endif
     catch /.*/
       echo '[DoGe] ' . b:doge_parser . ' parser failed'
+      echo '[Doge] Exception: ' . v:exception
       echo l:result
     finally
       call setpos('.', l:cursor_pos)
