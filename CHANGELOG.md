@@ -1,3 +1,9 @@
+## [3.1.1](https://github.com/kkoomen/vim-doge/compare/v3.1.0...v3.1.1) (2020-10-13)
+
+### Features
+
+- **javascript:** use !name instead of !parentName for the sake of multi-cursor ([7a56d28](https://github.com/kkoomen/vim-doge/commit/7a56d280048821938f77c7eee05fc71b3deffe82))
+
 # [3.1.0](https://github.com/kkoomen/vim-doge/compare/v3.0.1...v3.1.0) (2020-10-13)
 
 ### Bug Fixes
