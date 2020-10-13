@@ -53,6 +53,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
   - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
   - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
+  - [JavaScript](#javascript)
   - [PHP](#php)
   - [Python](#python)
 - [FAQ](#faq)
