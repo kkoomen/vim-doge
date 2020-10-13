@@ -357,10 +357,10 @@ Expect javascript (generated comments with a description, @param and @return tag
    * [TODO:description]
    *
    * @param {[TODO:type]} [TODO:name] - [TODO:description]
-   * @param {[TODO:type]} [TODO:parentName].a - [TODO:description]
-   * @param {str} [TODO:parentName].b - [TODO:description]
-   * @param {[TODO:type]} [[TODO:parentName].c] - [TODO:description]
-   * @param {int} [[TODO:parentName].d] - [TODO:description]
+   * @param {[TODO:type]} [TODO:name].a - [TODO:description]
+   * @param {str} [TODO:name].b - [TODO:description]
+   * @param {[TODO:type]} [[TODO:name].c] - [TODO:description]
+   * @param {int} [[TODO:name].d] - [TODO:description]
    * @return {[TODO:type]} [TODO:description]
    */
   function foo({ a, b: str, c = 3, d: int = 5 }) {}

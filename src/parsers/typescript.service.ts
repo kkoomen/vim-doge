@@ -363,7 +363,7 @@ export class TypeScriptParserService
 
                         subparams.push({
                           ...subparam,
-                          name: `!parentName.${subparam.name}`,
+                          name: `!name.${subparam.name}`,
                         });
                       });
                   }
