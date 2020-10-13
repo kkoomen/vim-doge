@@ -18,7 +18,7 @@ Given typescript (functions with destructured parameters):
 Do (trigger doge):
   :4\<CR>
   \<C-d>
-  :15\<CR>
+  :17\<CR>
   \<C-d>
 
 Expect typescript (generated comment with a description, @param and @return tags):
@@ -27,6 +27,8 @@ Expect typescript (generated comment with a description, @param and @return tags
      * [TODO:description]
      *
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
+     * @param {[TODO:type]} [TODO:parentName].idUser - [TODO:description]
+     * @param {[TODO:type]} [TODO:parentName].userModel - [TODO:description]
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
      * @return {[TODO:type]} [TODO:description]
@@ -40,6 +42,8 @@ Expect typescript (generated comment with a description, @param and @return tags
      *
      * @async
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
+     * @param {[TODO:type]} [TODO:parentName].idUser - [TODO:description]
+     * @param {[TODO:type]} [TODO:parentName].userModel - [TODO:description]
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
      * @throws {[TODO:name]} - [TODO:description]

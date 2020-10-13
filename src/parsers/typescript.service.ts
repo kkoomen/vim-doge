@@ -301,6 +301,7 @@ export class TypeScriptParserService
                   default: null,
                   optional: cn.type === 'optional_parameter',
                 };
+                const subparams: Array<Record<string, any>> = [];
 
                 cn.children.forEach((pn: SyntaxNode) => {
                   if (pn.type === 'identifier') {
@@ -317,9 +318,59 @@ export class TypeScriptParserService
                     param.default = pn.text;
                     param.optional = true;
                   }
+
+                  // Check for destructuring patterns.
+                  if (pn.type === 'object_pattern') {
+                    pn.children
+                      .filter((spn: SyntaxNode) =>
+                        [
+                          'pair',
+                          'shorthand_property_identifier',
+                          'assignment_pattern',
+                        ].includes(spn.type),
+                      )
+                      .forEach((spn: SyntaxNode) => {
+                        const subparam: Record<string, any> = {
+                          property: true,
+                          name: null,
+                          type: null,
+                          default: null,
+                          optional: false,
+                        };
+
+                        if (spn.type === 'shorthand_property_identifier') {
+                          subparam.name = spn.text;
+                        }
+
+                        if (spn.type === 'assignment_pattern') {
+                          subparam.name = spn.children.shift()?.text;
+                          subparam.optional = true;
+                        }
+
+                        if (spn.type === 'pair') {
+                          subparam.name = spn.children.shift()?.text;
+                          const paramTypeChild = spn.children.pop();
+                          if (
+                            paramTypeChild?.type === 'assignment_expression'
+                          ) {
+                            subparam.type = paramTypeChild.children.shift()?.text;
+                            subparam.default = paramTypeChild.children.pop()?.text;
+                            subparam.optional = true;
+                          } else {
+                            subparam.type = paramTypeChild?.text;
+                          }
+                        }
+
+                        subparams.push({
+                          ...subparam,
+                          name: `!parentName.${subparam.name}`,
+                        });
+                      });
+                  }
                 });
 
                 this.result.parameters.push(param);
+                this.result.parameters.push(...subparams);
               });
           }
           break;

@@ -9,6 +9,12 @@ set cpoptions&vim
 let b:doge_parser = 'typescript'
 let b:doge_insert = 'above'
 
+if !exists('g:doge_javascript_settings')
+  let g:doge_javascript_settings = {
+  \  'destructuring_props': 1,
+  \}
+endif
+
 let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['jsdoc'])
 let b:doge_doc_standard = doge#buffer#get_doc_standard('javascript')
 let b:doge_patterns = doge#buffer#get_patterns()
