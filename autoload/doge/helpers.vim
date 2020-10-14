@@ -82,14 +82,14 @@ endfunction
 " @public
 " Run a parser which will produce all the parameters and return the output.
 function! doge#helpers#parser(args) abort
-  let l:script_path = g:doge_dir . '/dist/index.js'
+  let l:script_path = g:doge_dir . '/index-macos'
   if filereadable(l:script_path) != v:false
     let l:cursor_pos = getpos('.')
     let l:current_line = l:cursor_pos[1]
     let l:tempfile = tempname()
     keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
     let l:args = [l:tempfile, b:doge_parser, l:current_line] + a:args
-    let l:result = system('node ' . l:script_path . ' ' . join(l:args, ' '))
+    let l:result = system(l:script_path . ' ' . join(l:args, ' '))
 
     try
       return json_decode(l:result)
