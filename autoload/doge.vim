@@ -201,7 +201,7 @@ function! doge#install() abort
   endfor
 
   let l:args = !empty(l:langs) ? l:langs : l:languages
-  echo '[DoGe] Installating ' . join(l:args, ', ')
+  echo '[DoGe] Installing parsers: ' . join(l:args, ', ')
   call execute('!' . g:doge_dir . '/install.sh ' . join(l:args, ' '))
 endfunction
 

@@ -333,3 +333,42 @@ Expect javascript (generated comments with a description, @param, @throws and @r
     throw err;
     throw new CustomException();
   }
+
+# ==============================================================================
+# Test the 'destructuring_props' option
+# ==============================================================================
+Given javascript (functions with destructuring_props):
+  function foo({ a, b: str, c = 3, d: int = 5 }) {}
+
+  function foo({ a, b: str, c = 3, d: int = 5 }) {}
+
+
+Do (trigger doge):
+  :let g:doge_javascript_settings = {'destructuring_props': 1}\<CR>
+  :1\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings = {'destructuring_props': 0}\<CR>
+  :13\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings = {'destructuring_props': 1}\<CR>
+
+Expect javascript (generated comments with a description, @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} [TODO:name] - [TODO:description]
+   * @param {[TODO:type]} [TODO:name].a - [TODO:description]
+   * @param {str} [TODO:name].b - [TODO:description]
+   * @param {[TODO:type]} [[TODO:name].c] - [TODO:description]
+   * @param {int} [[TODO:name].d] - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  function foo({ a, b: str, c = 3, d: int = 5 }) {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} [TODO:name] - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  function foo({ a, b: str, c = 3, d: int = 5 }) {}

@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "vim-doge",
-  "version": "3.0.1",
+  "version": "3.1.1",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",

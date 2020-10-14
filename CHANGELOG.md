@@ -1,3 +1,19 @@
+## [3.1.1](https://github.com/kkoomen/vim-doge/compare/v3.1.0...v3.1.1) (2020-10-13)
+
+### Features
+
+- **javascript:** use !name instead of !parentName for the sake of multi-cursor ([7a56d28](https://github.com/kkoomen/vim-doge/commit/7a56d280048821938f77c7eee05fc71b3deffe82))
+
+# [3.1.0](https://github.com/kkoomen/vim-doge/compare/v3.0.1...v3.1.0) (2020-10-13)
+
+### Bug Fixes
+
+- do not decode empty strings, closes [#105](https://github.com/kkoomen/vim-doge/issues/105) ([b26026b](https://github.com/kkoomen/vim-doge/commit/b26026b3be2dd735ab7b89ede2dd9a0dea22a2ae))
+
+### Features
+
+- **javascript:** add new destructuring option, closes [#109](https://github.com/kkoomen/vim-doge/issues/109) ([72f2432](https://github.com/kkoomen/vim-doge/commit/72f24322d14facb598730423d21c5a70aed54b6d))
+
 ## [3.0.1](https://github.com/kkoomen/vim-doge/compare/v3.0.0...v3.0.1) (2020-10-08)
 
 ### Bug Fixes

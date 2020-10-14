@@ -53,6 +53,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
   - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
   - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
+  - [JavaScript](#javascript)
   - [PHP](#php)
   - [Python](#python)
 - [FAQ](#faq)
@@ -326,6 +327,20 @@ For more information on how to create custom doc standards you can read
 
 Below is a list of language-specific configuration and their default values.
 
+### JavaScript
+
+JavaScript settings automatically apply for all the default filetypes that are
+being aliased, see [`g:doge_filetype_aliases`](#gdoge_filetype_aliases).
+
+```vim
+let g:doge_javascript_settings = {
+\  'destructuring_props': 1,
+\}
+```
+
+- `destructuring_props`: Whether or not to generate `@param` tags for the
+  destructured properties in a function expression.
+
 ### PHP
 
 ```vim
@@ -334,6 +349,10 @@ let g:doge_php_settings = {
 \}
 ```
 
+- `resolve_fqn`: Whether or not to resolve the FQN based on the `use` statements
+  in the current buffer. The FQN will be resolved for type hints in parameters
+  and the return type.
+
 ### Python
 
 ```vim
@@ -341,6 +360,8 @@ let g:doge_python_settings = {
 \  'single_quotes': 0
 \}
 ```
+
+- `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers
 
 # FAQ
 

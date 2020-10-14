@@ -51,6 +51,18 @@ endfunction
 " A callback function being called after the tokens have been extracted. This
 " function will adjust the input if needed.
 function! doge#preprocessors#javascript#tokens(tokens) abort
+  if has_key(a:tokens, 'parameters') && !empty(a:tokens['parameters'])
+    if get(g:doge_javascript_settings, 'destructuring_props') == v:false
+      let l:filtered_params = []
+      for l:param in a:tokens['parameters']
+        if has_key(l:param, 'property') == v:false
+          call add(l:filtered_params, l:param)
+        endif
+      endfor
+      let a:tokens['parameters'] = l:filtered_params
+    endif
+  endif
+
   if has_key(a:tokens, 'returnType')
     if a:tokens['returnType'] ==# 'void'
       let a:tokens['returnType'] = ''

@@ -188,7 +188,7 @@ if [[ ! -f ./dist/index.js ]]; then
     -v "$PWD/tsconfig.json:/vim-doge/tsconfig.json" \
     -w /vim-doge "$DOGE_DOCKER_IMAGE" \
     npm run build
-  echo "[done] Building dist/index.js"
+  echo "[done] Building dist folder"
 fi
 
 file_number=0
