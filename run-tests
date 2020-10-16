@@ -200,7 +200,7 @@ for vim in $(docker run --rm $DOGE_DOCKER_IMAGE ls /vim-build/bin | grep '^neovi
   || ( [[ $vim =~ ^neovim-v0.4 ]] && ((run_neovim_04_tests)) ); then
     echo "Starting Vim: $vim..."
     file_number=$((file_number+1))
-    scripts/run-vader-tests $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
+    scripts/run-vader-tests.sh $verbose_flag "$vim" "$tests" > "$output_dir/$file_number" 2>&1 &
     pid_list="$pid_list $!"
   fi
 done
@@ -208,7 +208,7 @@ done
 if ((run_linter)); then
   echo "Starting Vint..."
   file_number=$((file_number+1))
-  scripts/run-vint > "$output_dir/$file_number" 2>&1 &
+  scripts/run-vint.sh > "$output_dir/$file_number" 2>&1 &
   pid_list="$pid_list $!"
 fi
 
