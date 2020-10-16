@@ -32,5 +32,9 @@ else
 fi
 
 echo "Downloading $VIM_DOGE_EXECUTABLE_URL..."
-curl -s $VIM_DOGE_EXECUTABLE_URL > $OUTFILE
-echo "Done downloading $VIM_DOGE_EXECUTABLE_URL"
+curl -L -s $VIM_DOGE_EXECUTABLE_URL > $OUTFILE
+echo "[Done] downloading $VIM_DOGE_EXECUTABLE_URL"
+
+"Setting permissions"
+chmod +x $OUTFILE
+"[Done] Setting permissions"
