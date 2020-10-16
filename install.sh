@@ -31,10 +31,10 @@ else
   VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-win.exe"
 fi
 
-echo "Downloading $VIM_DOGE_EXECUTABLE_URL..."
+echo "Downloading $VIM_DOGE_EXECUTABLE_URL"
 curl -L -s $VIM_DOGE_EXECUTABLE_URL > $OUTFILE
 echo "[Done] downloading $VIM_DOGE_EXECUTABLE_URL"
 
-"Setting permissions"
+echo "Setting permissions"
 chmod +x $ROOT_DIR/$OUTFILE
-"[Done] Setting permissions"
+echo "[Done] Setting permissions"
