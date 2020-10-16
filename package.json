@@ -5,6 +5,7 @@
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
     "release": "release-it",
+    "release:beta": "release-it --preRelease=beta",
     "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
