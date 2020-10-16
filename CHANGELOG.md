@@ -1,3 +1,9 @@
+## [3.1.2-beta.3](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.2...3.1.2-beta.3) (2020-10-16)
+
+### Bug Fixes
+
+- add ROOT_DIR in front of OUTFILE path ([c927d44](https://github.com/kkoomen/vim-doge/commit/c927d4492ae5b081b481274a2c8bcd51a0a99544))
+
 ## 3.1.2-beta.2 (2020-10-16)
 
 ### Bug Fixes
