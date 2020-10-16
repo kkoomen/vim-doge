@@ -7,7 +7,7 @@ set -u
 
 [[ -e ./bin/vim-doge ]] && exit 0
 
-ROOT_DIR="$(cd "$(dirname "$0")"; pwd -P)/../"
+ROOT_DIR="$(cd "$(dirname "$0")"; pwd -P)/.."
 cd $ROOT_DIR
 mkdir ./bin
 
