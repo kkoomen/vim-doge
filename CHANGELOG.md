@@ -1,3 +1,10 @@
+## [3.1.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.1.2-beta.0...v3.1.2-beta.1) (2020-10-16)
+
+### Features
+
+- optimise install + build scripts ([06db921](https://github.com/kkoomen/vim-doge/commit/06db921d560eea236c80be31fd78318c4b989a2b))
+- update doge#install() ([fdfcd2f](https://github.com/kkoomen/vim-doge/commit/fdfcd2f266c7e46214f1fb7d6845b9b29a455136))
+
 ## [3.1.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.1.1...v3.1.2-beta.0) (2020-10-16)
 
 ### Features
