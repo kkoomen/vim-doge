@@ -181,7 +181,7 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
-  call execute('!' . g:doge_dir . '/install.sh')
+  call execute('!' . g:doge_dir . '/scripts/install')
 endfunction
 
 let &cpoptions = s:save_cpo

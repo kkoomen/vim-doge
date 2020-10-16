@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
-    "build:binary": "npm run prebuild && ncc build ./src/index.ts -m -o dist && ./build.sh",
+    "build:binary": "npm run prebuild && ncc build ./src/index.ts -m -o dist && ./scripts/build",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
   },
