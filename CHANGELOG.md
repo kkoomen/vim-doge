@@ -1,3 +1,9 @@
+## [3.1.2-beta.4](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.3...3.1.2-beta.4) (2020-10-16)
+
+### Bug Fixes
+
+- add missing echo in install script ([35bad8e](https://github.com/kkoomen/vim-doge/commit/35bad8ec399bfc45f785d7081f0262c41491240b))
+
 ## [3.1.2-beta.3](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.2...3.1.2-beta.3) (2020-10-16)
 
 ### Bug Fixes
