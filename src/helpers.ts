@@ -10,14 +10,6 @@ import TypeScript from 'tree-sitter-typescript/typescript';
 import { Language } from './constants';
 import { ValueOf } from './types';
 
-export function loadPackage(packageName: string): any {
-  try {
-    return require(packageName);
-  } catch (err) {
-    return null;
-  }
-}
-
 export function loadParserPackage(language: ValueOf<Language>): any {
   const languages: Record<string, string> = {
     [Language.PHP]: PHP,

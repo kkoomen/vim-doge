@@ -82,7 +82,7 @@ endfunction
 " @public
 " Run a parser which will produce all the parameters and return the output.
 function! doge#helpers#parser(args) abort
-  let l:script_path = g:doge_dir . '/index-macos'
+  let l:script_path = g:doge_dir . '/bin/vim-doge'
   if filereadable(l:script_path) != v:false
     let l:cursor_pos = getpos('.')
     let l:current_line = l:cursor_pos[1]

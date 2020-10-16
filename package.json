@@ -4,15 +4,21 @@
   "version": "3.1.1",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "preversion": "npm run format && npm run lint",
-    "prebuild": "rimraf dist/*",
+    "release": "release-it",
+    "prebuild": "rimraf dist",
     "watch": "tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
-    "build:binary": "pkg dist/index.js -t node10-linux-x64,node10-macos-x64,node10-win-x64",
-    "start": "npm run build",
+    "build:binary": "npm run prebuild && ncc build ./src/index.ts -m -o dist && ./build.sh",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
+  },
+  "bin": {
+    "vim-doge": "./dist/index.js"
+  },
+  "pkg": {
+    "assets": [
+      "dist/build/Release/*.node"
+    ]
   },
   "repository": {
     "type": "git",
@@ -59,9 +65,11 @@
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^9.1.2",
+    "@release-it/conventional-changelog": "^2.0.0",
     "@types/node": "^14.11.2",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
+    "@vercel/ncc": "^0.24.1",
     "conventional-changelog-cli": "^2.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.10.0",
@@ -73,6 +81,7 @@
     "nodemon": "^2.0.4",
     "pkg": "^4.4.9",
     "prettier": "^2.1.2",
+    "release-it": "^14.1.0",
     "rimraf": "^3.0.2",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"

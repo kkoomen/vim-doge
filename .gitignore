@@ -4,6 +4,7 @@
 # Compiled output
 /dist
 /node_modules
+/bin
 __pycache__/
 *.tsbuildinfo
 

@@ -5,25 +5,22 @@
 set -e
 set -u
 
+[[ -e ./bin/vim-doge ]] && exit 0
+
 ROOT_DIR="`dirname \"$0\"`"
 cd $ROOT_DIR
+mkdir ./bin
 
-parsers=($*)
-packages=()
-for lang in "${parsers[@]}"; do
-  package_name="tree-sitter-$lang"
-  echo "Preparing to install package: $package_name"
-  packages+=($package_name)
-done
+os="$(uname)"
+outfile="./bin/vim-doge"
 
-if [[ ! -d ./node_packages ]]; then
-  npm i --only=production --no-save
-fi
-
-if [[ "${packages[@]}" != "" ]]; then
-  npm i --no-save ${packages[@]}
-fi
-
-if [[ ! -f ./dist/index.js ]]; then
-  npm run build
+if [[ $os == "Darwin" ]]; then
+  echo "TODO: macos"
+  # curl "macos" > $outfile
+elif [[ $os == "Linux" ]]; then
+  echo "TODO: linux"
+  # curl "linux" > $outfile
+else
+  echo "TODO: windows"
+  # curl "windows" > $outfile
 fi

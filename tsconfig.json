@@ -11,6 +11,7 @@
     "sourceMap": true,
     "outDir": "./dist",
     "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "baseUrl": "./"
   },
   "include": ["src"],
