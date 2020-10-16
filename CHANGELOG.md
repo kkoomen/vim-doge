@@ -1,3 +1,10 @@
+## [3.1.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.1.1...v3.1.2-beta.0) (2020-10-16)
+
+### Features
+
+- add initial setup ([bf7745b](https://github.com/kkoomen/vim-doge/commit/bf7745b1e32caa34bb4565a28cde868b9850f413))
+- add proper build flow into single binary; add release-it config ([17b42dc](https://github.com/kkoomen/vim-doge/commit/17b42dc1223bec4e697afcedf73ad2e8fdf69c61))
+
 ## [3.1.1](https://github.com/kkoomen/vim-doge/compare/v3.1.0...v3.1.1) (2020-10-13)
 
 ### Features
