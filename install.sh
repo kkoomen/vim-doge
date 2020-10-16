@@ -12,7 +12,7 @@ cd $ROOT_DIR
 mkdir ./bin
 
 OS="$(uname)"
-OUTFILE="./bin/vim-doge"
+OUTFILE="bin/vim-doge"
 
 if [[ "$OS" == 'Linux' ]]; then
   SED_EXTENDED='-r'
@@ -36,5 +36,5 @@ curl -L -s $VIM_DOGE_EXECUTABLE_URL > $OUTFILE
 echo "[Done] downloading $VIM_DOGE_EXECUTABLE_URL"
 
 "Setting permissions"
-chmod +x $OUTFILE
+chmod +x $ROOT_DIR/$OUTFILE
 "[Done] Setting permissions"
