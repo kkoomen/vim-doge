@@ -1,3 +1,10 @@
+## [3.1.2-beta.5](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.4...3.1.2-beta.5) (2020-10-16)
+
+### Bug Fixes
+
+- rename install/build scripts and remove most logging ([ca3338b](https://github.com/kkoomen/vim-doge/commit/ca3338b8f3697037904dcdeddf1bf88dd7ed6481))
+- resolve ROOT_DIR properly ([271e457](https://github.com/kkoomen/vim-doge/commit/271e457ca3f552741617273eef1f3f3ddc958547))
+
 ## [3.1.2-beta.4](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.3...3.1.2-beta.4) (2020-10-16)
 
 ### Bug Fixes
