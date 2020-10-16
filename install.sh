@@ -7,20 +7,30 @@ set -u
 
 [[ -e ./bin/vim-doge ]] && exit 0
 
-ROOT_DIR="`dirname \"$0\"`"
+ROOT_DIR="$(dirname \"$0\")"
 cd $ROOT_DIR
 mkdir ./bin
 
-os="$(uname)"
-outfile="./bin/vim-doge"
+OS="$(uname)"
+OUTFILE="./bin/vim-doge"
 
-if [[ $os == "Darwin" ]]; then
-  echo "TODO: macos"
-  # curl "macos" > $outfile
-elif [[ $os == "Linux" ]]; then
-  echo "TODO: linux"
-  # curl "linux" > $outfile
+if [[ "$OS" == 'Linux' ]]; then
+  SED_EXTENDED='-r'
+elif [[ "$OS" == 'Darwin' ]]; then
+  SED_EXTENDED='-E'
+fi;
+PKG_VERSION=$(grep -m 1 "\"version\"" $ROOT_DIR/package.json | sed ${SED_EXTENDED} 's/^ *//;s/.*: *"//;s/",?//')
+RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$PKG_VERSION"
+echo "$RELEASE_URL"
+
+if [[ $OS == 'Darwin' ]]; then
+  VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-macos"
+elif [[ $OS == 'Linux' ]]; then
+  VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-linux"
 else
-  echo "TODO: windows"
-  # curl "windows" > $outfile
+  VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-win.exe"
 fi
+
+echo "Downloading $VIM_DOGE_EXECUTABLE_URL..."
+curl -s $VIM_DOGE_EXECUTABLE_URL > $OUTFILE
+echo "Done downloading $VIM_DOGE_EXECUTABLE_URL"
