@@ -1,3 +1,9 @@
+## [3.1.2-beta.6](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.5...3.1.2-beta.6) (2020-10-16)
+
+### Bug Fixes
+
+- add extensions to ensure dirname commands works ([0e55767](https://github.com/kkoomen/vim-doge/commit/0e557675554392721097a060efb185eaa6b3f072))
+
 ## [3.1.2-beta.5](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.4...3.1.2-beta.5) (2020-10-16)
 
 ### Bug Fixes
