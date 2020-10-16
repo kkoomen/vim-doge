@@ -1,3 +1,9 @@
+## [3.1.2-beta.7](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.6...3.1.2-beta.7) (2020-10-16)
+
+### Bug Fixes
+
+- resolve ROOT_DIR properly ([270c41b](https://github.com/kkoomen/vim-doge/commit/270c41b2d490ecc08e4faa3cee83661ba33885e9))
+
 ## [3.1.2-beta.6](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.5...3.1.2-beta.6) (2020-10-16)
 
 ### Bug Fixes
