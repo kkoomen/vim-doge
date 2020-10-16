@@ -1,3 +1,10 @@
+## 3.1.2-beta.2 (2020-10-16)
+
+### Bug Fixes
+
+- resolve ROOT_DIR properly in build/install scripts ([4d45442](https://github.com/kkoomen/vim-doge/commit/4d45442f29c3fd0c342ae6e89a8e2fa4c0185b04))
+- use realpath instead of dirname in setup/build scripts ([c2ac7da](https://github.com/kkoomen/vim-doge/commit/c2ac7dabccf68f885dc0396bb744241e466f9436))
+
 ## [3.1.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.1.2-beta.0...v3.1.2-beta.1) (2020-10-16)
 
 ### Features
