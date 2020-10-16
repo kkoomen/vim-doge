@@ -5,7 +5,7 @@
 set -e
 set -u
 
-ROOT_DIR="`dirname \"$0\"`"
+ROOT_DIR="$(realpath \"$0\")"
 
 if [[ ! -d ./pkg/lib-es5 ]]; then
   cd $ROOT_DIR/pkg
