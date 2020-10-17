@@ -1,3 +1,9 @@
+## [3.2.2](https://github.com/kkoomen/vim-doge/compare/3.2.1...3.2.2) (2020-10-17)
+
+### Bug Fixes
+
+- add staged .version file after version bump ([ead9864](https://github.com/kkoomen/vim-doge/commit/ead9864e1529dc2f06987423939954f88d2e6748))
+
 ## [3.2.1](https://github.com/kkoomen/vim-doge/compare/3.2.0...3.2.1) (2020-10-17)
 
 ### Features
