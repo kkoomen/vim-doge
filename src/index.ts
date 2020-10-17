@@ -20,7 +20,7 @@ if (languageParser) {
   // parser instead of the TSX parser.
   const sourceCode = fs
     .readFileSync(filepath, { encoding: 'utf8', flag: 'r' })
-    .replace(/(?:<?[^>]+>(.*)<\/[^>]+>|<[^>]+\/>)/g, '$1');
+    .replace(/(?:<[^>]+>(.*)<\/[^>]+>|<[^>]+\/>)/g, '$1');
 
   const tree = parser.parse(sourceCode);
   const parserService = getParserService(language, [
