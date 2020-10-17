@@ -27,7 +27,7 @@ let g:doge_mapping = '<Leader>f'
 **To Reproduce**
 
 <!--
-If you don't provide a minimal vimrc then we will close your issue very quickly.
+If you can't reproduce the bug with a minimum vimrc then we might close your issue immediately.
 -->
 
 - Create file `doge.vim` with:
@@ -62,16 +62,4 @@ If applicable, add screenshots to help explain your problem.
 
 <!--
 Run `vim --version` on the command-line and paste the output here.
--->
-
-**Output of `npm --version`**
-
-<!--
-Run `npm --version` on the command-line and paste the output here.
--->
-
-**Output of `node --version`**
-
-<!--
-Run `node --version` on the command-line and paste the output here.
 -->
