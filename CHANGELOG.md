@@ -1,3 +1,9 @@
+## [3.1.2-beta.8](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.7...3.1.2-beta.8) (2020-10-17)
+
+### Bug Fixes
+
+- adjust logic in doge#helpers#parser() to allow local build + prod build ([c3f5651](https://github.com/kkoomen/vim-doge/commit/c3f56511c4b20f5f433e4536b67b87eda8fb00b8))
+
 ## [3.1.2-beta.7](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.6...3.1.2-beta.7) (2020-10-16)
 
 ### Bug Fixes
