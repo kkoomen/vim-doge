@@ -3,7 +3,7 @@
     "before:init": ["npm run format", "npm run lint"],
     "after:bump": [
       "npm run build:binary",
-      "echo v${version} > .version && git add .version"
+      "echo ${version} > .version && git add .version"
     ]
   },
   "git": {
