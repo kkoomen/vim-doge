@@ -1,3 +1,4 @@
 [submodule "pkg"]
 	path = pkg
 	url = https://github.com/geekuillaume/pkg
+	shallow = true
