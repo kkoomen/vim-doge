@@ -1,3 +1,9 @@
+## [3.2.7](https://github.com/kkoomen/vim-doge/compare/3.2.6...3.2.7) (2020-10-17)
+
+### Bug Fixes
+
+- strip HTML tags properly ([#110](https://github.com/kkoomen/vim-doge/issues/110)) ([8e55d37](https://github.com/kkoomen/vim-doge/commit/8e55d378b8c27619867fb8736f9643f01c10ab2a))
+
 ## [3.2.6](https://github.com/kkoomen/vim-doge/compare/3.2.5...3.2.6) (2020-10-17)
 
 ### Bug Fixes
