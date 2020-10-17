@@ -1,3 +1,9 @@
+## 3.1.2-beta.9 (2020-10-17)
+
+### Bug Fixes
+
+- remove redundant ROOT_DIR in variable to ensure chmod executes correctly ([f84cb9d](https://github.com/kkoomen/vim-doge/commit/f84cb9d36dc9d35ef042041102216be6822a47ab))
+
 ## [3.1.2-beta.8](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.7...3.1.2-beta.8) (2020-10-17)
 
 ### Bug Fixes
