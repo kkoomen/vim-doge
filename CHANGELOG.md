@@ -1,3 +1,9 @@
+## [3.2.9](https://github.com/kkoomen/vim-doge/compare/3.2.8...3.2.9) (2020-10-17)
+
+### Bug Fixes
+
+- remove question-mark in regex ([#110](https://github.com/kkoomen/vim-doge/issues/110)) ([6448da8](https://github.com/kkoomen/vim-doge/commit/6448da8ccc4feb7e77f76572141e1a04af491dd3))
+
 ## [3.2.8](https://github.com/kkoomen/vim-doge/compare/3.2.7...3.2.8) (2020-10-17)
 
 ### Bug Fixes
