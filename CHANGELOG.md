@@ -1,3 +1,9 @@
+## [3.2.1](https://github.com/kkoomen/vim-doge/compare/3.2.0...3.2.1) (2020-10-17)
+
+### Features
+
+- add .version file for install script instead of stripping it from package.json ([e3cc326](https://github.com/kkoomen/vim-doge/commit/e3cc3264034ea22c60b670571ed4bf0488c275cd))
+
 # [3.2.0](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.9...3.2.0) (2020-10-17)
 
 ### Features
