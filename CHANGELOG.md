@@ -1,3 +1,9 @@
+## [3.2.5](https://github.com/kkoomen/vim-doge/compare/3.2.4...3.2.5) (2020-10-17)
+
+### Bug Fixes
+
+- remove ./bin/vim-doge before installing ([35b7c9e](https://github.com/kkoomen/vim-doge/commit/35b7c9eb179f9106e6abd6d4c298e3e64bf3afca))
+
 ## [3.2.4](https://github.com/kkoomen/vim-doge/compare/3.2.3...3.2.4) (2020-10-17)
 
 ### Bug Fixes
