@@ -1,3 +1,11 @@
+# [3.2.0](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.9...3.2.0) (2020-10-17)
+
+### Features
+
+- remove support for g:doge_parsers ([0159f3e](https://github.com/kkoomen/vim-doge/commit/0159f3e53b8110a04926536544b5700567d4195c))
+
+## [3.1.1](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.9...3.2.0) (2020-10-13)
+
 ## 3.1.2-beta.9 (2020-10-17)
 
 ### Bug Fixes
