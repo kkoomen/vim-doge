@@ -1,8 +1,10 @@
 {
   "hooks": {
     "before:init": ["npm run format", "npm run lint"],
-    "after:bump": ["npm run build:binary", "echo v${version} > .version"],
-    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+    "after:bump": [
+      "npm run build:binary",
+      "echo v${version} > .version && git add .version"
+    ]
   },
   "git": {
     "commitMessage": "chore(release): v${version} :tada:",
