@@ -43,4 +43,3 @@ g:doge_enable_mappings	doge.txt	/*g:doge_enable_mappings*
 g:doge_mapping	doge.txt	/*g:doge_mapping*
 g:doge_mapping_comment_jump_backward	doge.txt	/*g:doge_mapping_comment_jump_backward*
 g:doge_mapping_comment_jump_forward	doge.txt	/*g:doge_mapping_comment_jump_forward*
-g:doge_parsers	doge.txt	/*g:doge_parsers*
