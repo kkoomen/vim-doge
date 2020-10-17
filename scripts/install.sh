@@ -5,7 +5,10 @@
 set -e
 set -u
 
-[[ -e ./bin/vim-doge ]] && exit 0
+if [[ -e ./bin/vim-doge ]]; then
+  rm -f ./bin/vim-doge
+fi
+
 
 ROOT_DIR="$(cd "$(dirname "$0")"; pwd -P)/.."
 cd $ROOT_DIR
