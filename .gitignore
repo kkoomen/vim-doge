@@ -5,6 +5,7 @@
 /dist
 /node_modules
 /bin
+/build
 __pycache__/
 *.tsbuildinfo
 
