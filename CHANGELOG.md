@@ -1,3 +1,9 @@
+## [3.2.8](https://github.com/kkoomen/vim-doge/compare/3.2.7...3.2.8) (2020-10-17)
+
+### Bug Fixes
+
+- use correct regex for self-closing tag ([#110](https://github.com/kkoomen/vim-doge/issues/110)) ([96636f1](https://github.com/kkoomen/vim-doge/commit/96636f143fa02679a0e28958281e2188ab6f6900))
+
 ## [3.2.7](https://github.com/kkoomen/vim-doge/compare/3.2.6...3.2.7) (2020-10-17)
 
 ### Bug Fixes
