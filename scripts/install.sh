@@ -33,4 +33,4 @@ fi
 
 echo "Downloading $VIM_DOGE_EXECUTABLE_URL"
 curl -L $VIM_DOGE_EXECUTABLE_URL > $OUTFILE
-chmod +x $ROOT_DIR/$OUTFILE
+chmod +x $OUTFILE
