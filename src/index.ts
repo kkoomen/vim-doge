@@ -17,7 +17,7 @@ if (languageParser) {
   parser.setLanguage(languageParser);
 
   // Strip HTML from the source code to ensure we can still use the TypeScript
-  // parser instead of the JSX parser.
+  // parser instead of the TSX parser.
   const sourceCode = fs
     .readFileSync(filepath, { encoding: 'utf8', flag: 'r' })
     .replace(/<\/?[^>]+(>|$)/g, '');
