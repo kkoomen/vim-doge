@@ -1,0 +1,22 @@
+# ==============================================================================
+# Functions that contain JSX.
+# ==============================================================================
+Given javascript (function that contains JSX):
+  const Test = ({ someVal }) => {
+    return <div>{true && someVal ? <small className="helper-text">{someVal}</small> : null}</div>;
+  };
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with a description and a @return tag):
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} [TODO:name] - [TODO:description]
+   * @param {[TODO:type]} [TODO:name].someVal - [TODO:description]
+   * @return {[TODO:type]} [TODO:description]
+   */
+  const Test = ({ someVal }) => {
+    return <div>{true && someVal ? <small className="helper-text">{someVal}</small> : null}</div>;
+  };
