@@ -1,3 +1,9 @@
+## [3.2.3](https://github.com/kkoomen/vim-doge/compare/3.2.2...3.2.3) (2020-10-17)
+
+### Bug Fixes
+
+- remove v prefix in version when downloading ([ffc583f](https://github.com/kkoomen/vim-doge/commit/ffc583fe68e030ab73f0791148c315e206504047))
+
 ## [3.2.2](https://github.com/kkoomen/vim-doge/compare/3.2.1...3.2.2) (2020-10-17)
 
 ### Bug Fixes
