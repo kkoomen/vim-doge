@@ -82,28 +82,31 @@ endfunction
 " @public
 " Run a parser which will produce all the parameters and return the output.
 function! doge#helpers#parser(args) abort
-  let l:script_path = g:doge_dir . '/bin/vim-doge'
-  if filereadable(l:script_path) != v:false
-    let l:cursor_pos = getpos('.')
-    let l:current_line = l:cursor_pos[1]
-    let l:tempfile = tempname()
-    keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
-    let l:args = [l:tempfile, b:doge_parser, l:current_line] + a:args
-    let l:result = system(l:script_path . ' ' . join(l:args, ' '))
+  for l:executable in ['/dist/index.js', '/bin/vim-doge', '/bin/vim-doge.exe']
+    let l:script_path = g:doge_dir . l:executable
+    if filereadable(resolve(l:script_path))
+      let l:cursor_pos = getpos('.')
+      let l:current_line = l:cursor_pos[1]
+      let l:tempfile = tempname()
+      keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
+      let l:args = [l:tempfile, b:doge_parser, l:current_line] + a:args
+      let l:cmd = fnamemodify(resolve(l:script_path), ':e') ==# 'js' ? 'node ' : ''
+      let l:result = system(l:cmd . l:script_path . ' ' . join(l:args, ' '))
 
-    try
-      if !empty(l:result)
-        return json_decode(l:result)
-      endif
-    catch /.*/
-      echo '[DoGe] ' . b:doge_parser . ' parser failed'
-      echo '[Doge] Exception: ' . v:exception
-      echo l:result
-    finally
-      call setpos('.', l:cursor_pos)
-      call delete(l:tempfile)
-    endtry
-  endif
+      try
+        if !empty(l:result)
+          return json_decode(l:result)
+        endif
+      catch /.*/
+        echo '[DoGe] ' . b:doge_parser . ' parser failed'
+        echo '[Doge] Exception: ' . v:exception
+        echo l:result
+      finally
+        call setpos('.', l:cursor_pos)
+        call delete(l:tempfile)
+      endtry
+    endif
+  endfor
 
   return 0
 endfunction

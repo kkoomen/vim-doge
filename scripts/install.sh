@@ -12,7 +12,7 @@ cd $ROOT_DIR
 mkdir ./bin
 
 OS="$(uname)"
-OUTFILE="bin/vim-doge"
+OUTFILE="$ROOT_DIR/bin/vim-doge"
 
 if [[ "$OS" == 'Linux' ]]; then
   SED_EXTENDED='-r'
@@ -21,7 +21,6 @@ elif [[ "$OS" == 'Darwin' ]]; then
 fi;
 PKG_VERSION=$(grep -m 1 "\"version\"" $ROOT_DIR/package.json | sed ${SED_EXTENDED} 's/^ *//;s/.*: *"//;s/",?//')
 RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$PKG_VERSION"
-echo "$RELEASE_URL"
 
 if [[ $OS == 'Darwin' ]]; then
   VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-macos"
@@ -29,6 +28,7 @@ elif [[ $OS == 'Linux' ]]; then
   VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-linux"
 else
   VIM_DOGE_EXECUTABLE_URL="$RELEASE_URL/vim-doge-win.exe"
+  OUTFILE="$OUTFILE.exe"
 fi
 
 echo "Downloading $VIM_DOGE_EXECUTABLE_URL"
