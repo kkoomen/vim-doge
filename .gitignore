@@ -6,6 +6,9 @@
 /node_modules
 /bin
 /build
+vim-doge-macos
+vim-doge-linux
+vim-doge-win.exe
 __pycache__/
 *.tsbuildinfo
 
