@@ -1,3 +1,9 @@
+## [3.2.4](https://github.com/kkoomen/vim-doge/compare/3.2.3...3.2.4) (2020-10-17)
+
+### Bug Fixes
+
+- use custom fork to ensure no unexpected breaking changes ([b460bcc](https://github.com/kkoomen/vim-doge/commit/b460bccb3ab288f3f081a05efb9406ed76ddaf0f))
+
 ## [3.2.3](https://github.com/kkoomen/vim-doge/compare/3.2.2...3.2.3) (2020-10-17)
 
 ### Bug Fixes
