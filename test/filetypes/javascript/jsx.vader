@@ -3,13 +3,19 @@
 # ==============================================================================
 Given javascript (function that contains JSX):
   const Test = ({ someVal }) => {
-    return <div>{true && someVal ? <small className="helper-text">{someVal}</small> : null}</div>;
+    return (
+      <div>
+        {true && someVal ? <small className="helper-text">{someVal}</small> : null}
+        <span />
+        <span />
+      </div>
+    );
   };
 
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with a description and a @return tag):
+Expect javascript (generated comment with a description, @param and @return tags):
   /**
    * [TODO:description]
    *
@@ -18,5 +24,11 @@ Expect javascript (generated comment with a description and a @return tag):
    * @return {[TODO:type]} [TODO:description]
    */
   const Test = ({ someVal }) => {
-    return <div>{true && someVal ? <small className="helper-text">{someVal}</small> : null}</div>;
+    return (
+      <div>
+        {true && someVal ? <small className="helper-text">{someVal}</small> : null}
+        <span />
+        <span />
+      </div>
+    );
   };
