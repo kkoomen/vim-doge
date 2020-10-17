@@ -32,14 +32,10 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 
 - [Table of Contents](#table-of-contents)
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
-- [Migrating from v2 to v3](#migrating-from-v2-to-v3)
 - [Getting started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
 - [Configuration](#configuration)
   - [Choosing a different doc standard](#choosing-a-different-doc-standard)
   - [Options](#options)
-    - [`g:doge_parsers`](#gdoge_parsers)
     - [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     - [`g:doge_mapping`](#gdoge_mapping)
     - [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
@@ -87,37 +83,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 
-# Migrating from v2 to v3
-
-⚠️ If you've used DoGe v2 or less and upgraded to v3 then you are required to have
-NodeJS + NPM on your local machine in order to use this plugin, because of the
-new usage of the [tree-sitter](https://tree-sitter.github.io/tree-sitter/)
-parsers.
-
-If you just want to use v3, then read the [Getting started](#getting-started).
-
-If you feel more comfortable to use v2, then you can still do so by using
-[v2.8.0](https://github.com/kkoomen/vim-doge/tree/v2.8.0). **Please be aware that
-v2 might contain bugs and will not be maintained anymore.**
-
-Using Plug:
-
-- `Plug 'kkoomen/vim-doge', { 'tag': 'v2.8.0' }`
-
 # Getting started
-
-## Prerequisites
-
-Make sure your local system contains the following prerequisites:
-
-- [NodeJS](https://nodejs.org)
-- [NPM](https://www.npmjs.com)
-
-## Installation
-
-**NOTE:** If you only want to use a specific amount of languages, then make sure
-you use [`g:doge_parsers`](#gdoge_parsers) in your `.vimrc` before running
-`doge#install()`.
 
 Using plug:
 
@@ -125,12 +91,12 @@ Using plug:
 
 Using vim-pack:
 
-- `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
+- `git clone --recursive --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/pack/*/start/vim-doge`
 - Open Vim and run `:call doge#install()`
 
 Using Pathogen:
 
-- `git clone --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
+- `git clone --recursive --depth 1 https://github.com/kkoomen/vim-doge ~/.vim/bundle/vim-doge`
 - Open Vim and run `:call doge#install()`
 
 Using Vundle:
@@ -188,29 +154,6 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                   |
 
 ## Options
-
-### `g:doge_parsers`
-
-Default:
-
-```
-Default: [
-  'bash',
-  'c',
-  'cpp',
-  'java', // includes groovy
-  'lua',
-  'php',
-  'python',
-  'ruby',
-  'typescript', // used for JavaScript, ES6, FlowJS and NodeJS
-]
-```
-
-Defines the parsers that are enabled, which is useful if you only want to use
-specific languages. This also decreases installation time.
-
-**NOTE:** By default, all parsers will be installed.
 
 ### `g:doge_enable_mappings`
 

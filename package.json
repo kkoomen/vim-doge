@@ -1,17 +1,25 @@
 {
   "private": true,
   "name": "vim-doge",
-  "version": "3.1.1",
+  "version": "3.1.2-beta.9",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
-    "preversion": "npm run format && npm run lint",
-    "prebuild": "rimraf dist/*",
-    "watch": "tsc -p tsconfig.json --watch true --sourceMap",
+    "release": "release-it",
+    "release:beta": "release-it --preRelease=beta",
+    "prebuild": "rimraf dist/* && rm -f ./bin/vim-doge && ln -s ../dist/index.js ./bin/vim-doge",
+    "watch": "npm run prebuild && tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
-    "start": "npm run build",
+    "build:binary": "rimraf build && ncc build ./src/index.ts -m -o build && ./scripts/build.sh",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
+  },
+  "bin": {
+    "vim-doge": "./build/index.js"
+  },
+  "pkg": {
+    "assets": [
+      "build/build/Release/*.node"
+    ]
   },
   "repository": {
     "type": "git",
@@ -44,16 +52,25 @@
     ]
   },
   "dependencies": {
-    "rimraf": "^3.0.2",
     "tree-sitter": "^0.17.0",
-    "typescript": "^4.0.3"
+    "tree-sitter-bash": "^0.16.1",
+    "tree-sitter-c": "^0.16.1",
+    "tree-sitter-cpp": "^0.16.0",
+    "tree-sitter-java": "^0.16.0",
+    "tree-sitter-lua": "^1.6.1",
+    "tree-sitter-php": "^0.16.2",
+    "tree-sitter-python": "^0.16.1",
+    "tree-sitter-ruby": "^0.16.2",
+    "tree-sitter-typescript": "^0.16.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^9.1.2",
+    "@release-it/conventional-changelog": "^2.0.0",
     "@types/node": "^14.11.2",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
+    "@vercel/ncc": "^0.24.1",
     "conventional-changelog-cli": "^2.1.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.10.0",
@@ -63,7 +80,11 @@
     "husky": "^4.2.5",
     "lint-staged": "^10.4.0",
     "nodemon": "^2.0.4",
+    "pkg": "^4.4.9",
     "prettier": "^2.1.2",
-    "ts-node": "^9.0.0"
+    "release-it": "^14.1.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
   }
 }

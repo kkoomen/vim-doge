@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "before:init": ["npm run format", "npm run lint"],
+    "after:bump": "npm run build:binary",
+    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  },
+  "git": {
+    "commitMessage": "chore(release): v${version} :tada:",
+    "tagAnnotation": "Release v${version}"
+  },
+  "npm": {
+    "publish": false
+  },
+  "github": {
+    "release": true,
+    "releaseName": "Release v${version}",
+    "assets": ["./bin/vim-doge-*"]
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": "angular",
+      "infile": "CHANGELOG.md"
+    }
+  }
+}

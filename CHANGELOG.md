@@ -1,3 +1,67 @@
+## 3.1.2-beta.9 (2020-10-17)
+
+### Bug Fixes
+
+- remove redundant ROOT_DIR in variable to ensure chmod executes correctly ([f84cb9d](https://github.com/kkoomen/vim-doge/commit/f84cb9d36dc9d35ef042041102216be6822a47ab))
+
+## [3.1.2-beta.8](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.7...3.1.2-beta.8) (2020-10-17)
+
+### Bug Fixes
+
+- adjust logic in doge#helpers#parser() to allow local build + prod build ([c3f5651](https://github.com/kkoomen/vim-doge/commit/c3f56511c4b20f5f433e4536b67b87eda8fb00b8))
+
+## [3.1.2-beta.7](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.6...3.1.2-beta.7) (2020-10-16)
+
+### Bug Fixes
+
+- resolve ROOT_DIR properly ([270c41b](https://github.com/kkoomen/vim-doge/commit/270c41b2d490ecc08e4faa3cee83661ba33885e9))
+
+## [3.1.2-beta.6](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.5...3.1.2-beta.6) (2020-10-16)
+
+### Bug Fixes
+
+- add extensions to ensure dirname commands works ([0e55767](https://github.com/kkoomen/vim-doge/commit/0e557675554392721097a060efb185eaa6b3f072))
+
+## [3.1.2-beta.5](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.4...3.1.2-beta.5) (2020-10-16)
+
+### Bug Fixes
+
+- rename install/build scripts and remove most logging ([ca3338b](https://github.com/kkoomen/vim-doge/commit/ca3338b8f3697037904dcdeddf1bf88dd7ed6481))
+- resolve ROOT_DIR properly ([271e457](https://github.com/kkoomen/vim-doge/commit/271e457ca3f552741617273eef1f3f3ddc958547))
+
+## [3.1.2-beta.4](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.3...3.1.2-beta.4) (2020-10-16)
+
+### Bug Fixes
+
+- add missing echo in install script ([35bad8e](https://github.com/kkoomen/vim-doge/commit/35bad8ec399bfc45f785d7081f0262c41491240b))
+
+## [3.1.2-beta.3](https://github.com/kkoomen/vim-doge/compare/3.1.2-beta.2...3.1.2-beta.3) (2020-10-16)
+
+### Bug Fixes
+
+- add ROOT_DIR in front of OUTFILE path ([c927d44](https://github.com/kkoomen/vim-doge/commit/c927d4492ae5b081b481274a2c8bcd51a0a99544))
+
+## 3.1.2-beta.2 (2020-10-16)
+
+### Bug Fixes
+
+- resolve ROOT_DIR properly in build/install scripts ([4d45442](https://github.com/kkoomen/vim-doge/commit/4d45442f29c3fd0c342ae6e89a8e2fa4c0185b04))
+- use realpath instead of dirname in setup/build scripts ([c2ac7da](https://github.com/kkoomen/vim-doge/commit/c2ac7dabccf68f885dc0396bb744241e466f9436))
+
+## [3.1.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.1.2-beta.0...v3.1.2-beta.1) (2020-10-16)
+
+### Features
+
+- optimise install + build scripts ([06db921](https://github.com/kkoomen/vim-doge/commit/06db921d560eea236c80be31fd78318c4b989a2b))
+- update doge#install() ([fdfcd2f](https://github.com/kkoomen/vim-doge/commit/fdfcd2f266c7e46214f1fb7d6845b9b29a455136))
+
+## [3.1.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.1.1...v3.1.2-beta.0) (2020-10-16)
+
+### Features
+
+- add initial setup ([bf7745b](https://github.com/kkoomen/vim-doge/commit/bf7745b1e32caa34bb4565a28cde868b9850f413))
+- add proper build flow into single binary; add release-it config ([17b42dc](https://github.com/kkoomen/vim-doge/commit/17b42dc1223bec4e697afcedf73ad2e8fdf69c61))
+
 ## [3.1.1](https://github.com/kkoomen/vim-doge/compare/v3.1.0...v3.1.1) (2020-10-13)
 
 ### Features
