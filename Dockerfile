@@ -28,16 +28,6 @@ RUN git clone https://github.com/junegunn/vader.vim vader \
 RUN mkdir /vim-doge
 WORKDIR /vim-doge
 COPY ./package*.json ./
-RUN npm i --only=production --no-save
-RUN npm i --no-save tree-sitter \
-  tree-sitter-bash \
-  tree-sitter-c \
-  tree-sitter-cpp \
-  tree-sitter-java \
-  tree-sitter-lua \
-  tree-sitter-php \
-  tree-sitter-python \
-  tree-sitter-ruby \
-  tree-sitter-typescript
+RUN npm install --no-save
 
 CMD ["/bin/bash"]

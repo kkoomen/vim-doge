@@ -6,11 +6,19 @@ set -e
 set -u
 
 ROOT_DIR="$(cd "$(dirname "$0")"; pwd -P)/.."
+TARGET="$1"
 
-if [[ ! -d ./pkg/lib-es5 ]]; then
+if [[ ! -d $ROOT_DIR/pkg/lib-es5 ]]; then
   cd $ROOT_DIR/pkg
-  yarn && yarn prepare
+  npm install --no-save && npm run prepare
 fi
 
 cd $ROOT_DIR
-node ./pkg/lib-es5/bin.js . -t node14-linux-x64,node14-macos-x64,node14-win-x64 --out-path ./bin
+
+if [[ "$TARGET" == "linux" ]]; then
+  BUILD_TARGETS="node14-linux-x64"
+else
+  BUILD_TARGETS="node14-linux-x64,node14-macos-x64,node14-win-x64"
+fi
+node $ROOT_DIR/pkg/lib-es5/bin.js . -t "$BUILD_TARGETS" --out-path $ROOT_DIR/bin
+chmod +x $ROOT_DIR/bin/vim-doge*
