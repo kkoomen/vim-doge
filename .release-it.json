@@ -4,7 +4,8 @@
     "after:bump": [
       "npm run build:binary",
       "echo v${version} > .version && git add .version"
-    ]
+    ],
+    "after:release": "rm -f ./bin/vim-doge-*.tar.gz"
   },
   "git": {
     "commitMessage": "chore(release): v${version} :tada:",
