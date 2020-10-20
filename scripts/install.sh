@@ -12,7 +12,7 @@ fi
 
 ROOT_DIR=$(realpath "$(cd "$(dirname "$0")"; pwd -P)/..")
 cd $ROOT_DIR
-mkdir ./bin
+[[ ! -d ./bin ]] && mkdir ./bin
 
 OS="$(uname)"
 OUTFILE="$ROOT_DIR/bin/vim-doge"
