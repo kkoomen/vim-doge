@@ -32,13 +32,6 @@ fi
 echo "Downloading $VIM_DOGE_EXECUTABLE_URL"
 curl -L --progress-bar \
     --fail \
-    --connect-timeout 30 \
-    --max-time 10 \
-    --retry 300 \
-    --retry-delay 5 \
-    --retry-max-time 40 \
-    --retry-connrefused \
-    -C - \
     --output "$OUTFILE" \
     $VIM_DOGE_EXECUTABLE_URL
 chmod +x $OUTFILE
