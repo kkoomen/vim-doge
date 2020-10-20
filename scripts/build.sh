@@ -6,7 +6,6 @@ set -e
 set -u
 
 ROOT_DIR="$(cd "$(dirname "$0")"; pwd -P)/.."
-TARGET="${1:-}"
 
 if [[ ! -d $ROOT_DIR/pkg/lib-es5 ]]; then
   cd $ROOT_DIR/pkg
@@ -15,10 +14,6 @@ fi
 
 cd $ROOT_DIR
 
-if [[ "$TARGET" == "linux" ]]; then
-  BUILD_TARGETS="node14-linux-x64"
-else
-  BUILD_TARGETS="node14-linux-x64,node14-macos-x64,node14-win-x64"
-fi
+BUILD_TARGETS="node14-linux-x64,node14-macos-x64,node14-win-x64"
 node $ROOT_DIR/pkg/lib-es5/bin.js . -t "$BUILD_TARGETS" --out-path $ROOT_DIR/bin
 chmod +x $ROOT_DIR/bin/vim-doge*
