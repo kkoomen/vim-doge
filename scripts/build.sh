@@ -22,7 +22,7 @@ chmod +x $ROOT_DIR/bin/vim-doge*
 
 # Archive the binaries.
 cd $ROOT_DIR/bin
-rm -f $ROOT_DIR/bin/vim-doge-{linux,macos,win.exe}.tar.gz
+rm -f ./vim-doge-{linux,macos,win.exe}.tar.gz
 for file in ./vim-doge-{linux,macos,win.exe}; do
   filename=$(basename "$file")
   echo "==> Archiving $filename -> $filename.tar.gz"
