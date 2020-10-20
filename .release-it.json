@@ -17,7 +17,7 @@
   "github": {
     "release": true,
     "releaseName": "Release v${version}",
-    "assets": ["./bin/vim-doge-*"]
+    "assets": ["./bin/vim-doge-*.tar.gz"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
