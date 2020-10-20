@@ -1,3 +1,9 @@
+# [3.3.0](https://github.com/kkoomen/vim-doge/compare/v3.2.10...v3.3.0) (2020-10-20)
+
+### Features
+
+- archive binaries in builds for faster downloads ([42e92f6](https://github.com/kkoomen/vim-doge/commit/42e92f620ade9a472b8d08b4a71701112b5447e9))
+
 # 3.3.0 (2020-10-20)
 
 ### Features
