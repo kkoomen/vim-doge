@@ -1,3 +1,9 @@
+## [3.3.1](https://github.com/kkoomen/vim-doge/compare/v3.3.0...v3.3.1) (2020-10-20)
+
+### Bug Fixes
+
+- **install.sh:** Only make dir when it does not exists ([#113](https://github.com/kkoomen/vim-doge/issues/113)) ([3006c7b](https://github.com/kkoomen/vim-doge/commit/3006c7b4027d380e86c40a9d506d98035d1dca05))
+
 # [3.3.0](https://github.com/kkoomen/vim-doge/compare/v3.2.10...v3.3.0) (2020-10-20)
 
 ### Features
