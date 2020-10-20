@@ -1,3 +1,9 @@
+## [3.2.10](https://github.com/kkoomen/vim-doge/compare/3.2.9...v3.2.10) (2020-10-20)
+
+### Bug Fixes
+
+- **typescript:** use TSX parser to support JSX/TSX in JS/TS ([#110](https://github.com/kkoomen/vim-doge/issues/110)) ([60cbfe7](https://github.com/kkoomen/vim-doge/commit/60cbfe73d894488353ff335aee8e58b49be123ba))
+
 ## [3.2.9](https://github.com/kkoomen/vim-doge/compare/3.2.8...3.2.9) (2020-10-17)
 
 ### Bug Fixes
