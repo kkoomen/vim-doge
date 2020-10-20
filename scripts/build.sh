@@ -6,7 +6,7 @@ set -e
 set -u
 
 ROOT_DIR="$(cd "$(dirname "$0")"; pwd -P)/.."
-TARGET="$1"
+TARGET="${1:-}"
 
 if [[ ! -d $ROOT_DIR/pkg/lib-es5 ]]; then
   cd $ROOT_DIR/pkg

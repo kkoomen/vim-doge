@@ -6,7 +6,7 @@ import Lua from 'tree-sitter-lua';
 import PHP from 'tree-sitter-php';
 import Python from 'tree-sitter-python';
 import Ruby from 'tree-sitter-ruby';
-import TypeScript from 'tree-sitter-typescript/typescript';
+import TypeScript from 'tree-sitter-typescript/tsx';
 import { Language } from './constants';
 import { ValueOf } from './types';
 
