@@ -5,7 +5,7 @@
 set -e
 set -u
 
-ROOT_DIR=$(realpath "$(cd "$(dirname "$0")"; pwd -P)/..")
+ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 
 # Build the pkg lib prerequisites if needed.
 if [[ ! -d $ROOT_DIR/pkg/lib-es5 ]]; then
