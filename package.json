@@ -4,8 +4,9 @@
   "version": "3.3.1",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
+    "prerelease": "./scripts/release.sh",
     "release": "release-it",
-    "release:beta": "release-it --preRelease=beta",
+    "release:beta": "npm run prerelease && release-it --preRelease=beta",
     "prebuild": "rimraf dist/* && rm -f ./bin/vim-doge && ln -s ../dist/index.js ./bin/vim-doge",
     "watch": "npm run prebuild && tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
