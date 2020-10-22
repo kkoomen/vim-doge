@@ -1,12 +1,7 @@
 " vint: -ProhibitSetNoCompatible
 
-" Load builtin plugins
-" We need this because run_vim.sh sets -i NONE
-if has('win32')
-  set runtimepath=$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,C:\vader,C:\vim-doge
-else
-  set runtimepath=/home/vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,/vim-doge,/vader
-endif
+set runtimepath^=/Users/runner/work/vim-doge/vim-doge
+set runtimepath^=/Users/runner/work/vim-doge/vim-doge/vader
 
 " Set a variable to indicate we're inside a test env.
 let g:doge_test_env = 1

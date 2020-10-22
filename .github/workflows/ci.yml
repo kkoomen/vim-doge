@@ -26,6 +26,7 @@ jobs:
         with:
           version: ${{ matrix.vim-version }}
           neovim: ${{ matrix.neovim }}
+      - uses: actions/checkout@v2
       - name: Run tests
         run: ${{ steps.vim.outputs.executable }} -u test/vimrc "+Vader! $tests" 2>&1
 

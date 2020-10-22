@@ -34,7 +34,7 @@ If you can't reproduce the bug with a minimum vimrc then we might close your iss
 
 ```vim
 set nocompatible
-set runtimepath^=/path/to/vim-doge.nvim
+set runtimepath^=/path/to/vim-doge
 filetype plugin indent on
 syntax on
 set hidden
