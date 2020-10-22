@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-${{ binary-target }}
+      - run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.binary-target }}
       - uses: rhysd/action-setup-vim@v1
         id: vim
         with:
