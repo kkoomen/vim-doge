@@ -27,7 +27,7 @@ jobs:
           version: ${{ matrix.vim-version }}
           neovim: ${{ matrix.neovim }}
       - name: Run tests
-        run: ${{ steps.vim.outputs.executable }} -u test/vimrc "+Vader! test/*.vader test/commands/*.vader test/options/*.vader test/filetypes/*/*.vader" 2>&1
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 
   linux:
     name: Linux Tests
@@ -54,7 +54,7 @@ jobs:
           version: ${{ matrix.vim-version }}
           neovim: ${{ matrix.neovim }}
       - name: Run tests
-        run: ${{ steps.vim.outputs.executable }} -u test/vimrc "+Vader! test/*.vader test/commands/*.vader test/options/*.vader test/filetypes/*/*.vader" 2>&1
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 
   vint:
     name: Linter

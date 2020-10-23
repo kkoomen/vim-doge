@@ -1,92 +1,40 @@
 #!/usr/bin/env bash
-# Copyright (c) 2016-2019, w0rp <devw0rp@gmail.com> {{{
-# All rights reserved.
-#
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-# 1. Redistributions of source code must retain the above copyright notice, this
-# list of conditions and the following disclaimer.  2. Redistributions in binary
-# form must reproduce the above copyright notice, this list of conditions and
-# the following disclaimer in the documentation and/or other materials provided
-# with the distribution.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
-# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# }}}
 
 # For more info about the 'set' command, see
 # https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
 set -e
 set -u
 
-verbose=0
-while [ $# -ne 0 ]; do
-  case $1 in
-  -v)
-      verbose=1
-      shift
-  ;;
-  --)
-      shift
-      break
-  ;;
-  -?*)
-      echo "Invalid argument: $1" 1>&2
-      exit 1
-  ;;
-  *)
-      break
-  ;;
-  esac
-done
+ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 
 vim="$1"
-tests="$2"
+tests="$ROOT_DIR/test/*.vader $ROOT_DIR/test/commands/*.vader $ROOT_DIR/test/options/*.vader $ROOT_DIR/test/filetypes/*/*.vader"
 
 red='\033[0;31m'
 green='\033[0;32m'
 blue='\033[0;34m'
 nc='\033[0m'
 
-run_file="$(mktemp -t tests_ran.XXXXXXXX)"
-
+run_file="$(mktemp)"
 
 function filter-vader-output() {
   local hit_first_vader_line=0
-  # When verbose mode is off, suppress output until Vader starts.
-  local start_output="$verbose"
   local filtered_data=''
 
   while read -r; do
     # Search for the first Vader output line.
-    # We can try starting tests again if they don't start.
     if ((!hit_first_vader_line)); then
       if [[ "$REPLY" = *'Starting Vader:'* ]]; then
         hit_first_vader_line=1
-      fi
-    fi
-
-    if ((!start_output)); then
-      if ((hit_first_vader_line)); then
-        start_output=1
       else
-        continue
+        continue;
       fi
     fi
 
     echo "$REPLY"
   done
 
-  # Note that we managed to get the Vader tests started if we did.
+  # Echo a 1 into the temp file to indicate this (re)try is successful.
   if ((hit_first_vader_line)); then
     echo 1 > "$run_file"
   fi
@@ -95,7 +43,7 @@ function filter-vader-output() {
 function color-vader-output() {
   while read -r; do
     # Split blocks by echoing an extra white line.
-    if [[ "$REPLY" = *'GIVEN]'* ]]; then
+    if [[ "$REPLY" = *'GIVEN'* ]]; then
       echo
     fi
 
@@ -129,35 +77,20 @@ function color-vader-output() {
 }
 
 echo
-echo '========================================'
+echo '================================================================================'
 echo "Running tests for $vim"
-echo '========================================'
+echo '================================================================================'
 echo
+echo "tests: $tests"
 
 tries=0
 
 while [ "$tries" -lt 5 ]; do
   tries=$((tries + 1))
 
-  echo "tests: $tests"
   exit_code=0
-  set -o pipefail
 
-  docker run \
-    -a stderr \
-    -e VADER_OUTPUT_FILE=/dev/stderr \
-    --rm \
-    -v "$PWD/autoload:/vim-doge/autoload" \
-    -v "$PWD/ftplugin:/vim-doge/ftplugin" \
-    -v "$PWD/plugin:/vim-doge/plugin" \
-    -v "$PWD/src:/vim-doge/src" \
-    -v "$PWD/test:/vim-doge/test" \
-    -v "$PWD/dist:/vim-doge/dist" \
-    -v "$PWD/tsconfig.json:/vim-doge/tsconfig.json" \
-    -w /vim-doge "$DOGE_DOCKER_IMAGE" \
-    "/vim-build/bin/$vim" -u test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
-
-  set +o pipefail
+  "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
 
   if [ -s "$run_file" ]; then
     break
