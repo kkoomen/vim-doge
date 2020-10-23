@@ -46,13 +46,13 @@ jobs:
         with:
           submodules: true
 
-      - name: Setup nodejs v$NODE_VERSION
+      - name: Setup nodejs v${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
-          node-version: $NODE_VERSION
+          node-version: ${{ env.NODE_VERSION }}
       - run: npm ci --no-save
-      - name: npm run build:binary -- node$NODE_VERSION-$TARGET-x64 $ASSET_FILENAME
-        run: npm run build:binary -- node$NODE_VERSION-$TARGET-x64 $ASSET_FILENAME
+      - name: npm run build:binary -- node${{ env.NODE_VERSION }}-$TARGET-x64 $ASSET_FILENAME
+        run: npm run build:binary -- node${{ env.NODE_VERSION }}-$TARGET-x64 $ASSET_FILENAME
 
       - name: Load release url file from create_release job
         uses: actions/download-artifact@v1
@@ -62,10 +62,10 @@ jobs:
       - name: Get release upload url
         id: release_info
         run: |
-          value=$(cat release_url/release_url.txt)
-          echo ::set-output name=upload_url::$value
-          echo ::set-output name=asset_path::./bin/$ASSET_FILENAME.tar.gz
-          echo ::set-output name=asset_name::$ASSET_FILENAME.tar.gz
+          url=$(cat release_url/release_url.txt)
+          echo ::set-output name=upload_url::$url
+          echo ::set-output name=asset_path::./bin/${{ env.ASSET_FILENAME }}.tar.gz
+          echo ::set-output name=asset_name::${{ env.ASSET_FILENAME }}.tar.gz
 
       - name: Upload release asset
         id: upload-release-asset
