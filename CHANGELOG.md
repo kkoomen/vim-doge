@@ -1,3 +1,9 @@
+## [3.3.2-beta.18](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.17...v3.3.2-beta.18) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** exclude beta versions in main release ([d0ff95f](https://github.com/kkoomen/vim-doge/commit/d0ff95f0f4ec0e4ff7e120b5007e54242e1fc6c8))
+
 ## [3.3.2-beta.17](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.16...v3.3.2-beta.17) (2020-10-23)
 
 ### Features
