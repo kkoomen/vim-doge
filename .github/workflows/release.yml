@@ -1,0 +1,22 @@
+name: Release
+on: release
+
+jobs:
+  macos:
+    name: MacOS Release
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ matrix.node-version }}-macos-x64 vim-doge-macos
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: ./bin/vim-doge-macos.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

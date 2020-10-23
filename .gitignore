@@ -9,6 +9,8 @@
 vim-doge-macos
 vim-doge-linux
 vim-doge-win.exe
+*.tar.gz
+*.zip
 __pycache__/
 *.tsbuildinfo
 

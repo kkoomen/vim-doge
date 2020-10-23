@@ -1,11 +1,7 @@
 {
   "hooks": {
     "before:init": ["npm run format", "npm run lint"],
-    "after:bump": [
-      "npm run build:binary",
-      "echo v${version} > .version && git add .version"
-    ],
-    "after:release": "rm -f ./bin/vim-doge-*.tar.gz"
+    "after:bump": ["echo v${version} > .version && git add .version"]
   },
   "git": {
     "commitMessage": "chore(release): v${version} :tada:",
@@ -17,8 +13,7 @@
   },
   "github": {
     "release": true,
-    "releaseName": "Release v${version}",
-    "assets": ["./bin/vim-doge-*.tar.gz"]
+    "releaseName": "Release v${version}"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
