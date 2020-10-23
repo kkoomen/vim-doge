@@ -1,3 +1,9 @@
+## [3.3.2-beta.16](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.15...v3.3.2-beta.16) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** revert incorrect RUNNER_OS and url vars ([123a3c6](https://github.com/kkoomen/vim-doge/commit/123a3c6fd15a736e9262e5287d573138750aeee3))
+
 ## [3.3.2-beta.15](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.14...v3.3.2-beta.15) (2020-10-23)
 
 ### Bug Fixes
