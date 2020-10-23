@@ -2,12 +2,12 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  macos:
-    name: MacOS Tests
+  macos_vim:
+    name: MacOS Tests (Vim)
     strategy:
       matrix:
         os: [macos-latest]
-        neovim: [false, true]
+        neovim: [false]
         vim-version: [v7.4.2119, stable]
         node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
@@ -28,12 +28,38 @@ jobs:
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 
-  linux:
-    name: Linux Tests
+  macos_neovim:
+    name: MacOS Tests (NeoVim)
+    strategy:
+      matrix:
+        os: [macos-latest]
+        neovim: [true]
+        vim-version: [v0.2.0, stable]
+        node-version: [10, 12, 14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ matrix.node-version }}-macos-x64
+      - uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: ${{ matrix.neovim }}
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.neovim.outputs.executable }}"
+
+  linux_vim:
+    name: Linux Tests (Vim)
     strategy:
       matrix:
         os: [ubuntu-latest]
-        neovim: [false, true]
+        neovim: [false]
         vim-version: [v7.4.2119, stable]
         node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
@@ -53,6 +79,32 @@ jobs:
           neovim: ${{ matrix.neovim }}
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+
+  linux_neovim:
+    name: Linux Tests (NeoVim)
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        neovim: [true]
+        vim-version: [v0.2.0, stable]
+        node-version: [10, 12, 14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ matrix.node-version }}-linux-x64
+      - uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: ${{ matrix.neovim }}
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.neovim.outputs.executable }}"
 
   vint:
     name: Linter
