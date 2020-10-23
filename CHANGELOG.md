@@ -1,3 +1,9 @@
+## [3.3.2-beta.3](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.2...v3.3.2-beta.3) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** specify all branches, excluding tags ([950a82a](https://github.com/kkoomen/vim-doge/commit/950a82a3ef52de4fd81d51c98f85ad3b12c0bc60))
+
 ## [3.3.2-beta.2](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.1...v3.3.2-beta.2) (2020-10-23)
 
 ### Bug Fixes
