@@ -1,3 +1,9 @@
+## [3.3.2-beta.4](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.3...v3.3.2-beta.4) (2020-10-23)
+
+### Features
+
+- **ci:** build release assets with actions/create-release and actions/upload-release-asset ([635148c](https://github.com/kkoomen/vim-doge/commit/635148cfa3c43da7ea7fc31fbbf3fc851012e95c))
+
 ## [3.3.2-beta.3](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.2...v3.3.2-beta.3) (2020-10-23)
 
 ### Bug Fixes
