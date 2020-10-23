@@ -1,12 +1,8 @@
 " vint: -ProhibitSetNoCompatible
 
-if has('macunix')
-  set runtimepath^=/Users/runner/work/vim-doge/vim-doge
-  set runtimepath^=/Users/runner/work/vim-doge/vim-doge/vader
-elseif has('unix')
-  set runtimepath^=/home/runner/work/vim-doge/vim-doge
-  set runtimepath^=/home/runner/work/vim-doge/vim-doge/vader
-endif
+
+set runtimepath^=$PWD
+set runtimepath^=$PWD/vader
 
 " Set a variable to indicate we're inside a test env.
 let g:doge_test_env = 1
