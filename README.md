@@ -5,7 +5,7 @@
 </p>
 <p align="center">
   <a href="https://travis-ci.com/kkoomen/vim-doge">
-    <img src="https://travis-ci.com/kkoomen/vim-doge.svg?branch=master" alt="Travic CI Build Status" />
+    <img src="https://github.com/kkoomen/vim-doge/workflows/tests/badge.svg?branch=master" alt="tests build status" />
   </a>
   <img src="https://img.shields.io/badge/vim-7.4.2119%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.2.0%2B-informational.svg" alt="Minimum supported NeoVim version" />
