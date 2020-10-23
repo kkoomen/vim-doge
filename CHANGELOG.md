@@ -1,3 +1,9 @@
+## [3.3.2-beta.23](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.22...v3.3.2-beta.23) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** remove invalid needs-key ([fc43674](https://github.com/kkoomen/vim-doge/commit/fc436745d84f8c3477ef8095e18d7db552832cbd))
+
 ## [3.3.2-beta.22](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.21...v3.3.2-beta.22) (2020-10-23)
 
 ### Bug Fixes
