@@ -1,3 +1,9 @@
+## [3.3.2-beta.24](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.23...v3.3.2-beta.24) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** use matrix method for ubuntu and macos ([05ff5f7](https://github.com/kkoomen/vim-doge/commit/05ff5f763db05378c028caa02a054963d149caa6))
+
 ## [3.3.2-beta.23](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.22...v3.3.2-beta.23) (2020-10-23)
 
 ### Bug Fixes
