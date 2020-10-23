@@ -38,8 +38,8 @@ jobs:
     runs-on : ${{ matrix.os }}
     env:
       NODE_VERSION: 14
-      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
-      ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
+      TARGET: $(echo ${{ env.RUNNER_OS }} | tr '[:upper:]' '[:lower:]')
+      ASSET_FILENAME: vim-doge-$(echo ${{ env.RUNNER_OS }} | tr '[:upper:]' '[:lower:]')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -51,8 +51,8 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm ci --no-save
-      - name: npm run build:binary -- node${{ env.NODE_VERSION }}-$TARGET-x64 $ASSET_FILENAME
-        run: npm run build:binary -- node${{ env.NODE_VERSION }}-$TARGET-x64 $ASSET_FILENAME
+      - name: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+        run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
 
       - name: Load release url file from create_release job
         uses: actions/download-artifact@v1
@@ -63,7 +63,7 @@ jobs:
         id: release_info
         run: |
           url=$(cat release_url/release_url.txt)
-          echo ::set-output name=upload_url::$url
+          echo ::set-output name=upload_url::${{ env.url }}
           echo ::set-output name=asset_path::./bin/${{ env.ASSET_FILENAME }}.tar.gz
           echo ::set-output name=asset_name::${{ env.ASSET_FILENAME }}.tar.gz
 
