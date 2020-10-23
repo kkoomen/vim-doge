@@ -26,7 +26,7 @@ if [[ "$OUTFILE" != "" ]]; then
   OUTFILE="$OUTFILE.tar.gz"
   cd $ROOT_DIR/bin
   rm -f ./*.tar.gz
-  echo "==> Archiving vim-doge -> $OUTFILE"
+  echo "==> Archiving $ROOT_DIR/bin/vim-doge -> $ROOT_DIR/bin/$OUTFILE"
   tar -czf "$OUTFILE" vim-doge
 fi
 

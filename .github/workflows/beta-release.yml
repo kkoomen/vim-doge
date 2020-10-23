@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v1
-      - name: create release
+      - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -21,9 +21,9 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: true
-      - name: Output Release URL File
+      - name: Output release url file
         run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
-      - name: Save Release URL File for publish
+      - name: Save release url file for publish
         uses: actions/upload-artifact@v1
         with:
           name: release_url
