@@ -1,3 +1,9 @@
+## [3.3.2-beta.13](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.12...v3.3.2-beta.13) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** use workaround for the upload-release-assets args ([b136772](https://github.com/kkoomen/vim-doge/commit/b136772817b8a1226ee04e8cb307379d77576078))
+
 ## [3.3.2-beta.12](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.11...v3.3.2-beta.12) (2020-10-23)
 
 ## [3.3.2-beta.11](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.10...v3.3.2-beta.11) (2020-10-23)
