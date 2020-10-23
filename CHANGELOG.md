@@ -1,3 +1,9 @@
+## [3.3.2-beta.21](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.20...v3.3.2-beta.21) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** replace [0-9]+ with \* ([67c66b0](https://github.com/kkoomen/vim-doge/commit/67c66b04c96483885151f9209cadcb0a41a0f0b4))
+
 ## [3.3.2-beta.20](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.19...v3.3.2-beta.20) (2020-10-23)
 
 ## [3.3.2-beta.19](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.18...v3.3.2-beta.19) (2020-10-23)
