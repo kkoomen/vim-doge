@@ -2,15 +2,42 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  test:
-    name: Tests
+  macos:
+    name: MacOS Tests
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest]
         neovim: [false]
         vim-version: [v7.4.2119, v8.2.1800]
         node-version: [10, 14]
-        binary-target: [macos-x64, linux-x64]
+        binary-target: [macos-x64]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.binary-target }}
+      - uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: ${{ matrix.neovim }}
+      - name: Run tests
+        run: ${{ steps.vim.outputs.executable }} -u test/vimrc "+Vader! test/*.vader test/commands/*.vader test/options/*.vader test/filetypes/*/*.vader" 2>&1
+
+  linux:
+    name: Linux Tests
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        neovim: [false]
+        vim-version: [v7.4.2119, v8.2.1800]
+        node-version: [10, 14]
+        binary-target: [linux-x64]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
