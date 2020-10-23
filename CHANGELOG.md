@@ -1,3 +1,9 @@
+## [3.3.2-beta.6](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.5...v3.3.2-beta.6) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** move env key from root scope to job scope ([0259ab2](https://github.com/kkoomen/vim-doge/commit/0259ab229485318f66fd1b8e3a274b294eb64aff))
+
 ## [3.3.2-beta.5](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.4...v3.3.2-beta.5) (2020-10-23)
 
 ### Bug Fixes
