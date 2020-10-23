@@ -56,6 +56,8 @@ function color-vader-output() {
     fi
 
     if [[ "$REPLY" = *'Success/Total'* ]]; then
+      echo
+
       success="$(echo -n "$REPLY" | grep -o '[0-9]\+/' | head -n 1 | cut -d / -f 1)"
       total="$(echo -n "$REPLY" | grep -o '/[0-9]\+' | head -n 1 | cut -d / -f 2)"
 
@@ -65,7 +67,6 @@ function color-vader-output() {
         echo -en "$green"
       fi
 
-      echo
       echo "$REPLY"
       echo -en "$nc"
       echo
