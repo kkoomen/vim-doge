@@ -1,8 +1,8 @@
-name: beta release
+name: release
 on:
   create:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 jobs:
   create_release:
@@ -20,7 +20,7 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
-          prerelease: true
+          prerelease: false
       - name: Output release url file
         run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
       - name: Save release url file for publish
