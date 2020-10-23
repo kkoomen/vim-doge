@@ -67,6 +67,8 @@ jobs:
           echo ::set-output name=upload_url::$value
 
       - run: echo $(pwd)
+      - run: ls -l $(pwd)
+      - run: ls -l $(pwd)/bin
       - name: Upload release asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.1
