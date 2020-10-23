@@ -7,10 +7,9 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-        neovim: [false]
-        vim-version: [v7.4.2119, v8.2.1800]
-        node-version: [10, 14]
-        binary-target: [macos-x64]
+        neovim: [false, true]
+        vim-version: [v7.4.2119, stable]
+        node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -20,7 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.binary-target }}
+      - run: npm run build:binary -- node${{ matrix.node-version }}-macos-x64
       - uses: rhysd/action-setup-vim@v1
         id: vim
         with:
@@ -34,10 +33,9 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        neovim: [false]
-        vim-version: [v7.4.2119, v8.2.1800]
-        node-version: [10, 14]
-        binary-target: [linux-x64]
+        neovim: [false, true]
+        vim-version: [v7.4.2119, stable]
+        node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -47,7 +45,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.binary-target }}
+      - run: npm run build:binary -- node${{ matrix.node-version }}-linux-x64
       - uses: rhysd/action-setup-vim@v1
         id: vim
         with:

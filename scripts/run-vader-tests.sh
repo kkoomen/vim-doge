@@ -43,7 +43,7 @@ function filter-vader-output() {
 function color-vader-output() {
   while read -r; do
     # Split blocks by echoing an extra white line.
-    if [[ "$REPLY" = *'GIVEN'* ]]; then
+    if [[ "$REPLY" = *'GIVEN'* ]] || [[ "$REPLY" = *'EXECUTE'* ]]; then
       echo
     fi
 
@@ -56,8 +56,8 @@ function color-vader-output() {
     fi
 
     if [[ "$REPLY" = *'Success/Total'* ]]; then
-      success="$(echo -n "$REPLY" | grep -o '[0-9]\+/' | head -n1 | cut -d/ -f1)"
-      total="$(echo -n "$REPLY" | grep -o '/[0-9]\+' | head -n1 | cut -d/ -f2)"
+      success="$(echo -n "$REPLY" | grep -o '[0-9]\+/' | head -n 1 | cut -d / -f 1)"
+      total="$(echo -n "$REPLY" | grep -o '/[0-9]\+' | head -n 1 | cut -d / -f 2)"
 
       if [ "$success" -lt "$total" ]; then
         echo -en "$red"
@@ -65,6 +65,7 @@ function color-vader-output() {
         echo -en "$green"
       fi
 
+      echo
       echo "$REPLY"
       echo -en "$nc"
       echo
