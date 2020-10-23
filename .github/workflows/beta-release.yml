@@ -1,0 +1,47 @@
+name: beta release
+on:
+  push:
+    tags:
+    - 'v*-beta.*'
+
+env:
+  NODE_VERSION: 14
+
+jobs:
+  macos:
+    name: MacOS Release
+    runs-on: macos-latest
+    env:
+      TARGET: macos
+      ASSET_FILENAME: vim-doge-macos
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Setup nodejs v${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: true
+      - name: Upload release assets
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./bin/${{ env.ASSET_FILENAME }}.tar.gz
+          asset_name: ${{ env.ASSET_FILENAME }}.tar.gz
+          asset_content_type: application/zip
