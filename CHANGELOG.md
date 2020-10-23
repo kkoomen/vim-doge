@@ -1,3 +1,9 @@
+## [3.3.2-beta.5](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.4...v3.3.2-beta.5) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** build multiple releases on different systems ([da62246](https://github.com/kkoomen/vim-doge/commit/da6224687ac3083c8d1c854500e274abaa6aec4a))
+
 ## [3.3.2-beta.4](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.3...v3.3.2-beta.4) (2020-10-23)
 
 ### Features
