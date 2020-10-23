@@ -38,8 +38,8 @@ jobs:
     runs-on : ${{ matrix.os }}
     env:
       NODE_VERSION: 14
-      TARGET: $(echo ${{ env.RUNNER_OS }} | tr '[:upper:]' '[:lower:]')
-      ASSET_FILENAME: vim-doge-$(echo ${{ env.RUNNER_OS }} | tr '[:upper:]' '[:lower:]')
+      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
+      ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -63,7 +63,7 @@ jobs:
         id: release_info
         run: |
           url=$(cat release_url/release_url.txt)
-          echo ::set-output name=upload_url::${{ env.url }}
+          echo ::set-output name=upload_url::$url
           echo ::set-output name=asset_path::./bin/${{ env.ASSET_FILENAME }}.tar.gz
           echo ::set-output name=asset_name::${{ env.ASSET_FILENAME }}.tar.gz
 
