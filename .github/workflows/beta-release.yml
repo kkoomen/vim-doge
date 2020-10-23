@@ -37,6 +37,7 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     runs-on : ${{ matrix.os }}
     env:
+      WORKDIR: $(pwd)
       NODE_VERSION: 14
       TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
       ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
@@ -50,9 +51,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
-      - run: ls -l ./bin
+        run: npm ci --no-save
+      - name: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+        run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
 
       - name: Load release url file from create_release job
         uses: actions/download-artifact@v1
@@ -64,7 +65,6 @@ jobs:
         run: |
           value=$(cat release_url/release_url.txt)
           echo ::set-output name=upload_url::$value
-      - run: ls -l ./bin
 
       - name: Upload release asset
         id: upload-release-asset
@@ -73,6 +73,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-          asset_path: ./bin/${{ env.ASSET_FILENAME }}.tar.gz
+          asset_path: ${{ env.WORKDIR }}/bin/${{ env.ASSET_FILENAME }}.tar.gz
           asset_name: ${{ env.ASSET_FILENAME }}.tar.gz
           asset_content_type: application/zip
