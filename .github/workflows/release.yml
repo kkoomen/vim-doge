@@ -1,41 +1,48 @@
 name: Release
 on: release
 
+env:
+  node-version: 14
+
 jobs:
   macos:
     name: MacOS Release
     runs-on: macos-latest
+    env:
+      os: macos
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
       - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-macos-x64 vim-doge-macos
+      - run: npm run build:binary -- node${{ env.node-version }}-${{ env.os }}-x64 vim-doge-${{ env.os }}
       - name: Upload to release
         uses: JasonEtco/upload-to-release@master
         with:
-          args: ./bin/vim-doge-macos.tar.gz
+          args: ./bin/vim-doge-${{ env.os }}.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   linux:
     name: Linux Release
     runs-on: ubuntu-latest
+    env:
+      os: linux
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: true
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: ${{ env.node-version }}
       - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-linux-x64 vim-doge-linux
+      - run: npm run build:binary -- node${{ env.node-version }}-${{ env.os }}-x64 vim-doge-${{ env.os }}
       - name: Upload to release
         uses: JasonEtco/upload-to-release@master
         with:
-          args: ./bin/vim-doge-linux.tar.gz
+          args: ./bin/vim-doge-${{ env.os }}.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
