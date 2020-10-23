@@ -66,6 +66,7 @@ jobs:
           value=$(cat release_url/release_url.txt)
           echo ::set-output name=upload_url::$value
 
+      - run: echo $(pwd)
       - name: Upload release asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.1
