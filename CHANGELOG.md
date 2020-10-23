@@ -1,3 +1,10 @@
+## [3.3.2-beta.7](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.6...v3.3.2-beta.7) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** change runner.os to \$RUNNER_OS ([d0d054c](https://github.com/kkoomen/vim-doge/commit/d0d054c28a7055deaa8a5baaac36a7b34de381d9))
+- **ci:** only run beta-release workflow on new tags ([0e8627c](https://github.com/kkoomen/vim-doge/commit/0e8627c68052c08ce3e2d8d7a85184437407eb78))
+
 ## [3.3.2-beta.6](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.5...v3.3.2-beta.6) (2020-10-23)
 
 ### Bug Fixes
