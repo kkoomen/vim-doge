@@ -1,8 +1,8 @@
 name: beta release
 on:
-  push:
+  create:
     tags:
-    - 'v*-beta.*'
+      - v*-beta.*
 
 jobs:
   create_release:
