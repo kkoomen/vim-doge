@@ -38,8 +38,8 @@ jobs:
     runs-on : ${{ matrix.os }}
     env:
       NODE_VERSION: 14
-      TARGET: $(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
-      ASSET_FILENAME: vim-doge-$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
+      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
+      ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
