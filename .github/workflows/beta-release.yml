@@ -37,7 +37,6 @@ jobs:
         os: [macos-latest, ubuntu-latest]
     runs-on : ${{ matrix.os }}
     env:
-      WORKDIR: $(pwd)
       NODE_VERSION: 14
       TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
       ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
@@ -47,13 +46,13 @@ jobs:
         with:
           submodules: true
 
-      - name: Setup nodejs v${{ env.NODE_VERSION }}
+      - name: Setup nodejs v$NODE_VERSION
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: $NODE_VERSION
       - run: npm ci --no-save
-      - name: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
-        run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+      - name: npm run build:binary -- node$NODE_VERSION-$TARGET-x64 $ASSET_FILENAME
+        run: npm run build:binary -- node$NODE_VERSION-$TARGET-x64 $ASSET_FILENAME
 
       - name: Load release url file from create_release job
         uses: actions/download-artifact@v1
@@ -61,21 +60,20 @@ jobs:
           name: release_url
 
       - name: Get release upload url
-        id: get_release_info
+        id: release_info
         run: |
           value=$(cat release_url/release_url.txt)
           echo ::set-output name=upload_url::$value
+          echo ::set-output name=asset_path::./bin/$ASSET_FILENAME.tar.gz
+          echo ::set-output name=asset_name::$ASSET_FILENAME.tar.gz
 
-      - run: echo $(pwd)
-      - run: ls -l $(pwd)
-      - run: ls -l $(pwd)/bin
       - name: Upload release asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-          asset_path: ${{ env.WORKDIR }}/bin/${{ env.ASSET_FILENAME }}.tar.gz
-          asset_name: ${{ env.ASSET_FILENAME }}.tar.gz
+          upload_url: ${{ steps.release_info.outputs.upload_url }}
+          asset_path: ${{ steps.release_info.outputs.asset_path }}
+          asset_name: ${{ steps.release_info.outputs.asset_name }}
           asset_content_type: application/zip
