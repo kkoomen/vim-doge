@@ -8,61 +8,35 @@ on:
       - '*'
 
 jobs:
-  macos_vim:
-    name: MacOS Tests (Vim)
+  tests_vim:
+    name: Tests (Vim)
     strategy:
       matrix:
-        os: [macos-latest]
-        neovim: [false]
+        os: [macos-latest, ubuntu-latest]
         vim-version: [v7.4.2119, stable]
         node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
+    env:
+      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Setup nodejs v${{ matrix.node-version }}
+      - name: Setup nodejs
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-macos-x64
-      - name: Setup Vim ${{ matrix.vim-version }}
+      - name: npm install
+        run: npm ci --no-save
+      - name: Build binary
+        run: npm run build:binary -- node${{ matrix.node-version }}-${{ env.TARGET }}-x64
+      - name: Setup Vim
         uses: rhysd/action-setup-vim@v1
         id: vim
         with:
           version: ${{ matrix.vim-version }}
-          neovim: ${{ matrix.neovim }}
-      - name: Run tests
-        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-
-  linux_vim:
-    name: Linux Tests (Vim)
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        neovim: [false]
-        vim-version: [v7.4.2119, stable]
-        node-version: [10, 12, 14]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: Setup nodejs v${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ matrix.node-version }}-linux-x64
-      - name: Setup Vim ${{ matrix.vim-version }}
-        uses: rhysd/action-setup-vim@v1
-        id: vim
-        with:
-          version: ${{ matrix.vim-version }}
-          neovim: ${{ matrix.neovim }}
+          neovim: false
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 

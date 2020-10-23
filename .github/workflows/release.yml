@@ -31,7 +31,7 @@ jobs:
         uses: bruceadams/get-release@v1.2.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: Get release upload url
+      - name: Get asset info
         id: asset_info
         run: |
           echo ::set-output name=asset_path::./bin/${{ env.ASSET_FILENAME }}.tar.gz
