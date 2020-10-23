@@ -12,7 +12,8 @@
     "publish": false
   },
   "github": {
-    "release": false
+    "release": true,
+    "releaseName": "Release v${version}"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
