@@ -1,3 +1,23 @@
+## [3.3.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.3.1...v3.3.2-beta.0) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** add matrix prefix for variable ([3bfa189](https://github.com/kkoomen/vim-doge/commit/3bfa1890dcaa82c06809f4dc9625728217a14ac4))
+- **ci:** do not compress binary if no name has been given ([d607ee0](https://github.com/kkoomen/vim-doge/commit/d607ee0f0582c8b6867ec34fe960653ccb475948))
+- **ci:** replace old \$tests var with all the necessary globs ([3f8c81f](https://github.com/kkoomen/vim-doge/commit/3f8c81f86627a8f0bfdf68976cb182bc467035ae))
+- **ci:** set runtimepath correctly for unix / macunix ([2b634c5](https://github.com/kkoomen/vim-doge/commit/2b634c596325224ed8ed3ef4c29e11afbadd8cd8))
+- **ci:** split up single job into separate linux + macos jobs ([0e25059](https://github.com/kkoomen/vim-doge/commit/0e25059be2b5e9d917eb272a453b95684ca11f5c))
+- **ci:** use proper testing setup for vim + neovim ([6022cab](https://github.com/kkoomen/vim-doge/commit/6022cab9cc5a51235643b3b98321b80c14d11d52))
+- add vader as a submodule and adjust test vimrc runtimepath ([21bbbc1](https://github.com/kkoomen/vim-doge/commit/21bbbc18900ab54e3fa9591653b5bcbd9f241b9f))
+
+### Features
+
+- **ci:** add release workflow ([678d913](https://github.com/kkoomen/vim-doge/commit/678d913516b93f3321255d95a851282d4c5f7dda))
+- move echo to the top to ensure proper color echoing ([6e66713](https://github.com/kkoomen/vim-doge/commit/6e66713f780e1ac526fda48dbfe81ef0d5f6128f))
+- **ci:** filter vader output ([4fd24e4](https://github.com/kkoomen/vim-doge/commit/4fd24e4bb68529b6d0a58eaa05c8ca11a3de7765))
+- **gitmodules:** add shallow = true to vader ([73da31a](https://github.com/kkoomen/vim-doge/commit/73da31a8c977bacd876f39181a62b221e3826dd7))
+- remove travis.yml and setup initial CI workflow ([0c35ac9](https://github.com/kkoomen/vim-doge/commit/0c35ac97ea21f7005b54de58b512a4acebc11145))
+
 ## [3.3.1](https://github.com/kkoomen/vim-doge/compare/v3.3.0...v3.3.1) (2020-10-20)
 
 ### Bug Fixes
