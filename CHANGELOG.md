@@ -1,3 +1,5 @@
+## [3.3.2-beta.12](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.11...v3.3.2-beta.12) (2020-10-23)
+
 ## [3.3.2-beta.11](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.10...v3.3.2-beta.11) (2020-10-23)
 
 ## [3.3.2-beta.10](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.9...v3.3.2-beta.10) (2020-10-23)
