@@ -1,5 +1,7 @@
 name: release
-on: release
+on:
+  release:
+    types: [published]
 
 env:
   node-version: 14
