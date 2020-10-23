@@ -1,3 +1,9 @@
+## [3.3.2-beta.19](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.18...v3.3.2-beta.19) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** only use negate pattern for the releas ([7087532](https://github.com/kkoomen/vim-doge/commit/70875322e32c764948ae865b23f4e1c941df8caf))
+
 ## [3.3.2-beta.18](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.17...v3.3.2-beta.18) (2020-10-23)
 
 ### Bug Fixes
