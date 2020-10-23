@@ -1,3 +1,9 @@
+## [3.3.2-beta.17](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.16...v3.3.2-beta.17) (2020-10-23)
+
+### Features
+
+- **ci:** add release workflow ([de3b0c4](https://github.com/kkoomen/vim-doge/commit/de3b0c455e77e41160cc444eb8cf817598744605))
+
 ## [3.3.2-beta.16](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.15...v3.3.2-beta.16) (2020-10-23)
 
 ### Bug Fixes
