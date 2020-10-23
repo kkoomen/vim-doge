@@ -1,3 +1,13 @@
+## [3.3.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.0...v3.3.2-beta.1) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** use env variables for node-version and build target ([eaf8e5b](https://github.com/kkoomen/vim-doge/commit/eaf8e5ba28d0f8abc92f127d8bb445bc89240e95))
+
+### Features
+
+- **ci:** rename ci.yml to tests.yml ([f9a35a0](https://github.com/kkoomen/vim-doge/commit/f9a35a041764edfbfaf59b28806c65e3e57dcd7b))
+
 ## [3.3.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.3.1...v3.3.2-beta.0) (2020-10-23)
 
 ### Bug Fixes
