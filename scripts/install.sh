@@ -16,7 +16,6 @@ cd $ROOT_DIR
 
 OS="$(uname)"
 OUTFILE="$ROOT_DIR/bin/vim-doge"
-
 PKG_VERSION=$(cat "$ROOT_DIR/.version")
 RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$PKG_VERSION"
 
@@ -29,13 +28,13 @@ else
   OUTFILE="$OUTFILE.exe"
 fi
 
-TEMP_FILE="vim-doge.tar.gz"
-DOWNLOAD_URL="$RELEASE_URL/$TARGET.tar.gz"
+FILENAME="$TARGET.tar.gz"
+DOWNLOAD_URL="$RELEASE_URL/$FILENAME"
 echo "Downloading $DOWNLOAD_URL"
 curl -L --progress-bar \
     --fail \
-    --output "$TEMP_FILE" \
+    --output "$FILENAME" \
     "$DOWNLOAD_URL"
-tar xzf "$TEMP_FILE" && mv "$TARGET" "$OUTFILE"
-rm -f "$TEMP_FILE"
+tar xzf "$FILENAME" && mv "vim-doge" "$OUTFILE"
+rm -f "$FILENAME"
 chmod +x "$OUTFILE"
