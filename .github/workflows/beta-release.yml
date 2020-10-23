@@ -4,11 +4,6 @@ on:
     tags:
     - 'v*-beta.*'
 
-env:
-  NODE_VERSION: 14
-  TARGET: $(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
-  ASSET_FILENAME: vim-doge-$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
-
 jobs:
   create_release:
     name: create_release
@@ -41,6 +36,10 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
     runs-on : ${{ matrix.os }}
+    env:
+      NODE_VERSION: 14
+      TARGET: $(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
+      ASSET_FILENAME: vim-doge-$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
