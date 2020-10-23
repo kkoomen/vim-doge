@@ -1,3 +1,9 @@
+## [3.3.2-beta.15](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.14...v3.3.2-beta.15) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** use env prefix for remaining env vars ([ca73ea5](https://github.com/kkoomen/vim-doge/commit/ca73ea514a7b15547ad5764f69682de7cceb561d))
+
 ## [3.3.2-beta.14](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.13...v3.3.2-beta.14) (2020-10-23)
 
 ### Bug Fixes
