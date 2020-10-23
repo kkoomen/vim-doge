@@ -20,3 +20,22 @@ jobs:
           args: ./bin/vim-doge-macos.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  linux:
+    name: Linux Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ matrix.node-version }}-linux-x64 vim-doge-linux
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: ./bin/vim-doge-linux.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
