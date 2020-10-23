@@ -1,3 +1,9 @@
+## [3.3.2-beta.22](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.21...v3.3.2-beta.22) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** run on release:created instead of created tag ([4f4af3f](https://github.com/kkoomen/vim-doge/commit/4f4af3fd0bf946c2a28b5ed938c9dee66d47c175))
+
 ## [3.3.2-beta.21](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.20...v3.3.2-beta.21) (2020-10-23)
 
 ### Bug Fixes
