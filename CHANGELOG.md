@@ -1,3 +1,9 @@
+## [3.3.2-beta.10](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.9...v3.3.2-beta.10) (2020-10-23)
+
+### Bug Fixes
+
+- **ci:** use correct syntax ([9da65dd](https://github.com/kkoomen/vim-doge/commit/9da65dd3ce49902c27b17533cc3a63286885888a))
+
 ## [3.3.2-beta.9](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.8...v3.3.2-beta.9) (2020-10-23)
 
 ## [3.3.2-beta.8](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.7...v3.3.2-beta.8) (2020-10-23)
