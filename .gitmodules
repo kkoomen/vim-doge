@@ -5,3 +5,4 @@
 [submodule "vader"]
 	path = vader
 	url = https://github.com/junegunn/vader.vim
+	shallow = true
