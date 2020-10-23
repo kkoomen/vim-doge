@@ -25,7 +25,7 @@ chmod +x $ROOT_DIR/bin/vim-doge
 if [[ "$OUTFILE" != "" ]]; then
   OUTFILE="$OUTFILE.tar.gz"
   cd $ROOT_DIR/bin
-  rm -f $ROOT_DIR/bin/*.tar.gz
+  rm -f ./*.tar.gz
   echo "==> Archiving vim-doge -> $OUTFILE"
   tar -czf "$OUTFILE" vim-doge
 fi

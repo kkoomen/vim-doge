@@ -52,6 +52,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm ci --no-save
       - run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+      - run: ls -l ./bin
 
       - name: Load release url file from create_release job
         uses: actions/download-artifact@v1
@@ -61,8 +62,9 @@ jobs:
       - name: Get release upload url
         id: get_release_info
         run: |
-          value=`cat release_url/release_url.txt`
+          value=$(cat release_url/release_url.txt)
           echo ::set-output name=upload_url::$value
+      - run: ls -l ./bin
 
       - name: Upload release asset
         id: upload-release-asset
