@@ -6,26 +6,17 @@ on:
 
 env:
   NODE_VERSION: 14
+  TARGET: $(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
+  ASSET_FILENAME: vim-doge-$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
 
 jobs:
-  macos:
-    name: MacOS Release
-    runs-on: macos-latest
-    env:
-      TARGET: macos
-      ASSET_FILENAME: vim-doge-macos
+  create_release:
+    name: create_release
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: Setup nodejs v${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-      - run: npm ci --no-save
-      - run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
-      - name: Create release
+      - name: Check out code
+        uses: actions/checkout@v1
+      - name: create release
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -35,13 +26,52 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: true
-      - name: Upload release assets
+      - name: Output Release URL File
+        run: echo "${{ steps.create_release.outputs.upload_url }}" > release_url.txt
+      - name: Save Release URL File for publish
+        uses: actions/upload-artifact@v1
+        with:
+          name: release_url
+          path: release_url.txt
+
+  build_and_upload_assets:
+    needs: [create_release]
+    name: Build and upload binary assets
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on : ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Setup nodejs v${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm ci --no-save
+      - run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+
+      - name: Load release url file from create_release job
+        uses: actions/download-artifact@v1
+        with:
+          name: release_url
+
+      - name: Get release upload url
+        id: get_release_info
+        run: |
+          value=`cat release_url/release_url.txt`
+          echo ::set-output name=upload_url::$value
+
+      - name: Upload release asset
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release_info.outputs.upload_url }}
           asset_path: ./bin/${{ env.ASSET_FILENAME }}.tar.gz
           asset_name: ${{ env.ASSET_FILENAME }}.tar.gz
           asset_content_type: application/zip
