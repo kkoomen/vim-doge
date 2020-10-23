@@ -7,7 +7,7 @@ set -u
 
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 BUILD_TARGETS="${1:-}"
-OUTFILE="${2:-vim-doge}.tar.gz"
+OUTFILE="${2:-}"
 
 # Build the pkg lib prerequisites if needed.
 if [[ ! -d $ROOT_DIR/pkg/lib-es5 ]]; then
@@ -22,9 +22,12 @@ node $ROOT_DIR/pkg/lib-es5/bin.js . -t "$BUILD_TARGETS" --out-path $ROOT_DIR/bin
 chmod +x $ROOT_DIR/bin/vim-doge
 
 # Archive the binary.
-cd $ROOT_DIR/bin
-rm -f $ROOT_DIR/bin/*.tar.gz
-echo "==> Archiving vim-doge -> $OUTFILE"
-tar -czf "$OUTFILE" vim-doge
+if [[ "$OUTFILE" != "" ]]; then
+  OUTFILE="$OUTFILE.tar.gz"
+  cd $ROOT_DIR/bin
+  rm -f $ROOT_DIR/bin/*.tar.gz
+  echo "==> Archiving vim-doge -> $OUTFILE"
+  tar -czf "$OUTFILE" vim-doge
+fi
 
 echo "🎉  Done building vim-doge binaries"
