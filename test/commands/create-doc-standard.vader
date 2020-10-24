@@ -5,6 +5,9 @@
 # ==============================================================================
 
 Execute (Create a new doc standard based on phpdoc, setup dummy pattern and execute the DogeCreateDocStandard command):
+  if !has('nvim')
+    let &runtimepath .= ',' . expand('~/.vim')
+  endif
   enew
   setfiletype php
   let b:doge_patterns = {
@@ -48,7 +51,15 @@ Execute (Create a new doc standard based on phpdoc, setup dummy pattern and exec
   DogeCreateDocStandard phpdoc
 
 Then (Expect a file to be created with specific content):
-  AssertEqual expand('~/.vim/after/ftplugin/php.vim'), expand('%:p')
+  let b:path = '/after/ftplugin/php.vim'
+  if !has('nvim')
+    let b:path = '~/.vim' . b:path
+  elseif exists('*stdpath')
+    let b:path = '~/.config/nvim' . b:path
+  else
+    let b:path = getcwd() . b:path
+  endif
+  AssertEqual expand(b:path), expand('%:p')
 
   let b:content = join([
   \  '" Preserve existing doge settings.',
@@ -81,16 +92,27 @@ Then (Expect a file to be created with specific content):
   AssertEqual b:content, join(getline(line('^'), line('$')), "\n")
   unlet b:content
 # Remove the buffer to ensure every test will create a new doc standard file.
-  call delete(expand('~/.vim/after/ftplugin/php.vim'))
+  call delete(expand(b:path))
   bdelete!
 
 Execute (Create a new doc standard for an unsupported filetype, setup dummy pattern and execute the DogeCreateDocStandard command):
+  if !has('nvim')
+    let &runtimepath .= ',' . expand('~/.vim')
+  endif
   enew
   setfiletype foo
   DogeCreateDocStandard foo
 
 Then (Expect a file to be created with specific content):
-  AssertEqual expand('~/.vim/after/ftplugin/foo.vim'), expand('%:p')
+  let b:path = '/after/ftplugin/foo.vim'
+  if !has('nvim')
+    let b:path = '~/.vim' . b:path
+  elseif exists('*stdpath')
+    let b:path = '~/.config/nvim' . b:path
+  else
+    let b:path = getcwd() . b:path
+  endif
+  AssertEqual expand(b:path), expand('%:p')
 
   let b:content = join([
   \  '" Preserve existing doge settings.',
@@ -123,5 +145,5 @@ Then (Expect a file to be created with specific content):
   AssertEqual b:content, join(getline(line('^'), line('$')), "\n")
   unlet b:content
 # Remove the buffer to ensure every test will create a new doc standard file.
-  call delete(expand('~/.vim/after/ftplugin/foo.vim'))
+  call delete(expand(b:path))
   bdelete!
