@@ -34,18 +34,18 @@ export class TypeScriptParserService
     ) {
       switch (node.type) {
         case NodeType.MEMBER_EXPRESSION: {
-          this.result = {
-            functionName: null,
-            propertyName: null,
-            generator: false,
-            async: false,
-            typeParameters: [],
-            parameters: [],
-            returnType: null,
-            exceptions: [],
-          };
           const prototypeIdentifier = node.child(0)?.children.pop();
-          if (prototypeIdentifier && prototypeIdentifier.text === 'prototype') {
+          if (prototypeIdentifier?.text === 'prototype') {
+            this.result = {
+              functionName: null,
+              propertyName: null,
+              generator: false,
+              async: false,
+              typeParameters: [],
+              parameters: [],
+              returnType: null,
+              exceptions: [],
+            };
             this.runNodeParser(this.parsePrototypeFunction, node);
           }
           break;
