@@ -44,7 +44,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
-        vim-version: [v0.2.2, head]
+        vim-version: [v0.3.0, head]
         node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
     env:
