@@ -1,3 +1,9 @@
+## [3.4.1](https://github.com/kkoomen/vim-doge/compare/v3.4.0...v3.4.1) (2020-10-24)
+
+### Bug Fixes
+
+- **typescript:** do not generate docs for function calls ([65ae158](https://github.com/kkoomen/vim-doge/commit/65ae15862269255becb15ffc624a51839b740928))
+
 # [3.4.0](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.26...v3.4.0) (2020-10-24)
 
 ### Bug Fixes
