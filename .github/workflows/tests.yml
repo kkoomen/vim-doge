@@ -66,7 +66,7 @@ jobs:
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
-          vim_type: vim
+          vim_type: neovim
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 
