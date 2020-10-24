@@ -82,7 +82,7 @@ endfunction
 " @public
 " Run a parser which will produce all the parameters and return the output.
 function! doge#helpers#parser(args) abort
-  for l:executable in ['/dist/index.js', '/bin/vim-doge', '/bin/vim-doge.exe']
+  for l:executable in ['/dist/index.js', '/bin/vim-doge.exe', '/bin/vim-doge']
     let l:script_path = g:doge_dir . l:executable
     if filereadable(resolve(l:script_path))
       let l:cursor_pos = getpos('.')
