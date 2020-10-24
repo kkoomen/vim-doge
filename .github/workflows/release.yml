@@ -8,15 +8,23 @@ jobs:
     name: Build and upload binary assets
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        include:
+          - node-version: 14
+          - os: macos-latest
+            target: macos
+            asset-name: vim-doge-macos.tar.gz
+            asset-path: ./bin/vim-doge-macos.tar.gz
+          - os: ubuntu-latest
+            target: linux
+            asset-name: vim-doge-linux.tar.gz
+            asset-path: ./bin/vim-doge-linux.tar.gz
+          - os: windows-latest
+            target: win
+            asset-name: vim-doge-win.tar.gz
+            asset-path: ./bin/vim-doge-win.tar.gz
     runs-on : ${{ matrix.os }}
-    env:
-      NODE_VERSION: 14
     steps:
-      - name: Get build info
-        id: build_info
-        run: |
-          echo ::set-output name=target::$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -24,26 +32,21 @@ jobs:
       - name: Setup nodejs
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
       - name: Build binary
-        run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ steps.build_info.outputs.target }}-x64 vim-doge-${{ steps.build_info.outputs.target }}
+        run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.target }}-x64 vim-doge-${{ matrix.target }}
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: Get asset info
-        id: asset_info
-        run: |
-          echo ::set-output name=asset_path::./bin/vim-doge-${{ steps.build_info.outputs.target }}.tar.gz
-          echo ::set-output name=asset_name::vim-doge-${{ steps.build_info.outputs.target }}.tar.gz
       - name: Upload release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ${{ steps.asset_info.outputs.asset_path }}
-          asset_name: ${{ steps.asset_info.outputs.asset_name }}
+          asset-path: ${{ matrix.asset-path }}
+          asset-name: ${{ matrix.asset-name }}
           asset_content_type: application/zip
