@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests_vim:
-    name: Tests (Vim)
+    name: Vim
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
@@ -48,7 +48,7 @@ jobs:
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 
   tests_neovim:
-    name: Tests (NeoVim)
+    name: NeoVim
     strategy:
       matrix:
         os: [macos-latest, ubuntu-latest]
