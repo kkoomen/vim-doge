@@ -1,3 +1,31 @@
+## 3.3.2-beta.25 (2020-10-24)
+
+### Bug Fixes
+
+- give prio to ./bin/vim-doge.exe instead of ./bin/vim-doge ([5e42557](https://github.com/kkoomen/vim-doge/commit/5e4255783b3ea4c8d881353e9e1972f18b09c14a))
+- **ci:** add vader.vim to neovim tests ([dde32db](https://github.com/kkoomen/vim-doge/commit/dde32db3ad6c76033c2c678bea037e22afdaa84d))
+- **ci:** always build from source with neovim ([6b1a0e9](https://github.com/kkoomen/vim-doge/commit/6b1a0e96295fc7534f774862c80d9ada97f519e8))
+- **ci:** bump neovim version from v0.2.0 -> v0.2.1 ([1435a2b](https://github.com/kkoomen/vim-doge/commit/1435a2b8c2a660cb4ce01505a775794ea8981235))
+- **ci:** bump neovim version from v0.2.1 -> v0.2.2 ([33a4d1d](https://github.com/kkoomen/vim-doge/commit/33a4d1d435489c03c61eecfd4555757674d54c56))
+- **ci:** bump neovim version from v0.2.2 -> v0.3.0 ([3e12b0a](https://github.com/kkoomen/vim-doge/commit/3e12b0a6ec38d44930b13a9ab733329366c17d11))
+- **ci:** bump neovim version from v0.3.0 -> v0.3.2 ([356cd50](https://github.com/kkoomen/vim-doge/commit/356cd50416daa3be58ea43c28949908c1f3cae20))
+- **ci:** change vim_type:vim to vim_type:neovim for neovim tests ([5cd086f](https://github.com/kkoomen/vim-doge/commit/5cd086fe5934aeb9df76dccd5843e269c09517e5))
+- **ci:** check if binary exists before using chmod ([b1b5a89](https://github.com/kkoomen/vim-doge/commit/b1b5a89bd74044f5d59ec68d310ec0b9fbc9e8d6))
+- **ci:** convert TARGET env var into output var ([cce2d2c](https://github.com/kkoomen/vim-doge/commit/cce2d2c9d417671e3086c8c28972a8b76437a583))
+- **ci:** do not run chmod on vim-doge.exe ([7d4bc9d](https://github.com/kkoomen/vim-doge/commit/7d4bc9d36798120de5441e2839a2e9192f47d8a7))
+- **ci:** pass target to build script ([b33ebb0](https://github.com/kkoomen/vim-doge/commit/b33ebb0545a04232f9feb9dbf9cd16f6e96fa08e))
+- **ci:** surpress chmod errors from build.sh ([910b6b9](https://github.com/kkoomen/vim-doge/commit/910b6b9cd2b54a714675bb3eede204c0cf0e1e81))
+- **ci:** use head instead of stable vim version ([1dc882c](https://github.com/kkoomen/vim-doge/commit/1dc882ce7a1906beca341588d389629e5c60f2f2))
+- **install script:** fix incorrect unarchiving commands ([f001e03](https://github.com/kkoomen/vim-doge/commit/f001e036737fceb3e47ba3a8a0cbfc29d16803e4))
+
+### Features
+
+- remove support for windows ([2d7010d](https://github.com/kkoomen/vim-doge/commit/2d7010d6a00a9c832c144c23faea1122a793601f))
+- **ci:** add neovim tests ([54ecd1a](https://github.com/kkoomen/vim-doge/commit/54ecd1a939a35332305c9aacfd97b25617d57148))
+- **ci:** include windows-latest in the tests ([34cdb72](https://github.com/kkoomen/vim-doge/commit/34cdb72cdd31724c01c457c16ed607e5d87d5c6f))
+- **ci:** use matrix.include to switch target version and other vars ([2c763f3](https://github.com/kkoomen/vim-doge/commit/2c763f390c4b4260739b97596517ce7746e5b34c))
+- **ci:** use thinca/action-setup-vim instead of rhysd/action-setup-vim ([06165aa](https://github.com/kkoomen/vim-doge/commit/06165aabdd2c13e75238f6d3b23b4618751bebd7))
+
 ## [3.3.2-beta.24](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.23...v3.3.2-beta.24) (2020-10-23)
 
 ### Bug Fixes
