@@ -31,7 +31,19 @@ function filter-vader-output() {
       fi
     fi
 
-    echo "$REPLY"
+    if [[ "$REPLY" = *'GIVEN'* ]] \
+      || [[ "$REPLY" = *'DO'* ]] \
+      || [[ "$REPLY" = *'EXECUTE'* ]] \
+      || [[ "$REPLY" = *'THEN'* ]] \
+      || [[ "$REPLY" = *'EXPECT'* ]] \
+      || [[ "$REPLY" = *'BEFORE'* ]] \
+      || [[ "$REPLY" = *'AFTER'* ]] \
+      || [[ "$REPLY" = *'Starting Vader:'* ]] \
+      || [[ "$REPLY" = *'Success/Total'* ]] \
+      || [[ "$REPLY" = *'Elapsed time:'* ]]
+    then
+      echo "$REPLY"
+    fi
   done
 
   # Echo a 1 into the temp file to indicate this (re)try is successful.
