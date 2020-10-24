@@ -1,3 +1,14 @@
+# [3.4.0](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.26...v3.4.0) (2020-10-24)
+
+### Bug Fixes
+
+- **ci:** rename steps name ([9b01428](https://github.com/kkoomen/vim-doge/commit/9b014289dec7cf4e046d7d32dce251adbd7a578b))
+
+### Features
+
+- recreate PR [#104](https://github.com/kkoomen/vim-doge/issues/104) ([9c6e84c](https://github.com/kkoomen/vim-doge/commit/9c6e84cbb43e3d8772704ba68e73acb2eb4ca626))
+- **cpp:** add support for virtual functions ([#41](https://github.com/kkoomen/vim-doge/issues/41)) ([a06e8e9](https://github.com/kkoomen/vim-doge/commit/a06e8e9a7680ee47b405268939f8d08d4e54c805))
+
 ## [3.3.2-beta.26](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.25...v3.3.2-beta.26) (2020-10-24)
 
 ### Bug Fixes
