@@ -73,7 +73,7 @@
     "@vercel/ncc": "^0.24.1",
     "conventional-changelog-cli": "^2.1.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^7.10.0",
+    "eslint": "^7.12.0",
     "eslint-config-airbnb-typescript": "^11.0.0",
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-import": "^2.22.1",
