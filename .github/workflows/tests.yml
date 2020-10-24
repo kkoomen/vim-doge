@@ -55,10 +55,15 @@ jobs:
     env:
       TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
-      - name: Checkout code
+      - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: 'vader'
       - name: Setup nodejs
         uses: actions/setup-node@v1
         with:
