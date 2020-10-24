@@ -15,7 +15,7 @@ jobs:
       TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
       ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
-      - name: Checkout code
+      - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
           submodules: true

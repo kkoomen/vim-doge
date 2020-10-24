@@ -2,7 +2,3 @@
 	path = pkg
 	url = https://github.com/kkoomen/pkg
 	shallow = true
-[submodule "vader"]
-	path = vader
-	url = https://github.com/junegunn/vader.vim
-	shallow = true
