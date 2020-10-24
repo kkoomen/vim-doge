@@ -65,6 +65,7 @@ jobs:
         uses: thinca/action-setup-vim@v1
         id: vim
         with:
+          download: never
           vim_version: ${{ matrix.vim-version }}
           vim_type: neovim
       - name: Run tests
