@@ -38,7 +38,7 @@ jobs:
       - run: npm ci --no-save
       - name: Build binary
         run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
-      - name: Setup Vim
+      - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
         with:
@@ -77,7 +77,7 @@ jobs:
       - run: npm ci --no-save
       - name: Build binary
         run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
-      - name: Setup Vim
+      - name: Setup neovim
         uses: thinca/action-setup-vim@v1
         id: vim
         with:
