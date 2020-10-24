@@ -1,3 +1,9 @@
+## [3.3.2-beta.26](https://github.com/kkoomen/vim-doge/compare/v3.3.2-beta.25...v3.3.2-beta.26) (2020-10-24)
+
+### Bug Fixes
+
+- **ci:** use underscores in yml keys ([74df0df](https://github.com/kkoomen/vim-doge/commit/74df0df54c19a9ae5b24b3446ef23a9fa3ebcbf8))
+
 ## 3.3.2-beta.25 (2020-10-24)
 
 ### Bug Fixes
