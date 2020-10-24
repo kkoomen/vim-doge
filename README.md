@@ -11,6 +11,9 @@
   <a href="https://github.com/kkoomen/vim-doge/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/kkoomen/vim-doge.svg" alt="License" />
   </a>
+  <a href="https://gitter.im/kkoomen/vim-doge">
+    <img src="https://badges.gitter.im/kkoomen/vim-doge.svg" alt="Chat on Gitter" />
+  </a>
 </p>
 
 > Any fool can write code that a computer can understand. Good programmers write
