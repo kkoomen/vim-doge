@@ -184,17 +184,20 @@ function! doge#pattern#custom(name) abort
   " otherwise create a new file with an appropriate path.
   let l:path = ''
   for l:p in ['~/.vim', '~/vimfiles']
-    if isdirectory(expand(l:p))
-      let l:path = expand(l:p)
+    let l:p = expand(l:p)
+    if match(&runtimepath, l:p) >= 0
+      let l:path = l:p
       break
     endif
   endfor
-  if has('nvim') && empty(l:path)
-    let l:path = stdpath('config')
+  if empty(l:path)
+    if exists('*stdpath')
+      let l:path = stdpath('config')
+    else
+      let l:path = getcwd()
+    endif
   endif
-  if !empty(l:path)
-    let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
-  endif
+  let l:path .= '/after/ftplugin/' . l:this_ft . '.vim'
   if filereadable(l:path)
     let l:cmd = &showtabline ? 'tabedit' : 'split'
     call execute(l:cmd . fnameescape(l:path), 'silent!')
@@ -204,9 +207,7 @@ function! doge#pattern#custom(name) abort
   else
     call execute(&showtabline ? 'tabnew' : 'new', 'silent!')
     setfiletype vim
-    if !empty(l:path)
-      call execute('file ' . fnameescape(l:path), 'silent!')
-    endif
+    call execute('file ' . fnameescape(l:path), 'silent!')
   endif
 
   " Generate the template and paste it at the top of the file.
