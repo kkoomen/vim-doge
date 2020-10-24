@@ -1,18 +1,101 @@
 # ==============================================================================
-# Virtual functions with parameters with return type.
+# Virtual function declarations with parameters with return type.
 # ==============================================================================
-# TODO: Fix tests after https://github.com/tree-sitter/tree-sitter-cpp/issues/88
-" Given cpp (virtual function with parameters with return type):
-"   virtual bool my_virtual_func(bool val) = 0;
-"
-" Do (trigger doge):
-"   \<C-d>
-"
-" Expect cpp (generated comment with @brief, @param and @return tags):
-"   /**
-"    * @brief [TODO:description]
-"    *
-"    * @param val [TODO:description]
-"    * @return [TODO:description]
-"    */
-"   virtual bool my_virtual_func(bool val) = 0;
+Given cpp (virtual function declarations with parameters with return type):
+  class Test {
+    virtual bool my_virtual_function(bool val);
+    virtual bool my_pure_virtual_function(bool val) = 0;
+  };
+
+  class Test2: public Test {
+    bool my_virtual_function(bool val) override;
+    bool my_pure_virtual_function(bool val) final;
+  }
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+  :19\<CR>
+  \<C-d>
+  :26\<CR>
+  \<C-d>
+
+Expect cpp (generated comment with @brief, @param and @return tags):
+  class Test {
+    /**
+     * @brief [TODO:description]
+     *
+     * @param val [TODO:description]
+     * @return [TODO:description]
+     */
+    virtual bool my_virtual_function(bool val);
+    /**
+     * @brief [TODO:description]
+     *
+     * @param val [TODO:description]
+     * @return [TODO:description]
+     */
+    virtual bool my_pure_virtual_function(bool val) = 0;
+  };
+
+  class Test2: public Test {
+    /**
+     * @brief [TODO:description]
+     *
+     * @param val [TODO:description]
+     * @return [TODO:description]
+     */
+    bool my_virtual_function(bool val) override;
+    /**
+     * @brief [TODO:description]
+     *
+     * @param val [TODO:description]
+     * @return [TODO:description]
+     */
+    bool my_pure_virtual_function(bool val) final;
+  }
+
+# ==============================================================================
+# Virtual function definitions with parameters with return type.
+# ==============================================================================
+Given cpp (virtual function definitions with parameters with return type):
+  class base {
+  public:
+      bool fun_1(bool val) { cout << "base-1\n"; }
+  };
+
+  class derived : public base {
+  public:
+      bool fun_1(bool val) { cout << "derived-1\n"; }
+  };
+
+Do (trigger doge):
+  :3\<CR>
+  \<C-d>
+  :14\<CR>
+  \<C-d>
+
+Expect cpp (generated comment with @brief, @param and @return tags):
+  class base {
+  public:
+      /**
+       * @brief [TODO:description]
+       *
+       * @param val [TODO:description]
+       * @return [TODO:description]
+       */
+      bool fun_1(bool val) { cout << "base-1\n"; }
+  };
+
+  class derived : public base {
+  public:
+      /**
+       * @brief [TODO:description]
+       *
+       * @param val [TODO:description]
+       * @return [TODO:description]
+       */
+      bool fun_1(bool val) { cout << "derived-1\n"; }
+  };

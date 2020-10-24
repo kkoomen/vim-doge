@@ -51,7 +51,12 @@ unlet s:class_pattern['parameters']
 " Matches (template) function- and class method declarations.
 " ------------------------------------------------------------------------------
 let s:function_pattern = doge#helpers#deepextend(s:pattern_base, {
-\  'nodeTypes': ['function_definition', 'declaration', 'template_declaration'],
+\  'nodeTypes': [
+\    'function_definition',
+\    'declaration',
+\    'template_declaration',
+\    'function_declarator',
+\  ],
 \})
 
 " ------------------------------------------------------------------------------
