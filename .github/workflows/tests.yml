@@ -16,9 +16,11 @@ jobs:
         vim-version: [v7.4.2119, head]
         node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
-    env:
-      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
+      - name: Get build info
+        id: build_info
+        run: |
+          echo ::set-output name=target::$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -34,7 +36,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
       - name: Build binary
-        run: npm run build:binary -- node${{ matrix.node-version }}-${{ env.TARGET }}-x64
+        run: npm run build:binary -- node${{ matrix.node-version }}-${{ steps.build_info.outputs.target }}-x64
       - name: Setup Vim
         uses: thinca/action-setup-vim@v1
         id: vim
@@ -52,9 +54,11 @@ jobs:
         vim-version: [v0.3.2, head]
         node-version: [10, 12, 14]
     runs-on: ${{ matrix.os }}
-    env:
-      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
+      - name: Get build info
+        id: build_info
+        run: |
+          echo ::set-output name=target::$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -70,7 +74,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
       - name: Build binary
-        run: npm run build:binary -- node${{ matrix.node-version }}-${{ env.TARGET }}-x64
+        run: npm run build:binary -- node${{ matrix.node-version }}-${{ steps.build_info.outputs.target }}-x64
       - name: Setup Vim
         uses: thinca/action-setup-vim@v1
         id: vim

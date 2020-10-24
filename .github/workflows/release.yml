@@ -12,9 +12,11 @@ jobs:
     runs-on : ${{ matrix.os }}
     env:
       NODE_VERSION: 14
-      TARGET: $(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
-      ASSET_FILENAME: vim-doge-$(echo $RUNNER_OS | tr '[:upper:]' '[:lower:]')
     steps:
+      - name: Get build info
+        id: build_info
+        run: |
+          echo ::set-output name=target::$(echo ${{ runner.os }} | tr '[:upper:]' '[:lower:]')
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -25,7 +27,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
       - run: npm ci --no-save
       - name: Build binary
-        run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ env.TARGET }}-x64 ${{ env.ASSET_FILENAME }}
+        run: npm run build:binary -- node${{ env.NODE_VERSION }}-${{ steps.build_info.outputs.target }}-x64 vim-doge-${{ steps.build_info.outputs.target }}
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.2
@@ -34,8 +36,8 @@ jobs:
       - name: Get asset info
         id: asset_info
         run: |
-          echo ::set-output name=asset_path::./bin/${{ env.ASSET_FILENAME }}.tar.gz
-          echo ::set-output name=asset_name::${{ env.ASSET_FILENAME }}.tar.gz
+          echo ::set-output name=asset_path::./bin/vim-doge-${{ steps.build_info.outputs.target }}.tar.gz
+          echo ::set-output name=asset_name::vim-doge-${{ steps.build_info.outputs.target }}.tar.gz
       - name: Upload release asset
         uses: actions/upload-release-asset@v1.0.1
         env:
