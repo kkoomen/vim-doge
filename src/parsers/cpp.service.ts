@@ -9,6 +9,7 @@ enum NodeType {
   FIELD_DECLARATION = 'field_declaration',
   CLASS_SPECIFIER = 'class_specifier',
   TEMPLATE_DECLARATION = 'template_declaration',
+  FUNCTION_DECLARATOR = 'function_declarator',
 }
 
 export class CppParserService
@@ -41,6 +42,7 @@ export class CppParserService
           break;
         }
 
+        case NodeType.FUNCTION_DECLARATOR:
         case NodeType.FUNCTION_DEFINITION:
         case NodeType.DECLARATION: {
           this.result = {
@@ -52,7 +54,11 @@ export class CppParserService
             parameters: [],
             returnType: null,
           };
-          this.runNodeParser(this.parseFunction, node);
+          if (node.type === NodeType.FUNCTION_DECLARATOR) {
+            this.runNodeParser(this.parseFunction, node.parent as SyntaxNode);
+          } else {
+            this.runNodeParser(this.parseFunction, node);
+          }
           break;
         }
 
@@ -122,10 +128,12 @@ export class CppParserService
           // Method name.
           childNode.children
             .filter((n: SyntaxNode) =>
-              ['identifier', 'scoped_identifier'].includes(n.type),
+              ['identifier', 'scoped_identifier', 'field_identifier'].includes(
+                n.type,
+              ),
             )
             .forEach((n: SyntaxNode) => {
-              if (n.type === 'identifier') {
+              if (['identifier', 'field_identifier'].includes(n.type)) {
                 this.result.name = n.text;
               }
 
