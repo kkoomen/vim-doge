@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist/* && rm -f ./bin/vim-doge && ln -s ../dist/index.js ./bin/vim-doge",
     "watch": "npm run prebuild && tsc -p tsconfig.json --watch true --sourceMap",
     "build": "tsc -p tsconfig.json",
-    "build:binary": "rimraf build && ncc build ./src/index.ts -m -o build && ./scripts/build.sh",
+    "build:binary": "rimraf build && ncc build ./src/index.ts -m -o build",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\""
   },
