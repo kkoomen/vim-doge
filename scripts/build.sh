@@ -19,7 +19,7 @@ cd $ROOT_DIR
 
 # Build the binary.
 node $ROOT_DIR/pkg/lib-es5/bin.js . -t "$BUILD_TARGETS" --out-path $ROOT_DIR/bin
-chmod +x $ROOT_DIR/bin/vim-doge
+chmod +x $ROOT_DIR/bin/{vim-doge,vim-doge.exe}
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then

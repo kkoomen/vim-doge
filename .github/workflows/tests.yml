@@ -40,6 +40,7 @@ jobs:
       - run: npm ci --no-save
       - name: Build binary
         run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
+      - run: ./scripts/build.sh
       - name: Setup Vim
         uses: thinca/action-setup-vim@v1
         id: vim
