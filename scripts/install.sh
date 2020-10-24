@@ -24,6 +24,8 @@ if [[ $OS == 'Darwin' ]]; then
 elif [[ $OS == 'Linux' ]]; then
   TARGET="vim-doge-linux"
 else
+  echo "vim-doge does not support Windows yet"
+  exit 1
   TARGET="vim-doge-win"
   OUTFILE="$OUTFILE.exe"
 fi

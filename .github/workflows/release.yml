@@ -8,7 +8,7 @@ jobs:
     name: Build and upload binary assets
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest]
         include:
           - node-version: 14
           - os: macos-latest
@@ -19,10 +19,6 @@ jobs:
             target: linux
             asset-name: vim-doge-linux.tar.gz
             asset-path: ./bin/vim-doge-linux.tar.gz
-          - os: windows-latest
-            target: win
-            asset-name: vim-doge-win.tar.gz
-            asset-path: ./bin/vim-doge-win.tar.gz
     runs-on : ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
