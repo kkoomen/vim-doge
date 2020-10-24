@@ -32,11 +32,11 @@ jobs:
       - name: Build binary
         run: npm run build:binary -- node${{ matrix.node-version }}-${{ env.TARGET }}-x64
       - name: Setup Vim
-        uses: rhysd/action-setup-vim@v1
+        uses: thinca/action-setup-vim@v1
         id: vim
         with:
-          version: ${{ matrix.vim-version }}
-          neovim: false
+          vim_version: ${{ matrix.vim-version }}
+          vim_type: vim
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
 
