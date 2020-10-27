@@ -11,14 +11,14 @@ $assetPath = "$rootDir\bin\$assetName"
 # Build the pkg lib prerequisites if needed.
 if (!(Test-Path "$rootDir\pkg\lib-es5")) {
   cd $rootDir\pkg
-  npm install --no-save && npm run prepare
+  npm install --no-save; if ($?) {npm run prepare}
 }
 
 # Build the binary.
 node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
 # Archive the binary.
-if ($outFile != "") {
+if ($outFile -ne "") {
   $outFile = "$rootDir\bin\$outFile.exe"
   cd "$rootDir\bin"
   rm -f *.zip
