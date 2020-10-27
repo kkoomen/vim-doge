@@ -1,4 +1,4 @@
-$rootDir = Split-Path $myInvocation.MyCommand.Path
+$rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 $version = Get-Content "$rootDir\.version"
 $winVersion = switch ([IntPtr]::Size -eq 4) {
   $true  {"32"}

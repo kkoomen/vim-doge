@@ -1,5 +1,5 @@
 param([String] $buildTarget, [String] $outFile)
-$rootDir = Split-Path $myInvocation.MyCommand.Path
+$rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 # $winVersion = switch ([IntPtr]::Size -eq 4) {
 #   $true  {"32"}
 #   $false {"64"}
@@ -19,11 +19,11 @@ node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
 # Archive the binary.
 if ($outFile -ne "") {
-  $outFile = "$rootDir\bin\$outFile.exe"
+  $outFile = "$outFile.zip"
   cd "$rootDir\bin"
-  rm -f *.zip
+  rm *.zip
   echo "==> Archiving $rootDir\bin\vim-doge.exe -> $rootDir\bin\$outFile"
-  zip "$outFile" vim-doge.exe
+  7z a -tzip "$outFile" vim-doge.exe
 }
 
 echo "Done building vim-doge binaries"
