@@ -17,6 +17,10 @@ if (!(Test-Path "$rootDir\pkg\lib-es5")) {
 # Build the binary.
 node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
+Write-Host "--------- vim-doge.exe ---------"
+Write-Host (Get-ChildItem -Path "$rootDir" -Filter "vim-doge.exe" -Recurse -ErrorAction SilentlyContinue -Force | %{$_.FullName})
+Write-Host "--------- vim-doge.exe ---------"
+
 # Archive the binary.
 if ($outFile -ne "") {
   $outFile = "$rootDir\bin\$outFile$winVersion.zip"
