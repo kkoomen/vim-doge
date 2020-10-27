@@ -1,4 +1,6 @@
 param([String] $buildTarget, [String] $outFile)
+Write-Host "buildTarget: $buildTarget"
+Write-Host "outFile: $outFile"
 $rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 # $winVersion = switch ([IntPtr]::Size -eq 4) {
 #   $true  {"32"}
@@ -15,10 +17,12 @@ if (!(Test-Path "$rootDir\pkg\lib-es5")) {
 }
 
 # Build the binary.
+cd $rootDir
 node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
 Write-Host "--------- vim-doge.exe ---------"
 Write-Host (Get-ChildItem -Path "$rootDir" -Filter "vim-doge.exe" -Recurse -ErrorAction SilentlyContinue -Force | %{$_.FullName})
+Write-Host (Get-ChildItem -Path "$rootDir" -Filter "vim-doge" -Recurse -ErrorAction SilentlyContinue -Force | %{$_.FullName})
 Write-Host "--------- vim-doge.exe ---------"
 
 # Archive the binary.
