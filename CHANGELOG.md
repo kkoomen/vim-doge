@@ -1,3 +1,9 @@
+## [3.4.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.4.1...v3.4.2-beta.0) (2020-10-27)
+
+### Features
+
+- add initial windows build script setup ([24869f9](https://github.com/kkoomen/vim-doge/commit/24869f942e2576a31707cce3d1bca9d05e83dd88))
+
 ## [3.4.1](https://github.com/kkoomen/vim-doge/compare/v3.4.0...v3.4.1) (2020-10-24)
 
 ### Bug Fixes
