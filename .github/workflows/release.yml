@@ -8,7 +8,7 @@ jobs:
     name: Build and upload binary assets
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
         include:
           - node-version: 14
           - os: macos-latest
@@ -19,6 +19,10 @@ jobs:
             target: linux
             asset_name: vim-doge-linux.tar.gz
             asset_path: ./bin/vim-doge-linux.tar.gz
+          - os: windows-latest
+            target: win
+            asset_name: vim-doge-win64.zip
+            asset_path: ./bin/vim-doge-win.zip
     runs-on : ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -30,8 +34,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
-      - name: Build binary
+      - name: Build Unix binary
+        if: matrix.target != 'win'
         run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.target }}-x64 vim-doge-${{ matrix.target }}
+      - name: Build Windows binary
+        if: matrix.target == 'win'
+        run: npm run build:binary:windows -- node${{ matrix.node-version }}-${{ matrix.target }}-x64 vim-doge-${{ matrix.target }}
       - name: Get release
         id: get_release
         uses: bruceadams/get-release@v1.2.2

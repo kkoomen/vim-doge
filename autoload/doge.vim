@@ -181,7 +181,11 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
-  call execute('!' . g:doge_dir . '/scripts/install.sh')
+  if has('win32')
+    call execute('!' . g:doge_dir . '/scripts/install.ps1')
+  else
+    call execute('!' . g:doge_dir . '/scripts/install.sh')
+  endif
 endfunction
 
 let &cpoptions = s:save_cpo
