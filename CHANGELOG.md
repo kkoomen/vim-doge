@@ -1,3 +1,9 @@
+## [3.4.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.0...v3.4.2-beta.1) (2020-10-27)
+
+### Bug Fixes
+
+- **ci:** use powershell equivalent of != and && ([fcaa173](https://github.com/kkoomen/vim-doge/commit/fcaa1732569ddc2a270c74dca60669764a6efe3a))
+
 ## [3.4.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.4.1...v3.4.2-beta.0) (2020-10-27)
 
 ### Features
