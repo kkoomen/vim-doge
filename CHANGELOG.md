@@ -1,3 +1,9 @@
+## [3.4.2-beta.3](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.2...v3.4.2-beta.3) (2020-10-27)
+
+### Bug Fixes
+
+- **ci:** only support win64 for now ([cd4a7fb](https://github.com/kkoomen/vim-doge/commit/cd4a7fbd31bf54a661c0f8d1a4e6bd3f8a76c409))
+
 ## [3.4.2-beta.2](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.1...v3.4.2-beta.2) (2020-10-27)
 
 ### Bug Fixes
