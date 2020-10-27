@@ -19,11 +19,10 @@ node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
 # Archive the binary.
 if ($outFile -ne "") {
-  $outFile = "$outFile.zip"
-  cd "$rootDir\bin"
-  rm *.zip
-  echo "==> Archiving $rootDir\bin\vim-doge.exe -> $rootDir\bin\$outFile"
-  7z a -tzip "$outFile" vim-doge.exe
+  $outFile = "$rootDir\bin\$outFile$winVersion.zip"
+  rm $rootDir\bin\*.zip
+  echo "==> Archiving $rootDir\bin\vim-doge.exe -> $outFile"
+  7z a -tzip "$outFile" "$rootDir\bin\vim-doge.exe"
 }
 
 echo "Done building vim-doge binaries"

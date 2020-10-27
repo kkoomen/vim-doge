@@ -22,7 +22,7 @@ jobs:
           - os: windows-latest
             target: win
             asset_name: vim-doge-win64.zip
-            asset_path: ./bin/vim-doge-win.zip
+            asset_path: ./bin/vim-doge-win64.zip
     runs-on : ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
