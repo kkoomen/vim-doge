@@ -1,3 +1,9 @@
+## [3.4.2-beta.2](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.1...v3.4.2-beta.2) (2020-10-27)
+
+### Bug Fixes
+
+- **ci:** resolve path to parent dir for windows ([02aabcb](https://github.com/kkoomen/vim-doge/commit/02aabcb638eaa1c51479810e1c8db67ff0d27360))
+
 ## [3.4.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.0...v3.4.2-beta.1) (2020-10-27)
 
 ### Bug Fixes
