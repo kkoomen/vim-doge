@@ -21,7 +21,7 @@ jobs:
           - os: ubuntu-latest
             target: linux
           - os: windows-latest
-            target: windows
+            target: win
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -67,7 +67,7 @@ jobs:
           - os: ubuntu-latest
             target: linux
           - os: windows-latest
-            target: windows
+            target: win
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
