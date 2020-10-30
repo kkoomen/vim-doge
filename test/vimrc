@@ -56,6 +56,6 @@ if !has('patch-8.1.201')
   silent! python3 1
 endif
 
-if !exists(expand('~/.vim/'))
+if !exists(expand('~/.vim/')) && !has('win32')
   call mkdir(expand('~/.vim/'), 'p')
 endif
