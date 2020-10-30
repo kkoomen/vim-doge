@@ -113,6 +113,10 @@ done
 if [ "$tries" -gt 1 ]; then
   echo
   echo "Tried to run tests $tries times"
+
+  if [ "$tries" -eq 5 ]; then
+    exit 1
+  fi
 fi
 
 rm "$run_file"
