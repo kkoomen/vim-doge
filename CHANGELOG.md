@@ -1,3 +1,9 @@
+## [3.5.1](https://github.com/kkoomen/vim-doge/compare/v3.5.0...v3.5.1) (2020-10-31)
+
+### Bug Fixes
+
+- **windows:** prefix install.ps1 with powershell.exe ([5853802](https://github.com/kkoomen/vim-doge/commit/58538028a60bbcbc3a1f8d86c719f18b0eea2004))
+
 # [3.5.0](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.5...v3.5.0) (2020-10-31)
 
 ### Bug Fixes
