@@ -1,6 +1,8 @@
 " vint: -ProhibitSetNoCompatible
 
-call execute('set runtimepath=' . getcwd() . ',' . getcwd() . '/vader')
+" call execute('set runtimepath=' . getcwd() . ',' . getcwd() . '/vader')
+set runtimepath^=$PWD
+set runtimepath^=$PWD/vader
 
 " Set a variable to indicate we're inside a test env.
 let g:doge_test_env = 1
