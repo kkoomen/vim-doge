@@ -1,3 +1,25 @@
+# [3.5.0](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.5...v3.5.0) (2020-10-31)
+
+### Bug Fixes
+
+- **ci:** exit 1 if reached 5 test tries ([f4bd0de](https://github.com/kkoomen/vim-doge/commit/f4bd0dea2ef9722cd8f793c5cd38c178c766858e))
+- **ci:** only run windows tests for now ([cc00317](https://github.com/kkoomen/vim-doge/commit/cc0031739a7d949546da63c383be0ec8d066513c))
+- **ci:** run windows tests but only for Vim, exclude NeoVim ([e3a0300](https://github.com/kkoomen/vim-doge/commit/e3a0300ab3966d96acf5af2a814ff717de51ba72))
+- **ci:** use correct windows target value ([41eab11](https://github.com/kkoomen/vim-doge/commit/41eab113fa6337859980f6fabbea082560600ad6))
+- **test:** make sure the vim-doge rtp are the only runtimepaths ([3c963e9](https://github.com/kkoomen/vim-doge/commit/3c963e9f892a3a60e3422eff0cd52869196a5352))
+- **tests:** call execute() method in test/vimrc ([7be6a45](https://github.com/kkoomen/vim-doge/commit/7be6a455bdb49298c5fcc4711576fd3ac7bef446))
+- **tests:** only create ~/.vim dir on non-windows systems ([206a584](https://github.com/kkoomen/vim-doge/commit/206a5845c6b5af484afd5eb2a455b0c241855f9b))
+- **tests:** temporarily disable neovim tests ([4a4e74d](https://github.com/kkoomen/vim-doge/commit/4a4e74de837d83cee68f326d7530b645b7010829))
+- **tests:** update vimrc runtimepath to work on windows ([2684c96](https://github.com/kkoomen/vim-doge/commit/2684c96a08a52df9212d454bdeada96365894f27))
+- **tests:** use proper runtimepath and only run windows tests ([0d72744](https://github.com/kkoomen/vim-doge/commit/0d72744a5936d90807629f0809ef940d4b51e7b1))
+- **windows:** use shellslash check for g:doge_dir ([57777b7](https://github.com/kkoomen/vim-doge/commit/57777b79d0c363fe21ba984a74ec75cb0bc51176))
+- add path fix for windows in vercel/pkg submodule ([9cf0164](https://github.com/kkoomen/vim-doge/commit/9cf01642b6308e940ad4b65b9918f90afb020709))
+
+### Features
+
+- **ci:** first try to support windows ([709b6c6](https://github.com/kkoomen/vim-doge/commit/709b6c636666ee28747f15dcbfd619575ede3067))
+- **windows:** set shell=powershel before running ps1 script ([184f510](https://github.com/kkoomen/vim-doge/commit/184f5102bf4ecda5ba7a4bc78dc42d8224da24df))
+
 ## [3.4.2-beta.5](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.4...v3.4.2-beta.5) (2020-10-27)
 
 ## [3.4.2-beta.4](https://github.com/kkoomen/vim-doge/compare/v3.4.2-beta.3...v3.4.2-beta.4) (2020-10-27)
