@@ -182,7 +182,13 @@ if g:doge_enable_mappings == v:true
 endif
 unlet s:mode
 
-let g:doge_dir = expand('<sfile>:p:h:h')
+if has('win32') && &shellslash
+  set noshellslash
+  let g:doge_dir = resolve(expand('<sfile>:p:h:h'))
+  set shellslash
+else
+  let g:doge_dir = resolve(expand('<sfile>:p:h:h'))
+endif
 
 ""
 " @command DogeGenerate {doc_standard}

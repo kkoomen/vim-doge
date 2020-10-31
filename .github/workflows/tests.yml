@@ -12,7 +12,7 @@ jobs:
     name: Vim
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
         vim-version: [v7.4.2119, head]
         node-version: [10, 12, 14]
         include:
@@ -20,6 +20,8 @@ jobs:
             target: macos
           - os: ubuntu-latest
             target: linux
+          - os: windows-latest
+            target: win
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -36,8 +38,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
-      - name: Build binary
+      - name: Build Unix binary
+        if: matrix.target != 'win'
         run: npm run build:binary -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
+      - name: Build Windows binary
+        if: matrix.target == 'win'
+        run: npm run build:binary:windows -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
@@ -46,6 +52,7 @@ jobs:
           vim_type: vim
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
 
   tests_neovim:
     name: NeoVim
@@ -85,6 +92,7 @@ jobs:
           vim_type: neovim
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
 
   vint:
     name: Linter

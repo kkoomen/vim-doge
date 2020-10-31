@@ -1,14 +1,5 @@
 param([String] $buildTarget, [String] $outFile)
-Write-Host "buildTarget: $buildTarget"
-Write-Host "outFile: $outFile"
 $rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
-# $winVersion = switch ([IntPtr]::Size -eq 4) {
-#   $true  {"32"}
-#   $false {"64"}
-# }
-$winVersion = "64"
-$assetName = "vim-doge-win$winVersion.zip"
-$assetPath = "$rootDir\bin\$assetName"
 
 # Build the pkg lib prerequisites if needed.
 if (!(Test-Path "$rootDir\pkg\lib-es5")) {
@@ -16,18 +7,14 @@ if (!(Test-Path "$rootDir\pkg\lib-es5")) {
   npm install --no-save; if ($?) {npm run prepare}
 }
 
-# Build the binary.
 cd $rootDir
-node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
-Write-Host "--------- vim-doge.exe ---------"
-Write-Host (Get-ChildItem -Path "$rootDir" -Filter "vim-doge.exe" -Recurse -ErrorAction SilentlyContinue -Force | %{$_.FullName})
-Write-Host (Get-ChildItem -Path "$rootDir" -Filter "vim-doge" -Recurse -ErrorAction SilentlyContinue -Force | %{$_.FullName})
-Write-Host "--------- vim-doge.exe ---------"
+# Build the binary.
+node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
 
 # Archive the binary.
 if ($outFile -ne "") {
-  $outFile = "$rootDir\bin\$outFile$winVersion.zip"
+  $outFile = "$rootDir\bin\$outFile.zip"
   rm $rootDir\bin\*.zip
   echo "==> Archiving $rootDir\bin\vim-doge.exe -> $outFile"
   7z a -tzip "$outFile" "$rootDir\bin\vim-doge.exe"
