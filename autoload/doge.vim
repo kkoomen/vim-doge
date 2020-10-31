@@ -182,10 +182,7 @@ endfunction
 " Install the necessary dependencies.
 function! doge#install() abort
   if has('win32')
-    let l:shell = &shell
-    set shell=powershell
-    call execute('!' . g:doge_dir . '/scripts/install.ps1')
-    let &shell = l:shell
+    call execute('!powershell.exe ' . g:doge_dir . '/scripts/install.ps1')
   else
     call execute('!' . g:doge_dir . '/scripts/install.sh')
   endif
