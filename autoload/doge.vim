@@ -212,8 +212,18 @@ function! doge#install() abort
     " to show download progress bar, directly run execute()
     execute('!' . l:command)
     call Report(v:shell_error)
+  elseif has('terminal')
+    " vim with +terminal
+    function! Callback(channel) abort
+      let l:exitcode = job_info(ch_getjob(a:channel)).exitval
+      if l:exitcode == 0
+        bd!         " no errors to report, so delete buffer
+      endif
+      call Report(l:exitcode)
+    endfun
+    call term_start(l:command, {'close_cb': function('Callback')})
   else
-    " vim
+    " vim without terminal support
     call execute('!' . l:command)
     call Report(v:shell_error)
   endif
