@@ -181,6 +181,16 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
+  func! Report(exitcode) abort
+    if a:exitcode == 0
+      echom 'vim-doge installed sucessfully'
+    else
+      echohl ErrorMsg
+      echom 'vim-doge could not be installed ' . '(exit code: ' . a:exitcode . ')'
+      echohl None
+    endif
+  endfun
+
   if has('win32')
     let l:command = 'powershell.exe Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1'
   else
@@ -192,6 +202,7 @@ function! doge#install() abort
       if a:2 == 0   " exitcode
         bd!         " no errors to report, so delete buffer
       endif
+      call Report(a:2)
     endfun
     sp
     enew
@@ -200,9 +211,11 @@ function! doge#install() abort
     " neovim does not output stdout if called using :call execute()
     " to show download progress bar, directly run execute()
     execute('!' . l:command)
+    call Report(v:shell_error)
   else
     " vim
     call execute('!' . l:command)
+    call Report(v:shell_error)
   endif
 endfunction
 
