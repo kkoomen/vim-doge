@@ -182,9 +182,27 @@ endfunction
 " Install the necessary dependencies.
 function! doge#install() abort
   if has('win32')
-    call execute('!powershell.exe ' . g:doge_dir . '/scripts/install.ps1')
+    let l:command = 'powershell.exe Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1'
   else
-    call execute('!' . g:doge_dir . '/scripts/install.sh')
+    let l:command = g:doge_dir . '/scripts/install.sh'
+  endif
+  if has('nvim') && exists(':terminal') == 2
+    " neovim with :terminal support
+    function! Callback(...) abort
+      if a:2 == 0   " exitcode
+        bd!         " no errors to report, so delete buffer
+      endif
+    endfun
+    sp
+    enew
+    call termopen(l:command, {'on_exit': function('Callback')})
+  elseif has('nvim')
+    " neovim does not output stdout if called using :call execute()
+    " to show download progress bar, directly run execute()
+    execute('!' . l:command)
+  else
+    " vim
+    call execute('!' . l:command)
   endif
 endfunction
 
