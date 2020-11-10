@@ -198,15 +198,17 @@ function! doge#install() abort
   endif
   if has('nvim') && exists(':terminal') == 2
     " neovim with :terminal support
-    function! Callback(...) abort
+    function! Callback_on_exit(...) abort
       if a:2 == 0   " exitcode
-        bd!         " no errors to report, so delete buffer
+        call execute(s:terminal_bufnr . 'bd!')         " no errors to report, so delete buffer
+        unlet s:terminal_bufnr
       endif
       call Report(a:2)
     endfun
     sp
     enew
-    call termopen(l:command, {'on_exit': function('Callback')})
+    call termopen(l:command, {'on_exit': function('Callback_on_exit')})
+    let s:terminal_bufnr = bufnr()
   elseif has('nvim')
     " neovim does not output stdout if called using :call execute()
     " to show download progress bar, directly run execute()
@@ -214,14 +216,16 @@ function! doge#install() abort
     call Report(v:shell_error)
   elseif has('terminal')
     " vim with +terminal
-    function! Callback(channel) abort
+    function! Callback_on_exit(channel) abort
       let l:exitcode = job_info(ch_getjob(a:channel)).exitval
       if l:exitcode == 0
-        bd!         " no errors to report, so delete buffer
+        call execute(s:terminal_bufnr . 'bd!')         " no errors to report, so delete buffer
+        unlet s:terminal_bufnr
       endif
       call Report(l:exitcode)
     endfun
-    call term_start(l:command, {'close_cb': function('Callback')})
+    call term_start(l:command, {'close_cb': function('Callback_on_exit')})
+    let s:terminal_bufnr = bufnr()
   else
     " vim without terminal support
     call execute('!' . l:command)
