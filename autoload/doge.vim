@@ -192,7 +192,11 @@ function! doge#install() abort
   endfun
 
   if has('win32')
-    let l:command = 'powershell.exe Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1'
+    if executable('pwsh.exe')
+      let l:command = 'pwsh.exe -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1"'
+    else
+      let l:command = 'powershell.exe Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1'
+    endif
   else
     let l:command = g:doge_dir . '/scripts/install.sh'
   endif
