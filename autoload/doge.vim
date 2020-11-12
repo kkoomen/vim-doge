@@ -194,8 +194,10 @@ function! doge#install() abort
   if has('win32')
     let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
     let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1'))
+    let l:term_height = 8
   else
     let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
+    let l:term_height = 4
   endif
 
   if has('nvim') && exists(':terminal') == 2
@@ -207,7 +209,7 @@ function! doge#install() abort
       endif
       call s:report_result(a:2)
     endfun
-    sp
+    exe (&splitbelow ? 'botright' : 'topleft') . l:term_height . 'sp'
     enew
     call termopen(l:command, {'on_exit': function('s:callback')})
     let s:terminal_bufnr = bufnr()
@@ -228,7 +230,7 @@ function! doge#install() abort
       endif
       call s:report_result(l:exitcode)
     endfun
-    call term_start(l:command, {'close_cb': function('s:callback')})
+    exe (&splitbelow ? 'botright' : 'topleft') . " call term_start(l:command, {'term_rows': " . l:term_height . ", 'close_cb': function('s:callback')})"
     let s:terminal_bufnr = bufnr()
 
   else
