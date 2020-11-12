@@ -192,13 +192,10 @@ function! doge#install() abort
   endfun
 
   if has('win32')
-    if executable('pwsh.exe')
-      let l:command = 'pwsh.exe -Command "Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1"'
-    else
-      let l:command = 'powershell.exe Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; ' . g:doge_dir . '/scripts/install.ps1'
-    endif
+    let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
+    let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1'))
   else
-    let l:command = g:doge_dir . '/scripts/install.sh'
+    let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
   endif
   if has('nvim') && exists(':terminal') == 2
     " neovim with :terminal support

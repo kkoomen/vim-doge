@@ -20,7 +20,7 @@ fi
 
 
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-cd $ROOT_DIR
+cd "$ROOT_DIR"
 [[ ! -d ./bin ]] && mkdir ./bin
 
 OS="$(uname)"
