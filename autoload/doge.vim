@@ -181,7 +181,7 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
-  func! Report(exitcode) abort
+  func! s:report_result(exitcode) abort
     if a:exitcode == 0
       echom 'vim-doge installed sucessfully'
     else
@@ -197,40 +197,44 @@ function! doge#install() abort
   else
     let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
   endif
+
   if has('nvim') && exists(':terminal') == 2
     " neovim with :terminal support
-    function! Callback_on_exit(...) abort
+    function! s:callback(...) abort
       if a:2 == 0   " exitcode
         call execute(s:terminal_bufnr . 'bd!')         " no errors to report, so delete buffer
         unlet s:terminal_bufnr
       endif
-      call Report(a:2)
+      call s:report_result(a:2)
     endfun
     sp
     enew
-    call termopen(l:command, {'on_exit': function('Callback_on_exit')})
+    call termopen(l:command, {'on_exit': function('s:callback')})
     let s:terminal_bufnr = bufnr()
+
   elseif has('nvim')
     " neovim does not output stdout if called using :call execute()
     " to show download progress bar, directly run execute()
     execute('!' . l:command)
-    call Report(v:shell_error)
+    call s:report_result(v:shell_error)
+
   elseif has('terminal')
     " vim with +terminal
-    function! Callback_on_exit(channel) abort
+    function! s:callback(channel) abort
       let l:exitcode = job_info(ch_getjob(a:channel)).exitval
       if l:exitcode == 0
         call execute(s:terminal_bufnr . 'bd!')         " no errors to report, so delete buffer
         unlet s:terminal_bufnr
       endif
-      call Report(l:exitcode)
+      call s:report_result(l:exitcode)
     endfun
-    call term_start(l:command, {'close_cb': function('Callback_on_exit')})
+    call term_start(l:command, {'close_cb': function('s:callback')})
     let s:terminal_bufnr = bufnr()
+
   else
     " vim without terminal support
     call execute('!' . l:command)
-    call Report(v:shell_error)
+    call s:report_result(v:shell_error)
   endif
 endfunction
 
