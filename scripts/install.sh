@@ -10,7 +10,7 @@ then
   continue
 else
   echo "curl: command not found" >&2
-  echo "Please ensure curl is installed on the system and is available in the PATH" >&2
+  echo 'Please make sure that curl is installed and available in your $PATH' >&2
   exit 127
 fi
 

@@ -181,15 +181,15 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
-  func! s:report_result(exitcode) abort
+  function! s:report_result(exitcode) abort
     if a:exitcode == 0
-      echom 'vim-doge installed sucessfully'
+      echom '[DoGe] installed sucessfully'
     else
       echohl ErrorMsg
-      echom 'vim-doge could not be installed ' . '(exit code: ' . a:exitcode . ')'
+      echom '[DoGe] installation failed ' . '(exit code: ' . a:exitcode . ')'
       echohl None
     endif
-  endfun
+  endfunction
 
   if has('win32')
     let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
@@ -202,9 +202,11 @@ function! doge#install() abort
 
   if has('nvim') && exists(':terminal') == 2
     " neovim with :terminal support
+    " vint: next-line -ProhibitUnusedVariable
     function! s:callback(...) abort
-      if a:2 == 0   " exitcode
-        call execute(s:terminal_bufnr . 'bd!')         " no errors to report, so delete buffer
+      if a:2 == 0 " exitcode
+        " no errors to report, so delete buffer
+        call execute(s:terminal_bufnr . 'bd!')
         unlet s:terminal_bufnr
       endif
       call s:report_result(a:2)
@@ -213,19 +215,20 @@ function! doge#install() abort
     enew
     call termopen(l:command, {'on_exit': function('s:callback')})
     let s:terminal_bufnr = bufnr()
-
   elseif has('nvim')
-    " neovim does not output stdout if called using :call execute()
-    " to show download progress bar, directly run execute()
+    " Neovim does not show any stdout output if called with :call execute(),
+    " therefore to show the download progress bar, we need to call execute() by
+    " itself.
     execute('!' . l:command)
     call s:report_result(v:shell_error)
-
   elseif has('terminal')
     " vim with +terminal
+    " vint: next-line -ProhibitUnusedVariable
     function! s:callback(channel) abort
       let l:exitcode = job_info(ch_getjob(a:channel)).exitval
       if l:exitcode == 0
-        call execute(s:terminal_bufnr . 'bd!')         " no errors to report, so delete buffer
+      " no errors to report, so delete buffer
+        call execute(s:terminal_bufnr . 'bd!')
         unlet s:terminal_bufnr
       endif
       call s:report_result(l:exitcode)
