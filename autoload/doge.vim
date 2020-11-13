@@ -211,10 +211,13 @@ function! doge#install() abort
       endif
       call s:report_result(a:2)
     endfun
+    let l:winid = win_getid()
     exe (&splitbelow ? 'botright' : 'topleft') . l:term_height . 'sp'
     enew
     call termopen(l:command, {'on_exit': function('s:callback')})
+    set nobuflisted
     let s:terminal_bufnr = bufnr()
+    call win_gotoid(l:winid)
   elseif has('nvim')
     " Neovim does not show any stdout output if called with :call execute(),
     " therefore to show the download progress bar, we need to call execute() by
@@ -233,8 +236,11 @@ function! doge#install() abort
       endif
       call s:report_result(l:exitcode)
     endfun
+    let l:winid = win_getid()
     exe (&splitbelow ? 'botright' : 'topleft') . " call term_start(l:command, {'term_rows': " . l:term_height . ", 'close_cb': function('s:callback')})"
+    set nobuflisted
     let s:terminal_bufnr = bufnr()
+    call win_gotoid(l:winid)
 
   else
     " vim without terminal support
