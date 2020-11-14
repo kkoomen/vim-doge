@@ -1,9 +1,18 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 # For more info about the 'set' command, see
 # https://www.gnu.org/software/bash/manual/bash.html#The-Set-Builtin
 set -e
 set -u
+
+if which curl &> /dev/null
+then
+  continue
+else
+  echo "curl: command not found" >&2
+  echo 'Please make sure that curl is installed and available in your $PATH' >&2
+  exit 127
+fi
 
 if [[ -e ./bin/vim-doge ]]; then
   rm -f ./bin/vim-doge
@@ -11,7 +20,7 @@ fi
 
 
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-cd $ROOT_DIR
+cd "$ROOT_DIR"
 [[ ! -d ./bin ]] && mkdir ./bin
 
 OS="$(uname)"

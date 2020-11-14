@@ -1,3 +1,5 @@
+echo "Preparing to download vim-doge binary..."
+
 $rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 $version = Get-Content "$rootDir\.version"
 $assetName = "vim-doge-win64.zip"
