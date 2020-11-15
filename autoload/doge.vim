@@ -186,7 +186,7 @@ function! doge#install() abort
     if filereadable(l:filepath)
       let l:binary_version = doge#helpers#trim(system(l:filepath . ' --version'))
       let l:local_version = doge#helpers#trim(readfile(g:doge_dir . '/.version')[0])
-      if l:binary_version == l:local_version
+      if l:binary_version ==# l:local_version
         echom '[DoGe] already using latest version, skipping binary download'
         return 0
       endif
