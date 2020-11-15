@@ -181,6 +181,18 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
+  for l:filename in ['vim-doge', 'vim-dog.exe']
+    let l:filepath = g:doge_dir . '/bin/' . l:filename
+    if filereadable(l:filepath)
+      let l:binary_version = doge#helpers#trim(system(l:filepath . ' --version'))
+      let l:local_version = doge#helpers#trim(readfile(g:doge_dir . '/.version')[0])
+      if l:binary_version == l:local_version
+        echom '[DoGe] already using latest version, skipping binary download'
+        return 0
+      endif
+    endif
+  endfor
+
   function! s:report_result(exitcode) abort
     if a:exitcode == 0
       echom '[DoGe] installed sucessfully'
@@ -231,7 +243,7 @@ function! doge#install() abort
       let l:exitcode = job_info(ch_getjob(a:channel)).exitval
       if l:exitcode == 0
       " no errors to report, so delete buffer
-        call execute(s:terminal_bufnr . 'bd!')
+        execute(s:terminal_bufnr . 'bd!')
         unlet s:terminal_bufnr
       endif
       call s:report_result(l:exitcode)
