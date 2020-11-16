@@ -181,10 +181,10 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install() abort
-  for l:filename in ['vim-doge', 'vim-dog.exe']
+  for l:filename in ['vim-doge', 'vim-doge.exe']
     let l:filepath = g:doge_dir . '/bin/' . l:filename
     if filereadable(l:filepath)
-      let l:binary_version = doge#helpers#trim(system(l:filepath . ' --version'))
+      let l:binary_version = doge#helpers#trim(system(shellescape(l:filepath) . ' --version'))
       let l:local_version = doge#helpers#trim(readfile(g:doge_dir . '/.version')[0])
       if l:binary_version ==# l:local_version
         echom '[DoGe] already using latest version, skipping binary download'
