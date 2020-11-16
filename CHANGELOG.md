@@ -1,3 +1,13 @@
+## [3.5.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.5.1...v3.5.2-beta.0) (2020-11-16)
+
+### Bug Fixes
+
+- use case-sensitive check for doge#install() ([400e871](https://github.com/kkoomen/vim-doge/commit/400e87185f7514b3edb7c2801cb36dc41f4c85b5))
+
+### Features
+
+- do not download binary if already downloaded ([b5695b6](https://github.com/kkoomen/vim-doge/commit/b5695b60f8f31450b433d31c5c8a36e86cef8b28))
+
 ## [3.5.1](https://github.com/kkoomen/vim-doge/compare/v3.5.0...v3.5.1) (2020-10-31)
 
 ### Bug Fixes
