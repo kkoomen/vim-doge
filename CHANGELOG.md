@@ -1,3 +1,9 @@
+## [3.5.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.5.2-beta.0...v3.5.2-beta.1) (2020-11-16)
+
+### Bug Fixes
+
+- use shellescape() in system call and resolve typo ([#157](https://github.com/kkoomen/vim-doge/issues/157)) ([3b55111](https://github.com/kkoomen/vim-doge/commit/3b55111ea13f692c7f04d601f688a13807ccf71f))
+
 ## [3.5.2-beta.0](https://github.com/kkoomen/vim-doge/compare/v3.5.1...v3.5.2-beta.0) (2020-11-16)
 
 ### Bug Fixes
