@@ -1,3 +1,9 @@
+## [3.5.3](https://github.com/kkoomen/vim-doge/compare/v3.5.2...v3.5.3) (2020-11-17)
+
+### Bug Fixes
+
+- make install script compatible with dash ([#160](https://github.com/kkoomen/vim-doge/issues/160)) ([3129f22](https://github.com/kkoomen/vim-doge/commit/3129f227547c95547be1d1fcc4f75e45e93442e0))
+
 ## [3.5.2](https://github.com/kkoomen/vim-doge/compare/v3.5.2-beta.1...v3.5.2) (2020-11-16)
 
 ## [3.5.2-beta.1](https://github.com/kkoomen/vim-doge/compare/v3.5.2-beta.0...v3.5.2-beta.1) (2020-11-16)
