@@ -1,3 +1,9 @@
+## [3.5.4](https://github.com/kkoomen/vim-doge/compare/v3.5.3...v3.5.4) (2020-11-17)
+
+### Bug Fixes
+
+- adjust elif statement to be compatible with dash ([#160](https://github.com/kkoomen/vim-doge/issues/160)) ([3964cb0](https://github.com/kkoomen/vim-doge/commit/3964cb0841cfed670b6bf509deb5d56f69c2c258))
+
 ## [3.5.3](https://github.com/kkoomen/vim-doge/compare/v3.5.2...v3.5.3) (2020-11-17)
 
 ### Bug Fixes
