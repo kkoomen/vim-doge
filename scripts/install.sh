@@ -30,7 +30,7 @@ RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$PKG_VERSION"
 
 if [ $OS = 'Darwin' ]; then
   TARGET="vim-doge-macos"
-elif [[ $OS == 'Linux' ]]; then
+elif [ $OS = 'Linux' ]; then
   TARGET="vim-doge-linux"
 else
   echo "vim-doge does not support your system"
