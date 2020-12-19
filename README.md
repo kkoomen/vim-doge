@@ -307,7 +307,21 @@ let g:doge_python_settings = {
 
 - `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers
 
-# FAQ
+# Headless mode
+
+If you're running your vim commands inside a docker, CI or similar environments
+with commands such as `vim +PlugInstall +qall > /dev/null` then you probably
+want to use headless mode. This will not spawn any terminals, progress bars etc
+and will simply run any process by vim-doge in the background.
+
+This feature can be enabled by passing in `{ 'headless': 1 }` into the
+`doge#install()` like so: `doge#install({ 'headless': 1 })`.
+
+Example using vim-plug:
+
+```vim
+Plug 'kkoomen/vim-doge', {'do': { ->doge#install({ 'headless': 1 }) }}
+```
 
 # Help
 

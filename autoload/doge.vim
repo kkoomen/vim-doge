@@ -180,7 +180,7 @@ endfunction
 
 "" @public
 " Install the necessary dependencies.
-function! doge#install() abort
+function! doge#install(...) abort
   for l:filename in ['vim-doge', 'vim-doge.exe']
     let l:filepath = g:doge_dir . '/bin/' . l:filename
     if filereadable(l:filepath)
@@ -210,6 +210,14 @@ function! doge#install() abort
   else
     let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
     let l:term_height = 4
+  endif
+
+  if len(a:000) > 0
+    if get(a:000[0], 'headless', 0)
+      call system(l:command)
+      call s:report_result(v:shell_error)
+      return
+    endif
   endif
 
   if has('nvim') && exists(':terminal') == 2
