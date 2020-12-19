@@ -61,3 +61,27 @@ Expect cpp (generated comment with @brief and @param tag):
    * @param p [TODO:description]
    */
   void f(A* p = this) {}
+
+# ==============================================================================
+# Functions that returns a pointer type.
+# ==============================================================================
+Given cpp (function that returns a pointer type):
+  int* fun1(int a,int b,int c){
+      return nullptr;
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @brief and @param tag):
+  /**
+   * @brief [TODO:description]
+   *
+   * @param a [TODO:description]
+   * @param b [TODO:description]
+   * @param c [TODO:description]
+   * @return [TODO:description]
+   */
+  int* fun1(int a,int b,int c){
+      return nullptr;
+  }

@@ -114,6 +114,11 @@ export class CppParserService
           break;
         }
 
+        case 'pointer_declarator': {
+          this.parseFunction(childNode);
+          break;
+        }
+
         case 'function_declarator': {
           // Return type for statement like:
           //   auto Person::getPersonType () -> PersonType
