@@ -1,3 +1,13 @@
+# [3.6.0](https://github.com/kkoomen/vim-doge/compare/v3.5.4...v3.6.0) (2020-12-19)
+
+### Bug Fixes
+
+- **cpp:** support functions that return pointers ([#179](https://github.com/kkoomen/vim-doge/issues/179)) ([493336a](https://github.com/kkoomen/vim-doge/commit/493336afdaf81d84050c114f0558824fc70356de))
+
+### Features
+
+- support headless mode ([#199](https://github.com/kkoomen/vim-doge/issues/199)) ([ec4d1c4](https://github.com/kkoomen/vim-doge/commit/ec4d1c4702918f4cf31ce2d1dbe97e65c12d5d6d))
+
 ## [3.5.4](https://github.com/kkoomen/vim-doge/compare/v3.5.3...v3.5.4) (2020-11-17)
 
 ### Bug Fixes
