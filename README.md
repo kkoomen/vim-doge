@@ -53,7 +53,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
   - [JavaScript](#javascript)
   - [PHP](#php)
   - [Python](#python)
-- [FAQ](#faq)
+- [Headless mode](#headless-mode)
 - [Help](#help)
 - [Contributing](#contributing)
   - [Tree sitter](#tree-sitter)
