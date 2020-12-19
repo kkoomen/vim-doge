@@ -320,7 +320,7 @@ This feature can be enabled by passing in `{ 'headless': 1 }` into the
 Example using vim-plug:
 
 ```vim
-Plug 'kkoomen/vim-doge', {'do': { ->doge#install({ 'headless': 1 }) }}
+Plug 'kkoomen/vim-doge', {'do': { -> doge#install({ 'headless': 1 }) }}
 ```
 
 # Help
