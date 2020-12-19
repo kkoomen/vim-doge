@@ -176,13 +176,13 @@ let b:doge_patterns = {
 
         " The 'template' key is a new line when rendering the comment.
         " All the root-level tokens returned from the parser can be used here.
-\       'template': {
+\       'template': [
 \         '/**',
 \         ' * !description',
 \         '%(parameters| *)%',
 \         '%(parameters| * {parameters})%',
 \         ' */',
-\       },
+\       ],
 \     }
 \  ],
 \}
