@@ -76,7 +76,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.17.0",
     "eslint-config-airbnb-typescript": "^12.0.0",
-    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
     "husky": "^4.3.7",
     "lint-staged": "^10.5.3",
