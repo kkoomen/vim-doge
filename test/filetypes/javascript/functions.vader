@@ -374,6 +374,46 @@ Expect javascript (generated comments with a description, @param and @return tag
   function foo({ a, b: str, c = 3, d: int = 5 }) {}
 
 # ==============================================================================
+# Test the 'omit_redundant_param_types' option
+# ==============================================================================
+Given javascript (functions with type information):
+  function foo(a, b: str, c = 3, d: int = 5):int {}
+
+  function foo(a, b: str, c = 3, d: int = 5):int {}
+
+
+Do (trigger doge):
+  :let g:doge_javascript_settings = {'omit_redundant_param_types': 1}\<CR>
+  :1\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings = {'omit_redundant_param_types': 0}\<CR>
+  :13\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings = {'omit_redundant_param_types': 1}\<CR>
+
+Expect javascript (generated comments with a description, @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param {str} b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param {int} [d] - [TODO:description]
+   * @return {int} [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5):int {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5):int {}
+
+# ==============================================================================
 # Function calls that should not generate documentation
 # ==============================================================================
 Given javascript (function call):

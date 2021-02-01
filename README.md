@@ -279,11 +279,15 @@ being aliased, see [`g:doge_filetype_aliases`](#gdoge_filetype_aliases).
 ```vim
 let g:doge_javascript_settings = {
 \  'destructuring_props': 1,
+\  'omit_redundant_param_types': 0,
 \}
 ```
 
 - `destructuring_props`: Whether or not to generate `@param` tags for the
   destructured properties in a function expression.
+
+- `omit_redundant_param_types`: Whether or not to omit the `{Type}` part of
+  parameters, when the type is known (i.e. typescript).
 
 ### PHP
 
