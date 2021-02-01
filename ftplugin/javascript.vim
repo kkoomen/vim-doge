@@ -44,7 +44,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \  {
 \    'nodeTypes': ['member_expression'],
 \    'parameters': {
-\      'format': '@param %(not_redundant|{{type|!type}})% %(optional|[)%{name|!name}%(optional|])% - !description',
+\      'format': '@param %(not_redundant|{{type|!type}})% %(default|[)%{name|!name}%(default|])% - !description',
 \    },
 \    'exceptions': {
 \      'format': '@throws {{name|!name}} - !description',
