@@ -53,18 +53,15 @@ endfunction
 function! doge#preprocessors#javascript#tokens(tokens) abort
   if has_key(a:tokens, 'parameters') && !empty(a:tokens['parameters'])
     if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true
-      let l:filtered_params = []
       for l:param in a:tokens['parameters']
         if has_key(l:param, 'type') == v:true
-          if(!empty(l:param['type']))
+          if !empty(l:param['type'])
             let l:param['show_type'] = v:false
           else
             let l:param['show_type'] = v:true
           endif
-          call add(l:filtered_params, l:param)
         endif
       endfor
-      let a:tokens['parameters'] = l:filtered_params
     else
       for l:param in a:tokens['parameters']
         let l:param['show_type'] = v:true
