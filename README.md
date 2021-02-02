@@ -286,7 +286,7 @@ let g:doge_javascript_settings = {
 - `destructuring_props`: Whether or not to generate `@param` tags for the
   destructured properties in a function expression.
 
-- `omit_redundant_param_types`: Whether or not to omit the `{Type}` part of
+- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
   parameters, when the type is known (i.e. typescript).
 
 ### PHP
