@@ -1,7 +1,12 @@
 " vint: -ProhibitSetNoCompatible
 
-set runtimepath^=$PWD
-set runtimepath^=$PWD/../vader.vim
+if expand('$GITHUB_ACTIONS') == 'true'
+  set runtimepath^=$PWD
+  set runtimepath^=$PWD/vader.vim
+else
+  set runtimepath^=$PWD
+  set runtimepath^=$PWD/../vader.vim
+endif
 
 " Set a variable to indicate we're inside a test env.
 let g:doge_test_env = 1
