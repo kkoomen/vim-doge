@@ -32,7 +32,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: junegunn/vader.vim
-          path: vader
+          path: ../vader.vim
       - name: Setup nodejs
         uses: actions/setup-node@v1
         with:
