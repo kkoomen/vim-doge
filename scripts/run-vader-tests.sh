@@ -23,13 +23,13 @@ function filter-vader-output() {
 
   while read -r; do
     # Search for the first Vader output line.
-    if ((!hit_first_vader_line)); then
-      if [[ "$REPLY" = *'Starting Vader:'* ]]; then
-        hit_first_vader_line=1
-      else
-        continue;
-      fi
-    fi
+    # if ((!hit_first_vader_line)); then
+    #   if [[ "$REPLY" = *'Starting Vader:'* ]]; then
+    #     hit_first_vader_line=1
+    #   else
+    #     continue;
+    #   fi
+    # fi
 
     if [[ "$REPLY" = *'GIVEN'* ]] \
       || [[ "$REPLY" = *'DO'* ]] \
