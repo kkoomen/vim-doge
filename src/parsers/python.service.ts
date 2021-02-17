@@ -98,7 +98,11 @@ export class PythonParserService
                     param.name = pn.text;
                   }
 
-                  if (['list_splat_pattern', 'dictionary_splat_pattern'].includes(pn.type)) {
+                  if (
+                    ['list_splat_pattern', 'dictionary_splat_pattern'].includes(
+                      pn.type,
+                    )
+                  ) {
                     param.name = pn.children
                       .filter((cpn: SyntaxNode) => cpn.type === 'identifier')
                       .shift()?.text;
