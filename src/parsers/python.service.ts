@@ -98,7 +98,7 @@ export class PythonParserService
                     param.name = pn.text;
                   }
 
-                  if (['dictionary_splat', 'list_splat'].includes(pn.type)) {
+                  if (['list_splat_pattern', 'dictionary_splat_pattern'].includes(pn.type)) {
                     param.name = pn.children
                       .filter((cpn: SyntaxNode) => cpn.type === 'identifier')
                       .shift()?.text;
@@ -147,9 +147,8 @@ export class PythonParserService
       const exception: Record<string, any> = { name: null };
 
       const name = node.children
-        .filter((n: SyntaxNode) => n.type === 'expression_list')
+        .filter((n: SyntaxNode) => ['expression_list', 'call'].includes(n.type))
         .shift()
-        ?.children.shift()
         ?.children.shift()?.text;
       if (name) {
         exception.name = name;
