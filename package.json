@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "vim-doge",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "description": "A Vim polyglot plugin for generating documentation",
   "scripts": {
     "release": "release-it",
@@ -15,7 +15,7 @@
     "format": "prettier --write \"src/**/*.ts\""
   },
   "bin": {
-    "vim-doge": "./build/index.js"
+    "vim-doge": "build/index.js"
   },
   "pkg": {
     "assets": [

@@ -1,3 +1,18 @@
+# [3.7.0](https://github.com/kkoomen/vim-doge/compare/v3.6.0...v3.7.0) (2021-02-17)
+
+
+### Bug Fixes
+
+* adjust python errors; adjust package.json and tsconfig to use build/ instead of dist/ ([e0f29d4](https://github.com/kkoomen/vim-doge/commit/e0f29d410f357202778f7ec86949796b821aa1ff))
+* temp allow more output in CI ([871c2da](https://github.com/kkoomen/vim-doge/commit/871c2da5bb472b23c0fa29519932612ca8cb3164))
+* use the same logic for the DogeCreateDocStandard command in the test itself ([2eafe9b](https://github.com/kkoomen/vim-doge/commit/2eafe9bf0d8d9ea68f846a78e7f57dca4f3fc91e))
+* **ci:** use correct checkout path for vader.vim ([6d4c7eb](https://github.com/kkoomen/vim-doge/commit/6d4c7eb02256f29f118c9aca9585f0ccc6bb4f29))
+
+
+### Features
+
+* rename build:binary -> build:binary:unix ([7ec480c](https://github.com/kkoomen/vim-doge/commit/7ec480c532c37ed518cb7eb44c65de73f91d7ed4))
+
 # [3.6.0](https://github.com/kkoomen/vim-doge/compare/v3.5.4...v3.6.0) (2020-12-19)
 
 ### Bug Fixes
