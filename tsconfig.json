@@ -10,9 +10,9 @@
     "resolveJsonModule": true,
     "target": "es2017",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./build",
     "incremental": true,
-    "tsBuildInfoFile": "dist/tsconfig.tsbuildinfo",
+    "tsBuildInfoFile": "build/tsconfig.tsbuildinfo",
     "baseUrl": "./"
   },
   "include": ["src"],
