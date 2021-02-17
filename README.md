@@ -188,8 +188,8 @@ Default:
 ```
 
 Set filetypes as an alias for other filetypes. The key should be the filetype
-that is defined in `ftplugin/<key>.vim`. The value must be a list of 1 or more
-filetypes that will be aliases.
+that is defined in `ftplugin/<filetype>.vim`. The value must be a list of 1 or
+more filetypes that will be aliases.
 
 Example:
 

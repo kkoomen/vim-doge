@@ -51,14 +51,22 @@ Execute (Create a new doc standard based on phpdoc, setup dummy pattern and exec
   DogeCreateDocStandard phpdoc
 
 Then (Expect a file to be created with specific content):
-  let b:path = '/after/ftplugin/php.vim'
-  if !has('nvim')
-    let b:path = '~/.vim' . b:path
-  elseif exists('*stdpath')
-    let b:path = '~/.config/nvim' . b:path
-  else
-    let b:path = getcwd() . b:path
+  let b:path = ''
+  for b:p in ['~/.vim', '~/vimfiles']
+    let b:p = expand(b:p)
+    if match(&runtimepath, b:p) >= 0
+      let b:path = b:p
+      break
+    endif
+  endfor
+  if empty(b:path)
+    if exists('*stdpath')
+      let b:path = stdpath('config')
+    else
+      let b:path = getcwd()
+    endif
   endif
+  let b:path .= '/after/ftplugin/php.vim'
   AssertEqual expand(b:path), expand('%:p')
 
   let b:content = join([
@@ -104,14 +112,22 @@ Execute (Create a new doc standard for an unsupported filetype, setup dummy patt
   DogeCreateDocStandard foo
 
 Then (Expect a file to be created with specific content):
-  let b:path = '/after/ftplugin/foo.vim'
-  if !has('nvim')
-    let b:path = '~/.vim' . b:path
-  elseif exists('*stdpath')
-    let b:path = '~/.config/nvim' . b:path
-  else
-    let b:path = getcwd() . b:path
+  let b:path = ''
+  for b:p in ['~/.vim', '~/vimfiles']
+    let b:p = expand(b:p)
+    if match(&runtimepath, b:p) >= 0
+      let b:path = b:p
+      break
+    endif
+  endfor
+  if empty(b:path)
+    if exists('*stdpath')
+      let b:path = stdpath('config')
+    else
+      let b:path = getcwd()
+    endif
   endif
+  let b:path .= '/after/ftplugin/foo.vim'
   AssertEqual expand(b:path), expand('%:p')
 
   let b:content = join([

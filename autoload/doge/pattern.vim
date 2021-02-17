@@ -216,7 +216,7 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, "let b:doge_patterns = get(b:, 'doge_patterns', {})")
   call add(l:doc, "let b:doge_supported_doc_standards = get(b:, 'doge_supported_doc_standards', [])")
   call add(l:doc, "if index(b:doge_supported_doc_standards, '" . l:name . "') < 0")
-  call add(l:doc, "call add(b:doge_supported_doc_standards, '" . l:name . "')")
+  call add(l:doc, "  call add(b:doge_supported_doc_standards, '" . l:name . "')")
   call add(l:doc, 'endif')
   call add(l:doc, '')
   if l:unsupported_filetype
@@ -229,24 +229,24 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, '')
   call add(l:doc, '" Ensure we do not overwrite an existing doc standard.')
   call add(l:doc, "if !has_key(b:doge_patterns, '" . l:name . "')")
-  call add(l:doc, "let b:doge_patterns['" . l:name . "'] = [")
-  call add(l:doc, "\\  {")
-  call add(l:doc, "\\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],")
-  call add(l:doc, "\\    'parameters': {")
-  call add(l:doc, "\\      'format': '@param {name} !description',")
-  call add(l:doc, "\\    },")
-  call add(l:doc, "\\    'template': [")
+  call add(l:doc, "  let b:doge_patterns['" . l:name . "'] = [")
+  call add(l:doc, "        \\  {")
+  call add(l:doc, "        \\    'nodeTypes': ['NODE_TYPE_A', 'NODE_TYPE_B'],")
+  call add(l:doc, "        \\    'parameters': {")
+  call add(l:doc, "        \\      'format': '@param {name} !description',")
+  call add(l:doc, "        \\    },")
+  call add(l:doc, "        \\    'template': [")
   for l:line in l:template.template
-    call add(l:doc, '\      ' . string(l:line) . ',')
+    call add(l:doc, '        \      ' . string(l:line) . ',')
   endfor
-  call add(l:doc, '\    ],')
-  call add(l:doc, '\  },')
-  call add(l:doc, '\]')
+  call add(l:doc, '        \    ],')
+  call add(l:doc, '        \  },')
+  call add(l:doc, '        \]')
   call add(l:doc, 'endif')
+  call execute(':1,$d')
   call setreg('"', l:doc)
   1
-  call execute("normal! \"\"P'[=']Gdipgg", 'silent!')
+  call execute("normal! \"\"PGdd", 'silent!')
 endfunction
 
 let &cpoptions = s:save_cpo
-unlet s:save_cpo
