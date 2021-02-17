@@ -1,6 +1,6 @@
 " vint: -ProhibitSetNoCompatible
 
-if expand('$GITHUB_ACTIONS') == 'true'
+if expand('$CI') == 'true'
   set runtimepath^=$PWD
   set runtimepath^=$PWD/vader.vim
 else
