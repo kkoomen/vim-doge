@@ -243,10 +243,10 @@ function! doge#pattern#custom(name) abort
   call add(l:doc, '        \  },')
   call add(l:doc, '        \]')
   call add(l:doc, 'endif')
+  call execute(':1,$d')
   call setreg('"', l:doc)
   1
   call execute("normal! \"\"PGdd", 'silent!')
 endfunction
 
 let &cpoptions = s:save_cpo
-unlet s:save_cpo
