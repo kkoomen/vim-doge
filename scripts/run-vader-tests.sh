@@ -19,40 +19,36 @@ run_file="$(mktemp)"
 
 function filter-vader-output() {
   local hit_first_vader_line=0
+
   while read -r; do
-    echo "$REPLY"
+    # Search for the first Vader output line.
+    if ((!hit_first_vader_line)); then
+      if [[ "$REPLY" = *'Starting Vader:'* ]]; then
+        hit_first_vader_line=1
+      else
+        continue;
+      fi
+    fi
+
+    if [[ "$REPLY" = *'GIVEN'* ]] \
+      || [[ "$REPLY" = *'DO'* ]] \
+      || [[ "$REPLY" = *'EXECUTE'* ]] \
+      || [[ "$REPLY" = *'THEN'* ]] \
+      || [[ "$REPLY" = *'EXPECT'* ]] \
+      || [[ "$REPLY" = *'BEFORE'* ]] \
+      || [[ "$REPLY" = *'AFTER'* ]] \
+      || [[ "$REPLY" = *'Starting Vader:'* ]] \
+      || [[ "$REPLY" = *'Success/Total'* ]] \
+      || [[ "$REPLY" = *'Elapsed time:'* ]]
+    then
+      echo "$REPLY"
+    fi
   done
-  echo 1 > "$run_file"
 
-  # while read -r; do
-  #   # Search for the first Vader output line.
-  #   if ((!hit_first_vader_line)); then
-  #     if [[ "$REPLY" = *'Starting Vader:'* ]]; then
-  #       hit_first_vader_line=1
-  #     # else
-  #       # continue;
-  #     fi
-  #   fi
-  #
-  #   if [[ "$REPLY" = *'GIVEN'* ]] \
-  #     || [[ "$REPLY" = *'DO'* ]] \
-  #     || [[ "$REPLY" = *'EXECUTE'* ]] \
-  #     || [[ "$REPLY" = *'THEN'* ]] \
-  #     || [[ "$REPLY" = *'EXPECT'* ]] \
-  #     || [[ "$REPLY" = *'BEFORE'* ]] \
-  #     || [[ "$REPLY" = *'AFTER'* ]] \
-  #     || [[ "$REPLY" = *'Starting Vader:'* ]] \
-  #     || [[ "$REPLY" = *'Success/Total'* ]] \
-  #     || [[ "$REPLY" = *'Elapsed time:'* ]]
-  #   then
-  #     echo "$REPLY"
-  #   fi
-  # done
-
-  # # Echo a 1 into the temp file to indicate this (re)try is successful.
-  # if ((hit_first_vader_line)); then
-  #   echo 1 > "$run_file"
-  # fi
+  # Echo a 1 into the temp file to indicate this (re)try is successful.
+  if ((hit_first_vader_line)); then
+    echo 1 > "$run_file"
+  fi
 }
 
 function color-vader-output() {
