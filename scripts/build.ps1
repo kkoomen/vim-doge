@@ -9,9 +9,9 @@ cd $rootDir
 
 # Build the binary.
 if ($outFile -eq "") {
-  node "$rootDir\node_modules\.bin\caxa" --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge.exe"
+  npx caxa --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge.exe"
 } else {
-  node "$rootDir\node_modules\.bin\caxa" --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/$outFile.exe"
+  npx caxa --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/$outFile.exe"
 }
 
 # Archive the binary.
