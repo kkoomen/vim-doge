@@ -37,7 +37,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save
+      - run: npm ci --no-save -m
       - name: Build Unix binary
         if: matrix.target != 'win'
         run: npm run build:binary:unix
@@ -81,7 +81,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save
+      - run: npm ci --no-save -m
       - name: Build binary
         run: npm run build:binary:unix
       - name: Setup neovim
