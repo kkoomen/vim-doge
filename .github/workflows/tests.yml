@@ -16,10 +16,6 @@ jobs:
         vim-version: [v7.4.2119, head]
         node-version: [10, 12, 14]
         include:
-          - os: macos-latest
-            target: macos
-          - os: ubuntu-latest
-            target: linux
           - os: windows-latest
             target: win
     runs-on: ${{ matrix.os }}
