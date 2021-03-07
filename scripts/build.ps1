@@ -1,4 +1,4 @@
-param([String] $buildTarget, [String] $outFile)
+param([String] $outFile)
 $rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 
 if (!(Test-Path "$rootDir\bin")) {
