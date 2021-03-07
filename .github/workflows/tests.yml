@@ -40,10 +40,10 @@ jobs:
       - run: npm ci --no-save
       - name: Build Unix binary
         if: matrix.target != 'win'
-        run: npm run build:binary:unix -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
+        run: npm run build:binary:unix
       - name: Build Windows binary
         if: matrix.target == 'win'
-        run: npm run build:binary:windows -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
+        run: npm run build:binary:windows
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
@@ -83,7 +83,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save
       - name: Build binary
-        run: npm run build:binary:unix -- node${{ matrix.node-version }}-${{ matrix.target }}-x64
+        run: npm run build:binary:unix
       - name: Setup neovim
         uses: thinca/action-setup-vim@v1
         id: vim
