@@ -2,7 +2,7 @@ param([String] $buildTarget, [String] $outFile)
 $rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 
 if (!(Test-Path "$rootDir\bin")) {
-  New-Item -Path "$rootDir\bin" -ItemType Directory
+  mkdir "$rootDir\bin"
 }
 
 cd $rootDir
