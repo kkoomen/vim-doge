@@ -1,3 +1,10 @@
+## [3.8.1](https://github.com/kkoomen/vim-doge/compare/v3.8.0...v3.8.1) (2021-03-07)
+
+
+### Bug Fixes
+
+* **windows:** remove old param in build.ps1 ([5aec2f6](https://github.com/kkoomen/vim-doge/commit/5aec2f69be194a7373ac9e043c8f81322ca9472b))
+
 # 3.8.0 (2021-03-07)
 
 
