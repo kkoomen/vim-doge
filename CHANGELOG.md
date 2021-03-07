@@ -1,20 +1,3 @@
-## [3.8.1](https://github.com/kkoomen/vim-doge/compare/v3.8.0...v3.8.1) (2021-03-07)
-
-
-### Bug Fixes
-
-* **ci:** remove old build params ([dbc4a96](https://github.com/kkoomen/vim-doge/commit/dbc4a9637a0fba122ef5b967d31299130a29b66f))
-
-# 3.8.0 (2021-03-07)
-
-
-### Bug Fixes
-
-* remove prettier/[@typescript-eslint](https://github.com/typescript-eslint) from eslintrc ([cd8b9fb](https://github.com/kkoomen/vim-doge/commit/cd8b9fb515befdd209b6a20d247bb132bdf7ca4c))
-* **ci:** add strings around command for windows ([ffcfc74](https://github.com/kkoomen/vim-doge/commit/ffcfc7484d7ce12f0f6cc6432a4aa9a9af4b331f))
-* **ci:** do not pass any params to build binary scripts ([27545b4](https://github.com/kkoomen/vim-doge/commit/27545b4e6a311d2d463a28610c7ae5f0c624dc25))
-
-
 ### Features
 
 * replace vercel/pkg with caxa ([3c145fd](https://github.com/kkoomen/vim-doge/commit/3c145fd343e95099d4c723db7bc8f98d18c9a790))

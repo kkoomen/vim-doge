@@ -8,11 +8,7 @@ if (!(Test-Path "$rootDir\bin")) {
 cd $rootDir
 
 # Build the binary.
-if ($outFile -eq "") {
-  npx caxa --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge.exe"
-} else {
-  npx caxa --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/$outFile.exe"
-}
+npx caxa --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge.exe"
 
 # Archive the binary.
 if ($outFile -ne "") {
