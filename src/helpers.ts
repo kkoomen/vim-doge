@@ -6,6 +6,7 @@ import Lua from 'tree-sitter-lua';
 import PHP from 'tree-sitter-php';
 import Python from 'tree-sitter-python';
 import Ruby from 'tree-sitter-ruby';
+import Rust from 'tree-sitter-rust';
 import TypeScript from 'tree-sitter-typescript/tsx';
 import { Language } from './constants';
 import { ValueOf } from './types';
@@ -21,6 +22,7 @@ export function loadParserPackage(language: ValueOf<Language>): any {
     [Language.RUBY]: Ruby,
     [Language.LUA]: Lua,
     [Language.JAVA]: Java,
+    [Language.RUST]: Rust,
   };
 
   if (!Object.keys(languages).includes(language as string)) {
