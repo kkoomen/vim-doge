@@ -28,6 +28,8 @@ export class RustParserService
           this.result = {
             name: null,
             parameters: [],
+            unsafe: false,
+            errors: false,
           };
           this.runNodeParser(this.parseFunction, node);
           break;
@@ -53,12 +55,29 @@ export class RustParserService
           break;
         }
 
+        case 'function_modifiers': {
+          childNode.children.forEach((n: SyntaxNode) => {
+            if (n.type === 'unsafe') {
+              this.result.unsafe = true;
+            }
+          });
+          break;
+        }
+
+        case 'generic_type': {
+          const hasResultReturnType = childNode.children.filter((n: SyntaxNode) => n.type === 'type_identifier' && n.text === 'Result').shift();
+          if (hasResultReturnType) {
+            this.result.errors = true;
+          }
+          break;
+        }
+
         case 'parameters': {
           childNode.children
             .filter((n: SyntaxNode) => n.type === 'parameter')
             .forEach((child: SyntaxNode) => {
               this.result.parameters.push({
-                name: child.children.shift()?.text,
+                name: child.children.filter((n: SyntaxNode) => n.type === 'identifier').shift()?.text,
               });
             });
           break;

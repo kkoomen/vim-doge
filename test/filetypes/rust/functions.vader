@@ -1,5 +1,5 @@
 # ==============================================================================
-# Functions without parameters.
+# Functions with parameters.
 # ==============================================================================
 Given rust (impl methods with parameters):
   struct Person {
@@ -24,7 +24,7 @@ Do (trigger doge):
   :23\<CR>
   \<C-d>
 
-Expect rust (generated comments with Arguments and Examples tags):
+Expect rust (generated comments with Arguments and Examples sections):
   struct Person {
       name: String,
   }
@@ -58,3 +58,34 @@ Expect rust (generated comments with Arguments and Examples tags):
           return 0;
       }
   }
+
+# ==============================================================================
+# Functions with errors and safety section
+# ==============================================================================
+Given rust (impl methods with Errors and Safety section):
+  pub unsafe fn foo(foo: usize) -> Result<(), FooError> {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect rust (generated comments with Arguments, Errors and Examples sections):
+  /// [TODO:description]
+  ///
+  /// # Arguments
+  ///
+  /// * `foo` - [TODO:description]
+  ///
+  /// # Safety
+  ///
+  /// [TODO:description]
+  ///
+  /// # Errors
+  ///
+  /// [TODO:description]
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// [TODO:example]
+  /// ```
+  pub unsafe fn foo(foo: usize) -> Result<(), FooError> {}
