@@ -58,7 +58,7 @@ jobs:
     name: NeoVim
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
         vim-version: [v0.3.2, head]
         node-version: [10, 12, 14]
         include:
