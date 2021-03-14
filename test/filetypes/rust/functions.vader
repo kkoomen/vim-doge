@@ -68,7 +68,7 @@ Given rust (impl methods with Errors and Safety section):
 Do (trigger doge):
   \<C-d>
 
-Expect rust (generated comments with Arguments, Errors and Examples sections):
+Expect rust (generated comments with Arguments, Safety, Errors and Examples sections):
   /// [TODO:description]
   ///
   /// # Arguments
