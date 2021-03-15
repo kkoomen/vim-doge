@@ -83,6 +83,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
+| :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
 
 # Getting started
 
@@ -153,6 +154,7 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_cpp`        | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
 | `g:doge_doc_standard_c`          | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
 | `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                   |
+| `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                 |
 
 ## Options
 
@@ -383,6 +385,7 @@ DoGe is licensed under the GPL-3.0 license.
 [yard]: https://www.rubydoc.info/gems/yard/file/docs/Tags.md
 [roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
+[rustdoc]: https://doc.rust-lang.org/rust-by-example/meta/doc.html
 [kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
 [sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos

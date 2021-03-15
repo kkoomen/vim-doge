@@ -9,6 +9,7 @@ import { LuaParserService } from './lua.service';
 import { PhpParserService } from './php.service';
 import { PythonParserService } from './python.service';
 import { RubyParserService } from './ruby.service';
+import { RustParserService } from './rust.service';
 import { TypeScriptParserService } from './typescript.service';
 
 export type ParserService =
@@ -20,7 +21,8 @@ export type ParserService =
   | BashParserService
   | RubyParserService
   | LuaParserService
-  | JavaParserService;
+  | JavaParserService
+  | RustParserService;
 
 export function getParserService(
   language: ValueOf<Language>,
@@ -53,6 +55,9 @@ export function getParserService(
 
     case Language.JAVA:
       return new JavaParserService(...args);
+
+    case Language.RUST:
+      return new RustParserService(...args);
 
     default:
       // prettier-ignore

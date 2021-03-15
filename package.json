@@ -57,6 +57,7 @@
     "tree-sitter-php": "^0.16.2",
     "tree-sitter-python": "^0.17.1",
     "tree-sitter-ruby": "^0.17.0",
+    "tree-sitter-rust": "^0.16.0",
     "tree-sitter-typescript": "^0.16.3"
   },
   "devDependencies": {
