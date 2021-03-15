@@ -1,3 +1,11 @@
+# [3.9.0](https://github.com/kkoomen/vim-doge/compare/v3.8.1...v3.9.0) (2021-03-15)
+
+
+### Features
+
+* implement Errors and Safety sections ([358a0fa](https://github.com/kkoomen/vim-doge/commit/358a0fa0eb4ba78b00dea8b35c3bee7727740aa7))
+* implement rust with support for functions/methods ([77becd5](https://github.com/kkoomen/vim-doge/commit/77becd56a4ad67740863815c088a150b7d6e39f6))
+
 ## [3.8.1](https://github.com/kkoomen/vim-doge/compare/v3.8.0...v3.8.1) (2021-03-07)
 
 
