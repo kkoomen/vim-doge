@@ -1,3 +1,10 @@
+## [3.9.1](https://github.com/kkoomen/vim-doge/compare/v3.9.0...v3.9.1) (2021-03-29)
+
+
+### Bug Fixes
+
+* **c:** support pointer return types ([#294](https://github.com/kkoomen/vim-doge/issues/294)) ([4e814d7](https://github.com/kkoomen/vim-doge/commit/4e814d7047b2bcfb81a1e14eec3873295f84b076))
+
 # [3.9.0](https://github.com/kkoomen/vim-doge/compare/v3.8.1...v3.9.0) (2021-03-15)
 
 
