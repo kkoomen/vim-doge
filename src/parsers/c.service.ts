@@ -71,6 +71,11 @@ export class CParserService
           break;
         }
 
+        case 'pointer_declarator': {
+          this.parseFunction(childNode);
+          break;
+        }
+
         case 'function_declarator': {
           this.result.name = childNode.children
             .filter((n: SyntaxNode) => n.type === 'identifier')
