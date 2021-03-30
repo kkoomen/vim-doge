@@ -1,16 +1,16 @@
 " ==============================================================================
-" The Shell documentation should follow the 'Google' conventions.
-" see https://google.github.io/styleguide/shell.xml#Function_Comments
+" The Rust documentation should follow the 'rustdoc' conventions.
+" see https://doc.rust-lang.org/rust-by-example/meta/doc.html
 " ==============================================================================
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let b:doge_parser = 'bash'
+let b:doge_parser = 'rust'
 let b:doge_insert = 'above'
 
-let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['google'])
-let b:doge_doc_standard = doge#buffer#get_doc_standard('sh')
+let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards(['rustdoc'])
+let b:doge_doc_standard = doge#buffer#get_doc_standard('rs')
 let b:doge_patterns = doge#buffer#get_patterns()
 
 " ==============================================================================
@@ -23,7 +23,10 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " Matches regular functions.
 " ------------------------------------------------------------------------------
 let s:function_pattern = {
-\  'nodeTypes': ['function_definition'],
+\  'nodeTypes': ['function_item'],
+\  'parameters': {
+\    'format': '* `{name}` - !description'
+\  },
 \}
 
 " ==============================================================================
@@ -32,20 +35,28 @@ let s:function_pattern = {
 "
 " ==============================================================================
 
-call doge#buffer#register_doc_standard('google', [
+call doge#buffer#register_doc_standard('rustdoc', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
-\      '################################################################################',
-\      '# !description',
-\      '# Globals:',
-\      '# \t!var-name',
-\      '# Arguments:',
-\      '# \t$1: !description',
-\      '# Outputs:',
-\      '# \t!description',
-\      '# Returns:',
-\      '# \t!description',
-\      '################################################################################',
+\      '/// !description',
+\      '%(parameters|///)%',
+\      '%(parameters|/// # Arguments)%',
+\      '%(parameters|///)%',
+\      '%(parameters|/// {parameters})%',
+\      '%(unsafe|///)%',
+\      '%(unsafe|/// # Safety)%',
+\      '%(unsafe|///)%',
+\      '%(unsafe|/// !description)%',
+\      '%(errors|///)%',
+\      '%(errors|/// # Errors)%',
+\      '%(errors|///)%',
+\      '%(errors|/// !description)%',
+\      '///',
+\      '/// # Examples',
+\      '///',
+\      '/// ```',
+\      '/// !example',
+\      '/// ```',
 \    ],
 \  }),
 \])

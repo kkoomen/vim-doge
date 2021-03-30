@@ -1,16 +1,14 @@
-param([String] $buildTarget, [String] $outFile)
+param([String] $outFile)
 $rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 
-# Build the pkg lib prerequisites if needed.
-if (!(Test-Path "$rootDir\pkg\lib-es5")) {
-  cd $rootDir\pkg
-  npm install --no-save; if ($?) {npm run prepare}
+if (!(Test-Path "$rootDir\bin")) {
+  mkdir "$rootDir\bin"
 }
 
 cd $rootDir
 
 # Build the binary.
-node "$rootDir\pkg\lib-es5\bin.js" . -t "$buildTarget" --out-path "$rootDir\bin"
+npx caxa --directory "$rootDir/build" --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge.exe"
 
 # Archive the binary.
 if ($outFile -ne "") {
