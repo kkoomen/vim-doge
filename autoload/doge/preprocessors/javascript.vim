@@ -91,6 +91,8 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
     if a:tokens['returnType'] ==# 'void'
       " Set the type to an empty string so it skips rendering.
       let a:tokens['returnType'] = ''
+      " Set show return type to false so it skips rendering
+      let a:tokens['showReturnType'] = v:false
     elseif empty(a:tokens['returnType'])
       " Type was not given, so set to type temple for user input.
       let a:tokens['returnType'] = '!type'
