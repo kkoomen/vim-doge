@@ -1,4 +1,0 @@
-[submodule "pkg"]
-	path = pkg
-	url = https://github.com/kkoomen/pkg
-	shallow = true

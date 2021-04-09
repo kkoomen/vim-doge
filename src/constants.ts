@@ -8,4 +8,5 @@ export enum Language {
   RUBY = 'ruby',
   LUA = 'lua',
   JAVA = 'java',
+  RUST = 'rust',
 }

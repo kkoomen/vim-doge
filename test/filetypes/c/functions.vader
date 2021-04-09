@@ -2,17 +2,30 @@
 # Function definition with parameters.
 # ==============================================================================
 Given c (function definition with parameters):
-  int add(int x, int y) {}
+  int foo(int a, char b) {}
+
+  int *foo(int a, char b) {}
 
 Do (trigger doge):
+  \<C-d>
+  :10\<CR>
   \<C-d>
 
 Expect c (generated comment with @brief, @param and @return tags):
   /**
    * @brief [TODO:description]
    *
-   * @param x [TODO:description]
-   * @param y [TODO:description]
+   * @param a [TODO:description]
+   * @param b [TODO:description]
    * @return [TODO:description]
    */
-  int add(int x, int y) {}
+  int foo(int a, char b) {}
+
+  /**
+   * @brief [TODO:description]
+   *
+   * @param a [TODO:description]
+   * @param b [TODO:description]
+   * @return [TODO:description]
+   */
+  int *foo(int a, char b) {}

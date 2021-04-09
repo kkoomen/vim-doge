@@ -8,7 +8,7 @@ set -u
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 
 vim="$1"
-tests="$ROOT_DIR/test/*.vader $ROOT_DIR/test/commands/*.vader $ROOT_DIR/test/options/*.vader $ROOT_DIR/test/filetypes/*/*.vader"
+tests=${2:-"$ROOT_DIR/test/*.vader $ROOT_DIR/test/commands/*.vader $ROOT_DIR/test/options/*.vader $ROOT_DIR/test/filetypes/*/*.vader"}
 
 red='\033[0;31m'
 green='\033[0;32m'
@@ -19,7 +19,6 @@ run_file="$(mktemp)"
 
 function filter-vader-output() {
   local hit_first_vader_line=0
-  local filtered_data=''
 
   while read -r; do
     # Search for the first Vader output line.
@@ -96,14 +95,19 @@ echo "Running tests for $vim"
 echo '================================================================================'
 echo
 
+max_retries=5
 tries=0
+exit_code=0
 
-while [ "$tries" -lt 5 ]; do
+while [ "$tries" -lt $max_retries ]; do
   tries=$((tries + 1))
+  echo "($tries/$max_retries) Trying to run tests..."
 
-  exit_code=0
+  set -o pipefail
 
   "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
+
+  set +o pipefail
 
   if [ -s "$run_file" ]; then
     break
@@ -113,12 +117,9 @@ done
 if [ "$tries" -gt 1 ]; then
   echo
   echo "Tried to run tests $tries times"
-
-  if [ "$tries" -eq 5 ]; then
-    exit 1
-  fi
 fi
 
 rm "$run_file"
 
+echo "vim-doge exited with status code $exit_code"
 exit "$exit_code"

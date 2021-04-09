@@ -6,20 +6,13 @@ set -e
 set -u
 
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-BUILD_TARGETS="${1:-}"
-OUTFILE="${2:-}"
-
-# Build the pkg lib prerequisites if needed.
-if [[ ! -d $ROOT_DIR/pkg/lib-es5 ]]; then
-  cd $ROOT_DIR/pkg
-  npm install --no-save && npm run prepare
-fi
+OUTFILE="${1:-}"
 
 cd $ROOT_DIR
+[[ ! -d ./bin ]] && mkdir ./bin
 
 # Build the binary.
-node $ROOT_DIR/pkg/lib-es5/bin.js . -t "$BUILD_TARGETS" --out-path $ROOT_DIR/bin
-[[ -f $ROOT_DIR/bin/vim-doge ]] && chmod +x $ROOT_DIR/bin/vim-doge
+npx caxa --directory $ROOT_DIR/build --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge"
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then
