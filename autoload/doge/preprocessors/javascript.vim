@@ -80,14 +80,22 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
   endif
 
   if has_key(a:tokens, 'returnType')
+    " By default, show the return type.
+    let a:tokens['showReturnType'] = v:true
+
     if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true
-      if !empty(a:tokens['returnType'])
-        let a:tokens['returnType'] = ''
-      endif
-    elseif a:tokens['returnType'] ==# 'void'
+      " If omit is set, default to hiding type.
+      let a:tokens['showReturnType'] = v:false
+    endif
+
+    if a:tokens['returnType'] ==# 'void'
+      " Set the type to an empty string so it skips rendering.
       let a:tokens['returnType'] = ''
     elseif empty(a:tokens['returnType'])
+      " Type was not given, so set to type temple for user input.
       let a:tokens['returnType'] = '!type'
+      " Ensure type is shown always if type was not given.
+      let a:tokens['showReturnType'] = v:true
 
       " When we're dealing with an async function the return type is Promise<T>.
       " Only wrap the return type in a Promise when the type is not specified.
