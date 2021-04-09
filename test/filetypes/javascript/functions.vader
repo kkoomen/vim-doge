@@ -379,15 +379,19 @@ Expect javascript (generated comments with a description, @param and @return tag
 Given javascript (functions where the type should be omitted if let g:doge_javascript_settings = {'omit_redundant_param_types': 1} is set):
   function foo(a, b: str, c = 3, d: int = 5):int {}
 
-  function foo(a, b: str, c = 3, d: int = 5):int {}
+  function foo(a, b: str, c = 3, d: int = 5):void {}
 
+  function foo(a, b: str, c = 3, d: int = 5):int {}
 
 Do (trigger doge):
   :let g:doge_javascript_settings = {'omit_redundant_param_types': 0}\<CR>
   :1\<CR>
   \<C-d>
   :let g:doge_javascript_settings = {'omit_redundant_param_types': 1}\<CR>
-  :13\<CR>
+  :12\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings = {'omit_redundant_param_types': 1}\<CR>
+  :22\<CR>
   \<C-d>
   :let g:doge_javascript_settings = {'omit_redundant_param_types': 0}\<CR>
 
@@ -402,6 +406,16 @@ Expect javascript (generated comments with a description, @param and @return tag
    * @return {int} [TODO:description]
    */
   function foo(a, b: str, c = 3, d: int = 5):int {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5):void {}
 
   /**
    * [TODO:description]
