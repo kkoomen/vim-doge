@@ -329,6 +329,28 @@ Example using vim-plug:
 Plug 'kkoomen/vim-doge', {'do': { -> doge#install({ 'headless': 1 }) }}
 ```
 
+# Development
+
+If you want to run tests locally, you can simply do so by running
+`./scripts/run-vader-tests.sh <path-to-vim-executable>`, for example:
+
+```
+$ ./scripts/run-vader-tests.sh vim
+$ ./scripts/run-vader-tests.sh nvim
+```
+
+You can also open vim and run specific tests
+
+```
+:Vader ./test/filetypes/javascript/functions.vader ./test/filetypes/rust/functions.vader
+```
+
+or open vim and run the current file:
+
+```
+:Vader
+```
+
 # Help
 
 To open all the help pages, run `:help doge`.

@@ -61,7 +61,7 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
       endif
     endfor
 
-    if get(g:doge_javascript_settings, 'destructuring_props') == v:false
+    if get(g:doge_javascript_settings, 'destructuring_props', 1) == v:false
       let l:filtered_params = []
       for l:param in a:tokens['parameters']
         if has_key(l:param, 'property') == v:false
