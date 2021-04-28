@@ -52,21 +52,14 @@ endfunction
 " function will adjust the input if needed.
 function! doge#preprocessors#javascript#tokens(tokens) abort
   if has_key(a:tokens, 'parameters') && !empty(a:tokens['parameters'])
-    if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true
-      for l:param in a:tokens['parameters']
-        if has_key(l:param, 'type') == v:true
-          if !empty(l:param['type'])
-            let l:param['show_type'] = v:false
-          else
-            let l:param['show_type'] = v:true
-          endif
-        endif
-      endfor
-    else
-      for l:param in a:tokens['parameters']
-        let l:param['show_type'] = v:true
-      endfor
-    endif
+    for l:param in a:tokens['parameters']
+      let l:param['showType'] = v:true
+      if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true &&
+            \ has_key(l:param, 'type') == v:true &&
+            \ !empty(l:param['type'])
+        let l:param['showType'] = v:false
+      endif
+    endfor
 
     if get(g:doge_javascript_settings, 'destructuring_props') == v:false
       let l:filtered_params = []
@@ -80,7 +73,6 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
   endif
 
   if has_key(a:tokens, 'returnType')
-    " By default, show the return type.
     let a:tokens['showReturnType'] = v:true
 
     if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true

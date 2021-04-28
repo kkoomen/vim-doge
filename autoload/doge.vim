@@ -172,6 +172,8 @@ function! doge#on_filetype_change() abort
           endif
         endif
       endif
+
+      let b:doge_doc_standard = get(g:, 'doge_doc_standard_' . &filetype, b:doge_supported_doc_standards[0])
     endfor
     let b:doge_prev_supported_doc_standards = copy(b:doge_supported_doc_standards)
     let b:doge_prev_ft = &filetype

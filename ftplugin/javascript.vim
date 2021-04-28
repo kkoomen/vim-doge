@@ -44,7 +44,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \  {
 \    'nodeTypes': ['member_expression'],
 \    'parameters': {
-\      'format': '@param %(show_type|{{type|!type}})% %(default|[)%{name|!name}%(default|])% - !description',
+\      'format': '@param %(showType|{{type|!type}})% %(default|[)%{name|!name}%(default|])% - !description',
 \    },
 \    'exceptions': {
 \      'format': '@throws {{name|!name}} - !description',
@@ -74,7 +74,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      'generator_function_declaration',
 \    ],
 \    'parameters': {
-\      'format': '@param %(show_type|{{type|!type}})% %(optional|[)%{name|!name}%(optional|])% - !description',
+\      'format': '@param %(showType|{{type|!type}})% %(optional|[)%{name|!name}%(optional|])% - !description',
 \    },
 \    'typeParameters': {
 \      'format': '@template {name|!name} - !description',
