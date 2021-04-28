@@ -289,7 +289,7 @@ let g:doge_javascript_settings = {
   destructured properties in a function expression.
 
 - `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
-  parameters, when the type is known (i.e. typescript).
+  parameters and return types when the type is known (i.e. typescript).
 
 ### PHP
 
