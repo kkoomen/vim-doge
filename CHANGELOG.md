@@ -1,3 +1,21 @@
+# [3.10.0](https://github.com/kkoomen/vim-doge/compare/v3.9.1...v3.10.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* fix issue with return type not rendering when it should ([3421840](https://github.com/kkoomen/vim-doge/commit/3421840c81a99cce22a0eb833ff25d00ace5d293))
+* fix issue with void return being rendered ([3126f68](https://github.com/kkoomen/vim-doge/commit/3126f68e7822f059cd3828a64808488a707e9022))
+* get omit_redundant_param_types test passing, add better description ([7882a1a](https://github.com/kkoomen/vim-doge/commit/7882a1a08d618e8df0c77d0863a9a99d699064fc))
+* optimise code and fix filetype switching issue ([e6bab1f](https://github.com/kkoomen/vim-doge/commit/e6bab1ffae98a67abdd1eedbd6efe6852c63fbed))
+* revert changing default to optional in membertype expressions template. ([e17fb0b](https://github.com/kkoomen/vim-doge/commit/e17fb0b30b7fd06c58a6199724fe1716fde08ee1))
+* revert version ([60ec8f0](https://github.com/kkoomen/vim-doge/commit/60ec8f07c551aa8a61703bb3701b75e9a504e297))
+
+
+### Features
+
+* Add option to remove redundant param types in jsdoc. ([17b6147](https://github.com/kkoomen/vim-doge/commit/17b6147cf08411fb45438b7999ce063837271e45))
+* Add tests for omit_redundant_param_types option for javascript, add option description to readme. ([3049d64](https://github.com/kkoomen/vim-doge/commit/3049d64ce328a502f45f294c1fa03c5a23c0113a))
+
 ## [3.9.1](https://github.com/kkoomen/vim-doge/compare/v3.9.0...v3.9.1) (2021-03-29)
 
 
