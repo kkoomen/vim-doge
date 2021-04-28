@@ -10,6 +10,7 @@ OUTFILE="${1:-}"
 
 cd $ROOT_DIR
 [[ ! -d ./bin ]] && mkdir ./bin
+[[ -e ./bin/vim-doge ]] && rm -f ./bin/vim-doge
 
 # Build the binary.
 npx caxa --directory $ROOT_DIR/build --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge"
