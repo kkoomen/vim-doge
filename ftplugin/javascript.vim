@@ -12,6 +12,7 @@ let b:doge_insert = 'above'
 if !exists('g:doge_javascript_settings')
   let g:doge_javascript_settings = {
   \  'destructuring_props': 1,
+  \  'omit_redundant_param_types': 0,
   \}
 endif
 
@@ -43,7 +44,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \  {
 \    'nodeTypes': ['member_expression'],
 \    'parameters': {
-\      'format': '@param {{type|!type}} %(default|[)%{name|!name}%(default|])% - !description',
+\      'format': '@param %(showType|{{type|!type}})% %(default|[)%{name|!name}%(default|])% - !description',
 \    },
 \    'exceptions': {
 \      'format': '@throws {{name|!name}} - !description',
@@ -73,7 +74,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      'generator_function_declaration',
 \    ],
 \    'parameters': {
-\      'format': '@param {{type|!type}} %(optional|[)%{name|!name}%(optional|])% - !description',
+\      'format': '@param %(showType|{{type|!type}})% %(optional|[)%{name|!name}%(optional|])% - !description',
 \    },
 \    'typeParameters': {
 \      'format': '@template {name|!name} - !description',
@@ -91,7 +92,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(typeParameters| * {typeParameters})%',
 \      '%(parameters| * {parameters})%',
 \      '%(exceptions| * {exceptions})%',
-\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      '%(returnType| * @return)% %(showReturnType|{{returnType|!type}})% %(returnType|!description)%',
 \      ' */',
 \    ],
 \  },

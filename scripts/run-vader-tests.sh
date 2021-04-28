@@ -30,13 +30,7 @@ function filter-vader-output() {
       fi
     fi
 
-    if [[ "$REPLY" = *'GIVEN'* ]] \
-      || [[ "$REPLY" = *'DO'* ]] \
-      || [[ "$REPLY" = *'EXECUTE'* ]] \
-      || [[ "$REPLY" = *'THEN'* ]] \
-      || [[ "$REPLY" = *'EXPECT'* ]] \
-      || [[ "$REPLY" = *'BEFORE'* ]] \
-      || [[ "$REPLY" = *'AFTER'* ]] \
+    if [[ "$REPLY" =~ \[[A-Z\ ]+\] ]] \
       || [[ "$REPLY" = *'Starting Vader:'* ]] \
       || [[ "$REPLY" = *'Success/Total'* ]] \
       || [[ "$REPLY" = *'Elapsed time:'* ]]

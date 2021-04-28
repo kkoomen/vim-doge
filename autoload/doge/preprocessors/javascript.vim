@@ -52,7 +52,16 @@ endfunction
 " function will adjust the input if needed.
 function! doge#preprocessors#javascript#tokens(tokens) abort
   if has_key(a:tokens, 'parameters') && !empty(a:tokens['parameters'])
-    if get(g:doge_javascript_settings, 'destructuring_props') == v:false
+    for l:param in a:tokens['parameters']
+      let l:param['showType'] = v:true
+      if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true &&
+            \ has_key(l:param, 'type') == v:true &&
+            \ !empty(l:param['type'])
+        let l:param['showType'] = v:false
+      endif
+    endfor
+
+    if get(g:doge_javascript_settings, 'destructuring_props', 1) == v:false
       let l:filtered_params = []
       for l:param in a:tokens['parameters']
         if has_key(l:param, 'property') == v:false
@@ -64,10 +73,23 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
   endif
 
   if has_key(a:tokens, 'returnType')
+    let a:tokens['showReturnType'] = v:true
+
+    if get(g:doge_javascript_settings, 'omit_redundant_param_types') == v:true
+      " If omit is set, default to hiding type.
+      let a:tokens['showReturnType'] = v:false
+    endif
+
     if a:tokens['returnType'] ==# 'void'
+      " Set the type to an empty string so it skips rendering.
       let a:tokens['returnType'] = ''
+      " Set show return type to false so it skips rendering
+      let a:tokens['showReturnType'] = v:false
     elseif empty(a:tokens['returnType'])
+      " Type was not given, so set to type temple for user input.
       let a:tokens['returnType'] = '!type'
+      " Ensure type is shown always if type was not given.
+      let a:tokens['showReturnType'] = v:true
 
       " When we're dealing with an async function the return type is Promise<T>.
       " Only wrap the return type in a Promise when the type is not specified.

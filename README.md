@@ -281,11 +281,15 @@ being aliased, see [`g:doge_filetype_aliases`](#gdoge_filetype_aliases).
 ```vim
 let g:doge_javascript_settings = {
 \  'destructuring_props': 1,
+\  'omit_redundant_param_types': 0,
 \}
 ```
 
 - `destructuring_props`: Whether or not to generate `@param` tags for the
   destructured properties in a function expression.
+
+- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
+  parameters and return types when the type is known (i.e. typescript).
 
 ### PHP
 
@@ -323,6 +327,28 @@ Example using vim-plug:
 
 ```vim
 Plug 'kkoomen/vim-doge', {'do': { -> doge#install({ 'headless': 1 }) }}
+```
+
+# Development
+
+If you want to run tests locally, you can simply do so by running
+`./scripts/run-vader-tests.sh <path-to-vim-executable>`, for example:
+
+```
+$ ./scripts/run-vader-tests.sh vim
+$ ./scripts/run-vader-tests.sh nvim
+```
+
+You can also open vim and run specific tests
+
+```
+:Vader ./test/filetypes/javascript/functions.vader ./test/filetypes/rust/functions.vader
+```
+
+or open vim and run the current file:
+
+```
+:Vader
 ```
 
 # Help

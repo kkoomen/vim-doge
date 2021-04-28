@@ -374,11 +374,92 @@ Expect javascript (generated comments with a description, @param and @return tag
   function foo({ a, b: str, c = 3, d: int = 5 }) {}
 
 # ==============================================================================
+# Test the 'omit_redundant_param_types' option
+# ==============================================================================
+Given javascript (functions where the type should be omitted if let g:doge_javascript_settings = {'omit_redundant_param_types': 1} is set):
+  function foo(a, b: str, c = 3, d: int = 5): int {}
+
+  function foo(a, b: str, c = 3, d: int = 5): void {}
+
+  function foo(a, b: str, c = 3, d: int = 5): int {}
+
+  function foo(a, b: str, c = 3, d: int = 5): Promise<void> {}
+
+  function foo(a, b: str, c = 3, d: int = 5): Promise<int> {}
+
+Do (trigger doge):
+  :let g:doge_javascript_settings = {'omit_redundant_param_types': 1}\<CR>
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+  :22\<CR>
+  \<C-d>
+  :33\<CR>
+  \<C-d>
+  :44\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings = {'omit_redundant_param_types': 0}\<CR>
+
+Expect javascript (generated comments with a description, @param and @return tags):
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   * @return [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5): int {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5): void {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   * @return [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5): int {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   * @return [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5): Promise<void> {}
+
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} a - [TODO:description]
+   * @param b - [TODO:description]
+   * @param {[TODO:type]} [c] - [TODO:description]
+   * @param [d] - [TODO:description]
+   * @return [TODO:description]
+   */
+  function foo(a, b: str, c = 3, d: int = 5): Promise<int> {}
+
+# ==============================================================================
 # Function calls that should not generate documentation
 # ==============================================================================
 Given javascript (function call):
   AdminPermissionModel.create(item); 
-
 
 Do (trigger doge):
   \<C-d>
