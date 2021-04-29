@@ -332,8 +332,8 @@ Plug 'kkoomen/vim-doge', {'do': { -> doge#install({ 'headless': 1 }) }}
 
 # Development
 
-If you want to run tests locally, you can simply do so by running
-`./scripts/run-vader-tests.sh <path-to-vim-executable>`, for example:
+If you want to run tests locally, you can simply do so by running the command(s)
+below:
 
 ```
 $ ./scripts/run-vader-tests.sh vim
@@ -350,6 +350,16 @@ or open vim and run the current file:
 
 ```
 :Vader
+```
+
+**NOTE:** However, you do require to have
+[Vader](https://github.com/junegunn/vader.vim) installed being a sibling folder
+to the `vim-doge` folder, like so:
+
+```
+parent
+├── vader.vim
+└── vim-doge
 ```
 
 # Help
