@@ -140,8 +140,35 @@ Make sure to document code where needed and keep the [README](./README.md),
 
 ## Tests
 
-Running tests can be done in a docker by simply running `./run-tests`.
-Use `./run-tests --help` for more info about the usage.
+If you want to run tests locally, you can simply do so by running the command(s)
+below:
+
+```
+$ ./scripts/run-vader-tests.sh vim
+$ ./scripts/run-vader-tests.sh nvim
+```
+
+You can also open vim and run specific tests
+
+```
+:Vader ./test/filetypes/javascript/functions.vader ./test/filetypes/rust/functions.vader
+```
+
+or open vim and run the current file:
+
+```
+:Vader
+```
+
+**NOTE:** However, you do require to have
+[Vader](https://github.com/junegunn/vader.vim) installed being a sibling folder
+to the `vim-doge` folder, like so:
+
+```
+parent
+├── vader.vim
+└── vim-doge
+```
 
 # Tips
 
