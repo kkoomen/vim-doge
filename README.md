@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/kkoomen/vim-doge/blob/master/doc/demos">
-    <img src="https://user-images.githubusercontent.com/10693490/97796723-7f403900-1c0d-11eb-9633-9a94f48978b9.jpg" alt="DoGe" />
+    <img src="./doc/banner.jpg" alt="DoGe" />
   </a>
 </p>
 <p align="center">
