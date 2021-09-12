@@ -311,7 +311,7 @@ let g:doge_python_settings = {
 \}
 ```
 
-- `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers
+- `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers.
 
 # Headless mode
 
@@ -354,12 +354,10 @@ language and then we'll integrate it into vim-doge.
 # Motivation
 
 I created DoGe mainly because I couldn't find a plugin that could generate
-proper comments for a big collection of languages in a quick and easy way. I am
-a polyglot developer when it comes to programming languages and I couldn't find
-proper vim plugins that would generate documentation quickly for all languages I
-did want to be supported.
+proper comments for a big collection of languages that I would use on a daily
+basis in a quick and easy way.
 
-Rather then scraping off the internet to find all sorts of vim plugins for every
+Rather than scraping off the internet to find all sorts of vim plugins for every
 language I was coding in, I did want a single plugin that would support every
 language I was working in.
 
@@ -376,7 +374,7 @@ Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on
 
 # License
 
-DoGe is licensed under the GPL-3.0 license.
+DoGe is licensed under the GPL-2.0 license.
 
 [py-rest]: http://daouzli.com/blog/docstring.html#restructuredtext
 [py-numpy]: http://daouzli.com/blog/docstring.html#numpydoc
