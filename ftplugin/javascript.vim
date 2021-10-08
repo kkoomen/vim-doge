@@ -59,7 +59,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(typeParameters| * {typeParameters})%',
 \      '%(parameters| * {parameters})%',
 \      '%(exceptions| * {exceptions})%',
-\      '%(returnType| * @return {{returnType|!type}} !description)%',
+\      '%(returnType| * @returns {{returnType|!type}} !description)%',
 \      ' */',
 \    ],
 \  },

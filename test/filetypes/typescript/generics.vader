@@ -49,7 +49,7 @@ Do (trigger doge):
   :18\<CR>
   \<C-d>
 
-Expect typescript (generated comment with @template, @param and @return tags):
+Expect typescript (generated comment with @template, @param and @returns tags):
   /**
    * [TODO:description]
    *
@@ -60,7 +60,7 @@ Expect typescript (generated comment with @template, @param and @return tags):
    * @template R - [TODO:description]
    * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} fn1 - [TODO:description]
    * @param {Array<(a: R) => R>} fns - [TODO:description]
-   * @return {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} [TODO:description]
+   * @returns {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} [TODO:description]
    */
   export function pipe<T1, T2, T3, T4, R>(
     fn1: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
@@ -73,7 +73,7 @@ Expect typescript (generated comment with @template, @param and @return tags):
    * @template R - [TODO:description]
    * @param {(...args: any[]) => R} fn1 - [TODO:description]
    * @param {Array<(a: R) => R>} fns - [TODO:description]
-   * @return {(a: R) => R} [TODO:description]
+   * @returns {(a: R) => R} [TODO:description]
    */
   export function pipe<R>(
     fn1: (...args: any[]) => R,
@@ -98,7 +98,7 @@ Do (trigger doge):
   :19\<CR>
   \<C-d>
 
-Expect typescript (generated comment with @async, @template, @param and @return tags):
+Expect typescript (generated comment with @async, @template, @param and @returns tags):
   /**
    * [TODO:description]
    *
@@ -110,7 +110,7 @@ Expect typescript (generated comment with @async, @template, @param and @return 
    * @template R - [TODO:description]
    * @param {(arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R} fn1 - [TODO:description]
    * @param {Array<(a: R) => R>} fns - [TODO:description]
-   * @return {Promise<[TODO:type]>} [TODO:description]
+   * @returns {Promise<[TODO:type]>} [TODO:description]
    */
   export const pipe = async <T1, T2, T3, T4, R>(
     fn1: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => R,
@@ -124,7 +124,7 @@ Expect typescript (generated comment with @async, @template, @param and @return 
    * @template R - [TODO:description]
    * @param {(...args: any[]) => R} fn1 - [TODO:description]
    * @param {Array<(a: R) => R>} fns - [TODO:description]
-   * @return {(a: R) => R} [TODO:description]
+   * @returns {(a: R) => R} [TODO:description]
    */
   export const pipe = async <R>(
     fn1: (...args: any[]) => R,
