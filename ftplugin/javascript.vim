@@ -92,7 +92,7 @@ call doge#buffer#register_doc_standard('jsdoc', [
 \      '%(typeParameters| * {typeParameters})%',
 \      '%(parameters| * {parameters})%',
 \      '%(exceptions| * {exceptions})%',
-\      '%(returnType| * @return)% %(showReturnType|{{returnType|!type}})% %(returnType|!description)%',
+\      '%(returnType| * @returns)% %(showReturnType|{{returnType|!type}})% %(returnType|!description)%',
 \      ' */',
 \    ],
 \  },
