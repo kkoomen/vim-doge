@@ -19,7 +19,7 @@ Do (trigger doge):
   :8\<CR>
   \<C-d>
 
-Expect javascript (generated comment with @async, @param and @return tags):
+Expect javascript (generated comment with @async, @param and @returns tags):
   class Test {
     /**
      * [TODO:description]
@@ -28,7 +28,7 @@ Expect javascript (generated comment with @async, @param and @return tags):
      * @param {User} [TODO:name] - [TODO:description]
      * @param {[TODO:type]} [TODO:name].id - [TODO:description]
      * @param {Request} req - [TODO:description]
-     * @return {Promise<User>} [TODO:description]
+     * @returns {Promise<User>} [TODO:description]
      */
     @Get()
     @UseGuards(LocalAuthGuard([

@@ -33,13 +33,13 @@ Do (trigger doge):
   :18\<CR>
   \<C-d>
 
-Expect javascript (generated comment with a description, @param and @return tags):
+Expect javascript (generated comment with a description, @param and @returns tags):
   /**
    * [TODO:description]
    *
    * @param {[TODO:type]} [TODO:name] - [TODO:description]
    * @param {[TODO:type]} [TODO:name].someVal - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   const Test = ({ someVal }) => {
     return (
@@ -58,7 +58,7 @@ Expect javascript (generated comment with a description, @param and @return tags
    * @param {[TODO:type]} [TODO:name].onSubmit - [TODO:description]
    * @param {[TODO:type]} [TODO:name].previewImages - [TODO:description]
    * @param {[TODO:type]} [TODO:name].onPreviewFileDelete - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   const SomeWrapperComponent = ({ onSubmit, previewImages, onPreviewFileDelete, ...rest }) => {
     return (

@@ -21,7 +21,7 @@ Do (trigger doge):
   :17\<CR>
   \<C-d>
 
-Expect typescript (generated comment with a description, @param and @return tags):
+Expect typescript (generated comment with a description, @param and @returns tags):
   class Test {
     /**
      * [TODO:description]
@@ -31,7 +31,7 @@ Expect typescript (generated comment with a description, @param and @return tags
      * @param {[TODO:type]} [TODO:name].userModel - [TODO:description]
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
-     * @return {[TODO:type]} [TODO:description]
+     * @returns {[TODO:type]} [TODO:description]
      */
     @Test()
     @Test()
@@ -48,7 +48,7 @@ Expect typescript (generated comment with a description, @param and @return tags
      * @param {[TODO:type]} [p3] - [TODO:description]
      * @throws {[TODO:name]} - [TODO:description]
      * @throws {CustomException} - [TODO:description]
-     * @return {UserA & UserB} [TODO:description]
+     * @returns {UserA & UserB} [TODO:description]
      */
     @Test()
     async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {
@@ -73,14 +73,14 @@ Do (trigger doge):
   :2\<CR>
   \<C-d>
 
-Expect typescript (generated comment with a description, @param and @return tags):
+Expect typescript (generated comment with a description, @param and @returns tags):
   class Test {
     /**
      * [TODO:description]
      *
      * @param {Model<T>} $model - [TODO:description]
      * @param {Model<T>} model - [TODO:description]
-     * @return {[TODO:type]} [TODO:description]
+     * @returns {[TODO:type]} [TODO:description]
      */
     constructor(
       @InjectModel(User.name) private readonly $model: Model<T>,

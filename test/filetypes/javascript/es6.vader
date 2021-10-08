@@ -11,7 +11,7 @@ Expect javascript (no generated comment):
   /**
    * [TODO:description]
    *
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   () => {}
 
@@ -26,12 +26,12 @@ Given javascript (fat-arrow function with a single parameter without return type
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @param and @return tags):
+Expect javascript (generated comment with @param and @returns tags):
   /**
    * [TODO:description]
    *
    * @param {[TODO:type]} bar - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   export const foo = bar => {
     return bar
@@ -50,7 +50,7 @@ Do (trigger doge):
   :13\<CR>
   \<C-d>
 
-Expect javascript (generated comment with @param and @return tags):
+Expect javascript (generated comment with @param and @returns tags):
   /**
    * [TODO:description]
    *
@@ -58,7 +58,7 @@ Expect javascript (generated comment with @param and @return tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   const myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
@@ -69,7 +69,7 @@ Expect javascript (generated comment with @param and @return tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   let myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
@@ -82,7 +82,7 @@ Given javascript (fat-arrow function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @param and @return tags):
+Expect javascript (generated comment with @param and @returns tags):
   /**
    * [TODO:description]
    *
@@ -90,7 +90,7 @@ Expect javascript (generated comment with @param and @return tags):
    * @param {string[]} [p2] - [TODO:description]
    * @param {number} p3 - [TODO:description]
    * @param {float} p4 - [TODO:description]
-   * @return {string[]} [TODO:description]
+   * @returns {string[]} [TODO:description]
    */
   const myFunc = ($p1: string = 'value', p2: string[] = [], p3: number, p4: float): string[] => {}
 
@@ -114,14 +114,14 @@ Do (trigger doge):
   :13\<CR>
   \<C-d>
 
-Expect javascript (generated comments with @static, @param and @return tags):
+Expect javascript (generated comments with @static, @param and @returns tags):
   class Test {
     /**
      * [TODO:description]
      *
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
      * @param {number} [TODO:name].b - [TODO:description]
-     * @return {[TODO:type]} [TODO:description]
+     * @returns {[TODO:type]} [TODO:description]
      */
     myMethod = ({ b: number }) => {
       return this.add(b);
@@ -133,7 +133,7 @@ Expect javascript (generated comments with @static, @param and @return tags):
      * @static
      * @param {[TODO:type]} [TODO:name] - [TODO:description]
      * @param {number} [TODO:name].b - [TODO:description]
-     * @return {number} [TODO:description]
+     * @returns {number} [TODO:description]
      */
     static myMethod({ b: number }): number {
       return this.add(b);
@@ -154,13 +154,13 @@ Do (trigger doge):
   :2\<CR>
   \<C-d>
 
-Expect javascript (generated comment with a description, @param and @return tags):
+Expect javascript (generated comment with a description, @param and @returns tags):
   class Test {
     /**
      * [TODO:description]
      *
      * @param {number} b - [TODO:description]
-     * @return {[TODO:type]} [TODO:description]
+     * @returns {[TODO:type]} [TODO:description]
      */
     myMethod(public b: number) {
       return this.add(b);
@@ -176,14 +176,14 @@ Given javascript (prototype fat-arrow function with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @returns tags):
   /**
    * [TODO:description]
    *
    * @function Person#greet
    * @param {string} [p1] - [TODO:description]
    * @param {Immutable.List} [p2] - [TODO:description]
-   * @return {string[]} [TODO:description]
+   * @returns {string[]} [TODO:description]
    */
   Person.prototype.greet = (p1: string = 'default', p2: Immutable.List = Immutable.List()): string[] => {};
 
@@ -199,7 +199,7 @@ Do (trigger doge):
   /**
    * [TODO:description]
    *
-   * @return {[TODO:type]} [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
    */
   Person.prototype.greet = () => {};
 
@@ -212,13 +212,13 @@ Given javascript (fat-arrow function with parameters with multiple type hints):
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @function, @param and @return tags):
+Expect javascript (generated comment with @function, @param and @returns tags):
   /**
    * [TODO:description]
    *
    * @param {string} $p1 - [TODO:description]
    * @param {Foo | Bar | Baz} p2 - [TODO:description]
-   * @return {(Foo | Bar)} [TODO:description]
+   * @returns {(Foo | Bar)} [TODO:description]
    */
   const myFunc = ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
 
@@ -231,13 +231,13 @@ Given javascript (async fat-arrow function with parameters with multiple type hi
 Do (trigger doge):
   \<C-d>
 
-Expect javascript (generated comment with @async, @function, @param and @return tags):
+Expect javascript (generated comment with @async, @function, @param and @returns tags):
   /**
    * [TODO:description]
    *
    * @async
    * @param {string} $p1 - [TODO:description]
    * @param {Foo | Bar | Baz} p2 - [TODO:description]
-   * @return {(Foo | Bar)} [TODO:description]
+   * @returns {(Foo | Bar)} [TODO:description]
    */
   const myFunc = async ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
