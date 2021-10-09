@@ -1,3 +1,10 @@
+# 3.11.0 (2021-10-09)
+
+
+### Features
+
+* **javascript:** use [@returns](https://github.com/returns) instead of [@return](https://github.com/return) ([79e6247](https://github.com/kkoomen/vim-doge/commit/79e6247e8b157ee39106c336a5cd726d50c6cc9a))
+
 # [3.10.0](https://github.com/kkoomen/vim-doge/compare/v3.9.1...v3.10.0) (2021-04-28)
 
 
