@@ -23,14 +23,26 @@ call doge#buffer#register_doc_standard('csxml', [
 \  {
 \    'nodeTypes': ['method_declaration'],
 \    'parameters': {
-\      'format': '<param name="{name}"> !description</param>'
+\      'format': '<param name="{name}">!description</param>'
 \    },
 \    'template': [
 \      '/// <summary>',
 \      '/// !description',
 \      '/// </summary>',
 \      '%(parameters|/// {parameters})%',
-\      '%(isNoConstructorMethod|/// <retrurns>!description</returns>',
+\      '%(hasReturn|/// <retrurns>!description</returns>',
+\    ],
+\  },
+\  {
+\    'nodeTypes': ['constructor_declaration'],
+\    'parameters': {
+\      'format': '<param name="{name}">!description</param>'
+\    },
+\    'template': [
+\      '/// <summary>',
+\      '/// !description',
+\      '/// </summary>',
+\      '%(parameters|/// {parameters})%',
 \    ],
 \  },
 \])
