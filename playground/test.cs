@@ -78,6 +78,10 @@ public class TestCS
     /// <summary>
     /// [TODO:desription]
     /// </summary>
+    /// <summary>
+    /// [TODO:description]
+    /// </summary>
+    %(hasReturn|/// <retrurns>[TODO:description]</returns>
     public void ActualMethod1()
     {
     }
@@ -105,8 +109,9 @@ public class TestCS
     /// <param name="arg1">[TODO:description]</param>
     /// <param name="arg2">[TODO:description]</param>
     /// <returns>[TODO:description]</returns>
-    public void ActualMethodWitArgs(?List<string> arg1, int arg2)
+    public string ActualMethodWitArgsAndReturn(?List<string> arg1, int arg2)
     {
+        return  "";
     }
 
 

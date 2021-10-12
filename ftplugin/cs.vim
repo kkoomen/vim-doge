@@ -30,7 +30,7 @@ call doge#buffer#register_doc_standard('csxml', [
 \      '/// !description',
 \      '/// </summary>',
 \      '%(parameters|/// {parameters})%',
-\      '%(hasReturn|/// <retrurns>!description</returns>',
+\      '%(hasReturn|/// <retrurns>!description</returns>)%',
 \    ],
 \  },
 \  {

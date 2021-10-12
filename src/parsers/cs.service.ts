@@ -40,7 +40,7 @@ implements CustomParserService {
 
         switch (node.type) {
             case NodeType.METHOD_DECLARATION:
-                this.result = { parameters: [], hasReturn: null };
+                this.result = { parameters: [], hasReturn: true };
                 this.runNodeParser(this.parseFunction, node);
                 break;
 
@@ -56,44 +56,11 @@ implements CustomParserService {
     }
 
     private parseFunction(node: SyntaxNode): void {
-        let returnDone = false;
         node.children.forEach((childNode: SyntaxNode) => {
-            switch (childNode.type) {
-                case 'generic_name':
-                case 'predefined_type': {
-                    this.result.returnType = childNode.text;
-                    returnDone = true;
-                    break;
-                }
-
-                case 'identifier': {
-                    if (returnDone) {
-                        this.result.name = childNode.text;
-                    } else {
-                        this.result.returnType = childNode.text;
-                        returnDone = true;
-                    }
-                    break;
-                }
-
-                case 'formal_parameters': {
-                    childNode.children
-                        .filter((n: SyntaxNode) =>
-                            ['formal_parameter', 'spread_parameter'].includes(n.type),
-                    )
-                        .forEach((cn: SyntaxNode) => {
-                            const param: Record<string, any> = { name: null, type: null };
-
-                            param.type = cn.children.shift()?.text;
-                            param.name = cn.children.pop()?.text;
-
-                            this.result.parameters.push(param);
-                        });
-                    break;
-                }
-
-                default:
-                break;
+            if (childNode.type == "void_keyword") {
+                this.result.hasReturn = false;
+            } else if (childNode.type == "parameter_list") {
+                this.extractParamsFromList(childNode);
             }
         });
     }
@@ -104,18 +71,23 @@ implements CustomParserService {
                 return;
             }
 
-            childNode.children.forEach((parameterNode: SyntaxNode) => {
-                if (parameterNode.type !== "parameter") {
+            this.extractParamsFromList(childNode);
+        });
+    }
+
+    private extractParamsFromList(parameterList: SyntaxNode)
+    {
+        parameterList.children.forEach((parameterNode: SyntaxNode) => {
+            if (parameterNode.type !== "parameter") {
+                return;
+            }
+
+            parameterNode.children.forEach((idNode: SyntaxNode) => {
+                if (idNode.type != "identifier") {
                     return;
                 }
 
-                parameterNode.children.forEach((idNode: SyntaxNode) => {
-                    if (idNode.type != "identifier") {
-                        return;
-                    }
-
-                    this.result.parameters.push({ name: idNode.text });
-                });
+                this.result.parameters.push({ name: idNode.text });
             });
         });
     }
