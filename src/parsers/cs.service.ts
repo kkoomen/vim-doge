@@ -8,8 +8,9 @@ enum NodeType {
     VARIABLE_DECLARATION = 'variable_declaration',
     PROPERTY_DECLARATION = 'property_declaration',
     CONSTRUCTOR_DECLARATION = 'constructor_declaration',
+    CONSTANT_DECLARATION = 'field_declaration',
     OPERATOR_DECLARATION = 'operator_declaration',
-    CONSTANT_DECLARATION = 'field_declaration'
+    DELEGATE_DECLARATION = 'delegate_declaration'
 }
 
 export class CSharpParserService
@@ -44,10 +45,21 @@ implements CustomParserService {
                 this.runNodeParser(this.parseFunction, node);
                 break;
 
+            case NodeType.DELEGATE_DECLARATION:
+            case NodeType.OPERATOR_DECLARATION:
             case NodeType.CONSTRUCTOR_DECLARATION:
                 this.result = { parameters: [] };
                 this.runNodeParser(this.parseConstructor, node);
                 break;
+
+            case NodeType.VARIABLE_DECLARATION:
+            case NodeType.CONSTANT_DECLARATION:
+            case NodeType.PROPERTY_DECLARATION:
+            case NodeType.CLASS_DECLARATION:
+                this.result = { exist: true };
+                this.runNodeParser(this.parseNothing, node);
+                break;
+
 
             default: 
                 console.error(`Unable to handle node type: ${node.type}`);
@@ -75,20 +87,29 @@ implements CustomParserService {
         });
     }
 
-    private extractParamsFromList(parameterList: SyntaxNode)
-    {
+    private parseNothing(_: SyntaxNode) {
+        // dont actually need to do anything, this node only has the default summary
+    }
+
+    private extractParamsFromList(parameterList: SyntaxNode) {
         parameterList.children.forEach((parameterNode: SyntaxNode) => {
             if (parameterNode.type !== "parameter") {
                 return;
             }
 
-            parameterNode.children.forEach((idNode: SyntaxNode) => {
-                if (idNode.type != "identifier") {
-                    return;
+            let idCount = 0;
+            for (let idNode of parameterNode.children) {
+                // let idNode: SyntaxNode = parameterNode.child(i);
+                if (idNode.type === "parameter_modifier") {
+                    continue;
                 }
 
-                this.result.parameters.push({ name: idNode.text });
-            });
+                idCount++;
+
+                if (0 === idCount % 2) {
+                    this.result.parameters.push({ name: idNode.text });
+                }
+            }
         });
     }
 }

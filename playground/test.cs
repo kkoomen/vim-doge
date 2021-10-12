@@ -45,8 +45,7 @@ public class TestCS
     /// </summary>
     /// <param name="first">[TODO:description]</param>
     /// <param name="second">[TODO:description]</param>
-    /// <returns>[TODO:description]</returns>
-    public static TestCS operator +(TestCS first, TestCS second) 
+    public static TestCS operator +(ref TestCS first, in TestCS second) 
     { 
         return first; 
     }
@@ -59,7 +58,7 @@ public class TestCS
     }
 
     /// <summary>
-    /// [TODO:desription]
+    /// [TODO:description]
     /// </summary>
     /// <param name="arg1">[TODO:description]</param>
     public TestCS(string arg1)
@@ -67,7 +66,7 @@ public class TestCS
     }
 
     /// <summary>
-    /// [TODO:desription]
+    /// [TODO:description]
     /// </summary>
     /// <param name="arg1">[TODO:description]</param>
     /// <param name="arg2">[TODO:description]</param>
@@ -76,26 +75,23 @@ public class TestCS
     }
 
     /// <summary>
-    /// [TODO:desription]
-    /// </summary>
-    /// <summary>
     /// [TODO:description]
     /// </summary>
-    %(hasReturn|/// <retrurns>[TODO:description]</returns>
     public void ActualMethod1()
     {
     }
 
     /// <summary>
-    /// [TODO:desription]
+    /// [TODO:description]
     /// </summary>
-    /// <returns>[TODO:description]</returns>
-    public void ActualMethodWitReturn()
+    /// <retrurns>[TODO:description]</returns>
+    public string ActualMethodWitReturn()
     {
+        return "";
     }
 
     /// <summary>
-    /// [TODO:desription]
+    /// [TODO:description]
     /// </summary>
     /// <param name="arg1">[TODO:description]</param>
     /// <param name="arg2">[TODO:description]</param>
@@ -104,11 +100,11 @@ public class TestCS
     }
 
     /// <summary>
-    /// [TODO:desription]
+    /// [TODO:description]
     /// </summary>
     /// <param name="arg1">[TODO:description]</param>
     /// <param name="arg2">[TODO:description]</param>
-    /// <returns>[TODO:description]</returns>
+    /// <retrurns>[TODO:description]</returns>
     public string ActualMethodWitArgsAndReturn(?List<string> arg1, int arg2)
     {
         return  "";

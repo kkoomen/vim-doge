@@ -34,7 +34,7 @@ call doge#buffer#register_doc_standard('csxml', [
 \    ],
 \  },
 \  {
-\    'nodeTypes': ['constructor_declaration'],
+\    'nodeTypes': ['constructor_declaration', 'operator_declaration', 'delegate_declaration'],
 \    'parameters': {
 \      'format': '<param name="{name}">!description</param>'
 \    },
@@ -43,6 +43,14 @@ call doge#buffer#register_doc_standard('csxml', [
 \      '/// !description',
 \      '/// </summary>',
 \      '%(parameters|/// {parameters})%',
+\    ],
+\  },
+\  {
+\    'nodeTypes': ['class_declaration', 'variable_declaration', 'property_declaration', 'field_declaration'],
+\    'template': [
+\      '/// <summary>',
+\      '/// !description',
+\      '/// </summary>',
 \    ],
 \  },
 \])
