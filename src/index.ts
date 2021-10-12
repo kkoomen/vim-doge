@@ -19,6 +19,7 @@ const lineNumber: number = Math.max(0, Number(args.shift()) - 1);
 const nodeTypes: string[] = args;
 
 const languageParser = loadParserPackage(language);
+
 if (languageParser) {
   const parser = new Parser();
   parser.setLanguage(languageParser);

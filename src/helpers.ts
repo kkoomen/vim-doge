@@ -1,6 +1,7 @@
 import Bash from 'tree-sitter-bash';
 import C from 'tree-sitter-c';
 import CPP from 'tree-sitter-cpp';
+import CSharp from 'tree-sitter-c-sharp';
 import Java from 'tree-sitter-java';
 import Lua from 'tree-sitter-lua';
 import PHP from 'tree-sitter-php';
@@ -18,6 +19,7 @@ export function loadParserPackage(language: ValueOf<Language>): any {
     [Language.PYTHON]: Python,
     [Language.C]: C,
     [Language.CPP]: CPP,
+    [Language.CSHARP]: CSharp,
     [Language.BASH]: Bash,
     [Language.RUBY]: Ruby,
     [Language.LUA]: Lua,

@@ -8,6 +8,7 @@ enum NodeType {
 
 export class CSharpParserService
 extends BaseParserService
+
 implements CustomParserService {
     constructor(
         readonly rootNode: SyntaxNode,
@@ -29,7 +30,6 @@ implements CustomParserService {
                         name: null,
                         parameters: [],
                         returnType: null,
-                        exceptions: [],
                     };
                     this.runNodeParser(this.parseFunction, node);
                     break;
@@ -44,34 +44,31 @@ implements CustomParserService {
             node.children.forEach((childNode: SyntaxNode) => {
                 this.traverse(childNode);
             });
+        } else {
+            console.log(" -- ", node.type);
         }
     }
 
     private parseFunction(node: SyntaxNode): void {
+        let returnDone = false;
+        console.log(" ++ ", node);
         node.children.forEach((childNode: SyntaxNode) => {
+            console.log(" ++ ", childNode.text, childNode);
             switch (childNode.type) {
-                case 'throws': {
-                    childNode.children
-                        .filter((n: SyntaxNode) => n.type === 'type_identifier')
-                        .forEach((cn: SyntaxNode) => {
-                            this.result.exceptions.push({ name: cn.text });
-                        });
-                    break;
-                }
-
-                case 'type_identifier':
-                case 'void_type':
-                case 'floating_point_type':
-                case 'array_type':
-                case 'boolean_type':
-                case 'integral_type':
-                case 'generic_type': {
+                case 'generic_name':
+                case 'predefined_type': {
                     this.result.returnType = childNode.text;
+                    returnDone = true;
                     break;
                 }
 
                 case 'identifier': {
-                    this.result.name = childNode.text;
+                    if (returnDone) {
+                        this.result.name = childNode.text;
+                    } else {
+                        this.result.returnType = childNode.text;
+                        returnDone = true;
+                    }
                     break;
                 }
 
