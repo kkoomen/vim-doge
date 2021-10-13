@@ -21,7 +21,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 
 call doge#buffer#register_doc_standard('csxml', [
 \  {
-\    'nodeTypes': ['method_declaration'],
+\    'nodeTypes': ['method_declaration', 'operator_declaration', 'delegate_declaration'],
 \    'parameters': {
 \      'format': '<param name="{name}">!description</param>'
 \    },
@@ -30,11 +30,11 @@ call doge#buffer#register_doc_standard('csxml', [
 \      '/// !description',
 \      '/// </summary>',
 \      '%(parameters|/// {parameters})%',
-\      '%(hasReturn|/// <retrurns>!description</returns>)%',
+\      '%(hasReturn|/// <returns>!description</returns>)%',
 \    ],
 \  },
 \  {
-\    'nodeTypes': ['constructor_declaration', 'operator_declaration', 'delegate_declaration'],
+\    'nodeTypes': ['constructor_declaration'],
 \    'parameters': {
 \      'format': '<param name="{name}">!description</param>'
 \    },
@@ -46,7 +46,7 @@ call doge#buffer#register_doc_standard('csxml', [
 \    ],
 \  },
 \  {
-\    'nodeTypes': ['class_declaration', 'variable_declaration', 'property_declaration', 'field_declaration'],
+\    'nodeTypes': ['class_declaration', 'variable_declaration', 'property_declaration', 'field_declaration', 'enum_declaration'],
 \    'template': [
 \      '/// <summary>',
 \      '/// !description',

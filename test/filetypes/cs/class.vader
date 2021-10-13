@@ -1,0 +1,45 @@
+# ==============================================================================
+# Plain Class
+# ==============================================================================
+Given cs (plain class):
+  public class Myclass
+  {
+  }
+
+Do (run doge):
+  \<C-d>
+
+Expect cs (plain class with summary):
+  /// <summary>
+  /// [TODO:description]
+  /// </summary>
+  public class Myclass
+  {
+  }
+
+# ==============================================================================
+# Nested Class
+# ==============================================================================
+Given cs (plain class):
+  public class Myclass
+  {
+      private class SubClass
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (plain class with summary):
+  public class Myclass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      private class SubClass
+      {
+      }
+  }
+

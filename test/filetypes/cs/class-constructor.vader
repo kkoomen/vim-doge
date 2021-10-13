@@ -1,0 +1,53 @@
+# ==============================================================================
+# Construcor without params
+# ==============================================================================
+Given cs (constructor without params):
+  public class MyClass
+  {
+      public MyClass()
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (constructor with summary only):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public MyClass()
+      {
+      }
+  }
+
+# ==============================================================================
+# Constructor with params
+# ==============================================================================
+Given cs (constructor without params):
+  public class MyClass
+  {
+      public MyClass(string arg1, MyClass arg2)
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (constructor with summary only):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      /// <param name="arg2">[TODO:description]</param>
+      public MyClass(string arg1, MyClass arg2)
+      {
+      }
+  }

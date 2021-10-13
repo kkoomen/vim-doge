@@ -10,7 +10,8 @@ enum NodeType {
     CONSTRUCTOR_DECLARATION = 'constructor_declaration',
     CONSTANT_DECLARATION = 'field_declaration',
     OPERATOR_DECLARATION = 'operator_declaration',
-    DELEGATE_DECLARATION = 'delegate_declaration'
+    DELEGATE_DECLARATION = 'delegate_declaration',
+    ENUM_DECLARATION = 'enum_declaration'
 }
 
 export class CSharpParserService
@@ -41,23 +42,24 @@ implements CustomParserService {
 
         switch (node.type) {
             case NodeType.METHOD_DECLARATION:
+            case NodeType.DELEGATE_DECLARATION:
+            case NodeType.OPERATOR_DECLARATION:
                 this.result = { parameters: [], hasReturn: true };
                 this.runNodeParser(this.parseFunction, node);
                 break;
 
-            case NodeType.DELEGATE_DECLARATION:
-            case NodeType.OPERATOR_DECLARATION:
             case NodeType.CONSTRUCTOR_DECLARATION:
                 this.result = { parameters: [] };
                 this.runNodeParser(this.parseConstructor, node);
                 break;
 
             case NodeType.VARIABLE_DECLARATION:
+            case NodeType.ENUM_DECLARATION:
             case NodeType.CONSTANT_DECLARATION:
             case NodeType.PROPERTY_DECLARATION:
             case NodeType.CLASS_DECLARATION:
                 this.result = { exist: true };
-                this.runNodeParser(this.parseNothing, node);
+                this.runNodeParser(() => {}, node);
                 break;
 
 
@@ -85,10 +87,6 @@ implements CustomParserService {
 
             this.extractParamsFromList(childNode);
         });
-    }
-
-    private parseNothing(_: SyntaxNode) {
-        // dont actually need to do anything, this node only has the default summary
     }
 
     private extractParamsFromList(parameterList: SyntaxNode) {

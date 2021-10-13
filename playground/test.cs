@@ -3,6 +3,16 @@ using System.Collections;
 /// <summary>
 /// [TODO:description]
 /// </summary>
+public enum TestEnum
+{
+    One,
+    Two,
+    Three
+}
+
+/// <summary>
+/// [TODO:description]
+/// </summary>
 public class TestCS
 {
     /// <summary>
@@ -29,6 +39,12 @@ public class TestCS
         } 
     }
 
+    public static string operator +()
+    {
+    }
+
+    public delegate string Del(string arg1, int dontForgetMe);
+
     /// <summary>
     /// [TODO:description]
     /// </summary>
@@ -38,14 +54,20 @@ public class TestCS
     /// [TODO:description]
     /// </summary>
     /// <param name="number">[TODO:description]</param>
-    public delegate void Del(int number);
+    /// <summary>
+    /// [TODO:description]
+    /// </summary>
+    public delegate void Del();
 
     /// <summary>
     /// [TODO:description]
     /// </summary>
     /// <param name="first">[TODO:description]</param>
     /// <param name="second">[TODO:description]</param>
-    public static TestCS operator +(ref TestCS first, in TestCS second) 
+    /// <summary>
+    /// [TODO:description]
+    /// </summary>
+    public static string operator +() 
     { 
         return first; 
     }

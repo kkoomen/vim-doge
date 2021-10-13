@@ -1,0 +1,339 @@
+# ==============================================================================
+# Class method without params or returns
+# ==============================================================================
+Given cs (class method without params or return):
+  public class MyClass
+  {
+      public void Meth()
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class method with only summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public void Meth()
+      {
+      }
+  }
+
+# ==============================================================================
+# Class method with params but no return
+# ==============================================================================
+Given cs (class method with params but no return):
+  public class MyClass
+  {
+      public void Meth(string arg1)
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class method with summary and params):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      public void Meth(string arg1)
+      {
+      }
+  }
+
+# ==============================================================================
+# Class method with params and return
+# ==============================================================================
+Given cs (class method with params and return):
+  public class MyClass
+  {
+      public MyClass Meth(string arg1, int arg2)
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class method with summary, params and return blocks):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      /// <param name="arg2">[TODO:description]</param>
+      /// <returns>[TODO:description]</returns>
+      public MyClass Meth(string arg1, int arg2)
+      {
+      }
+  }
+
+# ==============================================================================
+# Class method with complex params and return
+# ==============================================================================
+Given cs (class method with complex params and return):
+  public class MyClass
+  {
+      public MyClass<T> Meth(List<string> arg1, int[] arg2)
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class method with summary, params and return blocks):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      /// <param name="arg2">[TODO:description]</param>
+      /// <returns>[TODO:description]</returns>
+      public MyClass<T> Meth(List<string> arg1, int[] arg2)
+      {
+      }
+  }
+
+
+
+# ==============================================================================
+# static method without params or returns
+# ==============================================================================
+Given cs (static method without params or return):
+  public class MyClass
+  {
+      public static void Meth()
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (static method with only summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public static void Meth()
+      {
+      }
+  }
+
+# ==============================================================================
+# static method with params but no return
+# ==============================================================================
+Given cs (static method with params but no return):
+  public class MyClass
+  {
+      public static void Meth(string arg1)
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (static method with summary and params):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      public static void Meth(string arg1)
+      {
+      }
+  }
+
+# ==============================================================================
+# static method with params and return
+# ==============================================================================
+Given cs (static method with params and return):
+  public class MyClass
+  {
+      public static MyClass Meth(string arg1, int arg2)
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (static method with summary, params and return blocks):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      /// <param name="arg2">[TODO:description]</param>
+      /// <returns>[TODO:description]</returns>
+      public static MyClass Meth(string arg1, int arg2)
+      {
+      }
+  }
+
+# ==============================================================================
+# Class operator without params or returns
+# ==============================================================================
+Given cs (class operator without params or return):
+  public class MyClass
+  {
+      public static void operator +()
+      {
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class operator with only summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public static void operator +()
+      {
+      }
+  }
+
+# ==============================================================================
+# Class operator with params but no return
+# ==============================================================================
+Given cs (class operator with params but no return):
+  public class MyClass
+  {
+      public static void operator +(ref TestCS first, in TestCS second) 
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class operator with summary and params):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="first">[TODO:description]</param>
+      /// <param name="second">[TODO:description]</param>
+      public static void operator +(ref TestCS first, in TestCS second) 
+  }
+
+# ==============================================================================
+# Class operator with params and return
+# ==============================================================================
+Given cs (class operator with params and return):
+  public class MyClass
+  {
+      public static TestCS operator +(ref TestCS first, in TestCS second) 
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class operator with summary, params and return blocks):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="first">[TODO:description]</param>
+      /// <param name="second">[TODO:description]</param>
+      /// <returns>[TODO:description]</returns>
+      public static TestCS operator +(ref TestCS first, in TestCS second) 
+  }
+
+# ==============================================================================
+# Class delegate without params or returns
+# ==============================================================================
+Given cs (class delegate without params or return):
+  public class MyClass
+  {
+      public delegate void Del();
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class delegate with only summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public delegate void Del();
+  }
+
+# ==============================================================================
+# Class delegate with params but no return
+# ==============================================================================
+Given cs (class delegate with params but no return):
+  public class MyClass
+  {
+      public delegate void Del(string arg1);
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class delegate with summary and params):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      public delegate void Del(string arg1);
+  }
+
+# ==============================================================================
+# Class delegate with params and return
+# ==============================================================================
+Given cs (class delegate with params and return):
+  public class MyClass
+  {
+      public delegate string Del(string arg1, int dontForgetMe);
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class delegate with summary, params and return blocks):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      /// <param name="arg1">[TODO:description]</param>
+      /// <param name="dontForgetMe">[TODO:description]</param>
+      /// <returns>[TODO:description]</returns>
+      public delegate string Del(string arg1, int dontForgetMe);
+  }

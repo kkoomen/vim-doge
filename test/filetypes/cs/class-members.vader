@@ -1,0 +1,139 @@
+# ==============================================================================
+# Class constant
+# ==============================================================================
+Given cs (class constant):
+  public class MyClass
+  {
+      public const doule PI = 3.14;
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class constant with summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public const doule PI = 3.14;
+  }
+
+# ==============================================================================
+# Class variable
+# ==============================================================================
+Given cs (class variable):
+  public class MyClass
+  {
+      public int one = 1;
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class variable with summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public int one = 1;
+  }
+
+# ==============================================================================
+# Class property
+# ==============================================================================
+Given cs (class propery):
+  public class MyClass
+  {
+      public string Prop
+      {
+          get 
+          {
+              return "catch me if you can";
+          }
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class property with summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public string Prop
+      {
+          get 
+          {
+              return "catch me if you can";
+          }
+      }
+  }
+
+# ==============================================================================
+# Class property (setter)
+# ==============================================================================
+Given cs (class propery with setter):
+  public class MyClass
+  {
+      public string Prop
+      {
+          get 
+          {
+              return "catch me if you can";
+          }
+          set
+          {
+          }
+      }
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class property with setter with summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public string Prop
+      {
+          get 
+          {
+              return "catch me if you can";
+          }
+          set
+          {
+          }
+      }
+  }
+
+# ==============================================================================
+# Class event
+# ==============================================================================
+Given cs (class event):
+  public class MyClass
+  {
+      public event Del EventHappened;
+  }
+
+Do (run doge):
+  :3\<CR>
+  \<C-d>
+
+Expect cs (class event with summary block):
+  public class MyClass
+  {
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      public event Del EventHappened;
+  }
