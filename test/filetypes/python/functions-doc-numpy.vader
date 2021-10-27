@@ -71,7 +71,7 @@ Expect python (generated comment with Parameters and Returns tag):
 
     Returns
     -------
-    Sequence[T]:
+    Sequence[T]
       [TODO:description]
     """
     pass
