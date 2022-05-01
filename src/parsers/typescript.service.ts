@@ -133,18 +133,7 @@ export class TypeScriptParserService
           childNode.children.forEach((cn: SyntaxNode) => {
             if (cn.type === 'extends_clause') {
               cn.children.forEach((n: SyntaxNode) => {
-                if (n.type === 'generic_type') {
-                  this.result.parentName = n.children
-                    .filter((c: SyntaxNode) =>
-                      ['type_identifier', 'nested_type_identifier'].includes(
-                        c.type,
-                      ),
-                    )
-                    .shift()?.text;
-                }
-
-                // prettier-ignore
-                if (['type_identifier', 'nested_type_identifier'].includes(n.type)) {
+                if (['member_expression', 'identifier'].includes(n.type)) {
                   this.result.parentName = n.text;
                 }
               });
@@ -308,6 +297,10 @@ export class TypeScriptParserService
                     param.name = pn.text;
                   }
 
+                  if (pn.type === 'rest_pattern') {
+                    param.name = pn.children.pop()?.text;
+                  }
+
                   if (pn.type === 'type_annotation') {
                     param.type = pn.children
                       .filter((tc: SyntaxNode) => tc.type !== ':')
@@ -324,12 +317,13 @@ export class TypeScriptParserService
                     pn.children
                       .filter((spn: SyntaxNode) =>
                         [
-                          'pair',
-                          'shorthand_property_identifier',
-                          'assignment_pattern',
+                          'pair_pattern',
+                          'shorthand_property_identifier_pattern',
+                          'object_assignment_pattern',
                         ].includes(spn.type),
                       )
                       .forEach((spn: SyntaxNode) => {
+                        // console.log('spn >>>>', spn);
                         const subparam: Record<string, any> = {
                           property: true,
                           name: null,
@@ -338,20 +332,20 @@ export class TypeScriptParserService
                           optional: false,
                         };
 
-                        if (spn.type === 'shorthand_property_identifier') {
+                        if (spn.type === 'shorthand_property_identifier_pattern') {
                           subparam.name = spn.text;
                         }
 
-                        if (spn.type === 'assignment_pattern') {
+                        if (spn.type === 'object_assignment_pattern') {
                           subparam.name = spn.children.shift()?.text;
                           subparam.optional = true;
                         }
 
-                        if (spn.type === 'pair') {
+                        if (spn.type === 'pair_pattern') {
                           subparam.name = spn.children.shift()?.text;
                           const paramTypeChild = spn.children.pop();
                           if (
-                            paramTypeChild?.type === 'assignment_expression'
+                            paramTypeChild?.type === 'assignment_pattern'
                           ) {
                             subparam.type = paramTypeChild.children.shift()?.text;
                             subparam.default = paramTypeChild.children.pop()?.text;

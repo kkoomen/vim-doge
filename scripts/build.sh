@@ -13,7 +13,7 @@ cd $ROOT_DIR
 [[ -e ./bin/vim-doge ]] && rm -f ./bin/vim-doge
 
 # Build the binary.
-npx caxa --directory $ROOT_DIR/build --command "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js" --output "./bin/vim-doge"
+npx caxa --input "$ROOT_DIR/build" --output "./bin/vim-doge" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js"
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then
