@@ -16,8 +16,8 @@ jobs:
         os: [windows-latest]
         # vim-version: [v7.4.2119, head]
         vim-version: [head]
-        # node-version: [10, 12, 14]
-        node-version: [14]
+        # node-version: [10, 12, 14, 16]
+        node-version: [16]
         include:
           # - os: macos-latest
             # target: macos
@@ -40,9 +40,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install Windows Build Tools
-        if: matrix.target == 'win'
-        run: npm install --global --production windows-build-tools && npm config set msvs_version 2017
+      # - name: Install Windows Build Tools
+      #   if: matrix.target == 'win'
+      #   run: npm install --global --production windows-build-tools && npm config set msvs_version 2017
       - run: npm ci --no-save
       - name: Build Unix binary
         if: matrix.target != 'win'
