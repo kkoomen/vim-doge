@@ -4,6 +4,7 @@ import { CustomParserService } from './custom-parser-service.interface';
 
 enum NodeType {
   FUNCTION = 'function',
+  FUNCTION_DECLARATION = 'function_declaration',
   FUNCTION_DEFINITION = 'function_definition',
 }
 
@@ -26,7 +27,8 @@ export class LuaParserService
     ) {
       switch (node.type) {
         case NodeType.FUNCTION:
-        case NodeType.FUNCTION_DEFINITION: {
+        case NodeType.FUNCTION_DEFINITION:
+        case NodeType.FUNCTION_DECLARATION: {
           this.result = { name: null, parameters: [] };
           this.runNodeParser(this.parseFunction, node);
           break;
@@ -71,7 +73,10 @@ export class LuaParserService
           childNode.children
             .filter((n: SyntaxNode) => n.type === 'identifier')
             .forEach((cn: SyntaxNode) => {
-              this.result.parameters.push({ name: cn.text });
+              const name = cn.text;
+              if (name !== 'self') {
+                this.result.parameters.push({ name });
+              }
             });
           break;
         }
