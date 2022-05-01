@@ -40,6 +40,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install Windows Build Tools
+        if: matrix.target == 'win'
+        run: npm ci --no-save windows-build-tools
       - run: npm ci --no-save
       - name: Build Unix binary
         if: matrix.target != 'win'
