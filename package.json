@@ -32,12 +32,6 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged --allow-empty",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "lint-staged": {
     "*.ts": [
       "prettier --write",
