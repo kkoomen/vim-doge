@@ -12,9 +12,7 @@ enum NodeType {
   FUNCTION_DECLARATOR = 'function_declarator',
 }
 
-export class CppParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class CppParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private lineNumber: number,
@@ -32,10 +30,7 @@ export class CppParserService
       switch (node.type) {
         case NodeType.TEMPLATE_DECLARATION: {
           const childNode: SyntaxNode = node.children
-            .filter(
-              (n: SyntaxNode) =>
-                n.previousSibling?.type === 'template_parameter_list',
-            )
+            .filter((n: SyntaxNode) => n.previousSibling?.type === 'template_parameter_list')
             .shift() as SyntaxNode;
           this.lineNumber = childNode.startPosition.row;
           this.traverse(childNode);
@@ -133,9 +128,7 @@ export class CppParserService
           // Method name.
           childNode.children
             .filter((n: SyntaxNode) =>
-              ['identifier', 'scoped_identifier', 'field_identifier'].includes(
-                n.type,
-              ),
+              ['identifier', 'scoped_identifier', 'field_identifier'].includes(n.type),
             )
             .forEach((n: SyntaxNode) => {
               if (['identifier', 'field_identifier'].includes(n.type)) {
@@ -149,9 +142,7 @@ export class CppParserService
 
           // Parameters.
           childNode.children
-            .filter((n: SyntaxNode) =>
-              ['parameter_list', 'parameter_declaration'].includes(n.type),
-            )
+            .filter((n: SyntaxNode) => ['parameter_list', 'parameter_declaration'].includes(n.type))
             .map((n: SyntaxNode) =>
               n.children.filter((cn: SyntaxNode) =>
                 [
@@ -162,10 +153,7 @@ export class CppParserService
                 ].includes(cn.type),
               ),
             )
-            .reduce(
-              (items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr],
-              [],
-            )
+            .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
             .forEach((n: SyntaxNode) => {
               const param: Record<string, any> = { name: null, type: null };
 
@@ -239,9 +227,7 @@ export class CppParserService
     });
   }
 
-  private getTypeParameters(
-    node: SyntaxNode,
-  ): Array<Record<'name', null | string>> {
+  private getTypeParameters(node: SyntaxNode): Array<Record<'name', null | string>> {
     const typeparams: Array<Record<'name', null | string>> = [];
 
     node.children
@@ -255,10 +241,7 @@ export class CppParserService
           ].includes(cn.type),
         ),
       )
-      .reduce(
-        (items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr],
-        [],
-      )
+      .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
       .forEach((n: SyntaxNode) => {
         const param: Record<string, any> = { name: null };
 

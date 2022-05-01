@@ -9,9 +9,7 @@ enum NodeType {
   FIELD_DECLARATION = 'field_declaration',
 }
 
-export class CParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class CParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -82,18 +80,11 @@ export class CParserService
             .shift()?.text;
 
           childNode.children
-            .filter((n: SyntaxNode) =>
-              ['parameter_list', 'parameter_declaration'].includes(n.type),
-            )
+            .filter((n: SyntaxNode) => ['parameter_list', 'parameter_declaration'].includes(n.type))
             .map((n: SyntaxNode) =>
-              n.children.filter(
-                (cn: SyntaxNode) => cn.type === 'parameter_declaration',
-              ),
+              n.children.filter((cn: SyntaxNode) => cn.type === 'parameter_declaration'),
             )
-            .reduce(
-              (items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr],
-              [],
-            )
+            .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
             .forEach((n: SyntaxNode) => {
               const param: Record<string, any> = { name: null, type: null };
 

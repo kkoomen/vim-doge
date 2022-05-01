@@ -7,9 +7,7 @@ enum NodeType {
   SINGLETON_METHOD = 'singleton_method',
 }
 
-export class RubyParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class RubyParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,

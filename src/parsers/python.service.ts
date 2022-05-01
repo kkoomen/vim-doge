@@ -7,9 +7,7 @@ enum NodeType {
   MODULE = 'module',
 }
 
-export class PythonParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class PythonParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -74,10 +72,7 @@ export class PythonParserService
             .forEach((cn: SyntaxNode, index: number) => {
               // If this is a class method then we don't want to add the first
               // parameter, because that will be the 'self' keyword.
-              if (
-                node.parent?.parent?.type === 'class_definition' &&
-                index === 0
-              ) {
+              if (node.parent?.parent?.type === 'class_definition' && index === 0) {
                 return;
               }
 
@@ -98,11 +93,7 @@ export class PythonParserService
                     param.name = pn.text;
                   }
 
-                  if (
-                    ['list_splat_pattern', 'dictionary_splat_pattern'].includes(
-                      pn.type,
-                    )
-                  ) {
+                  if (['list_splat_pattern', 'dictionary_splat_pattern'].includes(pn.type)) {
                     param.name = pn.children
                       .filter((cpn: SyntaxNode) => cpn.type === 'identifier')
                       .shift()?.text;

@@ -6,9 +6,7 @@ enum NodeType {
   FUNCTION_ITEM = 'function_item',
 }
 
-export class RustParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class RustParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -66,10 +64,7 @@ export class RustParserService
 
         case 'generic_type': {
           const hasResultReturnType = childNode.children
-            .filter(
-              (n: SyntaxNode) =>
-                n.type === 'type_identifier' && n.text === 'Result',
-            )
+            .filter((n: SyntaxNode) => n.type === 'type_identifier' && n.text === 'Result')
             .shift();
           if (hasResultReturnType) {
             this.result.errors = true;
@@ -82,9 +77,8 @@ export class RustParserService
             .filter((n: SyntaxNode) => n.type === 'parameter')
             .forEach((child: SyntaxNode) => {
               this.result.parameters.push({
-                name: child.children
-                  .filter((n: SyntaxNode) => n.type === 'identifier')
-                  .shift()?.text,
+                name: child.children.filter((n: SyntaxNode) => n.type === 'identifier').shift()
+                  ?.text,
               });
             });
           break;

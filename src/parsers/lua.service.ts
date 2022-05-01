@@ -8,9 +8,7 @@ enum NodeType {
   FUNCTION_DEFINITION = 'function_definition',
 }
 
-export class LuaParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class LuaParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -63,9 +61,7 @@ export class LuaParserService
       switch (childNode.type) {
         case 'function_name': {
           this.result.name =
-            childNode.childCount > 0
-              ? childNode.children.pop()?.text
-              : childNode.text;
+            childNode.childCount > 0 ? childNode.children.pop()?.text : childNode.text;
           break;
         }
 

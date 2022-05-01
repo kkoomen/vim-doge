@@ -6,9 +6,7 @@ enum NodeType {
   FUNCTION_DEFINITION = 'function_definition',
 }
 
-export class BashParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class BashParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,

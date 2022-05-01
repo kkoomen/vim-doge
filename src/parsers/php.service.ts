@@ -8,9 +8,7 @@ enum NodeType {
   PROPERTY_DECLARATION = 'property_declaration',
 }
 
-export class PhpParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class PhpParserService extends BaseParserService implements CustomParserService {
   constructor(
     private readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -93,9 +91,7 @@ export class PhpParserService
     return fqn;
   }
 
-  private getClassPropertyTypeViaConstructor(
-    node: SyntaxNode,
-  ): string | undefined {
+  private getClassPropertyTypeViaConstructor(node: SyntaxNode): string | null {
     const propertyName: string | undefined = node?.children
       .filter((n: SyntaxNode) => n.type === 'property_element')
       .shift()
@@ -103,7 +99,7 @@ export class PhpParserService
       ?.children.pop()?.text;
 
     if (!propertyName) {
-      return;
+      return null;
     }
 
     const constructorNode: SyntaxNode | undefined = node?.parent?.children
@@ -117,7 +113,7 @@ export class PhpParserService
       .shift();
 
     if (!constructorNode) {
-      return;
+      return null;
     }
 
     let paramName: string | undefined;
@@ -143,7 +139,7 @@ export class PhpParserService
       });
 
     if (!paramName) {
-      return;
+      return null;
     }
 
     const paramType: string | undefined = constructorNode?.children
@@ -162,7 +158,7 @@ export class PhpParserService
       )
       .shift()?.text;
 
-    return paramType;
+    return paramType as string;
   }
 
   private parseClassProperty(node: SyntaxNode): void {

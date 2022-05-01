@@ -6,9 +6,7 @@ enum NodeType {
   METHOD_DECLARATION = 'method_declaration',
 }
 
-export class JavaParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class JavaParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -77,9 +75,7 @@ export class JavaParserService
 
         case 'formal_parameters': {
           childNode.children
-            .filter((n: SyntaxNode) =>
-              ['formal_parameter', 'spread_parameter'].includes(n.type),
-            )
+            .filter((n: SyntaxNode) => ['formal_parameter', 'spread_parameter'].includes(n.type))
             .forEach((cn: SyntaxNode) => {
               const param: Record<string, any> = { name: null, type: null };
 

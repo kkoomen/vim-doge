@@ -26,11 +26,7 @@ if (languageParser) {
   const sourceCode = fs.readFileSync(filepath, { encoding: 'utf8', flag: 'r' });
 
   const tree = parser.parse(sourceCode);
-  const parserService = getParserService(language, [
-    tree.rootNode,
-    lineNumber,
-    nodeTypes,
-  ]);
+  const parserService = getParserService(language, [tree.rootNode, lineNumber, nodeTypes]);
   if (parserService) {
     parserService.traverse(tree.rootNode);
     parserService.output();

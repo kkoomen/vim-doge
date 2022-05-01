@@ -27,7 +27,7 @@ export type ParserService =
 export function getParserService(
   language: ValueOf<Language>,
   args: [SyntaxNode, number, string[]],
-): ParserService | undefined {
+): ParserService | null {
   switch (language) {
     case Language.PHP:
       return new PhpParserService(...args);
@@ -64,4 +64,6 @@ export function getParserService(
       console.error(`Could not get parser service for unknown language: ${language}`);
       break;
   }
+
+  return null;
 }

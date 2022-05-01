@@ -15,9 +15,7 @@ enum NodeType {
   MEMBER_EXPRESSION = 'member_expression',
 }
 
-export class TypeScriptParserService
-  extends BaseParserService
-  implements CustomParserService {
+export class TypeScriptParserService extends BaseParserService implements CustomParserService {
   constructor(
     readonly rootNode: SyntaxNode,
     private readonly lineNumber: number,
@@ -267,9 +265,7 @@ export class TypeScriptParserService
         }
 
         case 'type_annotation': {
-          this.result.returnType = childNode.children
-            .filter((n) => n.type !== ':')
-            .shift()?.text;
+          this.result.returnType = childNode.children.filter((n) => n.type !== ':').shift()?.text;
           break;
         }
 
@@ -277,11 +273,7 @@ export class TypeScriptParserService
           if (!isSingleParamArrowFunc) {
             childNode.children
               .filter((cn: SyntaxNode) =>
-                [
-                  'required_parameter',
-                  'rest_parameter',
-                  'optional_parameter',
-                ].includes(cn.type),
+                ['required_parameter', 'rest_parameter', 'optional_parameter'].includes(cn.type),
               )
               .forEach((cn: SyntaxNode) => {
                 const param: Record<string, any> = {
@@ -344,9 +336,7 @@ export class TypeScriptParserService
                         if (spn.type === 'pair_pattern') {
                           subparam.name = spn.children.shift()?.text;
                           const paramTypeChild = spn.children.pop();
-                          if (
-                            paramTypeChild?.type === 'assignment_pattern'
-                          ) {
+                          if (paramTypeChild?.type === 'assignment_pattern') {
                             subparam.type = paramTypeChild.children.shift()?.text;
                             subparam.default = paramTypeChild.children.pop()?.text;
                             subparam.optional = true;
