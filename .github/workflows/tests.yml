@@ -21,10 +21,10 @@ jobs:
         include:
           - os: macos-latest
             target: macos
-          - os: ubuntu-latest
-            target: linux
-          - os: windows-latest
-            target: win
+          # - os: ubuntu-latest
+          #   target: linux
+          # - os: windows-latest
+          #   target: win
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
