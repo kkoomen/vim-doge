@@ -297,6 +297,10 @@ export class TypeScriptParserService
                     param.name = pn.text;
                   }
 
+                  if (pn.type === 'rest_pattern') {
+                    param.name = pn.children.pop()?.text;
+                  }
+
                   if (pn.type === 'type_annotation') {
                     param.type = pn.children
                       .filter((tc: SyntaxNode) => tc.type !== ':')

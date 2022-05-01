@@ -5,10 +5,10 @@ Given typescript (functions with destructured parameters):
   class Test {
     @Test()
     @Test()
-    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false) {}
+    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2?: boolean, p3?, p4 = false) {}
 
     @Test()
-    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3?, p4 = false): UserA & UserB {
       err = new CustomException();
       throw err;
       throw new CustomException();
@@ -18,7 +18,7 @@ Given typescript (functions with destructured parameters):
 Do (trigger doge):
   :4\<CR>
   \<C-d>
-  :17\<CR>
+  :18\<CR>
   \<C-d>
 
 Expect typescript (generated comment with a description, @param and @returns tags):
@@ -31,11 +31,12 @@ Expect typescript (generated comment with a description, @param and @returns tag
      * @param {[TODO:type]} [TODO:name].userModel - [TODO:description]
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
+     * @param {[TODO:type]} [p4] - [TODO:description]
      * @returns {[TODO:type]} [TODO:description]
      */
     @Test()
     @Test()
-    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false) {}
+    test({ idUser, userModel }: { idUser: ObjectId, userModel: string }, p2?: boolean, p3?, p4 = false) {}
 
     /**
      * [TODO:description]
@@ -46,12 +47,13 @@ Expect typescript (generated comment with a description, @param and @returns tag
      * @param {[TODO:type]} [TODO:name].userModel - [TODO:description]
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
+     * @param {[TODO:type]} [p4] - [TODO:description]
      * @throws {[TODO:name]} - [TODO:description]
      * @throws {CustomException} - [TODO:description]
      * @returns {UserA & UserB} [TODO:description]
      */
     @Test()
-    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3? = false): UserA & UserB {
+    async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3?, p4 = false): UserA & UserB {
       err = new CustomException();
       throw err;
       throw new CustomException();
