@@ -1,83 +1,91 @@
-# 3.11.0 (2021-10-09)
+# [3.12.0](https://github.com/kkoomen/vim-doge/compare/v3.11.0...v3.12.0) (2022-05-01)
 
+### Bug Fixes
+
+- adjust typescript parser ([3a433fe](https://github.com/kkoomen/vim-doge/commit/3a433fe32520728e6ea3574b5541e3fab8f8b839))
+- exclude windows builds because of node-gyp issues ([cdc686e](https://github.com/kkoomen/vim-doge/commit/cdc686eef07b41dfd7b5c87de1b8ca0c0486db3b))
+- remove yarn and update package-lock.json ([85c945a](https://github.com/kkoomen/vim-doge/commit/85c945af3c520a1d7cc5d558c901afe85aba2540))
+- resolve broken TS tests ([bbaca07](https://github.com/kkoomen/vim-doge/commit/bbaca079559c19ad1fa68228650c434cb2634631))
+- resolve linter issues ([7fee3af](https://github.com/kkoomen/vim-doge/commit/7fee3afee837ea6c12e3855619030f7a5ef75783))
+- **python:** remove colon after return types in numpy doc ([#308](https://github.com/kkoomen/vim-doge/issues/308)) ([a27735a](https://github.com/kkoomen/vim-doge/commit/a27735a2d99d3563008cfc199ab47d443db1773f))
 
 ### Features
 
-* **javascript:** use [@returns](https://github.com/returns) instead of [@return](https://github.com/return) ([79e6247](https://github.com/kkoomen/vim-doge/commit/79e6247e8b157ee39106c336a5cd726d50c6cc9a))
+- add new husky config ([86b585f](https://github.com/kkoomen/vim-doge/commit/86b585fbbd10088cc2adca9fb0b1f43a3f94da43))
+- update caxa command ([1f07855](https://github.com/kkoomen/vim-doge/commit/1f078558a864018728f76c53d6d04daffa727cd0))
+- upgrade everything ([99caf16](https://github.com/kkoomen/vim-doge/commit/99caf16ff6681ac4064f4d012bb1dab91ac5d1e3))
+- use improved lua parser and fix broken tests ([6650989](https://github.com/kkoomen/vim-doge/commit/66509893809e01297ce3b4e2b4ed7fb7abc1b996))
+
+# 3.11.0 (2021-10-09)
+
+### Features
+
+- **javascript:** use [@returns](https://github.com/returns) instead of [@return](https://github.com/return) ([79e6247](https://github.com/kkoomen/vim-doge/commit/79e6247e8b157ee39106c336a5cd726d50c6cc9a))
 
 # [3.10.0](https://github.com/kkoomen/vim-doge/compare/v3.9.1...v3.10.0) (2021-04-28)
 
-
 ### Bug Fixes
 
-* fix issue with return type not rendering when it should ([3421840](https://github.com/kkoomen/vim-doge/commit/3421840c81a99cce22a0eb833ff25d00ace5d293))
-* fix issue with void return being rendered ([3126f68](https://github.com/kkoomen/vim-doge/commit/3126f68e7822f059cd3828a64808488a707e9022))
-* get omit_redundant_param_types test passing, add better description ([7882a1a](https://github.com/kkoomen/vim-doge/commit/7882a1a08d618e8df0c77d0863a9a99d699064fc))
-* optimise code and fix filetype switching issue ([e6bab1f](https://github.com/kkoomen/vim-doge/commit/e6bab1ffae98a67abdd1eedbd6efe6852c63fbed))
-* revert changing default to optional in membertype expressions template. ([e17fb0b](https://github.com/kkoomen/vim-doge/commit/e17fb0b30b7fd06c58a6199724fe1716fde08ee1))
-* revert version ([60ec8f0](https://github.com/kkoomen/vim-doge/commit/60ec8f07c551aa8a61703bb3701b75e9a504e297))
-
+- fix issue with return type not rendering when it should ([3421840](https://github.com/kkoomen/vim-doge/commit/3421840c81a99cce22a0eb833ff25d00ace5d293))
+- fix issue with void return being rendered ([3126f68](https://github.com/kkoomen/vim-doge/commit/3126f68e7822f059cd3828a64808488a707e9022))
+- get omit_redundant_param_types test passing, add better description ([7882a1a](https://github.com/kkoomen/vim-doge/commit/7882a1a08d618e8df0c77d0863a9a99d699064fc))
+- optimise code and fix filetype switching issue ([e6bab1f](https://github.com/kkoomen/vim-doge/commit/e6bab1ffae98a67abdd1eedbd6efe6852c63fbed))
+- revert changing default to optional in membertype expressions template. ([e17fb0b](https://github.com/kkoomen/vim-doge/commit/e17fb0b30b7fd06c58a6199724fe1716fde08ee1))
+- revert version ([60ec8f0](https://github.com/kkoomen/vim-doge/commit/60ec8f07c551aa8a61703bb3701b75e9a504e297))
 
 ### Features
 
-* Add option to remove redundant param types in jsdoc. ([17b6147](https://github.com/kkoomen/vim-doge/commit/17b6147cf08411fb45438b7999ce063837271e45))
-* Add tests for omit_redundant_param_types option for javascript, add option description to readme. ([3049d64](https://github.com/kkoomen/vim-doge/commit/3049d64ce328a502f45f294c1fa03c5a23c0113a))
+- Add option to remove redundant param types in jsdoc. ([17b6147](https://github.com/kkoomen/vim-doge/commit/17b6147cf08411fb45438b7999ce063837271e45))
+- Add tests for omit_redundant_param_types option for javascript, add option description to readme. ([3049d64](https://github.com/kkoomen/vim-doge/commit/3049d64ce328a502f45f294c1fa03c5a23c0113a))
 
 ## [3.9.1](https://github.com/kkoomen/vim-doge/compare/v3.9.0...v3.9.1) (2021-03-29)
 
-
 ### Bug Fixes
 
-* **c:** support pointer return types ([#294](https://github.com/kkoomen/vim-doge/issues/294)) ([4e814d7](https://github.com/kkoomen/vim-doge/commit/4e814d7047b2bcfb81a1e14eec3873295f84b076))
+- **c:** support pointer return types ([#294](https://github.com/kkoomen/vim-doge/issues/294)) ([4e814d7](https://github.com/kkoomen/vim-doge/commit/4e814d7047b2bcfb81a1e14eec3873295f84b076))
 
 # [3.9.0](https://github.com/kkoomen/vim-doge/compare/v3.8.1...v3.9.0) (2021-03-15)
 
-
 ### Features
 
-* implement Errors and Safety sections ([358a0fa](https://github.com/kkoomen/vim-doge/commit/358a0fa0eb4ba78b00dea8b35c3bee7727740aa7))
-* implement rust with support for functions/methods ([77becd5](https://github.com/kkoomen/vim-doge/commit/77becd56a4ad67740863815c088a150b7d6e39f6))
+- implement Errors and Safety sections ([358a0fa](https://github.com/kkoomen/vim-doge/commit/358a0fa0eb4ba78b00dea8b35c3bee7727740aa7))
+- implement rust with support for functions/methods ([77becd5](https://github.com/kkoomen/vim-doge/commit/77becd56a4ad67740863815c088a150b7d6e39f6))
 
 ## [3.8.1](https://github.com/kkoomen/vim-doge/compare/v3.8.0...v3.8.1) (2021-03-07)
 
-
 ### Bug Fixes
 
-* **windows:** remove old param in build.ps1 ([5aec2f6](https://github.com/kkoomen/vim-doge/commit/5aec2f69be194a7373ac9e043c8f81322ca9472b))
+- **windows:** remove old param in build.ps1 ([5aec2f6](https://github.com/kkoomen/vim-doge/commit/5aec2f69be194a7373ac9e043c8f81322ca9472b))
 
 # 3.8.0 (2021-03-07)
 
-
 ### Bug Fixes
 
-* **ci:** remove old build params ([dbc4a96](https://github.com/kkoomen/vim-doge/commit/dbc4a9637a0fba122ef5b967d31299130a29b66f))
-* remove prettier/[@typescript-eslint](https://github.com/typescript-eslint) from eslintrc ([cd8b9fb](https://github.com/kkoomen/vim-doge/commit/cd8b9fb515befdd209b6a20d247bb132bdf7ca4c))
-* **ci:** add strings around command for windows ([ffcfc74](https://github.com/kkoomen/vim-doge/commit/ffcfc7484d7ce12f0f6cc6432a4aa9a9af4b331f))
-* **ci:** do not pass any params to build binary scripts ([27545b4](https://github.com/kkoomen/vim-doge/commit/27545b4e6a311d2d463a28610c7ae5f0c624dc25))
-
-
-### Features
-
-* replace vercel/pkg with caxa ([3c145fd](https://github.com/kkoomen/vim-doge/commit/3c145fd343e95099d4c723db7bc8f98d18c9a790))
+- **ci:** remove old build params ([dbc4a96](https://github.com/kkoomen/vim-doge/commit/dbc4a9637a0fba122ef5b967d31299130a29b66f))
+- remove prettier/[@typescript-eslint](https://github.com/typescript-eslint) from eslintrc ([cd8b9fb](https://github.com/kkoomen/vim-doge/commit/cd8b9fb515befdd209b6a20d247bb132bdf7ca4c))
+- **ci:** add strings around command for windows ([ffcfc74](https://github.com/kkoomen/vim-doge/commit/ffcfc7484d7ce12f0f6cc6432a4aa9a9af4b331f))
+- **ci:** do not pass any params to build binary scripts ([27545b4](https://github.com/kkoomen/vim-doge/commit/27545b4e6a311d2d463a28610c7ae5f0c624dc25))
 
 ### Features
 
-* replace vercel/pkg with caxa ([3c145fd](https://github.com/kkoomen/vim-doge/commit/3c145fd343e95099d4c723db7bc8f98d18c9a790))
+- replace vercel/pkg with caxa ([3c145fd](https://github.com/kkoomen/vim-doge/commit/3c145fd343e95099d4c723db7bc8f98d18c9a790))
+
+### Features
+
+- replace vercel/pkg with caxa ([3c145fd](https://github.com/kkoomen/vim-doge/commit/3c145fd343e95099d4c723db7bc8f98d18c9a790))
 
 # [3.7.0](https://github.com/kkoomen/vim-doge/compare/v3.6.0...v3.7.0) (2021-02-17)
 
-
 ### Bug Fixes
 
-* adjust python errors; adjust package.json and tsconfig to use build/ instead of dist/ ([e0f29d4](https://github.com/kkoomen/vim-doge/commit/e0f29d410f357202778f7ec86949796b821aa1ff))
-* temp allow more output in CI ([871c2da](https://github.com/kkoomen/vim-doge/commit/871c2da5bb472b23c0fa29519932612ca8cb3164))
-* use the same logic for the DogeCreateDocStandard command in the test itself ([2eafe9b](https://github.com/kkoomen/vim-doge/commit/2eafe9bf0d8d9ea68f846a78e7f57dca4f3fc91e))
-* **ci:** use correct checkout path for vader.vim ([6d4c7eb](https://github.com/kkoomen/vim-doge/commit/6d4c7eb02256f29f118c9aca9585f0ccc6bb4f29))
-
+- adjust python errors; adjust package.json and tsconfig to use build/ instead of dist/ ([e0f29d4](https://github.com/kkoomen/vim-doge/commit/e0f29d410f357202778f7ec86949796b821aa1ff))
+- temp allow more output in CI ([871c2da](https://github.com/kkoomen/vim-doge/commit/871c2da5bb472b23c0fa29519932612ca8cb3164))
+- use the same logic for the DogeCreateDocStandard command in the test itself ([2eafe9b](https://github.com/kkoomen/vim-doge/commit/2eafe9bf0d8d9ea68f846a78e7f57dca4f3fc91e))
+- **ci:** use correct checkout path for vader.vim ([6d4c7eb](https://github.com/kkoomen/vim-doge/commit/6d4c7eb02256f29f118c9aca9585f0ccc6bb4f29))
 
 ### Features
 
-* rename build:binary -> build:binary:unix ([7ec480c](https://github.com/kkoomen/vim-doge/commit/7ec480c532c37ed518cb7eb44c65de73f91d7ed4))
+- rename build:binary -> build:binary:unix ([7ec480c](https://github.com/kkoomen/vim-doge/commit/7ec480c532c37ed518cb7eb44c65de73f91d7ed4))
 
 # [3.6.0](https://github.com/kkoomen/vim-doge/compare/v3.5.4...v3.6.0) (2020-12-19)
 
