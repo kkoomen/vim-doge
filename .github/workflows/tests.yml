@@ -40,9 +40,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # - name: Install Windows Build Tools
-      #   if: matrix.target == 'win'
-      #   run: npm install --global --production windows-build-tools && npm config set msvs_version 2017
+      - name: Install node-gyp latest version
+        if: matrix.target == 'win'
+        run: npm install -g node-gyp@latest
       - run: npm ci --no-save
       - name: Build Unix binary
         if: matrix.target != 'win'
