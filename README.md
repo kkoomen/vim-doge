@@ -371,7 +371,7 @@ Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on
 
 # License
 
-DoGe is licensed under the GPL-2.0 license.
+DoGe is licensed under the GPL-3.0 license.
 
 [py-rest]: http://daouzli.com/blog/docstring.html#restructuredtext
 [py-numpy]: http://daouzli.com/blog/docstring.html#numpydoc
