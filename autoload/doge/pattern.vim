@@ -95,7 +95,12 @@ function! doge#pattern#generate(pattern) abort
     let l:comment_lnum_insert_position = line('.')
   else
     let l:comment_indent = 0
-    let l:comment_lnum_insert_position = line('.') - 1
+	" Search for find empty (whitespace-only) line above.
+	let l:insert_l = line('.')
+	while (l:insert_l > 0) && getline(l:insert_l) !~ '^\s*$'
+		let l:insert_l -= 1
+	endw
+    let l:comment_lnum_insert_position = l:insert_l
   endif
 
   try
