@@ -27,9 +27,10 @@ export class CppParserService extends BaseParserService implements CustomParserS
       this.nodeTypes.includes(node.type) &&
       this.done === false
     ) {
-      const startPosition = node.parent?.type === NodeType.TEMPLATE_DECLARATION
-        ? node.parent.startPosition.row
-        : node.startPosition.row;
+      const startPosition =
+        node.parent?.type === NodeType.TEMPLATE_DECLARATION
+          ? node.parent.startPosition.row
+          : node.startPosition.row;
 
       switch (node.type) {
         case NodeType.TEMPLATE_DECLARATION: {
