@@ -27,6 +27,10 @@ export class CppParserService extends BaseParserService implements CustomParserS
       this.nodeTypes.includes(node.type) &&
       this.done === false
     ) {
+      this.setDefaultResult({
+        startPosition: node.startPosition.row,
+      });
+
       switch (node.type) {
         case NodeType.TEMPLATE_DECLARATION: {
           const childNode: SyntaxNode = node.children
