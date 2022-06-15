@@ -27,10 +27,6 @@ export class CppParserService extends BaseParserService implements CustomParserS
       this.nodeTypes.includes(node.type) &&
       this.done === false
     ) {
-      this.setDefaultResult({
-        startPosition: node.startPosition.row,
-      });
-
       switch (node.type) {
         case NodeType.TEMPLATE_DECLARATION: {
           const childNode: SyntaxNode = node.children
@@ -50,6 +46,7 @@ export class CppParserService extends BaseParserService implements CustomParserS
                 ? this.getTypeParameters(node.parent)
                 : [],
             name: null,
+            startPosition: node.startPosition.row,
             parameters: [],
             returnType: null,
           };

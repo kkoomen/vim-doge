@@ -97,7 +97,7 @@ function! doge#pattern#generate(pattern) abort
     let l:comment_indent = 0
     if has_key(l:tokens, 'startPosition')
       " If the startPosition has been given, we'll use that.
-      let l:comment_lnum_insert_position = max([0, l:tokens['startPosition'] - 1])
+      let l:comment_lnum_insert_position = l:tokens['startPosition']
     else
       " by default we'll insert 1 line above the declaration.
       let l:comment_lnum_insert_position = line('.') - 1
