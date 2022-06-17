@@ -1,5 +1,20 @@
 
 
+# 3.14.0 (2022-06-17)
+
+
+### Bug Fixes
+
+* adjust startPosition logic ([1692e96](https://github.com/kkoomen/vim-doge/commit/1692e9686df8a7f5894520717a97123deea59f7c))
+* adjust startPosition logic ([d11695e](https://github.com/kkoomen/vim-doge/commit/d11695eb348e01bf3e07b26a99be652c91b812ea))
+* **cpp:** insert comment at correct position for classes, struct and function declarations ([870eafd](https://github.com/kkoomen/vim-doge/commit/870eafd271c78c4ec936973153296e3fa59ce231))
+* **cpp:** limit startPosition bottom limit to 0 ([51c7a6d](https://github.com/kkoomen/vim-doge/commit/51c7a6d84e0461694adfac56429f82b9e6ee6ed9))
+
+
+### Features
+
+* expand comment where the function starts ([742fd25](https://github.com/kkoomen/vim-doge/commit/742fd25d9432d687a242d5933e23c0a4f55a8031))
+
 # 3.13.0 (2022-06-15)
 
 
