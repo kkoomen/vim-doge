@@ -69,8 +69,8 @@ export class CppParserService extends BaseParserService implements CustomParserS
               node.parent?.type === 'template_declaration'
                 ? this.getTypeParameters(node.parent)
                 : [],
-            startPosition,
             name: null,
+            startPosition,
           };
           this.runNodeParser(this.parseStruct, node);
           break;
@@ -89,6 +89,7 @@ export class CppParserService extends BaseParserService implements CustomParserS
                 ? this.getTypeParameters(node.parent)
                 : [],
             name: null,
+            startPosition,
           };
           this.runNodeParser(this.parseClass, node);
           break;
