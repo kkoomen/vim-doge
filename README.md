@@ -365,9 +365,9 @@ If you want to work on the parsers locally, or anything else that resides in the
 
 ### Testing locally
 
-If you want to run the tests locally, you should install
-[vader](https://github.com/junegunn/vader.vim) at the same directory level that
-vim-doge is, so your structure should look like this (using vim-plug example):
+If you want to run the tests locally, you should install [vader][vader] at the
+same directory level that vim-doge is, so your structure should look like this
+(using vim-plug example):
 
 ```
 ~/.vim/plugged/
@@ -430,3 +430,4 @@ DoGe is licensed under the GPL-3.0 license.
 [contrib-guide]: https://github.com/kkoomen/vim-doge/blob/master/CONTRIBUTING.md
 [coc]: https://github.com/kkoomen/vim-doge/blob/master/CODE_OF_CONDUCT.md
 [vim-script]: https://www.vim.org/scripts/script.php?script_id=5801
+[vader]: https://github.com/junegunn/vader.vim
