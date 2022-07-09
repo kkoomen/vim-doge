@@ -54,6 +54,10 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Help](#help)
 - [Contributing](#contributing)
   * [Tree sitter](#tree-sitter)
+- [Development](#development)
+    + [Environment setup](#environment-setup)
+    + [Parsers](#parsers)
+    + [Testing locally](#testing-locally)
 - [Motivation](#motivation)
 - [Supporting DoGe](#supporting-doge)
 - [License](#license)
@@ -347,6 +351,37 @@ yet, then feel free to create a custom tree-sitter language parser for that
 language and then we'll integrate it into vim-doge.
 
 - [Creating parsers](https://tree-sitter.github.io/tree-sitter/creating-parsers)
+
+# Development
+
+### Environment setup
+
+Get started by simply `cd /path/to/vim-doge` and run `yarn`.
+
+### Parsers
+
+If you want to work on the parsers locally, or anything else that resides in the
+`src` folder, you can run: `yarn watch`.
+
+### Testing locally
+
+If you want to run the tests locally, you should install
+[vader](https://github.com/junegunn/vader.vim) at the same directory level that
+vim-doge is, so your structure should look like this (using vim-plug example):
+
+```
+~/.vim/plugged/
+├── vader.vim
+└── vim-doge
+```
+
+After that, you can do the following:
+- `cd /path/to/vim-doge`
+- `vim -u test/vimrc`
+- Inside vim you can now run: `Vader test/**/**/*.vader` to run all tests
+
+:bulb: If you're working on specific tests, you can run that specific test only:
+`Vader test/filetypes/<filetype>/functions.<ext>`
 
 # Motivation
 
