@@ -63,7 +63,7 @@
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
-    "@typescript-eslint/parser": "^5.27.0",
+    "@typescript-eslint/parser": "^5.30.6",
     "@vercel/ncc": "^0.34.0",
     "caxa": "^2.1.0",
     "conventional-changelog-cli": "^2.2.2",
