@@ -1,7 +1,3 @@
-
-
-## [3.14.1](https://github.com/kkoomen/vim-doge/compare/v3.14.0...v3.14.1) (2022-07-19)
-
 # 3.14.0 (2022-06-17)
 
 
