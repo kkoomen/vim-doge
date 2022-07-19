@@ -14,15 +14,12 @@ jobs:
           - node-version: 16
           - os: macos-latest
             target: macos
-            asset_name: vim-doge-macos.tar.gz
             asset_path: ./bin/vim-doge-macos.tar.gz
           - os: ubuntu-latest
             target: linux
-            asset_name: vim-doge-linux.tar.gz
             asset_path: ./bin/vim-doge-linux.tar.gz
           # - os: windows-latest
           #   target: win
-          #   asset_name: vim-doge-win64.zip
           #   asset_path: ./bin/vim-doge-win64.zip
     runs-on : ${{ matrix.os }}
     steps:
@@ -43,15 +40,11 @@ jobs:
         run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
       - name: Get release
         id: get_release
-        uses: bruceadams/get-release@v1.2.2
+        uses: bruceadams/get-release@v1.2.3
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Upload release asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ${{ matrix.asset_path }}
-          asset_name: ${{ matrix.asset_name }}
-          asset_content_type: application/zip
+          tag_name: ${{ steps.get_release.outputs.tag }}
+          files: ${{ matrix.asset_path }}
