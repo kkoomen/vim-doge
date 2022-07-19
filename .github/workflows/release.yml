@@ -11,7 +11,7 @@ jobs:
         # os: [macos-latest, ubuntu-latest, windows-latest]
         os: [macos-latest, ubuntu-latest]
         include:
-          - node-version: 16
+          - node-version: 18
           - os: macos-latest
             target: macos
             asset_path: ./bin/vim-doge-macos.tar.gz

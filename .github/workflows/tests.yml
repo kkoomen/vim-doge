@@ -14,8 +14,8 @@ jobs:
       matrix:
         # os: [macos-latest, ubuntu-latest, windows-latest]
         os: [macos-latest, ubuntu-latest]
-        vim-version: [v7.4.2119, head]
-        node-version: [12, 14, 16]
+        vim-version: [v7.4.2119, v8.2.5172]
+        node-version: [12, 18]
         include:
           - os: macos-latest
             target: macos
