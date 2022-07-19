@@ -5,6 +5,9 @@
 set -e
 set -u
 
+echo "System info:"
+uname -a
+
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 OUTFILE="${1:-}"
 

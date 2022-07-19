@@ -40,7 +40,7 @@ jobs:
         run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
       - name: Get release
         id: get_release
-        uses: bruceadams/get-release@v1
+        uses: bruceadams/get-release@v1.2.3
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: Upload release asset
