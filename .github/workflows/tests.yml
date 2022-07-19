@@ -61,7 +61,7 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         vim-version: [v0.3.2, head]
-        node-version: [12, 14, 16]
+        node-version: [12, 16]
         include:
           - os: macos-latest
             target: macos
