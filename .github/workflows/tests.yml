@@ -19,7 +19,7 @@ jobs:
         # vim-version: [v7.4.2119, v8.2.5172]
         vim-version: [v8.2.5172]
         # node-version: [12, 16]
-        node-version: [20]
+        node-version: [18]
         include:
           # - os: macos-latest
           #   target: macos
