@@ -1,5 +1,10 @@
 name: Release
 on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'The tag name of the release where to upload the assets to, for example: v1.2.3'
+        required: true
   release:
     types: [created]
 
@@ -39,6 +44,7 @@ jobs:
         if: matrix.target == 'win'
         run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
       - name: Get release
+        if: github.event.inputs.tag_name == ''
         id: get_release
         uses: bruceadams/get-release@v1.2.3
         env:
@@ -46,5 +52,5 @@ jobs:
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.get_release.outputs.tag }}
+          tag_name: ${{ github.event.inputs.tag_name || steps.get_release.outputs.tag_name }}
           files: ${{ matrix.asset_path }}
