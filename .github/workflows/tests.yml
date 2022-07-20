@@ -21,12 +21,12 @@ jobs:
         # node-version: [12, 16]
         node-version: [16]
         include:
-          - os: macos-latest
-            target: macos
-          - os: ubuntu-latest
-            target: linux
-          # - os: windows-latest
-            # target: win
+          # - os: macos-latest
+          #   target: macos
+          # - os: ubuntu-latest
+          #   target: linux
+          - os: windows-latest
+            target: win
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
