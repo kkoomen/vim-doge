@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
+      - run: npm i --force --no-save --verbose
       - name: Build Unix binary
         if: matrix.target != 'win'
         run: npm run build:binary:unix
