@@ -42,7 +42,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: rm -rf $HOME/.node-gyp
+      - run: Remove-Item -path $HOME/.node-gyp -recurse -force
       - run: npm i --force --no-save --verbose
       - name: Build Unix binary
         if: matrix.target != 'win'
