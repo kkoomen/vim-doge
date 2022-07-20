@@ -44,6 +44,7 @@ jobs:
         if: matrix.target == 'win'
         run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
       - name: Get release
+        if: ${{ github.event.inputs.tag_name == '' }}
         id: get_release
         uses: bruceadams/get-release@v1.2.3
         env:
