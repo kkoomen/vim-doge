@@ -42,6 +42,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - run: npm config ls -l | grep nodedir
       - run: rm -rf $HOME/.node-gyp
       - run: npm i --force --no-save --verbose
       - name: Build Unix binary
