@@ -19,7 +19,7 @@ jobs:
         # vim-version: [v7.4.2119, v8.2.5172]
         vim-version: [v8.2.5172]
         # node-version: [12, 16]
-        node-version: [14]
+        node-version: [20]
         include:
           # - os: macos-latest
           #   target: macos
@@ -42,7 +42,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm config set msvs_version 2022 --global
       - run: npm ci --no-save --verbose
       - name: Build Unix binary
         if: matrix.target != 'win'
