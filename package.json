@@ -58,10 +58,10 @@
     "tree-sitter-typescript": "^0.20.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.2",
+    "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@release-it/conventional-changelog": "^5.0.0",
-    "@types/node": "^18.0.0",
+    "@types/node": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.27.0",
     "@vercel/ncc": "^0.34.0",
