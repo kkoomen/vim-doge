@@ -433,3 +433,4 @@ DoGe is licensed under the GPL-3.0 license.
 [coc]: https://github.com/kkoomen/vim-doge/blob/master/CODE_OF_CONDUCT.md
 [vim-script]: https://www.vim.org/scripts/script.php?script_id=5801
 [vader]: https://github.com/junegunn/vader.vim
+[xmldoc]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/
