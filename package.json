@@ -15,7 +15,8 @@
     "build:binary:unix": "rimraf build && ncc build ./src/index.ts -m -o build && ./scripts/build.sh",
     "build:binary:windows": "rimraf build && ncc build .\\src\\index.ts -m -o build && powershell.exe -file .\\scripts\\build.ps1",
     "lint": "eslint \"src/**/*.ts\" --fix",
-    "format": "prettier --write \"src/**/*.ts\""
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "husky install"
   },
   "bin": {
     "vim-doge": "build/index.js"
