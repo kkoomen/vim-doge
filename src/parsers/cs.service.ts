@@ -25,44 +25,40 @@ export class CSharpParserService extends BaseParserService implements CustomPars
 
   public traverse(node: SyntaxNode): void {
     if (
-      node.startPosition.row !== this.lineNumber ||
-      !this.nodeTypes.includes(node.type) ||
-      this.done !== false
+      node.startPosition.row === this.lineNumber &&
+      this.nodeTypes.includes(node.type) &&
+      this.done === false
     ) {
-      if (node.childCount > 0) {
-        node.children.forEach((childNode: SyntaxNode) => {
-          this.traverse(childNode);
-        });
+      switch (node.type) {
+        case NodeType.METHOD_DECLARATION:
+        case NodeType.DELEGATE_DECLARATION:
+        case NodeType.OPERATOR_DECLARATION:
+          this.result = { parameters: [], hasReturn: true };
+          this.runNodeParser(this.parseFunction, node);
+          break;
+
+        case NodeType.CONSTRUCTOR_DECLARATION:
+          this.result = { parameters: [] };
+          this.runNodeParser(this.parseConstructor, node);
+          break;
+
+        case NodeType.VARIABLE_DECLARATION:
+        case NodeType.ENUM_DECLARATION:
+        case NodeType.CONSTANT_DECLARATION:
+        case NodeType.PROPERTY_DECLARATION:
+        case NodeType.CLASS_DECLARATION:
+          this.result = {};
+          this.forceOutput = true;
+          break;
+
+        default:
+          console.error(`Unable to handle node type: ${node.type}`);
+          break;
       }
-
-      return;
-    }
-
-    switch (node.type) {
-      case NodeType.METHOD_DECLARATION:
-      case NodeType.DELEGATE_DECLARATION:
-      case NodeType.OPERATOR_DECLARATION:
-        this.result = { parameters: [], hasReturn: true };
-        this.runNodeParser(this.parseFunction, node);
-        break;
-
-      case NodeType.CONSTRUCTOR_DECLARATION:
-        this.result = { parameters: [] };
-        this.runNodeParser(this.parseConstructor, node);
-        break;
-
-      case NodeType.VARIABLE_DECLARATION:
-      case NodeType.ENUM_DECLARATION:
-      case NodeType.CONSTANT_DECLARATION:
-      case NodeType.PROPERTY_DECLARATION:
-      case NodeType.CLASS_DECLARATION:
-        this.result = {};
-        this.forceOutput = true;
-        break;
-
-      default:
-        console.error(`Unable to handle node type: ${node.type}`);
-        break;
+    } else if (node.childCount > 0) {
+      node.children.forEach((childNode: SyntaxNode) => {
+        this.traverse(childNode);
+      });
     }
   }
 
