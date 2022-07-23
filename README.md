@@ -83,9 +83,9 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Ruby                                           | [YARD][yard]                                                                 |
 | :white_check_mark: | C++                                            | [Doxygen][doxygen]                                                           |
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
+| :white_check_mark: | C#                                             | [XMLDoc][xmldoc]                                                             |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 | :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
-| :white_check_mark: | C-Sharp                                        | [XMLDoc][xmldoc]                                                             |
 
 # Getting started
 
