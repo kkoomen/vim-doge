@@ -85,6 +85,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | C                                              | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 | :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
+| :white_check_mark: | C-Sharp                                        | [XMLDoc][xmldoc]                                                             |
 
 # Getting started
 
@@ -155,7 +156,8 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_cpp`        | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
 | `g:doge_doc_standard_c`          | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
 | `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                   |
-| `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                 |
+| `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                  |
+| `g:doge_doc_standard_cs`         | `'xmldoc'`          | `'xmldoc'`                                                                                                                                   |
 
 ## Options
 

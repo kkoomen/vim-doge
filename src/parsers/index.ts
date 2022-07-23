@@ -4,6 +4,7 @@ import { ValueOf } from '../types';
 import { BashParserService } from './bash.service';
 import { CParserService } from './c.service';
 import { CppParserService } from './cpp.service';
+import { CSharpParserService } from './cs.service';
 import { JavaParserService } from './java.service';
 import { LuaParserService } from './lua.service';
 import { PhpParserService } from './php.service';
@@ -18,6 +19,7 @@ export type ParserService =
   | PythonParserService
   | CParserService
   | CppParserService
+  | CSharpParserService
   | BashParserService
   | RubyParserService
   | LuaParserService
@@ -43,6 +45,9 @@ export function getParserService(
 
     case Language.CPP:
       return new CppParserService(...args);
+
+    case Language.CSHARP:
+      return new CSharpParserService(...args);
 
     case Language.BASH:
       return new BashParserService(...args);
