@@ -1,0 +1,24 @@
+# ==============================================================================
+# Enum
+# ==============================================================================
+Given cs (enum):
+  public enum TestEnum
+  {
+      One,
+      Two,
+      Three
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cs (enum with summary):
+  /// <summary>
+  /// [TODO:description]
+  /// </summary>
+  public enum TestEnum
+  {
+      One,
+      Two,
+      Three
+  }
