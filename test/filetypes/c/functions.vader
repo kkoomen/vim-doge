@@ -2,16 +2,26 @@
 # Function definition with parameters.
 # ==============================================================================
 Given c (function definition with parameters):
+  void bar(void);
+
   int foo(int a, char b) {}
 
   int *foo(int a, char b) {}
 
 Do (trigger doge):
   \<C-d>
-  :10\<CR>
+  :7\<CR>
+  \<C-d>
+  :16\<CR>
   \<C-d>
 
 Expect c (generated comment with @brief, @param and @return tags):
+  /**
+   * @brief [TODO:description]
+   *
+   */
+  void bar(void);
+
   /**
    * @brief [TODO:description]
    *
