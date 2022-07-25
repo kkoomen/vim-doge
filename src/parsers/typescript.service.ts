@@ -42,6 +42,7 @@ export class TypeScriptParserService extends BaseParserService implements Custom
               typeParameters: [],
               parameters: [],
               returnType: null,
+              hasReturnStatementValue: false,
               exceptions: [],
             };
             this.runNodeParser(this.parsePrototypeFunction, node);
@@ -77,6 +78,7 @@ export class TypeScriptParserService extends BaseParserService implements Custom
             typeParameters: [],
             parameters: [],
             returnType: null,
+            hasReturnStatementValue: false,
             exceptions: [],
           };
           this.runNodeParser(this.parseFunction, node);
@@ -182,6 +184,30 @@ export class TypeScriptParserService extends BaseParserService implements Custom
     if (funcNode) {
       this.parseFunction(funcNode);
     }
+  }
+
+  /**
+   * Look whether one of the nested return statements has a value.
+   *
+   * @param {SyntaxNode} node
+   * @returns Whether the node its children has a return value.
+   */
+  private hasReturnStatementValue(node: SyntaxNode): boolean {
+    if (node.type === 'return_statement') {
+      const emptyValues = ['void', 'undefined'];
+      const hasChildren = node.children.filter((c: SyntaxNode) => c.text !== ';').length >= 2;
+      const text =
+        node.children[1].children[0]?.text || // void 0 OR void(0)
+        node.children[1].text; // undefined OR null
+
+      return hasChildren && !emptyValues.includes(text);
+    }
+
+    if (node.childCount > 0) {
+      return node.children.some((child: SyntaxNode) => this.hasReturnStatementValue(child));
+    }
+
+    return false;
   }
 
   private parseFunction(node: SyntaxNode): void {
@@ -315,7 +341,6 @@ export class TypeScriptParserService extends BaseParserService implements Custom
                         ].includes(spn.type),
                       )
                       .forEach((spn: SyntaxNode) => {
-                        // console.log('spn >>>>', spn);
                         const subparam: Record<string, any> = {
                           property: true,
                           name: null,
@@ -363,6 +388,7 @@ export class TypeScriptParserService extends BaseParserService implements Custom
         case 'statement_block':
         case 'class_body': {
           this.parseExceptions(childNode);
+          this.result.hasReturnStatementValue = this.hasReturnStatementValue(childNode);
           break;
         }
 

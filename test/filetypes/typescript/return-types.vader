@@ -1,0 +1,176 @@
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given javascript (function without params and return type):
+  function myFunc() {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comment with only a description):
+  /**
+   * [TODO:description]
+   *
+   */
+  function myFunc() {}
+
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given javascript (functions with void, undefined and null return types):
+  function myFunc(): void {}
+  function myFunc(): undefined {}
+  function myFunc(): null {}
+
+Do (trigger doge):
+  \<C-d>
+  :6\<CR>
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with a description and a @returns tag for the null type):
+  /**
+   * [TODO:description]
+   *
+   */
+  function myFunc(): void {}
+  /**
+   * [TODO:description]
+   *
+   */
+  function myFunc(): undefined {}
+  /**
+   * [TODO:description]
+   *
+   * @returns {null} [TODO:description]
+   */
+  function myFunc(): null {}
+
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given javascript (functions with void and undefined return statement values):
+  function myFunc() {
+    return void 0;
+  }
+
+  const foo = () => {
+    return void(0);
+  }
+
+  function myFunc() {
+    return undefined;
+  }
+
+  const foo = () => {
+    return undefined;
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :9\<CR>
+  \<C-d>
+  :17\<CR>
+  \<C-d>
+  :25\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with only a description):
+  /**
+   * [TODO:description]
+   *
+   */
+  function myFunc() {
+    return void 0;
+  }
+
+  /**
+   * [TODO:description]
+   *
+   */
+  const foo = () => {
+    return void(0);
+  }
+
+  /**
+   * [TODO:description]
+   *
+   */
+  function myFunc() {
+    return undefined;
+  }
+
+  /**
+   * [TODO:description]
+   *
+   */
+  const foo = () => {
+    return undefined;
+  }
+
+# ==============================================================================
+# Functions without parameters.
+# ==============================================================================
+Given javascript (functions with void and undefined return statement values):
+  function myFunc() {
+    return true;
+  }
+
+  const foo = () => {
+    return true;
+  }
+
+  function myFunc() {
+    return true;
+  }
+
+  const foo = () => {
+    return true;
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+  :19\<CR>
+  \<C-d>
+  :28\<CR>
+  \<C-d>
+
+Expect javascript (generated comment with only a description):
+  /**
+   * [TODO:description]
+   *
+   * @returns {[TODO:type]} [TODO:description]
+   */
+  function myFunc() {
+    return true;
+  }
+
+  /**
+   * [TODO:description]
+   *
+   * @returns {[TODO:type]} [TODO:description]
+   */
+  const foo = () => {
+    return true;
+  }
+
+  /**
+   * [TODO:description]
+   *
+   * @returns {[TODO:type]} [TODO:description]
+   */
+  function myFunc() {
+    return true;
+  }
+
+  /**
+   * [TODO:description]
+   *
+   * @returns {[TODO:type]} [TODO:description]
+   */
+  const foo = () => {
+    return true;
+  }

@@ -11,7 +11,6 @@ Expect javascript (no generated comment):
   /**
    * [TODO:description]
    *
-   * @returns {[TODO:type]} [TODO:description]
    */
   () => {}
 
@@ -47,7 +46,7 @@ Given javascript (fat-arrow function with parameters without type hints using 'c
 
 Do (trigger doge):
   \<C-d>
-  :13\<CR>
+  :12\<CR>
   \<C-d>
 
 Expect javascript (generated comment with @param and @returns tags):
@@ -58,7 +57,6 @@ Expect javascript (generated comment with @param and @returns tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   const myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
@@ -69,7 +67,6 @@ Expect javascript (generated comment with @param and @returns tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   let myFunc = ($p1 = 'value', p2 = [], p3, p4) => {}
 
@@ -238,6 +235,6 @@ Expect javascript (generated comment with @async, @function, @param and @returns
    * @async
    * @param {string} $p1 - [TODO:description]
    * @param {Foo | Bar | Baz} p2 - [TODO:description]
-   * @returns {(Foo | Bar)} [TODO:description]
+   * @returns {Promise<(Foo | Bar)>} [TODO:description]
    */
   const myFunc = async ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};

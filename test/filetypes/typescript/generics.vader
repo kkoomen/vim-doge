@@ -124,7 +124,7 @@ Expect typescript (generated comment with @async, @template, @param and @returns
    * @template R - [TODO:description]
    * @param {(...args: any[]) => R} fn1 - [TODO:description]
    * @param {Array<(a: R) => R>} fns - [TODO:description]
-   * @returns {(a: R) => R} [TODO:description]
+   * @returns {Promise<(a: R) => R>} [TODO:description]
    */
   export const pipe = async <R>(
     fn1: (...args: any[]) => R,
