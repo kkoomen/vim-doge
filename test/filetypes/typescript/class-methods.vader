@@ -18,7 +18,7 @@ Given typescript (functions with destructured parameters):
 Do (trigger doge):
   :4\<CR>
   \<C-d>
-  :18\<CR>
+  :17\<CR>
   \<C-d>
 
 Expect typescript (generated comment with a description, @param and @returns tags):
@@ -32,7 +32,6 @@ Expect typescript (generated comment with a description, @param and @returns tag
      * @param {boolean} [p2] - [TODO:description]
      * @param {[TODO:type]} [p3] - [TODO:description]
      * @param {[TODO:type]} [p4] - [TODO:description]
-     * @returns {[TODO:type]} [TODO:description]
      */
     @Test()
     @Test()
@@ -50,7 +49,7 @@ Expect typescript (generated comment with a description, @param and @returns tag
      * @param {[TODO:type]} [p4] - [TODO:description]
      * @throws {[TODO:name]} - [TODO:description]
      * @throws {CustomException} - [TODO:description]
-     * @returns {UserA & UserB} [TODO:description]
+     * @returns {Promise<UserA & UserB>} [TODO:description]
      */
     @Test()
     async test(@Body() { idUser, userModel }: { error: string } & { idUser: ObjectId, userModel: string }, p2?: boolean, p3?, p4 = false): UserA & UserB {
@@ -82,7 +81,6 @@ Expect typescript (generated comment with a description, @param and @returns tag
      *
      * @param {Model<T>} $model - [TODO:description]
      * @param {Model<T>} model - [TODO:description]
-     * @returns {[TODO:type]} [TODO:description]
      */
     constructor(
       @InjectModel(User.name) private readonly $model: Model<T>,

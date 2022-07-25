@@ -80,23 +80,32 @@ function! doge#preprocessors#javascript#tokens(tokens) abort
       let a:tokens['showReturnType'] = v:false
     endif
 
-    if a:tokens['returnType'] ==# 'void'
+    if a:tokens['returnType'] ==# 'void' || a:tokens['returnType'] ==# 'undefined'
       " Set the type to an empty string so it skips rendering.
       let a:tokens['returnType'] = ''
       " Set show return type to false so it skips rendering
       let a:tokens['showReturnType'] = v:false
     elseif empty(a:tokens['returnType'])
-      " Type was not given, so set to type temple for user input.
-      let a:tokens['returnType'] = '!type'
-      " Ensure type is shown always if type was not given.
-      let a:tokens['showReturnType'] = v:true
-
-      " When we're dealing with an async function the return type is Promise<T>.
-      " Only wrap the return type in a Promise when the type is not specified.
-      if has_key(a:tokens, 'async') && !empty(a:tokens['async'])
-        let a:tokens['returnType'] = 'Promise<' . a:tokens['returnType'] . '>'
+      if a:tokens['hasReturnStatementValue'] == v:false
+        " At this point we'll hide our return type complete if there's not return
+        " statement value and a return type. If one of these exists then we know
+        " this function will return some type.
+        let a:tokens['showReturnType'] = v:false
+      else
+        let a:tokens['returnType'] = '!type'
       endif
     endif
+
+    " When we're dealing with an async function the return type is Promise<T>.
+    " Only wrap the return type in a Promise when the type is not specified.
+    if has_key(a:tokens, 'async') && !empty(a:tokens['async']) && a:tokens['returnType'] !~# '^Promise'
+      if empty(a:tokens['returnType'])
+        let a:tokens['returnType'] = '!type'
+      endif
+      let a:tokens['returnType'] = 'Promise<' . a:tokens['returnType'] . '>'
+      let a:tokens['showReturnType'] = v:true
+    endif
+
   endif
 endfunction
 

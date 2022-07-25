@@ -11,7 +11,6 @@ Expect javascript (generated comment with a description and a @returns tag):
   /**
    * [TODO:description]
    *
-   * @returns {[TODO:type]} [TODO:description]
    */
   function myFunc(/* inline comment */) {}
 
@@ -32,7 +31,6 @@ Expect javascript (generated comment with a description, @param and @returns tag
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   function myFunc($p1 = 'value', p2 = [], p3, p4 /* inline comment */) {}
 
@@ -74,7 +72,6 @@ Expect javascript (generated comment with @functon and @param tags):
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   var myFunc = function($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -130,7 +127,6 @@ Do (trigger doge):
   /**
    * [TODO:description]
    *
-   * @returns {[TODO:type]} [TODO:description]
    */
   Person.prototype.greet = function () {}
 
@@ -193,7 +189,6 @@ Expect javascript (generated comment with a description, @param and @returns tag
    * @param {[TODO:type]} [p2] - [TODO:description]
    * @param {[TODO:type]} p3 - [TODO:description]
    * @param {[TODO:type]} p4 - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   function* myFunc($p1 = 'value', p2 = [], p3, p4) {}
 
@@ -229,7 +224,6 @@ Expect javascript (generated comment with @async, @param and @returns tags):
    *
    * @generator
    * @param {[TODO:type]} p1 - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   var perfectSquares = function*(p1) {};
 
@@ -326,7 +320,6 @@ Expect javascript (generated comments with a description, @param, @throws and @r
    *
    * @throws {[TODO:name]} - [TODO:description]
    * @throws {CustomException} - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   function test() {
     err = new CustomException();
@@ -348,7 +341,7 @@ Do (trigger doge):
   :1\<CR>
   \<C-d>
   :let g:doge_javascript_settings = {'destructuring_props': 0}\<CR>
-  :13\<CR>
+  :12\<CR>
   \<C-d>
   :let g:doge_javascript_settings = {'destructuring_props': 1}\<CR>
 
@@ -361,7 +354,6 @@ Expect javascript (generated comments with a description, @param and @returns ta
    * @param {str} [TODO:name].b - [TODO:description]
    * @param {[TODO:type]} [[TODO:name].c] - [TODO:description]
    * @param {int} [[TODO:name].d] - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   function foo({ a, b: str, c = 3, d: int = 5 }) {}
 
@@ -369,7 +361,6 @@ Expect javascript (generated comments with a description, @param and @returns ta
    * [TODO:description]
    *
    * @param {[TODO:type]} [TODO:name] - [TODO:description]
-   * @returns {[TODO:type]} [TODO:description]
    */
   function foo({ a, b: str, c = 3, d: int = 5 }) {}
 

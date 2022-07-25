@@ -79,7 +79,7 @@ Expect javascript (generated comment with @async, @param and @returns tags):
      * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
      * @param {[TODO:type]} p4 - [TODO:description]
-     * @returns {( 1 | 2 | 3 )} [TODO:description]
+     * @returns {Promise<( 1 | 2 | 3 )>} [TODO:description]
      */
     'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */): ( 1 | 2 | 3 ) => {
       //
