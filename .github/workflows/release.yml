@@ -47,3 +47,5 @@ jobs:
           generate_release_notes: true
           tag_name: ${{ env.PROJECT_VERSION }}
           files: ${{ matrix.asset_path }}
+          draft: false
+          prerelease: false
