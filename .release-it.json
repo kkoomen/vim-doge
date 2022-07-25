@@ -4,7 +4,7 @@
     "after:bump": [
       "git checkout -b release/v${version} && echo v${version} > .version && git add .version"
     ],
-    "after:git:release": ["gh pr create --title 'Release v${version}' --reviewer kkoomen"]
+    "after:git:release": ["gh pr create --title 'Release v${version}' --fill --reviewer kkoomen"]
   },
   "git": {
     "push": true,
