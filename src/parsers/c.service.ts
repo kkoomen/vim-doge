@@ -85,6 +85,7 @@ export class CParserService extends BaseParserService implements CustomParserSer
               n.children.filter((cn: SyntaxNode) => cn.type === 'parameter_declaration'),
             )
             .reduce((items: SyntaxNode[], curr: SyntaxNode[]) => [...items, ...curr], [])
+            .filter((n: SyntaxNode) => n.text !== 'void')
             .forEach((n: SyntaxNode) => {
               const param: Record<string, any> = { name: null, type: null };
 

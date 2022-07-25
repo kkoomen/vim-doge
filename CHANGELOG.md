@@ -1,3 +1,9 @@
+## [3.17.0](https://github.com/kkoomen/vim-doge/compare/v3.16.0...v3.17.0) (2022-07-25)
+
+### Features
+
+- **c:** exclude void params (fixes [#321](https://github.com/kkoomen/vim-doge/issues/321)) ([eb3180e](https://github.com/kkoomen/vim-doge/commit/eb3180ee46d55ac6d218f19a0b939e84f65e62be))
+
 ## [3.16.0](https://github.com/kkoomen/vim-doge/compare/v3.15.0...v3.16.0) (2022-07-25)
 
 ### Features
