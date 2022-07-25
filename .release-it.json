@@ -1,9 +1,13 @@
 {
   "hooks": {
     "before:init": ["npm run format", "npm run lint"],
-    "after:bump": ["echo v${version} > .version && git add .version"]
+    "after:bump": [
+      "git checkout -b release/v${version} && echo v${version} > .version && git add .version"
+    ],
+    "after:git:release": ["gh pr create --title 'Release v${version}' --body ''"]
   },
   "git": {
+    "push": true,
     "commitMessage": "chore(release): v${version} :tada:",
     "tagAnnotation": "Release v${version}",
     "tagName": "v${version}"
@@ -12,12 +16,12 @@
     "publish": false
   },
   "github": {
-    "release": true,
+    "release": false,
     "releaseName": "Release v${version}"
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "angular",
+      "preset": "conventionalcommits",
       "infile": "CHANGELOG.md"
     }
   }

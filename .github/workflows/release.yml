@@ -1,15 +1,11 @@
 name: Release
 on:
-  workflow_dispatch:
-    inputs:
-      tag_name:
-        description: 'The tag name of the release where to upload the assets to, for example: v1.2.3'
-        required: true
-  release:
-    types: [created]
+  push:
+    branches:
+      - 'release/v*.*.*'
 
 jobs:
-  build_and_upload_assets:
+  build_and_upload_release_assets:
     name: Build and upload binary assets
     strategy:
       matrix:
@@ -37,20 +33,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci --no-save --verbose
-      - name: Build Unix binary
+      - name: Build unix binary
         if: matrix.target != 'win'
         run: npm run build:binary:unix -- vim-doge-${{ matrix.target }}
-      - name: Build Windows binary
-        if: matrix.target == 'win'
-        run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
-      - name: Get release
-        if: github.event.inputs.tag_name == ''
-        id: get_release
-        uses: bruceadams/get-release@v1.2.3
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
+      # - name: Build Windows binary
+      #   if: matrix.target == 'win'
+      #   run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
+      - name: Get project version
+        run: echo "PROJECT_VERSION=$(cat .version)" >> $GITHUB_ENV
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event.inputs.tag_name || steps.get_release.outputs.tag_name }}
+          generate_release_notes: true
+          tag_name: ${{ env.PROJECT_VERSION }}
           files: ${{ matrix.asset_path }}
+          draft: false
+          prerelease: false
