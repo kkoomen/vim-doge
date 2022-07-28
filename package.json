@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "vim-doge",
-  "version": "3.16.0",
+  "version": "3.17.0",
   "description": "A Vim polyglot plugin for generating documentation",
   "engines": {
     "node": ">=12.0.0 <18.0.0"
@@ -54,7 +54,7 @@
     "tree-sitter-cpp": "^0.20.0",
     "tree-sitter-java": "^0.19.1",
     "tree-sitter-php": "^0.19.0",
-    "tree-sitter-python": "^0.19.0",
+    "tree-sitter-python": "^0.20.1",
     "tree-sitter-ruby": "^0.19.0",
     "tree-sitter-rust": "^0.20.1",
     "tree-sitter-typescript": "^0.20.1"
@@ -63,9 +63,9 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@release-it/conventional-changelog": "^5.0.0",
-    "@types/node": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.28.0",
-    "@typescript-eslint/parser": "^5.30.7",
+    "@types/node": "^18.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
     "@vercel/ncc": "^0.34.0",
     "caxa": "^2.1.0",
     "conventional-changelog-cli": "^2.2.2",
@@ -76,12 +76,12 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "husky": "^8.0.1",
-    "lint-staged": "^13.0.0",
+    "lint-staged": "^13.0.3",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
-    "release-it": "^15.1.2",
+    "release-it": "^15.2.0",
     "rimraf": "^3.0.2",
-    "ts-node": "^10.8.1",
+    "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
   }
 }
