@@ -6,6 +6,24 @@ labels: 'bug'
 assignees: ''
 ---
 
+<!--
+READ THIS BEFORE YOU CONTINUE: please fill in the information below and make
+sure to test your bug by using the minimal vimrc provided below. If you can't
+reproduce the bug with a minimal vimrc then your issue is mostly not relating to
+this plugin, therefore this issue might be closed immediately.
+
+1. Create file `vim-doge.vimrc` with:
+```vim
+set nocompatible
+set runtimepath^=/path/to/vim-doge
+filetype plugin indent on
+syntax on
+set hidden
+```
+2. Start (neo)vim with command: `vim -u vim-doge.vimrc`
+3. Test whether you can still run into the problem.
+-->
+
 **Describe the bug**
 
 <!--
@@ -25,22 +43,6 @@ let g:doge_mapping = '<Leader>f'
 -->
 
 **To Reproduce**
-
-<!--
-If you can't reproduce the bug with a minimum vimrc then we might close your issue immediately.
--->
-
-- Create file `doge.vim` with:
-
-```vim
-set nocompatible
-set runtimepath^=/path/to/vim-doge
-filetype plugin indent on
-syntax on
-set hidden
-```
-
-- Start (neo)vim with command: `vim -u doge.vim`
 
 Steps to reproduce the behavior:
 
