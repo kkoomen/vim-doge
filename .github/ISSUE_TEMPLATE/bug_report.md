@@ -9,7 +9,7 @@ assignees: ''
 <!--
 READ THIS BEFORE YOU CONTINUE: please fill in the information below and make
 sure to test your bug by using the minimal vimrc provided below. If you can't
-reproduce the bug with a minimal vimrc then your issue is mostly not relating to
+reproduce the bug with a minimal vimrc then your issue is mostly not related to
 this plugin, therefore this issue might be closed immediately.
 
 1. Create file `vim-doge.vimrc` with:
