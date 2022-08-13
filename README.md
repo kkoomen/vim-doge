@@ -89,7 +89,7 @@ Is your favorite doc standard not supported?
 
 # Getting started
 
-:warn: If you use a laptop with Apple silicon chip then you might run into an
+:warning: If you use a laptop with Apple silicon chip then you might run into an
 error once you trigger vim-doge. The current solution is to build manually via
 `npm i --no-save && npm run build:binary:unix`. If you're using vim-plug, you
 can do:
