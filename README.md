@@ -32,32 +32,32 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
-  * [Choosing a different doc standard](#choosing-a-different-doc-standard)
-  * [Options](#options)
-    + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
-    + [`g:doge_mapping`](#gdoge_mapping)
-    + [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
-    + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
-    + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
-    + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
-    + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
-    + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
-    + [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
+  - [Choosing a different doc standard](#choosing-a-different-doc-standard)
+  - [Options](#options)
+    - [`g:doge_enable_mappings`](#gdoge_enable_mappings)
+    - [`g:doge_mapping`](#gdoge_mapping)
+    - [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
+    - [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
+    - [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
+    - [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
+    - [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+    - [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
+    - [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
-    + [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
-    + [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
+  - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
+  - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
-    + [JavaScript](#javascript)
-    + [PHP](#php)
-    + [Python](#python)
+  - [JavaScript](#javascript)
+  - [PHP](#php)
+  - [Python](#python)
 - [Headless mode](#headless-mode)
 - [Help](#help)
 - [Contributing](#contributing)
-  * [Tree sitter](#tree-sitter)
+  - [Tree sitter](#tree-sitter)
 - [Development](#development)
-    + [Environment setup](#environment-setup)
-    + [Parsers](#parsers)
-    + [Testing locally](#testing-locally)
+  - [Environment setup](#environment-setup)
+  - [Parsers](#parsers)
+  - [Testing locally](#testing-locally)
 - [Motivation](#motivation)
 - [Supporting DoGe](#supporting-doge)
 - [License](#license)
@@ -88,6 +88,17 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
 
 # Getting started
+
+:warn: If you use a laptop with Apple silicon chip then you might run into an
+error once you trigger vim-doge. The current solution is to build manually via
+`npm i --no-save && npm run build:binary:unix`. If you're using vim-plug, you
+can do:
+
+```
+Plug 'kkoomen/vim-doge', { 'do': 'npm i --no-save && npm run build:binary:unix' }
+```
+
+---
 
 Using plug:
 
@@ -378,6 +389,7 @@ same directory level that vim-doge is, so your structure should look like this
 ```
 
 After that, you can do the following:
+
 - `cd /path/to/vim-doge`
 - `vim -u test/vimrc`
 - Inside vim you can now run: `Vader test/**/**/*.vader` to run all tests
