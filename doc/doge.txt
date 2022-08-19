@@ -84,14 +84,6 @@ COMMANDS                                                       *doge-commands*
   The string value should point to a doc standard name listed in the
   `b:doge_supported_doc_standards` variable.
 
-:DogeCreateDocStandard {doc_standard}                 *:DogeCreateDocStandard*
-  Command to generate a custom doc standard template. The `{doc_standard}` is
-  a mandatory argument which is the name of the new doc standard. If it
-  exists, the existing doc standard with the same name will be used as base
-  for the custom template.
-
-  It can complete the available doc standards for the current buffer.
-
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
 
@@ -111,9 +103,8 @@ doge#command_complete()                              *doge#command_complete()*
   Return a list of supported doc standards for the current buffer.
 
 doge#on_filetype_change()                          *doge#on_filetype_change()*
-  This function will be triggered on the FileType autocmd and will:
-  apply aliases
-  remove conflicting doc standards from the previous filetype.
+  This function will be triggered on the FileType autocmd and will apply
+  aliases
 
 doge#install()                                                *doge#install()*
   Install the necessary dependencies.

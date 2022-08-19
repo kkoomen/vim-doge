@@ -10,7 +10,7 @@ Do (trigger doge):
 
 Expect c (generated comment with the function name, all parameter tags, a description and a 'Return' keyword):
   /**
-   * add(): [TODO:description]
+   * add(): [TODO:summary]
    * @x: [TODO:description]
    * @y: [TODO:description]
    *
@@ -32,7 +32,7 @@ Do (trigger doge):
 
 Expect c (generated comment with the function name, all parameter tags, and a description):
   /**
-   * add(): [TODO:description]
+   * add(): [TODO:summary]
    * @x: [TODO:description]
    * @y: [TODO:description]
    *

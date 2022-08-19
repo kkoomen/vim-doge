@@ -13,7 +13,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam F [TODO:description]
    * @tparam Args [TODO:description]
@@ -41,7 +41,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam T [TODO:description]
    * @tparam U [TODO:description]

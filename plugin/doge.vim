@@ -203,16 +203,6 @@ endif
 " `b:doge_supported_doc_standards` variable.
 command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
 
-""
-" @command DogeCreateDocStandard {doc_standard}
-" Command to generate a custom doc standard template. The `{doc_standard}` is a
-" mandatory argument which is the name of the new doc standard. If it exists,
-" the existing doc standard with the same name will be used as base for the
-" custom template.
-"
-" It can complete the available doc standards for the current buffer.
-command -nargs=1 -complete=customlist,doge#command_complete DogeCreateDocStandard call doge#pattern#custom(<q-args>)
-
 augroup doge
   autocmd!
   autocmd TextChangedI * call doge#comment#update_interactive_comment_info()

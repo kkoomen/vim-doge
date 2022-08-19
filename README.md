@@ -45,7 +45,6 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     - [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
   - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
-  - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
   - [JavaScript](#javascript)
   - [PHP](#php)
@@ -154,21 +153,23 @@ specific expression, then you can use `DogeGenerate`:
 
 Here is the full list of available doc standards per filetype:
 
-| Variable                         | Default             | Supported                                                                                                                                    |
-| :------------------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| `g:doge_doc_standard_python`     | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                  |
-| `g:doge_doc_standard_php`        | `'phpdoc'`          | `'phpdoc'`                                                                                                                                   |
-| `g:doge_doc_standard_javascript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
-| `g:doge_doc_standard_typescript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                    |
-| `g:doge_doc_standard_lua`        | `'ldoc'`            | `'ldoc'`                                                                                                                                     |
-| `g:doge_doc_standard_java`       | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
-| `g:doge_doc_standard_groovy`     | `'javadoc'`         | `'javadoc'`                                                                                                                                  |
-| `g:doge_doc_standard_ruby`       | `'YARD'`            | `'YARD'`                                                                                                                                     |
-| `g:doge_doc_standard_cpp`        | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`                 |
-| `g:doge_doc_standard_c`          | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'` |
-| `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                   |
-| `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                  |
-| `g:doge_doc_standard_cs`         | `'xmldoc'`          | `'xmldoc'`                                                                                                                                   |
+:warning: For C and C++, see [C Family Doc Standard Examples](./doc/c-family-doc-standard-examples.md).
+
+| Variable                         | Default             | Supported                                                                                                                                                                                                                                              |
+| :------------------------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `g:doge_doc_standard_python`     | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                                                                                                                            |
+| `g:doge_doc_standard_php`        | `'phpdoc'`          | `'phpdoc'`                                                                                                                                                                                                                                             |
+| `g:doge_doc_standard_javascript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                                                                                                                              |
+| `g:doge_doc_standard_typescript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                                                                                                                              |
+| `g:doge_doc_standard_lua`        | `'ldoc'`            | `'ldoc'`                                                                                                                                                                                                                                               |
+| `g:doge_doc_standard_java`       | `'javadoc'`         | `'javadoc'`                                                                                                                                                                                                                                            |
+| `g:doge_doc_standard_groovy`     | `'javadoc'`         | `'javadoc'`                                                                                                                                                                                                                                            |
+| `g:doge_doc_standard_ruby`       | `'YARD'`            | `'YARD'`                                                                                                                                                                                                                                               |
+| `g:doge_doc_standard_cpp`        | `'doxygen_javadoc'` | `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`, `'doxygen_cpp_comment_slash'`, `'doxygen_cpp_comment_exclamation'`, `'doxygen_cpp_comment_slash_banner'`                 |
+| `g:doge_doc_standard_c`          | `'doxygen_javadoc'` | `'kernel_doc'`, `'doxygen_javadoc'`, `'doxygen_javadoc_no_asterisk'`, `'doxygen_javadoc_banner'`, `'doxygen_qt'`, `'doxygen_qt_no_asterisk'`, `'doxygen_cpp_comment_slash'`, `'doxygen_cpp_comment_exclamation'`, `'doxygen_cpp_comment_slash_banner'` |
+| `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                                                                                                                             |
+| `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                                                                                                                            |
+| `g:doge_doc_standard_cs`         | `'xmldoc'`          | `'xmldoc'`                                                                                                                                                                                                                                             |
 
 ## Options
 
@@ -272,16 +273,6 @@ The numeric value should point to an index key from the
 
 The string value should point to a doc standard name listed in the
 `b:doge_supported_doc_standards` variable.
-
-### `:DogeCreateDocStandard {doc_standard}`
-
-Command to generate a custom doc standard template. The `{doc_standard}` is a
-mandatory argument which is the name of the new doc standard. If it exists, the
-existing doc standard with the same name will be used as base for the custom
-template. It can complete the available doc standards for the current buffer.
-
-For more information on how to create custom doc standards you can read
-[Writing your first pattern](./CONTRIBUTING.md#writing-your-first-pattern).
 
 # Language-specific configuration
 

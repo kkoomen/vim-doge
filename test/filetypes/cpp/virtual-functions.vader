@@ -25,14 +25,14 @@ Do (trigger doge):
 Expect cpp (generated comment with @brief, @param and @return tags):
   class Test {
     /**
-     * @brief [TODO:description]
+     * @brief [TODO:summary]
      *
      * @param val [TODO:description]
      * @return [TODO:description]
      */
     virtual bool my_virtual_function(bool val);
     /**
-     * @brief [TODO:description]
+     * @brief [TODO:summary]
      *
      * @param val [TODO:description]
      * @return [TODO:description]
@@ -42,14 +42,14 @@ Expect cpp (generated comment with @brief, @param and @return tags):
 
   class Test2: public Test {
     /**
-     * @brief [TODO:description]
+     * @brief [TODO:summary]
      *
      * @param val [TODO:description]
      * @return [TODO:description]
      */
     bool my_virtual_function(bool val) override;
     /**
-     * @brief [TODO:description]
+     * @brief [TODO:summary]
      *
      * @param val [TODO:description]
      * @return [TODO:description]
@@ -81,7 +81,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
   class base {
   public:
       /**
-       * @brief [TODO:description]
+       * @brief [TODO:summary]
        *
        * @param val [TODO:description]
        * @return [TODO:description]
@@ -92,7 +92,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
   class derived : public base {
   public:
       /**
-       * @brief [TODO:description]
+       * @brief [TODO:summary]
        *
        * @param val [TODO:description]
        * @return [TODO:description]

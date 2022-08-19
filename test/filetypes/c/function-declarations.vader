@@ -9,7 +9,7 @@ Do (trigger doge):
 
 Expect c (generated comment with @brief, @param and @return tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param x [TODO:description]
    * @param y [TODO:description]

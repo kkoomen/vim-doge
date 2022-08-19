@@ -17,13 +17,13 @@ Do (trigger doge):
 
 Expect c (generated comment with @brief, @param and @return tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    */
   void bar(void);
 
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param a [TODO:description]
    * @param b [TODO:description]
@@ -32,7 +32,7 @@ Expect c (generated comment with @brief, @param and @return tags):
   int foo(int a, char b) {}
 
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param a [TODO:description]
    * @param b [TODO:description]

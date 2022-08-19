@@ -17,7 +17,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief, @tparam, and @param tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam HandshakeHandler [TODO:description]
    * @param type [TODO:description]
@@ -27,7 +27,7 @@ Expect cpp (generated comment with @brief, @tparam, and @param tags):
   void myFunc(handshake_type type, HandshakeHandler handler) {}
 
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam HandshakeHandler [TODO:description]
    * @param type [TODO:description]
@@ -48,7 +48,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief, and @param tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param type [TODO:description]
    * @param handler [TODO:description]
@@ -67,7 +67,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @tparam and @param tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam T [TODO:description]
    * @param i [TODO:description]
@@ -94,7 +94,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief, @tparam tags):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam Test [TODO:description]
    */
@@ -102,7 +102,7 @@ Expect cpp (generated comment with @brief, @tparam tags):
   class test {};
 
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @tparam Test [TODO:description]
    */
