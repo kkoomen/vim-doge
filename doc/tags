@@ -1,4 +1,3 @@
-:DogeCreateDocStandard	doge.txt	/*:DogeCreateDocStandard*
 :DogeGenerate	doge.txt	/*:DogeGenerate*
 doge	doge.txt	/*doge*
 doge#activate()	doge.txt	/*doge#activate()*

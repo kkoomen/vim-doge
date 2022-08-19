@@ -45,7 +45,6 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     - [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
   - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
-  - [`:DogeCreateDocStandard {doc_standard}`](#dogecreatedocstandard-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
   - [JavaScript](#javascript)
   - [PHP](#php)
@@ -274,16 +273,6 @@ The numeric value should point to an index key from the
 
 The string value should point to a doc standard name listed in the
 `b:doge_supported_doc_standards` variable.
-
-### `:DogeCreateDocStandard {doc_standard}`
-
-Command to generate a custom doc standard template. The `{doc_standard}` is a
-mandatory argument which is the name of the new doc standard. If it exists, the
-existing doc standard with the same name will be used as base for the custom
-template. It can complete the available doc standards for the current buffer.
-
-For more information on how to create custom doc standards you can read
-[Writing your first pattern](./CONTRIBUTING.md#writing-your-first-pattern).
 
 # Language-specific configuration
 
