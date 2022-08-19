@@ -1,4 +1,4 @@
-# C Family Doc Standard Examples
+# C-Family Doc Standard Examples
 
 Due to the amount of doc standards for the C-family languages, all of them are
 listed below using C++ to clarify style they generate, although most of the doc
@@ -6,7 +6,7 @@ styles apply for other C-family languages as well.
 
 # Table of Contents
 
-- [C Family Doc Standard Examples](#c-family-doc-standard-examples)
+- [C-Family Doc Standard Examples](#c-family-doc-standard-examples)
 - [Table of Contents](#table-of-contents)
 - [Doc standards](#doc-standards)
   - [doxygen_javadoc](#doxygen_javadoc)
