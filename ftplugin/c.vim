@@ -21,7 +21,10 @@ let b:doge_supported_doc_standards = doge#buffer#get_supported_doc_standards([
       \ 'doxygen_javadoc_banner',
       \ 'doxygen_qt',
       \ 'doxygen_qt_no_asterisk',
-      \ 'kernel_doc'
+      \ 'kernel_doc',
+      \ 'doxygen_cpp_comment_slash',
+      \ 'doxygen_cpp_comment_exclamation',
+      \ 'doxygen_cpp_comment_slash_banner',
       \ ])
 let b:doge_doc_standard = doge#buffer#get_doc_standard('c')
 let b:doge_patterns = doge#buffer#get_patterns()
@@ -177,7 +180,7 @@ call doge#buffer#register_doc_standard('kernel_doc', [
 \  doge#helpers#deepextend(s:function_pattern, s:kernel_doc_pattern_base, {
 \    'template': [
 \      '/**',
-\      ' * {name}(): !description',
+\      ' * {name}(): !summary',
 \      '%(parameters| * {parameters})%',
 \      ' *',
 \      ' * !description',
@@ -191,6 +194,69 @@ call doge#buffer#register_doc_standard('kernel_doc', [
 \      '/**',
 \      ' * struct {name} - !description',
 \      ' */',
+\    ],
+\  }),
+\  s:field_pattern,
+\])
+
+call doge#buffer#register_doc_standard('doxygen_cpp_comment_slash', [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '///',
+\      '/// @brief !description',
+\      '///',
+\      '%(parameters|/// {parameters})%',
+\      '%(returnType|/// @return !description)%',
+\      '///',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '///',
+\      '/// struct {name} - !description',
+\      '///',
+\    ],
+\  }),
+\  s:field_pattern,
+\])
+
+call doge#buffer#register_doc_standard('doxygen_cpp_comment_exclamation', [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '//!',
+\      '//! @brief !description',
+\      '//!',
+\      '%(parameters|//! {parameters})%',
+\      '%(returnType|//! @return !description)%',
+\      '//!',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '//!',
+\      '//! struct {name} - !description',
+\      '//!',
+\    ],
+\  }),
+\  s:field_pattern,
+\])
+
+call doge#buffer#register_doc_standard('doxygen_cpp_comment_slash_banner', [
+\  doge#helpers#deepextend(s:function_pattern, {
+\    'template': [
+\      '////////////////////////////////////////////////////////////////////////////////',
+\      '/// @brief !description',
+\      '///',
+\      '%(parameters|/// {parameters})%',
+\      '%(returnType|/// @return !description)%',
+\      '////////////////////////////////////////////////////////////////////////////////',
+\    ],
+\  }),
+\  doge#helpers#deepextend(s:struct_pattern, {
+\    'template': [
+\      '////////////////////////////////////////////////////////////////////////////////',
+\      '/// struct {name} - !description',
+\      '////////////////////////////////////////////////////////////////////////////////',
 \    ],
 \  }),
 \  s:field_pattern,
