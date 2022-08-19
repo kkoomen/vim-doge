@@ -22,7 +22,7 @@ Do (trigger 'DogeGenerate doxygen_javadoc' and 'DogeGenerate 3'):
 
 Expect c (generated comments):
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param x [TODO:description]
    * @param y [TODO:description]
@@ -31,7 +31,7 @@ Expect c (generated comments):
   int testA(int x, int y) {}
 
   /**
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param x [TODO:description]
    * @param y [TODO:description]
