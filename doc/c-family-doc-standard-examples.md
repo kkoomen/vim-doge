@@ -143,7 +143,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ### kernel_doc (only available in C)
 
-```cpp
+```c
 /**
  * foo(): [TODO:summary]
  * @a: [TODO:description]
