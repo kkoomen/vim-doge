@@ -1,3 +1,14 @@
+## 3.18.0 (2022-08-19)
+
+### Features
+
+- remove CreateDocStandard command due to unmaintainble and unnecessary complex logic ([8c402d6](https://github.com/kkoomen/vim-doge/commit/8c402d6a39dd18dafd72d42b74823484bdc43dd1))
+- **cpp:** support three new doxygen cpp doc standards ([82a8d98](https://github.com/kkoomen/vim-doge/commit/82a8d9871e0aaeb7a85b7499334671f2c9797f9b))
+
+### Bug Fixes
+
+- **c,cpp:** use !summary at [@brief](https://github.com/brief) instead of !description ([85bc0c7](https://github.com/kkoomen/vim-doge/commit/85bc0c71a844248e2673a4407ae439731d1fdeef))
+
 ## [3.17.0](https://github.com/kkoomen/vim-doge/compare/v3.16.0...v3.17.0) (2022-07-25)
 
 ### Features
