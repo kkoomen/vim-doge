@@ -1,8 +1,8 @@
 # C-Family Doc Standard Examples
 
 Due to the amount of doc standards for the C-family languages, all of them are
-listed below using C++ to clarify style they generate, although most of the doc
-styles apply for other C-family languages as well.
+listed below using C++ to clarify the style they generate, although most of the
+doc styles apply for other C-family languages as well.
 
 # Table of Contents
 
