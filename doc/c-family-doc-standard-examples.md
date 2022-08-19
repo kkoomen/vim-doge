@@ -25,7 +25,7 @@ styles apply for other C-family languages as well.
 
 ```cpp
 /**
- * @brief [TODO:description]
+ * @brief [TODO:summary]
  *
  * @tparam F [TODO:description]
  * @tparam Args [TODO:description]
@@ -40,7 +40,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 /**
-@brief [TODO:description]
+@brief [TODO:summary]
 
 @tparam F [TODO:description]
 @tparam Args [TODO:description]
@@ -55,7 +55,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 /*******************************************************************************
- * @brief [TODO:description]
+ * @brief [TODO:summary]
  *
  * @tparam F [TODO:description]
  * @tparam Args [TODO:description]
@@ -70,7 +70,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 /*!
- * @brief [TODO:description]
+ * @brief [TODO:summary]
  *
  * @tparam F [TODO:description]
  * @tparam Args [TODO:description]
@@ -85,7 +85,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 /*!
-@brief [TODO:description]
+@brief [TODO:summary]
 
 @tparam F [TODO:description]
 @tparam Args [TODO:description]
@@ -100,7 +100,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 ///
-/// @brief [TODO:description]
+/// @brief [TODO:summary]
 ///
 /// @tparam F [TODO:description]
 /// @tparam Args [TODO:description]
@@ -115,7 +115,7 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 //!
-//! @brief [TODO:description]
+//! @brief [TODO:summary]
 //!
 //! @tparam F [TODO:description]
 //! @tparam Args [TODO:description]
@@ -130,13 +130,15 @@ auto Person::getPersonType (const Builder& builder) -> PersonType {}
 
 ```cpp
 ////////////////////////////////////////////////////////////////////////////////
-/// @brief [TODO:description]
+/// @brief [TODO:summary]
 ///
 /// @tparam F [TODO:description]
 /// @tparam Args [TODO:description]
 /// @param builder [TODO:description]
 /// @return [TODO:description]
 ////////////////////////////////////////////////////////////////////////////////
+template<class F, class... Args>
+auto Person::getPersonType (const Builder& builder) -> PersonType {}
 ```
 
 ### kernel_doc (only available in C)

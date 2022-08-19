@@ -74,7 +74,7 @@ call doge#buffer#register_doc_standard('doxygen_javadoc', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/**',
-\      ' * @brief !description',
+\      ' * @brief !summary',
 \      ' *',
 \      '%(parameters| * {parameters})%',
 \      '%(returnType| * @return !description)%',
@@ -95,7 +95,7 @@ call doge#buffer#register_doc_standard('doxygen_javadoc_no_asterisk', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/**',
-\      '@brief !description',
+\      '@brief !summary',
 \      '',
 \      '%(parameters|{parameters})%',
 \      '%(returnType|@return !description)%',
@@ -116,7 +116,7 @@ call doge#buffer#register_doc_standard('doxygen_javadoc_banner', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*******************************************************************************',
-\      ' * @brief !description',
+\      ' * @brief !summary',
 \      ' *',
 \      '%(parameters| * {parameters})%',
 \      '%(returnType| * @return !description)%',
@@ -137,7 +137,7 @@ call doge#buffer#register_doc_standard('doxygen_qt', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*!',
-\      ' * @brief !description',
+\      ' * @brief !summary',
 \      ' *',
 \      '%(parameters| * {parameters})%',
 \      '%(returnType| * @return !description)%',
@@ -158,7 +158,7 @@ call doge#buffer#register_doc_standard('doxygen_qt_no_asterisk', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '/*!',
-\      '@brief !description',
+\      '@brief !summary',
 \      '',
 \      '%(parameters|{parameters})%',
 \      '%(returnType|@return !description)%',
@@ -203,7 +203,7 @@ call doge#buffer#register_doc_standard('doxygen_cpp_comment_slash', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '///',
-\      '/// @brief !description',
+\      '/// @brief !summary',
 \      '///',
 \      '%(parameters|/// {parameters})%',
 \      '%(returnType|/// @return !description)%',
@@ -224,7 +224,7 @@ call doge#buffer#register_doc_standard('doxygen_cpp_comment_exclamation', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '//!',
-\      '//! @brief !description',
+\      '//! @brief !summary',
 \      '//!',
 \      '%(parameters|//! {parameters})%',
 \      '%(returnType|//! @return !description)%',
@@ -245,7 +245,7 @@ call doge#buffer#register_doc_standard('doxygen_cpp_comment_slash_banner', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'template': [
 \      '////////////////////////////////////////////////////////////////////////////////',
-\      '/// @brief !description',
+\      '/// @brief !summary',
 \      '///',
 \      '%(parameters|/// {parameters})%',
 \      '%(returnType|/// @return !description)%',

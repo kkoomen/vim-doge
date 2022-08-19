@@ -10,7 +10,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with nothing but @brief and @return tag):
   /*!
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @return [TODO:description]
    */
@@ -39,7 +39,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
   };
 
   /*!
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param text [TODO:description]
    * @param node [TODO:description]
@@ -59,7 +59,7 @@ Do (trigger doge):
 
 Expect cpp (generated comment with @brief and @param tag):
   /*!
-   * @brief [TODO:description]
+   * @brief [TODO:summary]
    *
    * @param p [TODO:description]
    */
