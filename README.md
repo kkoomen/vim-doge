@@ -118,6 +118,15 @@ Using Vundle:
 - `Plugin 'kkoomen/vim-doge'`
 - Open Vim and run `:call doge#install()`
 
+Using [packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+```lua
+use {
+  'kkoomen/vim-doge',
+  run = ':call doge#install()'
+}
+```
+
 # Configuration
 
 Run `:help doge` to get the full help page.
