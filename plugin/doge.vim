@@ -201,7 +201,7 @@ endif
 "
 " The string value should point to a doc standard name listed in the
 " `b:doge_supported_doc_standards` variable.
-command -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
+command! -count -nargs=? -complete=customlist,doge#command_complete DogeGenerate call doge#generate(<count> ? <count> : <q-args>)
 
 augroup doge
   autocmd!
