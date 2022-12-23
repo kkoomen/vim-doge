@@ -312,11 +312,15 @@ let g:doge_php_settings = {
 
 ```vim
 let g:doge_python_settings = {
-\  'single_quotes': 0
+\  'single_quotes': 0,
+\  'omit_redundant_param_types': 1
 \}
 ```
 
 - `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers.
+
+- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
+  parameters and return types when the type is known.
 
 # Headless mode
 

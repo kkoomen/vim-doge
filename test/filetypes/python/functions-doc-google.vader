@@ -35,9 +35,9 @@ Expect python (generated comment with Args tags):
     [TODO:description]
 
     Args:
-      p1: [TODO:description]
-      p2: [TODO:description]
-      p3: [TODO:description]
+      p1 ([TODO:type]): [TODO:description]
+      p2 ([TODO:type]): [TODO:description]
+      p3 ([TODO:type]): [TODO:description]
     """
     pass
 
@@ -58,7 +58,7 @@ Expect python (generated comment with Args tags):
     [TODO:description]
 
     Args:
-      p1: [TODO:description]
+      p1 ([TODO:type]): [TODO:description]
       p2: [TODO:description]
       p3: [TODO:description]
     """
@@ -81,12 +81,12 @@ Expect python (generated comment with Args and Returns tags):
     [TODO:description]
 
     Args:
-      p1: [TODO:description]
+      p1 ([TODO:type]): [TODO:description]
       p2: [TODO:description]
       p3: [TODO:description]
 
     Returns:
-      Sequence[T]: [TODO:description]
+      [TODO:description]
     """
     pass
 
@@ -113,7 +113,139 @@ Expect python (generated comment with :param and :raises tags):
     [TODO:description]
 
     Args:
-      p1: [TODO:description]
+      p1 ([TODO:type]): [TODO:description]
+
+    Raises:
+      [TODO:name]: [TODO:description]
+      Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+# ==============================================================================
+# Test setting 'omit_redundant_param_types'
+# ==============================================================================
+Given python (setting: omit_redundant_param_types):
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='google'\<CR>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
+  \<C-d>
+  :20\<CR>
+  \<C-d>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 0\<CR>
+  :42\<CR>
+  \<C-d>
+  :61\<CR>
+  \<C-d>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
+
+Expect python (generated comment with :param and :raises tags):
+  def myFunc(p1 = 'string'):
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1 ([TODO:type]): [TODO:description]
+
+    Raises:
+      [TODO:name]: [TODO:description]
+      Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1 ([TODO:type]): [TODO:description]
+
+    Returns:
+      [TODO:description]
+
+    Raises:
+      [TODO:name]: [TODO:description]
+      Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string'):
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1 ([TODO:type]): [TODO:description]
+
+    Raises:
+      [TODO:name]: [TODO:description]
+      Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    """[TODO:summary]
+
+    [TODO:description]
+
+    Args:
+      p1 ([TODO:type]): [TODO:description]
+
+    Returns:
+      str: [TODO:description]
 
     Raises:
       [TODO:name]: [TODO:description]

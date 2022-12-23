@@ -12,6 +12,7 @@ set cpoptions&vim
 if !exists('g:doge_python_settings')
   let g:doge_python_settings = {
   \  'single_quotes': 0,
+  \  'omit_redundant_param_types': 1,
   \}
 endif
 
@@ -127,7 +128,7 @@ call doge#buffer#register_doc_standard('numpy', [
 call doge#buffer#register_doc_standard('google', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
-\      'format': '{name|!name}: !description',
+\      'format': '{name|!name}%(showType| ({type|!type}))%: !description',
 \    },
 \    'exceptions': {
 \      'format': '{name|!name}: !description',
@@ -141,7 +142,7 @@ call doge#buffer#register_doc_standard('google', [
 \      '%(parameters|\t{parameters})%',
 \      '%(returnType|)%',
 \      '%(returnType|Returns:)%',
-\      '%(returnType|\t{returnType}: !description)%',
+\      '%(returnType|\t)%%(showReturnType|{returnType}: )%%(returnType|!description)%',
 \      '%(exceptions|)%',
 \      '%(exceptions|Raises:)%',
 \      '%(exceptions|\t{exceptions})%',
