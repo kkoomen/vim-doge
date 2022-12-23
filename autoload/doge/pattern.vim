@@ -52,7 +52,8 @@ function! doge#pattern#generate(pattern) abort
               \ )
 
         if type(l:format) == v:t_list
-          call add(l:formatted_params, join(l:format, "\n"))
+          let l:cleaned_params = join(filter(l:format, 'v:val !~  "-"'), "\n")
+          call add(l:formatted_params, l:cleaned_params)
         else
           call add(l:formatted_params, l:format)
         endif

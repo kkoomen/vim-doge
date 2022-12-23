@@ -59,9 +59,7 @@ Expect python (generated comment with type hints, defaults and optional):
     :param p1: [TODO:description]
     :type p1: [TODO:type]
     :param p2: [TODO:description]
-    :type p2: Callable[[int], None]
-    :param p3: [TODO:description], defaults to []
-    :type p3: Callable[[int, Exception], None], optional
+    :param p3: [TODO:description]
     """
     pass
 
@@ -75,7 +73,7 @@ Do (trigger doge):
   :let b:doge_doc_standard='sphinx'\<CR>
   \<C-d>
 
-Expect python (generated comment with :param, :type, :return and :rtype tags):
+Expect python (generated comment with :param, :type and :return tags):
   def myFunc(p1, p2: Callable[[int], None], p3: Callable[[int, Exception], None] = []) -> Sequence[T]:
     """
     [TODO:description]
@@ -83,11 +81,8 @@ Expect python (generated comment with :param, :type, :return and :rtype tags):
     :param p1: [TODO:description]
     :type p1: [TODO:type]
     :param p2: [TODO:description]
-    :type p2: Callable[[int], None]
-    :param p3: [TODO:description], defaults to []
-    :type p3: Callable[[int, Exception], None], optional
+    :param p3: [TODO:description]
     :return: [TODO:description]
-    :rtype: Sequence[T]
     """
     pass
 
@@ -114,6 +109,123 @@ Expect python (generated comment with :param and :raises tags):
 
     :param p1: [TODO:description], defaults to 'string'
     :type p1: [TODO:type], optional
+    :raises [TODO:name]: [TODO:description]
+    :raises Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+# ==============================================================================
+# Test setting 'omit_redundant_param_types'
+# ==============================================================================
+Given python (setting: omit_redundant_param_types):
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string'):
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+Do (trigger doge):
+  :let b:doge_doc_standard='sphinx'\<CR>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
+  \<C-d>
+  :17\<CR>
+  \<C-d>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 0\<CR>
+  :34\<CR>
+  \<C-d>
+  :50\<CR>
+  \<C-d>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
+
+Expect python (generated comment with :param and :raises tags):
+  def myFunc(p1 = 'string'):
+    """
+    [TODO:description]
+
+    :param p1: [TODO:description], defaults to 'string'
+    :type p1: [TODO:type], optional
+    :raises [TODO:name]: [TODO:description]
+    :raises Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    """
+    [TODO:description]
+
+    :param p1: [TODO:description], defaults to 'string'
+    :type p1: [TODO:type], optional
+    :return: [TODO:description]
+    :raises [TODO:name]: [TODO:description]
+    :raises Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string'):
+    """
+    [TODO:description]
+
+    :param p1: [TODO:description], defaults to 'string'
+    :type p1: [TODO:type], optional
+    :raises [TODO:name]: [TODO:description]
+    :raises Exception: [TODO:description]
+    """
+    try:
+      foo = ValueError()
+      raise foo
+      raise Exception()
+    except Exception as error:
+      pass
+
+  def myFunc(p1 = 'string') -> str:
+    """
+    [TODO:description]
+
+    :param p1: [TODO:description], defaults to 'string'
+    :type p1: [TODO:type], optional
+    :return: [TODO:description]
+    :rtype: str
     :raises [TODO:name]: [TODO:description]
     :raises Exception: [TODO:description]
     """

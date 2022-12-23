@@ -69,7 +69,7 @@ call doge#buffer#register_doc_standard('sphinx', [
 \    'parameters': {
 \      'format': [
 \        ':param {name}: !description%(default|, defaults to {default})%',
-\        ':type {name}: {type|!type}%(default|, optional)%',
+\        '%(showType|:type {name}: {type|!type})%%(default|, optional)%',
 \      ],
 \    },
 \    'exceptions': {
@@ -81,7 +81,7 @@ call doge#buffer#register_doc_standard('sphinx', [
 \      '',
 \      '%(parameters|{parameters})%',
 \      '%(returnType|:return: !description)%',
-\      '%(returnType|:rtype: {returnType})%',
+\      '%(showReturnType|:rtype: {returnType})%',
 \      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],

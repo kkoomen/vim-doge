@@ -35,6 +35,7 @@ function! doge#preprocessors#python#tokens(tokens) abort
             \ has_key(l:param, 'type') == v:true &&
             \ !empty(l:param['type'])
         let l:param['showType'] = v:false
+        let l:param['default'] = ''
       endif
     endfor
   endif
