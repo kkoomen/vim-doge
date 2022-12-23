@@ -47,7 +47,7 @@ let s:function_pattern = {
 call doge#buffer#register_doc_standard('reST', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
-\      'format': ':param {name} {type|!type}: !description',
+\      'format': ':param {name}%(showType| {type|!type})%: !description',
 \    },
 \    'exceptions': {
 \      'format': ':raises {name|!name}: !description',
@@ -57,7 +57,7 @@ call doge#buffer#register_doc_standard('reST', [
 \      '!description',
 \      '',
 \      '%(parameters|{parameters})%',
-\      '%(returnType|:rtype {returnType}: !description)%',
+\      '%(returnType|:return: !description)%',
 \      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],
@@ -92,7 +92,7 @@ call doge#buffer#register_doc_standard('numpy', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
 \      'format': [
-\        '{name} : {type|!type}',
+\        '{name}%(showType| : {type|!type})%',
 \        '\t!description',
 \      ],
 \    },

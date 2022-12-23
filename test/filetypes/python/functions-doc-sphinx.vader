@@ -168,7 +168,7 @@ Do (trigger doge):
   \<C-d>
   :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
 
-Expect python (generated comment with :param and :raises tags):
+Expect python (generated comment):
   def myFunc(p1 = 'string'):
     """
     [TODO:description]
