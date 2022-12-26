@@ -4,7 +4,7 @@
   </a>
 </p>
 <p align="center">
-  <img src="https://img.shields.io/github/workflow/status/kkoomen/vim-doge/Tests/master" alt="tests build status" />
+  <img src="https://img.shields.io/github/actions/workflow/status/kkoomen/vim-doge/tests.yml?branch=master" alt="tests build status" />
   <img src="https://img.shields.io/badge/vim-7.4.2119%2B-informational.svg" alt="Minimum supported Vim version" />
   <img src="https://img.shields.io/badge/neovim-0.3.2%2B-informational.svg" alt="Minimum supported NeoVim version" />
   <img src="https://img.shields.io/github/v/tag/kkoomen/vim-doge?label=version" alt="Latest version" />
