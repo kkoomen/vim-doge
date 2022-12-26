@@ -26,5 +26,27 @@ function! doge#preprocessors#python#template(template) abort
   endif
 endfunction
 
+function! doge#preprocessors#python#tokens(tokens) abort
+  if has_key(a:tokens, 'parameters') && !empty(a:tokens['parameters'])
+    " omit redundant param types
+    for l:param in a:tokens['parameters']
+      let l:param['showType'] = v:true
+      if get(g:doge_python_settings, 'omit_redundant_param_types') == v:true &&
+            \ has_key(l:param, 'type') == v:true &&
+            \ !empty(l:param['type'])
+        let l:param['showType'] = v:false
+        let l:param['default'] = ''
+      endif
+    endfor
+  endif
+
+  " Show the return type based on the 'omit_redundant_param_types' setting.
+  let a:tokens['showReturnType'] = v:false
+  if (has_key(a:tokens, 'returnType') == v:true && !empty(a:tokens['returnType']))
+        \ && get(g:doge_python_settings, 'omit_redundant_param_types') == v:false
+    let a:tokens['showReturnType'] = v:true
+  endif
+endfunction
+
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

@@ -16,8 +16,8 @@ jobs:
         # os: [macos-latest, ubuntu-latest, windows-latest]
         os: [macos-latest, ubuntu-latest]
         vim-version: [v7.4.2119, v8.2.5172]
-        node-version: [12, 16]
         include:
+          - node-version: 16
           - os: macos-latest
             target: macos
           - os: ubuntu-latest
@@ -26,6 +26,9 @@ jobs:
             # target: win
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Install FUSE for linux
+        if: matrix.target == 'linux'
+        run: sudo apt-get install libfuse2
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -62,8 +65,8 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         vim-version: [v0.3.2, head]
-        node-version: [12, 16]
         include:
+          - node-version: 16
           - os: macos-latest
             target: macos
           - os: ubuntu-latest

@@ -22,7 +22,7 @@ Expect python (generated comment with nothing but the summary and description 'T
 # ------------------------------------------------------------------------------
 
 Given python(function with parameters without return type where b:doge_doc_standard='numpy'):
-  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}):
     pass
 
 Do (trigger doge):
@@ -30,7 +30,7 @@ Do (trigger doge):
   \<C-d>
 
 Expect python (generated comment with Parameters tag):
-  def myFunc(p1: Callable[[int], None] = False, p2: Callable[[int, Exception], None] = {}):
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}):
     """
     [TODO:summary]
 
@@ -38,9 +38,9 @@ Expect python (generated comment with Parameters tag):
 
     Parameters
     ----------
-    p1 : Callable[[int], None]
+    p1 : [TODO:type]
       [TODO:description]
-    p2 : Callable[[int, Exception], None]
+    p2
       [TODO:description]
     """
     pass
@@ -64,9 +64,9 @@ Expect python (generated comment with Parameters and Returns tag):
 
     Parameters
     ----------
-    p1 : Callable[[int], None]
+    p1
       [TODO:description]
-    p2 : Callable[[int, Exception], None]
+    p2
       [TODO:description]
 
     Returns
@@ -117,3 +117,104 @@ Expect python (generated comment with :param and :raises tags):
       raise Exception()
     except Exception as error:
       pass
+
+# ==============================================================================
+# Test setting 'omit_redundant_param_types'
+# ==============================================================================
+Given python (setting: omit_redundant_param_types):
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+    pass
+
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}):
+    pass
+
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+    pass
+
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}):
+    pass
+
+
+Do (trigger doge):
+  :let b:doge_doc_standard='numpy'\<CR>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
+  \<C-d>
+  :21\<CR>
+  \<C-d>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 0\<CR>
+  :36\<CR>
+  \<C-d>
+  :56\<CR>
+  \<C-d>
+  :let g:doge_python_settings['omit_redundant_param_types'] = 1\<CR>
+
+Expect python (generated comment):
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+    """
+    [TODO:summary]
+
+    [TODO:description]
+
+    Parameters
+    ----------
+    p1 : [TODO:type]
+      [TODO:description]
+    p2
+      [TODO:description]
+
+    Returns
+    -------
+    Sequence[T]
+      [TODO:description]
+    """
+    pass
+
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}):
+    """
+    [TODO:summary]
+
+    [TODO:description]
+
+    Parameters
+    ----------
+    p1 : [TODO:type]
+      [TODO:description]
+    p2
+      [TODO:description]
+    """
+    pass
+
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}) -> Sequence[T]:
+    """
+    [TODO:summary]
+
+    [TODO:description]
+
+    Parameters
+    ----------
+    p1 : [TODO:type]
+      [TODO:description]
+    p2 : Callable[[int, Exception], None]
+      [TODO:description]
+
+    Returns
+    -------
+    Sequence[T]
+      [TODO:description]
+    """
+    pass
+
+  def myFunc(p1, p2: Callable[[int, Exception], None] = {}):
+    """
+    [TODO:summary]
+
+    [TODO:description]
+
+    Parameters
+    ----------
+    p1 : [TODO:type]
+      [TODO:description]
+    p2 : Callable[[int, Exception], None]
+      [TODO:description]
+    """
+    pass
