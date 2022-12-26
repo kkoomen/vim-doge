@@ -38,7 +38,7 @@ function filter-vader-output() {
   #   then
   #     echo "$REPLY"
   #   fi
-  # done
+  done
 
   # Echo a 1 into the temp file to indicate this (re)try is successful.
   if ((hit_first_vader_line)); then
