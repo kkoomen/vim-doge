@@ -26,8 +26,8 @@ function filter-vader-output() {
     if ((!hit_first_vader_line)); then
       if [[ "$REPLY" = *'Starting Vader:'* ]]; then
         hit_first_vader_line=1
-      # else
-        # continue;
+      else
+        continue;
       fi
     fi
 
