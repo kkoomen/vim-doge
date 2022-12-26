@@ -1,3 +1,9 @@
+## 3.19.0 (2022-12-26)
+
+### Features
+
+- **python:** implement omit_redundant_param_types option ([4eda2dd](https://github.com/kkoomen/vim-doge/commit/4eda2ddeadc6c307d98e1a9286a7ed0c5d5bd10d))
+
 ## 3.18.0 (2022-08-19)
 
 ### Features
