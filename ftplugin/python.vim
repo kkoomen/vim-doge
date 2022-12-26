@@ -12,6 +12,7 @@ set cpoptions&vim
 if !exists('g:doge_python_settings')
   let g:doge_python_settings = {
   \  'single_quotes': 0,
+  \  'omit_redundant_param_types': 1,
   \}
 endif
 
@@ -46,7 +47,7 @@ let s:function_pattern = {
 call doge#buffer#register_doc_standard('reST', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
-\      'format': ':param {name} {type|!type}: !description',
+\      'format': ':param {name}%(showType| {type|!type})%: !description',
 \    },
 \    'exceptions': {
 \      'format': ':raises {name|!name}: !description',
@@ -56,7 +57,7 @@ call doge#buffer#register_doc_standard('reST', [
 \      '!description',
 \      '',
 \      '%(parameters|{parameters})%',
-\      '%(returnType|:rtype {returnType}: !description)%',
+\      '%(returnType|:return: !description)%',
 \      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],
@@ -68,7 +69,7 @@ call doge#buffer#register_doc_standard('sphinx', [
 \    'parameters': {
 \      'format': [
 \        ':param {name}: !description%(default|, defaults to {default})%',
-\        ':type {name}: {type|!type}%(default|, optional)%',
+\        '%(showType|:type {name}: {type|!type})%%(default|, optional)%',
 \      ],
 \    },
 \    'exceptions': {
@@ -80,7 +81,7 @@ call doge#buffer#register_doc_standard('sphinx', [
 \      '',
 \      '%(parameters|{parameters})%',
 \      '%(returnType|:return: !description)%',
-\      '%(returnType|:rtype: {returnType})%',
+\      '%(showReturnType|:rtype: {returnType})%',
 \      '%(exceptions|{exceptions})%',
 \      '"""',
 \    ],
@@ -91,7 +92,7 @@ call doge#buffer#register_doc_standard('numpy', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
 \      'format': [
-\        '{name} : {type|!type}',
+\        '{name}%(showType| : {type|!type})%',
 \        '\t!description',
 \      ],
 \    },
@@ -127,7 +128,7 @@ call doge#buffer#register_doc_standard('numpy', [
 call doge#buffer#register_doc_standard('google', [
 \  doge#helpers#deepextend(s:function_pattern, {
 \    'parameters': {
-\      'format': '{name|!name}: !description',
+\      'format': '{name|!name}%(showType| ({type|!type}))%: !description',
 \    },
 \    'exceptions': {
 \      'format': '{name|!name}: !description',
@@ -141,7 +142,7 @@ call doge#buffer#register_doc_standard('google', [
 \      '%(parameters|\t{parameters})%',
 \      '%(returnType|)%',
 \      '%(returnType|Returns:)%',
-\      '%(returnType|\t{returnType}: !description)%',
+\      '%(returnType|\t)%%(showReturnType|{returnType}: )%%(returnType|!description)%',
 \      '%(exceptions|)%',
 \      '%(exceptions|Raises:)%',
 \      '%(exceptions|\t{exceptions})%',

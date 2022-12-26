@@ -40,8 +40,8 @@ Expect python (generated comment with :param tags):
       """
       [TODO:description]
 
-      :param p1 Sequence[T]: [TODO:description]
-      :rtype Generator[int, float, str]: [TODO:description]
+      :param p1: [TODO:description]
+      :return: [TODO:description]
       """
       pass
 
@@ -51,7 +51,7 @@ Expect python (generated comment with :param tags):
 Given python (class method parameters with *args and **kwargs):
   class MyClass(object):
 
-    def call(cls, *args: str, **kwargs: str) -> str:
+    def call(cls, foo: str, **kwargs: dict[str, str]) -> str:
       pass
 
 Do (trigger doge):
@@ -61,12 +61,12 @@ Do (trigger doge):
 Expect python (generated comment with :param tags):
   class MyClass(object):
 
-    def call(cls, *args: str, **kwargs: str) -> str:
+    def call(cls, foo: str, **kwargs: dict[str, str]) -> str:
       """
       [TODO:description]
 
-      :param args str: [TODO:description]
-      :param kwargs str: [TODO:description]
-      :rtype str: [TODO:description]
+      :param foo: [TODO:description]
+      :param kwargs: [TODO:description]
+      :return: [TODO:description]
       """
       pass

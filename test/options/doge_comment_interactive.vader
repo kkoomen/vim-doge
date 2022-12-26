@@ -189,8 +189,8 @@ Expect python (generated comment with :param tags with brief descriptions):
     """
     Lorem ipsum dor sit amet.
 
-    :param p1 str: This is a string.
-    :param p2 int: This is an integer.    
+    :param p1: This is a string.
+    :param p2: This is an integer.    
     """
     pass
 
