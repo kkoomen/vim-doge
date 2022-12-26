@@ -26,6 +26,9 @@ jobs:
             # target: win
     runs-on: ${{ matrix.os }}
     steps:
+      - name: Install FUSE for linux
+        if: matrix.target == 'linux'
+        run: sudo apt-get install libfuse2
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
