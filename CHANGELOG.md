@@ -1,3 +1,5 @@
+### [3.19.1](https://github.com/kkoomen/vim-doge/compare/v3.19.0...v3.19.1) (2023-01-20)
+
 ## 3.19.0 (2022-12-26)
 
 ### Features

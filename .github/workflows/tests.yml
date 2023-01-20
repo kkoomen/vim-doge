@@ -13,14 +13,14 @@ jobs:
     name: Vim
     strategy:
       matrix:
-        # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-latest, ubuntu-latest]
+        # os: [macos-latest, ubuntu-20.04, windows-latest]
+        os: [macos-latest, ubuntu-20.04]
         vim-version: [v7.4.2119, v8.2.5172]
         include:
           - node-version: 16
           - os: macos-latest
             target: macos
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             target: linux
           # - os: windows-latest
             # target: win
@@ -63,13 +63,13 @@ jobs:
     name: NeoVim
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-20.04]
         vim-version: [v0.3.2, head]
         include:
           - node-version: 16
           - os: macos-latest
             target: macos
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             target: linux
     runs-on: ${{ matrix.os }}
     steps:
@@ -101,7 +101,7 @@ jobs:
 
   vint:
     name: Linter
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1

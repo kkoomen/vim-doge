@@ -9,14 +9,14 @@ jobs:
     name: Build and upload binary assets
     strategy:
       matrix:
-        # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-latest, ubuntu-latest]
+        # os: [macos-latest, ubuntu-20.04, windows-latest]
+        os: [macos-latest, ubuntu-20.04]
         include:
           - node-version: 16
           - os: macos-latest
             target: macos
             asset_path: ./bin/vim-doge-macos.tar.gz
-          - os: ubuntu-latest
+          - os: ubuntu-20.04
             target: linux
             asset_path: ./bin/vim-doge-linux.tar.gz
           # - os: windows-latest
