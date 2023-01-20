@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         # os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-20.04]
         vim-version: [v7.4.2119, v8.2.5172]
         include:
           - node-version: 16
