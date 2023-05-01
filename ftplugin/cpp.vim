@@ -30,7 +30,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 " ==============================================================================
 let s:pattern_base = {
 \  'parameters': {
-\    'format': b:char . 'param {name} !description',
+\    'format': b:char . 'param[!direction] {name} !description',
 \  },
 \  'typeParameters': {
 \    'format': b:char . 'tparam {name} !description',
