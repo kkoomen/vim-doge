@@ -1,3 +1,15 @@
+## [3.20.0](https://github.com/kkoomen/vim-doge/compare/v3.19.1...v3.20.0) (2023-05-01)
+
+### Features
+
+- manually compile for osx arm64 ([e547ece](https://github.com/kkoomen/vim-doge/commit/e547ece962d58f63298f91361b65eff1eb8eb54f))
+- **c,cpp:** add docblock tag custom char config option (closes [#534](https://github.com/kkoomen/vim-doge/issues/534)) ([f772669](https://github.com/kkoomen/vim-doge/commit/f772669d3527fe8ad3b7b5a2d8a0a5e8a5a49171))
+- **c,cpp:** add in-out direction docblock param jumps (closes [#533](https://github.com/kkoomen/vim-doge/issues/533)) ([4872f45](https://github.com/kkoomen/vim-doge/commit/4872f454414443e97fcb4535734627c5fa7ad033))
+
+### Bug Fixes
+
+- **cpp:** support direction in-out for param tags ([076bf12](https://github.com/kkoomen/vim-doge/commit/076bf12eec7a1e90174a2d0dc8f9a52bd0a2dd77))
+
 ### [3.19.1](https://github.com/kkoomen/vim-doge/compare/v3.19.0...v3.19.1) (2023-01-20)
 
 ## 3.19.0 (2022-12-26)
