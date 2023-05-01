@@ -13,6 +13,7 @@ vim-doge-win.exe
 *.zip
 __pycache__/
 *.tsbuildinfo
+yarn.lock
 
 # Logs
 logs
