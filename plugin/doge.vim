@@ -163,6 +163,19 @@ if !exists('g:doge_comment_jump_modes')
   let g:doge_comment_jump_modes = ['n', 'i', 's']
 endif
 
+" Doxygen settings that will be used for all C-family languages.
+if !exists('g:doge_doxygen_settings')
+  let g:doge_doxygen_settings = {
+  \  'char': '@',
+  \}
+else
+  let s:doxygen_settings = get(g:, 'doge_doxygen_settings', {})
+  if has_key(s:doxygen_settings, 'char') && !(s:doxygen_settings['char'] ==# '@' || s:doxygen_settings['char'] ==# '\')
+    echoerr '[DoGe] "' . s:doxygen_settings['char'] . '" is not a valid character. Accepted characters are @ or \'
+  endif
+endif
+
+
 " Register all the <Plug> mappings.
 
 nnoremap <Plug>(doge-generate) :<C-u>call doge#generate(v:count)<CR>

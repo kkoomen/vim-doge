@@ -331,6 +331,16 @@ let g:doge_python_settings = {
 - `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
   parameters and return types when the type is known.
 
+### Doxygen
+
+```vim
+let g:doge_doxygen_settings = {
+\  'char': '@'
+\}
+```
+
+- `char`: Character to use for docblock tags. Use `'@'` for `@param` or `'\'` for `\param`.
+
 # Headless mode
 
 If you're running your vim commands inside a docker, CI or similar environments
