@@ -24,8 +24,8 @@ Expect c (generated comments):
   /**
    * @brief [TODO:summary]
    *
-   * @param x [TODO:description]
-   * @param y [TODO:description]
+   * @param[[TODO:direction]] x [TODO:description]
+   * @param[[TODO:direction]] y [TODO:description]
    * @return [TODO:description]
    */
   int testA(int x, int y) {}
@@ -33,8 +33,8 @@ Expect c (generated comments):
   /**
    * @brief [TODO:summary]
    *
-   * @param x [TODO:description]
-   * @param y [TODO:description]
+   * @param[[TODO:direction]] x [TODO:description]
+   * @param[[TODO:direction]] y [TODO:description]
    * @return [TODO:description]
    */
   int testB(int x, int y) {}
