@@ -27,14 +27,14 @@ Expect cpp (generated comment with @brief, @param and @return tags):
     /**
      * @brief [TODO:summary]
      *
-     * @param val [TODO:description]
+     * @param[[TODO:direction]] val [TODO:description]
      * @return [TODO:description]
      */
     virtual bool my_virtual_function(bool val);
     /**
      * @brief [TODO:summary]
      *
-     * @param val [TODO:description]
+     * @param[[TODO:direction]] val [TODO:description]
      * @return [TODO:description]
      */
     virtual bool my_pure_virtual_function(bool val) = 0;
@@ -44,14 +44,14 @@ Expect cpp (generated comment with @brief, @param and @return tags):
     /**
      * @brief [TODO:summary]
      *
-     * @param val [TODO:description]
+     * @param[[TODO:direction]] val [TODO:description]
      * @return [TODO:description]
      */
     bool my_virtual_function(bool val) override;
     /**
      * @brief [TODO:summary]
      *
-     * @param val [TODO:description]
+     * @param[[TODO:direction]] val [TODO:description]
      * @return [TODO:description]
      */
     bool my_pure_virtual_function(bool val) final;
@@ -83,7 +83,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
       /**
        * @brief [TODO:summary]
        *
-       * @param val [TODO:description]
+       * @param[[TODO:direction]] val [TODO:description]
        * @return [TODO:description]
        */
       bool fun_1(bool val) { cout << "base-1\n"; }
@@ -94,7 +94,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
       /**
        * @brief [TODO:summary]
        *
-       * @param val [TODO:description]
+       * @param[[TODO:direction]] val [TODO:description]
        * @return [TODO:description]
        */
       bool fun_1(bool val) { cout << "derived-1\n"; }

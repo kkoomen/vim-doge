@@ -11,7 +11,7 @@ Expect cpp (generated comment with @param and @return tags):
   /**
    * @brief [TODO:summary]
    *
-   * @param text [TODO:description]
-   * @param node [TODO:description]
+   * @param[[TODO:direction]] text [TODO:description]
+   * @param[[TODO:direction]] node [TODO:description]
    */
   void append_token(const std::string& text /* inline comment */, const AST_Node* node);

@@ -42,7 +42,7 @@ let b:doge_patterns = doge#buffer#get_patterns()
 let s:function_pattern = {
 \  'nodeTypes': ['function_definition', 'declaration'],
 \  'parameters': {
-\    'format': b:char . 'param {name} !description',
+\    'format': b:char . 'param[!direction] {name} !description',
 \  },
 \}
 

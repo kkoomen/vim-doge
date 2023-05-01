@@ -20,8 +20,8 @@ Expect cpp (generated comment with @brief, @tparam, and @param tags):
    * @brief [TODO:summary]
    *
    * @tparam HandshakeHandler [TODO:description]
-   * @param type [TODO:description]
-   * @param handler [TODO:description]
+   * @param[[TODO:direction]] type [TODO:description]
+   * @param[[TODO:direction]] handler [TODO:description]
    */
   template <typename HandshakeHandler>
   void myFunc(handshake_type type, HandshakeHandler handler) {}
@@ -30,8 +30,8 @@ Expect cpp (generated comment with @brief, @tparam, and @param tags):
    * @brief [TODO:summary]
    *
    * @tparam HandshakeHandler [TODO:description]
-   * @param type [TODO:description]
-   * @param handler [TODO:description]
+   * @param[[TODO:direction]] type [TODO:description]
+   * @param[[TODO:direction]] handler [TODO:description]
    */
   template <typename HandshakeHandler>
   void myFunc(handshake_type type, HandshakeHandler handler) {}
@@ -50,8 +50,8 @@ Expect cpp (generated comment with @brief, and @param tags):
   /**
    * @brief [TODO:summary]
    *
-   * @param type [TODO:description]
-   * @param handler [TODO:description]
+   * @param[[TODO:direction]] type [TODO:description]
+   * @param[[TODO:direction]] handler [TODO:description]
    */
   template <>
   void myFunc(handshake_type type, HandshakeHandler handler) {}
@@ -70,8 +70,8 @@ Expect cpp (generated comment with @tparam and @param tags):
    * @brief [TODO:summary]
    *
    * @tparam T [TODO:description]
-   * @param i [TODO:description]
-   * @param args [TODO:description]
+   * @param[[TODO:direction]] i [TODO:description]
+   * @param[[TODO:direction]] args [TODO:description]
    */
   template<class...T> void h(int i = 0, T... args) {}
 

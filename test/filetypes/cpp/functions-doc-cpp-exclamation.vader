@@ -41,8 +41,8 @@ Expect cpp (generated comment with @brief, @param and @return tags):
   //!
   //! @brief [TODO:summary]
   //!
-  //! @param text [TODO:description]
-  //! @param node [TODO:description]
+  //! @param[[TODO:direction]] text [TODO:description]
+  //! @param[[TODO:direction]] node [TODO:description]
   //! @return [TODO:description]
   //!
   int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
@@ -61,6 +61,6 @@ Expect cpp (generated comment with @brief and @param tag):
   //!
   //! @brief [TODO:summary]
   //!
-  //! @param p [TODO:description]
+  //! @param[[TODO:direction]] p [TODO:description]
   //!
   void f(A* p = this) {}

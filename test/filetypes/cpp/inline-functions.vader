@@ -11,8 +11,8 @@ Expect cpp (generated comment with @brief, @param and @return tags):
   /**
    * @brief [TODO:summary]
    *
-   * @param lhs [TODO:description]
-   * @param rhs [TODO:description]
+   * @param[[TODO:direction]] lhs [TODO:description]
+   * @param[[TODO:direction]] rhs [TODO:description]
    * @return [TODO:description]
    */
   inline bool operator<(const value_t lhs, const value_t rhs) noexcept {}
