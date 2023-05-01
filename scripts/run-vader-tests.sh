@@ -19,9 +19,9 @@ run_file="$(mktemp)"
 
 function filter-vader-output() {
   local hit_first_vader_line=0
+  local force_echo=0
 
   while read -r; do
-    echo "$REPLY"
     # Search for the first Vader output line.
     if ((!hit_first_vader_line)); then
       if [[ "$REPLY" = *'Starting Vader:'* ]]; then
@@ -31,10 +31,18 @@ function filter-vader-output() {
       fi
     fi
 
+    # If an error occured, make sure to print it.
+    if [[ "$REPLY" = *'Expected:'* ]]; then
+      force_echo=1
+    elif [[ "$REPLY" =~ \[[A-Z\ ]+\] ]]; then
+      force_echo=0
+    fi
+
     if [[ "$REPLY" =~ \[[A-Z\ ]+\] ]] \
       || [[ "$REPLY" = *'Starting Vader:'* ]] \
       || [[ "$REPLY" = *'Success/Total'* ]] \
-      || [[ "$REPLY" = *'Elapsed time:'* ]]
+      || [[ "$REPLY" = *'Elapsed time:'* ]] \
+      || [[ $force_echo = 1 ]]
     then
       echo "$REPLY"
     fi

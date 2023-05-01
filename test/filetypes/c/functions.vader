@@ -25,8 +25,8 @@ Expect c (generated comment with @brief, @param and @return tags):
   /**
    * @brief [TODO:summary]
    *
-   * @param a [TODO:description]
-   * @param b [TODO:description]
+   * @param[[TODO:direction]] a [TODO:description]
+   * @param[[TODO:direction]] b [TODO:description]
    * @return [TODO:description]
    */
   int foo(int a, char b) {}
@@ -34,8 +34,8 @@ Expect c (generated comment with @brief, @param and @return tags):
   /**
    * @brief [TODO:summary]
    *
-   * @param a [TODO:description]
-   * @param b [TODO:description]
+   * @param[[TODO:direction]] a [TODO:description]
+   * @param[[TODO:direction]] b [TODO:description]
    * @return [TODO:description]
    */
   int *foo(int a, char b) {}

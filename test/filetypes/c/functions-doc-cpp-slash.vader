@@ -12,8 +12,8 @@ Expect c (generated comment with @brief, @param and @return tags):
   ///
   /// @brief [TODO:summary]
   ///
-  /// @param x [TODO:description]
-  /// @param y [TODO:description]
+  /// @param[[TODO:direction]] x [TODO:description]
+  /// @param[[TODO:direction]] y [TODO:description]
   /// @return [TODO:description]
   ///
   int add(int x, int y) {}
@@ -32,7 +32,7 @@ Expect c (generated comment with @brief and @param tags):
   ///
   /// @brief [TODO:summary]
   ///
-  /// @param x [TODO:description]
-  /// @param y [TODO:description]
+  /// @param[[TODO:direction]] x [TODO:description]
+  /// @param[[TODO:direction]] y [TODO:description]
   ///
   void add(int x, int y) {}

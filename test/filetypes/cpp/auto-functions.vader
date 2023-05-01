@@ -17,7 +17,7 @@ Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
    *
    * @tparam F [TODO:description]
    * @tparam Args [TODO:description]
-   * @param builder [TODO:description]
+   * @param[[TODO:direction]] builder [TODO:description]
    * @return [TODO:description]
    */
   template<class F, class... Args>
@@ -45,8 +45,8 @@ Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
    *
    * @tparam T [TODO:description]
    * @tparam U [TODO:description]
-   * @param t [TODO:description]
-   * @param u [TODO:description]
+   * @param[[TODO:direction]] t [TODO:description]
+   * @param[[TODO:direction]] u [TODO:description]
    * @return [TODO:description]
    */
   template<class T, class U>
