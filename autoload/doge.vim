@@ -162,7 +162,12 @@ function! doge#install(...) abort
     let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
     let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1'))
     let l:term_height = 8
+  elseif has('osx') && trim(system('uname -m')) ==# 'arm64'
+    echom '[DoGe] detected arm64 which requires manual install through NPM, installing now...'
+    let l:command = 'cd ' . fnameescape(g:doge_dir) . ' && npm i --no-save && npm run build:binary:unix'
+    let l:term_height = 10
   else
+    " macos x64
     let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
     let l:term_height = 4
   endif
@@ -212,7 +217,8 @@ function! doge#install(...) abort
       call s:report_result(l:exitcode)
     endfun
     let l:winid = win_getid()
-    exe (&splitbelow ? 'botright' : 'topleft') . " call term_start(l:command, {'term_rows': " . l:term_height . ", 'close_cb': function('s:callback')})"
+    let s:term_buf = term_start(&shell, {'term_rows': l:term_height, 'close_cb': function('s:callback')})
+    call term_sendkeys(s:term_buf, l:command . " && exit\<CR>")
     set nobuflisted
     let s:terminal_bufnr = bufnr()
     call win_gotoid(l:winid)
