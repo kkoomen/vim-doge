@@ -78,7 +78,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
     "nodemon": "^2.0.20",
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.8",
     "release-it": "^15.10.2",
     "rimraf": "^4.1.2",
     "ts-node": "^10.9.1",
