@@ -63,9 +63,11 @@ Expect rust (generated comments with Arguments and Examples sections):
 # Functions with errors and safety section
 # ==============================================================================
 Given rust (impl methods with Errors and Safety section):
+  #[macro_export]
   pub unsafe fn foo(foo: usize) -> Result<(), FooError> {}
 
 Do (trigger doge):
+  :2\<CR>
   \<C-d>
 
 Expect rust (generated comments with Arguments, Safety, Errors and Examples sections):
@@ -88,4 +90,5 @@ Expect rust (generated comments with Arguments, Safety, Errors and Examples sect
   /// ```
   /// [TODO:example]
   /// ```
+  #[macro_export]
   pub unsafe fn foo(foo: usize) -> Result<(), FooError> {}
