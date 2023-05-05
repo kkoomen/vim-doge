@@ -3,7 +3,7 @@ set cpoptions&vim
 
 " Alter the insert position for JavaScript functions.
 function! doge#preprocessors#javascript#insert_position(lnum_insert_pos) abort
-  " In Java some functions may have the ES7 decorators above them.
+  " In Java, some functions may have the ES7 decorators above them.
   " If this is the case we want to insert above this.
   "
   " Example:
