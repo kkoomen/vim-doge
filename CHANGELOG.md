@@ -1,3 +1,9 @@
+## [3.21.0](https://github.com/kkoomen/vim-doge/compare/v3.20.0...v3.21.0) (2023-05-05)
+
+### Features
+
+- **rust:** insert docblock above macros ([74b7ba1](https://github.com/kkoomen/vim-doge/commit/74b7ba1a3a3166726578598a9ac290192bc36e95))
+
 ## [3.20.0](https://github.com/kkoomen/vim-doge/compare/v3.19.1...v3.20.0) (2023-05-01)
 
 ### Features
