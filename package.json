@@ -79,7 +79,7 @@
     "lint-staged": "^13.2.2",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.8",
-    "release-it": "^15.10.2",
+    "release-it": "^15.10.3",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
