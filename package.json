@@ -77,7 +77,7 @@
     "eslint-plugin-import": "^2.27.5",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.2",
-    "nodemon": "^2.0.20",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "release-it": "^15.11.0",
     "rimraf": "^5.0.1",
