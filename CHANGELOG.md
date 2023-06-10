@@ -1,3 +1,9 @@
+## [3.22.0](https://github.com/kkoomen/vim-doge/compare/v3.21.0...v3.22.0) (2023-06-10)
+
+### Features
+
+- only replace \t chars when not followed by "param" ([c7354ff](https://github.com/kkoomen/vim-doge/commit/c7354ff67abbc15a67c00959e95bc2ac173428ae))
+
 ## [3.21.0](https://github.com/kkoomen/vim-doge/compare/v3.20.0...v3.21.0) (2023-05-05)
 
 ### Features
