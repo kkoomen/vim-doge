@@ -144,7 +144,11 @@ Expect c (generated comment):
 # C++ functions and doc standards.
 # ==============================================================================
 Given cpp (cpp function):
-  void append_token(const std::string& text /* inline comment */, const AST_Node* node);
+  template<class F, class... Args>
+  auto Person::getPersonType (const Builder& builder) -> PersonType
+  {
+      return _person_type;
+  }
 
 Do (trigger doge):
   :let b:doge_doc_standard='doxygen_javadoc'\<CR>
@@ -154,10 +158,16 @@ Expect cpp (generated comment):
   /**
    * \brief [TODO:summary]
    *
-   * \param[[TODO:direction]] text [TODO:description]
-   * \param[[TODO:direction]] node [TODO:description]
+   * \tparam F [TODO:description]
+   * \tparam Args [TODO:description]
+   * \param[[TODO:direction]] builder [TODO:description]
+   * \return [TODO:description]
    */
-  void append_token(const std::string& text /* inline comment */, const AST_Node* node);
+  template<class F, class... Args>
+  auto Person::getPersonType (const Builder& builder) -> PersonType
+  {
+      return _person_type;
+  }
 
 Given cpp (function without parameters with return type):
   int myFunc(/* inline comment */) {}

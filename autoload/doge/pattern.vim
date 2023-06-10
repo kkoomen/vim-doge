@@ -87,7 +87,7 @@ function! doge#pattern#generate(pattern) abort
     endif
 
     for l:replaced in split(l:line_replaced, "\n")
-      call add(l:comment, substitute(l:replaced, '\C\\t', repeat(' ', shiftwidth()), 'g'))
+      call add(l:comment, substitute(l:replaced, '\\t\(param\)\@!', repeat(' ', shiftwidth()), 'g'))
     endfor
   endfor
 
