@@ -50,22 +50,9 @@ endfunction
 
 ""
 " @public
-" Generate a placeholder with optionally a context. Optionally, you can pass the
-" context using the following example call:
-"
-"   doge#helpers#placeholder('summary')
-"
-" The above will return:
-"
-"   'TODO<summary>'
-"
-" If no context is specified the todo-pattern is returned to search for.
+" Returns the todo-pattern that is used for interactive mode
 function! doge#helpers#placeholder(...) abort
-  if !has_key(a:, 1)
-    return '\(\[TODO:[[:alnum:]-]\+\]\|TODO\)'
-  else
-    return printf('[TODO:%s]', a:1)
-  endif
+  return '\(\[TODO:[[:alnum:]-]\+\]\|TODO\)'
 endfunction
 
 ""
@@ -81,25 +68,51 @@ endfunction
 ""
 " @public
 " Run a parser which will produce all the parameters and return the output.
-function! doge#helpers#parser(args) abort
-  for l:executable in ['/dist/index.js', '/bin/vim-doge.exe', '/bin/vim-doge']
+function! doge#helpers#parser() abort
+  let l:executables = [
+        \ '/vim-doge-helper/target/release/vim-doge-helper',
+        \ '/bin/vim-doge-helper',
+        \ ]
+
+  for l:executable in l:executables
     let l:script_path = g:doge_dir . l:executable
     if filereadable(resolve(l:script_path))
       let l:cursor_pos = getpos('.')
       let l:current_line = l:cursor_pos[1]
+
       let l:tempfile = tempname()
       keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
-      let l:args = [l:tempfile, b:doge_parser, l:current_line] + a:args
-      let l:cmd = fnamemodify(resolve(l:script_path), ':e') ==# 'js' ? 'node ' : ''
-      let l:result = system(l:cmd . l:script_path . ' ' . join(l:args, ' '))
+
+      let l:args = [
+            \ '--filepath', l:tempfile,
+            \ '--parser', b:doge_parser,
+            \ '--doc-name', b:doge_doc_standard,
+            \ '--line', l:current_line,
+            \ ]
+
+      if &expandtab == v:true
+        let l:args += ['--indent', shiftwidth()]
+      else
+        let l:args += ['--tabs']
+      endif
+
+      " Call preprocessing function for the filetype, allowing it to add args.
+      try
+        let l:preprocess_fn = printf('doge#preprocessors#%s#alter_parser_args', doge#helpers#get_filetype())
+        let l:new_args = function(l:preprocess_fn)(l:args)
+        let l:args = l:new_args
+      catch /^Vim\%((\a\+)\)\=:E117/
+      endtry
+
+      let l:result = system(l:script_path . ' ' . join(l:args, ' '))
 
       try
         if !empty(l:result)
           return json_decode(l:result)
         endif
       catch /.*/
-        echo '[DoGe] ' . b:doge_parser . ' parser failed'
-        echo '[Doge] Exception: ' . v:exception
+        echo g:doge_prefix . ' ' . b:doge_parser . ' parser failed'
+        echo g:doge_prefix . ' Exception: ' . v:exception
         echo l:result
       finally
         call setpos('.', l:cursor_pos)

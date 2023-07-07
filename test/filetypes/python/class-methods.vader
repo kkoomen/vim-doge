@@ -17,7 +17,6 @@ Expect python (generated comment with no :param tags):
     def __init__(self: MyClass):
       """
       [TODO:description]
-
       """
       pass
 # ==============================================================================

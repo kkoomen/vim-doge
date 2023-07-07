@@ -300,10 +300,10 @@ let g:doge_javascript_settings = {
 \}
 ```
 
-- `destructuring_props`: Whether or not to generate `@param` tags for the
-  destructured properties in a function expression.
+- `destructuring_props`: Whether to generate `@param` tags for the destructured
+  properties in a function expression.
 
-- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
+- `omit_redundant_param_types`: Whether to omit the `{type}` part of
   parameters and return types when the type is known (i.e. typescript).
 
 ### PHP
@@ -327,10 +327,10 @@ let g:doge_python_settings = {
 \}
 ```
 
-- `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers.
+- `single_quotes`: Whether to use single quotes for the multiline comments delimiters.
 
-- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
-  parameters and return types when the type is known.
+- `omit_redundant_param_types`: Whether to omit the `{type}` part of parameters
+  and return types when the type is specified in the function itself.
 
 ### Doxygen
 

@@ -1,0 +1,40 @@
+# https://doc.rust-lang.org/rust-by-example/meta/doc.html
+
+templates:
+  function:
+    node_types:
+      - function_item
+    template: |
+      /// [TODO:description]
+      {% if params %}
+      ///
+      /// # Arguments
+      ///
+      {% for param in params %}
+      /// * `{{ param.name }}` - [TODO:description]
+      {% endfor %}
+      {% endif %}
+      {% if has_panics %}
+      ///
+      /// # Panics
+      ///
+      /// [TODO:describe scenarios in which the function could panic]
+      {% endif %}
+      {% if has_errors %}
+      ///
+      /// # Errors
+      ///
+      /// [TODO:describe error types and what triggers them]
+      {% endif %}
+      {% if has_unsafe %}
+      ///
+      /// # Safety
+      ///
+      /// [TODO:explain why the function is unsafe]
+      {% endif %}
+      ///
+      /// # Examples
+      ///
+      /// ```
+      /// [TODO:write some example code]
+      /// ```

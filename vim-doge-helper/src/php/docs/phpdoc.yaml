@@ -1,0 +1,35 @@
+# https://www.phpdoc.org
+
+templates:
+  class_property:
+    node_types:
+      - property_declaration
+    template: |
+        /**
+         * @var {{ type | default(value="[TODO:type]") }}
+         */
+
+  function:
+    node_types:
+      - method_declaration
+      - function_definition
+    template: >
+      /**
+       * [TODO:description]
+       {% if params %}
+       *
+       {% for param in params %}
+       * @param {{ param.type | default(value="[TODO:type]") }} {{ param.name }} {% if param.default_value %}(optional){% endif %} [TODO:description]
+       {% endfor %}
+       {% endif %}
+       {% if exceptions %}
+       *
+       {% for exception in exceptions %}
+       * @throws {{ exception.name | default(value="[TODO:name]") }} [TODO:description]
+       {% endfor %}
+       {% endif %}
+       {% if not is_constructor_method %}
+       *
+       * @return {{ return_type | default(value="[TODO:type]") }} [TODO:description]
+       {% endif %}
+       */

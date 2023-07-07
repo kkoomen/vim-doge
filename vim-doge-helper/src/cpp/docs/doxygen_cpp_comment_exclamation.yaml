@@ -1,0 +1,65 @@
+# http://www.doxygen.nl/manual/docblocks.html
+
+templates:
+  class:
+    node_types:
+      - class_specifier
+      - template_declaration
+    template: |
+      //!
+      //! {{ char }}brief [TODO:summary]
+      {% if tparams %}
+      //!
+        {% for tparam in tparams %}
+      //! {{ char }}tparam {{ tparam.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      //!
+
+  function:
+    node_types:
+      - function_definition
+      - declaration
+      - template_declaration
+      - function_declarator
+    template: |
+      //!
+      //! {{ char }}brief [TODO:summary]
+      //!
+      {% if tparams %}
+        {% for tparam in tparams %}
+      //! {{ char }}tparam {{ tparam.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if params %}
+        {% for param in params %}
+      //! {{ char }}param[[TODO:direction]] {{ param.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      //! {{ char }}return [TODO:description]
+      {% endif %}
+      //!
+
+  struct:
+    node_types:
+      - struct_specifier
+      - template_declaration
+    template: |
+      //!
+      //! struct {{ name }} - [TODO:description]
+      {% if tparams %}
+      //!
+        {% for tparam in tparams %}
+      //! {{ char }}tparam {{ tparam.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      //!
+
+  struct_field:
+    node_types:
+      - field_declaration
+    template: |
+      //!
+      //! {{ char }}{{ name }} [TODO:description]
+      //!

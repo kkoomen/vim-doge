@@ -1,0 +1,38 @@
+# http://www.doxygen.nl/manual/docblocks.html
+
+templates:
+  function:
+    node_types:
+      - function_definition
+      - declaration
+    template: |
+      /**
+      {{ char }}brief [TODO:summary]
+      {% if params or return_type %}
+      ~
+      {% endif %}
+      {% if params %}
+        {% for param in params %}
+      {{ char }}param[[TODO:direction]] {{ param.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      {{ char }}return [TODO:description]
+      {% endif %}
+      */
+
+  struct:
+    node_types:
+      - struct_specifier
+    template: |
+      /**
+      struct {{ name }} - [TODO:description]
+      */
+
+  struct_field:
+    node_types:
+      - field_declaration
+    template: |
+      /**
+      {{ char }}{{ name }} [TODO:description]
+      */

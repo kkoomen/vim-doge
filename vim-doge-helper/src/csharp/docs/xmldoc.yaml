@@ -1,0 +1,33 @@
+# https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/
+
+templates:
+  method:
+    node_types:
+      - method_declaration
+      - operator_declaration
+      - delegate_declaration
+      - constructor_declaration
+    template: |
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>
+      {% if params %}
+        {% for param in params %}
+      /// <param name="{{ param.name }}">[TODO:description]</param>
+        {% endfor %}
+      {% endif %}
+      {% if has_non_void_return_type and not is_constructor %}
+      /// <returns>[TODO:description]</returns>
+      {% endif %}
+
+  other:
+    node_types:
+      - class_declaration
+      - variable_declaration
+      - property_declaration
+      - field_declaration
+      - enum_declaration
+    template: |
+      /// <summary>
+      /// [TODO:description]
+      /// </summary>

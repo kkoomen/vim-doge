@@ -3,66 +3,24 @@
 # ==============================================================================
 Given sh (regular functions):
   function test {
-    print "foobar"
-  }
-
-  function test() {
-    print "foobar"
-  }
-
-  test() {
-    print "foobar"
+    echo "foobar"
   }
 
 Do (trigger doge):
-  \<C-d>
-  :16\<CR>
-  \<C-d>
-  :31\<CR>
   \<C-d>
 
 Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 'Returns' keywords):
   ################################################################################
   # [TODO:description]
   # Globals:
-  #   [TODO:var-name]
+  #   [TODO:variable name]
   # Arguments:
-  #   $1: [TODO:description]
+  #   $1: [TODO:description for each parameter]
   # Outputs:
-  #   [TODO:description]
+  #   [TODO:description for each output variable]
   # Returns:
   #   [TODO:description]
   ################################################################################
   function test {
-    print "foobar"
-  }
-
-  ################################################################################
-  # [TODO:description]
-  # Globals:
-  #   [TODO:var-name]
-  # Arguments:
-  #   $1: [TODO:description]
-  # Outputs:
-  #   [TODO:description]
-  # Returns:
-  #   [TODO:description]
-  ################################################################################
-  function test() {
-    print "foobar"
-  }
-
-  ################################################################################
-  # [TODO:description]
-  # Globals:
-  #   [TODO:var-name]
-  # Arguments:
-  #   $1: [TODO:description]
-  # Outputs:
-  #   [TODO:description]
-  # Returns:
-  #   [TODO:description]
-  ################################################################################
-  test() {
-    print "foobar"
+    echo "foobar"
   }

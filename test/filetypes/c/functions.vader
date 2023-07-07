@@ -10,15 +10,14 @@ Given c (function definition with parameters):
 
 Do (trigger doge):
   \<C-d>
-  :7\<CR>
+  :6\<CR>
   \<C-d>
-  :16\<CR>
+  :15\<CR>
   \<C-d>
 
 Expect c (generated comment with @brief, @param and @return tags):
   /**
    * @brief [TODO:summary]
-   *
    */
   void bar(void);
 

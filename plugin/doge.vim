@@ -1,7 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:unsupported_msg = '[DoGe] Unsupported version. %s is required.'
+let g:doge_prefix = "[vim-doge]"
+
+let s:unsupported_msg = g:doge_prefix . ' Unsupported version. %s is required.'
 
 if !has('nvim') && (v:version < 700 || !has('patch-7.4.2119'))
   echohl WarningMsg
@@ -171,7 +173,7 @@ if !exists('g:doge_doxygen_settings')
 else
   let s:doxygen_settings = get(g:, 'doge_doxygen_settings', {})
   if has_key(s:doxygen_settings, 'char') && !(s:doxygen_settings['char'] ==# '@' || s:doxygen_settings['char'] ==# '\')
-    echoerr '[DoGe] "' . s:doxygen_settings['char'] . '" is not a valid character. Accepted characters are @ or \'
+    echoerr g:doge_prefix . ' "' . s:doxygen_settings['char'] . '" is not a valid character. Accepted characters are @ or \'
   endif
 endif
 

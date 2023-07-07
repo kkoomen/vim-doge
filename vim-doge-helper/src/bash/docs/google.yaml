@@ -1,0 +1,18 @@
+# https://google.github.io/styleguide/shell.xml#Function_Comments
+
+templates:
+  function_definition:
+    node_types:
+      - function_definition
+    template: |
+      ################################################################################
+      # [TODO:description]
+      # Globals:
+      # <INDENT>[TODO:variable name]
+      # Arguments:
+      # <INDENT>$1: [TODO:description for each parameter]
+      # Outputs:
+      # <INDENT>[TODO:description for each output variable]
+      # Returns:
+      # <INDENT>[TODO:description]
+      ################################################################################

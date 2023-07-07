@@ -1,0 +1,15 @@
+# https://github.com/stevedonovan/LDoc
+
+templates:
+  function:
+    node_types:
+      - function_definition_statement
+      - function_definition
+    template: |
+      -- [TODO:summary]
+      -- [TODO:description]
+      {% if params %}
+        {% for param in params %}
+      -- @param {{ param.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}

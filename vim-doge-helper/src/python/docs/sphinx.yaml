@@ -1,0 +1,30 @@
+# https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+      """
+      [TODO:description]
+      {% if params or return_type or exceptions %}
+      ~
+      {% endif %}
+      {% if params %}
+        {% for param in params %}
+      :param {{ param.name }}: [TODO:description]{% if param.default_value %}, defaults to {{ param.default_value }}{% endif %}
+      {% if show_types or not param.type %}:type {{ param.name }}: {{ param.type | default(value="[TODO:type]") }}{% if param.default_value %}, optional{% endif %}{% endif %}
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      :return: [TODO:description]
+        {% if show_types %}
+      :rtype: {{ return_type | default(value="[TODO:type]") }}
+        {% endif %}
+      {% endif %}
+      {% if exceptions %}
+        {% for exception in exceptions %}
+      :raises {{ exception.name | default(value="[TODO:name]") }}: [TODO:description]
+        {% endfor %}
+      {% endif %}
+      """

@@ -1,0 +1,26 @@
+# https://www.oracle.com/technetwork/articles/javase/index-137868.html
+
+templates:
+  method:
+    node_types:
+      - method_declaration
+    template: |
+      /**
+       * [TODO:description]
+       {% if params %}
+       *
+       {% for param in params %}
+       * @param {{ param.name }} [TODO:description]
+       {% endfor %}
+       {% endif %}
+       {% if return_type %}
+       *
+       * @return [TODO:description]
+       {% endif %}
+       {% if exceptions %}
+       *
+       {% for exception in exceptions %}
+       * @throws {{ exception.name }} [TODO:description]
+       {% endfor %}
+       {% endif %}
+       */

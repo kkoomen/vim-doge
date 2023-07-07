@@ -13,7 +13,6 @@ Expect python (generated comment with nothing but the text 'TODO'):
   def myFunc():
     """
     [TODO:description]
-
     """
     pass
 
@@ -59,7 +58,7 @@ Expect python (generated comment with type hints, defaults and optional):
     :param p1: [TODO:description]
     :type p1: [TODO:type]
     :param p2: [TODO:description]
-    :param p3: [TODO:description]
+    :param p3: [TODO:description], defaults to []
     """
     pass
 
@@ -81,7 +80,7 @@ Expect python (generated comment with :param, :type and :return tags):
     :param p1: [TODO:description]
     :type p1: [TODO:type]
     :param p2: [TODO:description]
-    :param p3: [TODO:description]
+    :param p3: [TODO:description], defaults to []
     :return: [TODO:description]
     """
     pass
