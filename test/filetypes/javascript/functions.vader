@@ -145,7 +145,7 @@ Expect javascript (generated comment with @param and @returns tags):
    *
    * @param {string} $p1 - [TODO:description]
    * @param {Foo | Bar | Baz} p2 - [TODO:description]
-   * @returns {(Foo | Bar)} [TODO:description]
+   * @returns {Foo | Bar} [TODO:description]
    */
   function myFunc($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) {}
 
@@ -337,13 +337,13 @@ Given javascript (functions with destructuring_props):
 
 
 Do (trigger doge):
-  :let g:doge_javascript_settings = {'destructuring_props': 1}\<CR>
+  :let g:doge_javascript_settings['destructuring_props'] = 1\<CR>
   :1\<CR>
   \<C-d>
-  :let g:doge_javascript_settings = {'destructuring_props': 0}\<CR>
+  :let g:doge_javascript_settings['destructuring_props'] = 0\<CR>
   :12\<CR>
   \<C-d>
-  :let g:doge_javascript_settings = {'destructuring_props': 1}\<CR>
+  :let g:doge_javascript_settings['destructuring_props'] = 1\<CR>
 
 Expect javascript (generated comments with a description, @param and @returns tags):
   /**
@@ -379,7 +379,7 @@ Given javascript (functions where the type should be omitted if let g:doge_javas
   function foo(a, b: str, c = 3, d: int = 5): Promise<int> {}
 
 Do (trigger doge):
-  :let g:doge_javascript_settings = {'omit_redundant_param_types': 1}\<CR>
+  :let g:doge_javascript_settings['omit_redundant_param_types'] = 1\<CR>
   \<C-d>
   :12\<CR>
   \<C-d>
@@ -389,7 +389,7 @@ Do (trigger doge):
   \<C-d>
   :44\<CR>
   \<C-d>
-  :let g:doge_javascript_settings = {'omit_redundant_param_types': 0}\<CR>
+  :let g:doge_javascript_settings['omit_redundant_param_types'] = 0\<CR>
 
 Expect javascript (generated comments with a description, @param and @returns tags):
   /**

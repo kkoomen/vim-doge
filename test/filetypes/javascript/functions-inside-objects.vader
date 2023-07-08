@@ -43,10 +43,10 @@ Do (trigger doge):
 Given javascript (functions with punctation with parameters with/without type hints):
   var myObj = {
     'my-func': async function test($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) {
-      //
+      return $p1;
     },
     'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */): ( 1 | 2 | 3 ) => {
-      //
+      return 1;
     },
   };
 
@@ -69,7 +69,7 @@ Expect javascript (generated comment with @async, @param and @returns tags):
      * @returns {Promise<[TODO:type]>} [TODO:description]
      */
     'my-func': async function test($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */) {
-      //
+      return $p1;
     },
     /**
      * [TODO:description]
@@ -79,9 +79,9 @@ Expect javascript (generated comment with @async, @param and @returns tags):
      * @param {array} [p2] - [TODO:description]
      * @param {[TODO:type]} p3 - [TODO:description]
      * @param {[TODO:type]} p4 - [TODO:description]
-     * @returns {Promise<( 1 | 2 | 3 )>} [TODO:description]
+     * @returns {Promise<1 | 2 | 3>} [TODO:description]
      */
     'my-arrow-func': async ($p1: string = 'value', p2: array = [], p3, p4 /* inline comment */): ( 1 | 2 | 3 ) => {
-      //
+      return 1;
     },
   };

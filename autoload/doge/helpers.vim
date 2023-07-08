@@ -65,65 +65,6 @@ function! doge#helpers#trim(string) abort
         \ : trim(a:string)
 endfunction
 
-""
-" @public
-" Run a parser which will produce all the parameters and return the output.
-function! doge#helpers#parser() abort
-  let l:executables = [
-        \ '/vim-doge-helper/target/release/vim-doge-helper',
-        \ '/bin/vim-doge-helper',
-        \ ]
-
-  for l:executable in l:executables
-    let l:script_path = g:doge_dir . l:executable
-    if filereadable(resolve(l:script_path))
-      let l:cursor_pos = getpos('.')
-      let l:current_line = l:cursor_pos[1]
-
-      let l:tempfile = tempname()
-      keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
-
-      let l:args = [
-            \ '--filepath', l:tempfile,
-            \ '--parser', b:doge_parser,
-            \ '--doc-name', b:doge_doc_standard,
-            \ '--line', l:current_line,
-            \ ]
-
-      if &expandtab == v:true
-        let l:args += ['--indent', shiftwidth()]
-      else
-        let l:args += ['--tabs']
-      endif
-
-      " Call preprocessing function for the filetype, allowing it to add args.
-      try
-        let l:preprocess_fn = printf('doge#preprocessors#%s#alter_parser_args', doge#helpers#get_filetype())
-        let l:new_args = function(l:preprocess_fn)(l:args)
-        let l:args = l:new_args
-      catch /^Vim\%((\a\+)\)\=:E117/
-      endtry
-
-      let l:result = system(l:script_path . ' ' . join(l:args, ' '))
-
-      try
-        if !empty(l:result)
-          return json_decode(l:result)
-        endif
-      catch /.*/
-        echo g:doge_prefix . ' ' . b:doge_parser . ' parser failed'
-        echo g:doge_prefix . ' Exception: ' . v:exception
-        echo l:result
-      finally
-        call setpos('.', l:cursor_pos)
-        call delete(l:tempfile)
-      endtry
-    endif
-  endfor
-
-  return 0
-endfunction
-
 "" @public
 " Recursively merge nested dictionaries and/or lists.
 " a:1 is the base dictionary and every other parameter will be merged onto a:1.
