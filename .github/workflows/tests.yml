@@ -18,7 +18,7 @@ jobs:
         vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
-      - run: apt-get install -y gcc-multilib
+      - run: sudo apt-get install -y gcc-multilib
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
