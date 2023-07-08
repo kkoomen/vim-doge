@@ -12,9 +12,9 @@ Given c (function definition and declaration with parameters with return type):
 Do (trigger doge):
   :let b:doge_doc_standard='kernel_doc'\<CR>
   \<C-d>
-  :12\<C-d>
+  :12\<CR>
   \<C-d>
-  :23\<C-d>
+  :23\<CR>
   \<C-d>
 
 Expect c (generated comment with the function name, all parameter tags, a description and a 'Return' keyword):
@@ -62,7 +62,7 @@ Given c (function definition and declaration with parameters with 'void' return 
 Do (trigger doge):
   :let b:doge_doc_standard='kernel_doc'\<CR>
   \<C-d>
-  :10\<C-d>
+  :10\<CR>
   \<C-d>
 
 Expect c (generated comment with the function name, all parameter tags, and a description):
@@ -93,6 +93,7 @@ Given c (struct with fields):
   }
 
 Do (trigger doge):
+  :let b:doge_doc_standard='kernel_doc'\<CR>
   \<C-d>
   :5\<CR>
   \<C-d>

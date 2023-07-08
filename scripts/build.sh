@@ -21,11 +21,12 @@ else
   cargo build --release
 fi
 
-cp target/release/vim-doge-helper $ROOT_DIR/bin/
 cd $ROOT_DIR
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then
+  cp helper/target/release/vim-doge-helper $ROOT_DIR/bin/
+
   OUTFILE="$OUTFILE.tar.gz"
   cd $ROOT_DIR/bin
   rm -f ./*.tar.gz
