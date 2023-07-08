@@ -12,40 +12,54 @@ jobs:
         # os: [macos-latest, ubuntu-20.04, windows-latest]
         os: [macos-latest, ubuntu-20.04]
         include:
-          - node-version: 16
-          - os: macos-latest
-            target: macos
-            asset_path: ./bin/vim-doge-macos.tar.gz
-          - os: ubuntu-20.04
-            target: linux
-            asset_path: ./bin/vim-doge-linux.tar.gz
-          # - os: windows-latest
-          #   target: win
-          #   asset_path: ./bin/vim-doge-win64.zip
-    runs-on : ${{ matrix.os }}
+
+          # Intel-based
+          - platform: macos-latest
+            target: x86_64-apple-darwin
+            asset_path: vim-doge-helper-macos-x86_64.tar.gz
+
+          # Apple Silicon
+          - platform: macos-latest
+            target: aarch64-apple-darwin
+            asset_path: vim-doge-helper-macos-aarch64.tar.gz
+
+          # Linux
+          - platform: ubuntu-20.04
+            target: ''
+            asset_path: vim-doge-helper-linux.tar.gz
+
+          # 64-bit
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc
+            asset_path: vim-doge-helper-windows-x86_64.tar.gz
+
+          # 32-bit
+          - platform: windows-latest
+            target: i686-pc-windows-msvc
+            asset_path: vim-doge-helper-windows-i686.tar.gz
+
+    runs-on: ${{ matrix.settings.platform }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
         with:
-          submodules: true
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
-      - name: Build unix binary
-        if: matrix.target != 'win'
-        run: npm run build:binary:unix -- vim-doge-${{ matrix.target }}
-      # - name: Build Windows binary
-      #   if: matrix.target == 'win'
-      #   run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
-      - name: Get project version
-        run: echo "PROJECT_VERSION=$(cat .version)" >> $GITHUB_ENV
+          targets: aarch64-apple-darwin
+
+      - name: Build
+        run: ./scripts/build.sh "${{ matrix.settings.target }}" "${{ matrix.settings.asset_path }}"
+        shell: bash
+
+      - name: Get version
+        run: echo "PROJECT_VERSION=$(cat helper/Cargo.toml | grep version | head -n 1 | sed -E 's/version = \"([0-9]+.[0-9]+.[0-9]+)\"/\1/')" > $GITHUB_ENV
+
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
           tag_name: ${{ env.PROJECT_VERSION }}
-          files: ${{ matrix.asset_path }}
+          files: ${{ matrix.settings.asset_path }}
           draft: false
           prerelease: false
