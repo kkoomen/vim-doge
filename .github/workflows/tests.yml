@@ -49,51 +49,50 @@ jobs:
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
-  # tests_neovim:
-  #   name: NeoVim
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       vim-version: [v0.3.2, head]
-  #       include:
-  #         - node-version: 16
-  #         - os: macos-latest
-  #           target: macos
-  #         - os: ubuntu-20.04
-  #           target: linux
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout kkoomen/vim-doge
-  #       uses: actions/checkout@v2
-  #       with:
-  #         submodules: true
-  #     - name: Checkout junegunn/vader.vim
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: junegunn/vader.vim
-  #         path: vader.vim
-  #     - name: Setup nodejs
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - run: npm ci --no-save --verbose
-  #     - name: Build binary
-  #       run: npm run build:binary:unix
-  #     - name: Setup neovim
-  #       uses: thinca/action-setup-vim@v1
-  #       id: vim
-  #       with:
-  #         vim_version: ${{ matrix.vim-version }}
-  #         vim_type: neovim
-  #     - name: Run tests
-  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-  #       shell: bash
+  tests_neovim:
+    name: NeoVim
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+        vim-version: [v0.3.2, head]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+        with:
+          submodules: true
 
-  # vint:
-  #   name: Linter
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-python@v1
-  #     - run: pip install vim-vint
-  #     - run: vint -s ./autoload ./plugin
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: thinca/action-setup-vim@v1
+        id: vim
+        with:
+          vim_version: ${{ matrix.vim-version }}
+          vim_type: neovim
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
+
+  vint:
+    name: Linter
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+      - run: pip install vim-vint
+      - run: vint -s ./autoload ./plugin
