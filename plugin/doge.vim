@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let g:doge_prefix = "[vim-doge]"
+let g:doge_prefix = '[vim-doge]'
 
 let s:unsupported_msg = g:doge_prefix . ' Unsupported version. %s is required.'
 
