@@ -18,26 +18,34 @@ jobs:
         vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
-      - run: sudo apt-get install -y gcc-multilib
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Setup Rust
+        uses: ATiltedTree/setup-rust@v1
+        with:
+          rust-version: stable
+
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
           submodules: true
+
       - name: Checkout junegunn/vader.vim
         uses: actions/checkout@v2
         with:
           repository: junegunn/vader.vim
           path: vader.vim
-      - run: rustup update stable && rustup default stable
-      - uses: Swatinem/rust-cache@v2
+
       - run: ./scripts/build.sh
         shell: bash
+
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
           vim_type: vim
+
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
