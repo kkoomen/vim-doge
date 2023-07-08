@@ -94,7 +94,7 @@ impl<'a> TypescriptParser<'a> {
                 "type_identifier" => {
                     tokens.insert("name".to_string(), Value::String(self.get_node_text(&node)));
                 },
-                "type_params" => {
+                "type_parameters" => {
                     let tparams = self.parse_func_tparams(&child_node);
                     if !tparams.is_empty() {
                         tokens.insert("tparams".to_string(), Value::Array(tparams));
@@ -249,7 +249,7 @@ impl<'a> TypescriptParser<'a> {
                         .and_then(|node| Some(self.get_node_text(&node)))
                         .unwrap();
 
-                    if return_type != "void" {
+                    if !["void".to_string(), "undefined".to_string()].contains(&return_type) {
                         tokens.insert("return_type".to_string(), Value::String(return_type));
                     }
                 }
@@ -411,7 +411,13 @@ impl<'a> TypescriptParser<'a> {
                         "type_annotation" => {
                             let param_type = node
                                 .children(&mut node.walk())
-                                .filter(|node| ![":", "object_type"].contains(&node.kind()))
+                                .filter(|node|
+                                    ![
+                                        ":",
+                                        "object_type",
+                                        "intersection_type"
+                                    ].contains(&node.kind())
+                                )
                                 .next()
                                 .and_then(|node| Some(self.get_node_text(&node)));
 
