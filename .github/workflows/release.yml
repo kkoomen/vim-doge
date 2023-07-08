@@ -49,10 +49,4 @@ jobs:
         run: echo "version=$(cat helper/Cargo.toml | grep version | head -n 1 | sed -E 's/version = \"([0-9]+.[0-9]+.[0-9]+)\"/\1/')" >> "$GITHUB_OUTPUT"
 
       - name: Upload release asset
-        uses: softprops/action-gh-release@v1
-        with:
-          generate_release_notes: true
-          tag_name: ${{ steps.tag_name.outputs.version }}
-          files: ./bin/${{ matrix.settings.asset_path }}.tar.gz
-          draft: false
-          prerelease: true
+        run: gh release upload ${{ steps.tag_name.outputs.version }} ./bin/${{ matrix.settings.asset_path }}.tar.gz --clobber
