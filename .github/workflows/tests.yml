@@ -12,6 +12,7 @@ jobs:
   tests_vim:
     name: Vim
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         vim-version: [v7.4.2119, head]
@@ -50,6 +51,7 @@ jobs:
   tests_neovim:
     name: NeoVim
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         vim-version: [v0.3.2, head]
