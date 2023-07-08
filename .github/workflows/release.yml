@@ -26,7 +26,6 @@ jobs:
 
           # Linux
           - platform: ubuntu-20.04
-            target: ''
             asset_path: vim-doge-helper-linux.tar.gz
 
           # 64-bit
