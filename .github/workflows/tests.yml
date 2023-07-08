@@ -36,7 +36,7 @@ jobs:
           repository: junegunn/vader.vim
           path: vader.vim
 
-      - run: ./scripts/build.sh
+      - run: ./scripts/build.sh x86_64-unknown-linux-gnu
         shell: bash
 
       - name: Setup vim

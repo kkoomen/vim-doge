@@ -6,7 +6,8 @@ set -e
 set -u
 
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-OUTFILE="${1:-}"
+BUILD_TARGET="${1:-}"
+OUTFILE="${2:-}"
 
 cd $ROOT_DIR
 [[ ! -d ./bin ]] && mkdir ./bin
@@ -14,7 +15,12 @@ cd $ROOT_DIR
 
 # Build the binary.
 cd $ROOT_DIR/helper
-cargo build --release
+if [[ "$BUILD_TARGET" != "" ]]; then
+  cargo build --release --target "$BUILD_TARGET"
+else
+  cargo build --release
+fi
+
 cp target/release/vim-doge-helper $ROOT_DIR/bin/
 cd $ROOT_DIR
 
