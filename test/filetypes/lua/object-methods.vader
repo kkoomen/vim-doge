@@ -1,58 +1,58 @@
-# ==============================================================================
-# Methods declared with a ':'.
-# ==============================================================================
-Given lua (method declared with a ':' with parameters):
-  function a.b:c (p1, p2)
-  end
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (generated comment with @param tags):
-  -- [TODO:summary]
-  -- [TODO:description]
-  -- @param p1 [TODO:description]
-  -- @param p2 [TODO:description]
-  function a.b:c (p1, p2)
-  end
-
-# ==============================================================================
-# Methods declared with a '.'.
-# ==============================================================================
-Given lua (method declared with a '.' with parameters):
-  a.b.c = function (self, p1, p2)
-  end
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (generated comment with @param tags):
-  -- [TODO:summary]
-  -- [TODO:description]
-  -- @param p1 [TODO:description]
-  -- @param p2 [TODO:description]
-  a.b.c = function (self, p1, p2)
-  end
-
-# ==============================================================================
-# Method calls that should not generate anything.
-# ==============================================================================
-Given lua (method with parameters called with ':' syntax):
-  myobj:foo(n)
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (no changes):
-  myobj:foo(n)
-
-# ------------------------------------------------------------------------------
-
-Given lua (method with parameters called with '.' syntax):
-  myobj.foo(myobj, n)
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (generated comment with @param tags):
-  myobj.foo(myobj, n)
+" # ==============================================================================
+" # Methods declared with a ':'.
+" # ==============================================================================
+" Given lua (method declared with a ':' with parameters):
+"   function a.b:c (p1, p2)
+"   end
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (generated comment with @param tags):
+"   -- [TODO:summary]
+"   -- [TODO:description]
+"   -- @param p1 [TODO:description]
+"   -- @param p2 [TODO:description]
+"   function a.b:c (p1, p2)
+"   end
+"
+" # ==============================================================================
+" # Methods declared with a '.'.
+" # ==============================================================================
+" Given lua (method declared with a '.' with parameters):
+"   a.b.c = function (self, p1, p2)
+"   end
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (generated comment with @param tags):
+"   -- [TODO:summary]
+"   -- [TODO:description]
+"   -- @param p1 [TODO:description]
+"   -- @param p2 [TODO:description]
+"   a.b.c = function (self, p1, p2)
+"   end
+"
+" # ==============================================================================
+" # Method calls that should not generate anything.
+" # ==============================================================================
+" Given lua (method with parameters called with ':' syntax):
+"   myobj:foo(n)
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (no changes):
+"   myobj:foo(n)
+"
+" # ------------------------------------------------------------------------------
+"
+" Given lua (method with parameters called with '.' syntax):
+"   myobj.foo(myobj, n)
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (generated comment with @param tags):
+"   myobj.foo(myobj, n)
