@@ -47,7 +47,7 @@ jobs:
 
       - name: Set output
         id: vars
-        run: echo ::set-output name=app_version::${GITHUB_REF#refs/*/}
+        run: echo ::set-output name=app_version::${GITHUB_REF#refs/heads/release/}
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
