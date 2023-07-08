@@ -5,9 +5,6 @@
 set -e
 set -u
 
-echo "System info:"
-uname -a
-
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 OUTFILE="${1:-}"
 
@@ -16,7 +13,10 @@ cd $ROOT_DIR
 [[ -e ./bin/vim-doge ]] && rm -f ./bin/vim-doge
 
 # Build the binary.
-npx caxa --input "$ROOT_DIR/build" --output "./bin/vim-doge" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js"
+cd $ROOT_DIR/helper
+cargo build --release
+cp target/release/vim-doge-helper $ROOT_DIR/bin/
+cd $ROOT_DIR
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then
@@ -24,7 +24,7 @@ if [[ "$OUTFILE" != "" ]]; then
   cd $ROOT_DIR/bin
   rm -f ./*.tar.gz
   echo "==> Archiving $ROOT_DIR/bin/vim-doge -> $ROOT_DIR/bin/$OUTFILE"
-  tar -czf "$OUTFILE" vim-doge
+  tar -czf "$OUTFILE" vim-doge-helper
 fi
 
-echo "🎉  Done building vim-doge binaries"
+echo "🎉  Done building vim-doge-helper"

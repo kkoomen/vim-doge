@@ -14,8 +14,8 @@ else
   exit 127
 fi
 
-if [ -e ./bin/vim-doge ]; then
-  rm -f ./bin/vim-doge
+if [ -e ./bin/vim-doge-helper ]; then
+  rm -f ./bin/vim-doge-helper
 fi
 
 
@@ -24,14 +24,14 @@ cd "$ROOT_DIR"
 [ ! -d ./bin ] && mkdir ./bin
 
 OS="$(uname)"
-OUTFILE="$ROOT_DIR/bin/vim-doge"
-PKG_VERSION=$(cat "$ROOT_DIR/.version")
-RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$PKG_VERSION"
+OUTFILE="$ROOT_DIR/bin/vim-doge-helper"
+APP_VERSION=$(cat helper/Cargo.toml | grep version | head -n 1 | sed -E 's/version = "([0-9]+.[0-9]+.[0-9]+)"/\1/')
+RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$APP_VERSION"
 
 if [ $OS = 'Darwin' ]; then
-  TARGET="vim-doge-macos"
+  TARGET="vim-doge-helper-macos"
 elif [ $OS = 'Linux' ]; then
-  TARGET="vim-doge-linux"
+  TARGET="vim-doge-helper-linux"
 else
   echo "vim-doge does not support your system"
   exit 1
@@ -44,6 +44,6 @@ curl -L --progress-bar \
     --fail \
     --output "$FILENAME" \
     "$DOWNLOAD_URL"
-tar xzf "$FILENAME" && mv "vim-doge" "$OUTFILE"
+tar xzf "$FILENAME" && mv "vim-doge-helper" "$OUTFILE"
 rm -f "$FILENAME"
 chmod +x "$OUTFILE"

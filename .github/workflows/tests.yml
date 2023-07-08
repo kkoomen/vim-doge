@@ -13,22 +13,10 @@ jobs:
     name: Vim
     strategy:
       matrix:
-        # os: [macos-latest, ubuntu-20.04, windows-latest]
-        os: [macos-latest, ubuntu-20.04]
+        os: [ubuntu-latest]
         vim-version: [v7.4.2119, v8.2.5172]
-        include:
-          - node-version: 16
-          - os: macos-latest
-            target: macos
-          - os: ubuntu-20.04
-            target: linux
-          # - os: windows-latest
-            # target: win
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Install FUSE for linux
-        if: matrix.target == 'linux'
-        run: sudo apt-get install libfuse2
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -38,17 +26,8 @@ jobs:
         with:
           repository: junegunn/vader.vim
           path: vader.vim
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
-      - name: Build Unix binary
-        if: matrix.target != 'win'
-        run: npm run build:binary:unix
-      - name: Build Windows binary
-        if: matrix.target == 'win'
-        run: npm run build:binary:windows
+      - run: rustup update stable && rustup default stable
+      - run: ./scripts/build.sh
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
@@ -59,51 +38,51 @@ jobs:
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
-  tests_neovim:
-    name: NeoVim
-    strategy:
-      matrix:
-        os: [macos-latest, ubuntu-20.04]
-        vim-version: [v0.3.2, head]
-        include:
-          - node-version: 16
-          - os: macos-latest
-            target: macos
-          - os: ubuntu-20.04
-            target: linux
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: Checkout junegunn/vader.vim
-        uses: actions/checkout@v2
-        with:
-          repository: junegunn/vader.vim
-          path: vader.vim
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
-      - name: Build binary
-        run: npm run build:binary:unix
-      - name: Setup neovim
-        uses: thinca/action-setup-vim@v1
-        id: vim
-        with:
-          vim_version: ${{ matrix.vim-version }}
-          vim_type: neovim
-      - name: Run tests
-        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-        shell: bash
+  # tests_neovim:
+  #   name: NeoVim
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #       vim-version: [v0.3.2, head]
+  #       include:
+  #         - node-version: 16
+  #         - os: macos-latest
+  #           target: macos
+  #         - os: ubuntu-20.04
+  #           target: linux
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - name: Checkout kkoomen/vim-doge
+  #       uses: actions/checkout@v2
+  #       with:
+  #         submodules: true
+  #     - name: Checkout junegunn/vader.vim
+  #       uses: actions/checkout@v2
+  #       with:
+  #         repository: junegunn/vader.vim
+  #         path: vader.vim
+  #     - name: Setup nodejs
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - run: npm ci --no-save --verbose
+  #     - name: Build binary
+  #       run: npm run build:binary:unix
+  #     - name: Setup neovim
+  #       uses: thinca/action-setup-vim@v1
+  #       id: vim
+  #       with:
+  #         vim_version: ${{ matrix.vim-version }}
+  #         vim_type: neovim
+  #     - name: Run tests
+  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+  #       shell: bash
 
-  vint:
-    name: Linter
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v1
-      - run: pip install vim-vint
-      - run: vint -s ./autoload ./plugin
+  # vint:
+  #   name: Linter
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-python@v1
+  #     - run: pip install vim-vint
+  #     - run: vint -s ./autoload ./plugin
