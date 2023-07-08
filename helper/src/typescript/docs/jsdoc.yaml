@@ -37,12 +37,12 @@ templates:
       {% endif %}
       {% if params %}
         {% for param in params %}
-       * @param {% if show_types %}{{ "{" }}{{ param.type | default(value="[TODO:type]" )}}{{ "}" }}{% endif %} {% if param.default_value %}[{% endif %}{{ param.name | default(value="[TODO:name]") }}{% if param.default_value %}]{% endif %} - [TODO:description]
+       * @param {% if show_types or not param.type %}{{ "{" }}{{ param.type | default(value="[TODO:type]" )}}{{ "}" }}{% endif %} {% if param.optional %}[{% endif %}{{ param.name | default(value="[TODO:name]") }}{% if param.optional %}]{% endif %} - [TODO:description]
         {% endfor %}
       {% endif %}
       {% if exceptions %}
         {% for exception in exceptions %}
-       * @throws {{ exception.name | default(value="[TODO:name]") }} - [TODO:description]
+       * @throws {{ "{" }}{{ exception.name | default(value="[TODO:name]") }}{{ "}" }} - [TODO:description]
         {% endfor %}
       {% endif %}
       {% if return_type %}
@@ -79,15 +79,15 @@ templates:
       {% endif %}
       {% if params %}
         {% for param in params %}
-       * @param {% if show_types %}{{ "{" }}{{ param.type | default(value="[TODO:type]" )}}{{ "}" }}{% endif %} {% if param.optional %}[{% endif %}{{ param.name | default(value="[TODO:name]") }}{% if param.optional %}]{% endif %} - [TODO:description]
+       * @param {% if show_types or not param.type %}{{ "{" }}{{ param.type | default(value="[TODO:type]" )}}{{ "}" }}{% endif %} {% if param.optional %}[{% endif %}{{ param.name | default(value="[TODO:name]") }}{% if param.optional %}]{% endif %} - [TODO:description]
         {% endfor %}
       {% endif %}
       {% if exceptions %}
         {% for exception in exceptions %}
-       * @throws {{ exception.name | default(value="[TODO:name]") }} - [TODO:description]
+       * @throws {{ "{" }}{{ exception.name | default(value="[TODO:name]") }}{{ "}" }} - [TODO:description]
         {% endfor %}
       {% endif %}
-      {% if return_type %}
-       * @returns {% if show_return_type %}{{ "{" }}{{ return_type | default(value="[TODO:type]") }}{{ "}" }}{% endif %} [TODO:description]
+      {% if return_type or has_non_void_return_value %}
+       * @returns {% if show_types %}{{ "{" }}{{ return_type | default(value="[TODO:type]") }}{{ "}" }}{% endif %} [TODO:description]
       {% endif %}
        */

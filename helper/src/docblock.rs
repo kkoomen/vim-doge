@@ -30,7 +30,7 @@ fn replace_indent_placeholders(docblock: &str, use_tabs: bool, indent: usize) ->
 
 fn postprocess_template(parser_name: &str, template: String, options: &HashMap<&str, bool>) -> String {
     if parser_name == "python" {
-        if *options.get("single_quotes").unwrap() {
+        if options["single_quotes"] {
             return template.replace("\"\"\"", "'''");
         }
     }
@@ -47,18 +47,51 @@ fn postprocess_tokens(
 
     match parser_name {
         "c" | "cpp" => {
-            if *options.get("use_slash_char").unwrap() {
+            if options["use_slash_char"] {
                 new_tokens.insert("char".to_string(), Value::String("\\".to_string()));
             } else {
                 new_tokens.insert("char".to_string(), Value::String("@".to_string()));
             }
-        }
-        "python" | "typescript" => {
+        },
+        "python" => {
             new_tokens.insert(
                 "show_types".to_string(),
                 Value::Bool(!options["omit_redundant_param_types"]),
             );
-        }
+        },
+        "typescript" => {
+            new_tokens.insert(
+                "show_types".to_string(),
+                Value::Bool(!options["omit_redundant_param_types"]),
+            );
+
+            // Return values might have parenthesis, like `(Foo | Bar)`,
+            // but jsdoc simply wants `Foo | Bar`, so let's remove them.
+            let return_type = new_tokens.get("return_type");
+            let is_async = new_tokens.get("async");
+            if return_type.is_some() {
+                let mut return_value = return_type.unwrap().as_str().unwrap().to_string();
+                if return_value.starts_with("(") && return_value.ends_with(")") {
+                    return_value.remove(0);
+                    return_value.remove(return_value.len() - 1);
+                    return_value = return_value.trim().to_string();
+                }
+
+                // If we're dealing with an async function, then the return type
+                // with value T, should be wrapped inside a Promise<T>.
+                if is_async.is_some() {
+                    if !return_value.starts_with("Promise") {
+                        return_value = format!("Promise<{}>", return_value);
+                    }
+                }
+
+                new_tokens.insert("return_type".to_string(), Value::String(return_value));
+            } else if is_async.is_some() {
+                // If there is no return type, but the function is marked with
+                // async, the return type should be Promise<[TODO:type]>.
+                new_tokens.insert("return_type".to_string(), Value::String("Promise<[TODO:type]>".to_string()));
+            }
+        },
         _ => {}
     }
 
@@ -102,7 +135,7 @@ pub fn generate(
             "python" => Box::new(PythonParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "c" => Box::new(CParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "cpp" => Box::new(CppParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
-            "typescript" => Box::new(TypescriptParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
+            "typescript" => Box::new(TypescriptParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
             _ => panic!("Unsupported parser: {}", &parser_name),
         };
 

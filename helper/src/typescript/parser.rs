@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use tree_sitter::{Parser, Node};
 use serde_json::{Map, Value};
 
@@ -9,6 +11,7 @@ pub struct TypescriptParser<'a> {
     tree: tree_sitter::Tree,
     line: &'a usize,
     node_types: &'a [&'a str],
+    options: &'a HashMap<&'a str, bool>,
 }
 
 impl<'a> BaseParser for TypescriptParser<'a> {
@@ -29,11 +32,11 @@ impl<'a> BaseParser for TypescriptParser<'a> {
                 let mut temp_node = node;
                 loop {
                     if let Some(sibling_node) = temp_node.prev_sibling() {
-                        if sibling_node.kind() != "decorator" {
+                        if sibling_node.kind() != "decorator" && sibling_node.start_position().row + 1 < new_line {
                             break;
                         }
 
-                        new_line -= 1;
+                        new_line = sibling_node.start_position().row + 1;
                         temp_node = sibling_node;
                     } else {
                       break;
@@ -49,13 +52,14 @@ impl<'a> BaseParser for TypescriptParser<'a> {
 }
 
 impl<'a> TypescriptParser<'a> {
-    pub fn new(code: &'a str, line: &'a usize, node_types: &'a [&'a str]) -> Self {
+    pub fn new(code: &'a str, line: &'a usize, node_types: &'a [&'a str], options: &'a HashMap<&'a str, bool>) -> Self {
         let mut parser = Parser::new();
         parser.set_language(tree_sitter_typescript::language_tsx()).unwrap();
 
         let tree = parser.parse(code, None).unwrap();
+        // println!("{}", tree.root_node().to_sexp());
 
-        Self { code, tree, line, node_types }
+        Self { code, tree, line, options, node_types }
     }
 
     fn parse_node(&self, node: &Node) -> Option<Result<Map<String, Value>, String>> {
@@ -170,6 +174,39 @@ impl<'a> TypescriptParser<'a> {
         Ok(tokens)
     }
 
+    // Find any return statement and check if it contains a specific return
+    // value. Return statements can also return nothing (void), therefore we
+    // check for a specific value.
+    fn has_non_void_return_value(&self, node: &Node) -> bool {
+        for child_node in traverse::PreOrder::new(node.walk()) {
+            if child_node.kind() == "return_statement" {
+                let children: Vec<Node> = child_node.children(&mut child_node.walk()).into_iter().collect();
+
+                // Return early if it doesn't contain sufficient children,
+                // meaing that it is a `return;` expression.
+                if children.iter().filter(|node| node.kind() != ";").count() < 2 {
+                    continue;
+                }
+
+                let empty_values = ["void".to_string(), "undefined".to_string()];
+
+                let return_type_node = children.iter().nth(1).unwrap();
+
+                let mut return_value = self.get_node_text(&return_type_node);
+
+                // Check for `void 0` or `void(0)` structure
+                if let Some(return_value_node) = return_type_node.children(&mut return_type_node.walk()).next() {
+                    return_value= self.get_node_text(&return_value_node);
+                }
+
+                // Check for `undefined` or `null` structure.
+                return !empty_values.contains(&return_value);
+            }
+        }
+
+        false
+    }
+
     fn parse_function(&self, node: &Node) -> Result<Map<String, Value>, String> {
         let mut is_single_param_arrow_func = false;
         let mut tokens = Map::new();
@@ -178,7 +215,6 @@ impl<'a> TypescriptParser<'a> {
             tokens.insert("generator".to_string(), Value::Bool(true));
         }
 
-        // handle scenario: const foo = (bar) => bar;
         if let Some(arrow_func_tokens) = self.parse_single_param_arrow_func(&node) {
             tokens.extend(arrow_func_tokens);
             is_single_param_arrow_func = true;
@@ -203,7 +239,7 @@ impl<'a> TypescriptParser<'a> {
                         tokens.insert("exceptions".to_string(), Value::Array(exceptions));
                     }
 
-                    // tokens.insert("has_return_statement_value".to_string(), self.has_return_statement_value(&child_node));
+                    tokens.insert("has_non_void_return_value".to_string(), Value::Bool(self.has_non_void_return_value(&child_node)));
                 }
                 "type_annotation" => {
                     let return_type = child_node
@@ -324,7 +360,6 @@ impl<'a> TypescriptParser<'a> {
                                 .and_then(|node| Some(self.get_node_text(&node)))
                                 .unwrap();
                             subparam.insert("default_value".to_string(), Value::String(subparam_default_value));
-
                             subparam.insert("optional".to_string(), Value::Bool(true));
                         } else {
                             subparam.insert("type".to_string(), Value::String(self.get_node_text(&param_type_child)));
@@ -386,7 +421,9 @@ impl<'a> TypescriptParser<'a> {
                         },
                         "object_pattern" => {
                             // Check for destructuring patterns.
-                            subparams.extend(self.parse_func_destruct_params(&node));
+                            if self.options["destructuring_props"] {
+                                subparams.extend(self.parse_func_destruct_params(&node));
+                            }
                         },
                         _ => {},
                     }
@@ -441,30 +478,34 @@ impl<'a> TypescriptParser<'a> {
         tparams
     }
 
+    // handle scenario: const foo = (bar) => bar;
     fn parse_single_param_arrow_func(&self, node: &Node) -> Option<Map<String, Value>> {
         let parent_node = node.parent().unwrap();
         if ["arrow_function", "function"].contains(&node.kind()) && parent_node.kind() == "variable_declarator" {
-            let mut tokens = Map::new();
 
-            let func_name = parent_node.children(&mut parent_node.walk()).next().unwrap();
-            tokens.insert("name".to_string(), Value::String(self.get_node_text(&func_name)));
-
-            // handle scenario: const foo = bar => bar;
+            // When it goes inside this if-statement, we know we're dealing with
+            // the following expression: `const foo = bar => bar;`
             if node.children(&mut node.walk()).next().unwrap().kind() == "identifier" {
+                let mut tokens = Map::new();
+
                 let param_name = node
                     .children(&mut node.walk())
                     .next()
                     .and_then(|node| Some(self.get_node_text(&node)))
                     .unwrap();
 
+                let func_name = parent_node.children(&mut parent_node.walk()).next().unwrap();
+                tokens.insert("name".to_string(), Value::String(self.get_node_text(&func_name)));
+
                 let mut params = Vec::new();
                 let mut param = Map::new();
                 param.insert("name".to_string(), Value::String(param_name));
                 params.push(Value::Object(param));
                 tokens.insert("params".to_string(), Value::Array(params));
+
+                return Some(tokens);
             }
 
-            return Some(tokens);
         }
 
         None

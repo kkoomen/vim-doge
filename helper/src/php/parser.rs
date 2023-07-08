@@ -10,8 +10,8 @@ pub struct PhpParser<'a> {
     code: &'a str,
     tree: tree_sitter::Tree,
     line: &'a usize,
-    options: &'a HashMap<&'a str, bool>,
     node_types: &'a [&'a str],
+    options: &'a HashMap<&'a str, bool>,
 }
 
 impl<'a> BaseParser for PhpParser<'a> {
@@ -150,7 +150,7 @@ impl<'a> PhpParser<'a> {
     fn resolve_fqn(&self, property_type: &str) -> String {
         let mut fqn = property_type.to_string();
 
-        if *self.options.get("resolve_fqn").unwrap() {
+        if self.options["resolve_fqn"] {
             self.tree.root_node()
                 .children(&mut self.tree.root_node().walk())
                 .filter(|node| node.kind() == "namespace_use_declaration")
