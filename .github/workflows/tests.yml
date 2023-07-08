@@ -27,7 +27,10 @@ jobs:
         with:
           repository: junegunn/vader.vim
           path: vader.vim
+      - run: rustup toolchain install stable --profile minimal
+      - uses: Swatinem/rust-cache@v2
       - run: ./scripts/build.sh
+        shell: bash
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
