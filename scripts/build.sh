@@ -11,26 +11,25 @@ OUTFILE="${2:-}"
 
 cd $ROOT_DIR
 [[ ! -d ./bin ]] && mkdir ./bin
-[[ -e ./bin/vim-doge ]] && rm -f ./bin/vim-doge
+[[ -e ./bin/vim-doge-helper ]] && rm -f ./bin/vim-doge-helper
 
 # Build the binary.
 cd $ROOT_DIR/helper
 if [[ "$BUILD_TARGET" != "" ]]; then
   cargo build --release --target "$BUILD_TARGET"
+  cp target/$BUILD_TARGET/release/vim-doge-helper ../bin/
 else
   cargo build --release
+  cp target/release/vim-doge-helper ../bin/
 fi
-
-cd $ROOT_DIR
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then
-  cp helper/target/release/vim-doge-helper $ROOT_DIR/bin/
-
   OUTFILE="$OUTFILE.tar.gz"
+
   cd $ROOT_DIR/bin
   rm -f ./*.tar.gz
-  echo "==> Archiving $ROOT_DIR/bin/vim-doge -> $ROOT_DIR/bin/$OUTFILE"
+  echo "==> Archiving $ROOT_DIR/bin/vim-doge-helper -> $ROOT_DIR/bin/$OUTFILE"
   tar -czf "$OUTFILE" vim-doge-helper
 fi
 

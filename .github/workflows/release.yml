@@ -13,22 +13,22 @@ jobs:
         settings:
           - platform: macos-latest
             target: x86_64-apple-darwin                       # Intel-based
-            asset_path: vim-doge-helper-macos-x86_64.tar.gz
+            asset_path: vim-doge-helper-macos-x86_64
 
           - platform: macos-latest
             target: aarch64-apple-darwin                      # Apple Silicon
-            asset_path: vim-doge-helper-macos-aarch64.tar.gz
+            asset_path: vim-doge-helper-macos-aarch64
 
           - platform: ubuntu-20.04                            # Linux
-            asset_path: vim-doge-helper-linux.tar.gz
+            asset_path: vim-doge-helper-linux
 
           - platform: windows-latest
             target: x86_64-pc-windows-msvc                    # 64-bit
-            asset_path: vim-doge-helper-windows-x86_64.tar.gz
+            asset_path: vim-doge-helper-windows-x86_64
 
           - platform: windows-latest                          # 32-bit
             target: i686-pc-windows-msvc
-            asset_path: vim-doge-helper-windows-i686.tar.gz
+            asset_path: vim-doge-helper-windows-i686
 
     runs-on: ${{ matrix.settings.platform }}
     steps:
@@ -52,6 +52,6 @@ jobs:
         with:
           generate_release_notes: true
           tag_name: ${{ env.PROJECT_VERSION }}
-          files: ${{ matrix.settings.asset_path }}
+          files: ./bin/${{ matrix.settings.asset_path }}.tar.gz
           draft: false
-          prerelease: false
+          prerelease: true
