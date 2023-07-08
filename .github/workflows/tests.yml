@@ -27,7 +27,7 @@ jobs:
         with:
           repository: junegunn/vader.vim
           path: vader.vim
-      - run: rustup toolchain install stable --profile minimal
+      - run: rustup update stable && rustup default stable
       - uses: Swatinem/rust-cache@v2
       - run: ./scripts/build.sh
         shell: bash
