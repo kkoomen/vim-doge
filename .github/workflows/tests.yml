@@ -18,13 +18,6 @@ jobs:
         vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: Swatinem/rust-cache@v2
-
-      - name: Setup Rust
-        uses: ATiltedTree/setup-rust@v1
-        with:
-          rust-version: stable
-
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -36,7 +29,7 @@ jobs:
           repository: junegunn/vader.vim
           path: vader.vim
 
-      - run: ./scripts/build.sh x86_64-unknown-linux-gnu
+      - run: ./scripts/build.sh
         shell: bash
 
       - name: Setup vim

@@ -3,9 +3,10 @@ use std::collections::HashMap;
 use serde_json::{Map, Value, json};
 
 use crate::config::load_doc_config_str;
-
+use crate::tokens::replace_tokens;
 use crate::base_parser::BaseParser;
-use crate::bash::parser::BashParser;
+
+// use crate::bash::parser::BashParser;
 use crate::c::parser::CParser;
 use crate::cpp::parser::CppParser;
 use crate::csharp::parser::CSharpParser;
@@ -15,8 +16,8 @@ use crate::php::parser::PhpParser;
 use crate::python::parser::PythonParser;
 use crate::ruby::parser::RubyParser;
 use crate::rust::parser::RustParser;
-use crate::tokens::replace_tokens;
 use crate::typescript::parser::TypescriptParser;
+
 
 fn replace_indent_placeholders(docblock: &str, use_tabs: bool, indent: usize) -> String {
     let indent_str: String;
@@ -126,7 +127,7 @@ pub fn generate(
 
         let parser: Box<dyn BaseParser> = match parser_name {
             "php" => Box::new(PhpParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
-            "bash" => Box::new(BashParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
+            // "bash" => Box::new(BashParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "lua" => Box::new(LuaParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "ruby" => Box::new(RubyParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "rust" => Box::new(RustParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
