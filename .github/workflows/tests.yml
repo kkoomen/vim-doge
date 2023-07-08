@@ -14,7 +14,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        vim-version: [v7.4.2119, v8.2.5172]
+        # vim-version: [v7.4.2119, v8.2.5172]
+        vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -26,7 +27,6 @@ jobs:
         with:
           repository: junegunn/vader.vim
           path: vader.vim
-      - run: rustup update stable && rustup default stable
       - run: ./scripts/build.sh
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
