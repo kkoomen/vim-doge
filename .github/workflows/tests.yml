@@ -13,11 +13,12 @@ jobs:
     name: Vim
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-20.04]
         # vim-version: [v7.4.2119, v8.2.5172]
         vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
+      - run: apt-get install -y gcc-multilib
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
