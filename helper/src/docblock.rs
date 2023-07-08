@@ -6,7 +6,7 @@ use crate::config::load_doc_config_str;
 use crate::tokens::replace_tokens;
 use crate::base_parser::BaseParser;
 
-// use crate::bash::parser::BashParser;
+use crate::bash::parser::BashParser;
 use crate::c::parser::CParser;
 use crate::cpp::parser::CppParser;
 use crate::csharp::parser::CSharpParser;
@@ -127,7 +127,7 @@ pub fn generate(
 
         let parser: Box<dyn BaseParser> = match parser_name {
             "php" => Box::new(PhpParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
-            // "bash" => Box::new(BashParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
+            "bash" => Box::new(BashParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "lua" => Box::new(LuaParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "ruby" => Box::new(RubyParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "rust" => Box::new(RustParser::new(code, line, &node_types)) as Box<dyn BaseParser>,

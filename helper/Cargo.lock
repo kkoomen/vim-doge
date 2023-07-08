@@ -657,7 +657,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-php"
 version = "0.19.1"
-source = "git+https://github.com/tree-sitter/tree-sitter-php#d38adb26304d9b9d38e9a3b4aae0ec4b29bf9462"
+source = "git+https://github.com/amaanq/tree-sitter-php?branch=fix-conflicts#145d04fced5d45be133e8a38aedf2830585053ba"
 dependencies = [
  "cc",
  "tree-sitter",

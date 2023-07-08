@@ -1,26 +1,68 @@
-" # ==============================================================================
-" # Regular functions.
-" # ==============================================================================
-" Given sh (regular functions):
-"   function test {
-"     echo "foobar"
-"   }
-"
-" Do (trigger doge):
-"   \<C-d>
-"
-" Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 'Returns' keywords):
-"   ################################################################################
-"   # [TODO:description]
-"   # Globals:
-"   #   [TODO:variable name]
-"   # Arguments:
-"   #   $1: [TODO:description for each parameter]
-"   # Outputs:
-"   #   [TODO:description for each output variable]
-"   # Returns:
-"   #   [TODO:description]
-"   ################################################################################
-"   function test {
-"     echo "foobar"
-"   }
+# ==============================================================================
+# Regular functions.
+# ==============================================================================
+Given sh (regular functions):
+  function foo {
+    echo "foo"
+  }
+
+  function bar() {
+    echo "bar"
+  }
+
+  baz() {
+    echo "baz"
+  }
+
+Do (trigger doge):
+  \<C-d>
+  :16\<CR>
+  \<C-d>
+  :31\<CR>
+  \<C-d>
+
+Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 'Returns' keywords):
+  ################################################################################
+  # [TODO:description]
+  # Globals:
+  #   [TODO:variable name]
+  # Arguments:
+  #   $1: [TODO:description for each parameter]
+  # Outputs:
+  #   [TODO:description for each output variable]
+  # Returns:
+  #   [TODO:description]
+  ################################################################################
+  function foo {
+    echo "foo"
+  }
+
+  ################################################################################
+  # [TODO:description]
+  # Globals:
+  #   [TODO:variable name]
+  # Arguments:
+  #   $1: [TODO:description for each parameter]
+  # Outputs:
+  #   [TODO:description for each output variable]
+  # Returns:
+  #   [TODO:description]
+  ################################################################################
+  function bar() {
+    echo "bar"
+  }
+
+  ################################################################################
+  # [TODO:description]
+  # Globals:
+  #   [TODO:variable name]
+  # Arguments:
+  #   $1: [TODO:description for each parameter]
+  # Outputs:
+  #   [TODO:description for each output variable]
+  # Returns:
+  #   [TODO:description]
+  ################################################################################
+  baz() {
+    echo "baz"
+  }
