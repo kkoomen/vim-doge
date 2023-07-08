@@ -13,15 +13,13 @@ jobs:
     name: Vim
     strategy:
       matrix:
-        os: [ubuntu-20.04]
-        # vim-version: [v7.4.2119, v8.2.5172]
-        vim-version: [v8.2.5172]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        vim-version: [v7.4.2119, head]
+        # vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
-        with:
-          submodules: true
 
       - name: Checkout junegunn/vader.vim
         uses: actions/checkout@v2
@@ -53,14 +51,12 @@ jobs:
     name: NeoVim
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         vim-version: [v0.3.2, head]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
-        with:
-          submodules: true
 
       - name: Checkout junegunn/vader.vim
         uses: actions/checkout@v2
