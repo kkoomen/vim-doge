@@ -15,7 +15,6 @@ serde = { version = "1.0.104", features = ["derive"] }
 serde_json = "1.0.99"
 serde_yaml = "0.9.22"
 tree-sitter = "0.20.10"
-tree-sitter-php = { git = "https://github.com/amaanq/tree-sitter-php", branch = "fix-conflicts" }
 tree-sitter-bash = { git = "https://github.com/tree-sitter/tree-sitter-bash" }
 tree-sitter-lua = { git = "https://github.com/Azganoth/tree-sitter-lua" }
 tree-sitter-ruby = { git = "https://github.com/tree-sitter/tree-sitter-ruby" }
@@ -26,3 +25,8 @@ tree-sitter-python = { git = "https://github.com/tree-sitter/tree-sitter-python"
 tree-sitter-c = { git = "https://github.com/tree-sitter/tree-sitter-c" }
 tree-sitter-cpp = { git = "https://github.com/tree-sitter/tree-sitter-cpp" }
 tree-sitter-typescript = { git = "https://github.com/tree-sitter/tree-sitter-typescript" }
+
+# Waiting for these to be merged:
+#   - https://github.com/tree-sitter/tree-sitter-php/pull/181
+#   - https://github.com/tree-sitter/tree-sitter-bash/pull/182
+tree-sitter-php = { git = "https://github.com/amaanq/tree-sitter-php", branch = "fix-conflicts" }
