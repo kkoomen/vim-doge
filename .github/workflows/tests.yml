@@ -18,12 +18,6 @@ jobs:
         vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Cache Cargo dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.cargo
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
         with:
@@ -34,6 +28,12 @@ jobs:
         with:
           repository: junegunn/vader.vim
           path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - run: ./scripts/build.sh
         shell: bash
