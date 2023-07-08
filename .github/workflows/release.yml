@@ -10,31 +10,23 @@ jobs:
     name: Build and upload binary assets
     strategy:
       matrix:
-        # os: [macos-latest, ubuntu-20.04, windows-latest]
-        os: [macos-latest, ubuntu-20.04]
-        include:
-
-          # Intel-based
+        settings:
           - platform: macos-latest
-            target: x86_64-apple-darwin
+            target: x86_64-apple-darwin                       # Intel-based
             asset_path: vim-doge-helper-macos-x86_64.tar.gz
 
-          # Apple Silicon
           - platform: macos-latest
-            target: aarch64-apple-darwin
+            target: aarch64-apple-darwin                      # Apple Silicon
             asset_path: vim-doge-helper-macos-aarch64.tar.gz
 
-          # Linux
-          - platform: ubuntu-20.04
+          - platform: ubuntu-20.04                            # Linux
             asset_path: vim-doge-helper-linux.tar.gz
 
-          # 64-bit
           - platform: windows-latest
-            target: x86_64-pc-windows-msvc
+            target: x86_64-pc-windows-msvc                    # 64-bit
             asset_path: vim-doge-helper-windows-x86_64.tar.gz
 
-          # 32-bit
-          - platform: windows-latest
+          - platform: windows-latest                          # 32-bit
             target: i686-pc-windows-msvc
             asset_path: vim-doge-helper-windows-i686.tar.gz
 
