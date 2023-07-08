@@ -18,10 +18,11 @@ jobs:
         vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Setup Rust
-        uses: ATiltedTree/setup-rust@v1
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
         with:
-          rust-version: stable
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
