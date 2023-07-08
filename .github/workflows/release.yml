@@ -45,16 +45,16 @@ jobs:
         run: ./scripts/build.sh "${{ matrix.settings.target }}" "${{ matrix.settings.asset_path }}"
         shell: bash
 
-      - name: Set project
-        id: tag_name
-        run: echo "version=$(cat helper/Cargo.toml | grep version | head -n 1 | sed -E 's/version = \"([0-9]+.[0-9]+.[0-9]+)\"/\1/')" >> "$GITHUB_OUTPUT"
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=app_version::${GITHUB_REF#refs/heads/release/}
         shell: bash
 
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
-          tag_name: ${{ steps.tag_name.outputs.version }}
+          tag_name: ${{ steps.vars.outputs.app_version }}
           files: ./bin/${{ matrix.settings.asset_path }}.tar.gz
           draft: false
           prerelease: true
