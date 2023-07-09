@@ -24,8 +24,8 @@ if ($OutFile) {
 
   Set-Location "$RootDir/bin"
   Remove-Item -Path "./*.zip"
-  Write-Output "==> Archiving $RootDir/bin/vim-doge-helper.exe -> $RootDir/bin/$OutFile"
+  Write-Host "[vim-doge] Archiving $RootDir/bin/vim-doge-helper.exe -> $RootDir/bin/$OutFile"
   7z a -tzip "$OutFile" "vim-doge-helper.exe"
 }
 
-Write-Output "🎉  Done building vim-doge-helper"
+Write-Host "[vim-doge] Done building vim-doge-helper"

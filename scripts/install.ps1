@@ -1,4 +1,4 @@
-Write-Output "[vim-doge] Preparing to download vim-doge-helper binary..."
+Write-Host "[vim-doge] Preparing to download vim-doge-helper binary..."
 
 $Arch = $env:PROCESSOR_ARCHITECTURE
 if ($Arch -eq 'x86') {
@@ -33,4 +33,4 @@ Invoke-WebRequest -Uri $DownloadUrl -OutFile ( New-Item -Path "$AssetPath" -Forc
 Expand-Archive -LiteralPath "$AssetPath" -DestinationPath "$RootDir.\bin"
 Remove-Item "$AssetPath"
 
-Write-Output "[vim-doge] Successfully downloaded vim-doge-helper"
+Write-Host "[vim-doge] Successfully downloaded vim-doge-helper"
