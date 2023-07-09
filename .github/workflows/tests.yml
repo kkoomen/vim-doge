@@ -15,10 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        # os: [ubuntu-latest]
-        # vim-version: [v7.4.2119]
-        vim-version: [v7.4.2119, head]
-        # vim-version: [v8.2.5172]
+        vim-version: [v7.4.2119, v8.2.5172, head]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -37,12 +34,12 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Build (unix)
-        if: matrix.os != 'windows-latest'
+        if: runner.os != 'Windows'
         run: ./scripts/build.sh
         shell: bash
 
       - name: Build (windows)
-        if: matrix.os == 'windows-latest'
+        if: runner.os == 'Windows'
         run: ./scripts/build.ps1
 
       - name: Setup vim
