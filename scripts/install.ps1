@@ -12,10 +12,10 @@ else {
 
 
 $RootDir. = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
-$AppVersion = Get-Content "$RootDir.\.AppVersion"
+$AppVersion = Get-Content "$RootDir.\.version"
 
 $AssetPath = "$RootDir.\bin\$AssetName"
-$OutFile = "$RootDir.\bin\vim-doge.exe"
+$OutFile = "$RootDir.\bin\vim-doge-helper.exe"
 
 $DownloadUrl = "https://github.com/kkoomen/vim-doge/releases/download/v$AppVersion/$AssetName"
 
