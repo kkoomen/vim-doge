@@ -14,22 +14,28 @@ else
   exit 127
 fi
 
-if [ -e ./bin/vim-doge-helper ]; then
-  rm -f ./bin/vim-doge-helper
+ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
+OUTFILE="./bin/vim-doge-helper"
+
+cd "$ROOT_DIR"
+
+if [ -e "$OUTFILE" ]; then
+  rm -f "$OUTFILE"
 fi
 
-
-ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-cd "$ROOT_DIR"
 [ ! -d ./bin ] && mkdir ./bin
 
 OS="$(uname)"
-OUTFILE="$ROOT_DIR/bin/vim-doge-helper"
-APP_VERSION=$(cat helper/Cargo.toml | grep version | head -n 1 | sed -E 's/version = "([0-9]+.[0-9]+.[0-9]+)"/\1/')
-RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/$APP_VERSION"
+ARCH="$(uname -m)"
+APP_VERSION=$(cat "$ROOT_DIR/.version")
+RELEASE_URL="https://github.com/kkoomen/vim-doge/releases/download/v$APP_VERSION"
 
 if [ $OS = 'Darwin' ]; then
-  TARGET="vim-doge-helper-macos"
+  if [ $ARCH = 'arm64' ]; then
+    TARGET="vim-doge-helper-macos-aarch64"
+  else
+    TARGET="vim-doge-helper-macos-x86_64"
+  fi
 elif [ $OS = 'Linux' ]; then
   TARGET="vim-doge-helper-linux"
 else
@@ -37,13 +43,13 @@ else
   exit 1
 fi
 
-FILENAME="$TARGET.tar.gz"
-DOWNLOAD_URL="$RELEASE_URL/$FILENAME"
+ARCHIVE_FILENAME="$TARGET.tar.gz"
+DOWNLOAD_URL="$RELEASE_URL/$ARCHIVE_FILENAME"
 echo "Downloading $DOWNLOAD_URL"
 curl -L --progress-bar \
     --fail \
-    --output "$FILENAME" \
+    --output "$ARCHIVE_FILENAME" \
     "$DOWNLOAD_URL"
-tar xzf "$FILENAME" && mv "vim-doge-helper" "$OUTFILE"
-rm -f "$FILENAME"
+tar xzf "$ARCHIVE_FILENAME" && mv "vim-doge-helper" "$OUTFILE"
+rm -f "$ARCHIVE_FILENAME"
 chmod +x "$OUTFILE"

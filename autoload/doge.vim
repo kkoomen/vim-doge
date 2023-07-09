@@ -246,10 +246,10 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install(...) abort
-  for l:filename in ['vim-doge', 'vim-doge.exe']
+  for l:filename in ['vim-doge-helper', 'vim-doge-helper.exe']
     let l:filepath = g:doge_dir . '/bin/' . l:filename
     if filereadable(l:filepath)
-      let l:binary_version = doge#utils#trim(system(shellescape(l:filepath) . ' --version'))
+      let l:binary_version = split(doge#utils#trim(system(shellescape(l:filepath) . ' --version')), ' ')[1]
       let l:local_version = doge#utils#trim(readfile(g:doge_dir . '/.version')[0])
       if l:binary_version ==# l:local_version
         echom g:doge_prefix . ' already using latest version, skipping binary download'
@@ -272,12 +272,7 @@ function! doge#install(...) abort
     let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
     let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1'))
     let l:term_height = 8
-  elseif has('osx') && trim(system('uname -m')) ==# 'arm64'
-    echom g:doge_prefix . ' detected arm64 which requires manual install through NPM, installing now...'
-    let l:command = 'cd ' . fnameescape(g:doge_dir) . ' && npm i --no-save && npm run build:binary:unix'
-    let l:term_height = 10
   else
-    " macos x64
     let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
     let l:term_height = 4
   endif
