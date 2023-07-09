@@ -317,9 +317,9 @@ let g:doge_php_settings = {
 \}
 ```
 
-- `resolve_fqn`: Whether or not to resolve the FQN based on the `use` statements
-  in the current buffer. The FQN will be resolved for type hints in parameters
-  and the return type.
+- `resolve_fqn`: Whether to resolve the FQN based on the `use` statements in the
+  current buffer. The FQN will be resolved for type hints in parameters and the
+  return type.
 
 ### Python
 
