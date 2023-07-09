@@ -86,7 +86,7 @@ endfunction
 " @public
 " Returns the todo-pattern that is used for interactive mode
 function! doge#utils#placeholder(...) abort
-  return '\(\[TODO:[[:alnum:]-]\+\]\|TODO\)'
+  return '\(\[TODO:[[:alnum:]- ]\+\]\|TODO\)'
 endfunction
 
 ""
