@@ -1,0 +1,30 @@
+# https://github.com/google/styleguide/blob/gh-pages/pyguide.md
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+      """[TODO:summary]
+      ~
+      [TODO:description]
+      {% if params %}
+      ~
+      Args:
+        {% for param in params %}
+      <INDENT>{{ param.name | default(value="[TODO:name]") }}{% if show_types or not param.type %} ({{ param.type | default(value="[TODO:type]") }}){% endif %}: [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      ~
+      Returns:
+      <INDENT>{% if show_types or not return_type %}{{ return_type }}: {% endif %}{% if return_type %}[TODO:description]{% endif %}
+      {% endif %}
+      {% if exceptions %}
+      ~
+      Raises:
+        {% for exception in exceptions %}
+      <INDENT>{{ exception.name | default(value="[TODO:name]") }}: [TODO:description]
+        {% endfor %}
+      {% endif %}
+      """

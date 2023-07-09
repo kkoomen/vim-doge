@@ -1,32 +1,41 @@
-echo "Preparing to download vim-doge binary..."
+Write-Host "[vim-doge] Preparing to download vim-doge-helper binary..."
 
-$rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
-$version = Get-Content "$rootDir\.version"
-$assetName = "vim-doge-win64.zip"
-$assetPath = "$rootDir\bin\$assetName"
-$outFile = "$rootDir\bin\vim-doge.exe"
-$downloadUrl = "https://github.com/kkoomen/vim-doge/releases/download/$version/$assetName"
-
-if (Test-Path $assetName) {
-  rm "$assetName"
+$Arch = $env:PROCESSOR_ARCHITECTURE
+if ($Arch -eq 'x86') {
+  # 32-bit
+  $AssetName = "vim-doge-helper-windows-i686.zip"
+}
+else {
+  # 64-bit
+  $AssetName = "vim-doge-helper-windows-x86_64.zip"
 }
 
-if (Test-Path $outFile) {
-  rm "$outFile"
+$RootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
+$AppVersion = Get-Content "$RootDir\.version"
+
+$AssetPath = "$RootDir\bin\$AssetName"
+$OutFile = "$RootDir\bin\vim-doge-helper.exe"
+
+$DownloadUrl = "https://github.com/kkoomen/vim-doge/releases/download/v$AppVersion/$AssetName"
+
+if (Test-Path $AssetName) {
+  Remove-Item "$AssetName"
+}
+
+if (Test-Path $OutFile) {
+  Remove-Item "$OutFile"
 }
 
 try {
-  Invoke-WebRequest -uri $downloadUrl -OutFile ( New-Item -Path "$assetPath" -Force )
-  Expand-Archive -LiteralPath "$assetPath" -DestinationPath "$rootDir\bin"
-  rm "$assetPath"
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls, [Net.SecurityProtocolType]::Tls11, [Net.SecurityProtocolType]::Tls12, [Net.SecurityProtocolType]::Ssl3
+  [Net.ServicePointManager]::SecurityProtocol = "Tls, Tls11, Tls12, Ssl3"
+  Write-Host "Successfully set SSL/TLS security protocol"
 } catch {
-  echo "No release found for vim-doge for Windows."
-  echo "This is due to a bug in node-gyp which doesn't allow vim-doge to be build for Windows."
-  echo ""
-  echo "Currently, the latest stable release for Windows is v3.11.0."
-  echo ""
-  echo "HOW TO INSTALL v3.11.0:"
-  echo "- Download the latest release from: https://github.com/kkoomen/vim-doge/releases/download/v3.11.0/vim-doge-win64.zip"
-  echo "- Unzip the vim-doge-win64.zip"
-  echo "- Put the vim-doge binary inside ~/path/to/vim-doge/bin/ (e.g. vim-plug would be: ~/.vim/plugged/vim-doge/bin/)"
+  Write-Host "Failed to set SSL/TLS security protocol"
 }
+
+Invoke-WebRequest -Uri $DownloadUrl -OutFile ( New-Item -Path "$AssetPath" -Force )
+Expand-Archive -LiteralPath "$AssetPath" -DestinationPath "$RootDir.\bin"
+Remove-Item "$AssetPath"
+
+Write-Host "[vim-doge] Successfully downloaded vim-doge-helper"

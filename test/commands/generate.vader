@@ -61,7 +61,7 @@ Expect c (generated comments):
    * @x: [TODO:description]
    * @y: [TODO:description]
    *
-   * [TODO:description]
+   * [TODO:long description]
    *
    * Return: [TODO:description]
    */
@@ -72,7 +72,7 @@ Expect c (generated comments):
    * @x: [TODO:description]
    * @y: [TODO:description]
    *
-   * [TODO:description]
+   * [TODO:long description]
    *
    * Return: [TODO:description]
    */

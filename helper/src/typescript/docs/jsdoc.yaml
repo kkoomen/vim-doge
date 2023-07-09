@@ -1,0 +1,93 @@
+# https://jsdoc.app
+
+templates:
+  class:
+    node_types:
+      - class_declaration
+      - class
+    template: |
+      /**
+       * [TODO:description]
+      {% if tparams %}
+        {% for tparam in tparams %}
+       * @template {{ tparam.name | default(value="[TODO:name]") }} - [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if parent_name %}
+       * @extends {{ parent_name }}
+      {% endif %}
+      {% if interface_name %}
+       * @implements {{ interface_name }}
+      {% endif %}
+       */
+
+  prototype_function:
+    node_types:
+      - member_expression
+    template: |
+      /**
+       * [TODO:description]
+       *
+       * @function {{ function_name }}#{{ property_name }}
+      {% if async %}
+       * @async
+      {% endif %}
+      {% if generator %}
+       * @generator
+      {% endif %}
+      {% if params %}
+        {% for param in params %}
+       * @param {% if show_types or not param.type %}{{ "{" }}{{ param.type | default(value="[TODO:type]" )}}{{ "}" }}{% endif %} {% if param.optional %}[{% endif %}{{ param.name | default(value="[TODO:name]") }}{% if param.optional %}]{% endif %} - [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if exceptions %}
+        {% for exception in exceptions %}
+       * @throws {{ "{" }}{{ exception.name | default(value="[TODO:name]") }}{{ "}" }} - [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+       * @returns {{ "{" }}{{ return_type | default(value="[TODO:type]") }}{{ "}" }} [TODO:description]
+      {% endif %}
+       */
+
+  function:
+    node_types:
+      - arrow_function
+      - function
+      - function_declaration
+      - function_signature
+      - generator_function
+      - generator_function_declaration
+      - method_definition
+    template: |
+      /**
+       * [TODO:description]
+       *
+      {% if static %}
+       * @static
+      {% endif %}
+      {% if async %}
+       * @async
+      {% endif %}
+      {% if generator %}
+       * @generator
+      {% endif %}
+      {% if tparams %}
+        {% for tparam in tparams %}
+       * @template {{ tparam.name | default(value="[TODO:name]") }} - [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if params %}
+        {% for param in params %}
+       * @param {% if show_types or not param.type %}{{ "{" }}{{ param.type | default(value="[TODO:type]" )}}{{ "}" }}{% endif %} {% if param.optional %}[{% endif %}{{ param.name | default(value="[TODO:name]") }}{% if param.optional %}]{% endif %} - [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if exceptions %}
+        {% for exception in exceptions %}
+       * @throws {{ "{" }}{{ exception.name | default(value="[TODO:name]") }}{{ "}" }} - [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type or has_non_void_return_value %}
+       * @returns {% if show_types %}{{ "{" }}{{ return_type | default(value="[TODO:type]") }}{{ "}" }}{% endif %} [TODO:description]
+      {% endif %}
+       */

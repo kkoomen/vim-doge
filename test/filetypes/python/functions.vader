@@ -12,7 +12,6 @@ Expect python (no changes):
   def myFunc(): # inline comment
     """
     [TODO:description]
-
     """
     pass
 
@@ -145,9 +144,9 @@ Given python (function where the quotes should be single quotes when {'single_qu
     pass
 
 Do (trigger doge):
-  :let g:doge_python_settings = {'single_quotes': 1}\<CR>
+  :let g:doge_python_settings['single_quotes'] = 1\<CR>
   \<C-d>
-  :let g:doge_python_settings = {'single_quotes': 0}\<CR>
+  :let g:doge_python_settings['single_quotes'] = 0\<CR>
 
 Expect python (generated comment with :param tags):
   def myFunc(p1 = 'string'):

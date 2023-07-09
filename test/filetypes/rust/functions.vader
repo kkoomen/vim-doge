@@ -39,7 +39,7 @@ Expect rust (generated comments with Arguments and Examples sections):
       /// # Examples
       ///
       /// ```
-      /// [TODO:example]
+      /// [TODO:write some example code]
       /// ```
       fn new(name: &str) -> Person {
           Person {
@@ -52,7 +52,7 @@ Expect rust (generated comments with Arguments and Examples sections):
       /// # Examples
       ///
       /// ```
-      /// [TODO:example]
+      /// [TODO:write some example code]
       /// ```
       pub fn hello(&self) -> u8 {
           return 0;
@@ -65,7 +65,10 @@ Expect rust (generated comments with Arguments and Examples sections):
 Given rust (impl methods with Errors and Safety section):
   #[debug]
   #[macro_export]
-  pub unsafe fn foo(foo: usize) -> Result<(), FooError> {}
+  pub unsafe fn foo(foo: usize) -> Result<(), FooError> {
+      fs::read_to_string("file.txt")
+          .unwrap_or_else(|err| panic!("Failed to read filepath: {:?}", err));
+  }
 
 Do (trigger doge):
   :3\<CR>
@@ -78,19 +81,26 @@ Expect rust (generated comments with Arguments, Safety, Errors and Examples sect
   ///
   /// * `foo` - [TODO:description]
   ///
-  /// # Safety
+  /// # Panics
   ///
-  /// [TODO:description]
+  /// [TODO:describe scenarios in which the function could panic]
   ///
   /// # Errors
   ///
-  /// [TODO:description]
+  /// [TODO:describe error types and what triggers them]
+  ///
+  /// # Safety
+  ///
+  /// [TODO:explain why the function is unsafe]
   ///
   /// # Examples
   ///
   /// ```
-  /// [TODO:example]
+  /// [TODO:write some example code]
   /// ```
   #[debug]
   #[macro_export]
-  pub unsafe fn foo(foo: usize) -> Result<(), FooError> {}
+  pub unsafe fn foo(foo: usize) -> Result<(), FooError> {
+      fs::read_to_string("file.txt")
+          .unwrap_or_else(|err| panic!("Failed to read filepath: {:?}", err));
+  }

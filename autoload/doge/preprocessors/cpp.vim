@@ -1,14 +1,15 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-" A callback function being called after the tokens have been extracted. This
-" function will adjust the input if needed.
-function! doge#preprocessors#cpp#tokens(tokens) abort
-  " Unset the returnType when the type is 'void'.
-  " See https://github.com/kkoomen/vim-doge/issues/5
-  if has_key(a:tokens, 'returnType') && !empty(a:tokens['returnType']) && a:tokens['returnType'] ==# 'void'
-    let a:tokens['returnType'] = ''
+function! doge#preprocessors#cpp#alter_parser_args(parser_args) abort
+  let l:args = deepcopy(a:parser_args)
+  let l:settings = get(g:, 'doge_doxygen_settings', {})
+
+  if l:settings['char'] ==# '\'
+    let l:args += ['--doxygen-use-slash-char']
   endif
+
+  return l:args
 endfunction
 
 let &cpoptions = s:save_cpo

@@ -1,0 +1,26 @@
+# http://daouzli.com/blog/docstring.html#restructuredtext
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+      """
+      [TODO:description]
+      {% if params or return_type or exceptions %}
+      ~
+      {% endif %}
+      {% if params %}
+        {% for param in params %}
+      :param {{ param.name }}{% if show_types or not param.type %} {{ param.type | default(value="[TODO:type]") }}{% endif %}: [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      :return: [TODO:description]
+      {% endif %}
+      {% if exceptions %}
+        {% for exception in exceptions %}
+      :raises {{ exception.name | default(value="[TODO:name]") }}: [TODO:description]
+        {% endfor %}
+      {% endif %}
+      """

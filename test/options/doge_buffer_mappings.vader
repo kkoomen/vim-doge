@@ -15,7 +15,7 @@ Do (trigger doge):
   \<Tab>
   Lorem ipsum
 
-# Trigger an additional <Tab> to deactivate DoGe.
+# Trigger an additional <Tab> to deactivate vim-doge.
   \<Tab>
 
 Then (all buffer mappings should not exists anymore):

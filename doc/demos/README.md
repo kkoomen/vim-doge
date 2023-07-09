@@ -8,7 +8,7 @@
 # Demos and supported functionality
 
 This README contains several demos of some of the languages being supported by
-DoGe and also specifies _what_ is being supported.
+vim-doge and also specifies _what_ is being supported.
 
 ## PHP
 
@@ -21,9 +21,9 @@ Supported:
 
 ## JavaScript
 
-JavaScript is one of the most complicated ones to support, because of all the
+JavaScript is by far the most complicated ones to support, because of all the
 EcmaScript features and libraries that add TypeScript-like type hints.
-Nonetheless, DoGe supports all of it.
+Nonetheless, vim-doge supports all of it.
 
 Supported:
 - Regular functions

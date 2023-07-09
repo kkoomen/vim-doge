@@ -1,0 +1,14 @@
+# https://www.rubydoc.info/gems/yard/file/docs/Tags.md
+
+templates:
+  function:
+    node_types:
+      - method
+      - singleton_method
+    template: |
+      # [TODO:description]
+      {% if params %}
+        {% for param in params %}
+      # @param {{ param.name }} [[TODO:type]] [TODO:description]
+        {% endfor %}
+      {% endif %}

@@ -10,7 +10,7 @@ Given cpp (virtual function declarations with parameters with return type):
   class Test2: public Test {
     bool my_virtual_function(bool val) override;
     bool my_pure_virtual_function(bool val) final;
-  }
+  };
 
 Do (trigger doge):
   :2\<CR>
@@ -55,7 +55,7 @@ Expect cpp (generated comment with @brief, @param and @return tags):
      * @return [TODO:description]
      */
     bool my_pure_virtual_function(bool val) final;
-  }
+  };
 
 # ==============================================================================
 # Virtual function definitions with parameters with return type.

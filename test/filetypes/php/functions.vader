@@ -105,7 +105,7 @@ Expect php (generated comment with @param and @return tags):
   /**
    * [TODO:description]
    *
-   * @return ?array [TODO:description]
+   * @return array|null [TODO:description]
    */
   function myFunction2(): ?array {
     //
@@ -131,7 +131,7 @@ Expect php (generated comment with @param, @throws and @return tags):
   /**
    * [TODO:description]
    *
-   * @throws [TODO:name] [TODO:description]
+   * @throws FirstException [TODO:description]
    * @throws SecondException [TODO:description]
    *
    * @return [TODO:type] [TODO:description]

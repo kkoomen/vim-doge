@@ -2,16 +2,16 @@
 # Regular functions.
 # ==============================================================================
 Given sh (regular functions):
-  function test {
-    print "foobar"
+  function foo {
+    echo "foo"
   }
 
-  function test() {
-    print "foobar"
+  function bar() {
+    echo "bar"
   }
 
-  test() {
-    print "foobar"
+  baz() {
+    echo "baz"
   }
 
 Do (trigger doge):
@@ -25,44 +25,44 @@ Expect sh (generated comments with a descriptios and 'Globals', 'Arguments' and 
   ################################################################################
   # [TODO:description]
   # Globals:
-  #   [TODO:var-name]
+  #   [TODO:variable name]
   # Arguments:
-  #   $1: [TODO:description]
+  #   $1: [TODO:description for each parameter]
   # Outputs:
-  #   [TODO:description]
+  #   [TODO:description for each output variable]
   # Returns:
   #   [TODO:description]
   ################################################################################
-  function test {
-    print "foobar"
+  function foo {
+    echo "foo"
   }
 
   ################################################################################
   # [TODO:description]
   # Globals:
-  #   [TODO:var-name]
+  #   [TODO:variable name]
   # Arguments:
-  #   $1: [TODO:description]
+  #   $1: [TODO:description for each parameter]
   # Outputs:
-  #   [TODO:description]
+  #   [TODO:description for each output variable]
   # Returns:
   #   [TODO:description]
   ################################################################################
-  function test() {
-    print "foobar"
+  function bar() {
+    echo "bar"
   }
 
   ################################################################################
   # [TODO:description]
   # Globals:
-  #   [TODO:var-name]
+  #   [TODO:variable name]
   # Arguments:
-  #   $1: [TODO:description]
+  #   $1: [TODO:description for each parameter]
   # Outputs:
-  #   [TODO:description]
+  #   [TODO:description for each output variable]
   # Returns:
   #   [TODO:description]
   ################################################################################
-  test() {
-    print "foobar"
+  baz() {
+    echo "baz"
   }

@@ -6,7 +6,7 @@ Given cpp (class template):
   class test
   {
     //
-  }
+  };
 
 Do (trigger doge):
   \<C-d>
@@ -21,4 +21,4 @@ Expect cpp (generated comment with @brief, @tparam tags):
   class test
   {
     //
-  }
+  };

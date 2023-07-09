@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:comment_placeholder = doge#helpers#placeholder()
+let s:comment_placeholder = doge#utils#placeholder()
 
 " vint: next-line -ProhibitUnusedVariable
 function! s:jump_forward() abort
@@ -79,7 +79,7 @@ endfunction
 " variable. Requires @setting(g:doge_comment_interactive) to be enabled.
 " The {direction} can be of the following values: 'forward' | 'backward'
 function! doge#comment#jump(direction) abort
-  let l:regular_mapping = doge#helpers#keyseq(get(g:, 'doge_mapping_comment_jump_' . a:direction))
+  let l:regular_mapping = doge#utils#keyseq(get(g:, 'doge_mapping_comment_jump_' . a:direction))
 
   if exists('b:doge_interactive')
     " Quit interactive mode if the cursor is outside of the comment.
@@ -88,7 +88,7 @@ function! doge#comment#jump(direction) abort
       return l:regular_mapping
     endif
 
-    let l:todo_count = doge#helpers#count(
+    let l:todo_count = doge#utils#count(
           \ s:comment_placeholder,
           \ b:doge_interactive['lnum_comment_start_pos'],
           \ b:doge_interactive['lnum_comment_end_pos']
@@ -143,8 +143,8 @@ function! doge#comment#update_interactive_comment_info() abort
       " So the idea is to just loop through every line until we come across a
       " non-comment line.
       let l:lnum_comment_end_pos = line('.')
-      let l:comment_last_line = doge#helpers#trim(b:doge_interactive['comment'][-1])[0]
-      while doge#helpers#trim(getline(l:lnum_comment_end_pos)) =~# printf('\m^%s', l:comment_last_line)
+      let l:comment_last_line = doge#utils#trim(b:doge_interactive['comment'][-1])[0]
+      while doge#utils#trim(getline(l:lnum_comment_end_pos)) =~# printf('\m^%s', l:comment_last_line)
         let l:lnum_comment_end_pos += 1
       endwhile
 

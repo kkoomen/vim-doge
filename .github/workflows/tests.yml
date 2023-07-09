@@ -10,98 +10,123 @@ on:
 
 jobs:
   tests_vim:
-    name: Vim
+    name: Vim (unix)
     strategy:
+      fail-fast: false
       matrix:
-        # os: [macos-latest, ubuntu-20.04, windows-latest]
-        os: [macos-latest, ubuntu-20.04]
-        vim-version: [v7.4.2119, v8.2.5172]
-        include:
-          - node-version: 16
-          - os: macos-latest
-            target: macos
-          - os: ubuntu-20.04
-            target: linux
-          # - os: windows-latest
-            # target: win
+        os: [ubuntu-latest, macos-latest]
+        vim-version: [v7.4.2119, v8.2.5172, head]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: Install FUSE for linux
-        if: matrix.target == 'linux'
-        run: sudo apt-get install libfuse2
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
-        with:
-          submodules: true
+
       - name: Checkout junegunn/vader.vim
         uses: actions/checkout@v2
         with:
           repository: junegunn/vader.vim
           path: vader.vim
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
-      - name: Build Unix binary
-        if: matrix.target != 'win'
-        run: npm run build:binary:unix
-      - name: Build Windows binary
-        if: matrix.target == 'win'
-        run: npm run build:binary:windows
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build
+        run: ./scripts/build.sh
+        shell: bash
+
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
-          vim_type: vim
+          vim_type: Vim
+
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
-  tests_neovim:
-    name: NeoVim
+  tests_vim_windows:
+    name: Vim (windows)
     strategy:
+      fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-20.04]
-        vim-version: [v0.3.2, head]
-        include:
-          - node-version: 16
-          - os: macos-latest
-            target: macos
-          - os: ubuntu-20.04
-            target: linux
+        os: [windows-latest]
+        vim-version: [v8.2.5172, head]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
         uses: actions/checkout@v2
-        with:
-          submodules: true
+
       - name: Checkout junegunn/vader.vim
         uses: actions/checkout@v2
         with:
           repository: junegunn/vader.vim
           path: vader.vim
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
-      - name: Build binary
-        run: npm run build:binary:unix
-      - name: Setup neovim
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build
+        run: ./scripts/build.ps1
+
+      - name: Setup vim
         uses: thinca/action-setup-vim@v1
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
-          vim_type: neovim
+          vim_type: Vim
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
+
+  tests_neovim:
+    name: Neovim (unix)
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        vim-version: [v0.3.2, head]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: thinca/action-setup-vim@v1
+        id: vim
+        with:
+          vim_version: ${{ matrix.vim-version }}
+          vim_type: Neovim
+
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
   vint:
     name: Linter
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1

@@ -1,5 +1,6 @@
 name: Release
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'release/v*.*.*'
@@ -8,44 +9,101 @@ jobs:
   build_and_upload_release_assets:
     name: Build and upload binary assets
     strategy:
+      fail-fast: false
       matrix:
-        # os: [macos-latest, ubuntu-20.04, windows-latest]
-        os: [macos-latest, ubuntu-20.04]
-        include:
-          - node-version: 16
-          - os: macos-latest
-            target: macos
-            asset_path: ./bin/vim-doge-macos.tar.gz
-          - os: ubuntu-20.04
-            target: linux
-            asset_path: ./bin/vim-doge-linux.tar.gz
-          # - os: windows-latest
-          #   target: win
-          #   asset_path: ./bin/vim-doge-win64.zip
-    runs-on : ${{ matrix.os }}
+        settings:
+          - platform: macos-latest
+            target: x86_64-apple-darwin                       # Intel-based
+            asset_name: vim-doge-helper-macos-x86_64
+            asset_path: ./bin/vim-doge-helper-macos-x86_64.tar.gz
+
+          - platform: macos-latest
+            target: aarch64-apple-darwin                      # Apple Silicon
+            asset_name: vim-doge-helper-macos-aarch64
+            asset_path: ./bin/vim-doge-helper-macos-aarch64.tar.gz
+
+          - platform: ubuntu-20.04                            # Linux
+            target: x86_64-unknown-linux-gnu
+            asset_name: vim-doge-helper-linux
+            asset_path: ./bin/vim-doge-helper-linux.tar.gz
+
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc                    # 64-bit
+            asset_name: vim-doge-helper-windows-x86_64
+            asset_path: ./bin/vim-doge-helper-windows-x86_64.zip
+
+          - platform: windows-latest                          # 32-bit
+            target: i686-pc-windows-msvc
+            asset_name: vim-doge-helper-windows-i686
+            asset_path: ./bin/vim-doge-helper-windows-i686.zip
+
+    runs-on: ${{ matrix.settings.platform }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
         with:
-          submodules: true
-      - name: Setup nodejs
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci --no-save --verbose
-      - name: Build unix binary
-        if: matrix.target != 'win'
-        run: npm run build:binary:unix -- vim-doge-${{ matrix.target }}
-      # - name: Build Windows binary
-      #   if: matrix.target == 'win'
-      #   run: npm run build:binary:windows -- vim-doge-${{ matrix.target }}64
-      - name: Get project version
-        run: echo "PROJECT_VERSION=$(cat .version)" >> $GITHUB_ENV
+          targets: aarch64-apple-darwin
+
+      - name: Build (unix)
+        if: runner.os != 'Windows'
+        run: ./scripts/build.sh "${{ matrix.settings.target }}" "${{ matrix.settings.asset_name }}"
+        shell: bash
+
+      - name: Build (windows)
+        if: runner.os == 'Windows'
+        run: ./scripts/build.ps1 "${{ matrix.settings.target }}" "${{ matrix.settings.asset_name }}"
+
+      - name: Get current app version
+        id: tag_name
+        run: echo "version=$(cat .version)" >> "$GITHUB_OUTPUT"
+        shell: bash
+
       - name: Upload release asset
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
-          tag_name: ${{ env.PROJECT_VERSION }}
-          files: ${{ matrix.asset_path }}
+          tag_name: v${{ steps.tag_name.outputs.version }}
+          files: ${{ matrix.settings.asset_path }}
           draft: false
-          prerelease: false
+          prerelease: true
+
+  test_uploaded_builds:
+    name: Test uploaded builds
+    needs: build_and_upload_release_assets
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v3
+
+      - name: Download binary (unix)
+        if: runner.os != 'Windows'
+        run: ./scripts/install.sh
+        shell: bash
+
+      - name: Test binary (unix)
+        if: runner.os != 'Windows'
+        run: |
+          if ! bin/vim-doge-helper --version > /dev/null 2>&1; then
+            echo "vim-doge-helper is not installed properly"
+            exit 1
+          fi
+        shell: bash
+
+      - name: Download binary (windows)
+        if: runner.os == 'Windows'
+        run: ./scripts/install.ps1
+
+      - name: Test binary (windows)
+        if: runner.os == 'Windows'
+        run: |
+          if (!(bin/vim-doge-helper.exe --version 2>$null)) {
+              Write-Host "vim-doge-helper is not installed properly"
+              exit 1
+          }

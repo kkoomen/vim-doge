@@ -1,11 +1,20 @@
 # ==============================================================================
 # Function definitions with parameters with return type.
 # ==============================================================================
-Given c (function definition with parameters with return type):
+Given c (function definition and declaration with parameters with return type):
   int add(int x, int y) {}
+
+  int add(int x, int y);
+
+  int (*add2)(int x, int y);
+
 
 Do (trigger doge):
   :let b:doge_doc_standard='kernel_doc'\<CR>
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+  :23\<CR>
   \<C-d>
 
 Expect c (generated comment with the function name, all parameter tags, a description and a 'Return' keyword):
@@ -14,20 +23,46 @@ Expect c (generated comment with the function name, all parameter tags, a descri
    * @x: [TODO:description]
    * @y: [TODO:description]
    *
-   * [TODO:description]
+   * [TODO:long description]
    *
    * Return: [TODO:description]
    */
   int add(int x, int y) {}
 
+  /**
+   * add(): [TODO:summary]
+   * @x: [TODO:description]
+   * @y: [TODO:description]
+   *
+   * [TODO:long description]
+   *
+   * Return: [TODO:description]
+   */
+  int add(int x, int y);
+
+  /**
+   * add2(): [TODO:summary]
+   * @x: [TODO:description]
+   * @y: [TODO:description]
+   *
+   * [TODO:long description]
+   *
+   * Return: [TODO:description]
+   */
+  int (*add2)(int x, int y);
+
 # ==============================================================================
 # Function definitions with parameters with 'void' return type.
 # ==============================================================================
-Given c (function definition with parameters with 'void' return type):
+Given c (function definition and declaration with parameters with 'void' return type):
   void add(int x, int y) {}
+
+  void add(int x, int y);
 
 Do (trigger doge):
   :let b:doge_doc_standard='kernel_doc'\<CR>
+  \<C-d>
+  :10\<CR>
   \<C-d>
 
 Expect c (generated comment with the function name, all parameter tags, and a description):
@@ -36,6 +71,40 @@ Expect c (generated comment with the function name, all parameter tags, and a de
    * @x: [TODO:description]
    * @y: [TODO:description]
    *
-   * [TODO:description]
+   * [TODO:long description]
    */
   void add(int x, int y) {}
+
+  /**
+   * add(): [TODO:summary]
+   * @x: [TODO:description]
+   * @y: [TODO:description]
+   *
+   * [TODO:long description]
+   */
+  void add(int x, int y);
+
+# ==============================================================================
+# Function definitions with parameters with 'void' return type.
+# ==============================================================================
+Given c (struct with fields):
+  struct foo {
+    int bar;
+  }
+
+Do (trigger doge):
+  :let b:doge_doc_standard='kernel_doc'\<CR>
+  \<C-d>
+  :5\<CR>
+  \<C-d>
+
+Expect c (generated comments for the struct and the fields):
+  /**
+   * struct foo - [TODO:description]
+   */
+  struct foo {
+    /**
+     * @bar: [TODO:description]
+     */
+    int bar;
+  }

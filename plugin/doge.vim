@@ -1,7 +1,9 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:unsupported_msg = '[DoGe] Unsupported version. %s is required.'
+let g:doge_prefix = '[vim-doge]'
+
+let s:unsupported_msg = g:doge_prefix . ' Unsupported version. %s is required.'
 
 if !has('nvim') && (v:version < 700 || !has('patch-7.4.2119'))
   echohl WarningMsg
@@ -24,10 +26,10 @@ endif
 " We all love documentation because it makes our codebases easier to understand,
 " yet no one has time to write it in a good and proper way.
 "
-" DoGe is a (Do)cumentation (Ge)nerator which will generate a proper
+" Vim-doge is a (Do)cumentation (Ge)nerator which will generate a proper
 " documentation skeleton based on certain expressions (mainly functions).
-" Simply put your cursor on a function, press `<Leader>d`, jump quickly through TODO
-" items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
+" Simply put your cursor on a function, press `<Leader>d`, jump quickly through
+" TODO items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
 " coding!
 
 " }}}
@@ -39,17 +41,7 @@ endif
 " Preprocess functions are called for specific filetypes when @plugin(name) is
 " generating a comment. The following preprocess functions are available:
 "
-"   doge#preprocessors#<filetype>#tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#parameters_tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#type_parameters_tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#exceptions_tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
-"
-"   doge#preprocessors#<filetype>#template(template)
+"   doge#preprocessors#<language>#alter_parser_args(parser_args)
 
 " }}}
 
@@ -62,7 +54,7 @@ if !exists('g:doge_enable_mappings')
   ""
   " (Default: 1)
   "
-  " Whether or not to enable built-in mappings.
+  " Whether to enable built-in mappings.
   let g:doge_enable_mappings = 1
 endif
 
@@ -70,7 +62,7 @@ if !exists('g:doge_mapping')
   ""
   " (Default: '<Leader>d')
   "
-  " The mapping to trigger DoGe. The mapping accepts a count, to select a
+  " The mapping to trigger vim-doge. The mapping accepts a count, to select a
   " specific doc standard, if more than one is defined.
   let g:doge_mapping = '<Leader>d'
 endif
@@ -98,7 +90,7 @@ endif
 "
 " If you use the above settings and you open `myfile.vue` then it will behave
 " like you're opening a javascript filetype.
-let g:doge_filetype_aliases = doge#helpers#deepextend({
+let g:doge_filetype_aliases = doge#utils#deepextend({
 \  'javascript': [
 \    'javascript.jsx',
 \    'javascriptreact',
@@ -171,7 +163,7 @@ if !exists('g:doge_doxygen_settings')
 else
   let s:doxygen_settings = get(g:, 'doge_doxygen_settings', {})
   if has_key(s:doxygen_settings, 'char') && !(s:doxygen_settings['char'] ==# '@' || s:doxygen_settings['char'] ==# '\')
-    echoerr '[DoGe] "' . s:doxygen_settings['char'] . '" is not a valid character. Accepted characters are @ or \'
+    echoerr g:doge_prefix . ' "' . s:doxygen_settings['char'] . '" is not a valid character. Accepted characters are @ or \'
   endif
 endif
 

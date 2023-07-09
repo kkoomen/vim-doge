@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/kkoomen/vim-doge/blob/master/doc/demos">
-    <img src="./doc/banner.jpg" alt="DoGe" />
+    <img src="./doc/banner.jpg" alt="vim-doge" />
   </a>
 </p>
 <p align="center">
@@ -19,7 +19,7 @@
 We all love documentation because it makes our codebases easier to understand,
 yet no one has time to write it in a good and proper way.
 
-DoGe is a (Do)cumentation (Ge)nerator which will generate a proper documentation
+Vim-doge is a (Do)cumentation (Ge)nerator which will generate a proper documentation
 skeleton based on certain expressions (mainly functions). Simply put your cursor
 on a function, press `<Leader>d`, jump quickly through `TODO` items using
 `<Tab>` and `<S-Tab>` to quickly add descriptions and go on coding!
@@ -32,39 +32,39 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Supported languages and doc standards](#supported-languages-and-doc-standards)
 - [Getting started](#getting-started)
 - [Configuration](#configuration)
-  - [Choosing a different doc standard](#choosing-a-different-doc-standard)
-  - [Options](#options)
-    - [`g:doge_enable_mappings`](#gdoge_enable_mappings)
-    - [`g:doge_mapping`](#gdoge_mapping)
-    - [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
-    - [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
-    - [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
-    - [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
-    - [`g:doge_comment_interactive`](#gdoge_comment_interactive)
-    - [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
-    - [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
+  * [Choosing a different doc standard](#choosing-a-different-doc-standard)
+  * [Options](#options)
+    + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
+    + [`g:doge_mapping`](#gdoge_mapping)
+    + [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
+    + [`g:doge_buffer_mappings`](#gdoge_buffer_mappings)
+    + [`g:doge_mapping_comment_jump_forward`](#gdoge_mapping_comment_jump_forward)
+    + [`g:doge_mapping_comment_jump_backward`](#gdoge_mapping_comment_jump_backward)
+    + [`g:doge_comment_interactive`](#gdoge_comment_interactive)
+    + [`g:doge_comment_jump_wrap`](#gdoge_comment_jump_wrap)
+    + [`g:doge_comment_jump_modes`](#gdoge_comment_jump_modes)
 - [Commands](#commands)
-  - [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
+    + [`:DogeGenerate {doc_standard}`](#dogegenerate-doc_standard)
 - [Language-specific configuration](#language-specific-configuration)
-  - [JavaScript](#javascript)
-  - [PHP](#php)
-  - [Python](#python)
-  - [Doxygen](#doxygen)
+    + [JavaScript](#javascript)
+    + [PHP](#php)
+    + [Python](#python)
+    + [Doxygen](#doxygen)
 - [Headless mode](#headless-mode)
 - [Help](#help)
 - [Contributing](#contributing)
-  - [Tree sitter](#tree-sitter)
+  * [Tree sitter](#tree-sitter)
 - [Development](#development)
-  - [Environment setup](#environment-setup)
-  - [Parsers](#parsers)
-  - [Testing locally](#testing-locally)
+    + [Environment setup](#environment-setup)
+    + [Helper](#helper)
+    + [Testing locally](#testing-locally)
 - [Motivation](#motivation)
-- [Supporting DoGe](#supporting-doge)
+- [Supporting vim-doge](#supporting-vim-doge)
 - [License](#license)
 
 # Supported languages and doc standards
 
-Every language that has a documentation standard should be supported by DoGe.
+Every language that has a documentation standard should be supported by vim-doge.
 
 Is your favorite language not supported?
 [Suggest a new language][suggest-language] :tada:<br/>
@@ -88,17 +88,6 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
 
 # Getting started
-
-:warning: If you use a laptop with Apple silicon chip then you might run into an
-error once you trigger vim-doge. The current solution is to build manually via
-`npm i --no-save && npm run build:binary:unix`. If you're using vim-plug, you
-can do:
-
-```
-Plug 'kkoomen/vim-doge', { 'do': 'npm i --no-save && npm run build:binary:unix' }
-```
-
----
 
 Using plug:
 
@@ -134,8 +123,8 @@ Run `:help doge` to get the full help page.
 
 ## Choosing a different doc standard
 
-DoGe supports multiple doc standard and you can overwrite them per filetype in
-your vimrc. Is your favorite doc standard not supported?
+Vim-doge supports multiple doc standard and you can overwrite them per filetype
+in your vimrc. Is your favorite doc standard not supported?
 [Suggest a new doc standard][suggest-doc-standard] :tada:
 
 Example:
@@ -152,7 +141,7 @@ If you want to change the doc standard specifically for a buffer, then you can d
 ```
 
 If you want to generate a docblock using a different doc standard just for a
-specific expression, then you can use `DogeGenerate`:
+specific expression, then you can use the `DogeGenerate` command:
 
 ```vim
 " Inside test.py, cursor is at a function expression (cursor = `|`):
@@ -187,14 +176,28 @@ Here is the full list of available doc standards per filetype:
 
 Default: `1`
 
-Whether or not to enable built-in mappings.
+Whether to enable built-in mappings. If you decide to disable this, then you can
+copy the mappings below and change them to your needs:
+
+```vim
+" Generate comment for current line.
+nmap <silent> <Leader>d <Plug>(doge-generate)
+
+" Interactive mode comment todo-jumping.
+nmap <silent> <TAB> <Plug>(doge-comment-jump-forward)
+nmap <silent> <S-TAB> <Plug>(doge-comment-jump-backward)
+imap <silent> <TAB> <Plug>(doge-comment-jump-forward)
+imap <silent> <S-TAB> <Plug>(doge-comment-jump-backward)
+smap <silent> <TAB> <Plug>(doge-comment-jump-forward)
+smap <silent> <S-TAB> <Plug>(doge-comment-jump-backward)
+```
 
 ### `g:doge_mapping`
 
 Default: `'<Leader>d'`
 
-The mapping to trigger DoGe. The mapping accepts a count, to select a specific
-doc standard, if more than one is defined.
+The mapping to trigger vim-doge. The mapping accepts a count, to select a
+specific doc standard, if more than one is defined.
 
 ### `g:doge_filetype_aliases`
 
@@ -300,10 +303,10 @@ let g:doge_javascript_settings = {
 \}
 ```
 
-- `destructuring_props`: Whether or not to generate `@param` tags for the
-  destructured properties in a function expression.
+- `destructuring_props`: Whether to generate `@param` tags for the destructured
+  properties in a function expression.
 
-- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
+- `omit_redundant_param_types`: Whether to omit the `{type}` part of
   parameters and return types when the type is known (i.e. typescript).
 
 ### PHP
@@ -314,9 +317,9 @@ let g:doge_php_settings = {
 \}
 ```
 
-- `resolve_fqn`: Whether or not to resolve the FQN based on the `use` statements
-  in the current buffer. The FQN will be resolved for type hints in parameters
-  and the return type.
+- `resolve_fqn`: Whether to resolve the FQN based on the `use` statements in the
+  current buffer. The FQN will be resolved for type hints in parameters and the
+  return type.
 
 ### Python
 
@@ -327,10 +330,10 @@ let g:doge_python_settings = {
 \}
 ```
 
-- `single_quotes`: Whether or not to use single quotes for the multi-line comments openers and closers.
+- `single_quotes`: Whether to use single quotes for the multiline comments delimiters.
 
-- `omit_redundant_param_types`: Whether or not to omit the `{type}` part of
-  parameters and return types when the type is known.
+- `omit_redundant_param_types`: Whether to omit the `{type}` part of parameters
+  and return types when the type is specified in the function itself.
 
 ### Doxygen
 
@@ -346,7 +349,7 @@ let g:doge_doxygen_settings = {
 
 If you're running your vim commands inside a docker, CI or similar environments
 with commands such as `vim +PlugInstall +qall > /dev/null` then you probably
-want to use headless mode. This will not spawn any terminals, progress bars etc
+want to use headless mode. This will not spawn any terminals or progress bars
 and will simply run any process by vim-doge in the background.
 
 This feature can be enabled by passing in `{ 'headless': 1 }` into the
@@ -365,9 +368,9 @@ To open all the help pages, run `:help doge`.
 # Contributing
 
 Help or feedback is always appreciated. If you find any bugs, feel free to
-[submit a bug report][bug-report]. If you think DoGe can be improved, feel free
-to submit a [feature request][feature-request] or a pull request if you have
-time to help out.
+[submit a bug report][bug-report]. If you think vim-doge can be improved, feel
+free to submit a [feature request][feature-request] or a pull request if you
+have time to help out.
 
 Read the [Contribution Guidelines][contrib-guide] and [Code of Conduct][coc]
 when doing contributions.
@@ -378,18 +381,21 @@ If you want a new language to be supported but tree-sitter doesn't support it
 yet, then feel free to create a custom tree-sitter language parser for that
 language and then we'll integrate it into vim-doge.
 
-- [Creating parsers](https://tree-sitter.github.io/tree-sitter/creating-parsers)
+- [Creating parsers][create-tree-sitter-parser]
 
 # Development
 
 ### Environment setup
 
-Get started by simply `cd /path/to/vim-doge` and run `yarn`.
+Make sure you [install Rust and Cargo][rust-cargo-install] and you're good to go.
 
-### Parsers
+### Helper
 
-If you want to work on the parsers locally, or anything else that resides in the
-`src` folder, you can run: `yarn watch`.
+Vim-doge uses a custom command-line interface called
+[vim-doge-helper](./helper/), all made in Rust, that is responsible for parsing
+code and generating docblocks. Go have a look at the `helper` directory if you
+want to contribute to the parsers.
+
 
 ### Testing locally
 
@@ -410,17 +416,19 @@ After that, you can do the following:
 - Inside vim you can now run: `Vader test/**/**/*.vader` to run all tests
 
 :bulb: If you're working on specific tests, you can run that specific test only:
-`Vader test/filetypes/<filetype>/functions.<ext>`
+`Vader test/filetypes/<filetype>/functions.<ext>`.
+
+For more information, see [Contribution Guidelines][contrib-guide].
 
 # Motivation
 
-I created DoGe mainly because I couldn't find a plugin that could generate
+I created vim-doge mainly because I couldn't find a plugin that could generate
 proper comments for a big collection of languages that I would use on a daily
 basis in a quick and easy way.
 
 Rather than scraping off the internet to find all sorts of vim plugins for every
-language I was coding in, I did want a single plugin that would support every
-language I was working in.
+language I was coding in, I was more or less looking for a single plugin that
+supports every language I was working in.
 
 Another big motivation for me is that I've noticed people tend to skip the
 documentation part because writing _just the skeleton_ of the comment takes
@@ -428,14 +436,14 @@ already too much time and I am one of those people. Having the skeleton
 generated and an interactive mode to quickly add descriptions is a big
 time saver.
 
-# Supporting DoGe
+# Supporting vim-doge
 
-Do you enjoy using DoGe? Give it a star on GitHub and submit your vote on
+Do you enjoy using vim-doge? Give it a star on GitHub and submit your vote on
 [vim.org][vim-script].
 
 # License
 
-DoGe is licensed under the GPL-3.0 license.
+Vim-doge is licensed under the GPL-3.0 license.
 
 [py-rest]: http://daouzli.com/blog/docstring.html#restructuredtext
 [py-numpy]: http://daouzli.com/blog/docstring.html#numpydoc
@@ -446,11 +454,12 @@ DoGe is licensed under the GPL-3.0 license.
 [ldoc]: https://github.com/stevedonovan/LDoc
 [javadoc]: https://www.oracle.com/technetwork/articles/javase/index-137868.html
 [yard]: https://www.rubydoc.info/gems/yard/file/docs/Tags.md
-[roxygen2]: https://github.com/klutometis/roxygen
 [doxygen]: http://www.doxygen.nl
 [rustdoc]: https://doc.rust-lang.org/rust-by-example/meta/doc.html
 [kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
 [sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
+[xmldoc]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/
+
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
 [suggest-doc-standard]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=doc_standard.md
@@ -460,4 +469,5 @@ DoGe is licensed under the GPL-3.0 license.
 [coc]: https://github.com/kkoomen/vim-doge/blob/master/CODE_OF_CONDUCT.md
 [vim-script]: https://www.vim.org/scripts/script.php?script_id=5801
 [vader]: https://github.com/junegunn/vader.vim
-[xmldoc]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/
+[rust-cargo-install]: https://doc.rust-lang.org/cargo/getting-started/installation.html
+[create-tree-sitter-parser]: https://tree-sitter.github.io/tree-sitter/creating-parsers

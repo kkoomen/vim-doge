@@ -1,0 +1,37 @@
+# http://daouzli.com/blog/docstring.html#numpydoc
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+      """
+      [TODO:summary]
+      ~
+      [TODO:description]
+      {% if params %}
+      ~
+      Parameters
+      ----------
+        {% for param in params %}
+      {{ param.name }}{% if show_types or not param.type %} : {{ param.type | default(value="[TODO:type]") }}{% endif %}
+      <INDENT>[TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      ~
+      Returns
+      -------
+      {{ return_type }}
+      <INDENT>[TODO:description]
+      {% endif %}
+      {% if exceptions %}
+      ~
+      Raises
+      ------
+        {% for exception in exceptions %}
+      {{ exception.name | default(value="[TODO:name]") }}:
+      <INDENT>[TODO:description]
+        {% endfor %}
+      {% endif %}
+      """

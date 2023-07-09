@@ -193,10 +193,11 @@ Given javascript (prototype fat-arrow function without parameters without type h
 Do (trigger doge):
   \<C-d>
 
+Expect javascript (generated comment with @function):
   /**
    * [TODO:description]
    *
-   * @returns {[TODO:type]} [TODO:description]
+   * @function Person#greet
    */
   Person.prototype.greet = () => {};
 
@@ -215,7 +216,7 @@ Expect javascript (generated comment with @function, @param and @returns tags):
    *
    * @param {string} $p1 - [TODO:description]
    * @param {Foo | Bar | Baz} p2 - [TODO:description]
-   * @returns {(Foo | Bar)} [TODO:description]
+   * @returns {Foo | Bar} [TODO:description]
    */
   const myFunc = ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};
 
@@ -235,6 +236,6 @@ Expect javascript (generated comment with @async, @function, @param and @returns
    * @async
    * @param {string} $p1 - [TODO:description]
    * @param {Foo | Bar | Baz} p2 - [TODO:description]
-   * @returns {Promise<(Foo | Bar)>} [TODO:description]
+   * @returns {Promise<Foo | Bar>} [TODO:description]
    */
   const myFunc = async ($p1: string, p2: Foo | Bar | Baz): (Foo | Bar) => {};

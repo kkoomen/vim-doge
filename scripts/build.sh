@@ -5,26 +5,32 @@
 set -e
 set -u
 
-echo "System info:"
-uname -a
-
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-OUTFILE="${1:-}"
+BUILD_TARGET="${1:-}"
+OUTFILE="${2:-}"
 
 cd $ROOT_DIR
 [[ ! -d ./bin ]] && mkdir ./bin
-[[ -e ./bin/vim-doge ]] && rm -f ./bin/vim-doge
+[[ -e ./bin/vim-doge-helper ]] && rm -f ./bin/vim-doge-helper
 
 # Build the binary.
-npx caxa --input "$ROOT_DIR/build" --output "./bin/vim-doge" -- "{{caxa}}/node_modules/.bin/node" "{{caxa}}/index.js"
+cd $ROOT_DIR/helper
+if [[ "$BUILD_TARGET" != "" ]]; then
+  cargo build --release --target "$BUILD_TARGET"
+  cp target/$BUILD_TARGET/release/vim-doge-helper ../bin/
+else
+  cargo build --release
+  cp target/release/vim-doge-helper ../bin/
+fi
 
 # Archive the binary.
 if [[ "$OUTFILE" != "" ]]; then
   OUTFILE="$OUTFILE.tar.gz"
+
   cd $ROOT_DIR/bin
   rm -f ./*.tar.gz
-  echo "==> Archiving $ROOT_DIR/bin/vim-doge -> $ROOT_DIR/bin/$OUTFILE"
-  tar -czf "$OUTFILE" vim-doge
+  echo "==> Archiving $ROOT_DIR/bin/vim-doge-helper -> $ROOT_DIR/bin/$OUTFILE"
+  tar -czf "$OUTFILE" vim-doge-helper
 fi
 
-echo "🎉  Done building vim-doge binaries"
+echo "🎉  Done building vim-doge-helper"

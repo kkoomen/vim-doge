@@ -1,20 +1,85 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+let s:comment_placeholder = doge#utils#placeholder()
+
 ""
 " @public
-" Generates documentation based on available patterns in b:doge_patterns.
+" Run the vim-doge-helper in order to parse the user's code and generate the
+" actual docblock to be inserted later on.
+function! doge#run_parser() abort
+  let l:executables = [
+        \ '/helper/target/release/vim-doge-helper.exe',
+        \ '/helper/target/release/vim-doge-helper',
+        \ '/bin/vim-doge-helper',
+        \ ]
+
+  for l:executable in l:executables
+    let l:script_path = g:doge_dir . l:executable
+    if filereadable(resolve(l:script_path))
+      let l:cursor_pos = getpos('.')
+      let l:current_line = l:cursor_pos[1]
+
+      let l:tempfile = tempname()
+      keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
+
+      let l:args = [
+            \ '--filepath', l:tempfile,
+            \ '--parser', b:doge_parser,
+            \ '--doc-name', b:doge_doc_standard,
+            \ '--line', l:current_line,
+            \ ]
+
+      if &expandtab == v:true
+        let l:args += ['--indent', shiftwidth()]
+      else
+        let l:args += ['--use-tabs']
+      endif
+
+      " Call preprocessing function for the filetype, allowing it to add args.
+      try
+        let l:preprocess_fn = printf('doge#preprocessors#%s#alter_parser_args', doge#utils#get_filetype())
+        let l:new_args = function(l:preprocess_fn)(l:args)
+        let l:args = l:new_args
+      catch /^Vim\%((\a\+)\)\=:E117/
+      endtry
+
+      let l:result = system(l:script_path . ' ' . join(l:args, ' '))
+
+      try
+        if !empty(l:result)
+          return json_decode(l:result)
+        endif
+      catch /.*/
+        if &filetype =~# '^vader*'
+          echoerr g:doge_prefix . ' ' . b:doge_parser . " parser failed\n\nLine: \"" . getline('.') . "\"\n\nException: " . v:exception . "\n\nHelper output: " . l:result
+        else
+          echo 'Line: "' . getline('.') . '"' . "\n\n"
+          echo 'Exception: ' . v:exception . "\n\n"
+          echo 'Helper output: ' . l:result . "\n"
+          echoerr g:doge_prefix . ' ' . b:doge_parser . ' parser failed'
+        endif
+      finally
+        call setpos('.', l:cursor_pos)
+        call delete(l:tempfile)
+      endtry
+    endif
+  endfor
+
+  return 0
+endfunction
+
+""
+" @public
+" Main function used for generating documentation.
 "
 " arg: Either a count (0 by default) or a string (empty by default).
 function! doge#generate(arg) abort
-  if doge#buffer#initialized() == v:false
-    return 0
-  endif
-
   " Immediately validate if the doc standard is allowed.
   if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
     echoerr printf(
-    \  '[DoGe] "%s" is not a valid %s doc standard, available doc standard are: %s',
+    \  '%s "%s" is not a valid %s doc standard, available doc standard are: %s',
+    \  g:doge_prefix,
     \  b:doge_doc_standard,
     \  &filetype,
     \  string(b:doge_supported_doc_standards)
@@ -40,16 +105,62 @@ function! doge#generate(arg) abort
     endif
   endif
 
-  if exists('b:doge_patterns')
-    for l:pattern in get(b:doge_patterns, b:doge_doc_standard)
-      if doge#pattern#generate(l:pattern) == v:false
-        continue
-      endif
-
-      call doge#activate()
-      return 1
-    endfor
+  let l:parser_result = doge#run_parser()
+  if type(l:parser_result) != v:t_dict
+    return 0
   endif
+
+  let l:comment = copy(l:parser_result['docblock'])
+  let l:comment_lnum_insert_position = l:parser_result['line']
+
+  " Determine the line num where to insert the comment.
+  if b:doge_insert ==# 'below'
+    let l:comment_indent = shiftwidth()
+  else
+    let l:comment_indent = 0
+    let l:comment_lnum_insert_position = l:parser_result['line'] - 1
+  endif
+
+  " vint: next-line -ProhibitUnusedVariable
+  let l:Indent = function('doge#indent#add', [l:comment_indent])
+
+  " Indent the comment.
+  let l:comment = map(l:comment, { k, line -> l:Indent(line) })
+
+  " Write the comment.
+  call append(l:comment_lnum_insert_position, l:comment)
+
+  " Enable interactive mode.
+  if g:doge_comment_interactive == v:true
+    if b:doge_insert ==# 'below'
+      let l:todo_match = search(s:comment_placeholder, 'nW', l:comment_lnum_insert_position + len(l:comment))
+    else
+      let l:todo_match = search(s:comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
+    endif
+    if l:todo_match != 0
+      let l:todo_count = doge#utils#count(
+            \ s:comment_placeholder,
+            \ (l:comment_lnum_insert_position + 1),
+            \ (l:comment_lnum_insert_position + len(l:comment))
+            \ )
+      if l:todo_count > 0
+        let b:doge_interactive = {
+              \ 'comment': l:comment,
+              \ 'lnum_comment_start_pos': (l:comment_lnum_insert_position + 1),
+              \ 'lnum_comment_end_pos': (l:comment_lnum_insert_position + len(l:comment)),
+              \ }
+        " Go to the top of the comment and select the first TODO.
+        exe l:comment_lnum_insert_position + 1
+        call search(s:comment_placeholder, 'W')
+        call execute("normal! gno\<C-g>", 'silent!')
+      endif
+    endif
+  endif
+
+  " Activate doge buffer mappings.
+  call doge#activate()
+
+  return 1
 endfunction
 
 ""
@@ -136,13 +247,13 @@ endfunction
 "" @public
 " Install the necessary dependencies.
 function! doge#install(...) abort
-  for l:filename in ['vim-doge', 'vim-doge.exe']
+  for l:filename in ['vim-doge-helper', 'vim-doge-helper.exe']
     let l:filepath = g:doge_dir . '/bin/' . l:filename
     if filereadable(l:filepath)
-      let l:binary_version = doge#helpers#trim(system(shellescape(l:filepath) . ' --version'))
-      let l:local_version = doge#helpers#trim(readfile(g:doge_dir . '/.version')[0])
+      let l:binary_version = split(doge#utils#trim(system(shellescape(l:filepath) . ' --version')), ' ')[1]
+      let l:local_version = doge#utils#trim(readfile(g:doge_dir . '/.version')[0])
       if l:binary_version ==# l:local_version
-        echom '[DoGe] already using latest version, skipping binary download'
+        echom g:doge_prefix . ' already using latest version, skipping binary download'
         return 0
       endif
     endif
@@ -150,10 +261,10 @@ function! doge#install(...) abort
 
   function! s:report_result(exitcode) abort
     if a:exitcode == 0
-      echom '[DoGe] installed sucessfully'
+      echom g:doge_prefix . ' installed sucessfully'
     else
       echohl ErrorMsg
-      echom '[DoGe] installation failed ' . '(exit code: ' . a:exitcode . ')'
+      echom g:doge_prefix . ' installation failed ' . '(exit code: ' . a:exitcode . ')'
       echohl None
     endif
   endfunction
@@ -162,12 +273,7 @@ function! doge#install(...) abort
     let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
     let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1'))
     let l:term_height = 8
-  elseif has('osx') && trim(system('uname -m')) ==# 'arm64'
-    echom '[DoGe] detected arm64 which requires manual install through NPM, installing now...'
-    let l:command = 'cd ' . fnameescape(g:doge_dir) . ' && npm i --no-save && npm run build:binary:unix'
-    let l:term_height = 10
   else
-    " macos x64
     let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
     let l:term_height = 4
   endif
