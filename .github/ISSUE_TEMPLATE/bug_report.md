@@ -60,12 +60,12 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 -->
 
-**Output of `./bin/vim-doge --version`**
+**Output of `./bin/vim-doge-helper --version`**
 
 <!--
 HOW TO FIND VERSION
 1. cd into vim-doge directory
-2. run `./bin/vim-doge --version`
+2. run `./bin/vim-doge-helper  --version`
 -->
 
 **Output of `vim --version`**
