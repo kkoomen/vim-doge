@@ -17,7 +17,7 @@ jobs:
         # os: [ubuntu-latest, windows-latest, macos-latest]
         # vim-version: [v7.4.2119, v8.2.5172, head]
         os: [windows-latest]
-        vim-version: [v7.4.2119]
+        vim-version: [v8.2.5172, head]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
