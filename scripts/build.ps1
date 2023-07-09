@@ -39,17 +39,17 @@ Set-Location "$RootDir/helper"
 
 Get-DirectoryTree
 
-if ($BuildTarget -ne "") {
-  cargo.exe build --release --target $BuildTarget
+if ($BuildTarget && $BuildTarget -ne "") {
+  cargo build --release --target $BuildTarget
   Copy-Item -Path "target/$BuildTarget/release/vim-doge-helper.exe" -Destination "../bin/"
 }
 else {
-  cargo.exe build --release
+  cargo build --release
   Copy-Item -Path "target/release/vim-doge-helper.exe" -Destination "../bin/"
 }
 
 # Archive the binary.
-if ($OutFile -ne "") {
+if ($OutFile && $OutFile -ne "") {
   $OutFile = "$OutFile.zip"
 
   Set-Location "$RootDir/bin"
