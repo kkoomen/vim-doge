@@ -183,7 +183,7 @@ copy the mappings below and change them to your needs:
 " Generate comment for current line.
 nmap <silent> <Leader>d <Plug>(doge-generate)
 
-" Interactive mode comment todo-jumping
+" Interactive mode comment todo-jumping.
 nmap <silent> <TAB> <Plug>(doge-comment-jump-forward)
 nmap <silent> <S-TAB> <Plug>(doge-comment-jump-backward)
 imap <silent> <TAB> <Plug>(doge-comment-jump-forward)
@@ -418,6 +418,8 @@ After that, you can do the following:
 :bulb: If you're working on specific tests, you can run that specific test only:
 `Vader test/filetypes/<filetype>/functions.<ext>`.
 
+For more information, see [Contribution Guidelines][contrib-guide].
+
 # Motivation
 
 I created vim-doge mainly because I couldn't find a plugin that could generate
@@ -425,8 +427,8 @@ proper comments for a big collection of languages that I would use on a daily
 basis in a quick and easy way.
 
 Rather than scraping off the internet to find all sorts of vim plugins for every
-language I was coding in, I did want a single plugin that would support every
-language I was working in.
+language I was coding in, I was more or less looking for a single plugin that
+supports every language I was working in.
 
 Another big motivation for me is that I've noticed people tend to skip the
 documentation part because writing _just the skeleton_ of the comment takes
