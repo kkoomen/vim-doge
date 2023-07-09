@@ -36,8 +36,14 @@ jobs:
           path: ~/.cargo
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - run: ./scripts/build.sh
+      - name: Build (unix)
+        if: matrix.os != 'windows-latest'
+        run: ./scripts/build.sh
         shell: bash
+
+      - name: Build (windows)
+        if: matrix.os == 'windows-latest'
+        run: ./scripts/build.ps1
 
       - name: Setup vim
         uses: thinca/action-setup-vim@v1
