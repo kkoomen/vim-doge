@@ -1,14 +1,17 @@
 ## [4.0.0](https://github.com/kkoomen/vim-doge/compare/v3.22.0...v4.0.0) (2023-07-09)
 
-In v4 a new custom [vim-doge-helper](./helper/) has been created, completely developed in Rust from scratch, being a replacement for the old NodeJS version that vim-doge had in v3.
+In v4 a new custom [vim-doge-helper](https://github.com/kkoomen/vim-doge/tree/v4.0.0/helper) has been created, completely developed in Rust from scratch, being a replacement for the old NodeJS version that vim-doge had in v3.
+
+TL;DR: v4 now generates docblocks ~96% faster and has 87% smaller bundle sizes compared to v3.
 
 This new version resolves the following problems that existed prior to v4:
 - Failing Windows builds due to node-gyp build problems
-- **Templating limitations:** v3 contained basic templating functionality that was customly written, as opposed to v4 that uses [Tera](https://tera.netlify.app/docs)
+- **Templating limitations:** v3 contained basic templating functionality that was custom written, as opposed to v4 that uses [Tera](https://tera.netlify.app/docs)
 - **Limited platform builds:** v3 required due to NodeJS that binaries were created on the target machine itself that it was eventually used for. Windows builds had to be created on a windows runner and support for Apple Silicon had to be build on arm64 machines, but v4 can use the power of cross-compilation of Rust (through LLVM) to make builds for multiple architectures.
 - **Tree-sitter language limitations:** v3 required parsers to be published on NPM, but these packages aren't maintained that well. If there was no package of a certain parser on NPM, then we simply can't implement the language. With v4 we can use the tree-sitter GitHub source to be included in Cargo.toml that can link everything properly from C to Rust and we don't need any third-party package manager anymore in-between vim-doge and tree-sitter.
 - **Vimscript logic:** v3 contained docblock generating logic that should actually not be managed in vim. For example, It used plain regex to do some additional pre/post-processing rather than using tree-sitter. In v4 all the logic has been moved to the vim-doge-helper and all the vimscript code is only a bridge between the user and the vim-doge-helper.
-- **Speed:** v4 allows docblocks to be generated with the blink of an eye, as opposed to v3 where users had to wait a bit, and even worse, the first docblock genereration you did in v3 after you've downloaded the vim-doge binary, did require NodeJS to start the runtime which lead to a total wait time of &pm;0.4s until the docblock was generated. With v4, codeblocks are generated in about &pm;0.015s.
+- **Speed:** v4 allows docblocks to be generated with the blink of an eye, as opposed to v3 where users had to wait a bit, and even worse, the first docblock genereration you did in v3 after you've downloaded the vim-doge binary, did require NodeJS to start the runtime which lead to a total wait time of &pm;0.4s until the docblock was generated. With v4, docblock are generated in about &pm;0.015s.
+- **Bundle size:** v3 bundles were ~30MB, whereas v4 bundles are ~4MB (87% smaller)
 
 ## [3.22.0](https://github.com/kkoomen/vim-doge/compare/v3.21.0...v3.22.0) (2023-06-10)
 
