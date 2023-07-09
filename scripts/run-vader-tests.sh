@@ -21,6 +21,8 @@ function filter-vader-output() {
   local hit_first_vader_line=0
   local force_echo=0
 
+  echo "$REPLY"
+
   while read -r; do
     # Search for the first Vader output line.
     if ((!hit_first_vader_line)); then
@@ -38,14 +40,14 @@ function filter-vader-output() {
       force_echo=0
     fi
 
-    if [[ "$REPLY" =~ \[[A-Z\ ]+\] ]] \
-      || [[ "$REPLY" = *'Starting Vader:'* ]] \
-      || [[ "$REPLY" = *'Success/Total'* ]] \
-      || [[ "$REPLY" = *'Elapsed time:'* ]] \
-      || [[ $force_echo = 1 ]]
-    then
-      echo "$REPLY"
-    fi
+    # if [[ "$REPLY" =~ \[[A-Z\ ]+\] ]] \
+    #   || [[ "$REPLY" = *'Starting Vader:'* ]] \
+    #   || [[ "$REPLY" = *'Success/Total'* ]] \
+    #   || [[ "$REPLY" = *'Elapsed time:'* ]] \
+    #   || [[ $force_echo = 1 ]]
+    # then
+    #   echo "$REPLY"
+    # fi
   done
 
   # Echo a 1 into the temp file to indicate this (re)try is successful.
@@ -108,8 +110,7 @@ while [ "$tries" -lt $max_retries ]; do
 
   set -o pipefail
 
-  # "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
-  "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 || exit_code=$?
+  "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
 
   set +o pipefail
 
