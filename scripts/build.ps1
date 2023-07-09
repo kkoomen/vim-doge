@@ -1,6 +1,6 @@
+param([String] $BuildTarget)
+param([String] $OutFile)
 $RootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
-$BuildTarget = $args[0]
-$OutFile = $args[1]
 
 Set-Location $RootDir
 if (!(Test-Path -Path "./bin")) { New-Item -ItemType Directory -Path "./bin" | Out-Null }
