@@ -1,4 +1,4 @@
-$rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
+$RootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
 $BuildTarget = $args[0]
 $OutFile = $args[1]
 
