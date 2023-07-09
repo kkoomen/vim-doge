@@ -66,46 +66,6 @@ function! doge#helpers#trim(string) abort
 endfunction
 
 "" @public
-" Recursively merge nested dictionaries and/or lists.
-" a:1 is the base dictionary and every other parameter will be merged onto a:1.
-"
-" If you append '1' as the last argument then this will indicate that lists will
-" be merged together instead overwritten. Example:
-"
-"   doge#helpers#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
-"
-" The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
-function! doge#helpers#deepextend(...) abort
-  let l:merge_lists = type(a:000[-1]) is v:t_bool && a:000[-1] == v:true
-
-  " Thanks to: https://vi.stackexchange.com/a/20843
-  let l:args = filter(copy(a:000), 'type(v:val) == v:t_dict')
-  let l:new = deepcopy(a:1)
-  for l:arg in l:args
-    let l:index = index(l:args, l:arg)
-    if l:index == 0
-      continue
-    endif
-    for [l:k, l:v] in items(l:arg)
-      if type(l:v) is v:t_dict && type(get(l:new, l:k)) is v:t_dict
-        let l:new[l:k] = doge#helpers#deepextend(l:new[l:k], l:v, l:merge_lists)
-      elseif type(l:v) is v:t_list && type(get(l:new, l:k)) is v:t_list && l:merge_lists == v:true
-        let l:new[l:k] = uniq(sort(extend(copy(get(l:new, l:k)), l:v)))
-      else
-        let l:new[l:k] = l:v
-      endif
-    endfor
-  endfor
-  return l:new
-endfunction
-
-"" @public
-" Substitute input recursively.
-function! doge#helpers#deepsubstitute(input, search, replacement, flags) abort
-  return eval(substitute(string(a:input), a:search, a:replacement, a:flags))
-endfunction
-
-"" @public
 " Get the current filetype. Returns the original filetype if the current
 " filetype is an alias.
 function! doge#helpers#get_filetype() abort

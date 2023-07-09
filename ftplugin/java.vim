@@ -1,8 +1,3 @@
-" ==============================================================================
-" The Java documentation should follow the 'JavaDoc' conventions.
-" see https://www.oracle.com/technetwork/articles/javase/index-137868.html
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

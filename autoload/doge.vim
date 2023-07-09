@@ -5,7 +5,8 @@ let s:comment_placeholder = doge#helpers#placeholder()
 
 ""
 " @public
-" Run a parser which will produce all the parameters and return the output.
+" Run the vim-doge-helper in order to parse the user's code and generate the
+" actual docblock to be inserted later on.
 function! doge#run_parser() abort
   let l:executables = [
         \ '/helper/target/release/vim-doge-helper',

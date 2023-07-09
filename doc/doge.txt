@@ -15,7 +15,7 @@ INTRODUCTION                                                      *doge-intro*
 We all love documentation because it makes our codebases easier to understand,
 yet no one has time to write it in a good and proper way.
 
-DoGe is a (Do)cumentation (Ge)nerator which will generate a proper
+Vim-doge is a (Do)cumentation (Ge)nerator which will generate a proper
 documentation skeleton based on certain expressions (mainly functions). Simply
 put your cursor on a function, press `<Leader>d`, jump quickly through TODO
 items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
@@ -87,8 +87,12 @@ COMMANDS                                                       *doge-commands*
 ==============================================================================
 FUNCTIONS                                                     *doge-functions*
 
+doge#run_parser()                                          *doge#run_parser()*
+  Run the vim-doge-helper in order to parse the user's code and generate the
+  actual docblock to be inserted later on.
+
 doge#generate({arg})                                         *doge#generate()*
-  Generates documentation based on available patterns in b:doge_patterns.
+  Main function used for generating documentation.
 
   arg: Either a count (0 by default) or a string (empty by default).
 
@@ -109,24 +113,9 @@ doge#on_filetype_change()                          *doge#on_filetype_change()*
 doge#install()                                                *doge#install()*
   Install the necessary dependencies.
 
-doge#buffer#initialized()                          *doge#buffer#initialized()*
-  Returns a bool whether the current buffer is a supported filetype.
-
-doge#buffer#get_supported_doc_standards({defaults})
-                                   *doge#buffer#get_supported_doc_standards()*
-  'defaults': A list of supported doc standards that should be allowed.
-  Returns a list of accepted doc standards.
-
 doge#buffer#get_doc_standard({filetype})      *doge#buffer#get_doc_standard()*
   'filetype': The filetype where we initialized the b:doge_doc_standard.
   Returns the current active doc standard.
-
-doge#buffer#get_patterns()                        *doge#buffer#get_patterns()*
-  Returns the b:doge_patterns variable value.
-
-doge#buffer#register_doc_standard({doc_standard}, {patterns})
-                                         *doge#buffer#register_doc_standard()*
-  Add a doc standard to the b:doge_patterns variable.
 
 doge#comment#jump({direction})                           *doge#comment#jump()*
   Jumps to the previous and next TODO item in the comment based on the
@@ -160,37 +149,10 @@ doge#helpers#keyseq({seq})                             *doge#helpers#keyseq()*
   Useful when returning a dynamic value such as a user-configurable setting.
 
 doge#helpers#placeholder()                        *doge#helpers#placeholder()*
-  Generate a placeholder with optionally a context. Optionally, you can pass
-  the context using the following example call:
-
-    doge#helpers#placeholder('summary')
-
-  The above will return:
-
-    'TODO<summary>'
-
-  If no context is specified the todo-pattern is returned to search for.
+  Returns the todo-pattern that is used for interactive mode
 
 doge#helpers#trim({string})                              *doge#helpers#trim()*
   Helper for compatibility with vim versions without the trim() function.
-
-doge#helpers#parser({args})                            *doge#helpers#parser()*
-  Run a parser which will produce all the parameters and return the output.
-
-doge#helpers#deepextend()                          *doge#helpers#deepextend()*
-  Recursively merge nested dictionaries and/or lists. a:1 is the base
-  dictionary and every other parameter will be merged onto a:1.
-
-  If you append '1' as the last argument then this will indicate that lists
-  will be merged together instead overwritten. Example:
-
-    doge#helpers#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
-
-  The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
-
-doge#helpers#deepsubstitute({input}, {search}, {replacement}, {flags})
-                                               *doge#helpers#deepsubstitute()*
-  Substitute input recursively.
 
 doge#helpers#get_filetype()                      *doge#helpers#get_filetype()*
   Get the current filetype. Returns the original filetype if the current
@@ -199,41 +161,13 @@ doge#helpers#get_filetype()                      *doge#helpers#get_filetype()*
 doge#indent#add({indent}, {text})                          *doge#indent#add()*
   Indent a string based on a given line its indent, based on the user setting.
 
-doge#pattern#generate({pattern})                     *doge#pattern#generate()*
-  Generates a comment based on a given pattern.
-
-doge#pattern#custom({name})                            *doge#pattern#custom()*
-  Generates a template for a custom doc standard, and places it in
-  after/ftplugin/{&ft}.vim
-
-doge#token#replace({tokens}, {text})                    *doge#token#replace()*
-  Replace all tokens in the text parameter based on a given dictionary
-  containing all the tokens.
-
-doge#token#extract({text}, {regex}, {regex_group_names})
-                                                        *doge#token#extract()*
-  Extract all the tokens in a text by creating a dictionary holding key-value
-  pairs where the 'key' is the given group name and the 'value' the captured
-  value of that group. The regex groups in the 'regex' parameter should be
-  symmetrical in length to the 'regex_group_names' parameter.
-
 ==============================================================================
 PREPROCESSORS                                             *doge-preprocessors*
 
 Preprocess functions are called for specific filetypes when doge is generating
 a comment. The following preprocess functions are available:
 
-  doge#preprocessors#<filetype>#tokens(tokens)
-
-  doge#preprocessors#<filetype>#parameters_tokens(tokens)
-
-  doge#preprocessors#<filetype>#type_parameters_tokens(tokens)
-
-  doge#preprocessors#<filetype>#exceptions_tokens(tokens)
-
-  doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
-
-  doge#preprocessors#<filetype>#template(template)
+  doge#preprocessors#<language>#alter_parser_args(parser_args)
 
 
 vim:tw=78:ts=8:ft=help:norl:

@@ -1,8 +1,3 @@
-" ==============================================================================
-" The Ruby documentation should follow the 'YARD' conventions.
-" see https://www.rubydoc.info/gems/yard/file/docs/Tags.md
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

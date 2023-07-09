@@ -1,9 +1,3 @@
-" ==============================================================================
-" The C documentation should follow the 'Doxygen' conventions.
-" - Doxygen: http://www.doxygen.nl/manual/docblocks.html
-" - KernelDoc: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

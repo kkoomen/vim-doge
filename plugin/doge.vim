@@ -26,10 +26,10 @@ endif
 " We all love documentation because it makes our codebases easier to understand,
 " yet no one has time to write it in a good and proper way.
 "
-" DoGe is a (Do)cumentation (Ge)nerator which will generate a proper
+" Vim-doge is a (Do)cumentation (Ge)nerator which will generate a proper
 " documentation skeleton based on certain expressions (mainly functions).
-" Simply put your cursor on a function, press `<Leader>d`, jump quickly through TODO
-" items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
+" Simply put your cursor on a function, press `<Leader>d`, jump quickly through
+" TODO items using `<Tab>` and `<S-Tab>` to quickly add descriptions and go on
 " coding!
 
 " }}}
@@ -41,17 +41,7 @@ endif
 " Preprocess functions are called for specific filetypes when @plugin(name) is
 " generating a comment. The following preprocess functions are available:
 "
-"   doge#preprocessors#<filetype>#tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#parameters_tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#type_parameters_tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#exceptions_tokens(tokens)
-"
-"   doge#preprocessors#<filetype>#insert_position(lnum_insert_pos)
-"
-"   doge#preprocessors#<filetype>#template(template)
+"   doge#preprocessors#<language>#alter_parser_args(parser_args)
 
 " }}}
 

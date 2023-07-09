@@ -1,8 +1,3 @@
-" ==============================================================================
-" The Lua documentation should follow the 'LDoc' conventions.
-" see https://github.com/stevedonovan/LDoc
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

@@ -1,8 +1,3 @@
-" ==============================================================================
-" The JavaScript documentation should follow the 'jsdoc' conventions.
-" see https://jsdoc.app
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

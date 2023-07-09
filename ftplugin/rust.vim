@@ -1,8 +1,3 @@
-" ==============================================================================
-" The Rust documentation should follow the 'rustdoc' conventions.
-" see https://doc.rust-lang.org/rust-by-example/meta/doc.html
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

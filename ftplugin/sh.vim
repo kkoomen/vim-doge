@@ -1,8 +1,3 @@
-" ==============================================================================
-" The Shell documentation should follow the 'Google' conventions.
-" see https://google.github.io/styleguide/shell.xml#Function_Comments
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 

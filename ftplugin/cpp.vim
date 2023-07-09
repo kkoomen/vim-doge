@@ -1,8 +1,3 @@
-" ==============================================================================
-" The C++ documentation should follow the 'Doxygen' conventions.
-" see http://www.doxygen.nl/manual/docblocks.html
-" ==============================================================================
-
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
