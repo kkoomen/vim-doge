@@ -62,7 +62,7 @@ if !exists('g:doge_mapping')
   ""
   " (Default: '<Leader>d')
   "
-  " The mapping to trigger DoGe. The mapping accepts a count, to select a
+  " The mapping to trigger vim-doge. The mapping accepts a count, to select a
   " specific doc standard, if more than one is defined.
   let g:doge_mapping = '<Leader>d'
 endif

@@ -2,7 +2,14 @@
 
 Helper extension for the [vim-doge](https://github.com/kkoomen/vim-doge)
 plugin that parses code in order to generate docblocks using
-[tree-sitter](https://github.com/tree-sitter/tree-sitter).
+[tree-sitter](https://github.com/tree-sitter/tree-sitter), written in Rust.
+
+# Table of Contents
+- [vim-doge-helper](#vim-doge-helper)
+- [Table of Contents](#table-of-contents)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
 
 # Installation
 

@@ -35,7 +35,7 @@ generate documentation.
 **Settings**
 
 <!--
-If applicable, describe your custom DoGe settings like so:
+If applicable, describe your custom vim-doge settings like so:
 
 ```vim
 let g:doge_mapping = '<Leader>f'
