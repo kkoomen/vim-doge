@@ -1,0 +1,26 @@
+# ==============================================================================
+# Function calls
+# ==============================================================================
+Given javascript (function call):
+  AdminPermissionModel.create(item);
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (to not have generated a docblock):
+  AdminPermissionModel.create(item);
+
+# ==============================================================================
+# Assignment expressions
+# ==============================================================================
+Given javascript (function call):
+  class Foo {}
+  Foo.PropTypes = {};
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect javascript (to not have generated a docblock):
+  class Foo {}
+  Foo.PropTypes = {};

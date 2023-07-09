@@ -58,10 +58,12 @@ function! doge#run_parser() abort
           echo 'Exception: ' . v:exception . "\n\n"
           echo 'Helper output: ' . l:result . "\n"
           echoerr g:doge_prefix . ' ' . b:doge_parser . ' parser failed'
+          return 0
         endif
       finally
         call setpos('.', l:cursor_pos)
         call delete(l:tempfile)
+        return 1
       endtry
     endif
   endfor

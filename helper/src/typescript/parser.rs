@@ -64,9 +64,9 @@ impl<'a> TypescriptParser<'a> {
     fn parse_node(&self, node: &Node) -> Option<Result<Map<String, Value>, String>> {
         for child_node in traverse::PreOrder::new(node.walk()) {
             if child_node.start_position().row + 1 == *self.line && self.node_types.contains(&child_node.kind()) {
-                // Do not further parse function calls.
+                // Ignore assignments and function calls.
                 if let Some(parent_node) = child_node.parent() {
-                    if parent_node.kind() == "call_expression" {
+                    if ["call_expression", "assignment_expression"].contains(&parent_node.kind()) {
                         return None;
                     }
                 }
