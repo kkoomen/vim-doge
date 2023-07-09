@@ -1,6 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: npm
-    directory: "/"
+  - package-ecosystem: cargo
+    directory: "/helper"
+    open-pull-requests-limit: 0
     schedule:
       interval: daily
