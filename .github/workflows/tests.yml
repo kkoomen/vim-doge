@@ -14,9 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-20.04, macos-latest]
+        # os: [ubuntu-latest, macos-latest]
         # vim-version: [v7.4.2119, v8.2.5172, head]
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest]
         vim-version: [v7.4.2119]
     runs-on: ${{ matrix.os }}
     steps:
@@ -88,13 +88,12 @@ jobs:
   #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
   #       shell: bash
   #
-  #
   # tests_neovim:
   #   name: Neovim (unix)
   #   strategy:
   #     fail-fast: false
   #     matrix:
-  #       os: [ubuntu-20.04, macos-latest]
+  #       os: [ubuntu-latest, macos-latest]
   #       vim-version: [v0.3.2, head]
   #   runs-on: ${{ matrix.os }}
   #   steps:
@@ -129,7 +128,7 @@ jobs:
   #
   # vint:
   #   name: Linter
-  #   runs-on: ubuntu-20.04
+  #   runs-on: ubuntu-latest
   #   steps:
   #     - uses: actions/checkout@v2
   #     - uses: actions/setup-python@v1
