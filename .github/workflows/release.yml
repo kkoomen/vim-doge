@@ -23,6 +23,7 @@ jobs:
             asset_path: ./bin/vim-doge-helper-macos-aarch64.tar.gz
 
           - platform: ubuntu-latest                           # Linux
+            target: x86_64-unknown-linux-gnu
             asset_name: vim-doge-helper-linux
             asset_path: ./bin/vim-doge-helper-linux.tar.gz
 
