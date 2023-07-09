@@ -10,11 +10,11 @@ on:
 
 jobs:
   tests_vim:
-    name: Vim
+    name: Vim (unix)
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-20.04, macos-latest]
         vim-version: [v7.4.2119, v8.2.5172, head]
     runs-on: ${{ matrix.os }}
     steps:
@@ -88,11 +88,11 @@ jobs:
 
 
   tests_neovim:
-    name: Neovim
+    name: Neovim (unix)
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-20.04, macos-latest]
         vim-version: [v0.3.2, head]
     runs-on: ${{ matrix.os }}
     steps:

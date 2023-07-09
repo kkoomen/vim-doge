@@ -603,7 +603,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-bash"
 version = "0.19.0"
-source = "git+https://github.com/tree-sitter/tree-sitter-bash#493646764e7ad61ce63ce3b8c59ebeb37f71b841"
+source = "git+https://github.com/tree-sitter/tree-sitter-bash?rev=4936467#493646764e7ad61ce63ce3b8c59ebeb37f71b841"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -612,7 +612,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-c"
 version = "0.20.2"
-source = "git+https://github.com/tree-sitter/tree-sitter-c#84bdf409067676dd5c003b2a7cb7760456e731bf"
+source = "git+https://github.com/tree-sitter/tree-sitter-c?rev=84bdf40#84bdf409067676dd5c003b2a7cb7760456e731bf"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -621,7 +621,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-c-sharp"
 version = "0.20.0"
-source = "git+https://github.com/tree-sitter/tree-sitter-c-sharp#1648e21b4f087963abf0101ee5221bb413107b07"
+source = "git+https://github.com/tree-sitter/tree-sitter-c-sharp?rev=1648e21#1648e21b4f087963abf0101ee5221bb413107b07"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -630,7 +630,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-cpp"
 version = "0.20.0"
-source = "git+https://github.com/tree-sitter/tree-sitter-cpp#0e7b7a02b6074859b51c1973eb6a8275b3315b1d"
+source = "git+https://github.com/tree-sitter/tree-sitter-cpp?rev=0e7b7a0#0e7b7a02b6074859b51c1973eb6a8275b3315b1d"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -639,7 +639,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-java"
 version = "0.20.0"
-source = "git+https://github.com/tree-sitter/tree-sitter-java#c194ee5e6ede5f26cf4799feead4a8f165dcf14d"
+source = "git+https://github.com/tree-sitter/tree-sitter-java?rev=c194ee5#c194ee5e6ede5f26cf4799feead4a8f165dcf14d"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -648,7 +648,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-lua"
 version = "0.0.1"
-source = "git+https://github.com/Azganoth/tree-sitter-lua#6b02dfd7f07f36c223270e97eb0adf84e15a4cef"
+source = "git+https://github.com/Azganoth/tree-sitter-lua?rev=6b02dfd#6b02dfd7f07f36c223270e97eb0adf84e15a4cef"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -666,7 +666,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-python"
 version = "0.20.2"
-source = "git+https://github.com/tree-sitter/tree-sitter-python#36f9e33d52b7572536ac1a8af8d7e78363ad52c3"
+source = "git+https://github.com/tree-sitter/tree-sitter-python?rev=36f9e33#36f9e33d52b7572536ac1a8af8d7e78363ad52c3"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -675,7 +675,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-ruby"
 version = "0.20.0"
-source = "git+https://github.com/tree-sitter/tree-sitter-ruby#f257f3f57833d584050336921773738a3fd8ca22"
+source = "git+https://github.com/tree-sitter/tree-sitter-ruby?rev=f257f3f#f257f3f57833d584050336921773738a3fd8ca22"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -684,7 +684,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-rust"
 version = "0.20.3"
-source = "git+https://github.com/tree-sitter/tree-sitter-rust#0a70e15da977489d954c219af9b50b8a722630ee"
+source = "git+https://github.com/tree-sitter/tree-sitter-rust?rev=0a70e15#0a70e15da977489d954c219af9b50b8a722630ee"
 dependencies = [
  "cc",
  "tree-sitter",
@@ -693,7 +693,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-typescript"
 version = "0.20.2"
-source = "git+https://github.com/tree-sitter/tree-sitter-typescript#3429d8c77d7a83e80032667f0642e6cb19d0c772"
+source = "git+https://github.com/tree-sitter/tree-sitter-typescript?rev=3429d8c#3429d8c77d7a83e80032667f0642e6cb19d0c772"
 dependencies = [
  "cc",
  "tree-sitter",

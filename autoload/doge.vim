@@ -9,6 +9,7 @@ let s:comment_placeholder = doge#utils#placeholder()
 " actual docblock to be inserted later on.
 function! doge#run_parser() abort
   let l:executables = [
+        \ '/helper/target/release/vim-doge-helper.exe',
         \ '/helper/target/release/vim-doge-helper',
         \ '/bin/vim-doge-helper',
         \ ]
