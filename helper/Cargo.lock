@@ -648,7 +648,7 @@ dependencies = [
 [[package]]
 name = "tree-sitter-lua"
 version = "0.0.1"
-source = "git+https://github.com/Azganoth/tree-sitter-lua?rev=6b02dfd#6b02dfd7f07f36c223270e97eb0adf84e15a4cef"
+source = "git+https://github.com/Azganoth/tree-sitter-lua?rev=e198b76#e198b76a227f8b8bb024985ace8bcb5a2c18e13f"
 dependencies = [
  "cc",
  "tree-sitter",

@@ -1,0 +1,26 @@
+# ==============================================================================
+# Function calls that should not generate documentation
+# ==============================================================================
+Given javascript (function call):
+  AdminPermissionModel.create(item);
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (to not have generated a docblock):
+  AdminPermissionModel.create(item);
+
+# ==============================================================================
+# Member expressions with no function_name
+# ==============================================================================
+Given javascript (member expression with no function name):
+  class Foo {}
+  Foo.propTypes = {};
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect javascript (to not have generated a docblock):
+  class Foo {}
+  Foo.propTypes = {};

@@ -80,7 +80,14 @@ impl<'a> TypescriptParser<'a> {
                     "generator_function_declaration" |
                     "method_definition" => Some(self.parse_function(&child_node)),
 
-                    "member_expression" => Some(self.parse_member_expression(&child_node)),
+                    "member_expression" => {
+                        let tokens = self.parse_member_expression(&child_node).unwrap();
+                        if tokens.is_empty() {
+                            None
+                        } else {
+                            Some(Ok(tokens))
+                        }
+                    },
 
                     "class" | "class_declaration" => Some(self.parse_class(&child_node)),
 
@@ -167,6 +174,10 @@ impl<'a> TypescriptParser<'a> {
                 },
                 _ => {},
             }
+        }
+
+        if tokens.get("function_name").is_none() {
+            return Ok(Map::new());
         }
 
         if let Some(parent) = node.parent() {
