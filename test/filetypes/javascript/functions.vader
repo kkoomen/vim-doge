@@ -338,7 +338,6 @@ Given javascript (functions with destructuring_props):
 
   function foo({ a, b: str, c = 3, d: int = 5 }) {}
 
-
 Do (trigger doge):
   :let g:doge_javascript_settings['destructuring_props'] = 1\<CR>
   :1\<CR>

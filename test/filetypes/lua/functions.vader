@@ -1,53 +1,53 @@
-# ==============================================================================
-# Functions without parameters.
-# ==============================================================================
-Given lua (function without parameters):
-  function myFunc() -- inline comment
-  end
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (generated comment with nothing but the summary and description 'TODO'):
-  -- [TODO:summary]
-  -- [TODO:description]
-  function myFunc() -- inline comment
-  end
-
-# ==============================================================================
-# Functions with parameters.
-# ==============================================================================
-Given lua (function with parameters):
-  function myFunc(p1, p2, p3, p4) -- inline comment
-  end
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (generated comment with @param tags):
-  -- [TODO:summary]
-  -- [TODO:description]
-  -- @param p1 [TODO:description]
-  -- @param p2 [TODO:description]
-  -- @param p3 [TODO:description]
-  -- @param p4 [TODO:description]
-  function myFunc(p1, p2, p3, p4) -- inline comment
-  end
-
-# ==============================================================================
-# Functions as a variable value.
-# ==============================================================================
-Given lua (function as a variable value with parameters):
-  local myFunc = function(p1, p2)
-  end
-
-Do (trigger doge):
-  \<C-d>
-
-Expect lua (generated comment with @param tags):
-  -- [TODO:summary]
-  -- [TODO:description]
-  -- @param p1 [TODO:description]
-  -- @param p2 [TODO:description]
-  local myFunc = function(p1, p2)
-  end
+" # ==============================================================================
+" # Functions without parameters.
+" # ==============================================================================
+" Given lua (function without parameters):
+"   function myFunc() -- inline comment
+"   end
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (generated comment with nothing but the summary and description 'TODO'):
+"   -- [TODO:summary]
+"   -- [TODO:description]
+"   function myFunc() -- inline comment
+"   end
+"
+" # ==============================================================================
+" # Functions with parameters.
+" # ==============================================================================
+" Given lua (function with parameters):
+"   function myFunc(p1, p2, p3, p4) -- inline comment
+"   end
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (generated comment with @param tags):
+"   -- [TODO:summary]
+"   -- [TODO:description]
+"   -- @param p1 [TODO:description]
+"   -- @param p2 [TODO:description]
+"   -- @param p3 [TODO:description]
+"   -- @param p4 [TODO:description]
+"   function myFunc(p1, p2, p3, p4) -- inline comment
+"   end
+"
+" # ==============================================================================
+" # Functions as a variable value.
+" # ==============================================================================
+" Given lua (function as a variable value with parameters):
+"   local myFunc = function(p1, p2)
+"   end
+"
+" Do (trigger doge):
+"   \<C-d>
+"
+" Expect lua (generated comment with @param tags):
+"   -- [TODO:summary]
+"   -- [TODO:description]
+"   -- @param p1 [TODO:description]
+"   -- @param p2 [TODO:description]
+"   local myFunc = function(p1, p2)
+"   end
