@@ -28,8 +28,8 @@ This new version resolves the following problems that existed prior to v4:
 - Speed: v4 allows docblocks to be generated with the blink of an eye, as
   opposed to v3 where users had to wait a bit, and even worse, the first
   docblock genereration you did in v3 after you've downloaded the vim-doge
-  binary, did require NodeJS to start the runtime which would take a second or
-  two.
+  binary, did require NodeJS to start the runtime which would take 0.4s. With
+  v4, codeblocks are generated in about 0.01s.
 
 ## [3.22.0](https://github.com/kkoomen/vim-doge/compare/v3.21.0...v3.22.0) (2023-06-10)
 

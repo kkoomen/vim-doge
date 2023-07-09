@@ -26,8 +26,13 @@ if (Test-Path $OutFile) {
   Remove-Item "$OutFile"
 }
 
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls, [Net.SecurityProtocolType]::Tls11, [Net.SecurityProtocolType]::Tls12, [Net.SecurityProtocolType]::Ssl3
-[Net.ServicePointManager]::SecurityProtocol = "Tls, Tls11, Tls12, Ssl3"
+try {
+  [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls, [Net.SecurityProtocolType]::Tls11, [Net.SecurityProtocolType]::Tls12, [Net.SecurityProtocolType]::Ssl3
+  [Net.ServicePointManager]::SecurityProtocol = "Tls, Tls11, Tls12, Ssl3"
+  Write-Host "Successfully set SSL/TLS security protocol"
+} catch {
+  Write-Host "Failed to set SSL/TLS security protocol"
+}
 
 Invoke-WebRequest -Uri $DownloadUrl -OutFile ( New-Item -Path "$AssetPath" -Force )
 Expand-Archive -LiteralPath "$AssetPath" -DestinationPath "$RootDir.\bin"

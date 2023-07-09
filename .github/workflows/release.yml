@@ -56,7 +56,7 @@ jobs:
         if: runner.os == 'Windows'
         run: ./scripts/build.ps1 "${{ matrix.settings.target }}" "${{ matrix.settings.asset_name }}"
 
-      - name: Set project
+      - name: Get current app version
         id: tag_name
         run: echo "version=$(cat .version)" >> "$GITHUB_OUTPUT"
         shell: bash
@@ -71,6 +71,7 @@ jobs:
           prerelease: true
 
   test_uploaded_builds:
+    name: Test uploaded builds
     needs: build_and_upload_release_assets
     strategy:
       fail-fast: false
