@@ -5,10 +5,7 @@
 set -e
 set -u
 
-if which curl 2>&1 > /dev/null
-then
-  continue
-else
+if ! which curl > /dev/null 2>&1; then
   echo "curl: command not found" >&2
   echo 'Please make sure that curl is installed and available in your $PATH' >&2
   exit 127

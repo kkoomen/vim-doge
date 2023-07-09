@@ -69,3 +69,40 @@ jobs:
           files: ${{ matrix.settings.asset_path }}
           draft: false
           prerelease: true
+
+  test_uploaded_builds:
+    needs: build_and_upload_release_assets
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v3
+
+      - name: Download binary (unix)
+        if: runner.os != 'Windows'
+        run: ./scripts/install.sh
+        shell: bash
+
+      - name: Test binary (unix)
+        if: runner.os != 'Windows'
+        run: |
+          if ! bin/vim-doge-helper --version > /dev/null 2>&1; then
+            echo "vim-doge-helper is not installed properly"
+            exit 1
+          fi
+        shell: bash
+
+      - name: Download binary (windows)
+        if: runner.os == 'Windows'
+        run: ./scripts/install.ps1
+
+      - name: Test binary (windows)
+        if: runner.os == 'Windows'
+        run: |
+          if (!(bin/vim-doge-helper.exe --version 2>$null)) {
+              Write-Host "vim-doge-helper is not installed properly"
+              exit 1
+          }

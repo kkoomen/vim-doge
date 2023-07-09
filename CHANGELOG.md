@@ -6,7 +6,7 @@ that vim-doge had in v3.
 
 This new version resolves the following problems that existed prior to v4:
 - Failing Windows builds due to node-gyp build problems
-- Templating limitations: v4 contained basic templating functionality that
+- Templating limitations: v3 contained basic templating functionality that
   was customly written, as opposed to v4 that uses
   [Tera](https://tera.netlify.app/docs)
 - Limited platform builds: v3 required due to NodeJS that binaries were created
@@ -30,9 +30,6 @@ This new version resolves the following problems that existed prior to v4:
   docblock genereration you did in v3 after you've downloaded the vim-doge
   binary, did require NodeJS to start the runtime which would take a second or
   two.
-
-
-Besides the above being resolved,
 
 ## [3.22.0](https://github.com/kkoomen/vim-doge/compare/v3.21.0...v3.22.0) (2023-06-10)
 
