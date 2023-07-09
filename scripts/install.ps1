@@ -1,32 +1,32 @@
-echo "Preparing to download vim-doge binary..."
+echo "Preparing to download vim-doge-helper binary..."
 
-$architecture = $env:PROCESSOR_ARCHITECTURE
-if ($architecture -eq 'x86') {
+$Arch = $env:PROCESSOR_ARCHITECTURE
+if ($Arch -eq 'x86') {
   # 32-bit architecture
-  $assetName = "vim-doge-helper-windows-i686.zip"
+  $AssetName = "vim-doge-helper-windows-i686.zip"
 }
 else {
   # 64-bit architecture
-  $assetName = "vim-doge-helper-windows-x86_64.zip"
+  $AssetName = "vim-doge-helper-windows-x86_64.zip"
 }
 
 
-$rootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
-$version = Get-Content "$rootDir\.version"
+$RootDir. = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
+$AppVersion = Get-Content "$RootDir.\.AppVersion"
 
-$assetPath = "$rootDir\bin\$assetName"
-$outFile = "$rootDir\bin\vim-doge.exe"
+$AssetPath = "$RootDir.\bin\$AssetName"
+$OutFile = "$RootDir.\bin\vim-doge.exe"
 
-$downloadUrl = "https://github.com/kkoomen/vim-doge/releases/download/v$version/$assetName"
+$DownloadUrl = "https://github.com/kkoomen/vim-doge/releases/download/v$AppVersion/$AssetName"
 
-if (Test-Path $assetName) {
-  rm "$assetName"
+if (Test-Path $AssetName) {
+  rm "$AssetName"
 }
 
-if (Test-Path $outFile) {
-  rm "$outFile"
+if (Test-Path $OutFile) {
+  rm "$OutFile"
 }
 
-Invoke-WebRequest -uri $downloadUrl -OutFile ( New-Item -Path "$assetPath" -Force )
-Expand-Archive -LiteralPath "$assetPath" -DestinationPath "$rootDir\bin"
-rm "$assetPath"
+Invoke-WebRequest -uri $DownloadUrl -OutFile ( New-Item -Path "$AssetPath" -Force )
+Expand-Archive -LiteralPath "$AssetPath" -DestinationPath "$RootDir.\bin"
+rm "$AssetPath"
