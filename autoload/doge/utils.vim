@@ -6,7 +6,7 @@ let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
 
 ""
 " @public
-" @function doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
+" @function doge#utils#count({word} [, {lnum_start}, {lnum_end} ])
 " Returns the amount of occurences of a word.
 "
 " The 2nd and 3rd arguments, named lnum_start and lnum_end, can be used to limit
@@ -14,7 +14,7 @@ let s:no_trim = (has('nvim') && !has('nvim-0.3.2')) ||
 " '%', indicating a full buffer count.
 " NOTE: When lnum_start is a bigger number than lnum_end then these values
 " will be flipped to ensure a correct range format.
-function! doge#helpers#count(word, ...) abort
+function! doge#utils#count(word, ...) abort
   let l:cursor_pos = getpos('.')
   let l:range = '%'
   if (type(a:1) == v:t_number && type(a:2) == v:t_number)
@@ -33,7 +33,7 @@ function! doge#helpers#count(word, ...) abort
     return 0
   endtry
   call setpos('.', l:cursor_pos)
-  return doge#helpers#trim(strpart(l:cnt, 0, stridx(l:cnt, ' ')))
+  return doge#utils#trim(strpart(l:cnt, 0, stridx(l:cnt, ' ')))
 endfunction
 
 "" @public
@@ -43,10 +43,10 @@ endfunction
 " If you append '1' as the last argument then this will indicate that lists will
 " be merged together instead overwritten. Example:
 "
-"   doge#helpers#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
+"   doge#utils#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
 "
 " The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
-function! doge#helpers#deepextend(...) abort
+function! doge#utils#deepextend(...) abort
   let l:merge_lists = type(a:000[-1]) is v:t_bool && a:000[-1] == v:true
 
   " Thanks to: https://vi.stackexchange.com/a/20843
@@ -59,7 +59,7 @@ function! doge#helpers#deepextend(...) abort
     endif
     for [l:k, l:v] in items(l:arg)
       if type(l:v) is v:t_dict && type(get(l:new, l:k)) is v:t_dict
-        let l:new[l:k] = doge#helpers#deepextend(l:new[l:k], l:v, l:merge_lists)
+        let l:new[l:k] = doge#utils#deepextend(l:new[l:k], l:v, l:merge_lists)
       elseif type(l:v) is v:t_list && type(get(l:new, l:k)) is v:t_list && l:merge_lists == v:true
         let l:new[l:k] = uniq(sort(extend(copy(get(l:new, l:k)), l:v)))
       else
@@ -74,7 +74,7 @@ endfunction
 " @public
 " Creates a sequence of keys which can be used as a return value for mappings.
 " Useful when returning a dynamic value such as a user-configurable setting.
-function! doge#helpers#keyseq(seq) abort
+function! doge#utils#keyseq(seq) abort
   let l:escaped_keyseq = printf('"%s"', escape(
         \ substitute(escape(a:seq, '\'), '<', '\\<', 'g'),
         \ '"'))
@@ -85,14 +85,14 @@ endfunction
 ""
 " @public
 " Returns the todo-pattern that is used for interactive mode
-function! doge#helpers#placeholder(...) abort
+function! doge#utils#placeholder(...) abort
   return '\(\[TODO:[[:alnum:]-]\+\]\|TODO\)'
 endfunction
 
 ""
 " @public
-" Helper for compatibility with vim versions without the trim() function.
-function! doge#helpers#trim(string) abort
+" Utility for compatibility with vim versions without the trim() function.
+function! doge#utils#trim(string) abort
   let l:chars = '[ \t\n\r\x0B\xA0]*'
   return s:no_trim
         \ ? substitute(a:string, printf('\m^%s\(.\{-}\)%s$', l:chars, l:chars), '\1', '')
@@ -102,7 +102,7 @@ endfunction
 "" @public
 " Get the current filetype. Returns the original filetype if the current
 " filetype is an alias.
-function! doge#helpers#get_filetype() abort
+function! doge#utils#get_filetype() abort
   for [l:ft, l:aliases] in items(get(g:, 'doge_filetype_aliases', []))
     if index(l:aliases, &filetype) >= 0
       return l:ft

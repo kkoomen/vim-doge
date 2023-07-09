@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let s:comment_placeholder = doge#helpers#placeholder()
+let s:comment_placeholder = doge#utils#placeholder()
 
 ""
 " @public
@@ -37,7 +37,7 @@ function! doge#run_parser() abort
 
       " Call preprocessing function for the filetype, allowing it to add args.
       try
-        let l:preprocess_fn = printf('doge#preprocessors#%s#alter_parser_args', doge#helpers#get_filetype())
+        let l:preprocess_fn = printf('doge#preprocessors#%s#alter_parser_args', doge#utils#get_filetype())
         let l:new_args = function(l:preprocess_fn)(l:args)
         let l:args = l:new_args
       catch /^Vim\%((\a\+)\)\=:E117/
@@ -50,9 +50,14 @@ function! doge#run_parser() abort
           return json_decode(l:result)
         endif
       catch /.*/
-        echo g:doge_prefix . ' ' . b:doge_parser . ' parser failed'
-        echo g:doge_prefix . ' Exception: ' . v:exception
-        echo l:result
+        if &filetype =~# '^vader*'
+          echoerr g:doge_prefix . ' ' . b:doge_parser . " parser failed\n\nLine: \"" . getline('.') . "\"\n\nException: " . v:exception . "\n\nHelper output: " . l:result
+        else
+          echo 'Line: "' . getline('.') . '"' . "\n\n"
+          echo 'Exception: ' . v:exception . "\n\n"
+          echo 'Helper output: ' . l:result . "\n"
+          echoerr g:doge_prefix . ' ' . b:doge_parser . ' parser failed'
+        endif
       finally
         call setpos('.', l:cursor_pos)
         call delete(l:tempfile)
@@ -132,7 +137,7 @@ function! doge#generate(arg) abort
       let l:todo_match = search(s:comment_placeholder, 'bnW', l:comment_lnum_insert_position + 1)
     endif
     if l:todo_match != 0
-      let l:todo_count = doge#helpers#count(
+      let l:todo_count = doge#utils#count(
             \ s:comment_placeholder,
             \ (l:comment_lnum_insert_position + 1),
             \ (l:comment_lnum_insert_position + len(l:comment))
@@ -244,8 +249,8 @@ function! doge#install(...) abort
   for l:filename in ['vim-doge', 'vim-doge.exe']
     let l:filepath = g:doge_dir . '/bin/' . l:filename
     if filereadable(l:filepath)
-      let l:binary_version = doge#helpers#trim(system(shellescape(l:filepath) . ' --version'))
-      let l:local_version = doge#helpers#trim(readfile(g:doge_dir . '/.version')[0])
+      let l:binary_version = doge#utils#trim(system(shellescape(l:filepath) . ' --version'))
+      let l:local_version = doge#utils#trim(readfile(g:doge_dir . '/.version')[0])
       if l:binary_version ==# l:local_version
         echom g:doge_prefix . ' already using latest version, skipping binary download'
         return 0

@@ -7,21 +7,21 @@ Given javascript (anonymous function inside object without parameters):
       //
     },
     myArrowFunc: (/* inline comment */) => {
-      //
+      return 1;
     },
   };
 
 Do (trigger doge):
   :2\<CR>
   \<C-d>
-  :11\<CR>
+  :9\<CR>
   \<C-d>
 
+Expect javascript (generated comment with @returns tags):
   var myObj = {
     /**
      * [TODO:description]
      *
-     * @returns {[TODO:type]} [TODO:description]
      */
     myFunc: function(/* inline comment */) {
       //
@@ -32,7 +32,7 @@ Do (trigger doge):
      * @returns {[TODO:type]} [TODO:description]
      */
     myArrowFunc: (/* inline comment */) => {
-      //
+      return 1;
     },
   };
 

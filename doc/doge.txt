@@ -32,8 +32,8 @@ Whether or not to enable built-in mappings.
                                                               *g:doge_mapping*
 (Default: '<Leader>d')
 
-The mapping to trigger DoGe. The mapping accepts a count, to select a specific
-doc standard, if more than one is defined.
+The mapping to trigger vim-doge. The mapping accepts a count, to select a
+specific doc standard, if more than one is defined.
 
                                                       *g:doge_buffer_mappings*
 (Default: 1)
@@ -134,8 +134,10 @@ doge#comment#deactivate_when_done()      *doge#comment#deactivate_when_done()*
   and will deactivate doge when there are no more TODO items left. Requires
   |g:doge_comment_interactive| to be enabled.
 
-doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
-                                                        *doge#helpers#count()*
+doge#indent#add({indent}, {text})                          *doge#indent#add()*
+  Indent a string based on a given line its indent, based on the user setting.
+
+doge#utils#count({word} [, {lnum_start}, {lnum_end} ])    *doge#utils#count()*
   Returns the amount of occurences of a word.
 
   The 2nd and 3rd arguments, named lnum_start and lnum_end, can be used to
@@ -144,33 +146,30 @@ doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
   bigger number than lnum_end then these values will be flipped to ensure a
   correct range format.
 
-doge#helpers#deepextend()                          *doge#helpers#deepextend()*
+doge#utils#deepextend()                              *doge#utils#deepextend()*
   Recursively merge nested dictionaries and/or lists. a:1 is the base
   dictionary and every other parameter will be merged onto a:1.
 
   If you append '1' as the last argument then this will indicate that lists
   will be merged together instead overwritten. Example:
 
-    doge#helpers#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
+    doge#utils#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
 
   The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
 
-doge#helpers#keyseq({seq})                             *doge#helpers#keyseq()*
+doge#utils#keyseq({seq})                                 *doge#utils#keyseq()*
   Creates a sequence of keys which can be used as a return value for mappings.
   Useful when returning a dynamic value such as a user-configurable setting.
 
-doge#helpers#placeholder()                        *doge#helpers#placeholder()*
+doge#utils#placeholder()                            *doge#utils#placeholder()*
   Returns the todo-pattern that is used for interactive mode
 
-doge#helpers#trim({string})                              *doge#helpers#trim()*
-  Helper for compatibility with vim versions without the trim() function.
+doge#utils#trim({string})                                  *doge#utils#trim()*
+  Utility for compatibility with vim versions without the trim() function.
 
-doge#helpers#get_filetype()                      *doge#helpers#get_filetype()*
+doge#utils#get_filetype()                          *doge#utils#get_filetype()*
   Get the current filetype. Returns the original filetype if the current
   filetype is an alias.
-
-doge#indent#add({indent}, {text})                          *doge#indent#add()*
-  Indent a string based on a given line its indent, based on the user setting.
 
 ==============================================================================
 PREPROCESSORS                                             *doge-preprocessors*

@@ -193,10 +193,11 @@ Given javascript (prototype fat-arrow function without parameters without type h
 Do (trigger doge):
   \<C-d>
 
+Expect javascript (generated comment with @function):
   /**
    * [TODO:description]
    *
-   * @returns {[TODO:type]} [TODO:description]
+   * @function Person#greet
    */
   Person.prototype.greet = () => {};
 

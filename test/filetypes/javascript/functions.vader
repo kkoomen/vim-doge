@@ -84,6 +84,7 @@ Given javascript (function as variable with parameters with type hints):
 Do (trigger doge):
   \<C-d>
 
+Expect javascript (generated comment with @param and @returns tags):
   /**
    * [TODO:description]
    *
@@ -124,9 +125,11 @@ Given javascript (prototype function without parameters without type hints):
 Do (trigger doge):
   \<C-d>
 
+Expect javascript (generated comment with @function, @param and @returns tags):
   /**
    * [TODO:description]
    *
+   * @function Person#greet
    */
   Person.prototype.greet = function () {}
 

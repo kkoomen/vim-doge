@@ -90,7 +90,7 @@ endif
 "
 " If you use the above settings and you open `myfile.vue` then it will behave
 " like you're opening a javascript filetype.
-let g:doge_filetype_aliases = doge#helpers#deepextend({
+let g:doge_filetype_aliases = doge#utils#deepextend({
 \  'javascript': [
 \    'javascript.jsx',
 \    'javascriptreact',
