@@ -14,9 +14,46 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        # vim-version: [v7.4.2119, v8.2.5172, head]
-        # os: [windows-latest]
+        os: [ubuntu-latest, macos-latest]
+        vim-version: [v7.4.2119, v8.2.5172, head]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build
+        run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: thinca/action-setup-vim@v1
+        id: vim
+        with:
+          vim_version: ${{ matrix.vim-version }}
+          vim_type: Vim
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
+
+  tests_vim_windows:
+    name: Vim (windows)
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
         vim-version: [v8.2.5172, head]
     runs-on: ${{ matrix.os }}
     steps:
@@ -35,13 +72,7 @@ jobs:
           path: ~/.cargo
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Build (unix)
-        if: runner.os != 'Windows'
-        run: ./scripts/build.sh
-        shell: bash
-
-      - name: Build (windows)
-        if: runner.os == 'Windows'
+      - name: Build
         run: ./scripts/build.ps1
 
       - name: Setup vim
@@ -49,18 +80,19 @@ jobs:
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
-          vim_type: vim
+          vim_type: Vim
 
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
+
   tests_neovim:
-    name: NeoVim
+    name: Neovim
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
         vim-version: [v0.3.2, head]
     runs-on: ${{ matrix.os }}
     steps:
@@ -87,7 +119,7 @@ jobs:
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
-          vim_type: neovim
+          vim_type: Neovim
 
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
