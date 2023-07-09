@@ -32,7 +32,7 @@ function! doge#run_parser() abort
       if &expandtab == v:true
         let l:args += ['--indent', shiftwidth()]
       else
-        let l:args += ['--tabs']
+        let l:args += ['--use-tabs']
       endif
 
       " Call preprocessing function for the filetype, allowing it to add args.
