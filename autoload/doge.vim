@@ -103,7 +103,7 @@ function! doge#generate(arg) abort
     return 0
   endif
 
-  let l:comment = l:parser_result['docblock']
+  let l:comment = copy(l:parser_result['docblock'])
   let l:comment_lnum_insert_position = l:parser_result['line']
 
   " Determine the line num where to insert the comment.

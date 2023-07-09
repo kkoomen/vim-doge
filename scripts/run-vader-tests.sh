@@ -108,7 +108,8 @@ while [ "$tries" -lt $max_retries ]; do
 
   set -o pipefail
 
-  "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
+  # "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 | filter-vader-output | color-vader-output || exit_code=$?
+  "$vim" -u $ROOT_DIR/test/vimrc "+Vader! $tests" 2>&1 || exit_code=$?
 
   set +o pipefail
 
