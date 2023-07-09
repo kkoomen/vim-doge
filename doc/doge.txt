@@ -144,6 +144,17 @@ doge#helpers#count({word} [, {lnum_start}, {lnum_end} ])
   bigger number than lnum_end then these values will be flipped to ensure a
   correct range format.
 
+doge#helpers#deepextend()                          *doge#helpers#deepextend()*
+  Recursively merge nested dictionaries and/or lists. a:1 is the base
+  dictionary and every other parameter will be merged onto a:1.
+
+  If you append '1' as the last argument then this will indicate that lists
+  will be merged together instead overwritten. Example:
+
+    doge#helpers#deepextend({'a': ['foo']}, {'a': ['bar']}, 1)
+
+  The above will result in: {'a': ['foo', 'bar']} instead of {'a': ['bar']}.
+
 doge#helpers#keyseq({seq})                             *doge#helpers#keyseq()*
   Creates a sequence of keys which can be used as a return value for mappings.
   Useful when returning a dynamic value such as a user-configurable setting.
