@@ -51,7 +51,6 @@ jobs:
         shell: bash
 
       - name: Upload release asset
-        run: gh release upload ${{ steps.tag_name.outputs.version }} ./bin/${{ matrix.settings.asset_path }}.tar.gz --clobber
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
