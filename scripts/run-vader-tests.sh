@@ -21,9 +21,9 @@ function filter-vader-output() {
   local hit_first_vader_line=0
   local force_echo=0
 
-  echo "$REPLY"
-
   while read -r; do
+    echo "$REPLY"
+
     # Search for the first Vader output line.
     if ((!hit_first_vader_line)); then
       if [[ "$REPLY" = *'Starting Vader:'* ]]; then
