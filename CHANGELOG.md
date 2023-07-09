@@ -13,8 +13,7 @@ This new version resolves the following problems that existed prior to v4:
   on the target machine itself that it was eventually used for. Windows builds
   had to be created on a windows runner and support for Apple Silicon had to be
   build on arm64 machines, but v4 can use the power of cross-compilation of Rust
-  (through LLVM) to make builds for any platform we want, all on a single
-  machine.
+  (through LLVM) to make builds for multiple architectures.
 - Tree-sitter language limitations: v3 required parsers to be published on NPM,
   but these packages weren't maintained that well. If there was no package of a
   certain parser on NPM, then we simply can't implement the language. With v4 we
