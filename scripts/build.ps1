@@ -40,12 +40,11 @@ Set-Location "$RootDir/helper"
 Get-DirectoryTree
 
 if ($BuildTarget -ne "") {
-
-  cargo build --release --target $BuildTarget
+  cargo.exe build --release --target $BuildTarget
   Copy-Item -Path "target/$BuildTarget/release/vim-doge-helper.exe" -Destination "../bin/"
 }
 else {
-  cargo build --release
+  cargo.exe build --release
   Copy-Item -Path "target/release/vim-doge-helper.exe" -Destination "../bin/"
 }
 
