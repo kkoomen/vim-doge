@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        vim-version: v7.4.2119
+        vim-version: [v7.4.2119]
         # vim-version: [v7.4.2119, head]
         # vim-version: [v8.2.5172]
     runs-on: ${{ matrix.os }}
