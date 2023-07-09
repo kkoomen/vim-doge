@@ -37,19 +37,18 @@ function Get-DirectoryTree {
 # Build the binary.
 Set-Location "$RootDir/helper"
 
-Get-DirectoryTree
-
-if ($BuildTarget && $BuildTarget -ne "") {
-  cargo build --release --target $BuildTarget
+if ($BuildTarget) {
+  cargo build --release --target "$BuildTarget"
   Copy-Item -Path "target/$BuildTarget/release/vim-doge-helper.exe" -Destination "../bin/"
 }
 else {
   cargo build --release
+  Get-DirectoryTree
   Copy-Item -Path "target/release/vim-doge-helper.exe" -Destination "../bin/"
 }
 
 # Archive the binary.
-if ($OutFile && $OutFile -ne "") {
+if ($OutFile) {
   $OutFile = "$OutFile.zip"
 
   Set-Location "$RootDir/bin"
