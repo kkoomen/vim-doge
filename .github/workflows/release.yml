@@ -47,12 +47,12 @@ jobs:
           targets: aarch64-apple-darwin
 
       - name: Build (unix)
-        if: matrix.os != 'windows-latest'
+        if: matrix.settings.platform != 'windows-latest'
         run: ./scripts/build.sh "${{ matrix.settings.target }}" "${{ matrix.settings.asset_name }}"
         shell: bash
 
       - name: Build (windows)
-        if: matrix.os != 'windows-latest'
+        if: matrix.settings.platform == 'windows-latest'
         run: ./scripts/build.ps1 "${{ matrix.settings.target }}" "${{ matrix.settings.asset_name }}"
 
       - name: Set project
