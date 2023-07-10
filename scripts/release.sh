@@ -12,6 +12,13 @@ fi
 
 read -p "Enter the next version (format: X.X.X): " next_version
 
+current_branch="$(git rev-parse --abbrev-ref HEAD)"
+release_branch="release/v$next_version"
+if [[ "$current_branch" != "$release_branch" ]]; then
+  echo "Checking out to $release_branch"
+  git checkout -b release/v$next_version
+fi
+
 echo "$next_version" > .version
 
 # Replace the current version in helper/Cargo.toml with the new version
@@ -23,4 +30,10 @@ if command -v vimdoc >/dev/null 2>&1; then
   vimdoc .
 fi
 
-echo "Done"
+git diff .version helper/Cargo.toml
+
+echo "Committing the above changes..."
+git add .version helper/Cargo.toml
+git commit -m "chore(release): v$next_version :tada:"
+
+echo "Done, make sure to push the changes made"
