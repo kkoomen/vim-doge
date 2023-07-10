@@ -19,7 +19,7 @@ sed -E -i '' "s/^version = \"[0-9]+\.[0-9]+\.[0-9]+\"$/version = \"$next_version
 
 # Run vimdoc if it's installed to make sure all documentation is generated.
 if command -v vimdoc >/dev/null 2>&1; then
-  "Running vimdoc..."
+  echo "Running vimdoc..."
   vimdoc .
 fi
 
