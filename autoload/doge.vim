@@ -11,7 +11,8 @@ function! doge#run_parser() abort
   let l:executables = [
         \ '/helper/target/release/vim-doge-helper.exe',
         \ '/helper/target/release/vim-doge-helper',
-        \ '/bin/vim-doge-helper',
+        \ '/bin/vim-doge-helper.exe',
+        \ '/bin/vim-doge-helper'
         \ ]
 
   for l:executable in l:executables
