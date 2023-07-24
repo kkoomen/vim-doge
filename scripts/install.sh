@@ -34,7 +34,11 @@ if [ $OS = 'Darwin' ]; then
     TARGET="vim-doge-helper-macos-x86_64"
   fi
 elif [ $OS = 'Linux' ]; then
-  TARGET="vim-doge-helper-linux"
+  if [ $ARCH = 'aarch64' ]; then
+    TARGET="vim-doge-helper-linux-aarch64"
+  else
+    TARGET="vim-doge-helper-linux-x86_64"
+  fi
 else
   echo "vim-doge does not support your system"
   exit 1
