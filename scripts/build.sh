@@ -8,6 +8,12 @@ set -u
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 BUILD_TARGET="${1:-}"
 OUTFILE="${2:-}"
+OS="$(uname)"
+
+CMD="cargo"
+if [[ "$OS" != "Darwin" ]] && command -v cross >/dev/null 2>&1; then
+  CMD="cross"
+fi
 
 cd $ROOT_DIR
 [[ ! -d ./bin ]] && mkdir ./bin
@@ -16,10 +22,10 @@ cd $ROOT_DIR
 # Build the binary.
 cd $ROOT_DIR/helper
 if [[ "$BUILD_TARGET" != "" ]]; then
-  cargo build --release --target "$BUILD_TARGET"
+  eval "$CMD build --release --target $BUILD_TARGET"
   cp target/$BUILD_TARGET/release/vim-doge-helper ../bin/
 else
-  cargo build --release
+  eval "$CMD build --release"
   cp target/release/vim-doge-helper ../bin/
 fi
 
