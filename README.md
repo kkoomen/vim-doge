@@ -24,7 +24,9 @@ skeleton based on certain expressions (mainly functions). Simply put your cursor
 on a function, press `<Leader>d`, jump quickly through `TODO` items using
 `<Tab>` and `<S-Tab>` to quickly add descriptions and go on coding!
 
-[Visit the demo page][demo-readme]
+<a href="https://github.com/kkoomen/vim-doge/blob/master/doc/demos">
+  <img src="https://img.shields.io/badge/visit%20demo%20page-D3C5AF" alt="Visit demo page button" />
+</a>
 
 # Table of Contents
 
