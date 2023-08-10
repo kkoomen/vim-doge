@@ -62,6 +62,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
     + [Testing locally](#testing-locally)
 - [Motivation](#motivation)
 - [Supporting vim-doge](#supporting-vim-doge)
+- [Alternative projects](#alternative-projects)
 - [License](#license)
 
 # Supported languages and doc standards
@@ -442,6 +443,12 @@ time saver.
 
 Do you enjoy using vim-doge? Give it a star on GitHub and submit your vote on
 [vim.org][vim-script].
+
+# Alternative projects
+
+Vim-doge generates docblocks, but perhaps you want to take it a step further and
+generate it into HTML. [Dooku.vim](https://github.com/Zeioth/dooku.nvim) is
+another plugin that can suit these needs.
 
 # License
 
