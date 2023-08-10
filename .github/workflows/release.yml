@@ -26,7 +26,7 @@ jobs:
             target: x86_64-unknown-linux-gnu
             asset_name: vim-doge-helper-linux-x86_64
             asset_path: ./bin/vim-doge-helper-linux-x86_64.tar.gz
-            
+
           - platform: ubuntu-20.04                            # Apple Silicon
             target: aarch64-unknown-linux-gnu
             asset_name: vim-doge-helper-linux-aarch64
@@ -78,7 +78,7 @@ jobs:
           tag_name: v${{ steps.tag_name.outputs.version }}
           files: ${{ matrix.settings.asset_path }}
           draft: false
-          prerelease: true
+          prerelease: false
 
   test_uploaded_builds:
     name: Test uploaded builds
