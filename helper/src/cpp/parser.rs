@@ -2,7 +2,7 @@ use tree_sitter::{Parser, Node};
 use serde_json::{Map, Value};
 
 use crate::base_parser::BaseParser;
-use crate::traverse;
+use crate::traverse::{self, PreOrder};
 
 pub struct CppParser<'a> {
     code: &'a str,
@@ -154,13 +154,11 @@ impl<'a> CppParser<'a> {
                     }
 
                     if ["pointer_declarator", "reference_declarator", "variadic_declarator"].contains(&node.kind()) {
-                        let param_name = node
-                            .children(&mut node.walk())
-                            .filter(|node| node.kind() == "identifier")
-                            .next()
-                            .and_then(|node| Some(self.get_node_text(&node)))
-                            .unwrap();
-                        param.insert("name".to_string(), Value::String(param_name));
+                        for node in PreOrder::new(node.walk()) {
+                            if node.kind() == "identifier" {
+                                param.insert("name".to_string(), Value::String(self.get_node_text(&node)));
+                            }
+                        }
                     }
 
                     if node.kind() == "identifier" {

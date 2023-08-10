@@ -24,7 +24,7 @@ Given cpp (function with parameters without return type):
       int myFunc();
   };
 
-  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
+  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node, int &*testInputInt) {}
 
 Do (trigger doge):
   :8\<CR>
@@ -41,9 +41,12 @@ Expect cpp (generated comment with @brief, @param and @return tags):
    *
    * @param[[TODO:direction]] text [TODO:description]
    * @param[[TODO:direction]] node [TODO:description]
+   * @param[[TODO:direction]] testInputInt [TODO:description]
    * @return [TODO:description]
    */
-  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node) {}
+  int TestClass::myFunc(const std::string& text /* inline comment */, const Node* node, int &*testInputInt) {}
+
+
 
 # ==============================================================================
 # Functions with parameters with default values.
