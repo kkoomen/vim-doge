@@ -35,6 +35,5 @@ git diff .version helper/Cargo.toml
 echo "Committing the above changes..."
 git add .version helper/Cargo.toml
 git commit -m "chore(release): v$next_version :tada:"
-git tag -a "v$next_version" -m "Release v$next_version"
 
 echo "Done, make sure to push the changes made"

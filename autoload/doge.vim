@@ -262,7 +262,7 @@ function! doge#install(...) abort
 
   function! s:report_result(exitcode) abort
     if a:exitcode == 0
-      echom g:doge_prefix . ' installed sucessfully'
+      echom g:doge_prefix . ' installed successfully'
     else
       echohl ErrorMsg
       echom g:doge_prefix . ' installation failed ' . '(exit code: ' . a:exitcode . ')'
