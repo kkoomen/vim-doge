@@ -33,6 +33,7 @@ pub fn load_doc_config_str<'a>(parser_name: &'a str, doc_name: &'a str) -> &'a s
         "csharp_xmldoc" => include_str!("csharp/docs/xmldoc.yaml"),
         "bash_google" => include_str!("bash/docs/google.yaml"),
         "rust_rustdoc" => include_str!("rust/docs/rustdoc.yaml"),
+        "r_roxygen2" => include_str!("r/docs/roxygen2.yaml"),
 
         _ => panic!("Unsupported {} doc: {}", parser_name, doc_name),
     }

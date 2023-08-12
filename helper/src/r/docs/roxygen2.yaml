@@ -1,0 +1,20 @@
+# see https://github.com/klutometis/roxygen
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+        #' [TODO:description]
+        {% if params %}
+        #'
+            {% for param in params %}
+        #' @param {{ param.name }} [TODO:description]
+            {% endfor %}
+        {% endif %}
+        #'
+        #' @return [TODO:description]
+        #' @export
+        #'
+        #' @examples
+        #' [TODO:example]

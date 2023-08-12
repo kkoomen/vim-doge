@@ -673,6 +673,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "tree-sitter-r"
+version = "0.19.5"
+source = "git+https://github.com/r-lib/tree-sitter-r?rev=c55f8b4#c55f8b4dfaa32c80ddef6c0ac0e79b05cb0cbf57"
+dependencies = [
+ "cc",
+ "tree-sitter",
+]
+
+[[package]]
 name = "tree-sitter-ruby"
 version = "0.20.0"
 source = "git+https://github.com/tree-sitter/tree-sitter-ruby?rev=f257f3f#f257f3f57833d584050336921773738a3fd8ca22"
@@ -804,6 +813,7 @@ dependencies = [
  "tree-sitter-lua",
  "tree-sitter-php",
  "tree-sitter-python",
+ "tree-sitter-r",
  "tree-sitter-ruby",
  "tree-sitter-rust",
  "tree-sitter-typescript",
