@@ -30,13 +30,17 @@ Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
 # Auto-functions with parameters with type hints using return type 'auto'
 # ==============================================================================
 Given cpp (auto-function with parameters with advanced type hints using return type 'auto'):
-  template<class T, class U>
+  template<
+    class T,
+    class U
+  >
   auto add(T t, U u)
   {
     //
   }
 
 Do (trigger doge):
+  :5\<CR>
   \<C-d>
 
 Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
@@ -48,7 +52,10 @@ Expect cpp (generated comment with @brief, @tparam, @param and @return tags):
    * @param[[TODO:direction]] t [TODO:description]
    * @param[[TODO:direction]] u [TODO:description]
    */
-  template<class T, class U>
+  template<
+    class T,
+    class U
+  >
   auto add(T t, U u)
   {
     //
