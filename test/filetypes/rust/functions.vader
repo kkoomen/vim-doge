@@ -64,14 +64,17 @@ Expect rust (generated comments with Arguments and Examples sections):
 # ==============================================================================
 Given rust (impl methods with Errors and Safety section):
   #[debug]
-  #[macro_export]
+  #[foo(
+    bar=1,
+    baz=2
+  )]
   pub unsafe fn foo(foo: usize) -> Result<(), FooError> {
       fs::read_to_string("file.txt")
           .unwrap_or_else(|err| panic!("Failed to read filepath: {:?}", err));
   }
 
 Do (trigger doge):
-  :3\<CR>
+  :6\<CR>
   \<C-d>
 
 Expect rust (generated comments with Arguments, Safety, Errors and Examples sections):
@@ -99,7 +102,10 @@ Expect rust (generated comments with Arguments, Safety, Errors and Examples sect
   /// [TODO:write some example code]
   /// ```
   #[debug]
-  #[macro_export]
+  #[foo(
+    bar=1,
+    baz=2
+  )]
   pub unsafe fn foo(foo: usize) -> Result<(), FooError> {
       fs::read_to_string("file.txt")
           .unwrap_or_else(|err| panic!("Failed to read filepath: {:?}", err));
