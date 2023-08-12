@@ -1,0 +1,25 @@
+# https://github.com/klutometis/roxygen
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+        #' [TODO:title of the function]
+        #'
+        #' [TODO:brief description]
+        {% if params %}
+        #'
+            {% for param in params %}
+        #' @param {{ param.name }} [TODO:description]{% if param.default_value %}. Default is {{ param.default_value }}.{% endif %}
+            {% endfor %}
+        {% endif %}
+        #'
+        #' @return [TODO:description]
+        #'
+        #' @examples
+        #' {{ func_name }}([TODO:parameters])
+        #'
+        #' @rdname {{ func_name }}
+        #'
+        #' @method {{ func_name }}

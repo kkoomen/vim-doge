@@ -17,6 +17,7 @@ use crate::python::parser::PythonParser;
 use crate::ruby::parser::RubyParser;
 use crate::rust::parser::RustParser;
 use crate::typescript::parser::TypescriptParser;
+use crate::r::parser::RParser;
 
 
 fn replace_indent_placeholders(docblock: &str, use_tabs: bool, indent: usize) -> String {
@@ -137,6 +138,7 @@ pub fn generate(
             "c" => Box::new(CParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "cpp" => Box::new(CppParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "typescript" => Box::new(TypescriptParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
+            "r" => Box::new(RParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             _ => panic!("Unsupported parser: {}", &parser_name),
         };
 

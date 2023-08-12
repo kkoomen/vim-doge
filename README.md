@@ -89,6 +89,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | C#                                             | [XMLDoc][xmldoc]                                                             |
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 | :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
+| :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
 
 # Getting started
 
@@ -172,6 +173,7 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_sh`         | `'google'`          | `'google'`                                                                                                                                                                                                                                             |
 | `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                                                                                                                            |
 | `g:doge_doc_standard_cs`         | `'xmldoc'`          | `'xmldoc'`                                                                                                                                                                                                                                             |
+| `g:doge_doc_standard_r`          | `'roxygen2'`        | `'roxygen2'`                                                                                                                                                                                                                                           |
 
 ## Options
 
@@ -468,6 +470,7 @@ Vim-doge is licensed under the GPL-3.0 license.
 [kerneldoc]: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
 [sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
 [xmldoc]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/
+[roxygen2]: https://github.com/klutometis/roxygen
 
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>

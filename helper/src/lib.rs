@@ -15,3 +15,4 @@ pub mod python;
 pub mod c;
 pub mod cpp;
 pub mod typescript;
+pub mod r;
