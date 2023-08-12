@@ -1,0 +1,131 @@
+Given r (left-assignment function):
+  myFunc.default <- function(
+    p1,
+    p2.sub1 = FALSE,
+    p3.sub1 = 20,
+    p4.sub1 = 1/15,
+    ...
+  ) {
+    # ...
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment):
+  #' [TODO:title of the function]
+  #'
+  #' [TODO:brief description]
+  #'
+  #' @param p1 [TODO:description]
+  #' @param p2.sub1 [TODO:description]. Default is FALSE.
+  #' @param p3.sub1 [TODO:description]. Default is 20.
+  #' @param p4.sub1 [TODO:description]. Default is 1/15.
+  #' @param ... [TODO:description]
+  #'
+  #' @return [TODO:description]
+  #'
+  #' @examples
+  #' myFunc.default([TODO:parameters])
+  #'
+  #' @rdname myFunc.default
+  #'
+  #' @method myFunc.default
+  myFunc.default <- function(
+    p1,
+    p2.sub1 = FALSE,
+    p3.sub1 = 20,
+    p4.sub1 = 1/15,
+    ...
+  ) {
+    # ...
+  }
+
+Given r (left-assignment function with no params):
+  myFunc.default <- function() {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment):
+  #' [TODO:title of the function]
+  #'
+  #' [TODO:brief description]
+  #'
+  #' @return [TODO:description]
+  #'
+  #' @examples
+  #' myFunc.default([TODO:parameters])
+  #'
+  #' @rdname myFunc.default
+  #'
+  #' @method myFunc.default
+  myFunc.default <- function() {}
+
+Given r (regular function assignment):
+  myFunc = function(
+    p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
+    p4 = 'libs', p5 = NULL, ..., p7 = 'default',
+    p8 = c('lorem', 'ipsum+dor', 'sit', 'amet'),
+    p9 = TRUE, p10 = list(), p11 = TRUE
+  ) {
+    # ...
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment):
+  #' [TODO:title of the function]
+  #'
+  #' [TODO:brief description]
+  #'
+  #' @param p1 [TODO:description]. Default is TRUE.
+  #' @param p2_sub1 [TODO:description]. Default is TRUE.
+  #' @param p3 [TODO:description]. Default is FALSE.
+  #' @param p4 [TODO:description]. Default is 'libs'.
+  #' @param p5 [TODO:description]. Default is NULL.
+  #' @param ... [TODO:description]
+  #' @param p7 [TODO:description]. Default is 'default'.
+  #' @param p8 [TODO:description]. Default is c('lorem', 'ipsum+dor', 'sit', 'amet').
+  #' @param p9 [TODO:description]. Default is TRUE.
+  #' @param p10 [TODO:description]. Default is list().
+  #' @param p11 [TODO:description]. Default is TRUE.
+  #'
+  #' @return [TODO:description]
+  #'
+  #' @examples
+  #' myFunc([TODO:parameters])
+  #'
+  #' @rdname myFunc
+  #'
+  #' @method myFunc
+  myFunc = function(
+    p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,
+    p4 = 'libs', p5 = NULL, ..., p7 = 'default',
+    p8 = c('lorem', 'ipsum+dor', 'sit', 'amet'),
+    p9 = TRUE, p10 = list(), p11 = TRUE
+  ) {
+    # ...
+  }
+
+Given r (regular function assignment with no params):
+  myFunc = function() {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment):
+  #' [TODO:title of the function]
+  #'
+  #' [TODO:brief description]
+  #'
+  #' @return [TODO:description]
+  #'
+  #' @examples
+  #' myFunc([TODO:parameters])
+  #'
+  #' @rdname myFunc
+  #'
+  #' @method myFunc
+  myFunc = function() {}

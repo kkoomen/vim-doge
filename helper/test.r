@@ -1,3 +1,5 @@
+myFunc.default <- function() {}
+
 myFunc.default <- function(
   p1,
   p2.sub1 = FALSE,
