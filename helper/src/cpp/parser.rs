@@ -33,7 +33,7 @@ impl<'a> BaseParser for CppParser<'a> {
                             break;
                         }
 
-                        new_line -= 1;
+                        new_line = sibling_node.start_position().row + 1;
                         temp_node = sibling_node;
                     } else {
                       break;
