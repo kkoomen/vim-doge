@@ -1,0 +1,32 @@
+# ==============================================================================
+# Make sure that pressing 'u' after generating a docblock doesn't jump to the 
+# top of the file.
+#
+# See https://github.com/kkoomen/vim-doge/issues/309
+# ==============================================================================
+Given javascript(function):
+  function foo() {
+    //
+  }
+
+  function bar() {
+    //
+  }
+
+Do (trigger doge):
+  :call cursor(5,8)\<CR>
+  \<C-d>
+  u
+
+Expect javascript (no changes):
+  function foo() {
+    //
+  }
+
+  function bar() {
+    //
+  }
+
+Then (the cursor should be at the same pos as before generating the comment):
+  AssertEqual 5, line('.')
+  AssertEqual 8, col('.')
