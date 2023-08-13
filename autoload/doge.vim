@@ -22,7 +22,7 @@ function! doge#run_parser() abort
       let l:current_line = l:cursor_pos[1]
 
       let l:tempfile = tempname()
-      keepjumps call execute('%!tee ' . l:tempfile, 'silent!')
+      keepjumps call writefile(getline(line('^'), line('$')), l:tempfile)
 
       let l:args = [
             \ '--filepath', l:tempfile,
