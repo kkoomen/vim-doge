@@ -1,0 +1,109 @@
+# ==============================================================================
+# Subtype classes that extend traits
+# ==============================================================================
+Given scala (subtype class):
+  trait Pet:
+    val name: String
+
+  class Cat(val name: String) extends Pet
+
+Do (trigger doge):
+  :4\<CR>
+  \<C-d>
+
+Expect scala (generated comment):
+  trait Pet:
+    val name: String
+
+  /** [TODO:description]
+   *
+   * @param name [TODO:description]
+   */
+  class Cat(val name: String) extends Pet
+
+# ==============================================================================
+# Case class
+# ==============================================================================
+Given scala (case class with params):
+  protected case class LoremIpsum(name: String, age: Int) extends B with C with D
+
+Do (trigger doge):
+  \<C-d>
+
+Expect scala (generated comment):
+  /** [TODO:description]
+   *
+   * @param name [TODO:description]
+   * @param age [TODO:description]
+   */
+  protected case class LoremIpsum(name: String, age: Int) extends B with C with D
+
+Given scala (case class without params):
+  protected case class LoremIpsum()
+
+Do (trigger doge):
+  \<C-d>
+
+Expect scala (generated comment):
+  /** [TODO:description] */
+  protected case class LoremIpsum()
+
+# ==============================================================================
+# Classes that extend traits
+# ==============================================================================
+Given scala (classes that extend traits):
+  trait Iterator[A]:
+    def next(): A
+
+  class IntIterator(to: Int) extends Iterator[Int] {}
+
+  class IntIterator(to: Int) extends Iterator[Int]:
+    def x: Int = _x
+    def x_=(newValue: Int): Unit =
+    if newValue < bound then
+      _x = newValue
+    else
+      printWarning()
+  end IntIterator
+
+Do (trigger doge):
+  :4\<CR>
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+  :15\<CR>
+  \<C-d>
+  :20\<CR>
+  \<C-d>
+
+Expect scala (generated comment):
+  trait Iterator[A]:
+    def next(): A
+
+  /** [TODO:description]
+   *
+   * @param to [TODO:description]
+   */
+  class IntIterator(to: Int) extends Iterator[Int] {}
+
+  /** [TODO:description]
+   *
+   * @param to [TODO:description]
+   */
+  class IntIterator(to: Int) extends Iterator[Int]:
+    /** [TODO:description]
+     *
+     * @return [TODO:description]
+     */
+    def x: Int = _x
+    /** [TODO:description]
+     *
+     * @param newValue [TODO:description]
+     * @return [TODO:description]
+     */
+    def x_=(newValue: Int): Unit =
+    if newValue < bound then
+      _x = newValue
+    else
+      printWarning()
+  end IntIterator

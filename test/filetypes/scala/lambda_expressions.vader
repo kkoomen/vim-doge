@@ -1,0 +1,26 @@
+# ==============================================================================
+# Lambda expressions
+# ==============================================================================
+Given scala (lambda expressions):
+  (x: Int) => x + 1
+
+  val getTheAnswer = () => 42
+
+Do (trigger doge):
+  \<C-d>
+  :8\<CR>
+  \<C-d>
+
+Expect scala (generated comment):
+  /** [TODO:description]
+   *
+   * @param x [TODO:description]
+   * @return [TODO:description]
+   */
+  (x: Int) => x + 1
+
+  /** [TODO:description]
+   *
+   * @return [TODO:description]
+   */
+  val getTheAnswer = () => 42

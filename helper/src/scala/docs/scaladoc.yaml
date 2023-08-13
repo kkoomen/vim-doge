@@ -1,0 +1,45 @@
+# https://docs.scala-lang.org/style/scaladoc.html
+
+templates:
+  lambda_expression:
+    node_types:
+      - lambda_expression
+    template: |
+      /** [TODO:description]
+       *
+      {% if params %}
+        {% for param in params %}
+       * @param {{ param.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+       * @return [TODO:description]
+       */
+
+  function:
+    node_types:
+      - function_definition
+    template: |
+      /** [TODO:description]
+       *
+      {% if params %}
+        {% for param in params %}
+       * @param {{ param.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+       * @return [TODO:description]
+       */
+
+  class:
+    node_types:
+      - class_definition
+    template: |
+      {% if params %}
+      /** [TODO:description]
+       *
+        {% for param in params %}
+       * @param {{ param.name }} [TODO:description]
+        {% endfor %}
+       */
+       {% else %}
+      /** [TODO:description] */
+       {% endif %}
