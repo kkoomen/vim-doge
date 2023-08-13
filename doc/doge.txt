@@ -1,5 +1,5 @@
 *doge.txt*	(Do)cumentation (Ge)nerator
-Kim Koomen                                                              *doge*
+Kim 金可明                                                                 *doge*
 
 ==============================================================================
 CONTENTS                                                       *doge-contents*
