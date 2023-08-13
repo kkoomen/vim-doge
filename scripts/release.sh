@@ -30,10 +30,10 @@ if command -v vimdoc >/dev/null 2>&1; then
   vimdoc .
 fi
 
-git diff .version helper/Cargo.toml
+git diff .version helper/Cargo.toml doc/doge.txt
 
 echo "Committing the above changes..."
-git add .version helper/Cargo.toml
+git add .version helper/Cargo.toml doc/doge.txt
 git commit -m "chore(release): v$next_version :tada:"
 
 echo "Done, make sure to push the changes made"
