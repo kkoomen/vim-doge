@@ -1,0 +1,34 @@
+# ==============================================================================
+# Function with return type
+# ==============================================================================
+Given scala (function with return type):
+  def urlBuilder(ssl: Boolean = true, domainName: String): (String, String) => String = {}
+
+Do (trigger doge):
+  \<C-d>
+
+Expect scala (generated comment):
+  /** [TODO:description]
+   *
+   * @param ssl [TODO:description]
+   * @param domainName [TODO:description]
+   * @return [TODO:description]
+   */
+  def urlBuilder(ssl: Boolean = true, domainName: String): (String, String) => String = {}
+
+# ==============================================================================
+# Function without return type
+# ==============================================================================
+Given scala (function without return type):
+  def main(args: Array[String]) = println("Hello, Scala developer!")
+
+Do (trigger doge):
+  \<C-d>
+
+Expect scala (generated comment):
+  /** [TODO:description]
+   *
+   * @param args [TODO:description]
+   * @return [TODO:description]
+   */
+  def main(args: Array[String]) = println("Hello, Scala developer!")

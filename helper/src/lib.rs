@@ -16,3 +16,4 @@ pub mod c;
 pub mod cpp;
 pub mod typescript;
 pub mod r;
+pub mod scala;

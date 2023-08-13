@@ -34,6 +34,7 @@ pub fn load_doc_config_str<'a>(parser_name: &'a str, doc_name: &'a str) -> &'a s
         "bash_google" => include_str!("bash/docs/google.yaml"),
         "rust_rustdoc" => include_str!("rust/docs/rustdoc.yaml"),
         "r_roxygen2" => include_str!("r/docs/roxygen2.yaml"),
+        "scala_scaladoc" => include_str!("scala/docs/scaladoc.yaml"),
 
         _ => panic!("Unsupported {} doc: {}", parser_name, doc_name),
     }

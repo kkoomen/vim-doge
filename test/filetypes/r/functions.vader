@@ -1,3 +1,6 @@
+# ==============================================================================
+# Left-assignment function
+# ==============================================================================
 Given r (left-assignment function):
   myFunc.default <- function(
     p1,
@@ -62,6 +65,9 @@ Expect cpp (generated comment):
   #' @method myFunc.default
   myFunc.default <- function() {}
 
+# ==============================================================================
+# Regular function
+# ==============================================================================
 Given r (regular function assignment):
   myFunc = function(
     p1 = TRUE, p2_sub1= TRUE, p3 = FALSE,

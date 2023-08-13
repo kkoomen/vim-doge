@@ -700,6 +700,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "tree-sitter-scala"
+version = "0.20.0"
+source = "git+https://github.com/tree-sitter/tree-sitter-scala?rev=f14629b#f14629b4d53f72356ce8f6d4ac8c54d21b4e74dd"
+dependencies = [
+ "cc",
+ "tree-sitter",
+]
+
+[[package]]
 name = "tree-sitter-typescript"
 version = "0.20.2"
 source = "git+https://github.com/tree-sitter/tree-sitter-typescript?rev=3429d8c#3429d8c77d7a83e80032667f0642e6cb19d0c772"
@@ -796,7 +805,7 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 
 [[package]]
 name = "vim-doge-helper"
-version = "4.1.1"
+version = "4.2.0"
 dependencies = [
  "clap",
  "regex",
@@ -816,6 +825,7 @@ dependencies = [
  "tree-sitter-r",
  "tree-sitter-ruby",
  "tree-sitter-rust",
+ "tree-sitter-scala",
  "tree-sitter-typescript",
 ]
 
