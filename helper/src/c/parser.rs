@@ -58,9 +58,20 @@ impl<'a> CParser<'a> {
 
                     let param_name = node
                         .children(&mut node.walk())
-                        .filter(|node| node.kind() == "identifier")
+                        .filter(|node| ["identifier", "pointer_declarator"].contains(&node.kind()))
                         .next()
-                        .and_then(|node| Some(self.get_node_text(&node)));
+                        .and_then(|node| {
+                            if node.kind() == "pointer_declarator" {
+                                let identifier_node = node
+                                    .children(&mut node.walk())
+                                    .filter(|node| node.kind() == "identifier")
+                                    .next()
+                                    .unwrap();
+                                return Some(self.get_node_text(&identifier_node));
+                            }
+
+                            Some(self.get_node_text(&node))
+                        });
 
                     if param_name.is_some() {
                         param.insert("name".to_string(), Value::String(param_name.unwrap()));

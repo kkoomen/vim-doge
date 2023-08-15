@@ -6,7 +6,7 @@ Given c (function definition with parameters):
 
   int foo(int a, char b) {}
 
-  int *foo(int a, char b) {}
+  int *foo(int a, char *b) {}
 
 Do (trigger doge):
   \<C-d>
@@ -37,4 +37,4 @@ Expect c (generated comment with @brief, @param and @return tags):
    * @param[[TODO:direction]] b [TODO:description]
    * @return [TODO:description]
    */
-  int *foo(int a, char b) {}
+  int *foo(int a, char *b) {}
