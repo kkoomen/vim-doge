@@ -160,11 +160,16 @@ impl<'a> CppParser<'a> {
                             }
                         }
                     }
-
-                    if node.kind() == "identifier" {
-                        param.insert("name".to_string(), Value::String(self.get_node_text(&node)));
-                    }
                 });
+
+                let name = node
+                    .children(&mut node.walk())
+                    .filter(|node| node.kind() == "identifier")
+                    .next()
+                    .and_then(|node| Some(self.get_node_text(&node)));
+                if name.is_some(){
+                    param.insert("name".to_string(), Value::String(name.unwrap()));
+                }
 
                 params.push(Value::Object(param));
             });

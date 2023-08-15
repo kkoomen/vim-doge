@@ -88,3 +88,23 @@ Expect cpp (generated comment with @brief and @param tag):
   int* fun1(int a,int b,int c){
       return nullptr;
   }
+
+# ==============================================================================
+# Functions with a default value
+# ==============================================================================
+Given cpp (function with a default value):
+  int y = 5;
+  void foo( int x = y );
+
+Do (trigger doge):
+  :2\<CR>
+  \<C-d>
+
+Expect cpp (generated comment with @brief and @param tag):
+  int y = 5;
+  /**
+   * @brief [TODO:summary]
+   *
+   * @param[[TODO:direction]] x [TODO:description]
+   */
+  void foo( int x = y );
