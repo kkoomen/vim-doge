@@ -21,8 +21,13 @@ fi
 
 echo "$next_version" > .version
 
-# Replace the current version in helper/Cargo.toml with the new version
+# Replace the current version in helper/Cargo.toml with the new version.
 sed -E -i '' "s/^version = \"[0-9]+\.[0-9]+\.[0-9]+\"$/version = \"$next_version\"/" helper/Cargo.toml
+
+# Trigger a build so that the version will be applied to the Cargo.lock as well.
+cd helper
+cargo build
+cd ..
 
 # Run vimdoc if it's installed to make sure all documentation is generated.
 if command -v vimdoc >/dev/null 2>&1; then
@@ -30,10 +35,10 @@ if command -v vimdoc >/dev/null 2>&1; then
   vimdoc .
 fi
 
-git diff .version helper/Cargo.toml doc/doge.txt
+git diff .version helper/Cargo.toml helper/Cargo.lock doc/doge.txt
 
 echo "Committing the above changes..."
-git add .version helper/Cargo.toml doc/doge.txt
+git add .version helper/Cargo.toml helper/Cargo.lock doc/doge.txt
 git commit -m "chore(release): v$next_version :tada:"
 
-echo "Done, make sure to push the changes made"
+echo "Done, make sure to push the above changes."
