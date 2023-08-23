@@ -449,7 +449,7 @@ Do you enjoy using vim-doge? Give it a star on GitHub and submit your vote on
 # Alternative projects
 
 Vim-doge generates docblocks, but perhaps you want to take it a step further and
-generate it into HTML. [Dooku.vim](https://github.com/Zeioth/dooku.nvim) is
+generate it into HTML. [Dooku.nvim](https://github.com/Zeioth/dooku.nvim) is
 another plugin that can suit these needs.
 
 # License
