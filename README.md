@@ -90,6 +90,7 @@ Is your favorite doc standard not supported?
 | :white_check_mark: | Bash                                           | [Google][sh-google]                                                          |
 | :white_check_mark: | Rust                                           | [RustDoc][rustdoc]                                                           |
 | :white_check_mark: | R                                              | [Roxygen2][roxygen2]                                                         |
+| :white_check_mark: | Scala                                          | [ScalaDoc][scaladoc]                                                         |
 
 # Getting started
 
@@ -163,7 +164,6 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_python`     | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                                                                                                                            |
 | `g:doge_doc_standard_php`        | `'phpdoc'`          | `'phpdoc'`                                                                                                                                                                                                                                             |
 | `g:doge_doc_standard_javascript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                                                                                                                              |
-| `g:doge_doc_standard_typescript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                                                                                                                              |
 | `g:doge_doc_standard_lua`        | `'ldoc'`            | `'ldoc'`                                                                                                                                                                                                                                               |
 | `g:doge_doc_standard_java`       | `'javadoc'`         | `'javadoc'`                                                                                                                                                                                                                                            |
 | `g:doge_doc_standard_groovy`     | `'javadoc'`         | `'javadoc'`                                                                                                                                                                                                                                            |
@@ -174,6 +174,7 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_rs`         | `'rustdoc'`         | `'rustdoc'`                                                                                                                                                                                                                                            |
 | `g:doge_doc_standard_cs`         | `'xmldoc'`          | `'xmldoc'`                                                                                                                                                                                                                                             |
 | `g:doge_doc_standard_r`          | `'roxygen2'`        | `'roxygen2'`                                                                                                                                                                                                                                           |
+| `g:doge_doc_standard_scala`      | `'scaladoc'`        | `'scaladoc'`                                                                                                                                                                                                                                           |
 
 ## Options
 
@@ -471,6 +472,7 @@ Vim-doge is licensed under the GPL-3.0 license.
 [sh-google]: https://google.github.io/styleguide/shell.xml#Function_Comments
 [xmldoc]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/
 [roxygen2]: https://github.com/klutometis/roxygen
+[scaladoc]: https://docs.scala-lang.org/style/scaladoc.html
 
 [demo-readme]: https://github.com/kkoomen/vim-doge/blob/master/doc/demos
 [suggest-language]: https://github.com/kkoomen/vim-doge/issues/new?labels=enhancement&template=feature_request.md&title=Add+support+for+<language>
