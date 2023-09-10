@@ -60,6 +60,29 @@ Expect rust (generated comments with Arguments and Examples sections):
   }
 
 # ==============================================================================
+# Functions parameter destruction
+# ==============================================================================
+Given rust (function with destructured params):
+  pub fn do_thing((i, j): (u8, u8)) -> u8 {
+    i * j
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect rust (generated comments):
+  /// [TODO:description]
+  ///
+  /// # Examples
+  ///
+  /// ```
+  /// [TODO:write some example code]
+  /// ```
+  pub fn do_thing((i, j): (u8, u8)) -> u8 {
+    i * j
+  }
+
+# ==============================================================================
 # Functions with errors and safety section
 # ==============================================================================
 Given rust (impl methods with Errors and Safety section):

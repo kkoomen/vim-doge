@@ -100,15 +100,19 @@ impl<'a> RustParser<'a> {
                         .for_each(|node| {
                             let mut param = Map::new();
 
-                            let func_name = node
+                            let name = node
                                 .children(&mut node.walk())
                                 .filter(|node| node.kind() == "identifier")
                                 .next()
-                                .and_then(|node| Some(self.get_node_text(&node)))
-                                .unwrap();
-                            param.insert("name".to_string(), Value::String(func_name));
+                                .and_then(|node| Some(self.get_node_text(&node)));
 
-                            params.push(Value::Object(param));
+                            if name.is_some() {
+                                param.insert("name".to_string(), Value::String(name.unwrap()));
+                            }
+
+                            if !param.is_empty() {
+                                params.push(Value::Object(param));
+                            }
                         });
 
                     if !params.is_empty() {
