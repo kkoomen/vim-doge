@@ -10,6 +10,9 @@ if [[ -n $(git status -s) ]]; then
   exit 1
 fi
 
+current_version="$(cat helper/Cargo.toml | grep -E '^version = \"[0-9]+\.[0-9]+\.[0-9]+\"$' | sed -E 's/version = \"([0-9]+\.[0-9]+\.[0-9]+)\"/\1/g')"
+
+echo "Current version: $current_version"
 read -p "Enter the next version (format: X.X.X): " next_version
 
 current_branch="$(git rev-parse --abbrev-ref HEAD)"
