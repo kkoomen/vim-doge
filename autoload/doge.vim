@@ -76,6 +76,11 @@ endfunction
 "
 " arg: Either a count (0 by default) or a string (empty by default).
 function! doge#generate(arg) abort
+  if !exists('b:doge_supported_doc_standards')
+    echoerr "[vim-doge] It seems like you forgot to set `filetype plugin on` in your .vimrc"
+    return 1
+  endif
+
   " Immediately validate if the doc standard is allowed.
   if index(b:doge_supported_doc_standards, b:doge_doc_standard) < 0
     echoerr printf(
