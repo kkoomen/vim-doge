@@ -805,7 +805,7 @@ checksum = "49874b5167b65d7193b8aba1567f5c7d93d001cafc34600cee003eda787e483f"
 
 [[package]]
 name = "vim-doge-helper"
-version = "4.3.4"
+version = "4.3.5"
 dependencies = [
  "clap",
  "regex",
