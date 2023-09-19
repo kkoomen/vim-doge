@@ -8,16 +8,20 @@
 
 Given php (function where the type should result in its FQN):
   <?php
+  use Closure;
+  use Exception;
   use Symfony\Component\HttpFoundation\Response;
 
   function myFunction(Response $p1): Response {}
 
 Do (trigger doge):
-  :4\<CR>
+  :6\<CR>
   \<C-d>
 
 Expect php (generated comment containing the FQN):
   <?php
+  use Closure;
+  use Exception;
   use Symfony\Component\HttpFoundation\Response;
 
   /**
