@@ -117,6 +117,7 @@ Expect php (generated comment with @param and @return tags):
 Given php (function with exceptions being raised in the body):
   <?php
   function test() {
+    $user = new User(); // this should be ignored
     $err = new FirstException('Foo');
     throw $err;
     throw new SecondException('Bar');
@@ -137,6 +138,7 @@ Expect php (generated comment with @param, @throws and @return tags):
    * @return [TODO:type] [TODO:description]
    */
   function test() {
+    $user = new User(); // this should be ignored
     $err = new FirstException('Foo');
     throw $err;
     throw new SecondException('Bar');
