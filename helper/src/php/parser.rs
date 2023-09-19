@@ -308,9 +308,15 @@ impl<'a> PhpParser<'a> {
                     .and_then(|node| Some(self.get_node_text(&node)))
                     .unwrap();
 
-                tokens.insert("name".to_string(), Value::String(name));
+                let prev_sibling_node = &child_node.prev_sibling();
 
-                exceptions.push(Value::Object(tokens));
+                if name.ends_with("Exception") || (prev_sibling_node.is_some() && prev_sibling_node.unwrap().kind() == "throw") {
+                    tokens.insert("name".to_string(), Value::String(name));
+                }
+
+                if !tokens.is_empty()  {
+                    exceptions.push(Value::Object(tokens));
+                }
             }
 
         }
