@@ -165,20 +165,28 @@ impl<'a> PhpParser<'a> {
                             .count() > 0;
 
                         if !is_alias {
+                            // Get the `qualified_name` node kind, which are
+                            // usages like: `use Foo\Bar;`. We might also run
+                            // into `use Foo;` which has the node kind `name`,
+                            // which we ignore.
                             let fqn_node = child_node
                                 .children(&mut child_node.walk())
                                 .filter(|node| node.kind() == "qualified_name")
-                                .next()
-                                .unwrap();
+                                .next();
+
+                            if !fqn_node.is_some() {
+                                continue;
+                            }
 
                             let fqn_name = fqn_node
-                                .children(&mut fqn_node.walk())
+                                .unwrap()
+                                .children(&mut fqn_node.unwrap().walk())
                                 .filter(|node| node.kind() == "name")
                                 .next()
                                 .and_then(|node| Some(self.get_node_text(&node)));
 
                             if fqn_name.unwrap() == property_type {
-                                let mut fqn_text = self.get_node_text(&fqn_node);
+                                let mut fqn_text = self.get_node_text(&fqn_node.unwrap());
 
                                 // Make sure FQN always starts with a backslash.
                                 if !fqn_text.starts_with('\\') {
