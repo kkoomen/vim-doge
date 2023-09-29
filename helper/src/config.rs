@@ -27,6 +27,7 @@ pub fn load_doc_config_str<'a>(parser_name: &'a str, doc_name: &'a str) -> &'a s
 
         "php_phpdoc" => include_str!("php/docs/phpdoc.yaml"),
         "typescript_jsdoc" => include_str!("typescript/docs/jsdoc.yaml"),
+        "svelte_jsdoc" => include_str!("typescript/docs/jsdoc.yaml"),
         "lua_ldoc" => include_str!("lua/docs/ldoc.yaml"),
         "java_javadoc" => include_str!("java/docs/javadoc.yaml"),
         "ruby_YARD" => include_str!("ruby/docs/YARD.yaml"),

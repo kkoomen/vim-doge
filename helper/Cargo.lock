@@ -709,6 +709,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "tree-sitter-svelte"
+version = "0.10.2"
+source = "git+https://github.com/Himujjal/tree-sitter-svelte?rev=697bb51#697bb515471871e85ff799ea57a76298a71a9cca"
+dependencies = [
+ "cc",
+ "tree-sitter",
+]
+
+[[package]]
 name = "tree-sitter-typescript"
 version = "0.20.2"
 source = "git+https://github.com/tree-sitter/tree-sitter-typescript?rev=3429d8c#3429d8c77d7a83e80032667f0642e6cb19d0c772"
@@ -826,6 +835,7 @@ dependencies = [
  "tree-sitter-ruby",
  "tree-sitter-rust",
  "tree-sitter-scala",
+ "tree-sitter-svelte",
  "tree-sitter-typescript",
 ]
 
