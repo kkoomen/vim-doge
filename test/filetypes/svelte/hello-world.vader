@@ -1,28 +1,55 @@
-Given svelte (html with a script tag):
-  <script>
-    let name = 'world';
-    function foo(test) {
+Given svelte (hello world example with template and script tag):
+  <template>
+    <div>
+      <h1>Hello {{ name }}!</h1>
+    </div>
+  </template>
 
+  <script>
+  export default {
+    data() {
+      return {
+        name: 'world'
+      }
+    },
+    methods: {
+      foo(test) {}
     }
+  }
   </script>
 
-  <h1>Hello {name}!</h1>
-
 Do (trigger doge):
-  :3\<CR>
+  :9\<CR>
+  \<C-d>
+  :20\<CR>
   \<C-d>
 
 Expect typescript (generated comment with generated comment inside <script>):
+  <template>
+    <div>
+      <h1>Hello {{ name }}!</h1>
+    </div>
+  </template>
+
   <script>
-    let name = 'world';
+  export default {
     /**
      * [TODO:description]
      *
-     * @param {[TODO:type]} test - [TODO:description]
+     * @returns [TODO:description]
      */
-    function foo(test) {
-
+    data() {
+      return {
+        name: 'world'
+      }
+    },
+    methods: {
+      /**
+       * [TODO:description]
+       *
+       * @param {[TODO:type]} test - [TODO:description]
+       */
+      foo(test) {}
     }
+  }
   </script>
-
-  <h1>Hello {name}!</h1>

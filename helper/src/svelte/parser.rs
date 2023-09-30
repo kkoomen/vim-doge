@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use tree_sitter::{Parser, Node};
 use serde_json::{Map, Value};
 
+use crate::traverse;
 use crate::base_parser::BaseParser;
 use crate::typescript::parser::TypescriptParser;
 
@@ -35,11 +36,10 @@ impl<'a> SvelteParser<'a> {
     }
 
     fn parse_node(&self, node: &Node) -> Option<Result<Map<String, Value>, String>> {
-        for child_node in node.children(&mut node.walk()) {
-            return match child_node.kind() {
-                "script_element" => self.parse_script_element(&child_node),
-                _ => None,
-            };
+        for child_node in traverse::PreOrder::new(node.walk()) {
+            if child_node.kind() == "script_element" {
+                return self.parse_script_element(&child_node);
+            }
         }
 
         None
