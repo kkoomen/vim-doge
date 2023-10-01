@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        vim-version: [v7.4.2367, v8.2.5172, v9.0.1500]
+        vim-version: [v7.4, v8.2.5172, v9.0.1500]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
