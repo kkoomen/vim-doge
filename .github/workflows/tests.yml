@@ -114,7 +114,7 @@ jobs:
         shell: bash
 
       - name: Setup vim
-        uses: thinca/action-setup-vim@v1
+        uses: thinca/action-setup-vim@v1.0.2
         id: vim
         with:
           vim_version: ${{ matrix.vim-version }}
