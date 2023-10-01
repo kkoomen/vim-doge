@@ -1,0 +1,138 @@
+Given svelte (table layout component with script, style and template elements):
+  <template>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items" :key="item.id">
+            <td>{{ item.field1 }}</td>
+            <td>{{ item.field2 }}</td>
+            <td>{{ item.field3 }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+
+  <script>
+  export default {
+    data() {
+      return {
+        items: [
+          { id: 1, field1: 'Data 1', field2: 'Data 2', field3: 'Data 3' },
+          { id: 2, field1: 'Data 4', field2: 'Data 5', field3: 'Data 6' },
+          { id: 3, field1: 'Data 7', field2: 'Data 8', field3: 'Data 9' }
+        ]
+      };
+    }
+  };
+  </script>
+
+  <style scoped>
+  .table-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+  </style>
+
+Do (trigger doge):
+  :24\<CR>
+  \<C-d>
+
+Expect typescript (generated comment with generated comment inside <script>):
+  <template>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in items" :key="item.id">
+            <td>{{ item.field1 }}</td>
+            <td>{{ item.field2 }}</td>
+            <td>{{ item.field3 }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </template>
+
+  <script>
+  export default {
+    /**
+     * [TODO:description]
+     *
+     * @returns [TODO:description]
+     */
+    data() {
+      return {
+        items: [
+          { id: 1, field1: 'Data 1', field2: 'Data 2', field3: 'Data 3' },
+          { id: 2, field1: 'Data 4', field2: 'Data 5', field3: 'Data 6' },
+          { id: 3, field1: 'Data 7', field2: 'Data 8', field3: 'Data 9' }
+        ]
+      };
+    }
+  };
+  </script>
+
+  <style scoped>
+  .table-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+  </style>

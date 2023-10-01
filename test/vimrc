@@ -46,7 +46,7 @@ set autoindent
 set smartindent
 set smarttab
 
-augroup styles
+augroup vim_doge_tests
   autocmd!
 
   " Force 2 spaces for Python to prevent other filetypes inherit these settings.
