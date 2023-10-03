@@ -31,7 +31,7 @@ Do (trigger doge):
   :27\<CR>
   \<C-d>
 
-Expect typescript (generated comment with generated comment inside <script>):
+Expect svelte (generated comment with generated comment inside <script>):
   <template>
     <div>
       <h1>Hello {{ name }}!</h1>

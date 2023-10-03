@@ -5,7 +5,7 @@ let b:doge_parser = 'html'
 let b:doge_insert = 'above'
 
 let b:doge_supported_doc_standards = ['jsdoc']
-let b:doge_doc_standard = doge#buffer#get_doc_standard('svelte')
+let b:doge_doc_standard = doge#buffer#get_doc_standard('html')
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo

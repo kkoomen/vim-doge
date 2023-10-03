@@ -1,0 +1,48 @@
+Given html (html5 doc with multiple script elements):
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+    <script src="#"></script>
+    <script>
+      function foo(p1, p2) {}
+
+      const bar = (x) => {};
+    </script>
+  </body>
+  </html>
+
+Do (trigger doge):
+  :9\<CR>
+  \<C-d>
+  :17\<CR>
+  \<C-d>
+
+Expect html (generated comments at the javascript functions):
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+    <script src="#"></script>
+    <script>
+      /**
+       * [TODO:description]
+       *
+       * @param {[TODO:type]} p1 - [TODO:description]
+       * @param {[TODO:type]} p2 - [TODO:description]
+       */
+      function foo(p1, p2) {}
+
+      /**
+       * [TODO:description]
+       *
+       * @param {[TODO:type]} x - [TODO:description]
+       */
+      const bar = (x) => {};
+    </script>
+  </body>
+  </html>

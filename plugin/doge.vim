@@ -76,6 +76,7 @@ endif
 "     'typescriptreact',
 "     'typescript',
 "   ],
+"   'html': ['svelte'],
 "   'java': ['groovy'],
 " })
 
@@ -85,10 +86,10 @@ endif
 "
 " Example:
 " let g:doge_filetype_aliases = {
-" \  'javascript': ['vue']
+" \  'javascript': ['typescript']
 " \}
 "
-" If you use the above settings and you open `myfile.vue` then it will behave
+" If you use the above settings and you open `myfile.ts` then it will behave
 " like you're opening a javascript filetype.
 let g:doge_filetype_aliases = doge#utils#deepextend({
 \  'javascript': [
@@ -100,6 +101,7 @@ let g:doge_filetype_aliases = doge#utils#deepextend({
 \    'typescript.tsx',
 \  ],
 \  'java': ['groovy'],
+\  'html': ['svelte'],
 \}, get(g:, 'doge_filetype_aliases', {}), 1)
 
 if !exists('g:doge_buffer_mappings')

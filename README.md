@@ -221,6 +221,7 @@ Default:
     'typescript',
     'typescript.tsx',
   ],
+  'html': ['svelte'],
   'java': ['groovy'],
 }
 ```
@@ -233,11 +234,11 @@ Example:
 
 ```vim
 let g:doge_filetype_aliases = {
-\  'javascript': ['vue']
+\  'javascript': ['typescript']
 \}
 ```
 
-If you use the above settings and you open `myfile.vue` then it will behave like
+If you use the above settings and you open `myfile.ts` then it will behave like
 you're opening a JavaScript filetype.
 
 ### `g:doge_buffer_mappings`
