@@ -5,6 +5,13 @@ Given svelte (hello world example with template and script tag):
     </div>
   </template>
 
+  <!--
+  add another dummy script tag to make sure when the cursor is inside the
+  script element below this one, vim-doge detects the current script element
+  where the comment should be inserted.
+  -->
+  <script></script>
+
   <script>
   export default {
     data() {
@@ -19,17 +26,24 @@ Given svelte (hello world example with template and script tag):
   </script>
 
 Do (trigger doge):
-  :9\<CR>
+  :16\<CR>
   \<C-d>
-  :20\<CR>
+  :27\<CR>
   \<C-d>
 
-Expect typescript (generated comment with generated comment inside <script>):
+Expect svelte (generated comment with generated comment inside <script>):
   <template>
     <div>
       <h1>Hello {{ name }}!</h1>
     </div>
   </template>
+
+  <!--
+  add another dummy script tag to make sure when the cursor is inside the
+  script element below this one, vim-doge detects the current script element
+  where the comment should be inserted.
+  -->
+  <script></script>
 
   <script>
   export default {
