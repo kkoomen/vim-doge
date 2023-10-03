@@ -37,7 +37,11 @@ impl<'a> HtmlParser<'a> {
 
     fn parse_node(&self, node: &Node) -> Option<Result<Map<String, Value>, String>> {
         for child_node in traverse::PreOrder::new(node.walk()) {
-            if child_node.kind() == "script_element" {
+            // Parse the script element that is surrounding the cursor.
+            if child_node.kind() == "script_element" &&
+                child_node.start_position().row <= self.line - 1 &&
+                child_node.end_position().row >= self.line - 1
+            {
                 return self.parse_script_element(&child_node);
             }
         }
