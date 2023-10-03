@@ -19,7 +19,7 @@ use crate::rust::parser::RustParser;
 use crate::typescript::parser::TypescriptParser;
 use crate::r::parser::RParser;
 use crate::scala::parser::ScalaParser;
-use crate::svelte::parser::SvelteParser;
+use crate::html::parser::HtmlParser;
 
 
 fn replace_indent_placeholders(docblock: &str, use_tabs: bool, indent: usize) -> String {
@@ -142,7 +142,7 @@ pub fn generate(
             "typescript" => Box::new(TypescriptParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
             "r" => Box::new(RParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
             "scala" => Box::new(ScalaParser::new(code, line, &node_types)) as Box<dyn BaseParser>,
-            "svelte" => Box::new(SvelteParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
+            "html" => Box::new(HtmlParser::new(code, line, &node_types, options)) as Box<dyn BaseParser>,
             _ => panic!("Unsupported parser: {}", &parser_name),
         };
 

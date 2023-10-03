@@ -1,7 +1,7 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
-let b:doge_parser = 'svelte'
+let b:doge_parser = 'html'
 let b:doge_insert = 'above'
 
 let b:doge_supported_doc_standards = ['jsdoc']
