@@ -76,7 +76,7 @@ endif
 "     'typescriptreact',
 "     'typescript',
 "   ],
-"   'html': ['svelte'],
+"   'html': ['svelte', 'vue'],
 "   'java': ['groovy'],
 " })
 
@@ -101,7 +101,7 @@ let g:doge_filetype_aliases = doge#utils#deepextend({
 \    'typescript.tsx',
 \  ],
 \  'java': ['groovy'],
-\  'html': ['svelte'],
+\  'html': ['svelte', 'vue'],
 \}, get(g:, 'doge_filetype_aliases', {}), 1)
 
 if !exists('g:doge_buffer_mappings')
