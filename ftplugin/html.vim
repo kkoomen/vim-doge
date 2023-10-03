@@ -1,6 +1,11 @@
 let s:save_cpo = &cpoptions
 set cpoptions&vim
 
+" The HTML filetype also gets triggerred for PHP files (and perhaps others).
+if &filetype !=? 'html'
+  finish
+endif
+
 let b:doge_parser = 'html'
 let b:doge_insert = 'above'
 

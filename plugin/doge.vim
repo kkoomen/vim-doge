@@ -100,8 +100,8 @@ let g:doge_filetype_aliases = doge#utils#deepextend({
 \    'typescript',
 \    'typescript.tsx',
 \  ],
-\  'java': ['groovy'],
 \  'html': ['svelte', 'vue'],
+\  'java': ['groovy'],
 \}, get(g:, 'doge_filetype_aliases', {}), 1)
 
 if !exists('g:doge_buffer_mappings')
