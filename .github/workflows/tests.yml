@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
-        vim-version: [v8.2.5172, v9.0.1500]
+        vim-version: [v7.4.2119, v8.2.5172, v9.0.1500]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -54,7 +54,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest]
-        vim-version: [v8.2.5172, v9.0.1500]
+        # versions are coming from https://github.com/vim/vim-win32-installer
+        # and most of the versions we support aren't listed, therefore we take
+        # the next tag version that is available in this repository.
+        vim-version: [v7.4.2121, v8.2.5171, nightly]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -91,7 +94,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         vim-version: [v0.3.2, stable]
     runs-on: ${{ matrix.os }}
     steps:
