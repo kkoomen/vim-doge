@@ -38,11 +38,11 @@ jobs:
         shell: bash
 
       - name: Setup vim
-        uses: thinca/action-setup-vim@v1
+        uses: rhysd/action-setup-vim@v1
         id: vim
         with:
-          vim_version: ${{ matrix.vim-version }}
-          vim_type: Vim
+          version: ${{ matrix.vim-version }}
+          neovim: false
 
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
@@ -76,11 +76,11 @@ jobs:
         run: ./scripts/build.ps1
 
       - name: Setup vim
-        uses: thinca/action-setup-vim@v1
+        uses: rhysd/action-setup-vim@v1
         id: vim
         with:
-          vim_version: ${{ matrix.vim-version }}
-          vim_type: Vim
+          version: ${{ matrix.vim-version }}
+          neovim: false
 
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
@@ -113,12 +113,12 @@ jobs:
       - run: ./scripts/build.sh
         shell: bash
 
-      - name: Setup vim
-        uses: thinca/action-setup-vim@v1
+      - name: Setup neovim
+        uses: rhysd/action-setup-vim@v1
         id: vim
         with:
-          vim_version: ${{ matrix.vim-version }}
-          vim_type: Neovim
+          version: ${{ matrix.vim-version }}
+          neovim: true
 
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
