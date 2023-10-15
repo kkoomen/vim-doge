@@ -9,53 +9,51 @@ on:
       - '*'
 
 jobs:
-  # test_vim:
-  #   name: Vim
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: [ubuntu-latest, macos-latest]
-  #       vim-version: [v8.2.5172, v9.0.1500]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout kkoomen/vim-doge
-  #       uses: actions/checkout@v2
-  #
-  #     - name: Checkout junegunn/vader.vim
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: junegunn/vader.vim
-  #         path: vader.vim
-  #
-  #     - name: Cache Cargo dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.cargo
-  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-  #
-  #     - name: Build (unix)
-  #       run: ./scripts/build.sh
-  #       shell: bash
-  #
-  #     - name: Setup vim
-  #       uses: rhysd/action-setup-vim@v1
-  #       id: vim
-  #       with:
-  #         version: ${{ matrix.vim-version }}
-  #         neovim: false
-  #
-  #     - name: Run tests
-  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-  #       shell: bash
+  test_vim:
+    name: Vim
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        vim-version: [v8.2.5172, v9.0.1500]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build (unix)
+        run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: false
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
 
   test_old_vim:
     name: Vim
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, macos-11]
-        os: [macos-latest]
-        vim-version: [v7.4.2119]
+        os: [ubuntu-latest, macos-11]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -90,86 +88,45 @@ jobs:
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
-  # test_vim_windows:
-  #   name: Vim
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: [windows-latest]
-  #       # versions are coming from https://github.com/vim/vim-win32-installer
-  #       # and most of the versions we support aren't listed, therefore we take
-  #       # the next tag version that is available in this repository.
-  #       vim-version: [v8.2.5171, nightly]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout kkoomen/vim-doge
-  #       uses: actions/checkout@v2
-  #
-  #     - name: Checkout junegunn/vader.vim
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: junegunn/vader.vim
-  #         path: vader.vim
-  #
-  #     - name: Cache Cargo dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.cargo
-  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-  #
-  #     - name: Build (windows)
-  #       run: ./scripts/build.ps1
-  #
-  #     - name: Setup vim
-  #       uses: rhysd/action-setup-vim@v1
-  #       id: vim
-  #       with:
-  #         version: ${{ matrix.vim-version }}
-  #         neovim: false
-  #
-  #     - name: Run tests
-  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-  #       shell: bash
+  test_neovim:
+    name: Neovim
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        vim-version: [v0.3.2, stable]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
 
-  # test_neovim:
-  #   name: Neovim
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: [ubuntu-latest, macos-latest]
-  #       vim-version: [v0.3.2, stable]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout kkoomen/vim-doge
-  #       uses: actions/checkout@v2
-  #
-  #     - name: Checkout junegunn/vader.vim
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: junegunn/vader.vim
-  #         path: vader.vim
-  #
-  #     - name: Cache Cargo dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.cargo
-  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-  #
-  #     - name: Build (unix)
-  #       if: matrix.os != 'windows-latest'
-  #       run: ./scripts/build.sh
-  #       shell: bash
-  #
-  #     - name: Setup neovim
-  #       uses: rhysd/action-setup-vim@v1
-  #       id: vim
-  #       with:
-  #         version: ${{ matrix.vim-version }}
-  #         neovim: true
-  #
-  #     - name: Run tests
-  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-  #       shell: bash
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build (unix)
+        if: matrix.os != 'windows-latest'
+        run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup neovim
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: true
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
 
   vint:
     name: Linter
