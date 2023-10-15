@@ -8,7 +8,7 @@ set -u
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
 
 vim="$1"
-tests=${2:-"$ROOT_DIR/test/*.vader $ROOT_DIR/test/commands/*.vader $ROOT_DIR/test/options/*.vader $ROOT_DIR/test/filetypes/*/*.vader"}
+tests=${2:-"$(echo $ROOT_DIR/test/*.vader $ROOT_DIR/test/commands/*.vader $ROOT_DIR/test/options/*.vader $ROOT_DIR/test/filetypes/*/*.vader)"}
 
 red='\033[0;31m'
 green='\033[0;32m'
