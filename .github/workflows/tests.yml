@@ -54,7 +54,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-11]
-        vim-version: [v8.0.0000]
+        vim-version: [v7.4.2119]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
@@ -82,6 +82,8 @@ jobs:
         with:
           version: ${{ matrix.vim-version }}
           neovim: false
+          configure-args: |
+            --with-features=huge --enable-fail-if-missing --disable-nls
 
       - name: Run tests
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
