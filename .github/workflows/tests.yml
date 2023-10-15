@@ -9,7 +9,7 @@ on:
       - '*'
 
 jobs:
-  tests_vim:
+  test_vim:
     name: Vim
     strategy:
       fail-fast: false
@@ -48,7 +48,46 @@ jobs:
         run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
         shell: bash
 
-  # tests_vim_windows:
+  test_old_vim:
+    name: Vim
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-12.04, macos-11]
+        vim-version: [v7.4.2119]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build (unix)
+        run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: false
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
+
+  # test_vim_windows:
   #   name: Vim
   #   strategy:
   #     fail-fast: false
@@ -89,7 +128,7 @@ jobs:
   #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
   #       shell: bash
 
-  tests_neovim:
+  test_neovim:
     name: Neovim
     strategy:
       fail-fast: false
