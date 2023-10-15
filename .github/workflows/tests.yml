@@ -54,6 +54,8 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-11]
+        # Building older versions of Vim requires v8.2.1118 or less
+        vim-version: [v7.4.2119, v8.2.1118]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
