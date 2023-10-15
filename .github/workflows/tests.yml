@@ -9,94 +9,93 @@ on:
       - '*'
 
 jobs:
-  # test_vim:
-  #   name: Vim
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: [ubuntu-latest, macos-latest]
-  #       vim-version: [v8.2.5172, v9.0.1500]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout kkoomen/vim-doge
-  #       uses: actions/checkout@v2
-  #
-  #     - name: Checkout junegunn/vader.vim
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: junegunn/vader.vim
-  #         path: vader.vim
-  #
-  #     - name: Cache Cargo dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.cargo
-  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-  #
-  #     - name: Build (unix)
-  #       run: ./scripts/build.sh
-  #       shell: bash
-  #
-  #     - name: Setup vim
-  #       uses: rhysd/action-setup-vim@v1
-  #       id: vim
-  #       with:
-  #         version: ${{ matrix.vim-version }}
-  #         neovim: false
-  #
-  #     - name: Run tests
-  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-  #       shell: bash
-  #
-  # test_old_vim:
-  #   name: Vim
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       os: [ubuntu-latest, macos-11]
-  #       # Building older versions of Vim requires v8.2.1118 or less
-  #       vim-version: [v7.4.2119, v8.2.1118]
-  #   runs-on: ${{ matrix.os }}
-  #   steps:
-  #     - name: Checkout kkoomen/vim-doge
-  #       uses: actions/checkout@v2
-  #
-  #     - name: Checkout junegunn/vader.vim
-  #       uses: actions/checkout@v2
-  #       with:
-  #         repository: junegunn/vader.vim
-  #         path: vader.vim
-  #
-  #     - name: Cache Cargo dependencies
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ~/.cargo
-  #         key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-  #
-  #     - name: Build (unix)
-  #       run: ./scripts/build.sh
-  #       shell: bash
-  #
-  #     - name: Setup vim
-  #       uses: rhysd/action-setup-vim@v1
-  #       id: vim
-  #       with:
-  #         version: ${{ matrix.vim-version }}
-  #         neovim: false
-  #         configure-args: |
-  #           --with-features=huge --enable-fail-if-missing --disable-nls
-  #
-  #     - name: Run tests
-  #       run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
-  #       shell: bash
+  test_vim:
+    name: Vim
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        vim-version: [v8.2.5172, v9.0.1500]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build (unix)
+        run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: false
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
+
+  test_old_vim:
+    name: Vim
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-11]
+        # Building older versions of Vim requires v8.2.1118 or less
+        vim-version: [v7.4.2119, v8.2.1118]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout kkoomen/vim-doge
+        uses: actions/checkout@v2
+
+      - name: Checkout junegunn/vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: vader.vim
+
+      - name: Cache Cargo dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cargo
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Build (unix)
+        run: ./scripts/build.sh
+        shell: bash
+
+      - name: Setup vim
+        uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          version: ${{ matrix.vim-version }}
+          neovim: false
+          configure-args: |
+            --with-features=huge --enable-fail-if-missing --disable-nls
+
+      - name: Run tests
+        run: ./scripts/run-vader-tests.sh "${{ steps.vim.outputs.executable }}"
+        shell: bash
 
   test_neovim:
     name: Neovim
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-latest, macos-latest, windows-latest]
-        os: [windows-latest]
+        os: [ubuntu-latest, macos-latest]
         vim-version: [v0.3.2, stable]
     runs-on: ${{ matrix.os }}
     steps:
@@ -116,13 +115,8 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Build (unix)
-        if: matrix.os != 'windows-latest'
         run: ./scripts/build.sh
         shell: bash
-
-      - name: Build (windows)
-        if: matrix.os == 'windows-latest'
-        run: ./scripts/build.ps1
 
       - name: Setup neovim
         uses: rhysd/action-setup-vim@v1
