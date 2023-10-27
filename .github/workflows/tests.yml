@@ -135,5 +135,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
-      - run: pip install vim-vint
+      - run: pip install vim-vint pkg_resources
       - run: vint -s ./autoload ./plugin
