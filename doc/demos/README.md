@@ -49,6 +49,7 @@ Supported:
 - Doc standards
   - reST
   - Sphinx
+  - Doxygen
   - Numpy
   - Google
 - Python 3.7+ type hints

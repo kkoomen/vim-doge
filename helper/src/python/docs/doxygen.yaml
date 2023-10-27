@@ -1,0 +1,30 @@
+# https://www.woolseyworkshop.com/2020/06/25/documenting-python-programs-with-doxygen/
+
+templates:
+  function:
+    node_types:
+      - function_definition
+    template: |
+      {% if not params and not exceptions and not return_type %}
+      """! @brief [TODO:description]"""
+      {% else %}
+      """!
+      @brief [TODO:description]
+      {% if params %}
+      ~
+        {% for param in params %}
+      @param {{ param.name }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      {% if return_type %}
+      ~
+      @return [TODO:description]
+      {% endif %}
+      {% if exceptions %}
+      ~
+        {% for exception in exceptions %}
+      @throws {{ exception.name | default(value="[TODO:name]") }} [TODO:description]
+        {% endfor %}
+      {% endif %}
+      """
+      {% endif %}

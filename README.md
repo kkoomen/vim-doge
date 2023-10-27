@@ -74,24 +74,24 @@ Is your favorite language not supported?
 Is your favorite doc standard not supported?
 [Suggest a new doc standard][suggest-doc-standard] :tada:
 
-|                    | Language                                               | Doc standards                                                                |
-| :----------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------- |
-| :white_check_mark: | Python                                                 | [reST][py-rest], [Numpy][py-numpy], [Google][py-google], [Sphinx][py-sphinx] |
-| :white_check_mark: | PHP                                                    | [phpdoc][phpdoc]                                                             |
-| :white_check_mark: | JavaScript (Vanilla, ES6, FlowJS, NodeJS, Svelte, Vue) | [JSDoc][jsdoc]                                                               |
-| :white_check_mark: | TypeScript                                             | [JSDoc][jsdoc]                                                               |
-| :white_check_mark: | HTML (through inline `<script>` tags)                  | [JSDoc][jsdoc]                                                               |
-| :white_check_mark: | Lua                                                    | [LDoc][ldoc]                                                                 |
-| :white_check_mark: | Java                                                   | [JavaDoc][javadoc]                                                           |
-| :white_check_mark: | Groovy                                                 | [JavaDoc][javadoc]                                                           |
-| :white_check_mark: | Ruby                                                   | [YARD][yard]                                                                 |
-| :white_check_mark: | C++                                                    | [Doxygen][doxygen]                                                           |
-| :white_check_mark: | C                                                      | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                   |
-| :white_check_mark: | C#                                                     | [XMLDoc][xmldoc]                                                             |
-| :white_check_mark: | Bash                                                   | [Google][sh-google]                                                          |
-| :white_check_mark: | Rust                                                   | [RustDoc][rustdoc]                                                           |
-| :white_check_mark: | R                                                      | [Roxygen2][roxygen2]                                                         |
-| :white_check_mark: | Scala                                                  | [ScalaDoc][scaladoc]                                                         |
+|                    | Language                                               | Doc standards                                                                                    |
+| :----------------- | :----------------------------------------------------- | :----------------------------------------------------------------------------------------------- |
+| :white_check_mark: | Python                                                 | [reST][py-rest], [Numpy][py-numpy], [Google][py-google], [Sphinx][py-sphinx], [Doxygen][doxygen] |
+| :white_check_mark: | PHP                                                    | [phpdoc][phpdoc]                                                                                 |
+| :white_check_mark: | JavaScript (Vanilla, ES6, FlowJS, NodeJS, Svelte, Vue) | [JSDoc][jsdoc]                                                                                   |
+| :white_check_mark: | TypeScript                                             | [JSDoc][jsdoc]                                                                                   |
+| :white_check_mark: | HTML (through inline `<script>` tags)                  | [JSDoc][jsdoc]                                                                                   |
+| :white_check_mark: | Lua                                                    | [LDoc][ldoc]                                                                                     |
+| :white_check_mark: | Java                                                   | [JavaDoc][javadoc]                                                                               |
+| :white_check_mark: | Groovy                                                 | [JavaDoc][javadoc]                                                                               |
+| :white_check_mark: | Ruby                                                   | [YARD][yard]                                                                                     |
+| :white_check_mark: | C++                                                    | [Doxygen][doxygen]                                                                               |
+| :white_check_mark: | C                                                      | [Doxygen][doxygen], [KernelDoc][kerneldoc]                                                       |
+| :white_check_mark: | C#                                                     | [XMLDoc][xmldoc]                                                                                 |
+| :white_check_mark: | Bash                                                   | [Google][sh-google]                                                                              |
+| :white_check_mark: | Rust                                                   | [RustDoc][rustdoc]                                                                               |
+| :white_check_mark: | R                                                      | [Roxygen2][roxygen2]                                                                             |
+| :white_check_mark: | Scala                                                  | [ScalaDoc][scaladoc]                                                                             |
 
 # Getting started
 
@@ -162,7 +162,7 @@ Here is the full list of available doc standards per filetype:
 
 | Variable                         | Default             | Supported                                                                                                                                                                                                                                              |
 | :------------------------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `g:doge_doc_standard_python`     | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`                                                                                                                                                                                                            |
+| `g:doge_doc_standard_python`     | `'reST'`            | `'reST'`, `'numpy'`, `'google'`, `'sphinx'`, `'doxygen'`                                                                                                                                                                                                            |
 | `g:doge_doc_standard_php`        | `'phpdoc'`          | `'phpdoc'`                                                                                                                                                                                                                                             |
 | `g:doge_doc_standard_javascript` | `'jsdoc'`           | `'jsdoc'`                                                                                                                                                                                                                                              |
 | `g:doge_doc_standard_html`       | `'jsdoc'`           | `'jsdoc'`                                                                                                                                                                                                                                              |
