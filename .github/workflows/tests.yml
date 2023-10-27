@@ -135,5 +135,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
-      - run: pip install vim-vint
+
+      # https://github.com/Vimjas/vint/issues/329#issuecomment-1029628054
+      - run: pip install git+https://github.com/Vimjas/vint.git
+
       - run: vint -s ./autoload ./plugin
