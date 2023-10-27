@@ -1,5 +1,5 @@
 # ==============================================================================
-# Functions with destructured parameters.
+# Class with multiple properties
 # ==============================================================================
 Given typescript (class with multiple properties):
   class TestClass {
@@ -7,7 +7,6 @@ Given typescript (class with multiple properties):
     private bar;
     baz: int
     private bax: str = "test";
-    private bax2: str = "test";
   }
 
 Do (run doge):
@@ -19,10 +18,6 @@ Do (run doge):
   \<C-d>
   :17\<CR>
   \<C-d>
-  :let g:doge_javascript_settings['omit_redundant_param_types'] = 1\<CR>
-  :22\<CR>
-  \<C-d>
-  :let g:doge_javascript_settings['omit_redundant_param_types'] = 0\<CR>
 
 Expect typescript (each class prop has a docblock):
   class TestClass {
@@ -46,8 +41,46 @@ Expect typescript (each class prop has a docblock):
      * @type {str}
      */
     private bax: str = "test";
+  }
+
+# ------------------------------------------------------------------------------
+
+Given typescript (class with multiple properties with omit_redundant_param_types=1):
+  class TestClass {
+    foo
+    private bar;
+    baz: int
+    private bax: str = "test";
+  }
+
+Do (run doge):
+  :let g:doge_javascript_settings['omit_redundant_param_types'] = 1\<CR>
+  :2\<CR>
+  \<C-d>
+  :6\<CR>
+  \<C-d>
+  :10\<CR>
+  \<C-d>
+  :14\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings['omit_redundant_param_types'] = 0\<CR>
+
+Expect typescript (each class prop has a docblock):
+  class TestClass {
     /**
      * [TODO:description]
      */
-    private bax2: str = "test";
+    foo
+    /**
+     * [TODO:description]
+     */
+    private bar;
+    /**
+     * [TODO:description]
+     */
+    baz: int
+    /**
+     * [TODO:description]
+     */
+    private bax: str = "test";
   }
