@@ -16,6 +16,7 @@ let b:doge_supported_doc_standards = [
       \ 'numpy',
       \ 'google',
       \ 'sphinx',
+      \ 'doxygen',
       \ ]
 let b:doge_doc_standard = doge#buffer#get_doc_standard('python')
 

@@ -5,6 +5,7 @@ pub fn load_doc_config_str<'a>(parser_name: &'a str, doc_name: &'a str) -> &'a s
         "python_numpy" => include_str!("python/docs/numpy.yaml"),
         "python_google" => include_str!("python/docs/google.yaml"),
         "python_sphinx" => include_str!("python/docs/sphinx.yaml"),
+        "python_doxygen" => include_str!("python/docs/doxygen.yaml"),
 
         "cpp_doxygen_cpp_comment_exclamation" => include_str!("cpp/docs/doxygen_cpp_comment_exclamation.yaml"),
         "cpp_doxygen_cpp_comment_slash" => include_str!("cpp/docs/doxygen_cpp_comment_slash.yaml"),
