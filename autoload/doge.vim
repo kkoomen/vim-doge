@@ -131,7 +131,7 @@ function! doge#generate(arg) abort
   let l:Indent = function('doge#indent#add', [l:comment_indent])
 
   " Indent the comment.
-  let l:comment = map(l:comment, { k, line -> l:Indent(line) })
+  let l:comment = map(l:comment, { _, line -> l:Indent(line) })
 
   " Write the comment.
   call append(l:comment_lnum_insert_position, l:comment)
