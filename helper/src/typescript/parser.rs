@@ -89,6 +89,8 @@ impl<'a> TypescriptParser<'a> {
                         }
                     },
 
+                    "public_field_definition" => Some(self.parse_class_property(&child_node)),
+
                     "class" | "class_declaration" => Some(self.parse_class(&child_node)),
 
                     _ => None,
@@ -97,6 +99,22 @@ impl<'a> TypescriptParser<'a> {
         }
 
         None
+    }
+
+    fn parse_class_property(&self, node: &Node) -> Result<Map<String, Value>, String> {
+        let mut tokens = Map::new();
+
+        for child_node in node.children(&mut node.walk()) {
+            match child_node.kind() {
+                "type_annotation" => {
+                    let type_node = child_node.children(&mut child_node.walk()).last().unwrap();
+                    tokens.insert("type".to_string(), Value::String(self.get_node_text(&type_node)));
+                },
+                _ => {},
+            }
+        }
+
+        Ok(tokens)
     }
 
     fn parse_class(&self, node: &Node) -> Result<Map<String, Value>, String> {

@@ -91,3 +91,14 @@ templates:
        * @returns {% if show_types %}{{ "{" }}{{ return_type | default(value="[TODO:type]") }}{{ "}" }}{% endif %} [TODO:description]
       {% endif %}
        */
+
+  class_property:
+    node_types:
+      - public_field_definition
+    template: |
+      /**
+       * [TODO:description]
+      {% if show_types %}
+       * @type {{ "{" }}{{ type | default(value="[TODO:type]") }}{{ "}" }}
+      {% endif %}
+       */

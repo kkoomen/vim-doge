@@ -1,0 +1,53 @@
+# ==============================================================================
+# Functions with destructured parameters.
+# ==============================================================================
+Given typescript (class with multiple properties):
+  class TestClass {
+    foo
+    private bar;
+    baz: int
+    private bax: str = "test";
+    private bax2: str = "test";
+  }
+
+Do (run doge):
+  :2\<CR>
+  \<C-d>
+  :7\<CR>
+  \<C-d>
+  :12\<CR>
+  \<C-d>
+  :17\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings['omit_redundant_param_types'] = 1\<CR>
+  :22\<CR>
+  \<C-d>
+  :let g:doge_javascript_settings['omit_redundant_param_types'] = 0\<CR>
+
+Expect typescript (each class prop has a docblock):
+  class TestClass {
+    /**
+     * [TODO:description]
+     * @type {[TODO:type]}
+     */
+    foo
+    /**
+     * [TODO:description]
+     * @type {[TODO:type]}
+     */
+    private bar;
+    /**
+     * [TODO:description]
+     * @type {int}
+     */
+    baz: int
+    /**
+     * [TODO:description]
+     * @type {str}
+     */
+    private bax: str = "test";
+    /**
+     * [TODO:description]
+     */
+    private bax2: str = "test";
+  }
