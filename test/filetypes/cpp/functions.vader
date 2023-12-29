@@ -108,3 +108,20 @@ Expect cpp (generated comment with @brief and @param tag):
    * @param[[TODO:direction]] x [TODO:description]
    */
   void foo( int x = y );
+
+# ==============================================================================
+# Functions with unnamed parameters
+# ==============================================================================
+Given cpp (Functions with unnamed parameter):
+  Game(const Game &)=default;
+
+Do (trigger doge):
+  \<C-d>
+
+Expect cpp (generated comment with @brief and @param tag):
+  /**
+   * @brief [TODO:summary]
+   *
+   * @param[[TODO:direction]] [TODO:name] [TODO:description]
+   */
+  Game(const Game &)=default;

@@ -33,7 +33,7 @@ templates:
       {% endif %}
       {% if params %}
         {% for param in params %}
-      //! {{ char }}param[[TODO:direction]] {{ param.name }} [TODO:description]
+      //! {{ char }}param[[TODO:direction]] {{ param.name | default(value="[TODO:name]") }} [TODO:description]
         {% endfor %}
       {% endif %}
       {% if return_type %}
