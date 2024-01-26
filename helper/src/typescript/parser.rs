@@ -177,6 +177,13 @@ impl<'a> TypescriptParser<'a> {
     fn parse_member_expression(&self, node: &Node) -> Result<Map<String, Value>, String> {
         let mut tokens = Map::new();
 
+        // If a member expression is part of a function parameter, ignore it.
+        if let Some(parent_node) = node.parent() {
+            if ["required_parameter", "rest_parameter", "optional_parameter"].contains(&parent_node.kind()) {
+                return Ok(tokens);
+            }
+        }
+
         for child_node in node.children(&mut node.walk()) {
             match child_node.kind() {
                 "member_expression" => {
@@ -301,7 +308,7 @@ impl<'a> TypescriptParser<'a> {
                             tokens.insert("params".to_string(), Value::Array(params));
                         }
                     }
-                }
+                },
                 _ => {},
             }
         }
@@ -372,7 +379,7 @@ impl<'a> TypescriptParser<'a> {
                         subparam.insert("name".to_string(), Value::String(subparam_name));
                         subparam.insert("optional".to_string(), Value::Bool(true));
                     },
-                    "pair_pattern" =>{
+                    "pair_pattern" => {
                         let subparam_name = node
                             .children(&mut node.walk())
                             .next()

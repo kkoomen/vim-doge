@@ -367,6 +367,28 @@ Expect javascript (generated comments with a description, @param and @returns ta
   function foo({ a, b: str, c = 3, d: int = 5 }) {}
 
 # ==============================================================================
+# Test function references as default values
+# ==============================================================================
+Given javascript (functions with destructuring_props):
+  function foo(bar = import.meta.url) {
+    return true;
+  }
+
+Do (trigger doge):
+  \<C-d>
+
+Expect javascript (generated comments with a description, @param and @returns tags):
+  /**
+   * [TODO:description]
+   *
+   * @param {[TODO:type]} [bar] - [TODO:description]
+   * @returns {[TODO:type]} [TODO:description]
+   */
+  function foo(bar = import.meta.url) {
+    return true;
+  }
+
+# ==============================================================================
 # Test the 'omit_redundant_param_types' option
 # ==============================================================================
 Given javascript (functions where the type should be omitted if let g:doge_javascript_settings = {'omit_redundant_param_types': 1} is set):
