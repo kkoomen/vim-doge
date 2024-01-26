@@ -1,6 +1,6 @@
 [package]
 name = "vim-doge-helper"
-version = "4.6.1"
+version = "4.6.2"
 edition = "2021"
 publish = false
 include = ["src"]
