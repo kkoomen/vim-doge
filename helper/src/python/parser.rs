@@ -25,15 +25,23 @@ impl<'a> BaseParser for PythonParser<'a> {
     fn postprocess_line(&self, line: usize) -> usize {
         for node in traverse::PreOrder::new(self.tree.root_node().walk()) {
             if node.start_position().row + 1 == line {
-                // Find the body of the function,
-                // that's where the insert position is.
-                let body_node = node
+                // Find the body of the function, that's where the insert
+                // position should be, but rather finding the actual body, we
+                // find the colon after the return type, because there might be
+                // a docblock after the colon and before the body and we still
+                // want to insert before this.
+                //
+                // Example:
+                //      def foo() -> int:   <-- insert after here
+                //          # Comment       <-- considered separate from body
+                //          pass            <-- start of the body
+                let colon_node = node
                     .children(&mut node.walk())
-                    .filter(|node| node.kind() == "block")
+                    .filter(|node| node.kind() == ":")
                     .next();
 
-                if body_node.is_some() {
-                    return body_node.unwrap().prev_sibling().unwrap().start_position().row + 1;
+                if colon_node.is_some() {
+                    return colon_node.unwrap().start_position().row + 1;
                 }
             }
         }
@@ -78,7 +86,10 @@ impl<'a> PythonParser<'a> {
         for child_node in node.children(&mut node.walk()) {
             match child_node.kind() {
                 "type" => {
-                    tokens.insert("return_type".to_string(), Value::String(self.get_node_text(&child_node)));
+                    let value = Value::String(self.get_node_text(&child_node));
+                    if value != "None" {
+                        tokens.insert("return_type".to_string(), value);
+                    }
                 },
                 "parameters" => {
                     let mut params = Vec::new();
