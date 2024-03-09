@@ -59,14 +59,14 @@ Expect python (generated comment with :param tags):
 # Functions with parameters.
 # ==============================================================================
 Given python (function with parameters):
-  def myFunc(p1: str = 'string', p2: int = 5):
+  def myFunc(p1: str = 'string', p2: int = 5) -> None:
     pass
 
 Do (trigger doge):
   \<C-d>
 
 Expect python (generated comment with :param tags):
-  def myFunc(p1: str = 'string', p2: int = 5):
+  def myFunc(p1: str = 'string', p2: int = 5) -> None:
     """
     [TODO:description]
 

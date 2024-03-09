@@ -86,7 +86,10 @@ impl<'a> PythonParser<'a> {
         for child_node in node.children(&mut node.walk()) {
             match child_node.kind() {
                 "type" => {
-                    tokens.insert("return_type".to_string(), Value::String(self.get_node_text(&child_node)));
+                    let value = Value::String(self.get_node_text(&child_node));
+                    if value != "None" {
+                        tokens.insert("return_type".to_string(), value);
+                    }
                 },
                 "parameters" => {
                     let mut params = Vec::new();
