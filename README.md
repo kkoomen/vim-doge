@@ -123,6 +123,16 @@ use {
 }
 ```
 
+Using `LazyVim`:
+- Add plugin config to lua plugins folder:
+  ```
+  {
+    "kkoomen/vim-doge",
+  }
+  ```
+- Open nvim and run `:call doge#install()`
+
+
 # Configuration
 
 Run `:help doge` to get the full help page.
