@@ -1,4 +1,10 @@
+$RootDir = Resolve-Path -Path ((Split-Path $MyInvocation.MyCommand.Path) + "\..")
 $InstallDir = $args[0]
+
+if (-not $InstallDir) {
+  $InstallDir = $RootDir
+}
+
 $BinDir = "$InstallDir\bin"
 $OutFile = "$BinDir\vim-doge-helper.exe"
 
@@ -14,7 +20,6 @@ else {
   $AssetName = "vim-doge-helper-windows-x86_64.zip"
 }
 
-$RootDir = Resolve-Path -Path ((Split-Path $MyInvocation.MyCommand.Path) + "\..")
 $AppVersion = Get-Content "$RootDir\.version"
 
 $AssetPath = "$RootDir\bin\$AssetName"

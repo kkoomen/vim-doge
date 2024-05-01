@@ -50,7 +50,7 @@ jobs:
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: aarch64-apple-darwin, aarch64-unknown-linux-gnu
+          targets: aarch64-apple-darwin, x86_64-apple-darwin, aarch64-unknown-linux-gnu
 
       - name: Install Cargo dependencies (linux)
         if: runner.os == 'Linux'
