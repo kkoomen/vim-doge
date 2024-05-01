@@ -1,0 +1,26 @@
+# ==============================================================================
+# Classes with attributes
+# ==============================================================================
+Given python (class with two attributes):
+  class Foo:
+    bar = 1
+    baz: int = 2
+
+Do (run doge):
+  :let b:doge_doc_standard='numpy'\<CR>
+  \<C-d>
+
+Expect python (class with docstring describing all attributes):
+  class Foo:
+    """
+    [TODO:description]
+
+    Attributes
+    ----------
+    bar : [TODO:type]
+      [TODO:description]
+    baz
+      [TODO:description]
+    """
+    bar = 1
+    baz: int = 2
