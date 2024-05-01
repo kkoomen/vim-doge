@@ -1,6 +1,23 @@
 # http://daouzli.com/blog/docstring.html#numpydoc
 
 templates:
+  class:
+    node_types:
+      - class_definition
+    template: |
+      """
+      [TODO:description]
+      {% if attributes %}
+      ~
+      Attributes
+      ----------
+        {% for attribute in attributes %}
+      {{ attribute.name }}{% if show_types or not attribute.type %} : {{ attribute.type | default(value="[TODO:type]") }}{% endif %}
+      <INDENT>[TODO:description]
+        {% endfor %}
+      {% endif %}
+      """
+
   function:
     node_types:
       - function_definition

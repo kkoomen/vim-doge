@@ -64,6 +64,7 @@ impl<'a> PythonParser<'a> {
         for child_node in traverse::PreOrder::new(node.walk()) {
             if child_node.start_position().row + 1 == *self.line && self.node_types.contains(&child_node.kind()) {
                 return match child_node.kind() {
+                    "class_definition" => Some(self.parse_class(&child_node)),
                     "function_definition" => Some(self.parse_function(&child_node)),
                     _ => None,
                 };
@@ -72,6 +73,60 @@ impl<'a> PythonParser<'a> {
 
         None
     }
+
+    fn parse_class(&self, node: &Node) -> Result<Map<String, Value>, String> {
+        let mut tokens = Map::new();
+
+        for child_node in node.children(&mut node.walk()) {
+            match child_node.kind() {
+                "identifier" => {
+                    tokens.insert("name".to_string(), Value::String(self.get_node_text(&child_node)));
+                },
+                "block" => {
+                    let attributes = self.parse_class_attributes(&child_node);
+                    if !attributes.is_empty()  {
+                        tokens.insert("attributes".to_string(), Value::Array(attributes));
+                    }
+                }
+                _ => {},
+            }
+        }
+
+        Ok(tokens)
+    }
+
+    fn parse_class_attributes(&self, node: &Node) -> Vec<Value> {
+        let mut attributes = Vec::new();
+
+        node
+            .children(&mut node.walk())
+            .filter(|node| node.kind() == "expression_statement")
+            .for_each(|node| {
+                let mut attr = Map::new();
+
+                node
+                    .children(&mut node.walk())
+                    .filter(|node| node.kind() == "assignment")
+                    .for_each(|node|
+                        for child_node in node.children(&mut node.walk()) {
+                            match child_node.kind() {
+                                "identifier" => {
+                                    attr.insert("name".to_string(), Value::String(self.get_node_text(&child_node)));
+                                },
+                                "type" => {
+                                    attr.insert("type".to_string(), Value::String(self.get_node_text(&child_node)));
+                                },
+                                _ => {}
+                            }
+                        }
+                    );
+
+                attributes.push(Value::Object(attr));
+            });
+
+        attributes
+    }
+
 
     fn parse_function(&self, node: &Node) -> Result<Map<String, Value>, String> {
         let mut tokens = Map::new();

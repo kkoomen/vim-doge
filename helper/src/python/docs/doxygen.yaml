@@ -1,6 +1,12 @@
 # https://www.woolseyworkshop.com/2020/06/25/documenting-python-programs-with-doxygen/
 
 templates:
+  class:
+    node_types:
+      - class_definition
+    template: |
+      """! @brief [TODO:description]"""
+
   function:
     node_types:
       - function_definition
