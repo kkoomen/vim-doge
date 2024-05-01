@@ -1,4 +1,8 @@
-Write-Host "[vim-doge] Preparing to download vim-doge-helper binary..."
+$InstallDir = $args[0]
+$BinDir = "$InstallDir\bin"
+$OutFile = "$BinDir\vim-doge-helper.exe"
+
+Write-Host "Installation path: $OutFile"
 
 $Arch = $env:PROCESSOR_ARCHITECTURE
 if ($Arch -eq 'x86') {
@@ -10,16 +14,15 @@ else {
   $AssetName = "vim-doge-helper-windows-x86_64.zip"
 }
 
-$RootDir = Resolve-Path -Path ((Split-Path $myInvocation.MyCommand.Path) + "\..")
+$RootDir = Resolve-Path -Path ((Split-Path $MyInvocation.MyCommand.Path) + "\..")
 $AppVersion = Get-Content "$RootDir\.version"
 
 $AssetPath = "$RootDir\bin\$AssetName"
-$OutFile = "$RootDir\bin\vim-doge-helper.exe"
 
 $DownloadUrl = "https://github.com/kkoomen/vim-doge/releases/download/v$AppVersion/$AssetName"
 
-if (Test-Path $AssetName) {
-  Remove-Item "$AssetName"
+if (Test-Path $AssetPath) {
+  Remove-Item "$AssetPath"
 }
 
 if (Test-Path $OutFile) {
@@ -35,7 +38,7 @@ try {
 }
 
 Invoke-WebRequest -Uri $DownloadUrl -OutFile ( New-Item -Path "$AssetPath" -Force )
-Expand-Archive -LiteralPath "$AssetPath" -DestinationPath "$RootDir.\bin"
-Remove-Item "$AssetPath"
+Expand-Archive -LiteralPath $AssetPath -DestinationPath $BinDir
+Remove-Item $AssetPath
 
-Write-Host "[vim-doge] Successfully downloaded vim-doge-helper"
+Write-Host "Successfully downloaded vim-doge-helper"

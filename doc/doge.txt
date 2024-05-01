@@ -24,6 +24,11 @@ coding!
 ==============================================================================
 CONFIGURATION                                                    *doge-config*
 
+                                                         *g:doge_install_path*
+(Default: /path/to/vim-doge)
+
+The path where the bin/ directory will be installed and loaded from.
+
                                                       *g:doge_enable_mappings*
 (Default: 1)
 
