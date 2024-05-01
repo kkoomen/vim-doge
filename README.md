@@ -36,6 +36,7 @@ on a function, press `<Leader>d`, jump quickly through `TODO` items using
 - [Configuration](#configuration)
   * [Choosing a different doc standard](#choosing-a-different-doc-standard)
   * [Options](#options)
+    + [`g:doge_install_path`](#gdoge_install_path)
     + [`g:doge_enable_mappings`](#gdoge_enable_mappings)
     + [`g:doge_mapping`](#gdoge_mapping)
     + [`g:doge_filetype_aliases`](#gdoge_filetype_aliases)
@@ -189,6 +190,13 @@ Here is the full list of available doc standards per filetype:
 | `g:doge_doc_standard_scala`      | `'scaladoc'`        | `'scaladoc'`                                                                                                                                                                                                                                           |
 
 ## Options
+
+### `g:doge_install_path`
+
+Default: `/path/to/vim-doge`
+
+The path where the bin/ directory will be installed and loaded from. Can be
+useful if your system is read-only or uses immutable datastructures.
 
 ### `g:doge_enable_mappings`
 

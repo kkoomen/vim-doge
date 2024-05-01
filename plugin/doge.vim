@@ -19,6 +19,14 @@ if has('nvim') && !has('nvim-0.3.2')
   finish
 endif
 
+if has('win32') && &shellslash
+  set noshellslash
+  let g:doge_dir = resolve(expand('<sfile>:p:h:h'))
+  set shellslash
+else
+  let g:doge_dir = resolve(expand('<sfile>:p:h:h'))
+endif
+
 " section Introduction, intro {{{
 
 ""
@@ -49,6 +57,14 @@ if exists('g:loaded_doge')
   finish
 endif
 let g:loaded_doge = 1
+
+if !exists('g:doge_install_path')
+  ""
+  " (Default: /path/to/vim-doge)
+  "
+  " The path where the bin/ directory will be installed and loaded from.
+  let g:doge_install_path = g:doge_dir
+endif
 
 if !exists('g:doge_enable_mappings')
   ""
@@ -188,14 +204,6 @@ if g:doge_enable_mappings == v:true
   endif
 endif
 unlet s:mode
-
-if has('win32') && &shellslash
-  set noshellslash
-  let g:doge_dir = resolve(expand('<sfile>:p:h:h'))
-  set shellslash
-else
-  let g:doge_dir = resolve(expand('<sfile>:p:h:h'))
-endif
 
 ""
 " @command DogeGenerate {doc_standard}

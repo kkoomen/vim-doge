@@ -12,7 +12,11 @@ if ! which curl > /dev/null 2>&1; then
 fi
 
 ROOT_DIR=$(cd "$(dirname "$0")/.."; pwd -P)
-OUTFILE="./bin/vim-doge-helper"
+INSTALL_DIR="${1:-$ROOT_DIR}"
+BIN_DIR="$INSTALL_DIR/bin"
+OUTFILE="$BIN_DIR/vim-doge-helper"
+
+echo "Installation path: $OUTFILE"
 
 cd "$ROOT_DIR"
 
@@ -20,7 +24,8 @@ if [ -e "$OUTFILE" ]; then
   rm -f "$OUTFILE"
 fi
 
-[ ! -d ./bin ] && mkdir ./bin
+[ ! -d $BIN_DIR ] && mkdir -p $BIN_DIR
+cd $BIN_DIR
 
 OS="$(uname)"
 ARCH="$(uname -m)"
@@ -47,10 +52,7 @@ fi
 ARCHIVE_FILENAME="$TARGET.tar.gz"
 DOWNLOAD_URL="$RELEASE_URL/$ARCHIVE_FILENAME"
 echo "Downloading $DOWNLOAD_URL"
-curl -L --progress-bar \
-    --fail \
-    --output "$ARCHIVE_FILENAME" \
-    "$DOWNLOAD_URL"
-tar xzf "$ARCHIVE_FILENAME" && mv "vim-doge-helper" "$OUTFILE"
+curl -L --progress-bar --fail --output "$ARCHIVE_FILENAME" "$DOWNLOAD_URL"
+tar xzf "$ARCHIVE_FILENAME"
 rm -f "$ARCHIVE_FILENAME"
 chmod +x "$OUTFILE"

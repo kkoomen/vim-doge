@@ -9,14 +9,13 @@ let s:comment_placeholder = doge#utils#placeholder()
 " actual docblock to be inserted later on.
 function! doge#run_parser() abort
   let l:executables = [
-        \ '/helper/target/release/vim-doge-helper.exe',
-        \ '/helper/target/release/vim-doge-helper',
-        \ '/bin/vim-doge-helper.exe',
-        \ '/bin/vim-doge-helper'
+        \ g:doge_dir . '/helper/target/release/vim-doge-helper.exe',
+        \ g:doge_dir . '/helper/target/release/vim-doge-helper',
+        \ g:doge_install_path . '/bin/vim-doge-helper.exe',
+        \ g:doge_install_path . '/bin/vim-doge-helper'
         \ ]
 
-  for l:executable in l:executables
-    let l:script_path = g:doge_dir . l:executable
+  for l:script_path in l:executables
     if filereadable(resolve(l:script_path))
       let l:cursor_pos = getpos('.')
       let l:current_line = l:cursor_pos[1]
@@ -255,7 +254,7 @@ endfunction
 " Install the necessary dependencies.
 function! doge#install(...) abort
   for l:filename in ['vim-doge-helper', 'vim-doge-helper.exe']
-    let l:filepath = g:doge_dir . '/bin/' . l:filename
+    let l:filepath = g:doge_install_path . '/bin/' . l:filename
     if filereadable(l:filepath)
       let l:binary_version = split(doge#utils#trim(system(shellescape(l:filepath) . ' --version')), ' ')[1]
       let l:local_version = doge#utils#trim(readfile(g:doge_dir . '/.version')[0])
@@ -278,10 +277,10 @@ function! doge#install(...) abort
 
   if has('win32')
     let l:command = (executable('pwsh.exe') ? 'pwsh.exe' : 'powershell.exe')
-    let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1'))
+    let l:command .= ' -Command ' . shellescape('Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process -Force; & ' . shellescape(g:doge_dir . '/scripts/install.ps1')) . ' ' . shellescape(g:doge_install_path)
     let l:term_height = 8
   else
-    let l:command = fnameescape(g:doge_dir) . '/scripts/install.sh'
+    let l:command = shellescape(g:doge_dir . '/scripts/install.sh') . ' ' . shellescape(g:doge_install_path)
     let l:term_height = 4
   endif
 
