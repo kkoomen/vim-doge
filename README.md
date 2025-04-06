@@ -202,7 +202,21 @@ useful if your system is read-only or uses immutable datastructures.
 
 Default: `1`
 
-Whether to enable built-in mappings. If you decide to disable this, then you can
+Whether to enable built-in mappings.
+
+To disable:
+```vim
+let g:doge_enable_mappings = 0
+```
+
+Or with lua
+```lua
+-- be sure to call this before the plugin gets loaded.
+-- For example, in LazyVim, call in `init`
+vim.api.nvim_set_var('doge_enable_mappings', 0)
+```
+
+If you decide to disable this, then you can
 copy the mappings below and change them to your needs:
 
 ```vim
