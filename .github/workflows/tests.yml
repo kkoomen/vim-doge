@@ -19,16 +19,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Checkout junegunn/vader.vim
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: junegunn/vader.vim
           path: vader.vim
 
       - name: Cache Cargo dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cargo
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -59,16 +59,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Checkout junegunn/vader.vim
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: junegunn/vader.vim
           path: vader.vim
 
       - name: Cache Cargo dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cargo
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -100,16 +100,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Checkout junegunn/vader.vim
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: junegunn/vader.vim
           path: vader.vim
 
       - name: Cache Cargo dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.cargo
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
@@ -133,8 +133,8 @@ jobs:
     name: Linter
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
 
       # https://github.com/Vimjas/vint/issues/329#issuecomment-1029628054
       - run: pip install git+https://github.com/Vimjas/vint.git
