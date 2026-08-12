@@ -44,7 +44,8 @@ impl<'a> CSharpParser<'a> {
                     "variable_declaration" |
                     "property_declaration" |
                     "field_declaration" |
-                    "enum_declaration" => self.empty_parse_result(),
+                    "enum_declaration" |
+                    "interface_declaration" => self.empty_parse_result(),
 
                     _ => None,
                 };
