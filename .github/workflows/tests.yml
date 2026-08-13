@@ -53,9 +53,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-14]
-        # Building older versions of Vim requires v8.2.1118 or less
-        vim-version: [v7.4.2119, v8.2.1118]
+        include:
+          # Vim 7.4.2119 and 8.2.1118 are the minimum supported versions, but
+          # they cannot be built on macOS anymore: their configure fails with
+          # "NOT FOUND! You need to install a terminal library" because modern
+          # clang/Xcode rejects the implicit-int main() used by the old
+          # configure checks. See rhysd/action-setup-vim#38 and vim 8.2.5135.
+          - os: ubuntu-latest
+            vim-version: v7.4.2119
+          - os: ubuntu-latest
+            vim-version: v8.2.1118
+          # v8.2.5136 is the oldest Vim version that builds on current macOS
+          # runners (the configure fix landed in v8.2.5135).
+          - os: macos-latest
+            vim-version: v8.2.5136
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
