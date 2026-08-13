@@ -93,3 +93,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Graphify
+graphify-out
