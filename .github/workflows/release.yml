@@ -45,7 +45,7 @@ jobs:
     runs-on: ${{ matrix.settings.platform }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
@@ -72,7 +72,7 @@ jobs:
         shell: bash
 
       - name: Upload release asset
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           generate_release_notes: true
           tag_name: v${{ steps.tag_name.outputs.version }}
@@ -90,7 +90,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout kkoomen/vim-doge
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Download binary (unix)
         if: runner.os != 'Windows'
