@@ -90,7 +90,10 @@ Conventions:
 ## CI (`test` job in `.github/workflows/tests.yml`)
 
 Matrix: Vim 7.4.2119 / 8.2.1118 / 8.2.5172 / 9.0.1500 and Neovim
-0.3.2 / stable on ubuntu + macos. Every job:
+0.3.2 / stable on ubuntu + macos. Exception: the minimum Vim versions
+(7.4.2119, 8.2.1118) run on ubuntu only — their configure cannot build on
+current macOS runners (see `rhysd/action-setup-vim#38`), so macOS uses
+v8.2.5136, the oldest Vim that builds there. Every job:
 
 1. checks out this repo and `junegunn/vader.vim` into `vader.vim`,
 2. caches `~/.cargo`,
