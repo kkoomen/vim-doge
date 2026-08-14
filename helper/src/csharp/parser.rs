@@ -41,6 +41,7 @@ impl<'a> CSharpParser<'a> {
                     "constructor_declaration" => Some(self.parse_function(&child_node)),
 
                     "class_declaration" |
+                    "struct_declaration" |
                     "variable_declaration" |
                     "property_declaration" |
                     "field_declaration" |
